@@ -37,22 +37,22 @@ Onde:
 
 struct ClassFile{
  
-	uint32_t magic;								// Assinatura de um arquivo .class
-	uint16_t minor_version;						// Versao minima do arquivo.
-	uint16_t major_version;						// Versao maxima do arquivo.
-	uint16_t constant_pool_count;				// Numero de entradas na tabela constant_pool + 1.
-	cp_info constant_pool[constant_pool_count]; // DEFINIR A ESTRUTURA cp_info.
-	uint16_t access_flags;						// Mascara de bits que especifica permissao de acesso da classe.
-	uint16_t this_class;						// Representa a classe definida.
-	uint16_t super_class;						// Representa a super classe direta da classe definida.
-	uint16_t interfaces_count;					// Numero de entradas no array interfaces[].
-	uint16_t interfaces[interfaces_count];		// Representa uma interface que eh uma superinterface direta da classe.
-	uint16_t fields_count;						// Numero de variaveis de classe ou de instancias declaradas na classe.
-	field_info fields [fields_count];			// DEFINIR A ESTRUTURA field_info.
-	uint16_t methods_count;						// Numero de estruturas method_info na tabela de methods.
-	method_info methods[methods_count];			// DEFINIR A ESTRUTURA method_info.
-	uint16_t attributes_count;					// Numero de estruturas attributes_info na tabela attributes.
-	attribute_info attibutes[attributes_count];	// DEFINIR A ESTRUTURA attribute_info.
+	u4 magic;								// Assinatura de um arquivo .class
+	u2 minor_version;						// Versao minima do arquivo.
+	u2 major_version;						// Versao maxima do arquivo.
+	u2 constant_pool_count;				// Numero de entradas na tabela constant_pool.
+	cp_info *constant_pool; // DEFINIR A ESTRUTURA cp_info. Alocar com constantpoolcount-1
+	u2 access_flags;						// Mascara de bits que especifica permissao de acesso da classe.
+	u2 this_class;						// Representa a classe definida.
+	u2 super_class;						// Representa a super classe direta da classe definida.
+	u2 interfaces_count;					// Numero de entradas no array interfaces[].
+	u2 *interfaces;		// Representa uma interface que eh uma superinterface direta da classe. Aloca com interfaces_count
+	u2 fields_count;						// Numero de variaveis de classe ou de instancias declaradas na classe.
+	field_info *fields;			// DEFINIR A ESTRUTURA field_info. Aloca com fields_count
+	u2 methods_count;						// Numero de estruturas method_info na tabela de methods.
+	method_info *methods;			// DEFINIR A ESTRUTURA method_info. Aloca com methods_count
+	u2 attributes_count;					// Numero de estruturas attributes_info na tabela attributes.
+	attribute_info *attributes;	// DEFINIR A ESTRUTURA attribute_info. Aloca com attributes_count
 
 };
 typedef struct ClassFile ClassFile;

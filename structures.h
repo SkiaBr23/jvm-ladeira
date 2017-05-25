@@ -33,12 +33,67 @@
 
 #include <stdint.h>		// Biblioteca para definicao do tamanho de um inteiro.
 
+typedef uint8_t u1;
+typedef uint16_t u2;
+typedef uint32_t u4;
+
 
 // CADA entrada na constant_pool possui a forma (O que seria info[]?):
 struct cp_info{	
 
-	uint8_t tag;
-	uint8_t info[];			// VERIFICAR COMO DEFINIR UM PADRAO PARA CRIACAO DE VETOR NAS ESTRUTURAS.
+	u1 tag;
+	union{
+		struct{
+			u2 name_index;
+		} Class;
+
+		struct{
+			u2 class_index;
+			u2 name_and_type_index;
+		} Fieldref;
+
+		struct{
+			u2 class_index;
+			u2 name_and_type_index;
+		} Methodref;
+
+		struct{
+			u2 class_index;
+			u2 name_and_type_index;
+		} InterfaceMethodref;
+
+		struct{	
+			u2 string_index;
+		} String;
+
+		struct{
+			u2 bytes;
+		} Integer;
+
+		struct{
+			u4 bytes;
+		} Float;
+
+		struct{
+			u4 high_bytes;
+			u4 low_bytes;
+		} Long;
+
+		struct{
+			u4 high_bytes;
+			u4 low_bytes;
+		} Double;
+
+		struct{
+			u2 name_index;
+			u2 descriptor_index;
+		} NameAndType;
+
+		struct{
+			u2 length;
+			u2 *bytes;	
+		} UTF8;
+	};
 
 };
 typedef struct cp_info cp_info;
@@ -60,107 +115,30 @@ enum tag_values{			// Essas sao os tipos de estruturas que serao salvas no const
 	CONSTANT_Utf8 = 1,
 };
 
-
-struct CONSTANT_Class
-{
-	uint8_t tag; 							// Valor de tag = 7
-	uint16_t name_index;
-
+struct attribute_info{
+	u2 attribute_name_index;
+	u4 attribute_length;
+	u1 *info;
 };
-typedef struct CONSTANT_Class CONSTANT_Class_info;
 
+typedef struct attribute_info attribute_info;
 
-struct CONSTANT_Fieldref
-{
-	uint8_t tag; 							// Valor de tag = 9
-	uint16_t class_index;
-	uint16_t name_and_type_index;
+struct field_info{
+	u2 access_flags;
+	u2 name_index;
+	u2 descriptor_index;
+	u2 attributes_count;
+	attribute_info *attributes;
 };
-typedef struct CONSTANT_Fieldref CONSTANT_Fieldref_info;
 
+typedef struct field_info field_info;
 
-struct CONSTANT_Methodref
-{
-	uint8_t tag; 							// Valor de tag = 10
-	uint16_t class_index;
-	uint16_t name_and_type_index;
-
+struct method_info{
+	u2 access_flags;
+	u2 name_index;
+	u2 descriptor_index;
+	u2 attributes_count;
+	attribute_info *attributes;
 };
-typedef struct CONSTANT_Methodref CONSTANT_Methodref_info;
 
-
-struct CONSTANT_InterfaceMethodref
-{
-	uint8_t tag; 							// Valor de tag = 11
-	uint16_t class_index;
-	uint16_t name_and_type_index;
-
-};
-typedef struct CONSTANT_InterfaceMethodref CONSTANT_InterfaceMethodref_info;
-
-
-struct CONSTANT_String
-{
-	uint8_t tag; 							// Valor de tag = 8
-	uint16_t string_index;
-	
-};
-typedef struct CONSTANT_String CONSTANT_String_info;
-
-
-struct CONSTANT_Integer
-{
-	uint8_t tag; 							// Valor de tag = 3
-	uint16_t bytes;
-
-};
-typedef struct CONSTANT_Integer CONSTANT_Integer_info;
-
-
-struct CONSTANT_Float
-{
-	uint8_t tag; 							// Valor de tag = 4
-	uint16_t bytes;
-
-};
-typedef struct CONSTANT_Float CONSTANT_Float_info;
-
-
-struct CONSTANT_Long
-{
-	uint8_t tag; 							// Valor de tag = 5
-	uint16_t high_bytes;
-	uint16_t low_bytes;
-
-};
-typedef struct CONSTANT_Long CONSTANT_Long_info;
-
-
-struct CONSTANT_Double
-{
-	uint8_t tag; 							// Valor de tag = 6
-	uint16_t high_bytes;
-	uint16_t low_bytes;
-
-};
-typedef struct CONSTANT_Double CONSTANT_Double_info;
-
-
-struct CONSTANT_NameAndType
-{
-	uint8_t tag; 							// Valor de tag = 12
-	uint16_t name_index;
-	uint16_t descriptor_index;
-
-};
-typedef struct CONSTANT_NameAndType CONSTANT_NameAndType_info;
-
-
-struct CONSTANT_Utf8
-{
-	uint8_t tag; 							// Valor de tag = 1
-	uint16_t length;
-	uint16_t bytes[length];					// VERIFICAR COMO DEFINIR UM PADRAO PARA CRIACAO DE VETOR NAS ESTRUTURAS.
-
-};
-typedef struct CONSTANT_Utf8 CONSTANT_Utf8_info;
+typedef struct method_info method_info;
