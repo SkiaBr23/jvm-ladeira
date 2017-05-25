@@ -1,2 +1,5 @@
 all:
-	gcc structures.h classFileStruct.h -std=c99
+	gcc structures.h classFileStruct.h leitura.h leitura.c main.c -std=c99
+
+clean:
+	rm *.gch

@@ -1,3 +1,6 @@
+#ifndef	CLASSFILESTRUCT_H
+#define CLASSFILESTRUCT_H
+
 /**
 
 	Definicao da estrutura de ClassFile.
@@ -56,3 +59,5 @@ struct ClassFile{
 
 };
 typedef struct ClassFile ClassFile;
+
+#endif

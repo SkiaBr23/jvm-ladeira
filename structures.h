@@ -1,3 +1,6 @@
+#ifndef	STRUCTURES_H
+#define STRUCTURES_H
+
 /**
 
 	Nesse arquivo, sera definido as estruturas que sao utilizadas na constant_pool.
@@ -142,3 +145,5 @@ struct method_info{
 };
 
 typedef struct method_info method_info;
+
+#endif
