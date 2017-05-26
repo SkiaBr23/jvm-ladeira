@@ -11,7 +11,7 @@ u1 * u1Read(FILE *fp){
 
 u2 * u2Read(FILE *fp){
 	u2 * destino = malloc(sizeof(u2));
-	u1 * lowByte, * highByte;
+	u2 * lowByte, * highByte;
 	highByte = u1Read(fp);
 	lowByte = u1Read(fp);
 
@@ -25,7 +25,7 @@ u2 * u2Read(FILE *fp){
 
 u4 * u4Read(FILE *fp){
 	u4 * destino = malloc(sizeof(u4));
-	u1 * byteZero, * byteUm, * byteDois, * byteTres;
+	u4 * byteZero, * byteUm, * byteDois, * byteTres;
 	byteTres = u1Read(fp);
 	byteDois = u1Read(fp);
 	byteUm = u1Read(fp);
