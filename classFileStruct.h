@@ -38,8 +38,8 @@ Onde:
 #include "structures.h"
 
 
-struct ClassFile{
- 
+struct classFile{
+
 	u4 magic;								// Assinatura de um arquivo .class
 	u2 minor_version;						// Versao minima do arquivo.
 	u2 major_version;						// Versao maxima do arquivo.
@@ -58,6 +58,6 @@ struct ClassFile{
 	attribute_info *attributes;	// DEFINIR A ESTRUTURA attribute_info. Aloca com attributes_count
 
 };
-typedef struct ClassFile ClassFile;
+typedef struct classFile ClassFile;
 
 #endif

@@ -1,31 +1,50 @@
 #include "leitura.h"
 
-u1* u1Read(FILE *fp,int num){
-	u1 *destino = malloc(sizeof(u1)*num);
-	fread(destino,sizeof(u1),num,fp);
-	if(ferror(fp)){
+u1 * u1Read(FILE *fp){
+	u1 * destino = malloc(sizeof(u1));
+	if (fread(destino,sizeof(u1),1,fp) != 1) {
 		return NULL;
+	} else {
+		return destino;
 	}
-
-	return destino;
 }
 
-u2* u2Read(FILE *fp,int num){
-	u2 *destino = malloc(sizeof(u2)*num);
-	fread(destino,sizeof(u2),num,fp);
-	if(ferror(fp)){
+u2 * u2Read(FILE *fp){
+	u2 * destino = malloc(sizeof(u2));
+	u1 * lowByte, * highByte;
+	highByte = u1Read(fp);
+	lowByte = u1Read(fp);
+
+	if(highByte != NULL && lowByte != NULL) {
+		*destino = ((*highByte)<<8) | ((*lowByte));
+		return destino;
+	} else {
 		return NULL;
 	}
-
-	return destino;
 }
 
-u4* u4Read(FILE *fp,int num){
-	u4 *destino = malloc(sizeof(u4)*num);
-	fread(destino,sizeof(u4),num,fp);
-	if(ferror(fp)){
+u4 * u4Read(FILE *fp){
+	u4 * destino = malloc(sizeof(u4));
+	u1 * byteZero, * byteUm, * byteDois, * byteTres;
+	byteTres = u1Read(fp);
+	byteDois = u1Read(fp);
+	byteUm = u1Read(fp);
+	byteZero = u1Read(fp);
+	if(byteTres != NULL && byteDois != NULL && byteUm != NULL && byteZero != NULL){
+		*destino = ((*byteTres)<<24) | ((*byteDois)<<16) | ((*byteUm)<<8) | ((*byteZero));
+		return destino;
+	} else {
 		return NULL;
 	}
+}
 
-	return destino;
+ClassFile * lerArquivo (char * nomeArquivo) {
+	ClassFile * arquivoClass = NULL;
+	FILE * fp = fopen(nomeArquivo,"rb");
+	if (fp == NULL) {
+		printf("Ocorreu um problema ao abrir o arquivo, finalizando programa!\n");
+		exit(1);
+	} else {
+		return arquivoClass;
+	}
 }

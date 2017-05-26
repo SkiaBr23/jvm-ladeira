@@ -4,9 +4,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "structures.h"
+#include "classFileStruct.h"
 
-u1* u1Read(FILE *fp, int num);
-u2* u2Read(FILE *fp, int num);
-u4* u4Read(FILE *fp, int num);
+u1 * u1Read(FILE *fp);
+u2 * u2Read(FILE *fp);
+u4 * u4Read(FILE *fp);
+
+ClassFile * lerArquivo (char *);
 
 #endif
