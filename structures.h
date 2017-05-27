@@ -31,6 +31,9 @@
 			CONSTANT_Double					6
 			CONSTANT_NameAndType			12
 			CONSTANT_Utf8					1
+			CONSTANT_MethodHandle	15
+			CONSTANT_MethodType	16
+			CONSTANT_InvokeDynamic	18
 
 */
 
@@ -39,6 +42,10 @@
 typedef uint8_t u1;
 typedef uint16_t u2;
 typedef uint32_t u4;
+
+#define MAXU1 255
+#define MAXU2 65535
+#define MAXU4 2147483647
 
 
 // CADA entrada na constant_pool possui a forma (O que seria info[]?):
@@ -96,6 +103,20 @@ struct cp_info{
 			u2 length;
 			u2 *bytes;	
 		} UTF8;
+
+		struct{
+			u1 reference_kind;
+			u2 reference_index;
+		} MethodHandle;
+
+		struct{
+			u2 descriptor_index;
+		} MethodType;
+
+		struct{
+			u2 bootstrap_method_attr_index;
+    		u2 name_and_type_index;
+		} InvokeDynamicInfo;
 	};
 
 };
@@ -116,6 +137,9 @@ enum tag_values{			// Essas sao os tipos de estruturas que serao salvas no const
 	CONSTANT_Double = 6,
 	CONSTANT_NameAndType = 12,
 	CONSTANT_Utf8 = 1,
+	CONSTANT_MethodHandle = 15,
+	CONSTANT_MethodType = 16,
+	CONSTANT_InvokeDynamic = 18
 };
 
 struct attribute_info{
@@ -145,5 +169,24 @@ struct method_info{
 };
 
 typedef struct method_info method_info;
+
+struct code_attribute {
+    u2 attribute_name_index;
+    u4 attribute_length;
+    u2 max_stack;
+    u2 max_locals;
+    u4 code_length;
+    u1 *code; // Alocar com code_length
+    u2 exception_table_length;
+    /*{   u2 start_pc;
+        u2 end_pc;
+        u2 handler_pc;
+        u2 catch_type;
+    } *exception_table;*/ // Alocar com exception_table_length
+    u2 attributes_count;
+    attribute_info *attributes; // Alocar com attributes_count
+};
+
+typedef struct code_attribute code_attribute;
 
 #endif
