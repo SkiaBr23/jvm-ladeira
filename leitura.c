@@ -121,12 +121,12 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 				break;
 				case CONSTANT_Utf8:
 					aux->UnionCP.UTF8.length = u2Read(fp);
-					aux->UnionCP.UTF8.bytes = malloc(aux->UnionCP.UTF8.length*sizeof(u2));
-					for (u2 *i=aux->UnionCP.UTF8.bytes;i<aux->UnionCP.UTF8.bytes+aux->UnionCP.UTF8.length;i++){
-						*i = u2Read(fp);
+					aux->UnionCP.UTF8.bytes = malloc(aux->UnionCP.UTF8.length*sizeof(u1));
+					for (u1 *i=aux->UnionCP.UTF8.bytes;i<aux->UnionCP.UTF8.bytes+aux->UnionCP.UTF8.length;i++){
+						*i = u1Read(fp);
 					}
 					printf("%04x\n",aux->UnionCP.UTF8.length);
-					for (u2 *i=aux->UnionCP.UTF8.bytes;i<aux->UnionCP.UTF8.bytes+aux->UnionCP.UTF8.length;i++){
+					for (u1 *i=aux->UnionCP.UTF8.bytes;i<aux->UnionCP.UTF8.bytes+aux->UnionCP.UTF8.length;i++){
 						printf("%04x\n",*i);
 					}
 				break;

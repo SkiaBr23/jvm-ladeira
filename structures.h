@@ -101,7 +101,7 @@ struct cp_info{
 
 		struct{
 			u2 length;
-			u2 *bytes;	
+			u1 *bytes;
 		} UTF8;
 
 		struct{
