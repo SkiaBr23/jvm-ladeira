@@ -53,10 +53,105 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		arquivoClass->major_version = u2Read(fp);
 		arquivoClass->constant_pool_count = u2Read(fp); 
 
-		printf("%x\n",arquivoClass->magic);
-		printf("%x\n",arquivoClass->minor_version);
-		printf("%x\n",arquivoClass->major_version);
-		printf("%x\n",arquivoClass->constant_pool_count);
+		printf("%08x\n",arquivoClass->magic);
+		printf("%04x\n",arquivoClass->minor_version);
+		printf("%04x\n",arquivoClass->major_version);
+		printf("%04x\n",arquivoClass->constant_pool_count);
+
+		// Alocar o constant pool com constant_pool_count-1
+		cp_info *constantPool = (cp_info *) malloc((arquivoClass->constant_pool_count-1)*sizeof(cp_info));
+
+		cp_info *aux = NULL;
+
+		for (aux=constantPool;aux<constantPool+arquivoClass->constant_pool_count-1;aux++){
+			aux->tag = u1Read(fp);
+			printf("TAG: %02x\n",aux->tag);
+			switch(aux->tag){
+				case CONSTANT_Class:
+					aux->UnionCP.Class.name_index = u2Read(fp);
+					printf("%04x\n",aux->UnionCP.Class.name_index);
+				break;
+				case CONSTANT_Fieldref:
+					aux->UnionCP.Fieldref.class_index = u2Read(fp);
+					aux->UnionCP.Fieldref.name_and_type_index = u2Read(fp);
+					printf("%04x\n",aux->UnionCP.Fieldref.class_index);
+					printf("%04x\n",aux->UnionCP.Fieldref.name_and_type_index);
+				break;
+				case CONSTANT_Methodref:
+					aux->UnionCP.Methodref.class_index = u2Read(fp);
+					aux->UnionCP.Methodref.name_and_type_index = u2Read(fp);
+					printf("%04x\n",aux->UnionCP.Methodref.class_index);
+					printf("%04x\n",aux->UnionCP.Methodref.name_and_type_index);
+				break;
+				case CONSTANT_InterfaceMethodref:
+					aux->UnionCP.InterfaceMethodref.class_index = u2Read(fp);
+					aux->UnionCP.InterfaceMethodref.name_and_type_index = u2Read(fp);
+					printf("%04x\n",aux->UnionCP.InterfaceMethodref.class_index);
+					printf("%04x\n",aux->UnionCP.InterfaceMethodref.name_and_type_index);
+				break;
+				case CONSTANT_String:
+					aux->UnionCP.String.string_index = u2Read(fp);
+					printf("%04x\n",aux->UnionCP.String.string_index);
+				break;
+				case CONSTANT_Integer:
+					aux->UnionCP.Integer.bytes = u2Read(fp);
+					printf("%04x\n",aux->UnionCP.Integer.bytes);
+				break;
+				case CONSTANT_Float:
+					aux->UnionCP.Float.bytes = u4Read(fp);
+					printf("%04x\n",aux->UnionCP.Float.bytes);
+				break;
+				case CONSTANT_Long:
+					aux->UnionCP.Long.high_bytes = u4Read(fp);
+					aux->UnionCP.Long.low_bytes = u4Read(fp);
+					printf("%04x\n",aux->UnionCP.Long.high_bytes);
+					printf("%04x\n",aux->UnionCP.Long.low_bytes);
+				break;
+				case CONSTANT_Double:
+					aux->UnionCP.Double.high_bytes = u4Read(fp);
+					aux->UnionCP.Double.low_bytes = u4Read(fp);
+					printf("%04x\n",aux->UnionCP.Double.high_bytes);
+					printf("%04x\n",aux->UnionCP.Double.low_bytes);
+				break;
+				case CONSTANT_NameAndType:
+					aux->UnionCP.NameAndType.name_index = u2Read(fp);
+					aux->UnionCP.NameAndType.descriptor_index = u2Read(fp);
+					printf("%04x\n",aux->UnionCP.NameAndType.name_index);
+					printf("%04x\n",aux->UnionCP.NameAndType.descriptor_index);
+				break;
+				case CONSTANT_Utf8:
+					aux->UnionCP.UTF8.length = u2Read(fp);
+					aux->UnionCP.UTF8.bytes = malloc(aux->UnionCP.UTF8.length*sizeof(u2));
+					for (u2 *i=aux->UnionCP.UTF8.bytes;i<aux->UnionCP.UTF8.bytes+aux->UnionCP.UTF8.length;i++){
+						*i = u2Read(fp);
+					}
+					printf("%04x\n",aux->UnionCP.UTF8.length);
+					for (u2 *i=aux->UnionCP.UTF8.bytes;i<aux->UnionCP.UTF8.bytes+aux->UnionCP.UTF8.length;i++){
+						printf("%04x\n",*i);
+					}
+				break;
+				case CONSTANT_MethodHandle:
+					aux->UnionCP.MethodHandle.reference_kind = u1Read(fp);
+					aux->UnionCP.MethodHandle.reference_index = u2Read(fp);
+					printf("%04x\n",aux->UnionCP.MethodHandle.reference_kind);
+					printf("%04x\n",aux->UnionCP.MethodHandle.reference_index);
+				break;
+				case CONSTANT_MethodType:
+					aux->UnionCP.MethodType.descriptor_index = u2Read(fp);
+					printf("%04x\n",aux->UnionCP.MethodType.descriptor_index);
+				break;
+				case CONSTANT_InvokeDynamic:
+					aux->UnionCP.InvokeDynamicInfo.bootstrap_method_attr_index = u2Read(fp);
+					aux->UnionCP.InvokeDynamicInfo.name_and_type_index = u2Read(fp);
+					printf("%04x\n",aux->UnionCP.InvokeDynamicInfo.bootstrap_method_attr_index);
+					printf("%04x\n",aux->UnionCP.InvokeDynamicInfo.name_and_type_index);
+				break;
+				default:
+					printf("Default\n");
+				break;
+
+			}
+		}
 
 		fclose(fp);
 

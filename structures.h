@@ -117,7 +117,7 @@ struct cp_info{
 			u2 bootstrap_method_attr_index;
     		u2 name_and_type_index;
 		} InvokeDynamicInfo;
-	};
+	}UnionCP;
 
 };
 typedef struct cp_info cp_info;
