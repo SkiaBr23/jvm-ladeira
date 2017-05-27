@@ -233,6 +233,24 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 
 		if(arquivoClass->attributes_count>0){
 			// Preencher com leitura de atributos
+			arquivoClass->attributes = malloc((arquivoClass->attributes_count)*sizeof(attribute_info));
+
+			for (attribute_info *a=arquivoClass->attributes;a<(arquivoClass->attributes)+(arquivoClass->attributes_count);a++){
+				a->attribute_name_index = u2Read(fp);
+				a->attribute_length = u4Read(fp);
+
+				printf("Attribute Name Index: %04x\n",a->attribute_name_index);
+				printf("Attribute Length: %08x\n",a->attribute_length);
+
+				if(a->attribute_length>0){
+					a->info = malloc((a->attribute_length)*sizeof(u1));
+					for(u1 *c=a->info;c<a->info+a->attribute_length;c++){
+						*c = u1Read(fp);
+						printf("%02x\t",*c);
+					}
+					printf("\n");
+				}
+			}
 		}
 
 		fclose(fp);
