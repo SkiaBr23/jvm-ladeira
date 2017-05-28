@@ -25,7 +25,7 @@ int main(int argc, char const *argv[]){
 	char *nomearquivo = malloc(100*sizeof(char));
 
 	/*Alocação da estrutura para o arquivo .class*/
-	ClassFile *arquivoclass = malloc(sizeof(ClassFile));
+	ClassFile *arquivoClass = malloc(sizeof(ClassFile));
 
 	/*Estrutura condicional que analisa se foi passado o nome do arquivo como parâmetro*/
 	if(argc>1){
@@ -38,7 +38,10 @@ int main(int argc, char const *argv[]){
 	}
 
 	/*Chamada da função que realiza a leitura do arquivo .class*/
-	arquivoclass = lerArquivo(nomearquivo);
+	arquivoClass = lerArquivo(nomearquivo);
+	if (arquivoClass != NULL) {
+
+	}
 
 
 	/*Retorno da função main*/
