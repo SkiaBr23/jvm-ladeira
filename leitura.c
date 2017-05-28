@@ -109,11 +109,6 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		a quantidade de entradas na tabela Constant Pool*/
 		arquivoClass->constant_pool_count = u2Read(fp);
 
-		printf("%08x\n",arquivoClass->magic);
-		printf("%04x\n",arquivoClass->minor_version);
-		printf("%04x\n",arquivoClass->major_version);
-		printf("%04x\n",arquivoClass->constant_pool_count);
-
 		/*Leitura da tabela Constant Pool*/
 		arquivoClass->constant_pool = NULL;
 		arquivoClass->constant_pool = lerConstantPool(fp, arquivoClass->constant_pool_count);
@@ -130,11 +125,6 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		a quantidade de entradas na tabela Interfaces*/
 		arquivoClass->interfaces_count = u2Read(fp);
 
-		printf("Access Flags: %04x\n",arquivoClass->access_flags);
-		printf("This Class: %04x\n",arquivoClass->this_class);
-		printf("Super Class: %04x\n",arquivoClass->super_class);
-		printf("Interfaces Count: %04x\n",arquivoClass->interfaces_count);
-
 		/*Estrutura condicional que verifica se a quantidade de entradas
 		na tabela Interfaces é maior que zero. Se for, prossegue com a leitura
 		das entradas, caso contrário prossegue com a leitura dos próximos campos*/
@@ -146,7 +136,6 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		/*Leitura do valor 'fields_count', representando
 		a quantidade de entradas na tabela Fields*/
 		arquivoClass->fields_count = u2Read(fp);
-		printf("Fields Count: %04x\n",arquivoClass->fields_count);
 
 		/*Estrutura condicional que verifica se a quantidade de entradas
 		na tabela Fields é maior que zero. Se for, prossegue com a leitura
@@ -159,7 +148,6 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		/*Leitura do valor 'methods_count', representando
 		a quantidade de entradas na tabela Method*/
 		arquivoClass->methods_count = u2Read(fp);
-		printf("Methods Count: %04x\n",arquivoClass->methods_count);
 
 		/*Estrutura condicional que verifica se a quantidade de entradas
 		na tabela Method é maior que zero. Se for, prossegue com a leitura
@@ -172,7 +160,6 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		/*Leitura do valor 'attributes_count', representando
 		a quantidade de entradas na tabela Attributes*/
 		arquivoClass->attributes_count = u2Read(fp);
-		printf("Atributos da Classe: %02x\n",arquivoClass->attributes_count);
 
 		/*Estrutura condicional que verifica se a quantidade de entradas
 		na tabela Attributes é maior que zero. Se for, prossegue com a leitura
@@ -202,7 +189,6 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 	for (aux = constantPool; aux < constantPool+constant_pool_count-1; aux++){
 		/*Leitura do byte tag de uma entrada da Constant Pool*/
 		aux->tag = u1Read(fp);
-		printf("TAG: %02x\n",aux->tag);
 		/*Estrutura 'switch case' que analisa o byte tag lido e de acordo com o valor
 		realiza um procedimento específico de leitura*/
 		switch(aux->tag) {
@@ -210,7 +196,6 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			realiza a leitura do atributo name_index da estrutura Class*/
 			case CONSTANT_Class:
 				aux->UnionCP.Class.name_index = u2Read(fp);
-				printf("%04x\n",aux->UnionCP.Class.name_index);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_Fieldref,
 			realiza a leitura dos atributos class_index e name_and_type_index
@@ -218,8 +203,6 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			case CONSTANT_Fieldref:
 				aux->UnionCP.Fieldref.class_index = u2Read(fp);
 				aux->UnionCP.Fieldref.name_and_type_index = u2Read(fp);
-				printf("%04x\n",aux->UnionCP.Fieldref.class_index);
-				printf("%04x\n",aux->UnionCP.Fieldref.name_and_type_index);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_Methodref,
 			realiza a leitura dos atributos class_index e name_and_type_index
@@ -227,8 +210,6 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			case CONSTANT_Methodref:
 				aux->UnionCP.Methodref.class_index = u2Read(fp);
 				aux->UnionCP.Methodref.name_and_type_index = u2Read(fp);
-				printf("%04x\n",aux->UnionCP.Methodref.class_index);
-				printf("%04x\n",aux->UnionCP.Methodref.name_and_type_index);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_InterfaceMethodref,
 			realiza a leitura dos atributos class_index e name_and_type_index da estrutura
@@ -236,26 +217,21 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			case CONSTANT_InterfaceMethodref:
 				aux->UnionCP.InterfaceMethodref.class_index = u2Read(fp);
 				aux->UnionCP.InterfaceMethodref.name_and_type_index = u2Read(fp);
-				printf("%04x\n",aux->UnionCP.InterfaceMethodref.class_index);
-				printf("%04x\n",aux->UnionCP.InterfaceMethodref.name_and_type_index);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_String,
 			realiza a leitura do atributo string_index da estrutura String*/
 			case CONSTANT_String:
 				aux->UnionCP.String.string_index = u2Read(fp);
-				printf("%04x\n",aux->UnionCP.String.string_index);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_Integer,
 			realiza a leitura do atributo bytes da estrutura Integer*/
 			case CONSTANT_Integer:
 				aux->UnionCP.Integer.bytes = u2Read(fp);
-				printf("%04x\n",aux->UnionCP.Integer.bytes);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_Float,
 			realiza a leitura do atributo bytes da estrutura Float*/
 			case CONSTANT_Float:
 				aux->UnionCP.Float.bytes = u4Read(fp);
-				printf("%04x\n",aux->UnionCP.Float.bytes);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_Long,
 			realiza a leitura dos atributos high_bytes e low_bytes da estrutura
@@ -263,8 +239,6 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			case CONSTANT_Long:
 				aux->UnionCP.Long.high_bytes = u4Read(fp);
 				aux->UnionCP.Long.low_bytes = u4Read(fp);
-				printf("%04x\n",aux->UnionCP.Long.high_bytes);
-				printf("%04x\n",aux->UnionCP.Long.low_bytes);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_Double,
 			realiza a leitura dos atributos high_bytes e low_bytes da estrutura
@@ -272,8 +246,6 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			case CONSTANT_Double:
 				aux->UnionCP.Double.high_bytes = u4Read(fp);
 				aux->UnionCP.Double.low_bytes = u4Read(fp);
-				printf("%04x\n",aux->UnionCP.Double.high_bytes);
-				printf("%04x\n",aux->UnionCP.Double.low_bytes);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_NameAndType,
 			realiza a leitura dos atributos name_index e descriptor_index da estrutura
@@ -281,8 +253,6 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			case CONSTANT_NameAndType:
 				aux->UnionCP.NameAndType.name_index = u2Read(fp);
 				aux->UnionCP.NameAndType.descriptor_index = u2Read(fp);
-				printf("%04x\n",aux->UnionCP.NameAndType.name_index);
-				printf("%04x\n",aux->UnionCP.NameAndType.descriptor_index);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_Long,
 			realiza a leitura dos atributos length e bytes da estrutura UTF8*/
@@ -292,10 +262,6 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 				for (u1 *i=aux->UnionCP.UTF8.bytes;i<aux->UnionCP.UTF8.bytes+aux->UnionCP.UTF8.length;i++){
 					*i = u1Read(fp);
 				}
-				printf("%02x\n",aux->UnionCP.UTF8.length);
-				for (u1 *i=aux->UnionCP.UTF8.bytes;i<aux->UnionCP.UTF8.bytes+aux->UnionCP.UTF8.length;i++){
-					printf("%02x\n",*i);
-				}
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_MethodHandle,
 			realiza a leitura dos atributos reference_kind e reference_index da estrutura
@@ -303,14 +269,11 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			case CONSTANT_MethodHandle:
 				aux->UnionCP.MethodHandle.reference_kind = u1Read(fp);
 				aux->UnionCP.MethodHandle.reference_index = u2Read(fp);
-				printf("%02x\n",aux->UnionCP.MethodHandle.reference_kind);
-				printf("%04x\n",aux->UnionCP.MethodHandle.reference_index);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_MethodType,
 			realiza a leitura do atributo descriptor_index da estrutura MethodType*/
 			case CONSTANT_MethodType:
 				aux->UnionCP.MethodType.descriptor_index = u2Read(fp);
-				printf("%04x\n",aux->UnionCP.MethodType.descriptor_index);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_InvokeDynamic,
 			realiza a leitura dos atributos bootstrap_method_attr_index e
@@ -318,8 +281,6 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			case CONSTANT_InvokeDynamic:
 				aux->UnionCP.InvokeDynamicInfo.bootstrap_method_attr_index = u2Read(fp);
 				aux->UnionCP.InvokeDynamicInfo.name_and_type_index = u2Read(fp);
-				printf("%04x\n",aux->UnionCP.InvokeDynamicInfo.bootstrap_method_attr_index);
-				printf("%04x\n",aux->UnionCP.InvokeDynamicInfo.name_and_type_index);
 				break;
 			/*Caso um byte tag lido não tenha sido tratado na estrutura switch case,
 			realiza a impressão de uma mensagem de debug*/
@@ -351,11 +312,6 @@ method_info * lerMethod (FILE * fp, u2 methods_count) {
 		/*Leitura do atributo attributes_count do respectivo método*/
 		i->attributes_count = u2Read(fp);
 
-		printf("Access Flags do método: %04x\n",i->access_flags);
-		printf("Name index do método: %04x\n",i->name_index);
-		printf("Descriptor Index do método: %04x\n",i->descriptor_index);
-		printf("Attributes Count do método: %04x\n",i->attributes_count);
-
 		/*Estrutura condicional que avalia se a quantidade de atributos
 		do método é maior que zero. Se for, prossegue com a leitura dos
 		atributos do método*/
@@ -380,10 +336,8 @@ attribute_info * lerAttributes (FILE * fp, u2 attributes_count) {
 	for (attribute_info * a = attributes; a < attributes+attributes_count; a++) {
 		/*Leitura do atributo name_index do respectivo atributo*/
 		a->attribute_name_index = u2Read(fp);
-		printf("Attribute name index: %04x\n",a->attribute_name_index);
 		/*Leitura do atributo length do respectivo atributo*/
 		a->attribute_length = u4Read(fp);
-		printf("Attribute length: %08x\n",a->attribute_length);
 		/*Estrutura condicional que avalia se o tamanho do atributo
 		é maior que zero. Se for, prossegue com a leitura da informação
 		do atributo*/
@@ -395,12 +349,126 @@ attribute_info * lerAttributes (FILE * fp, u2 attributes_count) {
 			for(u1 * c = (a->info); c < (a->info)+(a->attribute_length); c++) {
 				/*Leitura dos dados*/
 				*c = u1Read(fp);
-				printf("%02x\t",*c);
 			}
-			printf("\n");
 		}
 	}
 
 	/*Retorno da estrutura Attribute alocada, com as informações lidas*/
 	return attributes;
+}
+
+void imprimirClassFile (ClassFile * arquivoClass) {
+
+	cp_info * aux;
+	method_info * auxMethod;
+	attribute_info * auxAttribute;
+
+	printf("Magic: %08x\n",arquivoClass->magic);
+	printf("Minor Version: %04x\n",arquivoClass->minor_version);
+	printf("Major Version: %04x\n",arquivoClass->major_version);
+	printf("Constant Pool Count: %04x\n",arquivoClass->constant_pool_count);
+
+	for (aux = arquivoClass->constant_pool; aux < arquivoClass->constant_pool+arquivoClass->constant_pool_count-1; aux++) {
+		printf("TAG: %02x\n",aux->tag);
+		switch(aux->tag) {
+			case CONSTANT_Class:
+				printf("Class Name Index: %04x\n",aux->UnionCP.Class.name_index);
+				break;
+			case CONSTANT_Fieldref:
+				printf("Fieldref Class Index: %04x\n",aux->UnionCP.Fieldref.class_index);
+				printf("Fieldref Name and Type Index: %04x\n",aux->UnionCP.Fieldref.name_and_type_index);
+				break;
+			case CONSTANT_Methodref:
+				printf("Methodref Class Index: %04x\n",aux->UnionCP.Methodref.class_index);
+				printf("Methodref Name and Type Index: %04x\n",aux->UnionCP.Methodref.name_and_type_index);
+				break;
+			case CONSTANT_InterfaceMethodref:
+				printf("InterfaceMethodref Class Index: %04x\n",aux->UnionCP.InterfaceMethodref.class_index);
+				printf("InterfaceMethodref Name and Type Index: %04x\n",aux->UnionCP.InterfaceMethodref.name_and_type_index);
+				break;
+			case CONSTANT_String:
+				printf("String Index: %04x\n",aux->UnionCP.String.string_index);
+				break;
+			case CONSTANT_Integer:
+				printf("Integer Bytes: %04x\n",aux->UnionCP.Integer.bytes);
+				break;
+			case CONSTANT_Float:
+				printf("Float Bytes: %04x\n",aux->UnionCP.Float.bytes);
+				break;
+			case CONSTANT_Long:
+				printf("Long High Bytes: %04x\n",aux->UnionCP.Long.high_bytes);
+				printf("Long Low Bytes: %04x\n",aux->UnionCP.Long.low_bytes);
+				break;
+			case CONSTANT_Double:
+				printf("Double High Bytes: %04x\n",aux->UnionCP.Double.high_bytes);
+				printf("Double Low Bytes: %04x\n",aux->UnionCP.Double.low_bytes);
+				break;
+			case CONSTANT_NameAndType:
+				printf("Name and Type - Name Index: %04x\n",aux->UnionCP.NameAndType.name_index);
+				printf("Name and Type - Descriptor Index: %04x\n",aux->UnionCP.NameAndType.descriptor_index);
+				break;
+			case CONSTANT_Utf8:
+				printf("UTF8 Length: %02x\n",aux->UnionCP.UTF8.length);
+				printf("Bytes: ");
+				for (u1 * i = aux->UnionCP.UTF8.bytes; i < aux->UnionCP.UTF8.bytes + aux->UnionCP.UTF8.length; i++) {
+					printf("%02x ",*i);
+				}
+				printf("\n");
+				break;
+			case CONSTANT_MethodHandle:
+				printf("MethodHandle Reference Kind: %02x\n",aux->UnionCP.MethodHandle.reference_kind);
+				printf("MethodHandle Reference Index: %04x\n",aux->UnionCP.MethodHandle.reference_index);
+				break;
+			case CONSTANT_MethodType:
+				printf("MethodType Descriptor Index: %04x\n",aux->UnionCP.MethodType.descriptor_index);
+				break;
+			case CONSTANT_InvokeDynamic:
+				printf("InvokeDynamic - Bootstrap Method Attr Index: %04x\n",aux->UnionCP.InvokeDynamicInfo.bootstrap_method_attr_index);
+				printf("InvokeDynamic - Name and Type Index: %04x\n",aux->UnionCP.InvokeDynamicInfo.name_and_type_index);
+				break;
+			default:
+				printf("Default\n");
+				break;
+		}
+	}
+
+	printf("Access Flags: %04x\n",arquivoClass->access_flags);
+	printf("This Class: %04x\n",arquivoClass->this_class);
+	printf("Super Class: %04x\n",arquivoClass->super_class);
+	printf("Interfaces Count: %04x\n",arquivoClass->interfaces_count);
+	printf("Fields Count: %04x\n",arquivoClass->fields_count);
+	printf("Methods Count: %04x\n",arquivoClass->methods_count);
+
+	for (auxMethod = arquivoClass->methods; auxMethod < arquivoClass->methods + arquivoClass->methods_count; auxMethod++) {
+		printf("Access Flags do método: %04x\n",auxMethod->access_flags);
+		printf("Name index do método: %04x\n",auxMethod->name_index);
+		printf("Descriptor Index do método: %04x\n",auxMethod->descriptor_index);
+		printf("Attributes Count do método: %04x\n",auxMethod->attributes_count);
+
+		for (auxAttribute = auxMethod->attributes; auxAttribute < auxMethod->attributes+auxMethod->attributes_count; auxAttribute++) {
+			printf("Attribute Name Index: %04x\n",auxAttribute->attribute_name_index);
+			printf("Attribute Length: %08x\n",auxAttribute->attribute_length);
+			if (auxAttribute->attribute_length > 0) {
+				printf("Attribute Info: ");
+				for(u1 * c = (auxAttribute->info); c < (auxAttribute->info)+(auxAttribute->attribute_length); c++) {
+					printf("%02x ",*c);
+				}
+				printf("\n");
+			}
+		}
+	}
+
+	printf("Atributos da Classe: %02x\n",arquivoClass->attributes_count);
+	for (auxAttribute = arquivoClass->attributes; auxAttribute < arquivoClass->attributes+arquivoClass->attributes_count; auxAttribute++) {
+		printf("Attribute Name Index: %04x\n",auxAttribute->attribute_name_index);
+		printf("Attribute Length: %08x\n",auxAttribute->attribute_length);
+		if (auxAttribute->attribute_length > 0) {
+			printf("Attribute Info: ");
+			for(u1 * c = (auxAttribute->info); c < (auxAttribute->info)+(auxAttribute->attribute_length); c++) {
+				printf("%02x ",*c);
+			}
+			printf("\n");
+		}
+	}
+
 }

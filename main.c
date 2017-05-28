@@ -40,7 +40,7 @@ int main(int argc, char const *argv[]){
 	/*Chamada da função que realiza a leitura do arquivo .class*/
 	arquivoClass = lerArquivo(nomearquivo);
 	if (arquivoClass != NULL) {
-
+		imprimirClassFile(arquivoClass);
 	}
 
 

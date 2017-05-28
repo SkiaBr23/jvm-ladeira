@@ -32,5 +32,6 @@ ClassFile * lerArquivo (char *);
 cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count);
 method_info * lerMethod (FILE * fp, u2 methods_count);
 attribute_info * lerAttributes (FILE * fp, u2 attributes_count);
+void imprimirClassFile (ClassFile *);
 
 #endif
