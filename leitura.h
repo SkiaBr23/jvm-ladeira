@@ -33,6 +33,8 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count);
 method_info * lerMethod (FILE * fp, u2 methods_count);
 attribute_info * lerAttributes (FILE * fp, u2 attributes_count);
 char* buscaNomeTag(u1 tag);
+char* decodificaStringUTF8(cp_info *cp);
+char* decodificaMethodref(cp_info *cp, u2 index);
 void imprimirClassFile (ClassFile *);
 
 #endif

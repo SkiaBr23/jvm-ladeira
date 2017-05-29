@@ -411,12 +411,54 @@ char* buscaNomeTag(u1 tag){
 	return(nometag);
 }
 
+char* decodificaStringUTF8(cp_info *cp){
+	char* retorno = malloc((cp->UnionCP.UTF8.length+1)*sizeof(char));
+	char *auxretorno = retorno;
+
+	for (u1 *aux=cp->UnionCP.UTF8.bytes;aux<cp->UnionCP.UTF8.bytes+cp->UnionCP.UTF8.length;aux++){
+		*auxretorno = (char) *aux;
+		auxretorno++;
+	}
+
+	*auxretorno = '\0';
+
+	return(retorno);
+}
+
+// LEMBRAR QUE CP INFO COMEÇA DE 1, POR ISSO QUE SUBTRAI 1 NA SOMA
+char* decodificaMethodref(cp_info *cp, u2 index){
+	char *retorno = malloc(100*sizeof(u1));
+
+	cp_info *aux;
+
+	aux = cp+index-1;
+
+	/*for (aux=cp;aux<cp+index;aux++){
+		printf("Tag no for: %02x\n",aux->tag);
+	}*/
+
+	//aux--;
+/*
+	printf("Index: %02x\n",index);
+
+	printf("Impressao: %02x\n",aux->UnionCP.Class.name_index);
+	printf("Tag depois da impressao: %02x\n",aux->tag);*/
+
+	cp_info *aux2 = cp+(aux->UnionCP.Class.name_index-1);
+
+	retorno = decodificaStringUTF8(aux2);
+
+	return(retorno);
+
+}
+
 void imprimirClassFile (ClassFile * arquivoClass) {
 
 	cp_info * aux;
 	method_info * auxMethod;
 	attribute_info * auxAttribute;
 	uint32_t contador = 1;
+	char *ponteiroprint;
 
 	printf("Magic: %08x\n",arquivoClass->magic);
 	printf("Minor Version: %04x\n",arquivoClass->minor_version);
@@ -436,7 +478,8 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 				printf("Name and Type: cp_info#%02x\n",aux->UnionCP.Fieldref.name_and_type_index);
 				break;
 			case CONSTANT_Methodref:
-				printf("Class Name: cp_info#%02x\n",aux->UnionCP.Methodref.class_index);
+				ponteiroprint = decodificaMethodref(arquivoClass->constant_pool,aux->UnionCP.Methodref.class_index);
+				printf("Class Name: cp_info#%02x %s\n",aux->UnionCP.Methodref.class_index,ponteiroprint);
 				printf("Name and Type: cp_info#%02x\n",aux->UnionCP.Methodref.name_and_type_index);
 				break;
 			case CONSTANT_InterfaceMethodref:
@@ -469,7 +512,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 				printf("Length of string: %02x\n",aux->UnionCP.UTF8.length);
 				printf("String: ");
 				for (u1 * i = aux->UnionCP.UTF8.bytes; i < aux->UnionCP.UTF8.bytes + aux->UnionCP.UTF8.length; i++) {
-					printf("%02x ",*i);
+					printf("%c",(char) (*i));
 				}
 				printf("\n");
 				break;
