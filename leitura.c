@@ -362,6 +362,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 	cp_info * aux;
 	method_info * auxMethod;
 	attribute_info * auxAttribute;
+	uint32_t contador = 1;
 
 	printf("Magic: %08x\n",arquivoClass->magic);
 	printf("Minor Version: %04x\n",arquivoClass->minor_version);
@@ -369,6 +370,8 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 	printf("Constant Pool Count: %04x\n",arquivoClass->constant_pool_count);
 
 	for (aux = arquivoClass->constant_pool; aux < arquivoClass->constant_pool+arquivoClass->constant_pool_count-1; aux++) {
+		printf("--------------Entrada [%d]--------------\n",contador);
+		contador++;
 		printf("TAG: %02x\n",aux->tag);
 		switch(aux->tag) {
 			case CONSTANT_Class:
@@ -470,5 +473,4 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 			printf("\n");
 		}
 	}
-
 }
