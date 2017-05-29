@@ -299,7 +299,7 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 method_info * lerMethod (FILE * fp, u2 methods_count) {
 	/*Alocação da estrutura Method que será retornada para a estrutura
 	principal do arquivo .class*/
-	method_info * methods = (method_info*) malloc(methods_count*sizeof(u2));
+	method_info * methods = (method_info*) malloc(methods_count*sizeof(method_info));
 
 	/*Estrutura de repetição contada que realiza a leitura das informações
 	contidas na tabela Method presente no arquvo .class*/
