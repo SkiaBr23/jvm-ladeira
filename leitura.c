@@ -13,6 +13,7 @@ Alunos: Maximillian Fan Xavier - 12/0153271
 
 /*Inclusão de estruturas e assinatura de funções de leitura*/
 #include "leitura.h"
+#include <string.h>
 
 /*Função 'u1Read' que realiza a leitura de 1 byte do arquivo .class*/
 u1 u1Read(FILE *fp){
@@ -357,6 +358,59 @@ attribute_info * lerAttributes (FILE * fp, u2 attributes_count) {
 	return attributes;
 }
 
+char* buscaNomeTag(u1 tag){
+	char *nometag = malloc(30*sizeof(char));
+	switch(tag){
+		case CONSTANT_Class:
+				strcpy(nometag,"CONSTANT_Class_Info");
+				break;
+		case CONSTANT_Fieldref:
+			strcpy(nometag,"CONSTANT_Fieldref_Info");
+			break;
+		case CONSTANT_Methodref:
+			strcpy(nometag,"CONSTANT_Methodref_Info");
+			break;
+		case CONSTANT_InterfaceMethodref:
+			strcpy(nometag,"CONSTANT_InterfaceMethodref_Info");
+			break;
+		case CONSTANT_String:
+			strcpy(nometag,"CONSTANT_String_Info");
+			break;
+		case CONSTANT_Integer:
+			strcpy(nometag,"CONSTANT_Integer_Info");
+			break;
+		case CONSTANT_Float:
+			strcpy(nometag,"CONSTANT_Float_Info");
+			break;
+		case CONSTANT_Long:
+			strcpy(nometag,"CONSTANT_Long_Info");
+			break;
+		case CONSTANT_Double:
+			strcpy(nometag,"CONSTANT_Double_Info");
+			break;
+		case CONSTANT_NameAndType:
+			strcpy(nometag,"CONSTANT_NameAndType_Info");
+			break;
+		case CONSTANT_Utf8:
+			strcpy(nometag,"CONSTANT_Utf8_Info");
+			break;
+		case CONSTANT_MethodHandle:
+			strcpy(nometag,"CONSTANT_MethodHandle_Info");
+			break;
+		case CONSTANT_MethodType:
+			strcpy(nometag,"CONSTANT_MethodType_Info");
+			break;
+		case CONSTANT_InvokeDynamic:
+			strcpy(nometag,"CONSTANT_InvokeDynamic_Info");
+			break;
+		default:
+			return NULL;
+			break;
+	}
+
+	return(nometag);
+}
+
 void imprimirClassFile (ClassFile * arquivoClass) {
 
 	cp_info * aux;
@@ -372,7 +426,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 	for (aux = arquivoClass->constant_pool; aux < arquivoClass->constant_pool+arquivoClass->constant_pool_count-1; aux++) {
 		printf("--------------Entrada [%d]--------------\n",contador);
 		contador++;
-		printf("TAG: %02x\n",aux->tag);
+		printf("TAG: %02x: %s\n",aux->tag,buscaNomeTag(aux->tag));
 		switch(aux->tag) {
 			case CONSTANT_Class:
 				printf("Class Name Index: %04x\n",aux->UnionCP.Class.name_index);
