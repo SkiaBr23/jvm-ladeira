@@ -429,22 +429,22 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		printf("TAG: %02x: %s\n",aux->tag,buscaNomeTag(aux->tag));
 		switch(aux->tag) {
 			case CONSTANT_Class:
-				printf("Class Name Index: %04x\n",aux->UnionCP.Class.name_index);
+				printf("Class Name: cp_info#%02x\n",aux->UnionCP.Class.name_index);
 				break;
 			case CONSTANT_Fieldref:
-				printf("Fieldref Class Index: %04x\n",aux->UnionCP.Fieldref.class_index);
-				printf("Fieldref Name and Type Index: %04x\n",aux->UnionCP.Fieldref.name_and_type_index);
+				printf("Class Name: cp_info#%02x\n",aux->UnionCP.Fieldref.class_index);
+				printf("Name and Type: cp_info#%02x\n",aux->UnionCP.Fieldref.name_and_type_index);
 				break;
 			case CONSTANT_Methodref:
-				printf("Methodref Class Index: %04x\n",aux->UnionCP.Methodref.class_index);
-				printf("Methodref Name and Type Index: %04x\n",aux->UnionCP.Methodref.name_and_type_index);
+				printf("Class Name: cp_info#%02x\n",aux->UnionCP.Methodref.class_index);
+				printf("Name and Type: cp_info#%02x\n",aux->UnionCP.Methodref.name_and_type_index);
 				break;
 			case CONSTANT_InterfaceMethodref:
 				printf("InterfaceMethodref Class Index: %04x\n",aux->UnionCP.InterfaceMethodref.class_index);
 				printf("InterfaceMethodref Name and Type Index: %04x\n",aux->UnionCP.InterfaceMethodref.name_and_type_index);
 				break;
 			case CONSTANT_String:
-				printf("String Index: %04x\n",aux->UnionCP.String.string_index);
+				printf("String: cp_info#%02x\n",aux->UnionCP.String.string_index);
 				break;
 			case CONSTANT_Integer:
 				printf("Integer Bytes: %04x\n",aux->UnionCP.Integer.bytes);
@@ -461,12 +461,13 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 				printf("Double Low Bytes: %04x\n",aux->UnionCP.Double.low_bytes);
 				break;
 			case CONSTANT_NameAndType:
-				printf("Name and Type - Name Index: %04x\n",aux->UnionCP.NameAndType.name_index);
-				printf("Name and Type - Descriptor Index: %04x\n",aux->UnionCP.NameAndType.descriptor_index);
+				printf("Name: cp_info#%02x\n",aux->UnionCP.NameAndType.name_index);
+				printf("Descriptor: cp_info#%02x\n",aux->UnionCP.NameAndType.descriptor_index);
 				break;
 			case CONSTANT_Utf8:
-				printf("UTF8 Length: %02x\n",aux->UnionCP.UTF8.length);
-				printf("Bytes: ");
+				printf("Length of byte array: %02x\n",aux->UnionCP.UTF8.length);
+				printf("Length of string: %02x\n",aux->UnionCP.UTF8.length);
+				printf("String: ");
 				for (u1 * i = aux->UnionCP.UTF8.bytes; i < aux->UnionCP.UTF8.bytes + aux->UnionCP.UTF8.length; i++) {
 					printf("%02x ",*i);
 				}
