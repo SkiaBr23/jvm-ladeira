@@ -270,6 +270,20 @@ struct exception_table{
 
 typedef struct exception_table exception_table;
 
+struct line_number_tableInfo {
+	u2 start_pc;
+	u2 line_number;
+};
+typedef struct line_number_tableInfo line_number_tableInfo;
+
+struct line_number_table {
+	u2 attribute_name_index;
+	u4 attribute_length;
+	u2 line_number_table_length;
+	line_number_tableInfo * info;
+};
+typedef struct line_number_table line_number_table;
+
 /*Definição de estrutura Code - ANALISAR!*/
 struct code_attribute {
 	/*Índice válido em Constant Pool, indicando
@@ -291,14 +305,17 @@ struct code_attribute {
   u4 code_length;
 	/*Arrat de bytes designando o código que implementa
 	o método*/
-  u1 *code;
+  u1 * code;
 	/*Número de entrada na tabela de exceções*/
   u2 exception_table_length;
-  exception_table *table; // Alocar com exception_table_length
+  exception_table * table; // Alocar com exception_table_length
 	/*Número de atributos do Code Attribute*/
   u2 attributes_count;
 	/*Array de atributos para este Code*/
-  attribute_info *attributes;
+	union{
+		line_number_table * lineNumberTable;
+		attribute_info * attributes;
+	}UnionCodeAttr;
 };
 typedef struct code_attribute code_attribute;
 
@@ -319,11 +336,10 @@ struct method_info{
 	u2 attributes_count;
 	/*Array de estruturas Attribute Info*/
 	union{
-		code_attribute *code_attributes;
-		attribute_info *attributes;
+		code_attribute * code_attributes;
+		attribute_info * attributes;
 	}UnionAttr;
 };
 typedef struct method_info method_info;
-
 
 #endif
