@@ -1,6 +1,6 @@
 /*
 Universidade de Brasília - 01/2017
-Software Básico -Turma A
+Software Básico - Turma A
 Projeto Leitor/Exibidor de arquivo .class
 
 Alunos: Maximillian Fan Xavier - 12/0153271
@@ -50,6 +50,12 @@ typedef uint32_t u4;
 #define MAXU1 255
 #define MAXU2 65535
 #define MAXU4 2147483647
+#define NAME_INDEX 1
+#define NAME_AND_TYPE 2
+#define STRING_INDEX 3
+#define CLASS_INDEX 4
+#define NAME_AND_TYPE_INFO_NAME_INDEX 5
+#define NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX 6
 
 
 /*Definição da estrutura de Constant Pool*/
@@ -209,6 +215,18 @@ enum tag_values {
 	CONSTANT_MethodType = 16,
 	CONSTANT_InvokeDynamic = 18
 };
+
+enum access_flags{
+	PUBLIC = 1,
+	PRIVATE = 2,
+	PROTECTED = 4,
+	STATIC = 8,
+	FINAL = 16,
+	VOLATILE = 64,
+	TRANSIENT = 128
+};
+
+typedef enum access_flags access_flags;
 
 /*Definição da estrutura de Attributes*/
 struct attribute_info {

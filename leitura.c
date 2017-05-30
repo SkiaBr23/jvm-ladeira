@@ -1,6 +1,6 @@
 /*
 Universidade de Brasília - 01/2017
-Software Básico -Turma A
+Software Básico - Turma A
 Projeto Leitor/Exibidor de arquivo .class
 
 Alunos: Maximillian Fan Xavier - 12/0153271
@@ -426,27 +426,103 @@ char* decodificaStringUTF8(cp_info *cp){
 }
 
 // LEMBRAR QUE CP INFO COMEÇA DE 1, POR ISSO QUE SUBTRAI 1 NA SOMA
-char* decodificaMethodref(cp_info *cp, u2 index){
+// Decodifica Name Index e Name Type
+char* decodificaNIeNT(cp_info *cp, u2 index, u1 tipo){
+
 	char *retorno = malloc(100*sizeof(u1));
 
 	cp_info *aux;
+	cp_info *aux2;
+	cp_info *aux3;
 
 	aux = cp+index-1;
 
-	/*for (aux=cp;aux<cp+index;aux++){
-		printf("Tag no for: %02x\n",aux->tag);
-	}*/
+	switch(tipo){
+		case NAME_INDEX:
 
-	//aux--;
-/*
-	printf("Index: %02x\n",index);
+			/*for (aux=cp;aux<cp+index;aux++){
+				printf("Tag no for: %02x\n",aux->tag);
+			}*/
+		
+			//aux--;
+			/*
+			printf("Index: %02x\n",index);
+		
+			printf("Impressao: %02x\n",aux->UnionCP.Class.name_index);
+			printf("Tag depois da impressao: %02x\n",aux->tag);*/
+		
+			aux2 = cp+(aux->UnionCP.Class.name_index-1);
+		
+			retorno = decodificaStringUTF8(aux2);
+		break;
 
-	printf("Impressao: %02x\n",aux->UnionCP.Class.name_index);
-	printf("Tag depois da impressao: %02x\n",aux->tag);*/
+		case NAME_AND_TYPE:
 
-	cp_info *aux2 = cp+(aux->UnionCP.Class.name_index-1);
+			aux2 = cp+(aux->UnionCP.NameAndType.name_index-1);
+			aux3 = cp+(aux->UnionCP.NameAndType.descriptor_index-1);
 
-	retorno = decodificaStringUTF8(aux2);
+			strcpy(retorno,decodificaStringUTF8(aux2));
+			strcat(retorno,":");
+			strcat(retorno,decodificaStringUTF8(aux3));
+		break;
+
+		case STRING_INDEX:
+		case CLASS_INDEX:
+			retorno = decodificaStringUTF8(aux);
+		break;
+
+		case NAME_AND_TYPE_INFO_NAME_INDEX:
+			retorno = decodificaStringUTF8(aux);
+		break;
+
+		case NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX:
+			retorno = decodificaStringUTF8(aux);
+		break;
+	}
+
+	return(retorno);
+}
+
+char* decodificaAccessFlags(u2 flag){
+
+	char *retorno = malloc(100*sizeof(char));
+	strcpy(retorno,"");
+
+	while(flag){
+		if(flag>=TRANSIENT){
+			flag-=TRANSIENT;
+			strcat(retorno,"TRANSIENT;");
+		}
+		if(flag>=VOLATILE){
+			flag-=VOLATILE;
+			strcat(retorno,"VOLATILE;");
+		}
+
+		if(flag>=FINAL){
+			flag-=FINAL;
+			strcat(retorno,"FINAL;");
+		}
+
+		if(flag>=STATIC){
+			flag-=STATIC;
+			strcat(retorno,"STATIC;");
+		}
+
+		if(flag>=PROTECTED){
+			flag-=PROTECTED;
+			strcat(retorno,"PROTECTED;");
+		}
+
+		if(flag>=PRIVATE){
+			flag-=PRIVATE;
+			strcat(retorno,"PRIVATE;");
+		}
+
+		if(flag>=PUBLIC){
+			flag-=PUBLIC;
+			strcat(retorno,"PUBLIC;");
+		}
+	}
 
 	return(retorno);
 
@@ -460,10 +536,20 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 	uint32_t contador = 1;
 	char *ponteiroprint;
 
+	printf("\n-----GENERAL INFORMATION-----\n\n");
 	printf("Magic: %08x\n",arquivoClass->magic);
 	printf("Minor Version: %04x\n",arquivoClass->minor_version);
 	printf("Major Version: %04x\n",arquivoClass->major_version);
 	printf("Constant Pool Count: %04x\n",arquivoClass->constant_pool_count);
+	printf("Access Flags: %04x\n",arquivoClass->access_flags);
+	printf("This Class: %04x\n",arquivoClass->this_class);
+	printf("Super Class: %04x\n",arquivoClass->super_class);
+	printf("Interfaces Count: %04x\n",arquivoClass->interfaces_count);
+	printf("Fields Count: %04x\n",arquivoClass->fields_count);
+	printf("Methods Count: %04x\n",arquivoClass->methods_count);
+	printf("Atributes Count: %02x\n",arquivoClass->attributes_count);
+
+	printf("\n\n-----CONSTANT POOL-----\n\n");
 
 	for (aux = arquivoClass->constant_pool; aux < arquivoClass->constant_pool+arquivoClass->constant_pool_count-1; aux++) {
 		printf("--------------Entrada [%d]--------------\n",contador);
@@ -471,23 +557,28 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		printf("TAG: %02x: %s\n",aux->tag,buscaNomeTag(aux->tag));
 		switch(aux->tag) {
 			case CONSTANT_Class:
-				printf("Class Name: cp_info#%02x\n",aux->UnionCP.Class.name_index);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Class.name_index,CLASS_INDEX);
+				printf("Class Name: cp_info#%02x <%s>\n",aux->UnionCP.Class.name_index,ponteiroprint);
 				break;
 			case CONSTANT_Fieldref:
-				printf("Class Name: cp_info#%02x\n",aux->UnionCP.Fieldref.class_index);
-				printf("Name and Type: cp_info#%02x\n",aux->UnionCP.Fieldref.name_and_type_index);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Fieldref.class_index,NAME_INDEX);
+				printf("Class Name: cp_info#%02x %s\n",aux->UnionCP.Fieldref.class_index,ponteiroprint);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Fieldref.name_and_type_index,NAME_AND_TYPE);
+				printf("Name and Type: cp_info#%02x %s\n",aux->UnionCP.Fieldref.name_and_type_index,ponteiroprint);
 				break;
 			case CONSTANT_Methodref:
-				ponteiroprint = decodificaMethodref(arquivoClass->constant_pool,aux->UnionCP.Methodref.class_index);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Methodref.class_index,NAME_INDEX);
 				printf("Class Name: cp_info#%02x %s\n",aux->UnionCP.Methodref.class_index,ponteiroprint);
-				printf("Name and Type: cp_info#%02x\n",aux->UnionCP.Methodref.name_and_type_index);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+				printf("Name and Type: cp_info#%02x %s\n",aux->UnionCP.Methodref.name_and_type_index,ponteiroprint);
 				break;
 			case CONSTANT_InterfaceMethodref:
 				printf("InterfaceMethodref Class Index: %04x\n",aux->UnionCP.InterfaceMethodref.class_index);
 				printf("InterfaceMethodref Name and Type Index: %04x\n",aux->UnionCP.InterfaceMethodref.name_and_type_index);
 				break;
 			case CONSTANT_String:
-				printf("String: cp_info#%02x\n",aux->UnionCP.String.string_index);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.String.string_index,STRING_INDEX);
+				printf("String: cp_info#%02x <%s>\n",aux->UnionCP.String.string_index,ponteiroprint);
 				break;
 			case CONSTANT_Integer:
 				printf("Integer Bytes: %04x\n",aux->UnionCP.Integer.bytes);
@@ -504,12 +595,14 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 				printf("Double Low Bytes: %04x\n",aux->UnionCP.Double.low_bytes);
 				break;
 			case CONSTANT_NameAndType:
-				printf("Name: cp_info#%02x\n",aux->UnionCP.NameAndType.name_index);
-				printf("Descriptor: cp_info#%02x\n",aux->UnionCP.NameAndType.descriptor_index);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
+				printf("Name: cp_info#%02x <%s>\n",aux->UnionCP.NameAndType.name_index,ponteiroprint);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
+				printf("Descriptor: cp_info#%02x <%s>\n",aux->UnionCP.NameAndType.descriptor_index,ponteiroprint);
 				break;
 			case CONSTANT_Utf8:
-				printf("Length of byte array: %02x\n",aux->UnionCP.UTF8.length);
-				printf("Length of string: %02x\n",aux->UnionCP.UTF8.length);
+				printf("Length of byte array: %d\n",(int)aux->UnionCP.UTF8.length);
+				printf("Length of string: %d\n",(int)aux->UnionCP.UTF8.length);
 				printf("String: ");
 				for (u1 * i = aux->UnionCP.UTF8.bytes; i < aux->UnionCP.UTF8.bytes + aux->UnionCP.UTF8.length; i++) {
 					printf("%c",(char) (*i));
@@ -533,21 +626,24 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		}
 	}
 
-	printf("Access Flags: %04x\n",arquivoClass->access_flags);
-	printf("This Class: %04x\n",arquivoClass->this_class);
-	printf("Super Class: %04x\n",arquivoClass->super_class);
-	printf("Interfaces Count: %04x\n",arquivoClass->interfaces_count);
-	printf("Fields Count: %04x\n",arquivoClass->fields_count);
-	printf("Methods Count: %04x\n",arquivoClass->methods_count);
+	printf("\n\n-----MÉTODOS-----\n\n");
 
-	for (auxMethod = arquivoClass->methods; auxMethod < arquivoClass->methods + arquivoClass->methods_count; auxMethod++) {
-		printf("Access Flags do método: %04x\n",auxMethod->access_flags);
-		printf("Name index do método: %04x\n",auxMethod->name_index);
-		printf("Descriptor Index do método: %04x\n",auxMethod->descriptor_index);
-		printf("Attributes Count do método: %04x\n",auxMethod->attributes_count);
+	contador = 0;
+
+	for (auxMethod = arquivoClass->methods; auxMethod < arquivoClass->methods + arquivoClass->methods_count; auxMethod++,contador++) {
+		printf("--------------Método [%d]--------------\n\n",contador);
+		ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+auxMethod->name_index);
+		printf("Name: cp_info#%02x <%s>\n",auxMethod->name_index,ponteiroprint);
+		ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+auxMethod->descriptor_index);
+		printf("Descriptor: cp_info#%02x <%s>\n",auxMethod->descriptor_index,ponteiroprint);
+		ponteiroprint = decodificaAccessFlags(auxMethod->access_flags);
+		printf("Access Flags: 0x%04x [%s]\n",auxMethod->access_flags,ponteiroprint);
+		printf("Attributes Count: %04x\n",auxMethod->attributes_count);
 
 		for (auxAttribute = auxMethod->attributes; auxAttribute < auxMethod->attributes+auxMethod->attributes_count; auxAttribute++) {
-			printf("Attribute Name Index: %04x\n",auxAttribute->attribute_name_index);
+
+			ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+auxAttribute->attribute_name_index);
+			printf("Attribute Name Index: cp_info#%02x <%s>\n",auxAttribute->attribute_name_index,ponteiroprint);
 			printf("Attribute Length: %08x\n",auxAttribute->attribute_length);
 			if (auxAttribute->attribute_length > 0) {
 				printf("Attribute Info: ");
@@ -559,7 +655,6 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		}
 	}
 
-	printf("Atributos da Classe: %02x\n",arquivoClass->attributes_count);
 	for (auxAttribute = arquivoClass->attributes; auxAttribute < arquivoClass->attributes+arquivoClass->attributes_count; auxAttribute++) {
 		printf("Attribute Name Index: %04x\n",auxAttribute->attribute_name_index);
 		printf("Attribute Length: %08x\n",auxAttribute->attribute_length);

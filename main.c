@@ -1,6 +1,6 @@
 /*
 Universidade de Brasília - 01/2017
-Software Básico -Turma A
+Software Básico - Turma A
 Projeto Leitor/Exibidor de arquivo .class
 
 Alunos: Maximillian Fan Xavier - 12/0153271

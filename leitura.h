@@ -1,6 +1,6 @@
 /*
 Universidade de Brasília - 01/2017
-Software Básico -Turma A
+Software Básico - Turma A
 Projeto Leitor/Exibidor de arquivo .class
 
 Alunos: Maximillian Fan Xavier - 12/0153271
@@ -34,7 +34,8 @@ method_info * lerMethod (FILE * fp, u2 methods_count);
 attribute_info * lerAttributes (FILE * fp, u2 attributes_count);
 char* buscaNomeTag(u1 tag);
 char* decodificaStringUTF8(cp_info *cp);
-char* decodificaMethodref(cp_info *cp, u2 index);
+char* decodificaNIeNT(cp_info *cp, u2 index,u1 tipo);
+char* decodificaAccessFlags(u2 flag);
 void imprimirClassFile (ClassFile *);
 
 #endif
