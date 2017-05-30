@@ -261,25 +261,14 @@ struct field_info{
 };
 typedef struct field_info field_info;
 
-/*Definição de estrutura Method*/
-struct method_info{
-	/*Denota a permissão de acesso ao método
-	e suas propriedades*/
-	u2 access_flags;
-	/*Índice válido em Constant Pool, indicando
-	o nome simples do método ou ainda
-	o nome do método especial <init> ou <clinit>*/
-	u2 name_index;
-	/*Índice válido em Constant Pool, indicando
-	o descritor do método*/
-	u2 descriptor_index;
-	/*Indica o número de atributos adicionais
-	deste método*/
-	u2 attributes_count;
-	/*Array de estruturas Attribute Info*/
-	attribute_info *attributes;
+struct exception_table{
+	u2 start_pc;
+    u2 end_pc;
+    u2 handler_pc;
+    u2 catch_type;
 };
-typedef struct method_info method_info;
+
+typedef struct exception_table exception_table;
 
 /*Definição de estrutura Code - ANALISAR!*/
 struct code_attribute {
@@ -287,7 +276,7 @@ struct code_attribute {
 	a string "Code"*/
 	u2 attribute_name_index;
 	/*Indica o tamanho do atributo*/
-  u4 attribute_length;
+  	u4 attribute_length;
 	/*Determina a profundidade máxima do operando
 	na pilha deste método, em qualquer ponto
 	durante a execução deste método*/
@@ -305,16 +294,36 @@ struct code_attribute {
   u1 *code;
 	/*Número de entrada na tabela de exceções*/
   u2 exception_table_length;
-  /*{   u2 start_pc;
-        u2 end_pc;
-        u2 handler_pc;
-        u2 catch_type;
-  } *exception_table;*/ // Alocar com exception_table_length
+  exception_table *table; // Alocar com exception_table_length
 	/*Número de atributos do Code Attribute*/
   u2 attributes_count;
 	/*Array de atributos para este Code*/
   attribute_info *attributes;
 };
 typedef struct code_attribute code_attribute;
+
+/*Definição de estrutura Method*/
+struct method_info{
+	/*Denota a permissão de acesso ao método
+	e suas propriedades*/
+	u2 access_flags;
+	/*Índice válido em Constant Pool, indicando
+	o nome simples do método ou ainda
+	o nome do método especial <init> ou <clinit>*/
+	u2 name_index;
+	/*Índice válido em Constant Pool, indicando
+	o descritor do método*/
+	u2 descriptor_index;
+	/*Indica o número de atributos adicionais
+	deste método*/
+	u2 attributes_count;
+	/*Array de estruturas Attribute Info*/
+	union{
+		code_attribute *code_attributes;
+		attribute_info *attributes;
+	}UnionAttr;
+};
+typedef struct method_info method_info;
+
 
 #endif

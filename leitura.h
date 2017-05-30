@@ -30,7 +30,7 @@ u2 u2Read(FILE *fp);
 u4 u4Read(FILE *fp);
 ClassFile * lerArquivo (char *);
 cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count);
-method_info * lerMethod (FILE * fp, u2 methods_count);
+method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp);
 attribute_info * lerAttributes (FILE * fp, u2 attributes_count);
 char* buscaNomeTag(u1 tag);
 char* decodificaStringUTF8(cp_info *cp);
