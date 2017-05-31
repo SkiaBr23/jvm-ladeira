@@ -838,12 +838,13 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 
 	printf("\n\n-----AtRIBUTOS DA CLASSE-----\n\n");
 	for (auxAttributeClasse = arquivoClass->attributes; auxAttributeClasse < arquivoClass->attributes+arquivoClass->attributes_count; auxAttributeClasse++) {
-		printf("Attribute Name Index: %04x\n",auxAttributeClasse->attribute_name_index);
-		printf("Attribute Length: %08x\n",auxAttributeClasse->attribute_length);
+		ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool+auxAttributeClasse->attribute_name_index-1);
+		printf("Attribute Name Index: cp_info#%d <%s>\n",auxAttributeClasse->attribute_name_index,ponteiroprint);
+		printf("Attribute Length: %d\n",(int) auxAttributeClasse->attribute_length);
 		if (auxAttributeClasse->attribute_length > 0) {
 			printf("Attribute Info: ");
 			for(u1 * c = (auxAttributeClasse->info); c < (auxAttributeClasse->info)+(auxAttributeClasse->attribute_length); c++) {
-				printf("%02x ",*c);
+				printf("%02x ",(*c));
 			}
 			printf("\n");
 		}
