@@ -167,7 +167,7 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		das entradas, caso contrário prossegue com a leitura dos próximos campos*/
 		if(arquivoClass->attributes_count > 0){
 			/*Chamada da função 'lerAttributes' para realizar a leitura da tabela Attributes*/
-			arquivoClass->attributes = lerAttributes(fp, arquivoClass->attributes_count);
+			arquivoClass->attributes = lerAttributes(fp, arquivoClass->attributes_count, arquivoClass->constant_pool);
 		}
 		/*Fechamento do arquivo .class*/
 		fclose(fp);
@@ -359,6 +359,7 @@ method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp) {
 
 				auxcount--;
 		}
+		free(string_name_index);
 
 
 			// i->attributes = lerAttributesInfo(fp, i->attributes_count, cp);
@@ -428,6 +429,8 @@ code_attribute * lerCode (FILE * fp, u2 name_index, u2 size, cp_info *cp) {
 		auxCodeAttrCount--;
 	}
 
+	free(string_name_index);
+
 	//code_attributes->attributes = lerAttributes(fp, code_attributes->attributes_count);//malloc(code_attributes->attributes_count*sizeof(attribute_info));
 
 	return code_attributes;
@@ -464,7 +467,7 @@ exception_table * lerExceptionTable (FILE * fp, u2 size) {
 
 
 /*Função 'lerAttributes' para realizar a leitura da tabela Attribute*/
-attribute_info * lerAttributes (FILE * fp, u2 attributes_count) {
+attribute_info * lerAttributes (FILE * fp, u2 attributes_count, cp_info * cp) {
 
 	/*Alocação da estrutura Attribute que será retornada para a estrutura
 	principal do arquivo .class*/
@@ -481,23 +484,38 @@ attribute_info * lerAttributes (FILE * fp, u2 attributes_count) {
 		é maior que zero. Se for, prossegue com a leitura da informação
 		do atributo*/
 		if (a->attribute_length > 0) {
-			/*Alocação do espaço para informação do atributo*/
-			a->info = malloc((a->attribute_length)*sizeof(u1));
-			/*Estrutura de repetição contada para fazer a leitura dos dados
-			e gravá-los na estrutura de informação*/
-			for(u1 * c = (a->info); c < (a->info)+(a->attribute_length); c++) {
-				/*Leitura dos dados*/
-				*c = u1Read(fp);
+			char * string_name_index = malloc(100*sizeof(char));
+			string_name_index = decodificaStringUTF8(cp+a->attribute_name_index-1);
+			//VERIFICAR SE ELE SO ALOCA NO MAXIMO 1 TIPO, LINENUMBER-CODE-ETC,por chamada
+			if(strcmp(string_name_index,"SourceFile") == 0){
+				source_file_attribute * SourceFile = NULL;//(code_attribute*) malloc(i->attributes_count*sizeof(code_attribute));
+				SourceFile = lerSourceFile(fp);
+				a->info = NULL;//malloc(i->attributes_count*sizeof(code_attribute));
+				a->info = (source_file_attribute*) SourceFile;
+			} else {
+				a->info = (u1*)malloc((a->attribute_length)*sizeof(u1));
+				/*Estrutura de repetição contada para fazer a leitura dos dados
+				e gravá-los na estrutura de informação*/
+				for(u1 * c = (u1*)(a->info); c < (u1*)((a->info)+(a->attribute_length)); c++) {
+					/*Leitura dos dados*/
+					*c = u1Read(fp);
+				}
 			}
 		}
 	}
-
 	/*Retorno da estrutura Attribute alocada, com as informações lidas*/
 	return attributes;
 }
 
+source_file_attribute * lerSourceFile (FILE * fp) {
+	source_file_attribute * SourceFile = NULL;
+	SourceFile = (source_file_attribute*)malloc(sizeof(source_file_attribute));
+	SourceFile->source_file_index = u2Read(fp);
+	return SourceFile;
+}
+
 char* buscaNomeTag(u1 tag){
-	char *nometag = malloc(30*sizeof(char));
+	char *nometag = malloc(40*sizeof(char));
 	switch(tag){
 		case CONSTANT_Class:
 				strcpy(nometag,"CONSTANT_Class_Info");
@@ -841,12 +859,18 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool+auxAttributeClasse->attribute_name_index-1);
 		printf("Attribute Name Index: cp_info#%d <%s>\n",auxAttributeClasse->attribute_name_index,ponteiroprint);
 		printf("Attribute Length: %d\n",(int) auxAttributeClasse->attribute_length);
-		if (auxAttributeClasse->attribute_length > 0) {
-			printf("Attribute Info: ");
-			for(u1 * c = (auxAttributeClasse->info); c < (auxAttributeClasse->info)+(auxAttributeClasse->attribute_length); c++) {
-				printf("%02x ",(*c));
+		if (strcmp(ponteiroprint,"SourceFile") == 0) {
+		 	source_file_attribute * SourceFile = ((source_file_attribute*)(auxAttributeClasse->info));
+			printf("Valor: %d\n",SourceFile->source_file_index);
+			printf("Source File Name Index: cp_info#%d <%s>\n",SourceFile->source_file_index,decodificaStringUTF8(arquivoClass->constant_pool+SourceFile->source_file_index-1));
+		} else {
+			if (auxAttributeClasse->attribute_length > 0) {
+				printf("Attribute Info: ");
+				for(u1 * c = (u1*)(auxAttributeClasse->info); c < (u1*)((auxAttributeClasse->info)+(auxAttributeClasse->attribute_length)); c++) {
+					printf("%02x ",(*c));
+				}
+				printf("\n");
 			}
-			printf("\n");
 		}
 	}
 }

@@ -238,7 +238,7 @@ struct attribute_info {
 	u4 attribute_length;
 	/*Array contendo a informação no formato
 	String - ANALISAR*/
-	u1 *info;
+	void *info;
 };
 typedef struct attribute_info attribute_info;
 
@@ -290,7 +290,7 @@ struct code_attribute {
 	a string "Code"*/
 	u2 attribute_name_index;
 	/*Indica o tamanho do atributo*/
-  	u4 attribute_length;
+  u4 attribute_length;
 	/*Determina a profundidade máxima do operando
 	na pilha deste método, em qualquer ponto
 	durante a execução deste método*/
@@ -341,5 +341,10 @@ struct method_info{
 	}UnionAttr;
 };
 typedef struct method_info method_info;
+
+struct source_file_attribute {
+	u2 source_file_index;
+};
+typedef struct source_file_attribute source_file_attribute;
 
 #endif

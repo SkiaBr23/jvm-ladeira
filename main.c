@@ -43,6 +43,9 @@ int main(int argc, char const *argv[]){
 		imprimirClassFile(arquivoClass);
 	}
 
+	free(arquivoClass);
+	free(nomearquivo);
+
 
 	/*Retorno da função main*/
 	return (0);
