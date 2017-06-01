@@ -167,7 +167,10 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		das entradas, caso contrário prossegue com a leitura dos próximos campos*/
 		if(arquivoClass->attributes_count > 0){
 			/*Chamada da função 'lerAttributes' para realizar a leitura da tabela Attributes*/
-			arquivoClass->attributes = lerAttributes(fp, arquivoClass->attributes_count, arquivoClass->constant_pool);
+			arquivoClass->attributes = (attribute_info**)malloc(arquivoClass->attributes_count*sizeof(attribute_info*));
+			for (int posicao = 0; posicao < arquivoClass->attributes_count; posicao++) {
+				*(arquivoClass->attributes+posicao) = lerAttributes(fp, arquivoClass->constant_pool);
+			}
 		}
 		/*Fechamento do arquivo .class*/
 		fclose(fp);
@@ -316,64 +319,45 @@ method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp) {
 		/*Estrutura condicional que avalia se a quantidade de atributos
 		do método é maior que zero. Se for, prossegue com a leitura dos
 		atributos do método*/
-		u2 auxcount = i->attributes_count;
 		// attribute_info *attributes = (attribute_info*) malloc(i->attributes_count*sizeof(attribute_info));
-		u2 name_index;
-		char * string_name_index = malloc(100*sizeof(char));
-		while (auxcount > 0) {
-			/*Estrutura de repetição contada que realiza a leitura das informações
-			contidas na tabela Attribute presente no arquvo .class*/
-				/*Leitura do atributo name_index do respectivo atributo*/
-				name_index = u2Read(fp);
-				string_name_index = decodificaStringUTF8(cp+name_index-1);
 
-
-				//FAZER FOR PARA LER MAIS DE UM CODE PARA UM MESMO METODO? OU SO EXISTE UM CODE POR METODO?
-
-
-				if(strcmp(string_name_index,"Code") == 0){
-					code_attribute *code_attributes = NULL;//(code_attribute*) malloc(i->attributes_count*sizeof(code_attribute));
-					code_attributes = lerCode(fp, name_index, auxcount, cp);
-					i->UnionAttr.code_attributes = NULL;//malloc(i->attributes_count*sizeof(code_attribute));
-					i->UnionAttr.code_attributes = code_attributes;
-				}
-				/*else if(strcmp(string_name_index,"Attribute Info")==0){
-
-				}*/
-				/*Leitura do atributo length do respectivo atributo
-				a->attribute_length = u4Read(fp);
-				Estrutura condicional que avalia se o tamanho do atributo
-				é maior que zero. Se for, prossegue com a leitura da informação
-				do atributo
-				if (a->attribute_length > 0) {
-					Alocação do espaço para informação do atributo
-					switch(decodificaStringUTF8(cp))
-					a->UnionAttr.attributes = malloc((a->attribute_length)*sizeof(u1));
-					Estrutura de repetição contada para fazer a leitura dos dados
-					e gravá-los na estrutura de informação
-					for(u1 * c = (a->info); c < (a->info)+(a->attribute_length); c++) {
-						Leitura dos dados
-						*c = u1Read(fp);
-					}
-				}*/
-
-				auxcount--;
+		if (i->attributes_count > 0) {
+			i->attributes = (attribute_info**)malloc(i->attributes_count*sizeof(attribute_info*));
+			for (int posicao = 0; posicao < i->attributes_count; posicao++) {
+				*(i->attributes+posicao) = lerAttributes(fp, cp);
+			}
 		}
-		free(string_name_index);
 
 
-			// i->attributes = lerAttributesInfo(fp, i->attributes_count, cp);
+
+		//FUNCIONOU - LIXAO
+		/*if (i->attributes_count > 0) {
+			u2 ida, vinda;
+			ida = i->attributes_count;
+			vinda = i->attributes_count;
+			i->attributes = NULL;
+			i->attributes = (attribute_info*)malloc(sizeof(attribute_info)*i->attributes_count);
+			while (ida){
+				//(code_attribute*) malloc(i->attributes_count*sizeof(code_attribute));
+				i->attributes = lerAttributes(fp, cp);
+				ida--;
+				i->attributes++;
+				getchar();
+			}
+			while (vinda) {
+				i->attributes--;
+				vinda--;
+			}
+		}*/
 	}
 
 	/*Retorno da estrutura Method alocada, com as informações lidas*/
 	return methods;
 }
 
-code_attribute * lerCode (FILE * fp, u2 name_index, u2 size, cp_info *cp) {
+code_attribute * lerCode (FILE * fp, cp_info *cp) {
 	code_attribute * code_attributes = NULL;
-	code_attributes = (code_attribute*) malloc(size*sizeof(code_attribute));
-	code_attributes->attribute_name_index = name_index;
-	code_attributes->attribute_length = u4Read(fp);
+	code_attributes = (code_attribute*) malloc(sizeof(code_attribute));
 	code_attributes->max_stack = u2Read(fp);
 	code_attributes->max_locals = u2Read(fp);
 	code_attributes->code_length = u4Read(fp);
@@ -386,68 +370,59 @@ code_attribute * lerCode (FILE * fp, u2 name_index, u2 size, cp_info *cp) {
 
 	code_attributes->exception_table_length = u2Read(fp);
 
-	if(code_attributes->exception_table_length>0){
+	if(code_attributes->exception_table_length > 0){
 		code_attributes->table = NULL;//malloc(code_attributes->exception_table_length*sizeof(exception_table));
 		code_attributes->table = lerExceptionTable(fp, code_attributes->exception_table_length);
 	}
 
 	code_attributes->attributes_count = u2Read(fp);
-	u2 auxCodeAttrCount = code_attributes->attributes_count;
-	char * string_name_index = malloc(100*sizeof(char));
 
-	while (auxCodeAttrCount > 0){
-		u2 attr_name_index = u2Read(fp);
-		string_name_index = decodificaStringUTF8(cp+attr_name_index-1);
-
-		//VERIFICAR SE ELE SO ALOCA NO MAXIMO 1 TIPO, LINENUMBER-CODE-ETC,por chamada
-			if(strcmp(string_name_index,"LineNumberTable") == 0){
-				line_number_table * LineNumberTable = NULL;//(code_attribute*) malloc(i->attributes_count*sizeof(code_attribute));
-				LineNumberTable = lerLineNumberTable(fp, attr_name_index, auxCodeAttrCount);
-				code_attributes->UnionCodeAttr.lineNumberTable = NULL;//malloc(i->attributes_count*sizeof(code_attribute));
-				code_attributes->UnionCodeAttr.lineNumberTable = LineNumberTable;
-			}
-				/*else if(strcmp(string_name_index,"Attribute Info")==0){
-
-				}*/
-				/*Leitura do atributo length do respectivo atributo
-				a->attribute_length = u4Read(fp);
-				Estrutura condicional que avalia se o tamanho do atributo
-				é maior que zero. Se for, prossegue com a leitura da informação
-				do atributo
-				if (a->attribute_length > 0) {
-					Alocação do espaço para informação do atributo
-					switch(decodificaStringUTF8(cp))
-					a->UnionAttr.attributes = malloc((a->attribute_length)*sizeof(u1));
-					Estrutura de repetição contada para fazer a leitura dos dados
-					e gravá-los na estrutura de informação
-					for(u1 * c = (a->info); c < (a->info)+(a->attribute_length); c++) {
-						Leitura dos dados
-						*c = u1Read(fp);
-					}
-				}*/
-
-		auxCodeAttrCount--;
+	if (code_attributes->attributes_count > 0){
+		code_attributes->attributes = (attribute_info**)malloc(code_attributes->attributes_count*sizeof(attribute_info*));
+		for (int posicao = 0; posicao < code_attributes->attributes_count; posicao++) {
+			*(code_attributes->attributes+posicao) = lerAttributes(fp, cp);
+		}
 	}
 
-	free(string_name_index);
 
-	//code_attributes->attributes = lerAttributes(fp, code_attributes->attributes_count);//malloc(code_attributes->attributes_count*sizeof(attribute_info));
+		/*u2 ida, vinda;
+		ida = code_attributes->attributes_count;
+		vinda = code_attributes->attributes_count;
+		code_attributes->attributes = NULL;
+		code_attributes->attributes = (attribute_info*)malloc(sizeof(attribute_info)*code_attributes->attributes_count);
+
+		while (ida){
+			code_attributes->attributes = lerAttributes(fp, cp);
+			ida--;
+			code_attributes->attributes++;
+		}
+		while (vinda) {
+			code_attributes->attributes--;
+			vinda--;
+		}*/
+
+		/*code_attributes->attributes = NULL;
+		attribute_info * attr = (attribute_info*)malloc(sizeof(attribute_info)*code_attributes->attributes_count);
+		attribute_info * aux;
+		for (aux = attr; aux < attr+code_attributes->attributes_count; aux++) {
+			attribute_info * attrAux = NULL;//(code_attribute*) malloc(i->attributes_count*sizeof(code_attribute));
+			attrAux = lerAttributes(fp, cp);
+			aux = attrAux;
+		}
+		code_attributes->attributes = attr;
+	}*/
 
 	return code_attributes;
 }
 
-line_number_table * lerLineNumberTable(FILE * fp, u2 attr_name_index, u2 size) {
-	line_number_table * lnt = (line_number_table*)malloc(size*sizeof(line_number_table));
-	for(line_number_table *l = lnt; l < lnt + size; l++){
-		l->attribute_name_index = attr_name_index;
-		l->attribute_length = u4Read(fp);
-		l->line_number_table_length = u2Read(fp);
-		if (l->line_number_table_length > 0) {
-			l->info = (line_number_tableInfo*)malloc(l->line_number_table_length*sizeof(line_number_tableInfo));
-			for (line_number_tableInfo * linfo = l->info; linfo < l->info+l->line_number_table_length; linfo++) {
-				linfo->start_pc = u2Read(fp);
-				linfo->line_number = u2Read(fp);
-			}
+line_number_table * lerLineNumberTable(FILE * fp, cp_info * cp) {
+	line_number_table * lnt = (line_number_table*)malloc(sizeof(line_number_table));
+	lnt->line_number_table_length = u2Read(fp);
+	if (lnt->line_number_table_length > 0) {
+		lnt->info = (line_number_tableInfo*)malloc(lnt->line_number_table_length*sizeof(line_number_tableInfo));
+		for (line_number_tableInfo * linfo = lnt->info; linfo < lnt->info+lnt->line_number_table_length; linfo++) {
+			linfo->start_pc = u2Read(fp);
+			linfo->line_number = u2Read(fp);
 		}
 	}
 	return lnt;
@@ -455,7 +430,7 @@ line_number_table * lerLineNumberTable(FILE * fp, u2 attr_name_index, u2 size) {
 
 exception_table * lerExceptionTable (FILE * fp, u2 size) {
 	exception_table * exception_tableAux = (exception_table*)malloc(size*sizeof(exception_table));
-	for(exception_table *e = exception_tableAux; e < exception_tableAux + size; e++){
+	for(exception_table * e = exception_tableAux; e < exception_tableAux + size; e++){
 		e->start_pc = u2Read(fp);
 		e->end_pc = u2Read(fp);
 		e->handler_pc = u2Read(fp);
@@ -467,42 +442,42 @@ exception_table * lerExceptionTable (FILE * fp, u2 size) {
 
 
 /*Função 'lerAttributes' para realizar a leitura da tabela Attribute*/
-attribute_info * lerAttributes (FILE * fp, u2 attributes_count, cp_info * cp) {
+attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 
 	/*Alocação da estrutura Attribute que será retornada para a estrutura
 	principal do arquivo .class*/
-	attribute_info * attributes = (attribute_info*) malloc(attributes_count*sizeof(attribute_info));
-
-	/*Estrutura de repetição contada que realiza a leitura das informações
-	contidas na tabela Attribute presente no arquvo .class*/
-	for (attribute_info * a = attributes; a < attributes+attributes_count; a++) {
-		/*Leitura do atributo name_index do respectivo atributo*/
-		a->attribute_name_index = u2Read(fp);
-		/*Leitura do atributo length do respectivo atributo*/
-		a->attribute_length = u4Read(fp);
-		/*Estrutura condicional que avalia se o tamanho do atributo
-		é maior que zero. Se for, prossegue com a leitura da informação
-		do atributo*/
-		if (a->attribute_length > 0) {
+	attribute_info * attributes = (attribute_info*) malloc(sizeof(attribute_info));
+	/*Leitura do atributo name_index do respectivo atributo*/
+	attributes->attribute_name_index = u2Read(fp);
+	/*Leitura do atributo length do respectivo atributo*/
+	attributes->attribute_length = u4Read(fp);
+	/*Estrutura condicional que avalia se o tamanho do atributo
+	é maior que zero. Se for, prossegue com a leitura da informação
+	do atributo*/
+	printf("NameIndexAttr: %d\n",attributes->attribute_name_index);
+	if (attributes->attribute_length > 0) {
 			char * string_name_index = malloc(100*sizeof(char));
-			string_name_index = decodificaStringUTF8(cp+a->attribute_name_index-1);
+			string_name_index = decodificaStringUTF8(cp+attributes->attribute_name_index-1);
 			//VERIFICAR SE ELE SO ALOCA NO MAXIMO 1 TIPO, LINENUMBER-CODE-ETC,por chamada
 			if(strcmp(string_name_index,"SourceFile") == 0){
 				source_file_attribute * SourceFile = NULL;//(code_attribute*) malloc(i->attributes_count*sizeof(code_attribute));
 				SourceFile = lerSourceFile(fp);
-				a->info = NULL;//malloc(i->attributes_count*sizeof(code_attribute));
-				a->info = (source_file_attribute*) SourceFile;
-			} else {
-				a->info = (u1*)malloc((a->attribute_length)*sizeof(u1));
-				/*Estrutura de repetição contada para fazer a leitura dos dados
-				e gravá-los na estrutura de informação*/
-				for(u1 * c = (u1*)(a->info); c < (u1*)((a->info)+(a->attribute_length)); c++) {
-					/*Leitura dos dados*/
-					*c = u1Read(fp);
-				}
+				printf("SourceFile: %d\n",SourceFile->source_file_index);
+				attributes->info = NULL;//malloc(i->attributes_count*sizeof(code_attribute));
+				attributes->info = (source_file_attribute*) SourceFile;
+			} else if (strcmp(string_name_index,"Code") == 0) {
+				code_attribute * code_attr = NULL;
+				code_attr = lerCode(fp ,cp);
+				printf("Code: %d\n",code_attr->code_length);
+				attributes->info = (code_attribute*) code_attr;
+			} else if (strcmp(string_name_index,"LineNumberTable") == 0) {
+				line_number_table * lnt = NULL;
+				lnt = lerLineNumberTable(fp, cp);
+				printf("LNT: %d\n",lnt->line_number_table_length);
+				attributes->info = (line_number_table*)lnt;
 			}
-		}
 	}
+	printf("Calma: %d\n",attributes->attribute_name_index);
 	/*Retorno da estrutura Attribute alocada, com as informações lidas*/
 	return attributes;
 }
@@ -688,11 +663,10 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 
 	cp_info * aux;
 	method_info * auxMethod;
-	code_attribute *auxAttribute;
-	attribute_info *auxAttributeClasse;
-	exception_table *eAux;
+	attribute_info ** auxAttributeClasse;
+	exception_table * exceptionTableAux;
 	uint32_t contador = 1;
-	u1 *auxcode;
+	u1 * auxBytesCode;
 	char *ponteiroprint;
 
 	printf("\n-----GENERAL INFORMATION-----\n\n");
@@ -799,78 +773,76 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		printf("Access Flags: 0x%04x [%s]\n",auxMethod->access_flags,ponteiroprint);
 		printf("Attributes Count: %04x\n",auxMethod->attributes_count);
 
-		for (auxAttribute = auxMethod->UnionAttr.code_attributes; auxAttribute < auxMethod->UnionAttr.code_attributes+auxMethod->attributes_count; auxAttribute++) {
+		printf("Atributos:\n");
+		attribute_info ** auxAttrCompleto = auxMethod->attributes;
+		for (int posicao = 0; posicao < auxMethod->attributes_count; posicao++) {
+			ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+(*(auxAttrCompleto+posicao))->attribute_name_index);
+			printf("Attribute Name Index: cp_info#%02x <%s>\n",(*(auxAttrCompleto+posicao))->attribute_name_index,ponteiroprint);
+			printf("Attribute Length: %d\n",(*(auxAttrCompleto+posicao))->attribute_length);
 
-			ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+auxAttribute->attribute_name_index);
-			printf("Attribute Name Index: cp_info#%02x <%s>\n",auxAttribute->attribute_name_index,ponteiroprint);
-			printf("Attribute Length: %d\n",auxAttribute->attribute_length);
-			printf("Max Stack: %02x\n",auxAttribute->max_stack);
-			printf("Max Locals: %02x\n",auxAttribute->max_locals);
-			printf("Code length: %04x\n",auxAttribute->code_length);
-
-
-			printf("Code: ");
-			if(auxAttribute->code_length>0){
-				for(auxcode=auxAttribute->code;auxcode<auxAttribute->code+auxAttribute->code_length;auxcode++){
-					printf("%02x ",*auxcode);
-				}
-				printf("\n\n");
-			}
-
-
-			if(auxAttribute->exception_table_length>0){
-				for(eAux=auxAttribute->table;eAux<auxAttribute->table+auxAttribute->exception_table_length;eAux++){
-					printf("Start PC: %02x\n",eAux->start_pc);
-					printf("End PC: %02x\n",eAux->end_pc);
-					printf("Handler PC: %02x\n",eAux->handler_pc);
-					printf("Catch Type: %02x\n",eAux->catch_type);
-				}
-
-				printf("\n\n");
-			}
-
-			printf("Attributes Count: %02x\n",auxAttribute->attributes_count);
-			int contadorAttr = 0;
-			int lntContador = 0;
-			if (auxAttribute->attributes_count > 0) {
-				printf("Attributo %d: \n",contadorAttr);
-				for(line_number_table * lnt = auxAttribute->UnionCodeAttr.lineNumberTable; lnt < auxAttribute->UnionCodeAttr.lineNumberTable + auxAttribute->attributes_count;lnt++){
-					ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+lnt->attribute_name_index);
-					printf("Attribute name index: cp_info#%d <%s>\n",lnt->attribute_name_index,ponteiroprint);
-					printf("Attribute Length: %d\n",(int)lnt->attribute_length);
-					printf("Attribute Info: \n");
-					printf("Nr.\t\tStartPC\t\tLineNumber\n");
-					for (line_number_tableInfo * linfo = lnt->info; linfo < lnt->info + lnt->line_number_table_length; linfo++) {
-						printf("%d\t\t%d\t\t%d\n",lntContador,linfo->start_pc,linfo->line_number);
-						lntContador++;
+			if (strcmp(ponteiroprint,"Code") == 0) {
+				code_attribute * auxCodePontual = (code_attribute*)(*(auxAttrCompleto+posicao))->info;
+				printf("Max Stack: %02x\n",auxCodePontual->max_stack);
+				printf("Max Locals: %02x\n",auxCodePontual->max_locals);
+				printf("Code length: %04x\n",auxCodePontual->code_length);
+				printf("Code: ");
+				if(auxCodePontual->code_length > 0) {
+					for(auxBytesCode = auxCodePontual->code; auxBytesCode < auxCodePontual->code + auxCodePontual->code_length; auxBytesCode++){
+						printf("%02x ",*auxBytesCode);
 					}
-					printf("\n");
-					//for(u1 * c = (a->info); c < (a->info)+(a->attribute_length); c++) {
-						//printf("%02x ",*c);
-					//}
+					printf("\n\n");
 				}
-				contadorAttr++;
+				if(auxCodePontual->exception_table_length > 0) {
+					for(exceptionTableAux = auxCodePontual->table; exceptionTableAux < auxCodePontual->table + auxCodePontual->exception_table_length; exceptionTableAux++){
+						printf("Start PC: %02x\n",exceptionTableAux->start_pc);
+						printf("End PC: %02x\n",exceptionTableAux->end_pc);
+						printf("Handler PC: %02x\n",exceptionTableAux->handler_pc);
+						printf("Catch Type: %02x\n",exceptionTableAux->catch_type);
+					}
+					printf("\n\n");
+				}
+				printf("Attributes Count: %02x\n",auxCodePontual->attributes_count);
+				if (auxCodePontual->attributes_count > 0) {
+					int contadorAttr = 0;
+					int lntContador = 0;
+					attribute_info ** auxAttributesFromCode = auxCodePontual->attributes;
+					for (int posicaoDois = 0; posicaoDois < auxCodePontual->attributes_count; posicaoDois++) {
+						ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+(*(auxAttributesFromCode+posicaoDois))->attribute_name_index);
+						printf("Attributo %d: \n",contadorAttr);
+						printf("Attribute Name Index: cp_info#%02x <%s>\n",(*(auxAttributesFromCode+posicaoDois))->attribute_name_index,ponteiroprint);
+						printf("Attribute Length: %d\n",(*(auxAttributesFromCode+posicaoDois))->attribute_length);
+						if (strcmp(ponteiroprint,"LineNumberTable") == 0) {
+							line_number_table * lntAux = (line_number_table*)(*(auxAttributesFromCode+posicaoDois))->info;
+							for(line_number_table * lnt = lntAux; lnt < lntAux + auxCodePontual->attributes_count; lnt++) {
+								ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1 + (*(auxAttributesFromCode+posicaoDois))->attribute_name_index);
+								printf("Attribute name index: cp_info#%d <%s>\n",(*(auxAttributesFromCode+posicaoDois))->attribute_name_index,ponteiroprint);
+								printf("Attribute Length: %d\n",(int)lnt->line_number_table_length);
+								printf("Attribute Info: \n");
+								printf("Nr.\t\tStartPC\t\tLineNumber\n");
+								for (line_number_tableInfo * linfo = lnt->info; linfo < lnt->info + lnt->line_number_table_length; linfo++) {
+									printf("%d\t\t%d\t\t%d\n",lntContador,linfo->start_pc,linfo->line_number);
+									lntContador++;
+								}
+								printf("\n");
+							}
+						}
+					}
+					contadorAttr++;
+				}
 			}
 		}
+		contador++;
 	}
 
 	printf("\n\n-----AtRIBUTOS DA CLASSE-----\n\n");
-	for (auxAttributeClasse = arquivoClass->attributes; auxAttributeClasse < arquivoClass->attributes+arquivoClass->attributes_count; auxAttributeClasse++) {
-		ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool+auxAttributeClasse->attribute_name_index-1);
-		printf("Attribute Name Index: cp_info#%d <%s>\n",auxAttributeClasse->attribute_name_index,ponteiroprint);
-		printf("Attribute Length: %d\n",(int) auxAttributeClasse->attribute_length);
+	auxAttributeClasse = arquivoClass->attributes;
+	for (int posicao = 0; posicao < arquivoClass->attributes_count; posicao++) {
+		ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool+(*(auxAttributeClasse+posicao))->attribute_name_index-1);
+		printf("Attribute Name Index: cp_info#%d <%s>\n",(*(auxAttributeClasse+posicao))->attribute_name_index,ponteiroprint);
+		printf("Attribute Length: %d\n",(int) (*(auxAttributeClasse+posicao))->attribute_length);
 		if (strcmp(ponteiroprint,"SourceFile") == 0) {
-		 	source_file_attribute * SourceFile = ((source_file_attribute*)(auxAttributeClasse->info));
-			printf("Valor: %d\n",SourceFile->source_file_index);
+		 	source_file_attribute * SourceFile = ((source_file_attribute*)((*(auxAttributeClasse+posicao))->info));
 			printf("Source File Name Index: cp_info#%d <%s>\n",SourceFile->source_file_index,decodificaStringUTF8(arquivoClass->constant_pool+SourceFile->source_file_index-1));
-		} else {
-			if (auxAttributeClasse->attribute_length > 0) {
-				printf("Attribute Info: ");
-				for(u1 * c = (u1*)(auxAttributeClasse->info); c < (u1*)((auxAttributeClasse->info)+(auxAttributeClasse->attribute_length)); c++) {
-					printf("%02x ",(*c));
-				}
-				printf("\n");
-			}
 		}
 	}
 }
