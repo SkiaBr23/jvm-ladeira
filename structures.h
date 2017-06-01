@@ -189,7 +189,7 @@ struct cp_info{
 			u2 bootstrap_method_attr_index;
 			/**Índice válido em Constant Pool, indicando
 			o nome e o descritor do método*/
-    	u2 name_and_type_index;
+    		u2 name_and_type_index;
 		} InvokeDynamicInfo;
 	}UnionCP;
 
@@ -346,5 +346,138 @@ struct source_file_attribute {
 	u2 source_file_index;
 };
 typedef struct source_file_attribute source_file_attribute;
+
+/************************************************************/
+
+struct constantValue_attribute {
+
+    u2 attribute_name_index;
+    u4 attribute_length;
+    u2 constantvalue_index;
+};
+typedef struct constantValue_attribute constantValue_attribute;
+
+
+struct stackMapTable_attribute {
+   
+    u2              attribute_name_index;
+    u4              attribute_length;
+    u2              number_of_entries;
+    stack_map_frame *entries;			// Alocar com number_of_entries
+};
+typedef struct stackMapTable_attribute stackMapTable_attribute;
+
+
+struct stack_map_frame {
+
+	union{
+
+		struct{
+					
+			/* frame_type eh representado por uma tag com valores entre 0 e 63 
+			If the frame type is same_frame, it means the frame has exactly the same
+			locals as the previous stack map frame and that the number of stack items is zero.*/
+			void *pointer;		// Inicializar com NULL
+			
+			u1 frame_type; // == 0 a 63
+
+
+		}same_frame;
+
+		struct{
+			/*If the frame_type is same_locals_1_stack_item_frame,
+			it means the frame has exactly the same
+			locals as the previous stack map frame and that the number
+			of stack items is 1*/
+			
+			u1 frame_type; // == 64 a 127
+			verification_type_info stack // ESTRUTURA NAO CRIADA
+
+
+		}same_locals_1_stack_item_frame;
+
+
+		struct{
+
+			/*he frame type same_locals_1_stack_item_frame_extended indicates
+			that the frame has exactly the same locals as the previous stack map
+			frame and that the number of stack items is 1. The offset_delta value
+			for the frame is given explicitly.*/
+
+			u1 frame_type; // == 247
+
+			u2 offset_delta;
+    		verification_type_info stack // ESTRUTURA NAO CRIADA
+
+
+		}same_locals_1_stack_item_frame_extended;
+
+
+		struct{
+
+			/*f the frame_type is chop_frame, it means that the operand stack
+			is empty and the current locals are the same as the locals in the
+			previous frame, except that the k last locals are absent.
+			The value of k is given by the formula 251 - frame_type.*/
+
+			u1 frame_type; //= 248 a 250
+			u2 offset_delta;
+
+		}chop_frame;
+
+		struct{
+
+			/*If the frame type is same_frame_extended,
+			it means the frame has exactly the same locals as
+			the previous stack map frame and that the number of stack items is zero.*/
+
+			u1 frame_type // == 251
+			u2 offset_delta;
+
+		}same_frame_extended;
+
+
+		struct{
+			
+			/*If the frame_type is append_frame, it means that the
+			operand stack is empty and the current locals are the same
+			as the locals in the previous frame, except that k
+			additional locals are defined. The value of k is given by
+			the formula frame_type - 251*/
+
+
+			u1 frame_type // == 252 a 254
+			u2 offset_delta;
+			verification_type_info locals
+
+		}append_frame;
+
+
+		struct{
+			
+			/*The frame type full_frame is represented by the tag value 255.*/
+
+			u1 frame_type; // == 255 
+    		u2 offset_delta;
+    		u2 number_of_locals;
+    		verification_type_info locals; // Vetor alocar com number_of_locals
+    		u2 number_of_stack_items;
+    		verification_type_info stack; // Vetor alocar com number_of_stack_items
+
+
+		}full_frame;
+
+	};
+};
+typedef struct stack_map_frame stack_map_frame;
+
+
+
+// IMPLEMENTAR UNION verification_type_info
+
+
+// IMPLEMENTAR OS ELEMENTOS DA UNION verification_type_info
+
+
 
 #endif
