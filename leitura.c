@@ -14,6 +14,7 @@ Alunos: Maximillian Fan Xavier - 12/0153271
 /*Inclusão de estruturas e assinatura de funções de leitura*/
 #include "leitura.h"
 #include <string.h>
+#include "instrucoes.h"
 
 /*Função 'u1Read' que realiza a leitura de 1 byte do arquivo .class*/
 u1 u1Read(FILE *fp){
@@ -468,6 +469,10 @@ char* decodificarCode(cp_info *cp, u1 *code, u4 length){
 				aux++;
 			break;
 
+			case invokestatic:
+
+			break;
+
 			case invokevirtual:
 				strcat(retorno,"invokevirtual");
 				aux2 = malloc(sizeof(u2));
@@ -522,6 +527,7 @@ char* decodificarCode(cp_info *cp, u1 *code, u4 length){
 				strcat(retorno,"\n");
 				aux++;
 			break;
+
 			default:
 				strcat(retorno,"default\n");
 				aux++;
@@ -929,6 +935,10 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 	uint32_t contador = 1;
 	// u1 *auxcode;
 	char *ponteiroprint;
+
+	instrucao *instrucoes = construirInstrucoes(); 
+
+	printf("Teste: %s\n",instrucoes[nop].inst_nome);
 
 	printf("\n-----GENERAL INFORMATION-----\n\n");
 	printf("Magic: %08x\n",arquivoClass->magic);
