@@ -143,7 +143,8 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		das entradas, caso contrário prossegue com a leitura dos próximos campos*/
 		if (arquivoClass->fields_count > 0) {
 			// Preencher com leitura de fields - CODIFICAR
-			arquivoClass->fields = malloc(arquivoClass->fields_count*sizeof(u2));
+			// arquivoClass->fields = malloc(arquivoClass->fields_count*sizeof(u2));
+			// arquivoClass->fields = lerField(fp,arquivoClass->fields_count,arquivoClass->constant_pool);
 		}
 
 		/*Leitura do valor 'methods_count', representando
@@ -369,6 +370,168 @@ method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp) {
 	return methods;
 }
 
+/*field_info* lerField(FILE *fp,u2 fields_count, cp_info *cp){
+	Alocação da estrutura Method que será retornada para a estrutura
+	principal do arquivo .class
+	field_info *fields = (field_info*) malloc(fields_count*sizeof(field_info));
+
+	Estrutura de repetição contada que realiza a leitura das informações
+	contidas na tabela Method presente no arquvo .class
+	for (field_info *i = fields; i < fields + fields_count; i++) {
+		Leitura do atributo access_flags do respectivo método
+		i->access_flags = u2Read(fp);
+		Leitura do atributo name_index do respectivo método
+		i->name_index = u2Read(fp);
+		Leitura do atributo descriptor_index do respectivo método
+		i->descriptor_index = u2Read(fp);
+		Leitura do atributo attributes_count do respectivo método
+		i->attributes_count = u2Read(fp);
+
+		Estrutura condicional que avalia se a quantidade de atributos
+		do método é maior que zero. Se for, prossegue com a leitura dos
+		atributos do método
+		u2 auxcount = i->attributes_count;
+		// attribute_info *attributes = (attribute_info*) malloc(i->attributes_count*sizeof(attribute_info));
+		u2 name_index;
+		char * string_name_index = malloc(100*sizeof(char));
+		while (auxcount > 0) {
+			Estrutura de repetição contada que realiza a leitura das informações
+			contidas na tabela Attribute presente no arquvo .class
+				Leitura do atributo name_index do respectivo atributo
+				name_index = u2Read(fp);
+				string_name_index = decodificaStringUTF8(cp+name_index-1);
+
+				//FAZER FOR PARA LER MAIS DE UM CODE PARA UM MESMO METODO? OU SO EXISTE UM CODE POR METODO?
+
+				// Leitura do atributo length do respectivo atributo
+				a->attribute_length = u4Read(fp);
+				Estrutura condicional que avalia se o tamanho do atributo
+				é maior que zero. Se for, prossegue com a leitura da informação
+				do atributo
+				if (a->attribute_length > 0) {
+					// Alocação do espaço para informação do atributo
+					switch(decodificaStringUTF8(cp))
+					a->UnionAttr.attributes = malloc((a->attribute_length)*sizeof(u1));
+					Estrutura de repetição contada para fazer a leitura dos dados
+					e gravá-los na estrutura de informação
+					for(u1 * c = (a->info); c < (a->info)+(a->attribute_length); c++) {
+						Leitura dos dados
+						*c = u1Read(fp);
+					}
+				}
+
+				auxcount--;
+		}
+		free(string_name_index);
+
+
+			// i->attributes = lerAttributesInfo(fp, i->attributes_count, cp);
+	}
+
+	Retorno da estrutura Method alocada, com as informações lidas
+	return fields;
+}*/
+
+char* decodificarCode(cp_info *cp, u1 *code, u4 length){
+	u1 *aux;
+
+	char *retorno = malloc(100*sizeof(char));
+	char *stringaux = malloc(100*sizeof(char));
+	u2 *aux2 = malloc(sizeof(u2));
+	char *stringmetodo = malloc(100*sizeof(char));
+	char *stringdecod = malloc(100*sizeof(char));
+	strcpy(retorno,"");
+
+
+	for(aux=code;aux<code+length;){
+		switch(*aux){
+			case aload_0:
+				strcat(retorno,"aload_0\n");
+				aux++;
+			break;
+
+			case invokespecial:
+				strcat(retorno,"invokespecial");
+				aux2 = malloc(sizeof(u2));
+				*aux2 = *(++aux) << 8;
+				*aux2 |= *(++aux);
+
+				stringmetodo = malloc(100*sizeof(char));
+				stringmetodo = decodificarOperandoInstrucao(cp,*aux2,CONSTANT_Methodref);
+				stringaux = malloc(100*sizeof(char));
+				strcat(retorno," #");
+				sprintf(stringaux,"%d",(int)*aux2);
+				strcat(retorno,stringaux);
+				strcat(retorno," ");
+				strcat(retorno,stringmetodo);
+				strcat(retorno,"\n");
+				aux++;
+			break;
+
+			case invokevirtual:
+				strcat(retorno,"invokevirtual");
+				aux2 = malloc(sizeof(u2));
+				*aux2 = *(++aux) << 8;
+				*aux2 |= *(++aux);
+
+				stringmetodo = malloc(100*sizeof(char));
+				stringmetodo = decodificarOperandoInstrucao(cp,*aux2,CONSTANT_Methodref);
+				stringaux = malloc(100*sizeof(char));
+				strcat(retorno," #");
+				sprintf(stringaux,"%d",(int)*aux2);
+				strcat(retorno,stringaux);
+				strcat(retorno," ");
+				strcat(retorno,stringmetodo);
+				strcat(retorno,"\n");
+				aux++;
+			break;
+
+			case inst_return:
+				strcat(retorno,"return");
+				strcat(retorno,"\n");
+				aux++;
+			break;
+
+			case ldc:
+				strcat(retorno,"ldc");
+				strcat(retorno," #");
+				stringaux = malloc(100*sizeof(char));
+				sprintf(stringaux,"%d",*(++aux));
+				strcat(retorno,stringaux);
+				strcat(retorno," ");
+				stringdecod = decodificarOperandoInstrucao(cp,*aux,CONSTANT_String);
+				strcat(retorno,stringdecod);
+				strcat(retorno,"\n");
+				aux++;
+			break;
+
+			case getstatic:
+				strcat(retorno,"getstatic");
+
+				aux2 = malloc(sizeof(u2));
+				*aux2 = *(++aux) << 8;
+				*aux2 |= *(++aux);
+
+				strcat(retorno," #");
+				stringaux = malloc(100*sizeof(char));
+				sprintf(stringaux,"%d",(int)*aux2);
+				strcat(retorno,stringaux);
+				strcat(retorno," ");
+				stringdecod = decodificarOperandoInstrucao(cp,*aux2,CONSTANT_Fieldref);
+				strcat(retorno,stringdecod);
+				strcat(retorno,"\n");
+				aux++;
+			break;
+			default:
+				strcat(retorno,"default\n");
+				aux++;
+			break;
+		}
+	}
+
+	return(retorno);
+}
+
 code_attribute * lerCode (FILE * fp, u2 name_index, u2 size, cp_info *cp) {
 	code_attribute * code_attributes = NULL;
 	code_attributes = (code_attribute*) malloc(size*sizeof(code_attribute));
@@ -581,6 +744,69 @@ char* decodificaStringUTF8(cp_info *cp){
 	return(retorno);
 }
 
+char* decodificarOperandoInstrucao(cp_info *cp,u2 index, int operando){
+
+	char *retorno = malloc(100*sizeof(char));
+	char *stringNomeClasse = malloc(100*sizeof(char));
+	char *stringNomeMetodo = malloc(100*sizeof(char));
+	char *stringGeral = malloc(100*sizeof(char));
+	char *ponteiro2pontos = malloc(100*sizeof(char));
+	cp_info *cp_aux = cp+index-1;
+
+	switch(operando){
+		case CONSTANT_Methodref:
+	
+			// String do Class Name do Methodref
+			// Concatenar com .
+			// String do name do Name_and_type do Methodref
+		
+			stringNomeClasse = decodificaNIeNT(cp,cp_aux->UnionCP.Methodref.class_index,NAME_INDEX);
+		
+			stringNomeMetodo = decodificaNIeNT(cp,cp_aux->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+		
+			ponteiro2pontos = strchr(stringNomeMetodo,':');
+			*ponteiro2pontos = '\0';
+		
+		
+			strcpy(retorno,"<");
+			strcat(retorno,stringNomeClasse);
+			strcat(retorno,".");
+			strcat(retorno,stringNomeMetodo);
+			strcat(retorno,">");
+		break;
+
+		case CONSTANT_Fieldref:
+
+			stringNomeClasse = decodificaNIeNT(cp,cp_aux->UnionCP.Fieldref.class_index,NAME_INDEX);
+			stringGeral = decodificaNIeNT(cp,cp_aux->UnionCP.Fieldref.name_and_type_index,NAME_AND_TYPE);
+			// printf("String Geral: %s\n",stringGeral);
+
+
+			ponteiro2pontos = strchr(stringGeral,':');
+			*ponteiro2pontos = '\0';
+
+			// stringGeral = strncpy(strstr(stringGeral,&stringGeral[1]),stringGeral,strlen(stringGeral));
+
+			strcpy(retorno,"<");
+			strcat(retorno,stringNomeClasse);
+			strcat(retorno,".");
+			strcat(retorno,stringGeral);
+			strcat(retorno,">");
+		break;
+
+		case CONSTANT_String:
+
+			stringGeral = decodificaNIeNT(cp,cp_aux->UnionCP.String.string_index,STRING_INDEX);
+
+			strcpy(retorno,"<");
+			strcat(retorno,stringGeral);
+			strcat(retorno,">");
+		break;
+	}
+
+	return(retorno);
+}
+
 // LEMBRAR QUE CP INFO COMEÇA DE 1, POR ISSO QUE SUBTRAI 1 NA SOMA
 // Decodifica Name Index e Name Type
 char* decodificaNIeNT(cp_info *cp, u2 index, u1 tipo){
@@ -617,10 +843,16 @@ char* decodificaNIeNT(cp_info *cp, u2 index, u1 tipo){
 			aux2 = cp+(aux->UnionCP.NameAndType.name_index-1);
 			aux3 = cp+(aux->UnionCP.NameAndType.descriptor_index-1);
 
-			strcpy(retorno,decodificaStringUTF8(aux2));
+			strcat(retorno,decodificaStringUTF8(aux2));
 			strcat(retorno,":");
 			strcat(retorno,decodificaStringUTF8(aux3));
 		break;
+
+		/*case FIELD_INDEX:
+			aux2 = cp+(aux->UnionCP.Class.name_index-1);
+			aux3 = cp+((aux->UnionCP.NameAndType.name_index-1)
+
+		break;*/
 
 		case STRING_INDEX:
 		case CLASS_INDEX:
@@ -634,6 +866,8 @@ char* decodificaNIeNT(cp_info *cp, u2 index, u1 tipo){
 		case NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX:
 			retorno = decodificaStringUTF8(aux);
 		break;
+
+
 	}
 
 	return(retorno);
@@ -688,11 +922,12 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 
 	cp_info * aux;
 	method_info * auxMethod;
+	// field_info *auxField;
 	code_attribute *auxAttribute;
 	attribute_info *auxAttributeClasse;
 	exception_table *eAux;
 	uint32_t contador = 1;
-	u1 *auxcode;
+	// u1 *auxcode;
 	char *ponteiroprint;
 
 	printf("\n-----GENERAL INFORMATION-----\n\n");
@@ -785,6 +1020,13 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		}
 	}
 
+	/*contador = 0;
+	printf("\n\n-----FIELDS-----\n\n");
+
+	for(auxField=arquivoClass->fields;auxField<arquivoClass->fields+arquivoClass->fields_count;auxField++,contador++){
+		printf("--------------Field [%d]--------------\n\n",contador);
+	}*/
+
 	printf("\n\n-----MÉTODOS-----\n\n");
 
 	contador = 0;
@@ -808,14 +1050,15 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 			printf("Max Locals: %02x\n",auxAttribute->max_locals);
 			printf("Code length: %04x\n",auxAttribute->code_length);
 
-
-			printf("Code: ");
-			if(auxAttribute->code_length>0){
+			printf("\n-----CODE-----\n");
+			ponteiroprint = decodificarCode(arquivoClass->constant_pool,auxAttribute->code,auxAttribute->code_length);
+			printf("%s\n",ponteiroprint);
+			/*if(auxAttribute->code_length>0){
 				for(auxcode=auxAttribute->code;auxcode<auxAttribute->code+auxAttribute->code_length;auxcode++){
 					printf("%02x ",*auxcode);
 				}
 				printf("\n\n");
-			}
+			}*/
 
 
 			if(auxAttribute->exception_table_length>0){
