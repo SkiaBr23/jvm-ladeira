@@ -257,7 +257,7 @@ struct field_info{
 	deste campo*/
 	u2 attributes_count;
 	/*Array de estruturas Attribute Info*/
-	attribute_info *attributes;
+	attribute_info ** attributes;
 };
 typedef struct field_info field_info;
 
@@ -277,8 +277,6 @@ struct line_number_tableInfo {
 typedef struct line_number_tableInfo line_number_tableInfo;
 
 struct line_number_table {
-	u2 attribute_name_index;
-	u4 attribute_length;
 	u2 line_number_table_length;
 	line_number_tableInfo * info;
 };
@@ -286,11 +284,6 @@ typedef struct line_number_table line_number_table;
 
 /*Definição de estrutura Code - ANALISAR!*/
 struct code_attribute {
-	/*Índice válido em Constant Pool, indicando
-	a string "Code"*/
-	u2 attribute_name_index;
-	/*Indica o tamanho do atributo*/
-  u4 attribute_length;
 	/*Determina a profundidade máxima do operando
 	na pilha deste método, em qualquer ponto
 	durante a execução deste método*/
@@ -312,10 +305,7 @@ struct code_attribute {
 	/*Número de atributos do Code Attribute*/
   u2 attributes_count;
 	/*Array de atributos para este Code*/
-	union{
-		line_number_table * lineNumberTable;
-		attribute_info * attributes;
-	}UnionCodeAttr;
+	attribute_info ** attributes;
 };
 typedef struct code_attribute code_attribute;
 
@@ -334,11 +324,8 @@ struct method_info{
 	/*Indica o número de atributos adicionais
 	deste método*/
 	u2 attributes_count;
-	/*Array de estruturas Attribute Info*/
-	union{
-		code_attribute * code_attributes;
-		attribute_info * attributes;
-	}UnionAttr;
+	/*Array de estruturas Attrite Info*/
+	attribute_info ** attributes;
 };
 typedef struct method_info method_info;
 

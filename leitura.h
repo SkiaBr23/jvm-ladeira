@@ -32,6 +32,7 @@ u4 u4Read(FILE *fp);
 ClassFile * lerArquivo (char *);
 cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count);
 method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp);
+field_info * lerField (FILE * fp, u2 fields_count, cp_info * cp);
 code_attribute * lerCode (FILE * fp, cp_info *cp);
 line_number_table * lerLineNumberTable(FILE * fp, cp_info *cp);
 exception_table * lerExceptionTable (FILE * fp, u2 size);

@@ -143,7 +143,7 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		das entradas, caso contrário prossegue com a leitura dos próximos campos*/
 		if (arquivoClass->fields_count > 0) {
 			// Preencher com leitura de fields - CODIFICAR
-			arquivoClass->fields = malloc(arquivoClass->fields_count*sizeof(u2));
+			arquivoClass->fields = lerField(fp, arquivoClass->fields_count, arquivoClass->constant_pool);
 		}
 
 		/*Leitura do valor 'methods_count', representando
@@ -296,6 +296,25 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 
 	/*Retorno da estrutura Constant Pool alocada, com as informações lidas*/
 	return constantPool;
+}
+
+field_info * lerField (FILE * fp, u2 fields_count, cp_info * cp) {
+	field_info * fields = (field_info*)malloc(fields_count*sizeof(field_info));
+	for (field_info * i = fields; i < fields + fields_count; i++) {
+		i->access_flags = u2Read(fp);
+		i->name_index = u2Read(fp);
+		i->descriptor_index = u2Read(fp);
+		i->attributes_count = u2Read(fp);
+
+		if (i->attributes_count > 0) {
+			i->attributes = (attribute_info**)malloc(i->attributes_count*sizeof(attribute_info*));
+			for (int posicao = 0; posicao < i->attributes_count; posicao++) {
+				*(i->attributes+posicao) = lerAttributes(fp, cp);
+			}
+		}
+	}
+
+	return fields;
 }
 
 /*Função 'lerMethod' para realizar a leitura da tabela Method*/
@@ -663,6 +682,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 
 	cp_info * aux;
 	method_info * auxMethod;
+	field_info * auxField;
 	attribute_info ** auxAttributeClasse;
 	exception_table * exceptionTableAux;
 	uint32_t contador = 1;
@@ -757,6 +777,20 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 				printf("Default\n");
 				break;
 		}
+	}
+
+	printf("\n\n-----FIELDS-----\n\n");
+	contador = 0;
+	for (auxField = arquivoClass->fields; auxField < arquivoClass->fields + arquivoClass->fields_count; auxField++,contador++) {
+		printf("--------------Field [%d]--------------\n\n",contador);
+		ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+auxField->name_index);
+		printf("Name: cp_info#%d <%s>\n",auxField->name_index,ponteiroprint);
+		ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+auxField->descriptor_index);
+		printf("Descriptor: cp_info#%d <%s>\n",auxField->descriptor_index,ponteiroprint);
+		ponteiroprint = decodificaAccessFlags(auxField->access_flags);
+		printf("Access Flags: 0x%04x [%s]\n",auxField->access_flags,ponteiroprint);
+		printf("Attributes Count: %04x\n",auxField->attributes_count);
+		//Incluir impressao de atributos dos fields
 	}
 
 	printf("\n\n-----MÉTODOS-----\n\n");
