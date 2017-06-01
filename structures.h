@@ -351,8 +351,8 @@ typedef struct source_file_attribute source_file_attribute;
 
 struct constantValue_attribute {
 
-    u2 attribute_name_index;
-    u4 attribute_length;
+    //u2 attribute_name_index;
+    //u4 attribute_length;
     u2 constantvalue_index;
 };
 typedef struct constantValue_attribute constantValue_attribute;
@@ -538,15 +538,226 @@ typedef struct stack_map_frame stack_map_frame;
 
 struct stackMapTable_attribute {
    
-    u2              attribute_name_index;
-    u4              attribute_length;
-    u2              number_of_entries;
-    stack_map_frame *entries;			// Alocar com number_of_entries
+    //u2 attribute_name_index;
+    //u4 attribute_length;
+    u2 number_of_entries;
+    stack_map_frame *entries; // Alocar com number_of_entries
 };
 typedef struct stackMapTable_attribute stackMapTable_attribute;
 
 
 
+
+struct exceptions_attribute {
+
+	//u2 attribute_name_index;
+	//u4 attribute_length;	   	// The value of the attribute_length
+							   	// item indicates the attribute length,
+							   	// excluding the initial six bytes.
+	u2 number_of_exceptions;
+	u2 *exception_index_table; 	// Alocar com number_of_exceptions
+							   	// Each value in the exception_index
+								// table array must be a valid
+								// index into the constant_pool table.
+
+};
+typedef struct exceptions_attribute exceptions_attribute;
+
+
+
+struct classes {
+	
+	u2 inner_class_info_index;	// Todos essas variaveis devem apontar para constant_pool;
+	u2 outer_class_info_index;	// If C is not a member of a class or an interface
+								// (that is, if C is a top-level class or interface
+								// or a local class or an anonymous class), the value
+								// of the outer_class_info_index item must be zero.
+	u2 inner_name_index;		// If C is anonymous, the value of the
+								// inner_name_index item must be zero.
+	
+	u2 inner_class_access_flags; // It is used by a compiler to recover the original
+								 // information when source code is not available.
+
+};
+typedef struct classes classes;
+
+	/* Sobre: inner_class_access_flags
+		
+		Flag Name     	Value(Decimal)
+
+		ACC_PUBLIC			1
+		ACC_PRIVATE			2
+		ACC_PROTECTED		4
+		ACC_STATIC			8
+		ACC_FINAL			16
+		ACC_INTERFACE		512
+		ACC_ABSTRACT		1024
+		ACC_SYNTHETIC		4096
+		ACC_ANNOTATION		8192
+		ACC_ENUM			16384
+	*/
+
+struct innerClasses_attribute{
+
+	//u2 attribute_name_index;	// Nome que representa a estrutura innerClasses
+								// na constant pool
+	//u4 attribute_length;		// the length of the attribute, excluding the initial six bytes.
+	u2 number_of_classes;		
+	classes * classes_vector; 	// Alocar com number_of_classes;
+
+};
+typedef struct innerClasses_attribute innerClasses_attribute;
+
+
+
+struct enclosingMethod_attribute {
+
+	//u2 attribute_name_index;	
+	//u4 attribute_length;	// The value of the attribute_length item is four.
+	u2 class_index;			// The constant_pool entry at that index must be a
+							// CONSTANT_Class_info structure representing the
+							// innermost class that encloses the declaration
+							// of the current class.	
+	
+	u2 method_index;		// If the current class is not immediately enclosed
+							// by a method or constructor, then the value of the
+							// method_index item must be zero.	
+
+	// Otherwise, The constant_pool entry at that index must be a
+	// CONSTANT_NameAndType_info structure representing the name
+	// and type of a method in the class referenced by the class_index attribute above.
+
+};
+typedef struct enclosingMethod_attribute enclosingMethod_attribute;
+
+
+struct synthetic_attribute {		// COMO FAZ COM ESSA?
+
+	u2 attribute_name_index;
+	u4 attribute_length;		// The value of the attribute_length item is zero.
+};
+typedef struct synthetic_attribute synthetic_attribute;
+
+
+struct signature_attribute {
+
+	//u2 attribute_name_index;
+	//u4 attribute_length;		// The value of the attribute_length item of
+								// a Signature_attribute structure must be 2.
+	u2 signature_index;			
+
+};
+typedef struct signature_attribute signature_attribute;
+
+
+
+struct sourceDebugExtension_attribute {
+
+	//u2 attribute_name_index;
+	//u4 attribute_length;
+	u1 * debug_extension; 		// Alocar com o tamanho de attribute_length
+
+};
+typedef struct sourceDebugExtension_attribute sourceDebugExtension_attribute;
+
+
+struct local_variable_table{
+
+	u2 start_pc;
+	u2 length;
+	u2 name_index;
+	u2 descriptor_index;
+	u2 index;
+
+
+};
+typedef struct local_variable_table local_variable_table;
+
+
+struct localVariableTable_attributes {
+
+
+	//u2 attribute_name_index;
+	//u4 attribute_length;
+	u2 local_variable_table_length;
+	local_variable_table *local_variables;
+
+
+}
+typedef struct localVariableTable_attributes localVariableTable_attributes;
+
+// localVariableTypeTable ???????????????????????
+
+
+
+
+struct deprecated_attribute{	// O que fazer com essa estrutura?
+
+	u2 attribute_name_index;
+	u4 attribute_length;
+
+};
+typedef struct deprecated_attribute deprecated_attribute;
+
+
+struct element_value{
+
+	u1 tag;
+	union{
+
+		u2 const_value_index;
+		u2 outer_class_info_index;
+		annotation annotation_value;	// ISSO DAQUI EH MUITO ERRADO! VERIFICAR
+
+		struct {
+
+			u2 type_name_index;
+			u2 const_name_index;
+
+		} enum_const_index;
+
+		struct {
+						
+			u2 num_values;
+			element_value *element_values;
+
+		} array_value;
+
+	} value;
+
+};
+typedef struct element_value element_value;
+
+
+struct element_value_pairs {
+
+	u2 element_name_index;
+	element_value value;
+
+};
+typedef struct element_value_pairs element_value_pairs;
+
+
+struct annotation {
+
+	u2 type_index;
+	u2 num_element_value_pairs;
+	element_value_pairs *elementes_pairs;
+
+};
+typedef struct annotation annotation;
+
+
+struct runTimeVisibleAnnotations_attribute {
+
+	u2 attribute_name_index;
+	u4 attribute_length;
+	u2 num_annotations;
+	annotation *annotations;
+
+
+};
+typedef struct runTimeVisibleAnnotations_attribute runTimeVisibleAnnotations_attribute;
 
 
 
