@@ -288,7 +288,7 @@ typedef struct line_number_table line_number_table;
 struct code_attribute {
 	/*Índice válido em Constant Pool, indicando
 	a string "Code"*/
-	u2 attribute_name_index;
+  u2 attribute_name_index;
 	/*Indica o tamanho do atributo*/
   u4 attribute_length;
 	/*Determina a profundidade máxima do operando
@@ -358,14 +358,88 @@ struct constantValue_attribute {
 typedef struct constantValue_attribute constantValue_attribute;
 
 
-struct stackMapTable_attribute {
-   
-    u2              attribute_name_index;
-    u4              attribute_length;
-    u2              number_of_entries;
-    stack_map_frame *entries;			// Alocar com number_of_entries
+struct verification_type_info{
+
+	union{
+
+		struct {
+			
+			u1 tag; // possuira valor 0;
+
+		} top_variable_info;
+
+		struct {
+			
+			u1 tag; // possuira valor 1;
+
+		} integer_variable_info;
+
+		struct {
+			
+			u1 tag; // possuira valor 2;			
+
+		} float_variable_info;
+
+		/*	 ATENCAo - Tanto para Long como Double (64bits ambas).
+		This structure gives the contents of two locations
+		in the operand stack or in the local variable array.
+		If the location is a local variable, then:
+		It must not be the local variable with the highest index.
+		The next higher numbered local variable contains the verification type top.
+		If the location is an operand stack entry, then:
+		The current location must not be the topmost location of the operand stack.
+		The next location closer to the top of the operand stack contains the verification type top.
+		*/
+
+		struct {
+			
+			u1 tag; // possuira valor 4;
+
+		} long_variable_info;
+
+		struct{
+
+			u1 tag; // possuira valor 3;
+
+		} double_variable_info;
+
+		struct {
+
+			u1 tag; // possuira valor 5;
+
+		} null_variable_info;
+
+		struct {
+			
+			u1 tag; // possuira valor 6;
+
+		} uninitializedThis_variable_info;
+
+		/*The Object_variable_info type indicates that the location
+		contains an instance of the class represented by the CONSTANT_Class_info*/
+
+		struct {
+
+			u1 tag; // possuira valor 7;
+			u2 cpool_index; // index da classe na constant_pool
+
+		} object_variable_info;
+
+		struct {
+
+			u1 tag; // possuira valor 8
+			u2 offset; /* The offset item indicates the offset, in the code array
+						of the Code attribute that contains this StackMapTable
+						attribute, of the new instruction (§new) that created the
+						object being stored in the location.*/
+
+		} uninitialized_variable_info;
+
+
+	} type_info;
+
 };
-typedef struct stackMapTable_attribute stackMapTable_attribute;
+typedef struct verification_type_info verification_type_info;
 
 
 struct stack_map_frame {
@@ -377,12 +451,9 @@ struct stack_map_frame {
 			/* frame_type eh representado por uma tag com valores entre 0 e 63 
 			If the frame type is same_frame, it means the frame has exactly the same
 			locals as the previous stack map frame and that the number of stack items is zero.*/
-			void *pointer;		// Inicializar com NULL
-			
 			u1 frame_type; // == 0 a 63
 
-
-		}same_frame;
+		} same_frame;
 
 		struct{
 			/*If the frame_type is same_locals_1_stack_item_frame,
@@ -391,11 +462,9 @@ struct stack_map_frame {
 			of stack items is 1*/
 			
 			u1 frame_type; // == 64 a 127
-			verification_type_info stack // ESTRUTURA NAO CRIADA
+			verification_type_info stack; // ESTRUTURA NAO CRIADA
 
-
-		}same_locals_1_stack_item_frame;
-
+		} same_locals_1_stack_item_frame;
 
 		struct{
 
@@ -407,11 +476,9 @@ struct stack_map_frame {
 			u1 frame_type; // == 247
 
 			u2 offset_delta;
-    		verification_type_info stack // ESTRUTURA NAO CRIADA
+    		verification_type_info stack; // ESTRUTURA NAO CRIADA
 
-
-		}same_locals_1_stack_item_frame_extended;
-
+		} same_locals_1_stack_item_frame_extended;
 
 		struct{
 
@@ -423,7 +490,7 @@ struct stack_map_frame {
 			u1 frame_type; //= 248 a 250
 			u2 offset_delta;
 
-		}chop_frame;
+		} chop_frame;
 
 		struct{
 
@@ -431,11 +498,10 @@ struct stack_map_frame {
 			it means the frame has exactly the same locals as
 			the previous stack map frame and that the number of stack items is zero.*/
 
-			u1 frame_type // == 251
+			u1 frame_type; // == 251
 			u2 offset_delta;
 
-		}same_frame_extended;
-
+		} same_frame_extended;
 
 		struct{
 			
@@ -446,15 +512,13 @@ struct stack_map_frame {
 			the formula frame_type - 251*/
 
 
-			u1 frame_type // == 252 a 254
+			u1 frame_type;// == 252 a 254
 			u2 offset_delta;
-			verification_type_info locals
+			verification_type_info locals;
 
-		}append_frame;
-
+		} append_frame;
 
 		struct{
-			
 			/*The frame type full_frame is represented by the tag value 255.*/
 
 			u1 frame_type; // == 255 
@@ -465,18 +529,24 @@ struct stack_map_frame {
     		verification_type_info stack; // Vetor alocar com number_of_stack_items
 
 
-		}full_frame;
+		} full_frame;
 
-	};
+	} map_frame_type;
 };
 typedef struct stack_map_frame stack_map_frame;
 
 
+struct stackMapTable_attribute {
+   
+    u2              attribute_name_index;
+    u4              attribute_length;
+    u2              number_of_entries;
+    stack_map_frame *entries;			// Alocar com number_of_entries
+};
+typedef struct stackMapTable_attribute stackMapTable_attribute;
 
-// IMPLEMENTAR UNION verification_type_info
 
 
-// IMPLEMENTAR OS ELEMENTOS DA UNION verification_type_info
 
 
 
