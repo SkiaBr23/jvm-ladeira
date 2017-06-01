@@ -23,6 +23,7 @@ manipualão de arquivos e definição de estruturas*/
 #include <stdlib.h>
 #include "structures.h"
 #include "classFileStruct.h"
+#include "instrucoes.h"
 
 /*Assinatura de métodos para leitura de dados*/
 u1 u1Read(FILE *fp);
