@@ -683,7 +683,7 @@ struct localVariableTable_attributes {
 	local_variable_table *local_variables;
 
 
-}
+};
 typedef struct localVariableTable_attributes localVariableTable_attributes;
 
 // localVariableTypeTable ???????????????????????
@@ -759,6 +759,82 @@ struct runTimeVisibleAnnotations_attribute {
 };
 typedef struct runTimeVisibleAnnotations_attribute runTimeVisibleAnnotations_attribute;
 
+
+struct runTimeInvisibleAnnotations_attribute {
+
+	u2 attribute_name_index;
+	u4 attribute_length;
+	u2 num_annotations;
+	annotation * annotations;	// Alocar com o tamanho de num_annotations;
+
+};
+typedef struct runTimeInvisibleAnnotations_attribute runTimeInvisibleAnnotations_attribute;
+
+	
+struct parameter_annotations {		// ESSA ESTRUTURA EH IGUAL A DE CIMA.
+
+	u2 num_annotations;
+	annotation *annotations;	// Alocar com o tamanho de num_annotations;
+
+
+};
+typedef struct parameter_annotations parameter_annotations;
+
+
+struct runtimeVisibleParameterAnnotations_attribute {
+
+	u2 attribute_name_index;
+    u4 attribute_length;
+    u1 num_parameters;
+    parameter_annotations *parameters_annotations;	// Alocar com o tamanho de num_parameters;
+
+};
+typedef struct runtimeVisibleParameterAnnotations_attribute runtimeVisibleParameterAnnotations_attribute;
+
+
+
+struct runtimeInvisibleParameterAnnotations_attribute {
+
+	u2 attribute_name_index;
+    u4 attribute_length;
+    u1 num_parameters;
+	parameter_annotations *parameters_annotations;	// Alocar com o tamanho de num_parameters;
+
+};
+typedef struct runtimeInvisibleParameterAnnotations_attribute runtimeInvisibleParameterAnnotations_attribute;
+
+
+
+struct annotationDefault_attribute {
+
+	u2 attribute_name_index;
+    u4 attribute_length;
+    element_value default_value;
+
+};
+typedef struct annotationDefault_attribute annotationDefault_attribute;
+
+struct bootstrap_methods {
+
+	u2 bootstrap_method_ref;
+	u2 num_bootstrap_arguments;
+    u2 *bootstrap_arguments;		// Alocar com o tamanho num_bootstrap_arguments;
+
+
+};
+typedef struct bootstrap_methods bootstrap_methods;
+
+
+struct bootstrapMethods_attribute {
+
+	u2 attribute_name_index;
+    u4 attribute_length;
+    u2 num_bootstrap_methods;
+
+    bootstrap_methods *bt_methods;
+
+};
+typedef struct bootstrapMethods_attribute bootstrapMethods_attribute;
 
 
 #endif
