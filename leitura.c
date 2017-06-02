@@ -131,7 +131,7 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		das entradas, caso contrário prossegue com a leitura dos próximos campos*/
 		if (arquivoClass->interfaces_count > 0) {
 			// Preencher com leitura de interfaces - CODIFICAR
-			arquivoClass->interfaces = malloc(arquivoClass->interfaces_count*sizeof(u2));
+			arquivoClass->interfaces = lerInterfaces(fp, arquivoClass->interfaces_count);
 		}
 
 		/*Leitura do valor 'fields_count', representando
@@ -296,6 +296,14 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 
 	/*Retorno da estrutura Constant Pool alocada, com as informações lidas*/
 	return constantPool;
+}
+
+u2 * lerInterfaces (FILE * fp, u2 size) {
+	u2 * interfaces = malloc(size*sizeof(u2));
+	for (u2 * auxInterfaces = interfaces; auxInterfaces < interfaces+size; auxInterfaces++) {
+		*auxInterfaces = u2Read(fp);
+	}
+	return interfaces;
 }
 
 field_info * lerField (FILE * fp, u2 fields_count, cp_info * cp) {
@@ -473,7 +481,6 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 	/*Estrutura condicional que avalia se o tamanho do atributo
 	é maior que zero. Se for, prossegue com a leitura da informação
 	do atributo*/
-	printf("NameIndexAttr: %d\n",attributes->attribute_name_index);
 	if (attributes->attribute_length > 0) {
 			char * string_name_index = malloc(100*sizeof(char));
 			string_name_index = decodificaStringUTF8(cp+attributes->attribute_name_index-1);
@@ -481,24 +488,95 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 			if(strcmp(string_name_index,"SourceFile") == 0){
 				source_file_attribute * SourceFile = NULL;//(code_attribute*) malloc(i->attributes_count*sizeof(code_attribute));
 				SourceFile = lerSourceFile(fp);
-				printf("SourceFile: %d\n",SourceFile->source_file_index);
 				attributes->info = NULL;//malloc(i->attributes_count*sizeof(code_attribute));
 				attributes->info = (source_file_attribute*) SourceFile;
 			} else if (strcmp(string_name_index,"Code") == 0) {
 				code_attribute * code_attr = NULL;
 				code_attr = lerCode(fp ,cp);
-				printf("Code: %d\n",code_attr->code_length);
 				attributes->info = (code_attribute*) code_attr;
 			} else if (strcmp(string_name_index,"LineNumberTable") == 0) {
 				line_number_table * lnt = NULL;
 				lnt = lerLineNumberTable(fp, cp);
-				printf("LNT: %d\n",lnt->line_number_table_length);
 				attributes->info = (line_number_table*)lnt;
+			} else if (strcmp(string_name_index,"StackMapTable") == 0) {
+				printf("Atributo STACKMAPTABLE não implementado!\n");
+				exit(1);
+				stackMapTable_attribute * stackMapTable = NULL;
+				stackMapTable = lerStackMapTable(fp);
+				attributes->info = (stackMapTable_attribute*)stackMapTable;
 			}
 	}
-	printf("Calma: %d\n",attributes->attribute_name_index);
 	/*Retorno da estrutura Attribute alocada, com as informações lidas*/
 	return attributes;
+}
+
+stackMapTable_attribute * lerStackMapTable (FILE * fp) {
+	stackMapTable_attribute * stackMapTable = (stackMapTable_attribute*)malloc(sizeof(stackMapTable_attribute));
+	stackMapTable->number_of_entries = u2Read(fp);
+	if (stackMapTable->number_of_entries > 0) {
+		stackMapTable->entries = (stack_map_frame**)malloc(stackMapTable->number_of_entries*sizeof(stack_map_frame*));
+		for (int posicao = 0; posicao < stackMapTable->number_of_entries; posicao++) {
+			*(stackMapTable->entries+posicao) = lerStackMapFrame(fp);
+		}
+	}
+	return stackMapTable;
+}
+
+stack_map_frame * lerStackMapFrame (FILE * fp) {
+	stack_map_frame * StackMapFrame = (stack_map_frame*)malloc(sizeof(stack_map_frame));
+	StackMapFrame->frame_type = u1Read(fp);
+	if (StackMapFrame->frame_type >= 0 && StackMapFrame->frame_type <= 63) {
+	} else if (StackMapFrame->frame_type >= 64 && StackMapFrame->frame_type <= 127) {
+		StackMapFrame->map_frame_type.same_locals_1_stack_item_frame.stack = (verification_type_info**)malloc(sizeof(verification_type_info*));
+		*(StackMapFrame->map_frame_type.same_locals_1_stack_item_frame.stack) = lerVerificationTypeInfo(fp);
+	} else if (StackMapFrame->frame_type == 247) {
+		StackMapFrame->map_frame_type.same_locals_1_stack_item_frame_extended.offset_delta = u2Read(fp);
+		StackMapFrame->map_frame_type.same_locals_1_stack_item_frame_extended.stack = (verification_type_info**)malloc(sizeof(verification_type_info*));
+		*(StackMapFrame->map_frame_type.same_locals_1_stack_item_frame_extended.stack) = lerVerificationTypeInfo(fp);
+	} else if (StackMapFrame->frame_type >= 248 && StackMapFrame->frame_type <= 250) {
+		StackMapFrame->map_frame_type.chop_frame.offset_delta = u2Read(fp);
+	} else if (StackMapFrame->frame_type == 251) {
+		StackMapFrame->map_frame_type.same_frame_extended.offset_delta = u2Read(fp);
+	} else if (StackMapFrame->frame_type >= 252 && StackMapFrame->frame_type <= 254) {
+		StackMapFrame->map_frame_type.append_frame.offset_delta = u2Read(fp);
+		printf("Leu: %d\n",StackMapFrame->map_frame_type.append_frame.offset_delta);
+		StackMapFrame->map_frame_type.append_frame.locals = (verification_type_info**)malloc(sizeof(verification_type_info*));
+		*(StackMapFrame->map_frame_type.append_frame.locals) = lerVerificationTypeInfo(fp);
+	} else if (StackMapFrame->frame_type == 255) {
+		StackMapFrame->map_frame_type.full_frame.offset_delta = u2Read(fp);
+		StackMapFrame->map_frame_type.full_frame.number_of_locals = u2Read(fp);
+		if (StackMapFrame->map_frame_type.full_frame.number_of_locals > 0) {
+			StackMapFrame->map_frame_type.full_frame.locals = (verification_type_info**)malloc(StackMapFrame->map_frame_type.full_frame.number_of_locals*sizeof(verification_type_info*));
+			for (int posicao = 0; posicao < StackMapFrame->map_frame_type.full_frame.number_of_locals; posicao++) {
+				*(StackMapFrame->map_frame_type.full_frame.locals+posicao) = lerVerificationTypeInfo(fp);
+			}
+		}
+		StackMapFrame->map_frame_type.full_frame.number_of_stack_items = u2Read(fp);
+		if (StackMapFrame->map_frame_type.full_frame.number_of_stack_items > 0) {
+			StackMapFrame->map_frame_type.full_frame.stack = (verification_type_info**)malloc(StackMapFrame->map_frame_type.full_frame.number_of_stack_items*sizeof(verification_type_info*));
+			for (int posicao = 0; posicao < StackMapFrame->map_frame_type.full_frame.number_of_locals; posicao++) {
+				*(StackMapFrame->map_frame_type.full_frame.stack+posicao) = lerVerificationTypeInfo(fp);
+			}
+		}
+	}
+	return StackMapFrame;
+}
+
+verification_type_info * lerVerificationTypeInfo (FILE * fp) {
+	verification_type_info * VTI = (verification_type_info*)malloc(sizeof(verification_type_info));
+	VTI->tag = u1Read(fp);
+	switch (VTI->tag) {
+		case 7:
+			VTI->type_info.object_variable_info.cpool_index = u2Read(fp);
+			break;
+		case 8:
+			VTI->type_info.uninitialized_variable_info.offset = u2Read(fp);
+			break;
+		default:
+			break;
+	}
+
+	return VTI;
 }
 
 source_file_attribute * lerSourceFile (FILE * fp) {
@@ -779,6 +857,12 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		}
 	}
 
+	printf("\n\n-----INTERFACES-----\n\n");
+	contador = 0;
+	for (u2 * auxInterfaces = arquivoClass->interfaces; auxInterfaces < arquivoClass->interfaces+arquivoClass->interfaces_count; auxInterfaces++) {
+		printf("%02x ",*auxInterfaces);
+	}
+
 	printf("\n\n-----FIELDS-----\n\n");
 	contador = 0;
 	for (auxField = arquivoClass->fields; auxField < arquivoClass->fields + arquivoClass->fields_count; auxField++,contador++) {
@@ -837,7 +921,6 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 				}
 				printf("Attributes Count: %02x\n",auxCodePontual->attributes_count);
 				if (auxCodePontual->attributes_count > 0) {
-					int contadorAttr = 0;
 					int lntContador = 0;
 					attribute_info ** auxAttributesFromCode = auxCodePontual->attributes;
 					for (int posicaoDois = 0; posicaoDois < auxCodePontual->attributes_count; posicaoDois++) {
@@ -861,11 +944,9 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 							}
 						}
 					}
-					contadorAttr++;
 				}
 			}
 		}
-		contador++;
 	}
 
 	printf("\n\n-----AtRIBUTOS DA CLASSE-----\n\n");
