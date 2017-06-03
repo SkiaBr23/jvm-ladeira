@@ -38,6 +38,7 @@ field_info * lerField (FILE * fp, u2 fields_count, cp_info * cp);
 u2 * lerInterfaces (FILE * fp, u2 size);
 stackMapTable_attribute * lerStackMapTable (FILE * fp);
 stack_map_frame * lerStackMapFrame (FILE * fp);
+int setaOffsetImpressao (int posicao, u1 offset);
 verification_type_info * lerVerificationTypeInfo (FILE * fp);
 code_attribute * lerCode (FILE * fp, cp_info *cp);
 line_number_table * lerLineNumberTable(FILE * fp, cp_info *cp);

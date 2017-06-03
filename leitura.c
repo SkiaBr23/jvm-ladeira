@@ -814,17 +814,6 @@ char* decodificaNIeNT(cp_info *cp, u2 index, u1 tipo){
 	switch(tipo){
 		case NAME_INDEX:
 
-			/*for (aux=cp;aux<cp+index;aux++){
-				printf("Tag no for: %02x\n",aux->tag);
-			}*/
-
-			//aux--;
-			/*
-			printf("Index: %02x\n",index);
-
-			printf("Impressao: %02x\n",aux->UnionCP.Class.name_index);
-			printf("Tag depois da impressao: %02x\n",aux->tag);*/
-
 			aux2 = cp+(aux->UnionCP.Class.name_index-1);
 
 			retorno = decodificaStringUTF8(aux2);
@@ -1085,22 +1074,93 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 							}
 							printf("\n");
 						} else if (strcmp(ponteiroprint,"StackMapTable") == 0) {
+							int offsetImpressao = 0;
 							stackMapTable_attribute * smt = (stackMapTable_attribute*)(*(auxAttributesFromCode+posicaoDois))->info;
 							stack_map_frame ** smf = smt->entries;
 							printf("Nr.\t\tStack Map Frame\n");
 							for (int posicaoSMF = 0; posicaoSMF < smt->number_of_entries; posicaoSMF++) {
 								if ((*(smf+posicaoSMF))->frame_type >= 0 && (*(smf+posicaoSMF))->frame_type <= 63) {
-									printf("%d\t\tSAME(%d),Offset: FAZER\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type);
+									offsetImpressao += setaOffsetImpressao(posicaoSMF,(*(smf+posicaoSMF))->frame_type);
+									printf("%d\t\tSAME(%d),Offset: %d(+%d)\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type,offsetImpressao,(*(smf+posicaoSMF))->frame_type);
 								} else if ((*(smf+posicaoSMF))->frame_type >= 64 && (*(smf+posicaoSMF))->frame_type <= 127) {
-
+									offsetImpressao += setaOffsetImpressao(posicaoSMF,((*(smf+posicaoSMF))->frame_type)-64);
+									printf("%d\t\tSAME_LOCALS_1_STACK_ITEM(%d), Offset: %d(+%d)\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type,offsetImpressao,((*(smf+posicaoSMF))->frame_type-64));
+									printf("\t\tStack verifications:\n");
+									verification_type_info ** VTIAux = (*(smf+posicaoSMF))->map_frame_type.same_locals_1_stack_item_frame.stack;
+									switch ((*(VTIAux))->tag) {
+										case 0:
+											printf("\t\t\tTOP\n");
+											break;
+										case 1:
+											printf("\t\t\tINTEGER\n");
+											break;
+										case 2:
+											printf("\t\t\tFLOAT\n");
+											break;
+										case 3:
+											printf("\t\t\tLONG\n");
+											break;
+										case 4:
+											printf("\t\t\tDOUBLE\n");
+											break;
+										case 5:
+											printf("\t\t\tNULL\n");
+											break;
+										case 6:
+											printf("\t\t\tUNINITIALIZED THIS\n");
+											break;
+										case 7:
+											ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,(*(VTIAux))->type_info.object_variable_info.cpool_index,NAME_INDEX);
+											printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
+											break;
+										case 8:
+											printf("\t\t\tUNINITIALIZED\n");
+											break;
+									}
 								} else if ((*(smf+posicaoSMF))->frame_type == 247) {
-
+									offsetImpressao += setaOffsetImpressao(posicaoSMF,(*(smf+posicaoSMF))->map_frame_type.same_locals_1_stack_item_frame_extended.offset_delta);
+									printf("%d\t\tSAME_LOCALS_1_STACK_ITEM_EXTENDED(%d), Offset: %d(+%d)\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type,offsetImpressao,(*(smf+posicaoSMF))->map_frame_type.same_locals_1_stack_item_frame_extended.offset_delta);
+									printf("\t\tStack verifications:\n");
+									verification_type_info ** VTIAux = (*(smf+posicaoSMF))->map_frame_type.same_locals_1_stack_item_frame_extended.stack;
+									switch ((*(VTIAux))->tag) {
+										case 0:
+											printf("\t\t\tTOP\n");
+											break;
+										case 1:
+											printf("\t\t\tINTEGER\n");
+											break;
+										case 2:
+											printf("\t\t\tFLOAT\n");
+											break;
+										case 3:
+											printf("\t\t\tLONG\n");
+											break;
+										case 4:
+											printf("\t\t\tDOUBLE\n");
+											break;
+										case 5:
+											printf("\t\t\tNULL\n");
+											break;
+										case 6:
+											printf("\t\t\tUNINITIALIZED THIS\n");
+											break;
+										case 7:
+											ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,(*(VTIAux))->type_info.object_variable_info.cpool_index,NAME_INDEX);
+											printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
+											break;
+										case 8:
+											printf("\t\t\tUNINITIALIZED\n");
+											break;
+									}
 								} else if ((*(smf+posicaoSMF))->frame_type >= 248 && (*(smf+posicaoSMF))->frame_type <= 250) {
-									printf("%d\t\tCHOP(%d),Offset: %d\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type, (*(smf+posicaoSMF))->map_frame_type.chop_frame.offset_delta);
+									offsetImpressao += setaOffsetImpressao(posicaoSMF,(*(smf+posicaoSMF))->map_frame_type.chop_frame.offset_delta);
+									printf("%d\t\tCHOP(%d),Offset: %d(+%d)\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type, offsetImpressao,(*(smf+posicaoSMF))->map_frame_type.chop_frame.offset_delta);
 								} else if ((*(smf+posicaoSMF))->frame_type == 251) {
-
+									offsetImpressao += setaOffsetImpressao(posicaoSMF,(*(smf+posicaoSMF))->map_frame_type.same_frame_extended.offset_delta);
+									printf("%d\t\tSAME_FRAME_EXTENDED(%d),Offset: %d(+%d)\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type, offsetImpressao,(*(smf+posicaoSMF))->map_frame_type.same_frame_extended.offset_delta);
 								} else if ((*(smf+posicaoSMF))->frame_type >= 252 && (*(smf+posicaoSMF))->frame_type <= 254) {
-									printf("%d\t\tAPPEND(%d),Offset: %d\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type, (*(smf+posicaoSMF))->map_frame_type.append_frame.offset_delta);
+									offsetImpressao += setaOffsetImpressao(posicaoSMF,(*(smf+posicaoSMF))->map_frame_type.append_frame.offset_delta);
+									printf("%d\t\tAPPEND(%d),Offset: %d(+%d)\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type, offsetImpressao, (*(smf+posicaoSMF))->map_frame_type.append_frame.offset_delta);
 									verification_type_info ** VTIAux = (*(smf+posicaoSMF))->map_frame_type.append_frame.locals;
 									printf("\t\t  Local verifications:\n");
 									for (int posicaoVTI = 0; posicaoVTI < ((*(smf+posicaoSMF))->frame_type-251); posicaoVTI++) {
@@ -1127,7 +1187,8 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 												printf("\t\t\tUNINITIALIZED THIS\n");
 												break;
 											case 7:
-												printf("\t\t\tOBJECT\n");
+												ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,(*(VTIAux))->type_info.object_variable_info.cpool_index,NAME_INDEX);
+												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
 												break;
 											case 8:
 												printf("\t\t\tUNINITIALIZED\n");
@@ -1135,7 +1196,76 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 										}
 									}
 								} else if ((*(smf+posicaoSMF))->frame_type == 255) {
-
+									offsetImpressao += setaOffsetImpressao(posicaoSMF,(*(smf+posicaoSMF))->map_frame_type.full_frame.offset_delta);
+									printf("%d\t\tFULL_FRAME(%d),Offset: %d(+%d)\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type, offsetImpressao, (*(smf+posicaoSMF))->map_frame_type.full_frame.offset_delta);
+									verification_type_info ** VTIAux = (*(smf+posicaoSMF))->map_frame_type.full_frame.locals;
+									printf("\t\t  Local verifications:\n");
+									for (int posicaoVTI = 0; posicaoVTI < (*(smf+posicaoSMF))->map_frame_type.full_frame.number_of_locals; posicaoVTI++) {
+										switch ((*(VTIAux+posicaoVTI))->tag) {
+											case 0:
+												printf("\t\t\tTOP\n");
+												break;
+											case 1:
+												printf("\t\t\tINTEGER\n");
+												break;
+											case 2:
+												printf("\t\t\tFLOAT\n");
+												break;
+											case 3:
+												printf("\t\t\tLONG\n");
+												break;
+											case 4:
+												printf("\t\t\tDOUBLE\n");
+												break;
+											case 5:
+												printf("\t\t\tNULL\n");
+												break;
+											case 6:
+												printf("\t\t\tUNINITIALIZED THIS\n");
+												break;
+											case 7:
+												ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,(*(VTIAux))->type_info.object_variable_info.cpool_index,NAME_INDEX);
+												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
+												break;
+											case 8:
+												printf("\t\t\tUNINITIALIZED\n");
+												break;
+										}
+									}
+									VTIAux = (*(smf+posicaoSMF))->map_frame_type.full_frame.stack;
+									printf("\t\t  Stack verifications:\n");
+									for (int posicaoVTI = 0; posicaoVTI < (*(smf+posicaoSMF))->map_frame_type.full_frame.number_of_stack_items; posicaoVTI++) {
+										switch ((*(VTIAux+posicaoVTI))->tag) {
+											case 0:
+												printf("\t\t\tTOP\n");
+												break;
+											case 1:
+												printf("\t\t\tINTEGER\n");
+												break;
+											case 2:
+												printf("\t\t\tFLOAT\n");
+												break;
+											case 3:
+												printf("\t\t\tLONG\n");
+												break;
+											case 4:
+												printf("\t\t\tDOUBLE\n");
+												break;
+											case 5:
+												printf("\t\t\tNULL\n");
+												break;
+											case 6:
+												printf("\t\t\tUNINITIALIZED THIS\n");
+												break;
+											case 7:
+												ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,(*(VTIAux))->type_info.object_variable_info.cpool_index,NAME_INDEX);
+												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
+												break;
+											case 8:
+												printf("\t\t\tUNINITIALIZED\n");
+												break;
+										}
+									}
 								}
 							}
 						}
@@ -1155,5 +1285,14 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		 	source_file_attribute * SourceFile = ((source_file_attribute*)((*(auxAttributeClasse+posicao))->info));
 			printf("Source File Name Index: cp_info#%d <%s>\n",SourceFile->source_file_index,decodificaStringUTF8(arquivoClass->constant_pool+SourceFile->source_file_index-1));
 		}
+	}
+}
+
+int setaOffsetImpressao (int posicao, u1 offset) {
+
+	if (posicao == 0) {
+		return offset;
+	} else {
+		return (offset+1);
 	}
 }
