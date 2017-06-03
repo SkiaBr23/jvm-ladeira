@@ -499,8 +499,6 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 				lnt = lerLineNumberTable(fp, cp);
 				attributes->info = (line_number_table*)lnt;
 			} else if (strcmp(string_name_index,"StackMapTable") == 0) {
-				printf("Atributo STACKMAPTABLE não implementado!\n");
-				exit(1);
 				stackMapTable_attribute * stackMapTable = NULL;
 				stackMapTable = lerStackMapTable(fp);
 				attributes->info = (stackMapTable_attribute*)stackMapTable;
@@ -539,9 +537,11 @@ stack_map_frame * lerStackMapFrame (FILE * fp) {
 		StackMapFrame->map_frame_type.same_frame_extended.offset_delta = u2Read(fp);
 	} else if (StackMapFrame->frame_type >= 252 && StackMapFrame->frame_type <= 254) {
 		StackMapFrame->map_frame_type.append_frame.offset_delta = u2Read(fp);
-		printf("Leu: %d\n",StackMapFrame->map_frame_type.append_frame.offset_delta);
-		StackMapFrame->map_frame_type.append_frame.locals = (verification_type_info**)malloc(sizeof(verification_type_info*));
-		*(StackMapFrame->map_frame_type.append_frame.locals) = lerVerificationTypeInfo(fp);
+		u2 sizeMalloc = (StackMapFrame->frame_type-251);
+		StackMapFrame->map_frame_type.append_frame.locals = (verification_type_info**)malloc(sizeMalloc*sizeof(verification_type_info*));
+		for (int posicao = 0; posicao < sizeMalloc; posicao++) {
+			*(StackMapFrame->map_frame_type.append_frame.locals+posicao) = lerVerificationTypeInfo(fp);
+		}
 	} else if (StackMapFrame->frame_type == 255) {
 		StackMapFrame->map_frame_type.full_frame.offset_delta = u2Read(fp);
 		StackMapFrame->map_frame_type.full_frame.number_of_locals = u2Read(fp);
@@ -925,22 +925,71 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 					attribute_info ** auxAttributesFromCode = auxCodePontual->attributes;
 					for (int posicaoDois = 0; posicaoDois < auxCodePontual->attributes_count; posicaoDois++) {
 						ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+(*(auxAttributesFromCode+posicaoDois))->attribute_name_index);
-						printf("Attributo %d: \n",contadorAttr);
-						printf("Attribute Name Index: cp_info#%02x <%s>\n",(*(auxAttributesFromCode+posicaoDois))->attribute_name_index,ponteiroprint);
+						printf("Attribute Name Index: cp_info#%d <%s>\n",(*(auxAttributesFromCode+posicaoDois))->attribute_name_index,ponteiroprint);
 						printf("Attribute Length: %d\n",(*(auxAttributesFromCode+posicaoDois))->attribute_length);
 						if (strcmp(ponteiroprint,"LineNumberTable") == 0) {
 							line_number_table * lntAux = (line_number_table*)(*(auxAttributesFromCode+posicaoDois))->info;
-							for(line_number_table * lnt = lntAux; lnt < lntAux + auxCodePontual->attributes_count; lnt++) {
-								ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1 + (*(auxAttributesFromCode+posicaoDois))->attribute_name_index);
-								printf("Attribute name index: cp_info#%d <%s>\n",(*(auxAttributesFromCode+posicaoDois))->attribute_name_index,ponteiroprint);
-								printf("Attribute Length: %d\n",(int)lnt->line_number_table_length);
-								printf("Attribute Info: \n");
-								printf("Nr.\t\tStartPC\t\tLineNumber\n");
-								for (line_number_tableInfo * linfo = lnt->info; linfo < lnt->info + lnt->line_number_table_length; linfo++) {
-									printf("%d\t\t%d\t\t%d\n",lntContador,linfo->start_pc,linfo->line_number);
-									lntContador++;
+							printf("Line Number Table Length: %d\n",(int)lntAux->line_number_table_length);
+							printf("Attribute Info: \n");
+							printf("Nr.\t\tStartPC\t\tLineNumber\n");
+							for (line_number_tableInfo * linfo = lntAux->info; linfo < lntAux->info + lntAux->line_number_table_length; linfo++) {
+								printf("%d\t\t%d\t\t%d\n",lntContador,linfo->start_pc,linfo->line_number);
+								lntContador++;
+							}
+							printf("\n");
+						} else if (strcmp(ponteiroprint,"StackMapTable") == 0) {
+							stackMapTable_attribute * smt = (stackMapTable_attribute*)(*(auxAttributesFromCode+posicaoDois))->info;
+							stack_map_frame ** smf = smt->entries;
+							printf("Nr.\t\tStack Map Frame\n");
+							for (int posicaoSMF = 0; posicaoSMF < smt->number_of_entries; posicaoSMF++) {
+								if ((*(smf+posicaoSMF))->frame_type >= 0 && (*(smf+posicaoSMF))->frame_type <= 63) {
+									printf("%d\t\tSAME(%d),Offset: FAZER\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type);
+								} else if ((*(smf+posicaoSMF))->frame_type >= 64 && (*(smf+posicaoSMF))->frame_type <= 127) {
+
+								} else if ((*(smf+posicaoSMF))->frame_type == 247) {
+
+								} else if ((*(smf+posicaoSMF))->frame_type >= 248 && (*(smf+posicaoSMF))->frame_type <= 250) {
+									printf("%d\t\tCHOP(%d),Offset: %d\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type, (*(smf+posicaoSMF))->map_frame_type.chop_frame.offset_delta);
+								} else if ((*(smf+posicaoSMF))->frame_type == 251) {
+
+								} else if ((*(smf+posicaoSMF))->frame_type >= 252 && (*(smf+posicaoSMF))->frame_type <= 254) {
+									printf("%d\t\tAPPEND(%d),Offset: %d\n",posicaoSMF,(*(smf+posicaoSMF))->frame_type, (*(smf+posicaoSMF))->map_frame_type.append_frame.offset_delta);
+									verification_type_info ** VTIAux = (*(smf+posicaoSMF))->map_frame_type.append_frame.locals;
+									printf("\t\t  Local verifications:\n");
+									for (int posicaoVTI = 0; posicaoVTI < ((*(smf+posicaoSMF))->frame_type-251); posicaoVTI++) {
+										switch ((*(VTIAux[posicaoVTI]))->tag) {
+											case 0:
+												printf("\t\t\tTOP\n");
+												break;
+											case 1:
+												printf("\t\t\tINTEGER\n");
+												break;
+											case 2:
+												printf("\t\t\tFLOAT\n");
+												break;
+											case 3:
+												printf("\t\t\tLONG\n");
+												break;
+											case 4:
+												printf("\t\t\tDOUBLE\n");
+												break;
+											case 5:
+												printf("\t\t\tNULL\n");
+												break;
+											case 6:
+												printf("\t\t\tUNINITIALIZED THIS\n");
+												break;
+											case 7:
+												printf("\t\t\tOBJECT\n");
+												break;
+											case 8:
+												printf("\t\t\tUNINITIALIZED\n");
+												break;
+										}
+									}
+								} else if ((*(smf+posicaoSMF))->frame_type == 255) {
+
 								}
-								printf("\n");
 							}
 						}
 					}
