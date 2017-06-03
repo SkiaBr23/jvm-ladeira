@@ -561,19 +561,23 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 			string_name_index = decodificaStringUTF8(cp+attributes->attribute_name_index-1);
 			//VERIFICAR SE ELE SO ALOCA NO MAXIMO 1 TIPO, LINENUMBER-CODE-ETC,por chamada
 			if(strcmp(string_name_index,"SourceFile") == 0){
+				printf("Entrou sourcefile\n");
 				source_file_attribute * SourceFile = NULL;//(code_attribute*) malloc(i->attributes_count*sizeof(code_attribute));
 				SourceFile = lerSourceFile(fp);
 				attributes->info = NULL;//malloc(i->attributes_count*sizeof(code_attribute));
 				attributes->info = (source_file_attribute*) SourceFile;
 			} else if (strcmp(string_name_index,"Code") == 0) {
+				printf("Entrou code\n");
 				code_attribute * code_attr = NULL;
 				code_attr = lerCode(fp ,cp);
 				attributes->info = (code_attribute*) code_attr;
 			} else if (strcmp(string_name_index,"LineNumberTable") == 0) {
 				line_number_table * lnt = NULL;
+				printf("Entrou lnt\n");
 				lnt = lerLineNumberTable(fp, cp);
 				attributes->info = (line_number_table*)lnt;
 			} else if (strcmp(string_name_index,"StackMapTable") == 0) {
+				printf("Entrou stack map table\n");
 				stackMapTable_attribute * stackMapTable = NULL;
 				stackMapTable = lerStackMapTable(fp);
 				attributes->info = (stackMapTable_attribute*)stackMapTable;
@@ -737,7 +741,7 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 	char *ponteiro2pontos = malloc(100*sizeof(char));
 	cp_info *cp_aux = cp+index-1;
 
-	
+
 	if (index < sizeCP) {
 		switch(cp_aux->tag){
 			case CONSTANT_Methodref:
@@ -922,6 +926,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 	printf("Methods Count: %04x\n",arquivoClass->methods_count);
 	printf("Atributes Count: %02x\n",arquivoClass->attributes_count);
 
+
 	printf("\n\n-----CONSTANT POOL-----\n\n");
 
 	for (aux = arquivoClass->constant_pool; aux < arquivoClass->constant_pool+arquivoClass->constant_pool_count-1; aux++) {
@@ -994,7 +999,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 				printf("InvokeDynamic - Name and Type Index: %04x\n",aux->UnionCP.InvokeDynamicInfo.name_and_type_index);
 				break;
 			default:
-				printf("Default\n");
+				printf("DefaultImpressao\n");
 				break;
 		}
 	}
@@ -1052,11 +1057,12 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 					printf("%s\n",ponteiroprint);
 				}
 				if(auxCodePontual->exception_table_length > 0) {
+					printf("Exception Table:\n");
+					printf("Nr.\t\tStart PC\tEnd PC\tHandler PC\tCatch Type\n");
+					int contadorExceptionTable = 0;
 					for(exceptionTableAux = auxCodePontual->table; exceptionTableAux < auxCodePontual->table + auxCodePontual->exception_table_length; exceptionTableAux++){
-						printf("Start PC: %02x\n",exceptionTableAux->start_pc);
-						printf("End PC: %02x\n",exceptionTableAux->end_pc);
-						printf("Handler PC: %02x\n",exceptionTableAux->handler_pc);
-						printf("Catch Type: %02x\n",exceptionTableAux->catch_type);
+						printf("%d\t\t%02x\t\t%02x\t\t%02x\t%02x\n",contadorExceptionTable,exceptionTableAux->start_pc,exceptionTableAux->end_pc,exceptionTableAux->handler_pc,exceptionTableAux->catch_type);
+						contadorExceptionTable++;
 					}
 					printf("\n\n");
 				}
@@ -1229,11 +1235,11 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 												printf("\t\t\tUNINITIALIZED THIS\n");
 												break;
 											case 7:
-												ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,(*(VTIAux))->type_info.object_variable_info.cpool_index,NAME_INDEX);
-												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
+												ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,(*(VTIAux+posicaoVTI))->type_info.object_variable_info.cpool_index,NAME_INDEX);
+												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux+posicaoVTI))->type_info.object_variable_info.cpool_index, ponteiroprint);
 												break;
 											case 8:
-												printf("\t\t\tUNINITIALIZED Offset: %d\n",(*(VTIAux))->type_info.uninitialized_variable_info.offset);
+												printf("\t\t\tUNINITIALIZED Offset: %d\n",(*(VTIAux+posicaoVTI))->type_info.uninitialized_variable_info.offset);
 												break;
 										}
 									}
