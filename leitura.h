@@ -32,6 +32,8 @@ u4 u4Read(FILE *fp);
 ClassFile * lerArquivo (char *);
 cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count);
 method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp);
+char* decodificarOperandoInstrucao(cp_info *cp, u2 index);
+char* decodificarCode(cp_info *cp,u1 *code, u4 length,instrucao *instrucoes);
 code_attribute * lerCode (FILE * fp, u2 name_index, u2 size, cp_info *cp);
 line_number_table * lerLineNumberTable(FILE * fp, u2 attr_name_index, u2 size);
 exception_table * lerExceptionTable (FILE * fp, u2 size);
