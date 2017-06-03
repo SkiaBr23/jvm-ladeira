@@ -441,7 +441,6 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 		switch(numarg){
 			case 0:
 				strcat(retorno,"\n");
-				printf("Retoooorno: %s\n",retorno);
 				aux++;
 			break;
 			case 1:
@@ -738,8 +737,6 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 	char *stringGeral = malloc(100*sizeof(char));
 	char *ponteiro2pontos = malloc(100*sizeof(char));
 	cp_info *cp_aux = cp+index-1;
-
-	printf("Indexxxxxxx: %d\n",index);
 
 	if (index < sizeCP) {
 		switch(cp_aux->tag){
@@ -1056,10 +1053,8 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 				printf("Code length: %04x\n",auxCodePontual->code_length);
 				printf("\n\n----Code----\n\n");
 				if(auxCodePontual->code_length > 0) {
-					printf("Iniciou impressao de code\n");
 					ponteiroprint = decodificarCode(arquivoClass->constant_pool,arquivoClass->constant_pool_count,auxCodePontual->code,auxCodePontual->code_length,instrucoes);
 					printf("%s\n",ponteiroprint);
-					printf("Fim de impressao de code\n");
 				}
 				if(auxCodePontual->exception_table_length > 0) {
 					for(exceptionTableAux = auxCodePontual->table; exceptionTableAux < auxCodePontual->table + auxCodePontual->exception_table_length; exceptionTableAux++){
