@@ -580,11 +580,50 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 				printf("Entrou stack map table\n");
 				stackMapTable_attribute * stackMapTable = NULL;
 				stackMapTable = lerStackMapTable(fp);
+				printf("Saiu de smt\n");
 				attributes->info = (stackMapTable_attribute*)stackMapTable;
+			} else if (strcmp(string_name_index, "InnerClasses") == 0) {
+				printf("Entrou em inner class\n");
+				innerClasses_attribute * innerClasses = NULL;
+				innerClasses = lerInnerClasses(fp, cp);
+				attributes->info = (innerClasses_attribute*)innerClasses;
+			} else if (strcmp(string_name_index,"Signature") == 0) {
+				printf("Entrou em signature\n");
+				signature_attribute * signatureR = NULL;
+				signatureR = lerSignature(fp);
+				attributes->info = (signature_attribute*)signatureR;
 			}
 	}
 	/*Retorno da estrutura Attribute alocada, com as informações lidas*/
 	return attributes;
+}
+
+signature_attribute * lerSignature (FILE * fp) {
+	signature_attribute * signature = (signature_attribute*)malloc(sizeof(signature_attribute));
+	signature->signature_index = u2Read(fp);
+	return signature;
+}
+
+innerClasses_attribute * lerInnerClasses (FILE * fp, cp_info * cp) {
+	innerClasses_attribute * innerClasses = (innerClasses_attribute*)malloc(sizeof(innerClasses_attribute));
+	innerClasses->number_of_classes = u2Read(fp);
+	if (innerClasses->number_of_classes > 0) {
+		innerClasses->classes_vector = (classes**)malloc(innerClasses->number_of_classes*sizeof(classes*));
+		for (int posicao = 0; posicao < innerClasses->number_of_classes; posicao++) {
+			*(innerClasses->classes_vector+posicao) = lerClasses(fp);
+		}
+	}
+	return innerClasses;
+}
+
+classes * lerClasses (FILE * fp) {
+	classes * classeRetorno = (classes*)malloc(sizeof(classes));
+	classeRetorno->inner_class_info_index = u2Read(fp);
+	classeRetorno->outer_class_info_index = u2Read(fp);
+	classeRetorno->inner_name_index = u2Read(fp);
+	classeRetorno->inner_class_access_flags = u2Read(fp);
+
+	return classeRetorno;
 }
 
 stackMapTable_attribute * lerStackMapTable (FILE * fp) {
@@ -628,12 +667,14 @@ stack_map_frame * lerStackMapFrame (FILE * fp) {
 			StackMapFrame->map_frame_type.full_frame.locals = (verification_type_info**)malloc(StackMapFrame->map_frame_type.full_frame.number_of_locals*sizeof(verification_type_info*));
 			for (int posicao = 0; posicao < StackMapFrame->map_frame_type.full_frame.number_of_locals; posicao++) {
 				*(StackMapFrame->map_frame_type.full_frame.locals+posicao) = lerVerificationTypeInfo(fp);
+				if ((*(StackMapFrame->map_frame_type.full_frame.locals+posicao))->tag == 7) {
+				}
 			}
 		}
 		StackMapFrame->map_frame_type.full_frame.number_of_stack_items = u2Read(fp);
 		if (StackMapFrame->map_frame_type.full_frame.number_of_stack_items > 0) {
 			StackMapFrame->map_frame_type.full_frame.stack = (verification_type_info**)malloc(StackMapFrame->map_frame_type.full_frame.number_of_stack_items*sizeof(verification_type_info*));
-			for (int posicao = 0; posicao < StackMapFrame->map_frame_type.full_frame.number_of_locals; posicao++) {
+			for (int posicao = 0; posicao < StackMapFrame->map_frame_type.full_frame.number_of_stack_items; posicao++) {
 				*(StackMapFrame->map_frame_type.full_frame.stack+posicao) = lerVerificationTypeInfo(fp);
 			}
 		}
@@ -1319,6 +1360,9 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 									}
 								}
 							}
+						} else if (strcmp(ponteiroprint,"Signature") == 0) {
+							char * Signature_Index = decodificaStringUTF8(arquivoClass->constant_pool-1+(*(auxAttributesFromCode+posicaoDois))->attribute_name_index);
+							printf("Signature index: cp_info#%d <%s>\n",(*(auxAttributesFromCode+posicaoDois))->attribute_name_index,Signature_Index);
 						}
 					}
 				}
@@ -1335,6 +1379,19 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		if (strcmp(ponteiroprint,"SourceFile") == 0) {
 		 	source_file_attribute * SourceFile = ((source_file_attribute*)((*(auxAttributeClasse+posicao))->info));
 			printf("Source File Name Index: cp_info#%d <%s>\n",SourceFile->source_file_index,decodificaStringUTF8(arquivoClass->constant_pool+SourceFile->source_file_index-1));
+		} else if (strcmp(ponteiroprint, "InnerClasses") == 0) {
+			innerClasses_attribute * innerC = ((innerClasses_attribute*)((*(auxAttributeClasse+posicao))->info));
+			printf("Nr.\t\tInner Class\t\t\tOuter Class\t\tInner Name\t\tAccess Flags\n");
+			char * innerClassString, * outerClassString, * innerNameIndex, * accessFlagsInner;
+			classes ** vetorClasses = innerC->classes_vector;
+			for (int posicaoInncerC = 0; posicaoInncerC < innerC->number_of_classes; posicaoInncerC++) {
+				innerClassString = decodificaNIeNT(arquivoClass->constant_pool,(*(vetorClasses+posicaoInncerC))->inner_class_info_index,NAME_INDEX);
+				outerClassString = decodificaNIeNT(arquivoClass->constant_pool,(*(vetorClasses+posicaoInncerC))->outer_class_info_index,NAME_INDEX);
+				innerNameIndex = decodificaStringUTF8(arquivoClass->constant_pool-1+(*(vetorClasses+posicaoInncerC))->inner_name_index);
+				accessFlagsInner = decodificaAccessFlags((*(vetorClasses+posicaoInncerC))->inner_class_access_flags);
+				printf("%d\t\tcp_info#%d\t\t\tcp_info#%d\t\tcp_info#%d\t\t0x%04x\n",posicaoInncerC,(*(vetorClasses+posicaoInncerC))->inner_class_info_index,(*(vetorClasses+posicaoInncerC))->outer_class_info_index,(*(vetorClasses+posicaoInncerC))->inner_name_index,(*(vetorClasses+posicaoInncerC))->inner_class_access_flags);
+				printf("  \t\t%s\t\t%s\t\t%s\t\t\t%s\n",innerClassString,outerClassString,innerNameIndex,accessFlagsInner);
+			}
 		}
 	}
 }
