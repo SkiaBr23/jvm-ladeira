@@ -1008,7 +1008,8 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 	printf("\n\n-----INTERFACES-----\n\n");
 	contador = 0;
 	for (u2 * auxInterfaces = arquivoClass->interfaces; auxInterfaces < arquivoClass->interfaces+arquivoClass->interfaces_count; auxInterfaces++) {
-		printf("%02x ",*auxInterfaces);
+		ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,*auxInterfaces,NAME_INDEX);
+		printf("Interface: cp_info#%d <%s>\n",*auxInterfaces, ponteiroprint);
 	}
 
 	printf("\n\n-----FIELDS-----\n\n");
