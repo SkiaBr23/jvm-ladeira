@@ -434,7 +434,6 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 	char *stringdecod = (char*)malloc(100*sizeof(char));
 	strcpy(retorno,"");
 
-
 	for(aux=code;aux<code+length;){
 		int numarg = instrucoes[*aux].numarg;
 		strcat(retorno,instrucoes[*aux].inst_nome);
@@ -738,6 +737,7 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 	char *ponteiro2pontos = malloc(100*sizeof(char));
 	cp_info *cp_aux = cp+index-1;
 
+	
 	if (index < sizeCP) {
 		switch(cp_aux->tag){
 			case CONSTANT_Methodref:
@@ -852,6 +852,11 @@ char* decodificaAccessFlags(u2 flag){
 	strcpy(retorno,"");
 
 	while(flag){
+
+		if(flag>=SYNTHETIC){
+			flag-=SYNTHETIC;
+			strcat(retorno,"SYNTHETIC;");
+		}
 		if(flag>=TRANSIENT){
 			flag-=TRANSIENT;
 			strcat(retorno,"TRANSIENT;");

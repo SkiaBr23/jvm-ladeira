@@ -224,7 +224,9 @@ enum access_flags{
 	STATIC = 8,
 	FINAL = 16,
 	VOLATILE = 64,
-	TRANSIENT = 128
+	TRANSIENT = 128,
+	SYNTHETIC = 4096,
+	ENUM = 16384
 };
 
 typedef enum access_flags access_flags;
