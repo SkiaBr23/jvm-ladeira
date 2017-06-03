@@ -1114,7 +1114,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 											printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
 											break;
 										case 8:
-											printf("\t\t\tUNINITIALIZED\n");
+											printf("\t\t\tUNINITIALIZED Offset: %d\n",(*(VTIAux))->type_info.uninitialized_variable_info.offset);
 											break;
 									}
 								} else if ((*(smf+posicaoSMF))->frame_type == 247) {
@@ -1149,7 +1149,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 											printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
 											break;
 										case 8:
-											printf("\t\t\tUNINITIALIZED\n");
+											printf("\t\t\tUNINITIALIZED Offset: %d\n",(*(VTIAux))->type_info.uninitialized_variable_info.offset);
 											break;
 									}
 								} else if ((*(smf+posicaoSMF))->frame_type >= 248 && (*(smf+posicaoSMF))->frame_type <= 250) {
@@ -1191,7 +1191,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
 												break;
 											case 8:
-												printf("\t\t\tUNINITIALIZED\n");
+												printf("\t\t\tUNINITIALIZED Offset: %d\n",(*(VTIAux))->type_info.uninitialized_variable_info.offset);
 												break;
 										}
 									}
@@ -1228,7 +1228,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
 												break;
 											case 8:
-												printf("\t\t\tUNINITIALIZED\n");
+												printf("\t\t\tUNINITIALIZED Offset: %d\n",(*(VTIAux))->type_info.uninitialized_variable_info.offset);
 												break;
 										}
 									}
@@ -1262,7 +1262,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
 												break;
 											case 8:
-												printf("\t\t\tUNINITIALIZED\n");
+												printf("\t\t\tUNINITIALIZED Offset: %d\n",(*(VTIAux))->type_info.uninitialized_variable_info.offset);
 												break;
 										}
 									}
