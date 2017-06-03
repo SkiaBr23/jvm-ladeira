@@ -36,6 +36,7 @@ char* decodificarOperandoInstrucao(cp_info *cp, u2 index, u2 sizeCP);
 char* decodificarCode(cp_info *cp,u2 sizeCP,u1 *code, u4 length,instrucao *instrucoes);
 field_info * lerField (FILE * fp, u2 fields_count, cp_info * cp);
 u2 * lerInterfaces (FILE * fp, u2 size);
+char* organizandoFlags(char* flagsOrdemInversa);
 stackMapTable_attribute * lerStackMapTable (FILE * fp);
 stack_map_frame * lerStackMapFrame (FILE * fp);
 int setaOffsetImpressao (int posicao, u1 offset);

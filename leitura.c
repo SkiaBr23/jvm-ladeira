@@ -896,8 +896,48 @@ char* decodificaAccessFlags(u2 flag){
 		}
 	}
 
+	retorno = organizandoFlags(retorno);
 	return(retorno);
 
+}
+
+char* organizandoFlags(char* flagsOrdemInversa){
+
+	const char s[2] = ";"; // Delimitador que vai dividir a string;
+
+	char* flags = strtok(flagsOrdemInversa,s);
+	char* velho = (char*)malloc(100*sizeof(char));
+	char* novo = (char*)malloc(100*sizeof(char));
+
+	int contador = 0;
+
+	strcpy(novo, "");
+	strcpy(velho, "");
+
+	printf("--------------------------------------\n");
+	while(flags != NULL){
+
+		if(contador == 0)
+			strcpy(velho, flags);
+
+		if(contador > 0){
+
+			strcpy(novo, flags);
+			strcat(novo," ");
+			strcat(novo, velho);
+			strcpy(velho, novo);
+			contador++;
+		}
+		else
+			contador++;
+
+		flags = strtok(NULL, s);
+	}
+
+	if(contador == 1)
+		return velho;
+	else
+		return novo;
 }
 
 void imprimirClassFile (ClassFile * arquivoClass) {
@@ -1198,11 +1238,11 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 												printf("\t\t\tUNINITIALIZED THIS\n");
 												break;
 											case 7:
-												ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,(*(VTIAux))->type_info.object_variable_info.cpool_index,NAME_INDEX);
-												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
+												ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,(*(VTIAux+posicaoVTI))->type_info.object_variable_info.cpool_index,NAME_INDEX);
+												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux+posicaoVTI))->type_info.object_variable_info.cpool_index, ponteiroprint);
 												break;
 											case 8:
-												printf("\t\t\tUNINITIALIZED Offset: %d\n",(*(VTIAux))->type_info.uninitialized_variable_info.offset);
+												printf("\t\t\tUNINITIALIZED Offset: %d\n",(*(VTIAux+posicaoVTI))->type_info.uninitialized_variable_info.offset);
 												break;
 										}
 									}
@@ -1269,11 +1309,11 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 												printf("\t\t\tUNINITIALIZED THIS\n");
 												break;
 											case 7:
-												ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,(*(VTIAux))->type_info.object_variable_info.cpool_index,NAME_INDEX);
-												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux))->type_info.object_variable_info.cpool_index, ponteiroprint);
+												ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,(*(VTIAux+posicaoVTI))->type_info.object_variable_info.cpool_index,NAME_INDEX);
+												printf("\t\t\tOBJECT cp_info#%d <%s>\n",(*(VTIAux+posicaoVTI))->type_info.object_variable_info.cpool_index, ponteiroprint);
 												break;
 											case 8:
-												printf("\t\t\tUNINITIALIZED Offset: %d\n",(*(VTIAux))->type_info.uninitialized_variable_info.offset);
+												printf("\t\t\tUNINITIALIZED Offset: %d\n",(*(VTIAux+posicaoVTI))->type_info.uninitialized_variable_info.offset);
 												break;
 										}
 									}
