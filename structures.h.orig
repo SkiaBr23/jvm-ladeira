@@ -285,6 +285,14 @@ typedef struct line_number_table line_number_table;
 
 /*Definição de estrutura Code - ANALISAR!*/
 struct code_attribute {
+<<<<<<< HEAD
+	/*Índice válido em Constant Pool, indicando
+	a string "Code"*/
+  u2 attribute_name_index;
+	/*Indica o tamanho do atributo*/
+  u4 attribute_length;
+=======
+>>>>>>> 71831aebce05554675f73c44adfc158f292f8ab3
 	/*Determina a profundidade máxima do operando
 	na pilha deste método, em qualquer ponto
 	durante a execução deste método*/
@@ -335,6 +343,7 @@ struct source_file_attribute {
 };
 typedef struct source_file_attribute source_file_attribute;
 
+<<<<<<< HEAD
 /************************************************************/
 
 struct constantValue_attribute {
@@ -606,7 +615,7 @@ struct bootstrapMethods_attribute {
 typedef struct bootstrapMethods_attribute bootstrapMethods_attribute;
 
 
-
+=======
 struct verification_type_info{
 
 	u1 tag;
@@ -788,5 +797,6 @@ struct stackMapTable_attribute {
     stack_map_frame ** entries;
 };
 typedef struct stackMapTable_attribute stackMapTable_attribute;
+>>>>>>> 71831aebce05554675f73c44adfc158f292f8ab3
 
 #endif

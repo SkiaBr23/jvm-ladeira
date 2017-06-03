@@ -67,7 +67,7 @@ struct classFile{
 	u2 methods_count;						// Numero de estruturas method_info na tabela de Methods
 	method_info *methods;				// Tabela Method
 	u2 attributes_count;				// Numero de estruturas attributes_info na tabela Attributes.
-	attribute_info *attributes;	// Tabela Attributes
+	attribute_info ** attributes;	// Tabela Attributes
 
 };
 typedef struct classFile ClassFile;

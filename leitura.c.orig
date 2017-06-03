@@ -144,7 +144,12 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		das entradas, caso contrário prossegue com a leitura dos próximos campos*/
 		if (arquivoClass->fields_count > 0) {
 			// Preencher com leitura de fields - CODIFICAR
+<<<<<<< HEAD
+			// arquivoClass->fields = malloc(arquivoClass->fields_count*sizeof(u2));
+			// arquivoClass->fields = lerField(fp,arquivoClass->fields_count,arquivoClass->constant_pool);
+=======
 			arquivoClass->fields = lerField(fp, arquivoClass->fields_count, arquivoClass->constant_pool);
+>>>>>>> 71831aebce05554675f73c44adfc158f292f8ab3
 		}
 
 		/*Leitura do valor 'methods_count', representando
@@ -355,12 +360,35 @@ method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp) {
 				*(i->attributes+posicao) = lerAttributes(fp, cp);
 			}
 		}
+
+
+
+		//FUNCIONOU - LIXAO
+		/*if (i->attributes_count > 0) {
+			u2 ida, vinda;
+			ida = i->attributes_count;
+			vinda = i->attributes_count;
+			i->attributes = NULL;
+			i->attributes = (attribute_info*)malloc(sizeof(attribute_info)*i->attributes_count);
+			while (ida){
+				//(code_attribute*) malloc(i->attributes_count*sizeof(code_attribute));
+				i->attributes = lerAttributes(fp, cp);
+				ida--;
+				i->attributes++;
+				getchar();
+			}
+			while (vinda) {
+				i->attributes--;
+				vinda--;
+			}
+		}*/
 	}
 
 	/*Retorno da estrutura Method alocada, com as informações lidas*/
 	return methods;
 }
 
+<<<<<<< HEAD
 /*field_info* lerField(FILE *fp,u2 fields_count, cp_info *cp){
 	Alocação da estrutura Method que será retornada para a estrutura
 	principal do arquivo .class
@@ -484,7 +512,10 @@ char* decodificarCode(cp_info *cp, u1 *code, u4 length,instrucao *instrucoes){
 	return(retorno);
 }
 
+code_attribute * lerCode (FILE * fp, u2 name_index, u2 size, cp_info *cp) {
+=======
 code_attribute * lerCode (FILE * fp, cp_info *cp) {
+>>>>>>> 71831aebce05554675f73c44adfc158f292f8ab3
 	code_attribute * code_attributes = NULL;
 	code_attributes = (code_attribute*) malloc(sizeof(code_attribute));
 	code_attributes->max_stack = u2Read(fp);
@@ -505,8 +536,6 @@ code_attribute * lerCode (FILE * fp, cp_info *cp) {
 	}
 
 	code_attributes->attributes_count = u2Read(fp);
-	// u2 auxCodeAttrCount = code_attributes->attributes_count;
-	// char * string_name_index = malloc(100*sizeof(char));
 
 	if (code_attributes->attributes_count > 0){
 		code_attributes->attributes = (attribute_info**)malloc(code_attributes->attributes_count*sizeof(attribute_info*));
@@ -514,6 +543,34 @@ code_attribute * lerCode (FILE * fp, cp_info *cp) {
 			*(code_attributes->attributes+posicao) = lerAttributes(fp, cp);
 		}
 	}
+
+
+		/*u2 ida, vinda;
+		ida = code_attributes->attributes_count;
+		vinda = code_attributes->attributes_count;
+		code_attributes->attributes = NULL;
+		code_attributes->attributes = (attribute_info*)malloc(sizeof(attribute_info)*code_attributes->attributes_count);
+
+		while (ida){
+			code_attributes->attributes = lerAttributes(fp, cp);
+			ida--;
+			code_attributes->attributes++;
+		}
+		while (vinda) {
+			code_attributes->attributes--;
+			vinda--;
+		}*/
+
+		/*code_attributes->attributes = NULL;
+		attribute_info * attr = (attribute_info*)malloc(sizeof(attribute_info)*code_attributes->attributes_count);
+		attribute_info * aux;
+		for (aux = attr; aux < attr+code_attributes->attributes_count; aux++) {
+			attribute_info * attrAux = NULL;//(code_attribute*) malloc(i->attributes_count*sizeof(code_attribute));
+			attrAux = lerAttributes(fp, cp);
+			aux = attrAux;
+		}
+		code_attributes->attributes = attr;
+	}*/
 
 	return code_attributes;
 }
@@ -833,6 +890,12 @@ char* decodificaNIeNT(cp_info *cp, u2 index, u1 tipo){
 			strcat(retorno,decodificaStringUTF8(aux3));
 		break;
 
+		/*case FIELD_INDEX:
+			aux2 = cp+(aux->UnionCP.Class.name_index-1);
+			aux3 = cp+((aux->UnionCP.NameAndType.name_index-1)
+
+		break;*/
+
 		case STRING_INDEX:
 		case CLASS_INDEX:
 			retorno = decodificaStringUTF8(aux);
@@ -845,6 +908,8 @@ char* decodificaNIeNT(cp_info *cp, u2 index, u1 tipo){
 		case NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX:
 			retorno = decodificaStringUTF8(aux);
 		break;
+
+
 	}
 
 	return(retorno);
@@ -899,11 +964,20 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 
 	cp_info * aux;
 	method_info * auxMethod;
+<<<<<<< HEAD
+	// field_info *auxField;
+	code_attribute *auxAttribute;
+	attribute_info *auxAttributeClasse;
+	exception_table *eAux;
+	uint32_t contador = 1;
+	// u1 *auxcode;
+=======
 	field_info * auxField;
 	attribute_info ** auxAttributeClasse;
 	exception_table * exceptionTableAux;
 	uint32_t contador = 1;
-	// u1 * auxBytesCode;
+	u1 * auxBytesCode;
+>>>>>>> 71831aebce05554675f73c44adfc158f292f8ab3
 	char *ponteiroprint;
 
 	instrucao *instrucoes = construirInstrucoes();
@@ -998,6 +1072,14 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		}
 	}
 
+<<<<<<< HEAD
+	/*contador = 0;
+	printf("\n\n-----FIELDS-----\n\n");
+
+	for(auxField=arquivoClass->fields;auxField<arquivoClass->fields+arquivoClass->fields_count;auxField++,contador++){
+		printf("--------------Field [%d]--------------\n\n",contador);
+	}*/
+=======
 	printf("\n\n-----INTERFACES-----\n\n");
 	contador = 0;
 	for (u2 * auxInterfaces = arquivoClass->interfaces; auxInterfaces < arquivoClass->interfaces+arquivoClass->interfaces_count; auxInterfaces++) {
@@ -1017,6 +1099,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		printf("Attributes Count: %04x\n",auxField->attributes_count);
 		//Incluir impressao de atributos dos fields
 	}
+>>>>>>> 71831aebce05554675f73c44adfc158f292f8ab3
 
 	printf("\n\n-----MÉTODOS-----\n\n");
 
@@ -1032,11 +1115,39 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		printf("Access Flags: 0x%04x [%s]\n",auxMethod->access_flags,ponteiroprint);
 		printf("Attributes Count: %04x\n",auxMethod->attributes_count);
 
+<<<<<<< HEAD
+		for (auxAttribute = auxMethod->UnionAttr.code_attributes; auxAttribute < auxMethod->UnionAttr.code_attributes+auxMethod->attributes_count; auxAttribute++) {
+
+			ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+auxAttribute->attribute_name_index);
+			printf("Attribute Name Index: cp_info#%02x <%s>\n",auxAttribute->attribute_name_index,ponteiroprint);
+			printf("Attribute Length: %d\n",auxAttribute->attribute_length);
+			printf("Max Stack: %02x\n",auxAttribute->max_stack);
+			printf("Max Locals: %02x\n",auxAttribute->max_locals);
+			printf("Code length: %04x\n",auxAttribute->code_length);
+
+			printf("\n-----CODE-----\n");
+			ponteiroprint = decodificarCode(arquivoClass->constant_pool,auxAttribute->code,auxAttribute->code_length,instrucoes);
+			printf("%s\n",ponteiroprint);
+			/*if(auxAttribute->code_length>0){
+				for(auxcode=auxAttribute->code;auxcode<auxAttribute->code+auxAttribute->code_length;auxcode++){
+					printf("%02x ",*auxcode);
+				}
+				printf("\n\n");
+			}*/
+
+
+			if(auxAttribute->exception_table_length>0){
+				for(eAux=auxAttribute->table;eAux<auxAttribute->table+auxAttribute->exception_table_length;eAux++){
+					printf("Start PC: %02x\n",eAux->start_pc);
+					printf("End PC: %02x\n",eAux->end_pc);
+					printf("Handler PC: %02x\n",eAux->handler_pc);
+					printf("Catch Type: %02x\n",eAux->catch_type);
+=======
 		printf("Atributos:\n");
 		attribute_info ** auxAttrCompleto = auxMethod->attributes;
 		for (int posicao = 0; posicao < auxMethod->attributes_count; posicao++) {
 			ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+(*(auxAttrCompleto+posicao))->attribute_name_index);
-			printf("Attribute Name Index: cp_info#%d <%s>\n",(*(auxAttrCompleto+posicao))->attribute_name_index,ponteiroprint);
+			printf("Attribute Name Index: cp_info#%02x <%s>\n",(*(auxAttrCompleto+posicao))->attribute_name_index,ponteiroprint);
 			printf("Attribute Length: %d\n",(*(auxAttrCompleto+posicao))->attribute_length);
 
 			if (strcmp(ponteiroprint,"Code") == 0) {
@@ -1044,10 +1155,12 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 				printf("Max Stack: %02x\n",auxCodePontual->max_stack);
 				printf("Max Locals: %02x\n",auxCodePontual->max_locals);
 				printf("Code length: %04x\n",auxCodePontual->code_length);
-				printf("\n\n----Code----\n\n");
+				printf("Code: ");
 				if(auxCodePontual->code_length > 0) {
-					ponteiroprint = decodificarCode(arquivoClass->constant_pool,auxCodePontual->code,auxCodePontual->code_length,instrucoes);
-					printf("%s\n",ponteiroprint);
+					for(auxBytesCode = auxCodePontual->code; auxBytesCode < auxCodePontual->code + auxCodePontual->code_length; auxBytesCode++){
+						printf("%02x ",*auxBytesCode);
+					}
+					printf("\n\n");
 				}
 				if(auxCodePontual->exception_table_length > 0) {
 					for(exceptionTableAux = auxCodePontual->table; exceptionTableAux < auxCodePontual->table + auxCodePontual->exception_table_length; exceptionTableAux++){
@@ -1057,6 +1170,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 						printf("Catch Type: %02x\n",exceptionTableAux->catch_type);
 					}
 					printf("\n\n");
+>>>>>>> 71831aebce05554675f73c44adfc158f292f8ab3
 				}
 				printf("Attributes Count: %02x\n",auxCodePontual->attributes_count);
 				if (auxCodePontual->attributes_count > 0) {
@@ -1096,7 +1210,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 									verification_type_info ** VTIAux = (*(smf+posicaoSMF))->map_frame_type.append_frame.locals;
 									printf("\t\t  Local verifications:\n");
 									for (int posicaoVTI = 0; posicaoVTI < ((*(smf+posicaoSMF))->frame_type-251); posicaoVTI++) {
-										switch ((*(VTIAux+posicaoVTI))->tag) {
+										switch ((*(VTIAux[posicaoVTI]))->tag) {
 											case 0:
 												printf("\t\t\tTOP\n");
 												break;
