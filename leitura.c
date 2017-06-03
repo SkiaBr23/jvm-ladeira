@@ -423,15 +423,15 @@ method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp) {
 	return fields;
 }*/
 
-char* decodificarCode(cp_info *cp, u1 *code, u4 length,instrucao *instrucoes){
+char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *instrucoes){
 	u1 *aux;
 
-	char *retorno = malloc(100*sizeof(char));
-	char *stringaux = malloc(100*sizeof(char));
-	u2 *aux2 = malloc(sizeof(u2));
+	char *retorno = (char*)malloc(100*sizeof(char));
+	char *stringaux = (char*)malloc(100*sizeof(char));
+	u2 *aux2 = (u2*)malloc(sizeof(u2));
 	// u2 tag = 0;
-	char *stringargs = malloc(100*sizeof(char));
-	char *stringdecod = malloc(100*sizeof(char));
+	char *stringargs = (char*)malloc(100*sizeof(char));
+	char *stringdecod = (char*)malloc(100*sizeof(char));
 	strcpy(retorno,"");
 
 
@@ -441,28 +441,29 @@ char* decodificarCode(cp_info *cp, u1 *code, u4 length,instrucao *instrucoes){
 		switch(numarg){
 			case 0:
 				strcat(retorno,"\n");
+				printf("Retoooorno: %s\n",retorno);
 				aux++;
 			break;
 			case 1:
 				strcat(retorno," #");
-				stringaux = malloc(100*sizeof(char));
+				stringaux = (char*)malloc(100*sizeof(char));
 				sprintf(stringaux,"%d",*(++aux));
 				strcat(retorno,stringaux);
 				strcat(retorno," ");
-				stringdecod = decodificarOperandoInstrucao(cp,*aux);
+				stringdecod = decodificarOperandoInstrucao(cp,*aux,sizeCP);
 				strcat(retorno,stringdecod);
 				strcat(retorno,"\n");
 				aux++;
 			break;
 
 			case 2:
-				aux2 = malloc(sizeof(u2));
+				aux2 = (u2*)malloc(sizeof(u2));
 				*aux2 = *(++aux) << 8;
 				*aux2 |= *(++aux);
 
-				stringargs = malloc(100*sizeof(char));
-				stringargs = decodificarOperandoInstrucao(cp,*aux2);
-				stringaux = malloc(100*sizeof(char));
+				stringargs = (char*)malloc(100*sizeof(char));
+				stringargs = decodificarOperandoInstrucao(cp,*aux2,sizeCP);
+				stringaux = (char*)malloc(100*sizeof(char));
 				strcat(retorno," #");
 				sprintf(stringaux,"%d",(int)*aux2);
 				strcat(retorno,stringaux);
@@ -729,7 +730,7 @@ char* decodificaStringUTF8(cp_info *cp){
 	return(retorno);
 }
 
-char* decodificarOperandoInstrucao(cp_info *cp,u2 index){
+char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 
 	char *retorno = malloc(100*sizeof(char));
 	char *stringNomeClasse = malloc(100*sizeof(char));
@@ -738,55 +739,64 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index){
 	char *ponteiro2pontos = malloc(100*sizeof(char));
 	cp_info *cp_aux = cp+index-1;
 
-	switch(cp_aux->tag){
-		case CONSTANT_Methodref:
-	
-			// String do Class Name do Methodref
-			// Concatenar com .
-			// String do name do Name_and_type do Methodref
-		
-			stringNomeClasse = decodificaNIeNT(cp,cp_aux->UnionCP.Methodref.class_index,NAME_INDEX);
-		
-			stringNomeMetodo = decodificaNIeNT(cp,cp_aux->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
-		
-			ponteiro2pontos = strchr(stringNomeMetodo,':');
-			*ponteiro2pontos = '\0';
-		
-		
-			strcpy(retorno,"<");
-			strcat(retorno,stringNomeClasse);
-			strcat(retorno,".");
-			strcat(retorno,stringNomeMetodo);
-			strcat(retorno,">");
-		break;
+	printf("Indexxxxxxx: %d\n",index);
 
-		case CONSTANT_Fieldref:
+	if (index < sizeCP) {
+		switch(cp_aux->tag){
+			case CONSTANT_Methodref:
 
-			stringNomeClasse = decodificaNIeNT(cp,cp_aux->UnionCP.Fieldref.class_index,NAME_INDEX);
-			stringGeral = decodificaNIeNT(cp,cp_aux->UnionCP.Fieldref.name_and_type_index,NAME_AND_TYPE);
-			// printf("String Geral: %s\n",stringGeral);
+				// String do Class Name do Methodref
+				// Concatenar com .
+				// String do name do Name_and_type do Methodref
+
+				stringNomeClasse = decodificaNIeNT(cp,cp_aux->UnionCP.Methodref.class_index,NAME_INDEX);
+
+				stringNomeMetodo = decodificaNIeNT(cp,cp_aux->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+
+				ponteiro2pontos = strchr(stringNomeMetodo,':');
+				*ponteiro2pontos = '\0';
 
 
-			ponteiro2pontos = strchr(stringGeral,':');
-			*ponteiro2pontos = '\0';
+				strcpy(retorno,"<");
+				strcat(retorno,stringNomeClasse);
+				strcat(retorno,".");
+				strcat(retorno,stringNomeMetodo);
+				strcat(retorno,">");
+			break;
 
-			// stringGeral = strncpy(strstr(stringGeral,&stringGeral[1]),stringGeral,strlen(stringGeral));
+			case CONSTANT_Fieldref:
 
-			strcpy(retorno,"<");
-			strcat(retorno,stringNomeClasse);
-			strcat(retorno,".");
-			strcat(retorno,stringGeral);
-			strcat(retorno,">");
-		break;
+				stringNomeClasse = decodificaNIeNT(cp,cp_aux->UnionCP.Fieldref.class_index,NAME_INDEX);
+				stringGeral = decodificaNIeNT(cp,cp_aux->UnionCP.Fieldref.name_and_type_index,NAME_AND_TYPE);
+				// printf("String Geral: %s\n",stringGeral);
 
-		case CONSTANT_String:
 
-			stringGeral = decodificaNIeNT(cp,cp_aux->UnionCP.String.string_index,STRING_INDEX);
+				ponteiro2pontos = strchr(stringGeral,':');
+				*ponteiro2pontos = '\0';
 
-			strcpy(retorno,"<");
-			strcat(retorno,stringGeral);
-			strcat(retorno,">");
-		break;
+				// stringGeral = strncpy(strstr(stringGeral,&stringGeral[1]),stringGeral,strlen(stringGeral));
+
+				strcpy(retorno,"<");
+				strcat(retorno,stringNomeClasse);
+				strcat(retorno,".");
+				strcat(retorno,stringGeral);
+				strcat(retorno,">");
+			break;
+
+			case CONSTANT_String:
+
+				stringGeral = decodificaNIeNT(cp,cp_aux->UnionCP.String.string_index,STRING_INDEX);
+
+				strcpy(retorno,"<");
+				strcat(retorno,stringGeral);
+				strcat(retorno,">");
+			break;
+			default:
+				strcpy(retorno,"undefined");
+				break;
+		}
+	} else {
+		sprintf(retorno,"%d",index);
 	}
 
 	return(retorno);
@@ -1046,8 +1056,10 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 				printf("Code length: %04x\n",auxCodePontual->code_length);
 				printf("\n\n----Code----\n\n");
 				if(auxCodePontual->code_length > 0) {
-					ponteiroprint = decodificarCode(arquivoClass->constant_pool,auxCodePontual->code,auxCodePontual->code_length,instrucoes);
+					printf("Iniciou impressao de code\n");
+					ponteiroprint = decodificarCode(arquivoClass->constant_pool,arquivoClass->constant_pool_count,auxCodePontual->code,auxCodePontual->code_length,instrucoes);
 					printf("%s\n",ponteiroprint);
+					printf("Fim de impressao de code\n");
 				}
 				if(auxCodePontual->exception_table_length > 0) {
 					for(exceptionTableAux = auxCodePontual->table; exceptionTableAux < auxCodePontual->table + auxCodePontual->exception_table_length; exceptionTableAux++){
