@@ -42,6 +42,7 @@ classes * lerClasses (FILE * fp);
 constantValue_attribute * lerConstantValue (FILE * fp);
 long decodificaDoubleInfo (cp_info * cp);
 float decodificaFloatInfo (cp_info * cp);
+int decodificaIntegerInfo (cp_info * cp);
 signature_attribute * lerSignature (FILE * fp);
 char* organizandoFlags(char* flagsOrdemInversa);
 stackMapTable_attribute * lerStackMapTable (FILE * fp);

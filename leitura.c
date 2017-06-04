@@ -238,7 +238,7 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_Integer,
 			realiza a leitura do atributo bytes da estrutura Integer*/
 			case CONSTANT_Integer:
-				aux->UnionCP.Integer.bytes = u2Read(fp);
+				aux->UnionCP.Integer.bytes = u4Read(fp);
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_Float,
 			realiza a leitura do atributo bytes da estrutura Float*/
@@ -972,6 +972,12 @@ long decodificaDoubleInfo (cp_info * cp) {
 	return retorno;
 }
 
+int decodificaIntegerInfo (cp_info * cp) {
+
+	u4 valor = cp->UnionCP.Integer.bytes;
+	return valor;
+}
+
 float decodificaFloatInfo (cp_info * cp) {
 	u4 valor = cp->UnionCP.Float.bytes;
 	float retorno;
@@ -1016,37 +1022,41 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 	for (aux = arquivoClass->constant_pool; aux < arquivoClass->constant_pool+arquivoClass->constant_pool_count-1; aux++) {
 		fprintf(fp, "--------------Entrada [%d]--------------\n",contador);
 		contador++;
-		fprintf(fp, "TAG: %02x: %s\n",aux->tag,buscaNomeTag(aux->tag));
+		fprintf(fp, "TAG: %02d: %s\n",aux->tag,buscaNomeTag(aux->tag));
 		switch(aux->tag) {
 			case CONSTANT_Class:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Class.name_index,CLASS_INDEX);
-				fprintf(fp, "Class Name: cp_info#%02x <%s>\n",aux->UnionCP.Class.name_index,ponteiroprint);
+				fprintf(fp, "Class Name: cp_info#%02d <%s>\n",aux->UnionCP.Class.name_index,ponteiroprint);
 				break;
 			case CONSTANT_Fieldref:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Fieldref.class_index,NAME_INDEX);
-				fprintf(fp, "Class Name: cp_info#%02x %s\n",aux->UnionCP.Fieldref.class_index,ponteiroprint);
+				fprintf(fp, "Class Name: cp_info#%02d %s\n",aux->UnionCP.Fieldref.class_index,ponteiroprint);
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Fieldref.name_and_type_index,NAME_AND_TYPE);
-				fprintf(fp, "Name and Type: cp_info#%02x %s\n",aux->UnionCP.Fieldref.name_and_type_index,ponteiroprint);
+				fprintf(fp, "Name and Type: cp_info#%02d %s\n",aux->UnionCP.Fieldref.name_and_type_index,ponteiroprint);
 				break;
 			case CONSTANT_Methodref:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Methodref.class_index,NAME_INDEX);
-				fprintf(fp, "Class Name: cp_info#%02x %s\n",aux->UnionCP.Methodref.class_index,ponteiroprint);
+				fprintf(fp, "Class Name: cp_info#%02d %s\n",aux->UnionCP.Methodref.class_index,ponteiroprint);
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
-				fprintf(fp, "Name and Type: cp_info#%02x %s\n",aux->UnionCP.Methodref.name_and_type_index,ponteiroprint);
+				fprintf(fp, "Name and Type: cp_info#%02d %s\n",aux->UnionCP.Methodref.name_and_type_index,ponteiroprint);
 				break;
 			case CONSTANT_InterfaceMethodref:
-				fprintf(fp, "InterfaceMethodref Class Index: %04x\n",aux->UnionCP.InterfaceMethodref.class_index);
-				fprintf(fp, "InterfaceMethodref Name and Type Index: %04x\n",aux->UnionCP.InterfaceMethodref.name_and_type_index);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.String.string_index,NAME_INDEX);
+				fprintf(fp, "Class Name: cp_info#%02d <%s>\n",aux->UnionCP.InterfaceMethodref.class_index, ponteiroprint);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.String.string_index,NAME_AND_TYPE);
+				fprintf(fp, "Name and Type Index: cp_info#%02d <%s>\n",aux->UnionCP.InterfaceMethodref.name_and_type_index, ponteiroprint);
 				break;
 			case CONSTANT_String:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.String.string_index,STRING_INDEX);
-				fprintf(fp, "String: cp_info#%02x <%s>\n",aux->UnionCP.String.string_index,ponteiroprint);
+				fprintf(fp, "String: cp_info#%02d <%s>\n",aux->UnionCP.String.string_index,ponteiroprint);
 				break;
 			case CONSTANT_Integer:
-				fprintf(fp, "Integer Bytes: %04x\n",aux->UnionCP.Integer.bytes);
+				fprintf(fp, "Bytes: %04x\n",aux->UnionCP.Integer.bytes);
+				fprintf(fp,"Integer: %d\n",aux->UnionCP.Integer.bytes);
 				break;
 			case CONSTANT_Float:
-				fprintf(fp, "Float Bytes: %04x\n",aux->UnionCP.Float.bytes);
+				fprintf(fp, "Bytes: %04x\n",aux->UnionCP.Float.bytes);
+				fprintf(fp, "Float: %d\n",aux->UnionCP.Float.bytes);
 				break;
 			case CONSTANT_Long:
 				fprintf(fp, "Long High Bytes: %04x\n",aux->UnionCP.Long.high_bytes);
@@ -1058,9 +1068,9 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				break;
 			case CONSTANT_NameAndType:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
-				fprintf(fp, "Name: cp_info#%02x <%s>\n",aux->UnionCP.NameAndType.name_index,ponteiroprint);
+				fprintf(fp, "Name: cp_info#%02d <%s>\n",aux->UnionCP.NameAndType.name_index,ponteiroprint);
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
-				fprintf(fp, "Descriptor: cp_info#%02x <%s>\n",aux->UnionCP.NameAndType.descriptor_index,ponteiroprint);
+				fprintf(fp, "Descriptor: cp_info#%02d <%s>\n",aux->UnionCP.NameAndType.descriptor_index,ponteiroprint);
 				break;
 			case CONSTANT_Utf8:
 				fprintf(fp, "Length of byte array: %d\n",(int)aux->UnionCP.UTF8.length);
@@ -1105,7 +1115,7 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 		fprintf(fp, "Descriptor: cp_info#%d <%s>\n",auxField->descriptor_index,ponteiroprint);
 		ponteiroprint = decodificaAccessFlags(auxField->access_flags);
 		fprintf(fp, "Access Flags: 0x%04x [%s]\n",auxField->access_flags,ponteiroprint);
-		fprintf(fp, "Attributes Count: %04x\n",auxField->attributes_count);
+		fprintf(fp, "Attributes Count: %d\n",auxField->attributes_count);
 		if (auxField->attributes_count > 0) {
 			fieldAttrAux = auxField->attributes;
 			for (int posicaoFields = 0; posicaoFields < auxField->attributes_count; posicaoFields++) {
@@ -1115,9 +1125,18 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				if (strcmp(ponteiroprint, "ConstantValue") == 0) {
 					constantValue_attribute * cvAux = (constantValue_attribute*)(*(fieldAttrAux+posicaoFields))->info;
 					cp_info * cpInfoAux = arquivoClass->constant_pool-1+cvAux->constantvalue_index;
+					//FLOAT
 					if (cpInfoAux->tag == 4) {
 						float valorCV = decodificaFloatInfo(arquivoClass->constant_pool-1+cvAux->constantvalue_index);
 						fprintf(fp, "Constant Value Index: cp_info#%d <%f>\n",cvAux->constantvalue_index,valorCV);
+					//Integer-Byte-Boolean-Short-Char
+				} else if (cpInfoAux->tag == 3) {
+						int valorRetorno = decodificaIntegerInfo (arquivoClass->constant_pool-1+cvAux->constantvalue_index);
+						fprintf(fp, "Constant Value Index: cp_info#%d <%d>\n",cvAux->constantvalue_index,valorRetorno);
+					//STRING
+					} else if (cpInfoAux->tag == 8) {
+						char * stringEntrada = decodificaNIeNT(arquivoClass->constant_pool,cvAux->constantvalue_index,NAME_INDEX);
+						fprintf(fp, "Constant Value Index: cp_info#%d <%s>\n",cvAux->constantvalue_index,stringEntrada);
 					}
 				} else if (strcmp(ponteiroprint,"Signature") == 0) {
 					signature_attribute * sig = (signature_attribute*)(*(fieldAttrAux+posicaoFields))->info;
@@ -1141,7 +1160,7 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 		fprintf(fp, "Descriptor: cp_info#%d <%s>\n",auxMethod->descriptor_index,ponteiroprint);
 		ponteiroprint = decodificaAccessFlags(auxMethod->access_flags);
 		fprintf(fp, "Access Flags: 0x%04x [%s]\n",auxMethod->access_flags,ponteiroprint);
-		fprintf(fp, "Attributes Count: %04x\n",auxMethod->attributes_count);
+		fprintf(fp, "Attributes Count: %d\n",auxMethod->attributes_count);
 
 		fprintf(fp, "Atributos:\n");
 		attribute_info ** auxAttrCompleto = auxMethod->attributes;
@@ -1152,9 +1171,9 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 
 			if (strcmp(ponteiroprint,"Code") == 0) {
 				code_attribute * auxCodePontual = (code_attribute*)(*(auxAttrCompleto+posicao))->info;
-				fprintf(fp, "Max Stack: %02x\n",auxCodePontual->max_stack);
-				fprintf(fp, "Max Locals: %02x\n",auxCodePontual->max_locals);
-				fprintf(fp, "Code length: %04x\n",auxCodePontual->code_length);
+				fprintf(fp, "Max Stack: %d\n",auxCodePontual->max_stack);
+				fprintf(fp, "Max Locals: %d\n",auxCodePontual->max_locals);
+				fprintf(fp, "Code length: %d\n",auxCodePontual->code_length);
 				fprintf(fp, "\n\n----Code----\n\n");
 				if(auxCodePontual->code_length > 0) {
 					ponteiroprint = decodificarCode(arquivoClass->constant_pool,arquivoClass->constant_pool_count,auxCodePontual->code,auxCodePontual->code_length,instrucoes);
@@ -1170,7 +1189,7 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 					}
 					fprintf(fp, "\n\n");
 				}
-				fprintf(fp, "Attributes Count: %02x\n",auxCodePontual->attributes_count);
+				fprintf(fp, "Attributes Count: %d\n",auxCodePontual->attributes_count);
 				if (auxCodePontual->attributes_count > 0) {
 					int lntContador = 0;
 					attribute_info ** auxAttributesFromCode = auxCodePontual->attributes;

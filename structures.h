@@ -118,7 +118,7 @@ struct cp_info{
 		struct{
 			/*Representa o valor da constante
 			int, em big-endian*/
-			u2 bytes;
+			u4 bytes;
 		} Integer;
 		/*Estrutura representando uma
 		constante de ponto flutuante de
