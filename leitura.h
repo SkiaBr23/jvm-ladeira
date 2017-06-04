@@ -57,6 +57,6 @@ char* buscaNomeTag(u1 tag);
 char* decodificaStringUTF8(cp_info *cp);
 char* decodificaNIeNT(cp_info *cp, u2 index,u1 tipo);
 char* decodificaAccessFlags(u2 flag);
-void imprimirClassFile (ClassFile *);
+void imprimirClassFile (ClassFile *, FILE *);
 
 #endif
