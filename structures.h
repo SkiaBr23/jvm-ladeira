@@ -358,7 +358,7 @@ struct exceptions_attribute {
 typedef struct exceptions_attribute exceptions_attribute;
 
 struct classes {
-	
+
 	u2 inner_class_info_index;	// Todos essas variaveis devem apontar para constant_pool;
 	u2 outer_class_info_index;	// If C is not a member of a class or an interface
 								// (that is, if C is a top-level class or interface
@@ -366,7 +366,7 @@ struct classes {
 								// of the outer_class_info_index item must be zero.
 	u2 inner_name_index;		// If C is anonymous, the value of the
 								// inner_name_index item must be zero.
-	
+
 	u2 inner_class_access_flags; // It is used by a compiler to recover the original
 								 // information when source code is not available.
 
@@ -374,7 +374,7 @@ struct classes {
 typedef struct classes classes;
 
 	/* Sobre: inner_class_access_flags
-		
+
 		Flag Name     	Value(Decimal)
 
 		ACC_PUBLIC			1
@@ -391,8 +391,8 @@ typedef struct classes classes;
 
 struct innerClasses_attribute{
 
-	u2 number_of_classes;		
-	classes *classes_vector; 	// Alocar com number_of_classes;
+	u2 number_of_classes;
+	classes ** classes_vector; 	// Alocar com number_of_classes;
 
 };
 typedef struct innerClasses_attribute innerClasses_attribute;
@@ -403,11 +403,11 @@ struct enclosingMethod_attribute {
 	u2 class_index;			// The constant_pool entry at that index must be a
 							// CONSTANT_Class_info structure representing the
 							// innermost class that encloses the declaration
-							// of the current class.	
-	
+							// of the current class.
+
 	u2 method_index;		// If the current class is not immediately enclosed
 							// by a method or constructor, then the value of the
-							// method_index item must be zero.	
+							// method_index item must be zero.
 
 	// Otherwise, The constant_pool entry at that index must be a
 	// CONSTANT_NameAndType_info structure representing the name
@@ -426,7 +426,7 @@ typedef struct synthetic_attribute synthetic_attribute;*/
 
 struct signature_attribute {
 
-	u2 signature_index;			
+	u2 signature_index;
 
 };
 typedef struct signature_attribute signature_attribute;
@@ -490,7 +490,7 @@ struct element_value{
 
 		u2 const_value_index;
 		u2 outer_class_info_index;
-		
+
 		struct annotation *annotation_value;	// ISSO DAQUI EH MUITO ERRADO! VERIFICAR
 
 		struct {
@@ -501,7 +501,7 @@ struct element_value{
 		} enum_const_index;
 
 		struct {
-						
+
 			u2 num_values;
 			struct element_value *element_values;
 
@@ -550,7 +550,7 @@ struct runTimeInvisibleAnnotations_attribute {
 };
 typedef struct runTimeInvisibleAnnotations_attribute runTimeInvisibleAnnotations_attribute;
 
-	
+
 struct parameter_annotations {		// ESSA ESTRUTURA EH IGUAL A DE CIMA.
 
 	u2 num_annotations;
