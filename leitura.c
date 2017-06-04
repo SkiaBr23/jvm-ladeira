@@ -609,10 +609,27 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 				constantValue_attribute * constantV = NULL;
 				constantV = lerConstantValue(fp);
 				attributes->info = (constantValue_attribute*)constantV;
+			} else if (strcmp(string_name_index,"Exceptions") == 0) {
+				exceptions_attribute * exceptions = NULL;
+				exceptions = lerExceptionsAttribute(fp);
+				attributes->info = (exceptions_attribute*)exceptions;
 			}
 	}
 	/*Retorno da estrutura Attribute alocada, com as informações lidas*/
 	return attributes;
+}
+
+exceptions_attribute * lerExceptionsAttribute (FILE * fp) {
+	exceptions_attribute * exceptions = (exceptions_attribute*)malloc(sizeof(exceptions_attribute));
+	exceptions->number_of_exceptions = u2Read(fp);
+	exceptions->exception_index_table = NULL;
+	if (exceptions->number_of_exceptions > 0) {
+		exceptions->exception_index_table = (u2*)malloc(exceptions->number_of_exceptions*sizeof(u2));
+		for (u2 * excpAux = exceptions->exception_index_table; excpAux < exceptions->exception_index_table + exceptions->number_of_exceptions; excpAux++) {
+			*excpAux = u2Read(fp);
+		}
+	}
+	return exceptions;
 }
 
 constantValue_attribute * lerConstantValue (FILE * fp) {
@@ -978,7 +995,6 @@ char* organizandoFlags(char* flagsOrdemInversa){
 	strcpy(novo, "");
 	strcpy(velho, "");
 
-	printf("--------------------------------------\n");
 	while(flags != NULL){
 
 		if(contador == 0)
@@ -1158,6 +1174,10 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 						float valorCV = decodificaFloatInfo(arquivoClass->constant_pool-1+cvAux->constantvalue_index);
 						printf("Constant Value Index: cp_info#%d <%f>\n",cvAux->constantvalue_index,valorCV);
 					}
+				} else if (strcmp(ponteiroprint,"Signature") == 0) {
+					signature_attribute * sig = (signature_attribute*)(*(fieldAttrAux+posicaoFields))->info;
+					char * Signature_Index = decodificaStringUTF8(arquivoClass->constant_pool-1+sig->signature_index);
+					printf("Signature index: cp_info#%d <%s>\n",sig->signature_index,Signature_Index);
 				}
 			}
 		}
@@ -1181,6 +1201,7 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		printf("Atributos:\n");
 		attribute_info ** auxAttrCompleto = auxMethod->attributes;
 		for (int posicao = 0; posicao < auxMethod->attributes_count; posicao++) {
+			printf("\n");
 			ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+(*(auxAttrCompleto+posicao))->attribute_name_index);
 			printf("Attribute Name Index: cp_info#%d <%s>\n",(*(auxAttrCompleto+posicao))->attribute_name_index,ponteiroprint);
 			printf("Attribute Length: %d\n",(*(auxAttrCompleto+posicao))->attribute_length);
@@ -1418,12 +1439,23 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 									}
 								}
 							}
-						} else if (strcmp(ponteiroprint,"Signature") == 0) {
-							char * Signature_Index = decodificaStringUTF8(arquivoClass->constant_pool-1+(*(auxAttributesFromCode+posicaoDois))->attribute_name_index);
-							printf("Signature index: cp_info#%d <%s>\n",(*(auxAttributesFromCode+posicaoDois))->attribute_name_index,Signature_Index);
 						}
 					}
 				}
+			} else if (strcmp(ponteiroprint,"Exceptions") == 0) {
+				exceptions_attribute * excpAux = (exceptions_attribute*)(*(auxAttrCompleto+posicao))->info;
+				int contadorExcp = 0;
+				char * exceptionIndexString;
+				printf("Nr.\t\tException\t\t\tVerbose\n");
+				for (u2 * indexExcp = excpAux->exception_index_table; indexExcp < excpAux->exception_index_table + excpAux->number_of_exceptions; indexExcp++) {
+					exceptionIndexString = decodificaNIeNT(arquivoClass->constant_pool,*indexExcp,NAME_INDEX);
+					printf("%d\t\tcp_info#%d\t\t\t%s\n",contadorExcp,*indexExcp,exceptionIndexString);
+					contadorExcp++;
+				}
+			} else if (strcmp(ponteiroprint,"Signature") == 0) {
+				signature_attribute * sig = (signature_attribute*)(*(auxAttrCompleto+posicao))->info;
+				char * Signature_Index = decodificaStringUTF8(arquivoClass->constant_pool-1+sig->signature_index);
+				printf("Signature index: cp_info#%d <%s>\n",sig->signature_index,Signature_Index);
 			}
 		}
 	}
@@ -1450,6 +1482,10 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 				printf("%d\t\tcp_info#%d\t\t\tcp_info#%d\t\tcp_info#%d\t\t0x%04x\n",posicaoInncerC,(*(vetorClasses+posicaoInncerC))->inner_class_info_index,(*(vetorClasses+posicaoInncerC))->outer_class_info_index,(*(vetorClasses+posicaoInncerC))->inner_name_index,(*(vetorClasses+posicaoInncerC))->inner_class_access_flags);
 				printf("  \t\t%s\t\t%s\t\t%s\t\t\t%s\n",innerClassString,outerClassString,innerNameIndex,accessFlagsInner);
 			}
+		} else if (strcmp(ponteiroprint,"Signature") == 0) {
+			signature_attribute * sig = (signature_attribute*)((*(auxAttributeClasse+posicao))->info);
+			char * Signature_Index = decodificaStringUTF8(arquivoClass->constant_pool-1+sig->signature_index);
+			printf("Signature index: cp_info#%d <%s>\n",sig->signature_index,Signature_Index);
 		}
 	}
 }
