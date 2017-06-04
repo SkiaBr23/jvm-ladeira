@@ -37,7 +37,6 @@ char* decodificarCode(cp_info *cp,u2 sizeCP,u1 *code, u4 length,instrucao *instr
 field_info * lerField (FILE * fp, u2 fields_count, cp_info * cp);
 u2 * lerInterfaces (FILE * fp, u2 size);
 innerClasses_attribute * lerInnerClasses (FILE * fp, cp_info * cp);
-exceptions_attribute * lerExceptionsAttribute (FILE * fp);
 classes * lerClasses (FILE * fp);
 constantValue_attribute * lerConstantValue (FILE * fp);
 long decodificaDoubleInfo (cp_info * cp);
