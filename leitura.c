@@ -14,6 +14,7 @@ Alunos: Maximillian Fan Xavier - 12/0153271
 /*Inclusão de estruturas e assinatura de funções de leitura*/
 #include "leitura.h"
 #include <string.h>
+#include <math.h>
 #include "instrucoes.h"
 
 /*Função 'u1Read' que realiza a leitura de 1 byte do arquivo .class*/
@@ -147,9 +148,13 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 			arquivoClass->fields = lerField(fp, arquivoClass->fields_count, arquivoClass->constant_pool);
 		}
 
+		printf("Passou leitura field\n");
+
 		/*Leitura do valor 'methods_count', representando
 		a quantidade de entradas na tabela Method*/
 		arquivoClass->methods_count = u2Read(fp);
+
+		printf("Metodos: %d\n",arquivoClass->methods_count);
 
 		/*Estrutura condicional que verifica se a quantidade de entradas
 		na tabela Method é maior que zero. Se for, prossegue com a leitura
@@ -189,11 +194,13 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 	/*Ponteiro auxiliar do tipo cp_info para fazer a varredura de leitura*/
 	cp_info * aux = NULL;
 
+	printf("Size: %d\n",constant_pool_count);
 	/*Estrutura de repetição contada que realiza a leitura das informações
 	contidas na Constant Pool presente no arquvo .class*/
 	for (aux = constantPool; aux < constantPool+constant_pool_count-1; aux++){
 		/*Leitura do byte tag de uma entrada da Constant Pool*/
 		aux->tag = u1Read(fp);
+		printf("Case: %d\n",aux->tag);
 		/*Estrutura 'switch case' que analisa o byte tag lido e de acordo com o valor
 		realiza um procedimento específico de leitura*/
 		switch(aux->tag) {
@@ -266,6 +273,7 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 				aux->UnionCP.UTF8.bytes = malloc(aux->UnionCP.UTF8.length*sizeof(u1));
 				for (u1 *i=aux->UnionCP.UTF8.bytes;i<aux->UnionCP.UTF8.bytes+aux->UnionCP.UTF8.length;i++){
 					*i = u1Read(fp);
+					printf("Byte lido: %02x\n",*i);
 				}
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_MethodHandle,
@@ -343,6 +351,9 @@ method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp) {
 		i->descriptor_index = u2Read(fp);
 		/*Leitura do atributo attributes_count do respectivo método*/
 		i->attributes_count = u2Read(fp);
+
+		printf("access_flags: %02x\n",i->access_flags);
+		printf("Name index method: %d\n",i->name_index);
 
 		/*Estrutura condicional que avalia se a quantidade de atributos
 		do método é maior que zero. Se for, prossegue com a leitura dos
@@ -553,6 +564,8 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 	attributes->attribute_name_index = u2Read(fp);
 	/*Leitura do atributo length do respectivo atributo*/
 	attributes->attribute_length = u4Read(fp);
+	printf("att name index: %d\n",attributes->attribute_name_index);
+	printf("attr length: %d\n",attributes->attribute_length);
 	/*Estrutura condicional que avalia se o tamanho do atributo
 	é maior que zero. Se for, prossegue com a leitura da informação
 	do atributo*/
@@ -592,10 +605,20 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 				signature_attribute * signatureR = NULL;
 				signatureR = lerSignature(fp);
 				attributes->info = (signature_attribute*)signatureR;
+			} else if (strcmp(string_name_index,"ConstantValue") == 0) {
+				constantValue_attribute * constantV = NULL;
+				constantV = lerConstantValue(fp);
+				attributes->info = (constantValue_attribute*)constantV;
 			}
 	}
 	/*Retorno da estrutura Attribute alocada, com as informações lidas*/
 	return attributes;
+}
+
+constantValue_attribute * lerConstantValue (FILE * fp) {
+	constantValue_attribute * cv = (constantValue_attribute*)malloc(sizeof(constantValue_attribute));
+	cv->constantvalue_index = u2Read(fp);
+	return cv;
 }
 
 signature_attribute * lerSignature (FILE * fp) {
@@ -981,12 +1004,31 @@ char* organizandoFlags(char* flagsOrdemInversa){
 		return novo;
 }
 
+long decodificaDoubleInfo (cp_info * cp) {
+	long high = (long)cp->UnionCP.Double.high_bytes;
+	long low = (long)cp->UnionCP.Double.low_bytes;
+
+	long retorno = ((long)high<<32)+low;
+	return retorno;
+}
+
+float decodificaFloatInfo (cp_info * cp) {
+	u4 valor = cp->UnionCP.Float.bytes;
+	float retorno;
+	int sinal = ((valor>>31) == 0) ? 1 : -1;
+	int expon = ((valor>>23) & 0xff);
+	int mant = (expon == 0) ? (valor & 0x7fffff)<<1 : (valor & 0x7fffff) | 0x800000;
+	retorno = (sinal)*(mant)*(pow(2,expon-150));
+	return retorno;
+}
+
 void imprimirClassFile (ClassFile * arquivoClass) {
 
 	cp_info * aux;
 	method_info * auxMethod;
 	field_info * auxField;
 	attribute_info ** auxAttributeClasse;
+	attribute_info ** fieldAttrAux;
 	exception_table * exceptionTableAux;
 	uint32_t contador = 1;
 	// u1 * auxBytesCode;
@@ -1103,6 +1145,22 @@ void imprimirClassFile (ClassFile * arquivoClass) {
 		ponteiroprint = decodificaAccessFlags(auxField->access_flags);
 		printf("Access Flags: 0x%04x [%s]\n",auxField->access_flags,ponteiroprint);
 		printf("Attributes Count: %04x\n",auxField->attributes_count);
+		if (auxField->attributes_count > 0) {
+			fieldAttrAux = auxField->attributes;
+			for (int posicaoFields = 0; posicaoFields < auxField->attributes_count; posicaoFields++) {
+				ponteiroprint = decodificaStringUTF8(arquivoClass->constant_pool-1+(*(fieldAttrAux+posicaoFields))->attribute_name_index);
+				printf("Attribute Name Index: cp_info#%d <%s>\n",(*(fieldAttrAux+posicaoFields))->attribute_name_index,ponteiroprint);
+				printf("Attribute Length: %d\n",(*(fieldAttrAux+posicaoFields))->attribute_length);
+				if (strcmp(ponteiroprint, "ConstantValue") == 0) {
+					constantValue_attribute * cvAux = (constantValue_attribute*)(*(fieldAttrAux+posicaoFields))->info;
+					cp_info * cpInfoAux = arquivoClass->constant_pool-1+cvAux->constantvalue_index;
+					if (cpInfoAux->tag == 4) {
+						float valorCV = decodificaFloatInfo(arquivoClass->constant_pool-1+cvAux->constantvalue_index);
+						printf("Constant Value Index: cp_info#%d <%f>\n",cvAux->constantvalue_index,valorCV);
+					}
+				}
+			}
+		}
 		//Incluir impressao de atributos dos fields
 	}
 
