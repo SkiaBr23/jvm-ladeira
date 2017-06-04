@@ -372,68 +372,6 @@ method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp) {
 	return methods;
 }
 
-/*field_info* lerField(FILE *fp,u2 fields_count, cp_info *cp){
-	Alocação da estrutura Method que será retornada para a estrutura
-	principal do arquivo .class
-	field_info *fields = (field_info*) malloc(fields_count*sizeof(field_info));
-
-	Estrutura de repetição contada que realiza a leitura das informações
-	contidas na tabela Method presente no arquvo .class
-	for (field_info *i = fields; i < fields + fields_count; i++) {
-		Leitura do atributo access_flags do respectivo método
-		i->access_flags = u2Read(fp);
-		Leitura do atributo name_index do respectivo método
-		i->name_index = u2Read(fp);
-		Leitura do atributo descriptor_index do respectivo método
-		i->descriptor_index = u2Read(fp);
-		Leitura do atributo attributes_count do respectivo método
-		i->attributes_count = u2Read(fp);
-
-		Estrutura condicional que avalia se a quantidade de atributos
-		do método é maior que zero. Se for, prossegue com a leitura dos
-		atributos do método
-		u2 auxcount = i->attributes_count;
-		// attribute_info *attributes = (attribute_info*) malloc(i->attributes_count*sizeof(attribute_info));
-		u2 name_index;
-		char * string_name_index = malloc(100*sizeof(char));
-		while (auxcount > 0) {
-			Estrutura de repetição contada que realiza a leitura das informações
-			contidas na tabela Attribute presente no arquvo .class
-				Leitura do atributo name_index do respectivo atributo
-				name_index = u2Read(fp);
-				string_name_index = decodificaStringUTF8(cp+name_index-1);
-
-				//FAZER FOR PARA LER MAIS DE UM CODE PARA UM MESMO METODO? OU SO EXISTE UM CODE POR METODO?
-
-				// Leitura do atributo length do respectivo atributo
-				a->attribute_length = u4Read(fp);
-				Estrutura condicional que avalia se o tamanho do atributo
-				é maior que zero. Se for, prossegue com a leitura da informação
-				do atributo
-				if (a->attribute_length > 0) {
-					// Alocação do espaço para informação do atributo
-					switch(decodificaStringUTF8(cp))
-					a->UnionAttr.attributes = malloc((a->attribute_length)*sizeof(u1));
-					Estrutura de repetição contada para fazer a leitura dos dados
-					e gravá-los na estrutura de informação
-					for(u1 * c = (a->info); c < (a->info)+(a->attribute_length); c++) {
-						Leitura dos dados
-						*c = u1Read(fp);
-					}
-				}
-
-				auxcount--;
-		}
-		free(string_name_index);
-
-
-			// i->attributes = lerAttributesInfo(fp, i->attributes_count, cp);
-	}
-
-	Retorno da estrutura Method alocada, com as informações lidas
-	return fields;
-}*/
-
 char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *instrucoes){
 	u1 *aux;
 
@@ -441,8 +379,8 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 	char *stringaux = (char*)malloc(100*sizeof(char));
 	u2 *aux2 = (u2*)malloc(sizeof(u2));
 	// u2 tag = 0;
-	char *stringargs = (char*)malloc(100*sizeof(char));
-	char *stringdecod = (char*)malloc(100*sizeof(char));
+	char *stringargs;
+	char *stringdecod;
 	strcpy(retorno,"");
 
 	for(aux=code;aux<code+length;){
@@ -455,7 +393,6 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 			break;
 			case 1:
 				strcat(retorno," #");
-				stringaux = (char*)malloc(100*sizeof(char));
 				sprintf(stringaux,"%d",*(++aux));
 				strcat(retorno,stringaux);
 				strcat(retorno," ");
@@ -466,13 +403,10 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 			break;
 
 			case 2:
-				aux2 = (u2*)malloc(sizeof(u2));
 				*aux2 = *(++aux) << 8;
 				*aux2 |= *(++aux);
 
-				stringargs = (char*)malloc(100*sizeof(char));
 				stringargs = decodificarOperandoInstrucao(cp,*aux2,sizeCP);
-				stringaux = (char*)malloc(100*sizeof(char));
 				strcat(retorno," #");
 				sprintf(stringaux,"%d",(int)*aux2);
 				strcat(retorno,stringaux);
@@ -490,7 +424,10 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 		}
 
 	}
-
+	free(stringaux);
+	free(aux2);
+	free(stringargs);
+	free(stringdecod);
 	return(retorno);
 }
 
@@ -570,7 +507,7 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 	é maior que zero. Se for, prossegue com a leitura da informação
 	do atributo*/
 	if (attributes->attribute_length > 0) {
-			char * string_name_index = malloc(100*sizeof(char));
+			char * string_name_index;
 			string_name_index = decodificaStringUTF8(cp+attributes->attribute_name_index-1);
 			//VERIFICAR SE ELE SO ALOCA NO MAXIMO 1 TIPO, LINENUMBER-CODE-ETC,por chamada
 			if(strcmp(string_name_index,"SourceFile") == 0){
@@ -747,7 +684,7 @@ source_file_attribute * lerSourceFile (FILE * fp) {
 }
 
 char* buscaNomeTag(u1 tag){
-	char *nometag = malloc(40*sizeof(char));
+	char *nometag = NULL;
 	switch(tag){
 		case CONSTANT_Class:
 				strcpy(nometag,"CONSTANT_Class_Info");
@@ -816,10 +753,10 @@ char* decodificaStringUTF8(cp_info *cp){
 char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 
 	char *retorno = malloc(100*sizeof(char));
-	char *stringNomeClasse = malloc(100*sizeof(char));
-	char *stringNomeMetodo = malloc(100*sizeof(char));
-	char *stringGeral = malloc(100*sizeof(char));
-	char *ponteiro2pontos = malloc(100*sizeof(char));
+	char *stringNomeClasse;// = malloc(100*sizeof(char));
+	char *stringNomeMetodo;// = malloc(100*sizeof(char));
+	char *stringGeral;// = malloc(100*sizeof(char));
+	char *ponteiro2pontos;// = malloc(100*sizeof(char));
 	cp_info *cp_aux = cp+index-1;
 
 
@@ -888,7 +825,7 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 // Decodifica Name Index e Name Type
 char* decodificaNIeNT(cp_info *cp, u2 index, u1 tipo){
 
-	char *retorno = malloc(100*sizeof(u1));
+	char *retorno = NULL;
 
 	cp_info *aux;
 	cp_info *aux2;
@@ -1014,10 +951,14 @@ char* organizandoFlags(char* flagsOrdemInversa){
 		flags = strtok(NULL, s);
 	}
 
-	if(contador == 1)
+	if(contador == 1){
+		free(novo);
 		return velho;
-	else
+	}
+	else{
+		free(velho);
 		return novo;
+	}
 }
 
 long decodificaDoubleInfo (cp_info * cp) {

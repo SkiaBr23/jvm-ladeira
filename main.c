@@ -25,7 +25,7 @@ int main(int argc, char const *argv[]){
 	char *nomearquivo = malloc(100*sizeof(char));
 
 	/*Alocação da estrutura para o arquivo .class*/
-	ClassFile *arquivoClass = malloc(sizeof(ClassFile));
+	ClassFile *arquivoClass;// = malloc(sizeof(ClassFile));
 
 	/*Estrutura condicional que analisa se foi passado o nome do arquivo como parâmetro*/
 	if(argc>1){
