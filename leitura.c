@@ -962,12 +962,18 @@ char* organizandoFlags(char* flagsOrdemInversa){
 	}
 }
 
-long decodificaDoubleInfo (cp_info * cp) {
-	long high = (long)cp->UnionCP.Double.high_bytes;
-	long low = (long)cp->UnionCP.Double.low_bytes;
+double decodificaDoubleInfo (cp_info * cp) {
+	 uint64_t valor = ((uint64_t)cp->UnionCP.Double.high_bytes<<32) | (uint64_t)cp->UnionCP.Double.low_bytes;
+	 int sinal = ((valor>>63) == 0) ? 1 : -1;
+	 int expon = ((valor>>52) & 0x7ffL);
+	 long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
 
-	long retorno = ((long)high<<32)+low;
+	double retorno = sinal*mant*(pow(2,expon-1075));
 	return retorno;
+}
+
+uint64_t decodificaLongInfo (cp_info * cp) {
+	return ((((uint64_t)cp->UnionCP.Long.high_bytes)<<32) | ((uint64_t)cp->UnionCP.Long.low_bytes));
 }
 
 int decodificaIntegerInfo (cp_info * cp) {
@@ -990,6 +996,8 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 	if(fp == NULL)
 		return;
 	cp_info * aux;
+	double valor;
+	uint64_t longValue;
 	method_info * auxMethod;
 	field_info * auxField;
 	attribute_info ** auxAttributeClasse;
@@ -1057,12 +1065,16 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				fprintf(fp, "Float: %d\n",aux->UnionCP.Float.bytes);
 				break;
 			case CONSTANT_Long:
-				fprintf(fp, "Long High Bytes: %04x\n",aux->UnionCP.Long.high_bytes);
-				fprintf(fp, "Long Low Bytes: %04x\n",aux->UnionCP.Long.low_bytes);
+				longValue = decodificaLongInfo(aux);
+				fprintf(fp, "Long High Bytes: 0x%08x\n",aux->UnionCP.Long.high_bytes);
+				fprintf(fp, "Long Low Bytes: 0x%08x\n",aux->UnionCP.Long.low_bytes);
+				fprintf(fp, "Long: %ld\n",longValue);
 				break;
 			case CONSTANT_Double:
-				fprintf(fp, "Double High Bytes: %04x\n",aux->UnionCP.Double.high_bytes);
-				fprintf(fp, "Double Low Bytes: %04x\n",aux->UnionCP.Double.low_bytes);
+				valor = decodificaDoubleInfo(aux);
+				fprintf(fp, "Double High Bytes: 0x%08x\n",aux->UnionCP.Double.high_bytes);
+				fprintf(fp, "Double Low Bytes: 0x%08x\n",aux->UnionCP.Double.low_bytes);
+				fprintf(fp, "Double: %lf\n",valor);
 				break;
 			case CONSTANT_NameAndType:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
@@ -1128,13 +1140,20 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 						float valorCV = decodificaFloatInfo(arquivoClass->constant_pool-1+cvAux->constantvalue_index);
 						fprintf(fp, "Constant Value Index: cp_info#%d <%f>\n",cvAux->constantvalue_index,valorCV);
 					//Integer-Byte-Boolean-Short-Char
-				} else if (cpInfoAux->tag == 3) {
+					} else if (cpInfoAux->tag == 3) {
 						int valorRetorno = decodificaIntegerInfo (arquivoClass->constant_pool-1+cvAux->constantvalue_index);
 						fprintf(fp, "Constant Value Index: cp_info#%d <%d>\n",cvAux->constantvalue_index,valorRetorno);
 					//STRING
 					} else if (cpInfoAux->tag == 8) {
 						char * stringEntrada = decodificaNIeNT(arquivoClass->constant_pool,cvAux->constantvalue_index,NAME_INDEX);
 						fprintf(fp, "Constant Value Index: cp_info#%d <%s>\n",cvAux->constantvalue_index,stringEntrada);
+					//DOUBLE
+					} else if (cpInfoAux->tag == 6) {
+						double valorDB = decodificaDoubleInfo(arquivoClass->constant_pool-1+cvAux->constantvalue_index);
+						fprintf(fp, "Constant Value Index: cp_info#%d <%lf>\n",cvAux->constantvalue_index,valorDB);
+					} else if (cpInfoAux->tag == 5) {
+						uint64_t valorL = decodificaLongInfo(arquivoClass->constant_pool-1+cvAux->constantvalue_index);
+						fprintf(fp, "Constant Value Index: cp_info#%d <%ld>\n",cvAux->constantvalue_index,valorL);
 					}
 				} else if (strcmp(ponteiroprint,"Signature") == 0) {
 					signature_attribute * sig = (signature_attribute*)(*(fieldAttrAux+posicaoFields))->info;

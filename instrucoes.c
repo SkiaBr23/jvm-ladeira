@@ -588,9 +588,9 @@ instrucao* construirInstrucoes(void){
 				instrucoes[i].opcode = frem;
 				instrucoes[i].numarg = 0;
 			break;
-			case drem:
+			case inst_drem:
 				strcpy(instrucoes[i].inst_nome,"drem");
-				instrucoes[i].opcode = drem;
+				instrucoes[i].opcode = inst_drem;
 				instrucoes[i].numarg = 0;
 			break;
 			case ineg:
