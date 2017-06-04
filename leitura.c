@@ -193,14 +193,11 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 	cp_info * constantPool = (cp_info *) malloc((constant_pool_count-1)*sizeof(cp_info));
 	/*Ponteiro auxiliar do tipo cp_info para fazer a varredura de leitura*/
 	cp_info * aux = NULL;
-
-	printf("Size: %d\n",constant_pool_count);
 	/*Estrutura de repetição contada que realiza a leitura das informações
 	contidas na Constant Pool presente no arquvo .class*/
 	for (aux = constantPool; aux < constantPool+constant_pool_count-1; aux++){
 		/*Leitura do byte tag de uma entrada da Constant Pool*/
 		aux->tag = u1Read(fp);
-		printf("Case: %d\n",aux->tag);
 		/*Estrutura 'switch case' que analisa o byte tag lido e de acordo com o valor
 		realiza um procedimento específico de leitura*/
 		switch(aux->tag) {
@@ -251,6 +248,7 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			case CONSTANT_Long:
 				aux->UnionCP.Long.high_bytes = u4Read(fp);
 				aux->UnionCP.Long.low_bytes = u4Read(fp);
+				aux++;
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_Double,
 			realiza a leitura dos atributos high_bytes e low_bytes da estrutura
@@ -258,6 +256,7 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 			case CONSTANT_Double:
 				aux->UnionCP.Double.high_bytes = u4Read(fp);
 				aux->UnionCP.Double.low_bytes = u4Read(fp);
+				aux++;
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_NameAndType,
 			realiza a leitura dos atributos name_index e descriptor_index da estrutura
@@ -273,7 +272,6 @@ cp_info * lerConstantPool (FILE * fp, u2 constant_pool_count) {
 				aux->UnionCP.UTF8.bytes = malloc(aux->UnionCP.UTF8.length*sizeof(u1));
 				for (u1 *i=aux->UnionCP.UTF8.bytes;i<aux->UnionCP.UTF8.bytes+aux->UnionCP.UTF8.length;i++){
 					*i = u1Read(fp);
-					printf("Byte lido: %02x\n",*i);
 				}
 				break;
 			/*Caso o byte tag lido represente o valor de tag de CONSTANT_MethodHandle,
@@ -1030,15 +1028,15 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				break;
 			case CONSTANT_Fieldref:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Fieldref.class_index,NAME_INDEX);
-				fprintf(fp, "Class Name: cp_info#%02d %s\n",aux->UnionCP.Fieldref.class_index,ponteiroprint);
+				fprintf(fp, "Class Name: cp_info#%02d <%s>\n",aux->UnionCP.Fieldref.class_index,ponteiroprint);
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Fieldref.name_and_type_index,NAME_AND_TYPE);
-				fprintf(fp, "Name and Type: cp_info#%02d %s\n",aux->UnionCP.Fieldref.name_and_type_index,ponteiroprint);
+				fprintf(fp, "Name and Type: cp_info#%02d <%s>\n",aux->UnionCP.Fieldref.name_and_type_index,ponteiroprint);
 				break;
 			case CONSTANT_Methodref:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Methodref.class_index,NAME_INDEX);
-				fprintf(fp, "Class Name: cp_info#%02d %s\n",aux->UnionCP.Methodref.class_index,ponteiroprint);
+				fprintf(fp, "Class Name: cp_info#%02d <%s>\n",aux->UnionCP.Methodref.class_index,ponteiroprint);
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
-				fprintf(fp, "Name and Type: cp_info#%02d %s\n",aux->UnionCP.Methodref.name_and_type_index,ponteiroprint);
+				fprintf(fp, "Name and Type: cp_info#%02d <%s>\n",aux->UnionCP.Methodref.name_and_type_index,ponteiroprint);
 				break;
 			case CONSTANT_InterfaceMethodref:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.String.string_index,NAME_INDEX);
@@ -1141,7 +1139,7 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				} else if (strcmp(ponteiroprint,"Signature") == 0) {
 					signature_attribute * sig = (signature_attribute*)(*(fieldAttrAux+posicaoFields))->info;
 					char * Signature_Index = decodificaStringUTF8(arquivoClass->constant_pool-1+sig->signature_index);
-					printf("Signature index: cp_info#%d <%s>\n",sig->signature_index,Signature_Index);
+					fprintf(fp, "Signature index: cp_info#%d <%s>\n",sig->signature_index,Signature_Index);
 				}
 			}
 		}
@@ -1448,7 +1446,7 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 		} else if (strcmp(ponteiroprint,"Signature") == 0) {
 			signature_attribute * sig = (signature_attribute*)((*(auxAttributeClasse+posicao))->info);
 			char * Signature_Index = decodificaStringUTF8(arquivoClass->constant_pool-1+sig->signature_index);
-			printf("Signature index: cp_info#%d <%s>\n",sig->signature_index,Signature_Index);
+			fprintf(fp, "Signature index: cp_info#%d <%s>\n",sig->signature_index,Signature_Index);
 		}
 	}
 }
