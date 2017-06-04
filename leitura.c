@@ -609,10 +609,27 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 				constantValue_attribute * constantV = NULL;
 				constantV = lerConstantValue(fp);
 				attributes->info = (constantValue_attribute*)constantV;
+			} else if (strcmp(string_name_index,"Exceptions") == 0) {
+				exceptions_attribute * exceptions = NULL;
+				exceptions = lerExceptionsAttribute(fp);
+				attributes->info = (exceptions_attribute*)exceptions;
 			}
 	}
 	/*Retorno da estrutura Attribute alocada, com as informações lidas*/
 	return attributes;
+}
+
+exceptions_attribute * lerExceptionsAttribute (FILE * fp) {
+	exceptions_attribute * exceptions = (exceptions_attribute*)malloc(sizeof(exceptions_attribute));
+	exceptions->number_of_exceptions = u2Read(fp);
+	exceptions->exception_index_table = NULL;
+	if (exceptions->number_of_exceptions > 0) {
+		exceptions->exception_index_table = (u2*)malloc(exceptions->number_of_exceptions*sizeof(u2));
+		for (u2 * excpAux = exceptions->exception_index_table; excpAux < exceptions->exception_index_table + exceptions->number_of_exceptions; excpAux++) {
+			*excpAux = u2Read(fp);
+		}
+	}
+	return exceptions;
 }
 
 constantValue_attribute * lerConstantValue (FILE * fp) {
