@@ -950,10 +950,10 @@ char* organizandoFlags(char* flagsOrdemInversa){
 }
 
 double decodificaDoubleInfo (cp_info * cp) {
-	 uint64_t valor = ((uint64_t)cp->UnionCP.Double.high_bytes<<32) | (uint64_t)cp->UnionCP.Double.low_bytes;
-	 int sinal = ((valor>>63) == 0) ? 1 : -1;
-	 int expon = ((valor>>52) & 0x7ffL);
-	 long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
+	 long long valor = ((long long)(cp->UnionCP.Double.high_bytes)<<32) | (long long)cp->UnionCP.Double.low_bytes;
+	 int8_t sinal = ((valor>>63) == 0) ? 1 : -1;
+	 int16_t expon = ((valor>>52) & 0x7ffL);
+	 long long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
 
 	double retorno = sinal*mant*(pow(2,expon-1075));
 	return retorno;
