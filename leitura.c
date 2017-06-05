@@ -1071,7 +1071,7 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				longValue = decodificaLongInfo(aux);
 				fprintf(fp, "Long High Bytes: 0x%08x\n",aux->UnionCP.Long.high_bytes);
 				fprintf(fp, "Long Low Bytes: 0x%08x\n",aux->UnionCP.Long.low_bytes);
-				fprintf(fp, "Long: %lld\n",longValue);
+				fprintf(fp, "Long: %lu\n",longValue);
 				break;
 			case CONSTANT_Double:
 				valor = decodificaDoubleInfo(aux);
@@ -1156,7 +1156,7 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 						fprintf(fp, "Constant Value Index: cp_info#%d <%lf>\n",cvAux->constantvalue_index,valorDB);
 					} else if (cpInfoAux->tag == 5) {
 						uint64_t valorL = decodificaLongInfo(arquivoClass->constant_pool-1+cvAux->constantvalue_index);
-						fprintf(fp, "Constant Value Index: cp_info#%d <%lld>\n",cvAux->constantvalue_index,valorL);
+						fprintf(fp, "Constant Value Index: cp_info#%d <%lu>\n",cvAux->constantvalue_index,valorL);
 					}
 				} else if (strcmp(ponteiroprint,"Signature") == 0) {
 					signature_attribute * sig = (signature_attribute*)(*(fieldAttrAux+posicaoFields))->info;
