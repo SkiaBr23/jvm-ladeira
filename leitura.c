@@ -846,6 +846,7 @@ char* decodificaNIeNT(cp_info *cp, u2 index, u1 tipo){
 			aux2 = cp+(aux->UnionCP.NameAndType.name_index-1);
 			aux3 = cp+(aux->UnionCP.NameAndType.descriptor_index-1);
 
+			strcpy(retorno,"");
 			strcat(retorno,decodificaStringUTF8(aux2));
 			strcat(retorno,":");
 			strcat(retorno,decodificaStringUTF8(aux3));
