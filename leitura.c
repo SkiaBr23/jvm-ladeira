@@ -148,13 +148,9 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 			arquivoClass->fields = lerField(fp, arquivoClass->fields_count, arquivoClass->constant_pool);
 		}
 
-		printf("Passou leitura field\n");
-
 		/*Leitura do valor 'methods_count', representando
 		a quantidade de entradas na tabela Method*/
 		arquivoClass->methods_count = u2Read(fp);
-
-		printf("Metodos: %d\n",arquivoClass->methods_count);
 
 		/*Estrutura condicional que verifica se a quantidade de entradas
 		na tabela Method é maior que zero. Se for, prossegue com a leitura
@@ -350,9 +346,6 @@ method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp) {
 		/*Leitura do atributo attributes_count do respectivo método*/
 		i->attributes_count = u2Read(fp);
 
-		printf("access_flags: %02x\n",i->access_flags);
-		printf("Name index method: %d\n",i->name_index);
-
 		/*Estrutura condicional que avalia se a quantidade de atributos
 		do método é maior que zero. Se for, prossegue com a leitura dos
 		atributos do método*/
@@ -501,8 +494,6 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 	attributes->attribute_name_index = u2Read(fp);
 	/*Leitura do atributo length do respectivo atributo*/
 	attributes->attribute_length = u4Read(fp);
-	printf("att name index: %d\n",attributes->attribute_name_index);
-	printf("attr length: %d\n",attributes->attribute_length);
 	/*Estrutura condicional que avalia se o tamanho do atributo
 	é maior que zero. Se for, prossegue com a leitura da informação
 	do atributo*/
@@ -511,34 +502,27 @@ attribute_info * lerAttributes (FILE * fp, cp_info * cp) {
 			string_name_index = decodificaStringUTF8(cp+attributes->attribute_name_index-1);
 			//VERIFICAR SE ELE SO ALOCA NO MAXIMO 1 TIPO, LINENUMBER-CODE-ETC,por chamada
 			if(strcmp(string_name_index,"SourceFile") == 0){
-				printf("Entrou sourcefile\n");
 				source_file_attribute * SourceFile = NULL;//(code_attribute*) malloc(i->attributes_count*sizeof(code_attribute));
 				SourceFile = lerSourceFile(fp);
 				attributes->info = NULL;//malloc(i->attributes_count*sizeof(code_attribute));
 				attributes->info = (source_file_attribute*) SourceFile;
 			} else if (strcmp(string_name_index,"Code") == 0) {
-				printf("Entrou code\n");
 				code_attribute * code_attr = NULL;
 				code_attr = lerCode(fp ,cp);
 				attributes->info = (code_attribute*) code_attr;
 			} else if (strcmp(string_name_index,"LineNumberTable") == 0) {
 				line_number_table * lnt = NULL;
-				printf("Entrou lnt\n");
 				lnt = lerLineNumberTable(fp, cp);
 				attributes->info = (line_number_table*)lnt;
 			} else if (strcmp(string_name_index,"StackMapTable") == 0) {
-				printf("Entrou stack map table\n");
 				stackMapTable_attribute * stackMapTable = NULL;
 				stackMapTable = lerStackMapTable(fp);
-				printf("Saiu de smt\n");
 				attributes->info = (stackMapTable_attribute*)stackMapTable;
 			} else if (strcmp(string_name_index, "InnerClasses") == 0) {
-				printf("Entrou em inner class\n");
 				innerClasses_attribute * innerClasses = NULL;
 				innerClasses = lerInnerClasses(fp, cp);
 				attributes->info = (innerClasses_attribute*)innerClasses;
 			} else if (strcmp(string_name_index,"Signature") == 0) {
-				printf("Entrou em signature\n");
 				signature_attribute * signatureR = NULL;
 				signatureR = lerSignature(fp);
 				attributes->info = (signature_attribute*)signatureR;
