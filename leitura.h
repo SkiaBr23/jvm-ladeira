@@ -39,6 +39,7 @@ u2 * lerInterfaces (FILE * fp, u2 size);
 innerClasses_attribute * lerInnerClasses (FILE * fp, cp_info * cp);
 exceptions_attribute * lerExceptionsAttribute (FILE * fp);
 classes * lerClasses (FILE * fp);
+double decodificaMajorVersion (u2 major);
 constantValue_attribute * lerConstantValue (FILE * fp);
 double decodificaDoubleInfo (cp_info * cp);
 uint64_t decodificaLongInfo (cp_info * cp);

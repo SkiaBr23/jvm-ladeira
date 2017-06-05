@@ -827,7 +827,7 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 // Decodifica Name Index e Name Type
 char* decodificaNIeNT(cp_info *cp, u2 index, u1 tipo){
 
-	char *retorno = malloc(100*sizeof(u1));
+	char *retorno = malloc(100*sizeof(char));
 
 	cp_info *aux;
 	cp_info *aux2;
@@ -995,12 +995,53 @@ float decodificaFloatInfo (cp_info * cp) {
 	return retorno;
 }
 
+double decodificaMajorVersion (u2 major) {
+
+	double retorno;
+
+	switch (major) {
+		case 53:
+			retorno = 1.9;
+			break;
+		case 52:
+			retorno = 1.8;
+			break;
+		case 51:
+			retorno = 1.7;
+			break;
+		case 50:
+			retorno = 1.6;
+			break;
+		case 49:
+			retorno = 1.5;
+			break;
+		case 48:
+			retorno = 1.4;
+			break;
+		case 47:
+			retorno = 1.3;
+			break;
+		case 46:
+			retorno = 1.2;
+			break;
+		case 45:
+			retorno = 1.1;
+			break;
+		default:
+			retorno = 0;
+			break;
+	}
+
+	return retorno;
+}
+
 void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 	if(fp == NULL)
 		return;
 	cp_info * aux;
 	double valor;
 	uint64_t longValue;
+	double valorMajor;
 	method_info * auxMethod;
 	field_info * auxField;
 	attribute_info ** auxAttributeClasse;
@@ -1014,16 +1055,19 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 
 	fprintf(fp, "\n-----GENERAL INFORMATION-----\n\n");
 	fprintf(fp, "Magic: %08x\n",arquivoClass->magic);
-	fprintf(fp, "Minor Version: %04x\n",arquivoClass->minor_version);
-	fprintf(fp, "Major Version: %04x\n",arquivoClass->major_version);
-	fprintf(fp, "Constant Pool Count: %04x\n",arquivoClass->constant_pool_count);
+	fprintf(fp, "Minor Version: %d\n",arquivoClass->minor_version);
+	valorMajor = decodificaMajorVersion(arquivoClass->major_version);
+	fprintf(fp, "Major Version: %d [%lf]\n",arquivoClass->major_version,valorMajor);
+	fprintf(fp, "Constant Pool Count: %d\n",arquivoClass->constant_pool_count);
 	fprintf(fp, "Access Flags: %04x\n",arquivoClass->access_flags);
-	fprintf(fp, "This Class: %04x\n",arquivoClass->this_class);
-	fprintf(fp, "Super Class: %04x\n",arquivoClass->super_class);
-	fprintf(fp, "Interfaces Count: %04x\n",arquivoClass->interfaces_count);
-	fprintf(fp, "Fields Count: %04x\n",arquivoClass->fields_count);
-	fprintf(fp, "Methods Count: %04x\n",arquivoClass->methods_count);
-	fprintf(fp, "Atributes Count: %02x\n",arquivoClass->attributes_count);
+	ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,arquivoClass->this_class,NAME_INDEX);
+	fprintf(fp, "This Class: cp_info#%d <%s>\n",arquivoClass->this_class, ponteiroprint);
+	ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,arquivoClass->super_class,NAME_INDEX);
+	fprintf(fp, "Super Class: cp_info#%d <%s>\n",arquivoClass->super_class, ponteiroprint);
+	fprintf(fp, "Interfaces Count: %d\n",arquivoClass->interfaces_count);
+	fprintf(fp, "Fields Count: %d\n",arquivoClass->fields_count);
+	fprintf(fp, "Methods Count: %d\n",arquivoClass->methods_count);
+	fprintf(fp, "Atributes Count: %d\n",arquivoClass->attributes_count);
 
 
 	fprintf(fp, "\n\n-----CONSTANT POOL-----\n\n");
@@ -1050,9 +1094,9 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				fprintf(fp, "Name and Type: cp_info#%02d <%s>\n",aux->UnionCP.Methodref.name_and_type_index,ponteiroprint);
 				break;
 			case CONSTANT_InterfaceMethodref:
-				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.String.string_index,NAME_INDEX);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.InterfaceMethodref.class_index,NAME_INDEX);
 				fprintf(fp, "Class Name: cp_info#%02d <%s>\n",aux->UnionCP.InterfaceMethodref.class_index, ponteiroprint);
-				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.String.string_index,NAME_AND_TYPE);
+				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
 				fprintf(fp, "Name and Type Index: cp_info#%02d <%s>\n",aux->UnionCP.InterfaceMethodref.name_and_type_index, ponteiroprint);
 				break;
 			case CONSTANT_String:
