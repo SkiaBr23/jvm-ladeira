@@ -959,8 +959,8 @@ double decodificaDoubleInfo (cp_info * cp) {
 	return retorno;
 }
 
-uint64_t decodificaLongInfo (cp_info * cp) {
-	return ((((uint64_t)cp->UnionCP.Long.high_bytes)<<32) | ((uint64_t)cp->UnionCP.Long.low_bytes));
+long long decodificaLongInfo (cp_info * cp) {
+	return ((((long long)cp->UnionCP.Long.high_bytes)<<32) | ((long long)cp->UnionCP.Long.low_bytes));
 }
 
 int decodificaIntegerInfo (cp_info * cp) {

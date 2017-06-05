@@ -42,7 +42,7 @@ classes * lerClasses (FILE * fp);
 double decodificaMajorVersion (u2 major);
 constantValue_attribute * lerConstantValue (FILE * fp);
 double decodificaDoubleInfo (cp_info * cp);
-uint64_t decodificaLongInfo (cp_info * cp);
+long long decodificaLongInfo (cp_info * cp);
 float decodificaFloatInfo (cp_info * cp);
 int decodificaIntegerInfo (cp_info * cp);
 signature_attribute * lerSignature (FILE * fp);
