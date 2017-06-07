@@ -22,13 +22,10 @@ u1 u1Read(FILE *fp){
 	/*Variável 'destino' para conter o retorno da função*/
 	u1 destino;
 	/*Chamada da função 'fread' para ler um byte do arquivo .class*/
-	if (fread(&destino,sizeof(u1),1,fp) != 1) {
-		/*Caso ocorra um erro na leitura, retorna um valor de debug*/
-		return MAXU1;
-	} else {
-		/*Caso contrário retorna o byte lido*/
-		return destino;
-	}
+	fread(&destino,sizeof(u1),1,fp);
+
+	return destino;
+	/*Caso ocorra um erro na leitura, retorna um valor de debug*/
 }
 
 /*Função 'u2Read' que realiza a leitura de 2 bytes do arquivo .class*/
@@ -44,16 +41,12 @@ u2 u2Read(FILE *fp){
 
 	/*Estrutura condicional que verifica se a leitura dos bytes
 	foi corretamente executada*/
-	if(highByte != MAXU1 && lowByte != MAXU1) {
 		/*Caso positivo, realiza o deslocamento do byte de maior nível
 		para a esquerda e execução de operação OR bit a bit com o byte
 		de menor nível, dado que a informação está em big endian order*/
 		destino = ((highByte)<<8) | ((lowByte));
 		return destino;
-	} else {
 		/*Caso contrário, retorna um valor de debug*/
-		return MAXU2;
-	}
 }
 
 /*Função 'u4Read' que realiza a leitura de 4 bytes do arquivo .class*/
@@ -70,17 +63,13 @@ u4 u4Read(FILE *fp){
 	byteZero = u1Read(fp);
 	/*Estrutura condicional que verifica se a leitura dos bytes
 	foi executada corretamente*/
-	if(byteTres != MAXU1 && byteDois != MAXU1 && byteUm != MAXU1 && byteZero != MAXU1){
 		/*Caso positivo, realiza o deslocamento do 'byteTres' para esquerda em 24 bits,
 		deslocamento de 'byteDois' para a esquerda em 16 bits, deslocamento de 'byteUm'
 		em 8 bits e realiza operação OR bit a bit com todos os bytes lidos, formando
 		a informação representada pelos 4 bytes, dado que a informação está em big endian order*/
 		destino = ((byteTres)<<24) | ((byteDois)<<16) | ((byteUm)<<8) | ((byteZero));
-		return destino;
-	} else {
 		/*Caso contrário, retorna um valor de debug*/
-		return MAXU4;
-	}
+		return destino;
 }
 
 /*Função 'lerArquivo' para realizar a leitura do arquivo .class*/
@@ -1024,8 +1013,9 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 		return;
 	cp_info * aux;
 	double valor;
-	uint64_t longValue;
+	long long longValue;
 	double valorMajor;
+	float valorRetFloat;
 	method_info * auxMethod;
 	field_info * auxField;
 	attribute_info ** auxAttributeClasse;
@@ -1092,14 +1082,15 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				fprintf(fp,"Integer: %d\n",aux->UnionCP.Integer.bytes);
 				break;
 			case CONSTANT_Float:
+				valorRetFloat = decodificaFloatInfo(aux);
 				fprintf(fp, "Bytes: %04x\n",aux->UnionCP.Float.bytes);
-				fprintf(fp, "Float: %d\n",aux->UnionCP.Float.bytes);
+				fprintf(fp, "Float: %f\n",valorRetFloat);
 				break;
 			case CONSTANT_Long:
 				longValue = decodificaLongInfo(aux);
 				fprintf(fp, "Long High Bytes: 0x%08x\n",aux->UnionCP.Long.high_bytes);
 				fprintf(fp, "Long Low Bytes: 0x%08x\n",aux->UnionCP.Long.low_bytes);
-				fprintf(fp, "Long: %lu\n",longValue);
+				fprintf(fp, "Long: %lld\n",longValue);
 				break;
 			case CONSTANT_Double:
 				valor = decodificaDoubleInfo(aux);
