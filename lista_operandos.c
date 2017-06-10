@@ -7,7 +7,7 @@ lista_operandos* Criarlista_operandos(){
 	return NULL;
 }
 
-lista_operandos* InserirInicio(lista_operandos* lis, u4 operando, u1 tipo_operando){
+lista_operandos* InserirInicio_operandos(lista_operandos* lis, u4 operando, u1 tipo_operando){
 	lista_operandos *novo= malloc(sizeof(lista_operandos));
 	novo->operando = operando;
 	novo->tipo_operando = tipo_operando;
@@ -21,7 +21,7 @@ lista_operandos* InserirInicio(lista_operandos* lis, u4 operando, u1 tipo_operan
 	return novo;
 }
 
-lista_operandos* InserirFim(lista_operandos* lis, u4 operando, u1 tipo_operando){
+lista_operandos* InserirFim_operandos(lista_operandos* lis, u4 operando, u1 tipo_operando){
 	lista_operandos *novo; lista_operandos *ant = NULL; lista_operandos *p = lis;
 	
 	while(p!=NULL){
@@ -39,7 +39,7 @@ lista_operandos* InserirFim(lista_operandos* lis, u4 operando, u1 tipo_operando)
 	return (lis);
 }
 
-lista_operandos* RemoverInicio(lista_operandos* lis){
+lista_operandos* RemoverInicio_operandos(lista_operandos* lis){
 	lista_operandos* p=lis;
 	
 	lis = p->prox;
@@ -49,7 +49,7 @@ lista_operandos* RemoverInicio(lista_operandos* lis){
 	return (lis);
 }
 
-lista_operandos* RemoverFim(lista_operandos* lis){
+lista_operandos* RemoverFim_operandos(lista_operandos* lis){
 	lista_operandos *p=lis, *ant=NULL;
 	
 	while (p!=NULL){
@@ -64,8 +64,8 @@ lista_operandos* RemoverFim(lista_operandos* lis){
 	return lis;
 }
 
-lista_operandos* RemoverElemento(lista_operandos* lis,u4 operando,u1 tipo_operando){
-	lista_operandos *p = BuscarElemento(lis, operando);
+lista_operandos* RemoverElemento_operandos(lista_operandos* lis,u4 operando,u1 tipo_operando){
+	lista_operandos *p = BuscarElemento_operandos(lis, operando);
 	
 	if(p==NULL){
 		return lis;
@@ -86,7 +86,7 @@ lista_operandos* RemoverElemento(lista_operandos* lis,u4 operando,u1 tipo_operan
 	return lis;
 }
 
-lista_operandos* BuscarElemento(lista_operandos* lis, u4 operando, u1 tipo_operando){
+lista_operandos* BuscarElemento_operandos(lista_operandos* lis, u4 operando, u1 tipo_operando){
 	lista_operandos *p;
 	for(p=lis;p!=NULL;p=p->prox){
 		if(p->operando == operando && p->tipo_operando == tipo_operando){
@@ -97,7 +97,7 @@ lista_operandos* BuscarElemento(lista_operandos* lis, u4 operando, u1 tipo_opera
 	return(NULL);
 }
 
-lista_operandos* BuscarPosicao(lista_operandos *lis, int posicao){
+lista_operandos* BuscarPosicao_operandos(lista_operandos *lis, int posicao){
 	lista_operandos *p;
 	int cont;
 
@@ -109,7 +109,7 @@ lista_operandos* BuscarPosicao(lista_operandos *lis, int posicao){
 	return(p);
 }
 
-lista_operandos* InserirPosicao(lista_operandos *lis, u4 operando, u1 tipo_operando, int posicao){
+lista_operandos* InserirPosicao_operandos(lista_operandos *lis, u4 operando, u1 tipo_operando, int posicao){
 	lista_operandos *novo; lista_operandos *ant=NULL; lista_operandos *p;
 	int cont;
 
@@ -139,7 +139,7 @@ lista_operandos* InserirPosicao(lista_operandos *lis, u4 operando, u1 tipo_opera
 	return(lis);
 }
 
-lista_operandos* RemoverPosicao(lista_operandos *lis, int posicao){
+lista_operandos* RemoverPosicao_operandos(lista_operandos *lis, int posicao){
 
 	lista_operandos *p = BuscarPosicao(lis, posicao);
 	

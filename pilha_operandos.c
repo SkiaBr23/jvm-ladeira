@@ -3,28 +3,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-pilha_operandos* CriarPilha(){
+pilha_operandos* CriarPilha_operandos(){
 	return NULL;
 }
 
-pilha_operandos* Push(pilha_operandos *p, u4 operando, u1 tipo_operando){
-	p->topo = InserirInicio(p->topo,string);
+pilha_operandos* Push_operandos(pilha_operandos *p, u4 operando, u1 tipo_operando){
+	p->topo = InserirInicio_operandos(p->topo,operando,tipo_operando);
 	return (p);
 }
 
-pilha_operandos* Pop(pilha_operandos *p){
-	pilha_operandos *elementotopo = Topo(p);
+pilha_operandos* Pop_operandos(pilha_operandos *p){
+	pilha_operandos *elementotopo = Topo_operandos(p);
 	if(elementotopo==NULL){
 		return(NULL);
 	}
-	p->topo = RemoverInicio(p->topo);
+	p->topo = RemoverInicio_operandos(p->topo);
 	return (elementotopo);
 }
 
-pilha_operandos* Topo(pilha_operandos *p){
+pilha_operandos* Topo_operandos(pilha_operandos *p){
 	return(p->topo);
 }
 
-void ImprimirPilha(pilha_operandos *p){
-	ImprimirLista(p->topo);
+void ImprimirPilha_operandos(pilha_operandos *p){
+	ImprimirLista_operandos(p->topo);
 }
