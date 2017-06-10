@@ -42,9 +42,14 @@ alternada de acordo com a quantidade de bits*/
 
 /*Definição de rótulos para os tipos uint8_t, uint16_t e uint32_t como
 u1, u2 e u4, respectivamente*/
+#ifndef TIPOS_U
+#define TIPOS_U
 typedef uint8_t u1;
 typedef uint16_t u2;
 typedef uint32_t u4;
+#endif
+
+#include "pilha_operandos.h"
 
 /*Definição de valores máximos, para debug - PENSAR OUTRO MODO*/
 #define MAXU1 255
@@ -790,5 +795,22 @@ struct stackMapTable_attribute {
     stack_map_frame ** entries;
 };
 typedef struct stackMapTable_attribute stackMapTable_attribute;
+
+
+struct vetor_locais{
+	u4 *variavel;
+	u1 tipo_variavel;
+};
+
+typedef struct vetor_locais vetor_locais;
+
+struct frame{
+	u4 retorno;
+	pilha_operandos *p;
+	vetor_locais *v;
+	cp_info *cp;
+};
+
+typedef struct frame frame;
 
 #endif

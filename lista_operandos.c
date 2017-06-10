@@ -1,0 +1,181 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "lista_operandos.h"
+
+lista_operandos* Criarlista_operandos(){
+	return NULL;
+}
+
+lista_operandos* InserirInicio(lista_operandos* lis, u4 operando, u1 tipo_operando){
+	lista_operandos *novo= malloc(sizeof(lista_operandos));
+	novo->operando = operando;
+	novo->tipo_operando = tipo_operando;
+	novo->prox = lis;
+	novo->ant = NULL;
+	
+	if (lis!=NULL){
+		lis->ant = novo;
+	}
+	
+	return novo;
+}
+
+lista_operandos* InserirFim(lista_operandos* lis, u4 operando, u1 tipo_operando){
+	lista_operandos *novo; lista_operandos *ant = NULL; lista_operandos *p = lis;
+	
+	while(p!=NULL){
+		ant = p;
+		p=p->prox;
+	}
+	
+	novo = malloc(sizeof(lista_operandos));
+	novo->operando = operando;
+	novo->tipo_operando = tipo_operando;
+	novo->prox = NULL;
+	novo->ant = ant;
+	ant->prox = novo;
+	
+	return (lis);
+}
+
+lista_operandos* RemoverInicio(lista_operandos* lis){
+	lista_operandos* p=lis;
+	
+	lis = p->prox;
+	lis->ant = NULL;
+	
+	free(p);
+	return (lis);
+}
+
+lista_operandos* RemoverFim(lista_operandos* lis){
+	lista_operandos *p=lis, *ant=NULL;
+	
+	while (p!=NULL){
+		ant = p;
+		p=p->prox;
+	}
+
+	ant->ant->prox = NULL;
+	
+	free(ant);
+
+	return lis;
+}
+
+lista_operandos* RemoverElemento(lista_operandos* lis,u4 operando,u1 tipo_operando){
+	lista_operandos *p = BuscarElemento(lis, operando);
+	
+	if(p==NULL){
+		return lis;
+	}
+
+	if (lis == p){
+		lis=p->prox;
+	}else{
+		p->ant->prox = p->prox;
+	}
+	
+	if (p->prox!=NULL){
+		p->prox->ant = p->ant;
+	}
+
+	free(p);
+	
+	return lis;
+}
+
+lista_operandos* BuscarElemento(lista_operandos* lis, u4 operando, u1 tipo_operando){
+	lista_operandos *p;
+	for(p=lis;p!=NULL;p=p->prox){
+		if(p->operando == operando && p->tipo_operando == tipo_operando){
+			return p;
+		}
+	}
+
+	return(NULL);
+}
+
+lista_operandos* BuscarPosicao(lista_operandos *lis, int posicao){
+	lista_operandos *p;
+	int cont;
+
+	for(p=lis,cont=0;p!=NULL && cont<posicao;){
+		p=p->prox;
+		cont++;
+	}
+
+	return(p);
+}
+
+lista_operandos* InserirPosicao(lista_operandos *lis, u4 operando, u1 tipo_operando, int posicao){
+	lista_operandos *novo; lista_operandos *ant=NULL; lista_operandos *p;
+	int cont;
+
+	for(p=lis,cont=0;p!=NULL && cont<posicao;){
+		ant=p;
+		p=p->prox;
+		cont++;
+	}
+
+	novo = malloc(sizeof(lista_operandos));
+	novo->operando = operando;
+	novo->tipo_operando = tipo_operando;
+
+	if (ant==NULL){
+		novo->prox = lis;
+		novo->ant = NULL;
+		lis = novo;
+	}else{
+		ant->prox = novo;
+		novo->ant = ant;
+		novo->prox = p;
+		if(p!=NULL){
+			p->ant = novo;
+		}
+	}
+
+	return(lis);
+}
+
+lista_operandos* RemoverPosicao(lista_operandos *lis, int posicao){
+
+	lista_operandos *p = BuscarPosicao(lis, posicao);
+	
+	if(p==NULL){
+		return lis;
+	}
+
+	if (lis == p){
+		lis=p->prox;
+	}else{
+		p->ant->prox = p->prox;
+	}
+	
+	if (p->prox!=NULL){
+		p->prox->ant = p->ant;
+	}
+
+	free(p);
+	
+	return (lis);
+}
+
+void Imprimirlista_operandos(lista_operandos *lis){
+	lista_operandos *p;
+	
+	for(p=lis;p!=NULL;p=p->prox){
+		printf("%01x\t",p->tipo_operando);
+		printf("%d\n",p->operando);
+	}
+}
+
+void Liberarlista_operandos(lista_operandos *lis){
+	lista_operandos *p=lis;
+	while(p!=NULL){
+		lista_operandos *t = p->prox;
+		free(p);
+		p=t;
+	}
+}
