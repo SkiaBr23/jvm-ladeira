@@ -7,7 +7,7 @@ struct instrucao{
   char inst_nome[50];
   u1 opcode;
   u1 numarg;
-  int *tipoarg; // Alocar com numarg
+  u1 numop; // Número de operandos que a instrução dá pop na pilha de operandos.
 };
 
 typedef struct instrucao instrucao;

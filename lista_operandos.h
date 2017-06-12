@@ -20,7 +20,11 @@ struct lista_operandos{
 typedef struct lista_operandos lista_operandos;
 
 enum tipos_operandos{
-	INTEGER_OP = 1,
+	BOOLEAN_OP = 1,
+	BYTE_OP,
+	CHAR_OP,
+	SHORT_OP,
+	INTEGER_OP,
 	FLOAT_OP,
 	LONG_OP,
 	DOUBLE_OP,

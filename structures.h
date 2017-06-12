@@ -805,7 +805,7 @@ struct vetor_locais{
 typedef struct vetor_locais vetor_locais;
 
 struct frame{
-	u4 retorno;
+	u4 end_retorno; // Confirmar se é realmente endereço de retorno
 	pilha_operandos *p;
 	vetor_locais *v;
 	cp_info *cp;
