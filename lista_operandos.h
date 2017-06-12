@@ -11,9 +11,17 @@ typedef uint16_t u2;
 typedef uint32_t u4;
 #endif
 
+#ifndef TIPOS_I
+#define TIPOS_I
+typedef int8_t i1;
+typedef int16_t i2;
+typedef int32_t i4;
+typedef int64_t i8;
+#endif
+
 /* Essa lista foi implementada utilizando strings. Substituir a string pelo elemento que será utilizado */
 struct lista_operandos{
-	u4 operando;
+	i4 operando;
 	u1 tipo_operando;
 	struct lista_operandos *prox,*ant;
 };
@@ -34,17 +42,17 @@ enum tipos_operandos{
 
 typedef enum tipos_operandos tipos_operandos;
 
-lista_operandos* CriarLista();
-lista_operandos* InserirInicio(lista_operandos *lis, u4 operando, u1 tipo_operando); 
-lista_operandos* InserirFim(lista_operandos *lis, u4 operando, u1 tipo_operando);
-lista_operandos* RemoverInicio(lista_operandos *lis);
-lista_operandos* RemoverFim(lista_operandos *lis);
-lista_operandos* RemoverElemento(lista_operandos *lis,u4 operando, u1 tipo_operando);
-lista_operandos* BuscarElemento(lista_operandos *lis, u4 operando, u1 tipo_operando);
-lista_operandos* BuscarPosicao(lista_operandos *lis, int posicao);
-lista_operandos* InserirPosicao(lista_operandos *lis, u4 operando, u1 tipo_operando, int posicao);
-lista_operandos* RemoverPosicao(lista_operandos *lis, int posicao);
-void ImprimirLista(lista_operandos *lis);
-void LiberarLista(lista_operandos *lis);
+lista_operandos* CriarLista_operandos();
+lista_operandos* InserirInicio_operandos(lista_operandos *lis, i4 operando, u1 tipo_operando); 
+lista_operandos* InserirFim_operandos(lista_operandos *lis, i4 operando, u1 tipo_operando);
+lista_operandos* RemoverInicio_operandos(lista_operandos *lis);
+lista_operandos* RemoverFim_operandos(lista_operandos *lis);
+lista_operandos* RemoverElemento_operandos(lista_operandos *lis,i4 operando, u1 tipo_operando);
+lista_operandos* BuscarElemento_operandos(lista_operandos *lis, i4 operando, u1 tipo_operando);
+lista_operandos* BuscarPosicao_operandos(lista_operandos *lis, int posicao);
+lista_operandos* InserirPosicao_operandos(lista_operandos *lis, i4 operando, u1 tipo_operando, int posicao);
+lista_operandos* RemoverPosicao_operandos(lista_operandos *lis, int posicao);
+void ImprimirLista_operandos(lista_operandos *lis);
+void LiberarLista_operandos(lista_operandos *lis);
 
 #endif

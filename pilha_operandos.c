@@ -22,7 +22,7 @@ pilha_operandos* Pop_operandos(pilha_operandos *p){
 }
 
 pilha_operandos* Topo_operandos(pilha_operandos *p){
-	return(p->topo);
+	return(p);
 }
 
 void ImprimirPilha_operandos(pilha_operandos *p){
