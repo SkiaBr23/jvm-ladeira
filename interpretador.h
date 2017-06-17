@@ -94,14 +94,14 @@ void castore_impl(frame *f);
 void sastore_impl(frame *f);
 pilha_operandos* pop_impl(frame *f);
 pilha_operandos** pop2_impl(frame *f);
-void dup(frame *f);
-void dup_x1(frame *f);
-void dup_x2(frame *f);
-void dup2(frame *f);
-void dup2_x1(frame *f);
-void dup2_x2(frame *f);
-void swap(frame *f);
-void iadd(frame *f);
+void dup_impl(frame *f);
+void dup_x1_impl(frame *f);
+void dup_x2_impl(frame *f);
+void dup2_impl(frame *f);
+void dup2_x1_impl(frame *f);
+void dup2_x2_impl(frame *f);
+void swap_impl(frame *f);
+void iadd_impl(frame *f);
 
 
 
