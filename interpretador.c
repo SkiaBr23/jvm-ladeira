@@ -513,9 +513,9 @@ void isub_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	pilha_operandos *valor3 = CriarPilha();
+	pilha_operandos *valor3 = CriarPilha_operandos();
 
-	valor3 = Push_operandos(valor3,valor1->topo->operando-valor2->topo->operando);
+	valor3 = Push_operandos(valor3,valor1->topo->operando-valor2->topo->operando, INTEGER_OP);
 	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
 	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
 }
@@ -524,9 +524,9 @@ void imul_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	pilha_operandos *valor3 = CriarPilha();
+	pilha_operandos *valor3 = CriarPilha_operandos();
 
-	valor3 = Push_operandos(valor3,valor1->topo->operando*valor2->topo->operando);
+	valor3 = Push_operandos(valor3,valor1->topo->operando*valor2->topo->operando, INTEGER_OP);
 	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
 	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
 }
@@ -535,11 +535,11 @@ void idiv_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	pilha_operandos *valor3 = CriarPilha();
+	pilha_operandos *valor3 = CriarPilha_operandos();
 	if(valor2->topo->operando == 0){
 		// Lançar exceção ArithmeticException
 	}
-	valor3 = Push_operandos(valor3,valor1->topo->operando/valor2->topo->operando);
+	valor3 = Push_operandos(valor3,valor1->topo->operando/valor2->topo->operando, INTEGER_OP);
 	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
 
 	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
@@ -549,7 +549,7 @@ void irem_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	pilha_operandos *valor3 = CriarPilha();
+	pilha_operandos *valor3 = CriarPilha_operandos();
 
 	if(valor2->topo->operando == 0){
 		// Lançar Arithmetic Exception
@@ -558,7 +558,7 @@ void irem_impl(frame *f){
 	i4 valor_push = valor1->topo->operando - (valor1->topo->operando/valor2->topo->operando) * valor2->topo->operando;
 
 	valor3 = Push_operandos(valor3,valor_push,valor1->topo->tipo_operando);
-	valor3->tipo_operando = valor1->topo->tipo_operando;
+	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
 
 	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
 }
