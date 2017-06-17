@@ -1174,7 +1174,7 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 						double valorDB = decodificaDoubleInfo(arquivoClass->constant_pool-1+cvAux->constantvalue_index);
 						fprintf(fp, "Constant Value Index: cp_info#%d <%lf>\n",cvAux->constantvalue_index,valorDB);
 					} else if (cpInfoAux->tag == 5) {
-						uint64_t valorL = decodificaLongInfo(arquivoClass->constant_pool-1+cvAux->constantvalue_index);
+						long long valorL = decodificaLongInfo(arquivoClass->constant_pool-1+cvAux->constantvalue_index);
 						fprintf(fp, "Constant Value Index: cp_info#%d <%lld>\n",cvAux->constantvalue_index,valorL);
 					}
 				} else if (strcmp(ponteiroprint,"Signature") == 0) {
