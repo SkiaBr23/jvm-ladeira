@@ -100,6 +100,8 @@ void dup_x2(frame *f);
 void dup2(frame *f);
 void dup2_x1(frame *f);
 void dup2_x2(frame *f);
+void swap(frame *f);
+void iadd(frame *f);
 
 
 

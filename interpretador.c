@@ -389,6 +389,25 @@ void dup2_x2(frame *f){
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
 }
 
+void swap(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
+	f->p = Push_operandos(f->p,valor2->topo->operando,valor2->topo->tipo_operando);
+}
+
+void iadd(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	pilha_operandos *valor3 = CriarPilha();
+
+	// Realizar checagem de tipo, só realizar a operação se os 2 tipos forem iguais e forem inteiros
+	valor3 = Push_operandos(valor3,valor1->topo->operando+valor2->topo->operando,valor1->topo->tipo_operando);
+
+	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
+}
 
 
 
