@@ -62,5 +62,52 @@ void saload_impl(frame *f);
 void istore_impl(u1 index, frame *f);
 void lstore_impl(u1 index, frame *f); // Não implementado
 void fstore_impl(u1 index, frame *f);
+void dstore_impl(frame *f); // Não implementado
+void astore_impl(u1 index, frame *f);
+void istore_0_impl(frame *f);
+void istore_1_impl(frame *f);
+void istore_2_impl(frame *f);
+void istore_3_impl(frame *f);
+void lstore_0_impl(frame *f); // Não implementado
+void lstore_1_impl(frame *f); // Não implementado
+void lstore_2_impl(frame *f); // Não implementado
+void lstore_3_impl(frame *f); // Não implementado
+void fstore_0_impl(frame *f);
+void fstore_1_impl(frame *f);
+void fstore_2_impl(frame *f);
+void fstore_3_impl(frame *f);
+void dstore_0_impl(frame *f); // Não implementado
+void dstore_1_impl(frame *f); // Não implementado
+void dstore_2_impl(frame *f); // Não implementado
+void dstore_3_impl(frame *f); // Não implementado
+void astore_0_impl(frame *f);
+void astore_1_impl(frame *f);
+void astore_2_impl(frame *f);
+void astore_3_impl(frame *f);
+void iastore_impl(frame *f);
+void lastore_impl(frame *f); // Não implementado
+void fastore_impl(frame *f);
+void dastore_impl(frame *f); // Não implementado
+void aastore_impl(frame *f); // Não implementado
+void bastore_impl(frame *f);
+void castore_impl(frame *f);
+void sastore_impl(frame *f);
+pilha_operandos* pop_impl(frame *f);
+pilha_operandos** pop2_impl(frame *f);
+void dup(frame *f);
+void dup_x1(frame *f);
+void dup_x2(frame *f);
+void dup2(frame *f);
+void dup2_x1(frame *f);
+void dup2_x2(frame *f);
+
+
+
+
+
+
+
+
+
 
 #endif
