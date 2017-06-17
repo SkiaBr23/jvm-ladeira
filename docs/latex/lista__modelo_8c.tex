@@ -1,0 +1,108 @@
+\hypertarget{lista__modelo_8c}{}\section{Referência do Arquivo lista\+\_\+modelo.\+c}
+\label{lista__modelo_8c}\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}lista.\+h\char`\"{}}\newline
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$ \hyperlink{lista__modelo_8c_a81b725a0bcfa73b47d54e0660637a14e}{Criar\+Lista} ()
+\item 
+\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$ \hyperlink{lista__modelo_8c_ad9b8c6d6a9548716c556e6c6a4bf58b5}{Inserir\+Inicio} (\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$lis, char $\ast$string)
+\item 
+\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$ \hyperlink{lista__modelo_8c_a3746614d6d817f200fd44886a833f785}{Inserir\+Fim} (\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$lis, char $\ast$string)
+\item 
+\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$ \hyperlink{lista__modelo_8c_aeba49d4f8a6f9f71d93e3a8965a7cea5}{Remover\+Inicio} (\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$lis)
+\item 
+\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$ \hyperlink{lista__modelo_8c_a77ae280ea65f9924373591546a6da38d}{Remover\+Fim} (\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$lis)
+\item 
+\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$ \hyperlink{lista__modelo_8c_ada1cdf80613d35a4185f04e89130d16d}{Remover\+Elemento} (\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$lis, char $\ast$string)
+\item 
+\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$ \hyperlink{lista__modelo_8c_a6e2af4da846d074b25c8d421c588bb1c}{Buscar\+Elemento} (\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$lis, char $\ast$string)
+\item 
+\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$ \hyperlink{lista__modelo_8c_a9a5d51691dc0f6c55198b2dd24613b73}{Buscar\+Posicao} (\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$lis, int posicao)
+\item 
+\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$ \hyperlink{lista__modelo_8c_a1f8dfa23426c9c8a25dfb674a68531da}{Inserir\+Posicao} (\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$lis, char $\ast$string, int posicao)
+\item 
+\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$ \hyperlink{lista__modelo_8c_a7ee6d07249e5b8347432d34cd2d517fc}{Remover\+Posicao} (\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$lis, int posicao)
+\item 
+void \hyperlink{lista__modelo_8c_a90f183f234445ac8b07c1135c061c4db}{Imprimir\+Lista} (\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$lis)
+\item 
+void \hyperlink{lista__modelo_8c_a7e5b11a1eb9f7269a4ac7c2410961f17}{Liberar\+Lista} (\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$lis)
+\end{DoxyCompactItemize}
+
+
+\subsection{Funções}
+\mbox{\Hypertarget{lista__modelo_8c_a6e2af4da846d074b25c8d421c588bb1c}\label{lista__modelo_8c_a6e2af4da846d074b25c8d421c588bb1c}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Buscar\+Elemento@{Buscar\+Elemento}}
+\index{Buscar\+Elemento@{Buscar\+Elemento}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Buscar\+Elemento()}{BuscarElemento()}}
+{\footnotesize\ttfamily \hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista}$\ast$ Buscar\+Elemento (\begin{DoxyParamCaption}\item[{\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$}]{lis,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__modelo_8c_a9a5d51691dc0f6c55198b2dd24613b73}\label{lista__modelo_8c_a9a5d51691dc0f6c55198b2dd24613b73}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Buscar\+Posicao@{Buscar\+Posicao}}
+\index{Buscar\+Posicao@{Buscar\+Posicao}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Buscar\+Posicao()}{BuscarPosicao()}}
+{\footnotesize\ttfamily \hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista}$\ast$ Buscar\+Posicao (\begin{DoxyParamCaption}\item[{\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$}]{lis,  }\item[{int}]{posicao }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__modelo_8c_a81b725a0bcfa73b47d54e0660637a14e}\label{lista__modelo_8c_a81b725a0bcfa73b47d54e0660637a14e}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Criar\+Lista@{Criar\+Lista}}
+\index{Criar\+Lista@{Criar\+Lista}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Criar\+Lista()}{CriarLista()}}
+{\footnotesize\ttfamily \hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista}$\ast$ Criar\+Lista (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__modelo_8c_a90f183f234445ac8b07c1135c061c4db}\label{lista__modelo_8c_a90f183f234445ac8b07c1135c061c4db}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Imprimir\+Lista@{Imprimir\+Lista}}
+\index{Imprimir\+Lista@{Imprimir\+Lista}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Imprimir\+Lista()}{ImprimirLista()}}
+{\footnotesize\ttfamily void Imprimir\+Lista (\begin{DoxyParamCaption}\item[{\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$}]{lis }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__modelo_8c_a3746614d6d817f200fd44886a833f785}\label{lista__modelo_8c_a3746614d6d817f200fd44886a833f785}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Inserir\+Fim@{Inserir\+Fim}}
+\index{Inserir\+Fim@{Inserir\+Fim}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Inserir\+Fim()}{InserirFim()}}
+{\footnotesize\ttfamily \hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista}$\ast$ Inserir\+Fim (\begin{DoxyParamCaption}\item[{\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$}]{lis,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__modelo_8c_ad9b8c6d6a9548716c556e6c6a4bf58b5}\label{lista__modelo_8c_ad9b8c6d6a9548716c556e6c6a4bf58b5}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Inserir\+Inicio@{Inserir\+Inicio}}
+\index{Inserir\+Inicio@{Inserir\+Inicio}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Inserir\+Inicio()}{InserirInicio()}}
+{\footnotesize\ttfamily \hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista}$\ast$ Inserir\+Inicio (\begin{DoxyParamCaption}\item[{\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$}]{lis,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__modelo_8c_a1f8dfa23426c9c8a25dfb674a68531da}\label{lista__modelo_8c_a1f8dfa23426c9c8a25dfb674a68531da}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Inserir\+Posicao@{Inserir\+Posicao}}
+\index{Inserir\+Posicao@{Inserir\+Posicao}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Inserir\+Posicao()}{InserirPosicao()}}
+{\footnotesize\ttfamily \hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista}$\ast$ Inserir\+Posicao (\begin{DoxyParamCaption}\item[{\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$}]{lis,  }\item[{char $\ast$}]{string,  }\item[{int}]{posicao }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__modelo_8c_a7e5b11a1eb9f7269a4ac7c2410961f17}\label{lista__modelo_8c_a7e5b11a1eb9f7269a4ac7c2410961f17}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Liberar\+Lista@{Liberar\+Lista}}
+\index{Liberar\+Lista@{Liberar\+Lista}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Liberar\+Lista()}{LiberarLista()}}
+{\footnotesize\ttfamily void Liberar\+Lista (\begin{DoxyParamCaption}\item[{\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$}]{lis }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__modelo_8c_ada1cdf80613d35a4185f04e89130d16d}\label{lista__modelo_8c_ada1cdf80613d35a4185f04e89130d16d}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Remover\+Elemento@{Remover\+Elemento}}
+\index{Remover\+Elemento@{Remover\+Elemento}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Remover\+Elemento()}{RemoverElemento()}}
+{\footnotesize\ttfamily \hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista}$\ast$ Remover\+Elemento (\begin{DoxyParamCaption}\item[{\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$}]{lis,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__modelo_8c_a77ae280ea65f9924373591546a6da38d}\label{lista__modelo_8c_a77ae280ea65f9924373591546a6da38d}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Remover\+Fim@{Remover\+Fim}}
+\index{Remover\+Fim@{Remover\+Fim}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Remover\+Fim()}{RemoverFim()}}
+{\footnotesize\ttfamily \hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista}$\ast$ Remover\+Fim (\begin{DoxyParamCaption}\item[{\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$}]{lis }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__modelo_8c_aeba49d4f8a6f9f71d93e3a8965a7cea5}\label{lista__modelo_8c_aeba49d4f8a6f9f71d93e3a8965a7cea5}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Remover\+Inicio@{Remover\+Inicio}}
+\index{Remover\+Inicio@{Remover\+Inicio}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Remover\+Inicio()}{RemoverInicio()}}
+{\footnotesize\ttfamily \hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista}$\ast$ Remover\+Inicio (\begin{DoxyParamCaption}\item[{\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$}]{lis }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__modelo_8c_a7ee6d07249e5b8347432d34cd2d517fc}\label{lista__modelo_8c_a7ee6d07249e5b8347432d34cd2d517fc}} 
+\index{lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}!Remover\+Posicao@{Remover\+Posicao}}
+\index{Remover\+Posicao@{Remover\+Posicao}!lista\+\_\+modelo.\+c@{lista\+\_\+modelo.\+c}}
+\subsubsection{\texorpdfstring{Remover\+Posicao()}{RemoverPosicao()}}
+{\footnotesize\ttfamily \hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista}$\ast$ Remover\+Posicao (\begin{DoxyParamCaption}\item[{\hyperlink{lista__modelo_8h_a83d34a2ef405ccb8e18cf64ba8d2cb0d}{Lista} $\ast$}]{lis,  }\item[{int}]{posicao }\end{DoxyParamCaption})}
+
