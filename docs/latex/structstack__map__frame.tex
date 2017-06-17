@@ -1,46 +1,135 @@
 \hypertarget{structstack__map__frame}{}\section{Referência da Estrutura stack\+\_\+map\+\_\+frame}
 \label{structstack__map__frame}\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+
+
+{\ttfamily \#include $<$structures.\+h$>$}
+
 \subsection*{Atributos Públicos}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structstack__map__frame_ae7d53e0f8daea6d5738a88ffb94e575c}\label{structstack__map__frame_ae7d53e0f8daea6d5738a88ffb94e575c}} 
-u1 {\bfseries frame\+\_\+type}
+\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} \hyperlink{structstack__map__frame_ae7d53e0f8daea6d5738a88ffb94e575c}{frame\+\_\+type}
 \item 
-\mbox{\Hypertarget{structstack__map__frame_aa924e6fab46f29a756e2649da800a419}\label{structstack__map__frame_aa924e6fab46f29a756e2649da800a419}} 
 \begin{tabbing}
 xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
 union \{\\
 \>struct \{\\
-\>\} {\bfseries same\_frame}\\
+\>\} \hyperlink{structstack__map__frame_a761073b8521c7ac269b5357dfcf963b6}{same\_frame}\\
 \>struct \{\\
-\>\>\hyperlink{structverification__type__info}{verification\_type\_info} $\ast$$\ast$ {\bfseries stack}\\
-\>\} {\bfseries same\_locals\_1\_stack\_item\_frame}\\
+\>\>\hyperlink{structverification__type__info}{verification\_type\_info} $\ast$$\ast$ \hyperlink{structstack__map__frame_acf0d1f6336e72271bc0d91186a9360d5}{stack}\\
+\>\} \hyperlink{structstack__map__frame_a5503eba82f65aaa1b91d7bebf48f778a}{same\_locals\_1\_stack\_item\_frame}\\
 \>struct \{\\
-\>\>u2 {\bfseries offset\_delta}\\
-\>\>\hyperlink{structverification__type__info}{verification\_type\_info} $\ast$$\ast$ {\bfseries stack}\\
-\>\} {\bfseries same\_locals\_1\_stack\_item\_frame\_extended}\\
+\>\>\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} \hyperlink{structstack__map__frame_a6eb1565feda91c1edced70dc473c834d}{offset\_delta}\\
+\>\>\hyperlink{structverification__type__info}{verification\_type\_info} $\ast$$\ast$ \hyperlink{structstack__map__frame_acf0d1f6336e72271bc0d91186a9360d5}{stack}\\
+\>\} \hyperlink{structstack__map__frame_a13c670726708696c2f2b9d12309d7038}{same\_locals\_1\_stack\_item\_frame\_extended}\\
 \>struct \{\\
-\>\>u2 {\bfseries offset\_delta}\\
-\>\} {\bfseries chop\_frame}\\
+\>\>\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} \hyperlink{structstack__map__frame_a6eb1565feda91c1edced70dc473c834d}{offset\_delta}\\
+\>\} \hyperlink{structstack__map__frame_a27a14f523a1397381684cbb47c8a241f}{chop\_frame}\\
 \>struct \{\\
-\>\>u2 {\bfseries offset\_delta}\\
-\>\} {\bfseries same\_frame\_extended}\\
+\>\>\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} \hyperlink{structstack__map__frame_a6eb1565feda91c1edced70dc473c834d}{offset\_delta}\\
+\>\} \hyperlink{structstack__map__frame_adf8e43e48aaaf7efd8ef26bcce53e07e}{same\_frame\_extended}\\
 \>struct \{\\
-\>\>u2 {\bfseries offset\_delta}\\
-\>\>\hyperlink{structverification__type__info}{verification\_type\_info} $\ast$$\ast$ {\bfseries locals}\\
-\>\} {\bfseries append\_frame}\\
+\>\>\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} \hyperlink{structstack__map__frame_a6eb1565feda91c1edced70dc473c834d}{offset\_delta}\\
+\>\>\hyperlink{structverification__type__info}{verification\_type\_info} $\ast$$\ast$ \hyperlink{structstack__map__frame_a0f20c63cb736738c8cf6c7e4ba59c070}{locals}\\
+\>\} \hyperlink{structstack__map__frame_a6a5b310b8bcd3d37a31a96406a987d99}{append\_frame}\\
 \>struct \{\\
-\>\>u2 {\bfseries offset\_delta}\\
-\>\>u2 {\bfseries number\_of\_locals}\\
-\>\>\hyperlink{structverification__type__info}{verification\_type\_info} $\ast$$\ast$ {\bfseries locals}\\
-\>\>u2 {\bfseries number\_of\_stack\_items}\\
-\>\>\hyperlink{structverification__type__info}{verification\_type\_info} $\ast$$\ast$ {\bfseries stack}\\
-\>\} {\bfseries full\_frame}\\
-\} {\bfseries map\_frame\_type}\\
+\>\>\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} \hyperlink{structstack__map__frame_a6eb1565feda91c1edced70dc473c834d}{offset\_delta}\\
+\>\>\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} \hyperlink{structstack__map__frame_ae1b29541fba8d296cd60bc999b0aeb39}{number\_of\_locals}\\
+\>\>\hyperlink{structverification__type__info}{verification\_type\_info} $\ast$$\ast$ \hyperlink{structstack__map__frame_a0f20c63cb736738c8cf6c7e4ba59c070}{locals}\\
+\>\>\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} \hyperlink{structstack__map__frame_a539b4b1665bdc0e836c9bfba8a663c30}{number\_of\_stack\_items}\\
+\>\>\hyperlink{structverification__type__info}{verification\_type\_info} $\ast$$\ast$ \hyperlink{structstack__map__frame_acf0d1f6336e72271bc0d91186a9360d5}{stack}\\
+\>\} \hyperlink{structstack__map__frame_a5191673ddb13df19cc664836013b4f41}{full\_frame}\\
+\} \hyperlink{structstack__map__frame_aa924e6fab46f29a756e2649da800a419}{map\_frame\_type}\\
 
 \end{tabbing}\end{DoxyCompactItemize}
 
 
+\subsection{Atributos}
+\mbox{\Hypertarget{structstack__map__frame_a6a5b310b8bcd3d37a31a96406a987d99}\label{structstack__map__frame_a6a5b310b8bcd3d37a31a96406a987d99}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!append\+\_\+frame@{append\+\_\+frame}}
+\index{append\+\_\+frame@{append\+\_\+frame}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{append\+\_\+frame}{append\_frame}}
+{\footnotesize\ttfamily struct \{ ... \}   stack\+\_\+map\+\_\+frame\+::append\+\_\+frame}
+
+\mbox{\Hypertarget{structstack__map__frame_a27a14f523a1397381684cbb47c8a241f}\label{structstack__map__frame_a27a14f523a1397381684cbb47c8a241f}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!chop\+\_\+frame@{chop\+\_\+frame}}
+\index{chop\+\_\+frame@{chop\+\_\+frame}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{chop\+\_\+frame}{chop\_frame}}
+{\footnotesize\ttfamily struct \{ ... \}   stack\+\_\+map\+\_\+frame\+::chop\+\_\+frame}
+
+\mbox{\Hypertarget{structstack__map__frame_ae7d53e0f8daea6d5738a88ffb94e575c}\label{structstack__map__frame_ae7d53e0f8daea6d5738a88ffb94e575c}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!frame\+\_\+type@{frame\+\_\+type}}
+\index{frame\+\_\+type@{frame\+\_\+type}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{frame\+\_\+type}{frame\_type}}
+{\footnotesize\ttfamily \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} stack\+\_\+map\+\_\+frame\+::frame\+\_\+type}
+
+\mbox{\Hypertarget{structstack__map__frame_a5191673ddb13df19cc664836013b4f41}\label{structstack__map__frame_a5191673ddb13df19cc664836013b4f41}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!full\+\_\+frame@{full\+\_\+frame}}
+\index{full\+\_\+frame@{full\+\_\+frame}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{full\+\_\+frame}{full\_frame}}
+{\footnotesize\ttfamily struct \{ ... \}   stack\+\_\+map\+\_\+frame\+::full\+\_\+frame}
+
+\mbox{\Hypertarget{structstack__map__frame_a0f20c63cb736738c8cf6c7e4ba59c070}\label{structstack__map__frame_a0f20c63cb736738c8cf6c7e4ba59c070}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!locals@{locals}}
+\index{locals@{locals}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{locals}{locals}}
+{\footnotesize\ttfamily \hyperlink{structverification__type__info}{verification\+\_\+type\+\_\+info}$\ast$$\ast$ stack\+\_\+map\+\_\+frame\+::locals}
+
+\mbox{\Hypertarget{structstack__map__frame_aa924e6fab46f29a756e2649da800a419}\label{structstack__map__frame_aa924e6fab46f29a756e2649da800a419}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!map\+\_\+frame\+\_\+type@{map\+\_\+frame\+\_\+type}}
+\index{map\+\_\+frame\+\_\+type@{map\+\_\+frame\+\_\+type}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{map\+\_\+frame\+\_\+type}{map\_frame\_type}}
+{\footnotesize\ttfamily union \{ ... \}   stack\+\_\+map\+\_\+frame\+::map\+\_\+frame\+\_\+type}
+
+\mbox{\Hypertarget{structstack__map__frame_ae1b29541fba8d296cd60bc999b0aeb39}\label{structstack__map__frame_ae1b29541fba8d296cd60bc999b0aeb39}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!number\+\_\+of\+\_\+locals@{number\+\_\+of\+\_\+locals}}
+\index{number\+\_\+of\+\_\+locals@{number\+\_\+of\+\_\+locals}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{number\+\_\+of\+\_\+locals}{number\_of\_locals}}
+{\footnotesize\ttfamily \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} stack\+\_\+map\+\_\+frame\+::number\+\_\+of\+\_\+locals}
+
+\mbox{\Hypertarget{structstack__map__frame_a539b4b1665bdc0e836c9bfba8a663c30}\label{structstack__map__frame_a539b4b1665bdc0e836c9bfba8a663c30}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!number\+\_\+of\+\_\+stack\+\_\+items@{number\+\_\+of\+\_\+stack\+\_\+items}}
+\index{number\+\_\+of\+\_\+stack\+\_\+items@{number\+\_\+of\+\_\+stack\+\_\+items}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{number\+\_\+of\+\_\+stack\+\_\+items}{number\_of\_stack\_items}}
+{\footnotesize\ttfamily \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} stack\+\_\+map\+\_\+frame\+::number\+\_\+of\+\_\+stack\+\_\+items}
+
+\mbox{\Hypertarget{structstack__map__frame_a6eb1565feda91c1edced70dc473c834d}\label{structstack__map__frame_a6eb1565feda91c1edced70dc473c834d}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!offset\+\_\+delta@{offset\+\_\+delta}}
+\index{offset\+\_\+delta@{offset\+\_\+delta}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{offset\+\_\+delta}{offset\_delta}}
+{\footnotesize\ttfamily \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} stack\+\_\+map\+\_\+frame\+::offset\+\_\+delta}
+
+\mbox{\Hypertarget{structstack__map__frame_a761073b8521c7ac269b5357dfcf963b6}\label{structstack__map__frame_a761073b8521c7ac269b5357dfcf963b6}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!same\+\_\+frame@{same\+\_\+frame}}
+\index{same\+\_\+frame@{same\+\_\+frame}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{same\+\_\+frame}{same\_frame}}
+{\footnotesize\ttfamily struct \{ ... \}   stack\+\_\+map\+\_\+frame\+::same\+\_\+frame}
+
+\mbox{\Hypertarget{structstack__map__frame_adf8e43e48aaaf7efd8ef26bcce53e07e}\label{structstack__map__frame_adf8e43e48aaaf7efd8ef26bcce53e07e}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!same\+\_\+frame\+\_\+extended@{same\+\_\+frame\+\_\+extended}}
+\index{same\+\_\+frame\+\_\+extended@{same\+\_\+frame\+\_\+extended}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{same\+\_\+frame\+\_\+extended}{same\_frame\_extended}}
+{\footnotesize\ttfamily struct \{ ... \}   stack\+\_\+map\+\_\+frame\+::same\+\_\+frame\+\_\+extended}
+
+\mbox{\Hypertarget{structstack__map__frame_a5503eba82f65aaa1b91d7bebf48f778a}\label{structstack__map__frame_a5503eba82f65aaa1b91d7bebf48f778a}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame@{same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame}}
+\index{same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame@{same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame}{same\_locals\_1\_stack\_item\_frame}}
+{\footnotesize\ttfamily struct \{ ... \}   stack\+\_\+map\+\_\+frame\+::same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame}
+
+\mbox{\Hypertarget{structstack__map__frame_a13c670726708696c2f2b9d12309d7038}\label{structstack__map__frame_a13c670726708696c2f2b9d12309d7038}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame\+\_\+extended@{same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame\+\_\+extended}}
+\index{same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame\+\_\+extended@{same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame\+\_\+extended}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame\+\_\+extended}{same\_locals\_1\_stack\_item\_frame\_extended}}
+{\footnotesize\ttfamily struct \{ ... \}   stack\+\_\+map\+\_\+frame\+::same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame\+\_\+extended}
+
+\mbox{\Hypertarget{structstack__map__frame_acf0d1f6336e72271bc0d91186a9360d5}\label{structstack__map__frame_acf0d1f6336e72271bc0d91186a9360d5}} 
+\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!stack@{stack}}
+\index{stack@{stack}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
+\subsubsection{\texorpdfstring{stack}{stack}}
+{\footnotesize\ttfamily \hyperlink{structverification__type__info}{verification\+\_\+type\+\_\+info}$\ast$$\ast$ stack\+\_\+map\+\_\+frame\+::stack}
+
+
+
 A documentação para esta estrutura foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
 \item 
-structures.\+h\end{DoxyCompactItemize}
+\hyperlink{structures_8h}{structures.\+h}\end{DoxyCompactItemize}

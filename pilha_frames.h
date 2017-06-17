@@ -1,3 +1,8 @@
+/**
+ * @file pilha_frames.h
+ * @brief Estrutura e cabeçalho da implementação da pilha de frames
+ */
+
 #ifndef PILHA_FRAMES_H
 #define PILHA_FRAMES_H
 

@@ -1,3 +1,8 @@
+/**
+ * @file pilha_frames.c
+ * @brief Funções de controle da pilha de frames
+ */
+
 #include "pilha_frames.h"
 #include <stdio.h>
 #include <stdlib.h>
