@@ -1,0 +1,80 @@
+\hypertarget{structcp__info}{}\section{Referência da Estrutura cp\+\_\+info}
+\label{structcp__info}\index{cp\+\_\+info@{cp\+\_\+info}}
+\subsection*{Atributos Públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structcp__info_a045b8801a6e96a2a31d3b62ea684f141}\label{structcp__info_a045b8801a6e96a2a31d3b62ea684f141}} 
+u1 {\bfseries tag}
+\item 
+\mbox{\Hypertarget{structcp__info_aad04019f28f2b6191ace6ab762e051a5}\label{structcp__info_aad04019f28f2b6191ace6ab762e051a5}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>struct \{\\
+\>\>u2 {\bfseries name\_index}\\
+\>\} {\bfseries Class}\\
+\>struct \{\\
+\>\>u2 {\bfseries class\_index}\\
+\>\>u2 {\bfseries name\_and\_type\_index}\\
+\>\} {\bfseries Fieldref}\\
+\>struct \{\\
+\>\>u2 {\bfseries class\_index}\\
+\>\>u2 {\bfseries name\_and\_type\_index}\\
+\>\} {\bfseries Methodref}\\
+\>struct \{\\
+\>\>u2 {\bfseries class\_index}\\
+\>\>u2 {\bfseries name\_and\_type\_index}\\
+\>\} {\bfseries InterfaceMethodref}\\
+\>struct \{\\
+\>\>u2 {\bfseries string\_index}\\
+\>\} {\bfseries String}\\
+\>struct \{\\
+\>\>u4 {\bfseries bytes}\\
+\>\} {\bfseries Integer}\\
+\>struct \{\\
+\>\>u4 {\bfseries bytes}\\
+\>\} {\bfseries Float}\\
+\>struct \{\\
+\>\>u4 {\bfseries high\_bytes}\\
+\>\>u4 {\bfseries low\_bytes}\\
+\>\} {\bfseries Long}\\
+\>struct \{\\
+\>\>u4 {\bfseries high\_bytes}\\
+\>\>u4 {\bfseries low\_bytes}\\
+\>\} {\bfseries Double}\\
+\>struct \{\\
+\>\>u2 {\bfseries name\_index}\\
+\>\>u2 {\bfseries descriptor\_index}\\
+\>\} {\bfseries NameAndType}\\
+\>struct \{\\
+\>\>u2 {\bfseries length}\\
+\>\>u1 $\ast$ {\bfseries bytes}\\
+\>\} {\bfseries UTF8}\\
+\>struct \{\\
+\>\>u1 {\bfseries reference\_kind}\\
+\>\>u2 {\bfseries reference\_index}\\
+\>\} {\bfseries MethodHandle}\\
+\>struct \{\\
+\>\>u2 {\bfseries descriptor\_index}\\
+\>\} {\bfseries MethodType}\\
+\>struct \{\\
+\>\>u2 {\bfseries bootstrap\_method\_attr\_index}\\
+\>\>u2 \hyperlink{structcp__info_a1b947f3ff3eee58acf5500debf45848c}{name\_and\_type\_index}\\
+\>\} {\bfseries InvokeDynamicInfo}\\
+\} {\bfseries UnionCP}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\subsection{Atributos}
+\mbox{\Hypertarget{structcp__info_a1b947f3ff3eee58acf5500debf45848c}\label{structcp__info_a1b947f3ff3eee58acf5500debf45848c}} 
+\index{cp\+\_\+info@{cp\+\_\+info}!name\+\_\+and\+\_\+type\+\_\+index@{name\+\_\+and\+\_\+type\+\_\+index}}
+\index{name\+\_\+and\+\_\+type\+\_\+index@{name\+\_\+and\+\_\+type\+\_\+index}!cp\+\_\+info@{cp\+\_\+info}}
+\subsubsection{\texorpdfstring{name\+\_\+and\+\_\+type\+\_\+index}{name\_and\_type\_index}}
+{\footnotesize\ttfamily u2 cp\+\_\+info\+::name\+\_\+and\+\_\+type\+\_\+index}
+
+Índice válido em Constant Pool, indicando o nome e o descritor do método 
+
+A documentação para esta estrutura foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
+\item 
+structures.\+h\end{DoxyCompactItemize}
