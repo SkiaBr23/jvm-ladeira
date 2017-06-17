@@ -1004,9 +1004,9 @@ instrucao* construirInstrucoes(void){
 				instrucoes[i].numarg = 2;
 				instrucoes[i].numop = 2;
 			break;
-			case if_acmpeg:
-				strcpy(instrucoes[i].inst_nome,"if_acmpeg");
-				instrucoes[i].opcode = if_acmpeg;
+			case if_acmpeq:
+				strcpy(instrucoes[i].inst_nome,"if_acmpeq");
+				instrucoes[i].opcode = if_acmpeq;
 				instrucoes[i].numarg = 2;
 				instrucoes[i].numop = 2;
 			break;

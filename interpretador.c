@@ -576,8 +576,256 @@ void ishl_impl(frame *f){
 
 	i4 s = (valor2->topo->operando << 27) >> 27;
 
-	f->p = Push_operandos(f->p,s,valor1->topo->tipo_operando);
+	i4 resultado = valor1->topo->operando << s;
+
+	f->p = Push_operandos(f->p,resultado,valor1->topo->tipo_operando);
 }
+
+
+void ishr_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	i4 s = (i4) (valor2->topo->operando << 27) >> 27;
+
+	i4 resultado = (i4) valor1->topo->operando >> s;
+
+	f->p = Push_operandos(f->p,resultado,valor1->topo->tipo_operando);
+}
+
+// Verificar se a implementação é essa mesmo, para fazer a extensão do sinal
+void iushr_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	u4 s = (u4) (valor2->topo->operando << 27) >> 27;
+
+	u4 resultado = (u4) valor1->topo->operando >> s;
+
+	f->p = Push_operandos(f->p,(i4) resultado,valor1->topo->tipo_operando);
+}
+
+void iand_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	i4 resultado = valor1->topo->operando & valor2->topo->operando;
+
+	f->p = Push_operandos(f->p,resultado,valor1->topo->tipo_operando);
+}
+
+void ior_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	i4 resultado = valor1->topo->operando | valor2->topo->operando;
+
+	f->p = Push_operandos(f->p,resultado,valor1->topo->tipo_operando);
+}
+
+void ixor_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	i4 resultado = valor1->topo->operando ^ valor2->topo->operando;
+
+	f->p = Push_operandos(f->p,resultado,valor1->topo->tipo_operando);
+}
+
+void iinc_impl(frame *f,u1 index, i1 constante){
+	// Estender o sinal para 32 bits
+	i4 inteiro_constante = (i4) constante;
+
+	f->v[index] += inteiro_constante;
+}
+
+void i2b_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+
+	i1 truncado = (i1) valor1->topo->operando;
+
+	i4 resultado = (i4) truncado;
+
+	f->p = Push_operandos(f->p,resultado,BYTE_OP);
+}
+
+void i2c_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+
+	i1 truncado = (i1) valor1->topo->operando;
+
+	i4 resultado = (i4) truncado;
+
+	f->p = Push_operandos(f->p,resultado,CHAR_OP);
+}
+
+void i2s_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+
+	i2 truncado = (i2) valor1->topo->operando;
+
+	i4 resultado = (i4) valor1->topo->operando;
+
+	f->p = Push_operandos(f->p,resultado,SHORT_OP);
+}
+
+void ifeq_impl(frame *f){
+
+	// Amanhãl menbra
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+
+	if(valor1->topo->operando == 0){
+		// Alterar o PC aqui para fazer o branch
+	}
+
+}
+
+void ifne_impl_imple(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+
+	if(valor1->topo->opernado !=0){
+		// Fazer o salt
+	}
+}
+
+variável sabe?
+
+void iflt(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+
+	if(valor->topo->valor1<0){
+
+	}
+}
+
+void ifge_impl(frame *f){
+	pilha_operandos *valor = Pop_operandos(f->p);
+	if(valor->topo->valor1 >= 0){
+
+	}
+}
+
+void ifgt_impl(frame *{
+	pilha_operandos *valor = Pop_operandos(f->p);
+
+	if(valor1->topo->operando > 0){
+		// Branch aqui
+	}
+}
+
+void ifle_impl(frame *{
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+
+	if(valor1->topo->operando <= 0){
+		// Branch
+	}
+}
+
+void icmpeq_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	if(valor1->topo->operando == valor2->topo->operando){
+		// Efetuar o branch
+	}
+}
+
+void icmpne_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	if(valor1->topo->operando != valor2->topo->operando){
+		// Efetuar o branch
+	}
+}
+
+void icmplt_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	if(valor1->topo->operando < valor2->topo->operando){
+		// Efetuar o branch
+	}
+}
+
+void icmpge_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	if(valor1->topo->operando >= valor2->topo->operando){
+		// Efetuar o branch
+	}
+}
+
+void icmpgt_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	if(valor1->topo->operando > valor2->topo->operando){
+		// Efetuar o branch
+	}
+}
+
+void icmple_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	if(valor1->topo->operando <= valor2->topo->operando){
+		// Efetuar o branch
+	}
+}
+
+void acmpeq_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	if(valor1->topo->operando == valor2->topo->operando){
+		// Efetuar o branch
+	}
+}
+
+void acmpne_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	if(valor1->topo->operando != valor2->topo->operando){
+		// Efetuar o branch
+	}
+}
+
+void inst_goto(frame *f,u1 branchbyte1, u1 branchbyte2){
+	u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+
+	// Efetuar o branch com branch offset
+}
+
+void jsr_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
+	u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+
+	// Efetuar o branch com branch offset
+}
+
+void ret_impl(frame *f,u1 index){
+	u1 endereco_retorno = f->v[index];
+
+	// Escrever no registrador PC
+}
+
+void ireturn_impl(frame *f){
+	// Analisar as condições do método que deve ser retornado
+
+	pilha_operandos *valor = Pop_operandos(f->p);
+
+	// Colocar no stack do vetor de variáveis seguir essa con
+}
+
+void areturn_impl(frame *f){
+	// Analisar mesmas coisas do ireturn
+	pilha_operandos *valor = Pop_operandos(f->p);
+}
+
+
+
 
 
 

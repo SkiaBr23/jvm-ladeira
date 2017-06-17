@@ -126,6 +126,65 @@ void lneg_impl(frame *f); // Não implementado
 void fneg_impl(frame *f); // Não implementado
 void dneg_impl(frame *f); // Não implementado
 void ishl_impl(frame *f);
+void lshl_impl(frame *f); // Não implementado
+void ishr_impl(frame *f);
+void lshr_impl(frame *f); // Não implementado
+void iushr_impl(frame *f);
+void lushr_impl(frame *f); // Não implementado
+void iand_impl(frame *f);
+void land_impl(frame *f); // Não implementado
+void ior_impl(frame *f);
+void lor_impl(frame *f); // Não implementado
+void ixor_impl(frame *f);
+void lxor_impl(frame *f); // Não implementado
+void iinc_impl(frame *f, u1 index, i1 constante);
+void i2l_impl(frame *f); // Não implementado
+void i2f_impl(frame *f); // Não implementado
+void i2d_impl(frame *f); // Não implementado
+void l2i_impl(frame *f); // Não implementado
+void l2f_impl(frame *f); // Não implementado
+void l2d_impl(frame *f); // Não implementado
+void f2i_impl(frame *f); // Não implementado
+void f2l_impl(frame *f); // Não implementado
+void f2d_impl(frame *f); // Não implementado
+void d2i_impl(frame *f); // Não implementado
+void d2l_impl(frame *f); // Não implementado
+void d2f_impl(frame *f); // Não implementado
+void i2b_impl(frame *f);
+void i2c_impl(frame *f);
+void i2d_impl(frame *f); // Não implementado 
+void i2s_impl(frame *f);
+void lcmp_impl(frame *f); // Não implementado
+void fcmpl_impl(frame *f); // Não implementado
+void fcmpg_impl(frame *f); // Não implement
+void dcmpl_impl(frame *f); // Não implementado
+void dcmpg_impl(frame *f); // Não implementado
+void ifeq_impl(frame *f); 
+void ifne_impl(frame *f);
+void iflt_impl(frame *f);
+void ifge_impl(frame *f);
+void ifgt_impl(frame *f);
+void ifle_impl(frame *f);
+void icmpeq_impl(frame *f);
+void icmpne_impl(frame *f);
+void icmplt_impl(frame *f);
+void icmpgt_impl(frame *f);
+void icmple_impl(frame *f);
+void acmpeq_impl(frame *f);
+void acmpne_impl(frame *f);
+void inst_goto_impl(frame *f,u1 branchbyte1, u1 branchbyte2);
+void jsr_impl(frame *f,u1 branchbyte1, u1 branchbyte2);
+void ret_impl(frame *f, u1 index);
+void tableswitch_impl(frame *f);
+void lookupswitch_impl(frame *f);
+void ireturn_impl(frame *f);
+void lreturn_impl(frame *f); // Não implementado
+void freturn_impl(frame *f); // Não implementado
+void dreturn_impl(frame *f); // Não implementado
+void areturn_impl(frame *f);
+void inst_return(frame *f); // Não implmentado
+
+
 
 
 
