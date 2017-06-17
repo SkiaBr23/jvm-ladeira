@@ -13,13 +13,13 @@ void iconst_2_impl(frame *f);
 void iconst_3_impl(frame *f);
 void iconst_4_impl(frame *f);
 void iconst_5_impl(frame *f);
-void lconst_0_impl(frame *f); // Não implementado
-void lconst_1_impl(frame *f); // Não implementado
-void fconst_0_impl(frame *f); // Não implementado
-void fconst_1_impl(frame *f); // Não implementado
-void fconst_2_impl(frame *f); // Não implementado
-void dconst_0_impl(frame *f); // Não implementado
-void dconst_1_impl(frame *f); // Não implementado
+void lconst_0_impl(frame *f);
+void lconst_1_impl(frame *f);
+void fconst_0_impl(frame *f);
+void fconst_1_impl(frame *f);
+void fconst_2_impl(frame *f);
+void dconst_0_impl(frame *f);
+void dconst_1_impl(frame *f);
 void bipush_impl(u1 byte, frame *f);
 void sipush_impl(u1 byte1, u1 byte2, frame *f);
 void ldc_impl(void); // Não implementado
