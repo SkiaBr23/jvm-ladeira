@@ -94,14 +94,38 @@ void castore_impl(frame *f);
 void sastore_impl(frame *f);
 pilha_operandos* pop_impl(frame *f);
 pilha_operandos** pop2_impl(frame *f);
-void dup(frame *f);
-void dup_x1(frame *f);
-void dup_x2(frame *f);
-void dup2(frame *f);
-void dup2_x1(frame *f);
-void dup2_x2(frame *f);
-void swap(frame *f);
-void iadd(frame *f);
+void dup_impl(frame *f);
+void dup_x1_impl(frame *f);
+void dup_x2_impl(frame *f);
+void dup2_impl(frame *f);
+void dup2_x1_impl(frame *f);
+void dup2_x2_impl(frame *f);
+void swap_impl(frame *f);
+void iadd_impl(frame *f);
+void ladd_impl(frame *f); // Não implementado
+void fadd_impl(frame *f); // Não implementado
+void dadd_impl(frame *f); // Não implementado
+void isub_impl(frame *f);
+void lsub_impl(frame *f); // Não implementado
+void fsub_impl(frame *f); // Não implementado
+void dsub_impl(frame *f); // Não implementado
+void imul_impl(frame *f);
+void lmul_impl(frame *f); // Não implementado
+void fmul_impl(frame *f); // Não implementado
+void dmul_impl(frame *f); // Não implementado
+void idiv_impl(frame *f);
+void ldiv_impl(frame *f); // Não implementado
+void fdiv_impl(frame *f); // Não implementado
+void ddiv_impl(frame *f); // Não implementado
+void irem_impl(frame *f);
+void lrem_impl(frame *f); // Não implementado
+void frem_impl(frame *f); // Não implementado
+void drem_impl(frame *f); // Não implementado
+void ineg_impl(frame *f);
+void lneg_impl(frame *f); // Não implementado
+void fneg_impl(frame *f); // Não implementado
+void dneg_impl(frame *f); // Não implementado
+void ishl_impl(frame *f);
 
 
 

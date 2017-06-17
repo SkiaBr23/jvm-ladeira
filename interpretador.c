@@ -382,12 +382,12 @@ pilha_operandos** pop2_impl(frame *f){
 	return(vetor_retorno);
 }
 
-void dup(frame *f){
+void dup_impl(frame *f){
 	pilha_operandos *valor = Topo_operandos(f->p);
 	f->p = Push_operandos(f->p,valor->topo->operando,valor->topo->tipo_operando);
 }
 
-void dup_x1(frame *f){
+void dup_x1_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -396,7 +396,7 @@ void dup_x1(frame *f){
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
 }
 
-void dup_x2(frame *f){
+void dup_x2_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 	pilha_operandos *valor3 = Pop_operandos(f->p);
@@ -420,7 +420,7 @@ void dup_x2(frame *f){
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
 }
 
-void dup2(frame *f){
+void dup2_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -432,7 +432,7 @@ void dup2(frame *f){
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
 }
 
-void dup2_x1(frame *f){
+void dup2_x1_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 	pilha_operandos *valor3 = Pop_operandos(f->p);
@@ -442,7 +442,7 @@ void dup2_x1(frame *f){
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
 }
 
-void dup2_x2(frame *f){
+void dup2_x2_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 	pilha_operandos *valor3 = Pop_operandos(f->p);
@@ -454,7 +454,7 @@ void dup2_x2(frame *f){
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
 }
 
-void swap(frame *f){
+void swap_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -462,17 +462,96 @@ void swap(frame *f){
 	f->p = Push_operandos(f->p,valor2->topo->operando,valor2->topo->tipo_operando);
 }
 
-void iadd(frame *f){
+void iadd_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	pilha_operandos *valor3 = CriarPilha();
 
-	// Realizar checagem de tipo, só realizar a operação se os 2 tipos forem iguais e forem inteiros
+	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
 	valor3 = Push_operandos(valor3,valor1->topo->operando+valor2->topo->operando,valor1->topo->tipo_operando);
+	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
+	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
+
+}
+
+// Overflow pode ocorrer, mas mesmo assim, exceção não é lançada. Ou seja, é só subtrair
+void isub_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	pilha_operandos *valor3 = CriarPilha();
+
+	valor3 = Push_operandos(valor3,valor1->topo->operando-valor2->topo->operando);
+	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
+	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
+}
+
+void imul_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	pilha_operandos *valor3 = CriarPilha();
+
+	valor3 = Push_operandos(valor3,valor1->topo->operando*valor2->topo->operando);
+	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
+	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
+}
+
+void idiv_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	pilha_operandos *valor3 = CriarPilha();
+	if(valor2->topo->operando == 0){
+		// Lançar exceção ArithmeticException
+	}
+	valor3 = Push_operandos(valor3,valor1->topo->operando/valor2->topo->operando);
+	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
 
 	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
 }
+
+void irem_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	pilha_operandos *valor3 = CriarPilha();
+
+	if(valor2->topo->operando == 0){
+		// Lançar Arithmetic Exception
+	}
+
+	i4 valor_push = valor1->topo->operando - (valor1->topo->operando/valor2->topo->operando) * valor2->topo->operando;
+
+	valor3 = Push_operandos(valor3,valor_push,valor1->topo->tipo_operando);
+	valor3->tipo_operando = valor1->topo->tipo_operando;
+
+	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
+}
+
+void ineg_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+
+	// Colocar o valor na pilha negado
+	f->p = Push_operandos(f->p,-(valor1->topo->operando),valor1->topo->tipo_operando);
+}
+
+void ishl_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	i4 s = (valor2->topo->operando << 27) >> 27;
+
+	f->p = Push_operandos(f->p,s,valor1->topo->tipo_operando);
+}
+
+
+
+
+
+
+
 
 
 
