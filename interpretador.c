@@ -40,6 +40,71 @@ void iconst_5_impl(frame *f){
 	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);
 }
 
+void lconst_0_impl(frame *f){
+
+	//Push 0L to stack
+	i4 high_bytes = (i4) 0;
+	Push_operandos(f->p,high_bytes,LONG_OP);
+
+	//TOPO DA PILHA FICA O LOW
+	i4 low_bytes = (i4) 0;
+	Push_operandos(f->p,low_bytes,LONG_OP);
+}
+
+void lconst_1_impl(frame *f){
+
+	//Push 1L to stack 
+	i4 high_bytes = (i4) 0;
+	Push_operandos(f->p,high_bytes,LONG_OP);
+
+	//TOPO DA PILHA FICA O LOW
+	i4 low_bytes = (i4) 1;
+	Push_operandos(f->p,low_bytes,LONG_OP);
+}
+
+void fconst_0_impl(frame *f){
+
+	i4 float_bytes = (i4) 0;
+	Push_operandos(f->p,float_bytes,FLOAT_OP);
+
+}
+
+void fconst_1_impl(frame *f){
+
+	i4 float_bytes = 0x3f800000;
+	Push_operandos(f->p,float_bytes,FLOAT_OP);
+
+}
+
+void fconst_2_impl(frame *f){
+
+	i4 float_bytes = 0x40000000;
+	Push_operandos(f->p,float_bytes,FLOAT_OP);
+
+}
+
+void dconst_0_impl(frame *f){
+
+	//Push 0.0 double to stack
+	i4 high_bytes = (i4) 0;
+	Push_operandos(f->p,high_bytes,DOUBLE_OP);
+
+	//TOPO DA PILHA FICA O LOW
+	i4 low_bytes = (i4) 0;
+	Push_operandos(f->p,low_bytes,DOUBLE_OP);
+}
+
+void dconst_1_impl(frame *f){
+
+	//Push 1.0 double to stack
+	i4 high_bytes = 0x3FF00000;	
+	Push_operandos(f->p,high_bytes,DOUBLE_OP);
+
+	//TOPO DA PILHA FICA O LOW
+	i4 low_bytes = (i4) 0;
+	Push_operandos(f->p,low_bytes,DOUBLE_OP);
+}
+
 void bipush_impl(u1 byte, frame *f){
 	i4 byte_int = (i4) byte;
 	Push_operandos(f->p,byte_int,BYTE_OP);
