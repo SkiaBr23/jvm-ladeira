@@ -185,48 +185,67 @@ void iaload_impl(frame *f){
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
 	i4 *endereco = malloc(sizeof(i4 ));
-	endereco = referencia->topo->operando + indice->topo->operando;
+	endereco = ((i4*) referencia->topo->operando) + (indice->topo->operando * sizeof(i4));
 
 	// Objetivo: Acessar o conteúdo do endereço "referencia+indice"
 	// O código para esse acesso não parece correto, tem que analisar
-	Push_operandos(f->p,(i4) *endereco,INTEGER_OP);
+	Push_operandos(f->p,*endereco,INTEGER_OP);
 }
 
 void faload_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
+	i4 *endereco = malloc(sizeof(i4));
+	endereco = ((i4*) referencia->topo->operando) + (indice->topo->operando * sizeof(i4));
+
 	// Acessar o conteúdo do endereço "referencia+indice"
 	// O código para esse acesso não parece correto, tem que analisar
-	Push_operandos(f->p,(i4) ,FLOAT_OP);
+	Push_operandos(f->p,*endereco,FLOAT_OP);
 }
 
 void aaload_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	Push_operandos(f->p,(i4) *((&(referencia->topo->operando))+(&(indice->topo->operando))),REFERENCE_OP);
+	u4 *endereco = malloc(sizeof(u4));
+	endereco = ((u4*) referencia->topo->operando) + (indice->topo->operando * sizeof(u4));
+
+	Push_operandos(f->p,*endereco,REFERENCE_OP);
 }
 
 void baload_impl(frame *f){
+
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	Push_operandos(f->p,(i4) *(&(referencia->topo->operando)+&(indice->topo->operando)),BYTE_OP);
+	i1 *endereco = malloc(sizeof(i1));
+	endereco = ((i1*) referencia->topo->operando) + (indice->topo->operando * sizeof(i1));
+	i1 byte = *endereco;
+	//O Sign Extend foi feito?
+	Push_operandos(f->p,(i4) byte,BYTE_OP);
 }
 
 void caload_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	Push_operandos(f->p,(i4) *(&(referencia->topo->operando)+&(indice->topo->operando)),CHAR_OP);
+	u2 *endereco = malloc(sizeof(u2));
+	endereco = ((u2*) referencia->topo->operando) + (indice->topo->operando * sizeof(u2));
+	u2 caracter = *endereco;
+	//O Zero Extend foi feito?
+	Push_operandos(f->p,(u4) caracter,CHAR_OP);
 }
 
 void saload_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	Push_operandos(f->p,(i4) *(&(referencia->topo->operando)+&(indice->topo->operando)),SHORT_OP);
+	i2 *endereco = malloc(sizeof(i2));
+	endereco = ((i2*) referencia->topo->operando) + (indice->topo->operando * sizeof(i2));
+	i2 ashort = *endereco;
+	//O Sign Extend foi feito?
+	Push_operandos(f->p,(i4) ashort,SHORT_OP);
 }
 
 void istore_impl(u1 index,frame *f){
@@ -318,7 +337,10 @@ void iastore_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	*(array->topo->operando+indice->topo->operando) = valor->topo->operando;
+	i4 *endereco = malloc(sizeof(i4));
+	endereco = ((i4*) array->topo->operando) + (indice->topo->operando * sizeof(i4));
+
+	*endereco = valor->topo->operando;
 }
 
 void fastore_impl(frame *f){
@@ -326,7 +348,10 @@ void fastore_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	*(array->topo->operando+indice->topo->operando) = valor->topo->operando;
+	i4 *endereco = malloc(sizeof(i4));
+	endereco = ((i4*) array->topo->operando) + (indice->topo->operando * sizeof(i4));
+
+	*endereco = valor->topo->operando;
 }
 
 void bastore_impl(frame *f){
@@ -334,7 +359,10 @@ void bastore_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	*(array->topo->operando+indice->topo->operando) = (i1) valor->topo->operando;
+	i1 *endereco = malloc(sizeof(i1));
+	endereco = ((i1*) array->topo->operando) + (indice->topo->operando * sizeof(i1));
+
+	*endereco = valor->topo->operando;
 }
 
 void castore_impl(frame *f){
@@ -342,8 +370,10 @@ void castore_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	// i1 também pois char tem 1 byte
-	*(array->topo->operando+indice->topo->operando) = (i1) valor->topo->operando;
+	u2 *endereco = malloc(sizeof(u2));
+	endereco = ((u2*) array->topo->operando) + (indice->topo->operando * sizeof(u2));
+
+	*endereco = valor->topo->operando;
 }
 
 void sastore_impl(frame *f){
@@ -351,7 +381,10 @@ void sastore_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	*(array->topo->operando+indice->topo->operando) = (i2) valor->topo->operando;
+	i2 *endereco = malloc(sizeof(i2));
+	endereco = ((i2*) array->topo->operando) + (indice->topo->operando * sizeof(i2));
+
+	*endereco = valor->topo->operando;
 }
 
 pilha_operandos* pop_impl(frame *f){
@@ -364,7 +397,7 @@ pilha_operandos** pop2_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	pilha_operandos *vetor_retorno = malloc(2*sizeof(pilha_operandos));
+	pilha_operandos **vetor_retorno = malloc(2*sizeof(pilha_operandos));
 	vetor_retorno[0] = valor1;	
 	vetor_retorno[1] = valor2;	
 
@@ -466,7 +499,7 @@ void iadd_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	pilha_operandos *valor3 = CriarPilha();
+	pilha_operandos *valor3 = CriarPilha_operandos();
 
 	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
 	valor3 = Push_operandos(valor3,valor1->topo->operando+valor2->topo->operando,valor1->topo->tipo_operando);
