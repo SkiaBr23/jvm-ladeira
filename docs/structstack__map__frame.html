@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>JVM - Grupo 4: Referência da Estrutura stack_map_frame</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">JVM - Grupo 4
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">Projeto da máquina virtual Java da disciplina de Software Básico</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Busca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Atributos Públicos</a> &#124;
+<a href="structstack__map__frame-members.html">Lista de todos os Membros</a>  </div>
+  <div class="headertitle">
+<div class="title">Referência da Estrutura stack_map_frame</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="structures_8h_source.html">structures.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Atributos Públicos</h2></td></tr>
+<tr class="memitem:ae7d53e0f8daea6d5738a88ffb94e575c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstack__map__frame.html#ae7d53e0f8daea6d5738a88ffb94e575c">frame_type</a></td></tr>
+<tr class="separator:ae7d53e0f8daea6d5738a88ffb94e575c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa924e6fab46f29a756e2649da800a419"><td class="memItemLeft" >union {</td></tr>
+<tr class="memitem:a18525b014ad0264abfa80154498d6d26"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a18525b014ad0264abfa80154498d6d26"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a761073b8521c7ac269b5357dfcf963b6">same_frame</a></td></tr>
+<tr class="separator:a18525b014ad0264abfa80154498d6d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab04103d24a96e5e39cd87cfd47563d94"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a12bd532c4ca37aabbce0c97fd3b7d384"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="structverification__type__info.html">verification_type_info</a> **&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#acf0d1f6336e72271bc0d91186a9360d5">stack</a></td></tr>
+<tr class="separator:a12bd532c4ca37aabbce0c97fd3b7d384"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab04103d24a96e5e39cd87cfd47563d94"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a5503eba82f65aaa1b91d7bebf48f778a">same_locals_1_stack_item_frame</a></td></tr>
+<tr class="separator:ab04103d24a96e5e39cd87cfd47563d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cb2e40fc38ebab341b897cfafb10718"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a051d932339c6b658b1e1c258a03e07c8"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a>&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a6eb1565feda91c1edced70dc473c834d">offset_delta</a></td></tr>
+<tr class="separator:a051d932339c6b658b1e1c258a03e07c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03f255ae7800803998e8df4f2e1a06b9"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="structverification__type__info.html">verification_type_info</a> **&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#acf0d1f6336e72271bc0d91186a9360d5">stack</a></td></tr>
+<tr class="separator:a03f255ae7800803998e8df4f2e1a06b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cb2e40fc38ebab341b897cfafb10718"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a13c670726708696c2f2b9d12309d7038">same_locals_1_stack_item_frame_extended</a></td></tr>
+<tr class="separator:a1cb2e40fc38ebab341b897cfafb10718"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab27a8583503af7d3634748d5cbff3b28"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a6c256861fd558789432d001646b5cb4b"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a>&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a6eb1565feda91c1edced70dc473c834d">offset_delta</a></td></tr>
+<tr class="separator:a6c256861fd558789432d001646b5cb4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab27a8583503af7d3634748d5cbff3b28"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a27a14f523a1397381684cbb47c8a241f">chop_frame</a></td></tr>
+<tr class="separator:ab27a8583503af7d3634748d5cbff3b28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8274dc585979f0c4f6fbe90406788ac8"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:acc6f29740f481ec0206ea22ee3f45563"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a>&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a6eb1565feda91c1edced70dc473c834d">offset_delta</a></td></tr>
+<tr class="separator:acc6f29740f481ec0206ea22ee3f45563"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8274dc585979f0c4f6fbe90406788ac8"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#adf8e43e48aaaf7efd8ef26bcce53e07e">same_frame_extended</a></td></tr>
+<tr class="separator:a8274dc585979f0c4f6fbe90406788ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ccdade6b79b67b47a1ba481fce8b43e"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a37dff80242f0a072a05fd1f52c0bfa32"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a>&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a6eb1565feda91c1edced70dc473c834d">offset_delta</a></td></tr>
+<tr class="separator:a37dff80242f0a072a05fd1f52c0bfa32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e139ce6d6dd108381b769ab11f30b6a"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="structverification__type__info.html">verification_type_info</a> **&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a0f20c63cb736738c8cf6c7e4ba59c070">locals</a></td></tr>
+<tr class="separator:a4e139ce6d6dd108381b769ab11f30b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ccdade6b79b67b47a1ba481fce8b43e"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a6a5b310b8bcd3d37a31a96406a987d99">append_frame</a></td></tr>
+<tr class="separator:a5ccdade6b79b67b47a1ba481fce8b43e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6222b5f1b77dc69c3a68e9b3d4cec62d"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a7b70569f1e73bfbda402972800655339"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a>&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a6eb1565feda91c1edced70dc473c834d">offset_delta</a></td></tr>
+<tr class="separator:a7b70569f1e73bfbda402972800655339"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0501456194e4909656d4df025c322c0"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a>&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#ae1b29541fba8d296cd60bc999b0aeb39">number_of_locals</a></td></tr>
+<tr class="separator:ac0501456194e4909656d4df025c322c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a567e2ca4c0d6608b3b79e8a031353557"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="structverification__type__info.html">verification_type_info</a> **&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a0f20c63cb736738c8cf6c7e4ba59c070">locals</a></td></tr>
+<tr class="separator:a567e2ca4c0d6608b3b79e8a031353557"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fcf25a596e9afa2423d292236a593ba"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a>&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a539b4b1665bdc0e836c9bfba8a663c30">number_of_stack_items</a></td></tr>
+<tr class="separator:a3fcf25a596e9afa2423d292236a593ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79009fb1638124af99ace1ce5f3fb4d9"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="structverification__type__info.html">verification_type_info</a> **&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#acf0d1f6336e72271bc0d91186a9360d5">stack</a></td></tr>
+<tr class="separator:a79009fb1638124af99ace1ce5f3fb4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6222b5f1b77dc69c3a68e9b3d4cec62d"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="structstack__map__frame.html#a5191673ddb13df19cc664836013b4f41">full_frame</a></td></tr>
+<tr class="separator:a6222b5f1b77dc69c3a68e9b3d4cec62d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa924e6fab46f29a756e2649da800a419"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstack__map__frame.html#aa924e6fab46f29a756e2649da800a419">map_frame_type</a></td></tr>
+<tr class="separator:aa924e6fab46f29a756e2649da800a419"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Atributos</h2>
+<a id="a6a5b310b8bcd3d37a31a96406a987d99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a5b310b8bcd3d37a31a96406a987d99">&#9670;&nbsp;</a></span>append_frame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   stack_map_frame::append_frame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a27a14f523a1397381684cbb47c8a241f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27a14f523a1397381684cbb47c8a241f">&#9670;&nbsp;</a></span>chop_frame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   stack_map_frame::chop_frame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae7d53e0f8daea6d5738a88ffb94e575c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7d53e0f8daea6d5738a88ffb94e575c">&#9670;&nbsp;</a></span>frame_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> stack_map_frame::frame_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5191673ddb13df19cc664836013b4f41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5191673ddb13df19cc664836013b4f41">&#9670;&nbsp;</a></span>full_frame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   stack_map_frame::full_frame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f20c63cb736738c8cf6c7e4ba59c070"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f20c63cb736738c8cf6c7e4ba59c070">&#9670;&nbsp;</a></span>locals</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structverification__type__info.html">verification_type_info</a>** stack_map_frame::locals</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa924e6fab46f29a756e2649da800a419"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa924e6fab46f29a756e2649da800a419">&#9670;&nbsp;</a></span>map_frame_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">union { ... }   stack_map_frame::map_frame_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae1b29541fba8d296cd60bc999b0aeb39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1b29541fba8d296cd60bc999b0aeb39">&#9670;&nbsp;</a></span>number_of_locals</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> stack_map_frame::number_of_locals</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a539b4b1665bdc0e836c9bfba8a663c30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a539b4b1665bdc0e836c9bfba8a663c30">&#9670;&nbsp;</a></span>number_of_stack_items</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> stack_map_frame::number_of_stack_items</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6eb1565feda91c1edced70dc473c834d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eb1565feda91c1edced70dc473c834d">&#9670;&nbsp;</a></span>offset_delta</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> stack_map_frame::offset_delta</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a761073b8521c7ac269b5357dfcf963b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a761073b8521c7ac269b5357dfcf963b6">&#9670;&nbsp;</a></span>same_frame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   stack_map_frame::same_frame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adf8e43e48aaaf7efd8ef26bcce53e07e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf8e43e48aaaf7efd8ef26bcce53e07e">&#9670;&nbsp;</a></span>same_frame_extended</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   stack_map_frame::same_frame_extended</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5503eba82f65aaa1b91d7bebf48f778a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5503eba82f65aaa1b91d7bebf48f778a">&#9670;&nbsp;</a></span>same_locals_1_stack_item_frame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   stack_map_frame::same_locals_1_stack_item_frame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a13c670726708696c2f2b9d12309d7038"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13c670726708696c2f2b9d12309d7038">&#9670;&nbsp;</a></span>same_locals_1_stack_item_frame_extended</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   stack_map_frame::same_locals_1_stack_item_frame_extended</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf0d1f6336e72271bc0d91186a9360d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf0d1f6336e72271bc0d91186a9360d5">&#9670;&nbsp;</a></span>stack</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structverification__type__info.html">verification_type_info</a>** stack_map_frame::stack</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>A documentação para esta estrutura foi gerada a partir do seguinte arquivo:<ul>
+<li><a class="el" href="structures_8h_source.html">structures.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>JVM - Grupo 4: Código-Fonte de lista_modelo.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">JVM - Grupo 4
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">Projeto da máquina virtual Java da disciplina de Software Básico</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Busca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">lista_modelo.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="lista__modelo_8h.html">Vá para a documentação deste arquivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">/* Essa lista foi implementada utilizando strings. Substituir a string pelo elemento que será utilizado */</span></div><div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="structlista.html">    4</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlista.html">lista</a>{</div><div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="structlista.html#a1ba5a9f199d6bf09cb40c905d50685f0">    5</a></span>&#160;    <span class="keywordtype">char</span> *<a class="code" href="structlista.html#a1ba5a9f199d6bf09cb40c905d50685f0">string</a>;</div><div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="structlista.html#a3b0e375147c1163d74544fd206a1f1de">    6</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlista.html">lista</a> *<a class="code" href="structlista.html#a3b0e375147c1163d74544fd206a1f1de">prox</a>,*<a class="code" href="structlista.html#a92e5a9da9a7788d2a85de746a88b336f">ant</a>;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;};</div><div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="lista__modelo_8h.html#a83d34a2ef405ccb8e18cf64ba8d2cb0d">    8</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structlista.html">lista</a> <a class="code" href="structlista.html">Lista</a>;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<a class="code" href="structlista.html">Lista</a>* <a class="code" href="lista__modelo_8h.html#a81b725a0bcfa73b47d54e0660637a14e">CriarLista</a>();</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<a class="code" href="structlista.html">Lista</a>* <a class="code" href="lista__modelo_8h.html#ad9b8c6d6a9548716c556e6c6a4bf58b5">InserirInicio</a>(<a class="code" href="structlista.html">Lista</a> *lis, <span class="keywordtype">char</span> *<span class="keywordtype">string</span>); </div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<a class="code" href="structlista.html">Lista</a>* <a class="code" href="lista__modelo_8h.html#a3746614d6d817f200fd44886a833f785">InserirFim</a>(<a class="code" href="structlista.html">Lista</a> *lis, <span class="keywordtype">char</span> *<span class="keywordtype">string</span>);</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<a class="code" href="structlista.html">Lista</a>* <a class="code" href="lista__modelo_8h.html#aeba49d4f8a6f9f71d93e3a8965a7cea5">RemoverInicio</a>(<a class="code" href="structlista.html">Lista</a> *lis);</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<a class="code" href="structlista.html">Lista</a>* <a class="code" href="lista__modelo_8h.html#a77ae280ea65f9924373591546a6da38d">RemoverFim</a>(<a class="code" href="structlista.html">Lista</a> *lis);</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<a class="code" href="structlista.html">Lista</a>* <a class="code" href="lista__modelo_8h.html#ada1cdf80613d35a4185f04e89130d16d">RemoverElemento</a>(<a class="code" href="structlista.html">Lista</a> *lis, <span class="keywordtype">char</span> *<span class="keywordtype">string</span>);</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<a class="code" href="structlista.html">Lista</a>* <a class="code" href="lista__modelo_8h.html#a6e2af4da846d074b25c8d421c588bb1c">BuscarElemento</a>(<a class="code" href="structlista.html">Lista</a> *lis, <span class="keywordtype">char</span> *<span class="keywordtype">string</span>);</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<a class="code" href="structlista.html">Lista</a>* <a class="code" href="lista__modelo_8h.html#a9a5d51691dc0f6c55198b2dd24613b73">BuscarPosicao</a>(<a class="code" href="structlista.html">Lista</a> *lis, <span class="keywordtype">int</span> posicao);</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<a class="code" href="structlista.html">Lista</a>* <a class="code" href="lista__modelo_8h.html#a1f8dfa23426c9c8a25dfb674a68531da">InserirPosicao</a>(<a class="code" href="structlista.html">Lista</a> *lis, <span class="keywordtype">char</span> *<span class="keywordtype">string</span>, <span class="keywordtype">int</span> posicao);</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<a class="code" href="structlista.html">Lista</a>* <a class="code" href="lista__modelo_8h.html#a7ee6d07249e5b8347432d34cd2d517fc">RemoverPosicao</a>(<a class="code" href="structlista.html">Lista</a> *lis, <span class="keywordtype">int</span> posicao);</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="lista__modelo_8h.html#a90f183f234445ac8b07c1135c061c4db">ImprimirLista</a>(<a class="code" href="structlista.html">Lista</a> *lis);</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">void</span> <a class="code" href="lista__modelo_8h.html#a7e5b11a1eb9f7269a4ac7c2410961f17">LiberarLista</a>(<a class="code" href="structlista.html">Lista</a> *lis);</div><div class="ttc" id="lista__modelo_8h_html_a3746614d6d817f200fd44886a833f785"><div class="ttname"><a href="lista__modelo_8h.html#a3746614d6d817f200fd44886a833f785">InserirFim</a></div><div class="ttdeci">Lista * InserirFim(Lista *lis, char *string)</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:24</div></div>
+<div class="ttc" id="lista__modelo_8h_html_a7e5b11a1eb9f7269a4ac7c2410961f17"><div class="ttname"><a href="lista__modelo_8h.html#a7e5b11a1eb9f7269a4ac7c2410961f17">LiberarLista</a></div><div class="ttdeci">void LiberarLista(Lista *lis)</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:174</div></div>
+<div class="ttc" id="lista__modelo_8h_html_a77ae280ea65f9924373591546a6da38d"><div class="ttname"><a href="lista__modelo_8h.html#a77ae280ea65f9924373591546a6da38d">RemoverFim</a></div><div class="ttdeci">Lista * RemoverFim(Lista *lis)</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:52</div></div>
+<div class="ttc" id="structlista_html_a1ba5a9f199d6bf09cb40c905d50685f0"><div class="ttname"><a href="structlista.html#a1ba5a9f199d6bf09cb40c905d50685f0">lista::string</a></div><div class="ttdeci">char * string</div><div class="ttdef"><b>Definition:</b> lista_modelo.h:5</div></div>
+<div class="ttc" id="structlista_html"><div class="ttname"><a href="structlista.html">lista</a></div><div class="ttdef"><b>Definition:</b> lista_modelo.h:4</div></div>
+<div class="ttc" id="lista__modelo_8h_html_a81b725a0bcfa73b47d54e0660637a14e"><div class="ttname"><a href="lista__modelo_8h.html#a81b725a0bcfa73b47d54e0660637a14e">CriarLista</a></div><div class="ttdeci">Lista * CriarLista()</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:6</div></div>
+<div class="ttc" id="lista__modelo_8h_html_a90f183f234445ac8b07c1135c061c4db"><div class="ttname"><a href="lista__modelo_8h.html#a90f183f234445ac8b07c1135c061c4db">ImprimirLista</a></div><div class="ttdeci">void ImprimirLista(Lista *lis)</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:165</div></div>
+<div class="ttc" id="lista__modelo_8h_html_a6e2af4da846d074b25c8d421c588bb1c"><div class="ttname"><a href="lista__modelo_8h.html#a6e2af4da846d074b25c8d421c588bb1c">BuscarElemento</a></div><div class="ttdeci">Lista * BuscarElemento(Lista *lis, char *string)</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:89</div></div>
+<div class="ttc" id="lista__modelo_8h_html_a9a5d51691dc0f6c55198b2dd24613b73"><div class="ttname"><a href="lista__modelo_8h.html#a9a5d51691dc0f6c55198b2dd24613b73">BuscarPosicao</a></div><div class="ttdeci">Lista * BuscarPosicao(Lista *lis, int posicao)</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:100</div></div>
+<div class="ttc" id="structlista_html_a3b0e375147c1163d74544fd206a1f1de"><div class="ttname"><a href="structlista.html#a3b0e375147c1163d74544fd206a1f1de">lista::prox</a></div><div class="ttdeci">struct lista * prox</div><div class="ttdef"><b>Definition:</b> lista_modelo.h:6</div></div>
+<div class="ttc" id="lista__modelo_8h_html_a1f8dfa23426c9c8a25dfb674a68531da"><div class="ttname"><a href="lista__modelo_8h.html#a1f8dfa23426c9c8a25dfb674a68531da">InserirPosicao</a></div><div class="ttdeci">Lista * InserirPosicao(Lista *lis, char *string, int posicao)</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:112</div></div>
+<div class="ttc" id="lista__modelo_8h_html_a7ee6d07249e5b8347432d34cd2d517fc"><div class="ttname"><a href="lista__modelo_8h.html#a7ee6d07249e5b8347432d34cd2d517fc">RemoverPosicao</a></div><div class="ttdeci">Lista * RemoverPosicao(Lista *lis, int posicao)</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:142</div></div>
+<div class="ttc" id="structlista_html_a92e5a9da9a7788d2a85de746a88b336f"><div class="ttname"><a href="structlista.html#a92e5a9da9a7788d2a85de746a88b336f">lista::ant</a></div><div class="ttdeci">struct lista * ant</div><div class="ttdef"><b>Definition:</b> lista_modelo.h:6</div></div>
+<div class="ttc" id="lista__modelo_8h_html_ad9b8c6d6a9548716c556e6c6a4bf58b5"><div class="ttname"><a href="lista__modelo_8h.html#ad9b8c6d6a9548716c556e6c6a4bf58b5">InserirInicio</a></div><div class="ttdeci">Lista * InserirInicio(Lista *lis, char *string)</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:10</div></div>
+<div class="ttc" id="lista__modelo_8h_html_ada1cdf80613d35a4185f04e89130d16d"><div class="ttname"><a href="lista__modelo_8h.html#ada1cdf80613d35a4185f04e89130d16d">RemoverElemento</a></div><div class="ttdeci">Lista * RemoverElemento(Lista *lis, char *string)</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:67</div></div>
+<div class="ttc" id="lista__modelo_8h_html_aeba49d4f8a6f9f71d93e3a8965a7cea5"><div class="ttname"><a href="lista__modelo_8h.html#aeba49d4f8a6f9f71d93e3a8965a7cea5">RemoverInicio</a></div><div class="ttdeci">Lista * RemoverInicio(Lista *lis)</div><div class="ttdef"><b>Definition:</b> lista_modelo.c:42</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>
