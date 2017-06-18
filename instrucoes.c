@@ -1,3 +1,9 @@
+/**
+ * @file instrucoes.c
+ * @brief Arquivo fonte que monta o vetor de instruções e seus metadados.
+ * @see https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1037,14 +1043,12 @@ instrucao* construirInstrucoes(void){
 			case tableswitch:
 				strcpy(instrucoes[i].inst_nome,"tableswitch");
 				instrucoes[i].opcode = tableswitch;
-				// -1 é tamanho variável. A gente tanto na hora da leitura como na hora da interpretação, iremos dar um tratamento especial
 				instrucoes[i].numarg = -1;
 				instrucoes[i].numop = 1;
 			break;
 			case lookupswitch:
 				strcpy(instrucoes[i].inst_nome,"lookupswitch");
 				instrucoes[i].opcode = lookupswitch;
-				// -1 é tamanho variável. A gente tanto na hora da leitura como na hora da interpretação, iremos dar um tratamento especial
 				instrucoes[i].numarg = -1;
 				instrucoes[i].numop = 1;
 			break;
@@ -1112,28 +1116,24 @@ instrucao* construirInstrucoes(void){
 				strcpy(instrucoes[i].inst_nome,"invokevirtual");
 				instrucoes[i].opcode = invokevirtual;
 				instrucoes[i].numarg = 2;
-				// Número de operandos vai descobrir olhando para o descritor
 				instrucoes[i].numop = -1;
 			break;
 			case invokespecial:
 				strcpy(instrucoes[i].inst_nome,"invokespecial");
 				instrucoes[i].opcode = invokespecial;
 				instrucoes[i].numarg = 2;
-				// Número de operandos vai descobrir olhando para o descritor
 				instrucoes[i].numop = -1;
 			break;
 			case invokestatic:
 				strcpy(instrucoes[i].inst_nome,"invokestatic");
 				instrucoes[i].opcode = invokestatic;
 				instrucoes[i].numarg = 2;
-				// Número de operandos vai descobrir olhando para o descritor
 				instrucoes[i].numop = -1;
 			break;
 			case invokeinterface:
 				strcpy(instrucoes[i].inst_nome,"invokeinterface");
 				instrucoes[i].opcode = invokeinterface;
 				instrucoes[i].numarg = 4;
-				// Número de operandos vai descobrir olhando para o descritor
 				instrucoes[i].numop = -1;
 			break;
 			case inst_new:
@@ -1194,14 +1194,12 @@ instrucao* construirInstrucoes(void){
 				strcpy(instrucoes[i].inst_nome,"wide");
 				instrucoes[i].opcode = wide;
 				instrucoes[i].numarg = 5;
-				// Número de operandos é variável pois dependem da instrução que a wide está modificando
 				instrucoes[i].numop = -1;
 			break;
 			case multianewarray:
 				strcpy(instrucoes[i].inst_nome,"multianewarray");
 				instrucoes[i].opcode = multianewarray;
 				instrucoes[i].numarg = 3;
-				// Número de operandos é variável pois depende do número de dimensões do array que está sendo criado
 				instrucoes[i].numop = -1;
 			break;
 			case ifnull:
@@ -1233,7 +1231,6 @@ instrucao* construirInstrucoes(void){
 				strcpy(instrucoes[i].inst_nome,"undefined");
 				instrucoes[i].opcode = 255;
 				instrucoes[i].numarg = -1;
-				// Instrução não definida. Não vai ter operandos, não vai ter nada.
 				instrucoes[i].numop = -1;
 			break;
 		}

@@ -2,47 +2,55 @@
 \label{structinstrucao}\index{instrucao@{instrucao}}
 
 
+Estrutura de dados de uma instrução.  
+
+
+
+
 {\ttfamily \#include $<$instrucoes.\+h$>$}
 
 \subsection*{Atributos Públicos}
 \begin{DoxyCompactItemize}
 \item 
-char \hyperlink{structinstrucao_a848f2424a95f3d71ded0327a524446b8}{inst\+\_\+nome} \mbox{[}50\mbox{]}
+char \hyperlink{structinstrucao_ac2c793a7850383fa1cb4cf040d3c3cb4}{inst\+\_\+nome} \mbox{[}50\mbox{]}
 \item 
-\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} \hyperlink{structinstrucao_a6fab1343e02c9298bc65ce60976e41a0}{opcode}
+\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} \hyperlink{structinstrucao_a588fa0d2c21e3de3d31382cdd08a3f6c}{opcode}
 \item 
-\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} \hyperlink{structinstrucao_a59c5e317639fc03517361dd90678d239}{numarg}
+\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} \hyperlink{structinstrucao_abe29e9abb3acf6ab4f1b4690d31b456d}{numarg}
 \item 
-\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} \hyperlink{structinstrucao_ae1e28e385eb8ef40eba3918cd8f458d0}{numop}
+\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} \hyperlink{structinstrucao_ada3363067b90142344358001d51dd197}{numop}
 \end{DoxyCompactItemize}
 
 
+\subsection{Descrição Detalhada}
+Estrutura de dados de uma instrução. 
+
 \subsection{Atributos}
-\mbox{\Hypertarget{structinstrucao_a848f2424a95f3d71ded0327a524446b8}\label{structinstrucao_a848f2424a95f3d71ded0327a524446b8}} 
+\mbox{\Hypertarget{structinstrucao_ac2c793a7850383fa1cb4cf040d3c3cb4}\label{structinstrucao_ac2c793a7850383fa1cb4cf040d3c3cb4}} 
 \index{instrucao@{instrucao}!inst\+\_\+nome@{inst\+\_\+nome}}
 \index{inst\+\_\+nome@{inst\+\_\+nome}!instrucao@{instrucao}}
 \subsubsection{\texorpdfstring{inst\+\_\+nome}{inst\_nome}}
-{\footnotesize\ttfamily char instrucao\+::inst\+\_\+nome\mbox{[}50\mbox{]}}
+{\footnotesize\ttfamily instrucao\+::inst\+\_\+nome}
 
-\mbox{\Hypertarget{structinstrucao_a59c5e317639fc03517361dd90678d239}\label{structinstrucao_a59c5e317639fc03517361dd90678d239}} 
+Nome da instrução \mbox{\Hypertarget{structinstrucao_abe29e9abb3acf6ab4f1b4690d31b456d}\label{structinstrucao_abe29e9abb3acf6ab4f1b4690d31b456d}} 
 \index{instrucao@{instrucao}!numarg@{numarg}}
 \index{numarg@{numarg}!instrucao@{instrucao}}
 \subsubsection{\texorpdfstring{numarg}{numarg}}
-{\footnotesize\ttfamily \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} instrucao\+::numarg}
+{\footnotesize\ttfamily instrucao\+::numarg}
 
-\mbox{\Hypertarget{structinstrucao_ae1e28e385eb8ef40eba3918cd8f458d0}\label{structinstrucao_ae1e28e385eb8ef40eba3918cd8f458d0}} 
+Número de argumentos da instrução \mbox{\Hypertarget{structinstrucao_ada3363067b90142344358001d51dd197}\label{structinstrucao_ada3363067b90142344358001d51dd197}} 
 \index{instrucao@{instrucao}!numop@{numop}}
 \index{numop@{numop}!instrucao@{instrucao}}
 \subsubsection{\texorpdfstring{numop}{numop}}
-{\footnotesize\ttfamily \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} instrucao\+::numop}
+{\footnotesize\ttfamily instrucao\+::numop}
 
-\mbox{\Hypertarget{structinstrucao_a6fab1343e02c9298bc65ce60976e41a0}\label{structinstrucao_a6fab1343e02c9298bc65ce60976e41a0}} 
+Número de operandos que a instrução dá pop na pilha de operandos \mbox{\Hypertarget{structinstrucao_a588fa0d2c21e3de3d31382cdd08a3f6c}\label{structinstrucao_a588fa0d2c21e3de3d31382cdd08a3f6c}} 
 \index{instrucao@{instrucao}!opcode@{opcode}}
 \index{opcode@{opcode}!instrucao@{instrucao}}
 \subsubsection{\texorpdfstring{opcode}{opcode}}
-{\footnotesize\ttfamily \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} instrucao\+::opcode}
+{\footnotesize\ttfamily instrucao\+::opcode}
 
-
+Opcode da instrução correspondente 
 
 A documentação para esta estrutura foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
 \item 

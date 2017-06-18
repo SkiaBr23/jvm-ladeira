@@ -1,18 +1,52 @@
+/**
+ * @file instrucoes.h
+ * @brief Arquivo cabeçalho que contém a estrutura de instrucao e sua enumeração
+ * @see https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html
+ */
+
 #ifndef INSTRUCOES_H
 #define INSTRUCOES_H
 
 #include "structures.h"
 
+/**
+ * @struct instrucao
+ * 
+ * @brief Estrutura de dados de uma instrução 
+ * 
+ */
+/**
+ * @var instrucao::inst_nome 
+ * Nome da instrução
+ */
+/**
+ * @var instrucao::opcode 
+ * Opcode da instrução correspondente
+ */ 
+/**
+ * @var instrucao::numarg
+ * Número de argumentos da instrução
+ */ 
+/**
+ * @var instrucao::numop
+ * Número de operandos que a instrução dá pop na pilha de operandos
+ */ 
 struct instrucao{
   char inst_nome[50];
   u1 opcode;
   u1 numarg;
-  u1 numop; // Número de operandos que a instrução dá pop na pilha de operandos.
+  u1 numop;
 };
 
+/**
+ * @brief Definição de tipo 'instrucao' para a estrutura
+ */
 typedef struct instrucao instrucao;
 
-
+/**
+ * @enum instrucoes_op
+ * @brief Enumerador das instruções de acordo com a documentação da JVM
+ */
 enum instrucoes_op {
   nop = 0x00, aconst_null = 0x01, iconst_m1 = 0x02, iconst_0 = 0x03, iconst_1 = 0x04, iconst_2 = 0x05, iconst_3 = 0x06, iconst_4 = 0x07,
   iconst_5 = 0x08, lconst_0 = 0x09, lconst_1 = 0x0a, fconst_0 = 0x0b, fconst_1 = 0x0c, fconst_2 = 0x0d, dconst_0 = 0x0e, dconst_1 = 0x0f,
@@ -40,10 +74,30 @@ enum instrucoes_op {
   goto_w = 0xc8, jsr_w = 0xc9,
 };
 
+/**
+ * @brief Definição de tipo 'instrucoes_op' para a enumeração
+ */
 typedef enum instrucoes_op instrucoes_op;
 
+/**
+ * @var contagem_enum
+ * Número de instruções presentes na enumeração
+ */
 extern const int contagem_enum;
 
+
+/**
+ * @brief Cria um vetor de instruções e as configura.
+ * @details Após criar um vetor de instruções, a função define
+ * cada instrução com os campos corretos (opcode, numarg e numop),
+ * retornando o vetor ao fim da configuração.
+ * 
+ * @note Instruções com 'numarg' definido como -1 são instruções com numero
+ * de argumentos variáveis, e serão tratadas posteriormente.
+ * @note Instruções com 'numop' definido como -1 são instruções que precisam
+ * verificar o descritor para definir seu número de operandos.
+ * @return Ponteiro para o vetor de instruções já configuradas
+ */
 instrucao* construirInstrucoes(void);
 
 #endif
