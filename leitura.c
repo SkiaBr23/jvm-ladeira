@@ -3,7 +3,7 @@ Universidade de Brasília - 01/2017
 Software Básico - Turma A
 Projeto Leitor/Exibidor de arquivo .class
 
-Alunos: Maximillian Fan Xavier - 12/0153271
+Alunos: 		Maximillian Fan Xavier - 12/0153271
 				Rafael Dias da Costa - 12/0133253
 				Murilo Cerqueira Medeiros - 12/0130637
 				Eduardo Sousa da Silva - 13/0108405

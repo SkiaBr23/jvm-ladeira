@@ -816,13 +816,94 @@ void ireturn_impl(frame *f){
 
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	// Colocar no stack do vetor de variáveis seguir essa con
+	// Empilhar na pilha do frame do chamador
 }
 
 void areturn_impl(frame *f){
 	// Analisar mesmas coisas do ireturn
 	pilha_operandos *valor = Pop_operandos(f->p);
 }
+
+void inst_return_impl(frame *f){
+
+	// Retornar void para o chamador
+	void *a = NULL;
+
+	return(a);
+}
+
+void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+
+	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+
+	// Resolver o field
+	struct Fieldref campo = f->cp[indice_cp];
+}
+
+void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+
+	// Resolver o field
+
+	struct Fieldref campo = f->cp[indice_cp];
+}
+
+void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+	pilha_operandos *objeto = Pop_operandos(f->p);
+
+	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+
+	// Resolver o field
+
+	struct Fieldref campo = f->cp[indice_cp];
+}
+
+void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+
+	// Resolver o field 
+
+	struct Fieldref campo = f->cp[indice_cp];
+}
+
+void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+
+	struct Methodref metodo = f->cp[indice_cp];
+}
+
+void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
+	pilha_operandos *valor = Pop_operandos(f->p);
+
+	u2 offset = 0;
+
+	if(valor==NULL){
+		offset = (branchbyte1 << 8) | branchbyte2;
+	}
+	else{
+		// Continuar execução normalmente
+	}
+}
+
+void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
+	pilha_operandos *valor = Pop_operandos(f->p);
+
+	u2 offset = 0;
+
+	if(valor!=NULL){
+		offset = (branchbyte1 << 8) | branchbyte2;
+	}
+	else{
+		// Continuar execução normalmente
+	}
+}
+
+
+
+
+
+
+
 
 
 

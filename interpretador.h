@@ -182,9 +182,31 @@ void lreturn_impl(frame *f); // Não implementado
 void freturn_impl(frame *f); // Não implementado
 void dreturn_impl(frame *f); // Não implementado
 void areturn_impl(frame *f);
-void inst_return(frame *f); // Não implmentado
-
-
+void inst_return_impl(frame *f);
+void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Implementado parcialmente
+void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Implementado parcialmente
+void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Implementado parcialmente
+void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Implementado parcialmente
+void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Implementado parcialmente
+// Pulei várias instruções
+void invokespecial_impl(frame *f); // Não implementado
+void invokestatic_impl(frame *f); // Não implementado
+void invokeinterface_impl(frame *f); // Não implementado
+void inst_new_impl(frame *f); // Não implementado
+void newarray_impl(frame *f); // Não implementado
+void anewarray_impl(frame *f); // Não implementado
+void arraylength_impl(frame *f); // Não implementado
+void athrow_impl(frame *f); // Não implementado
+void checkcast_impl(frame *f); // Não implementado
+void instanceof_impl(frame *f); // Não implementado
+void monitorenter_impl(frame *f); // Não implementado
+void monitorexit_impl(frame *f); // Não implementado
+void wide_impl(frame *f); // Não implementado
+void multianewarray_impl(frame *f); // Não implementado
+void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2); // Implementado parcialmente
+void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2); // Implementado parcialmente
+void goto_w(frame *f);
+void jsr_w(frame *f);
 
 
 
