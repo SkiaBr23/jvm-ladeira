@@ -3,7 +3,8 @@
 
 #include "instrucoes.h"
 
-/* Ficamos na dúvida entre u1 e u4, não sabemos qual valor deve ser mandado para o argumento das funções */
+/* Observar todas as instruções, pois a maioria delas está parcialmente implementada */
+/* Observar todas as intruções quanto ao lançamento de exceções */
 void nop_impl(void); // Não implementado
 void aconst_null_impl(frame *f);
 void iconst_m1_impl(frame *f);
@@ -156,7 +157,7 @@ void i2d_impl(frame *f); // Não implementado
 void i2s_impl(frame *f);
 void lcmp_impl(frame *f); // Não implementado
 void fcmpl_impl(frame *f); // Não implementado
-void fcmpg_impl(frame *f); // Não implement
+void fcmpg_impl(frame *f); // Não implementado
 void dcmpl_impl(frame *f); // Não implementado
 void dcmpg_impl(frame *f); // Não implementado
 void ifeq_impl(frame *f); 
@@ -193,9 +194,9 @@ void invokespecial_impl(frame *f); // Não implementado
 void invokestatic_impl(frame *f); // Não implementado
 void invokeinterface_impl(frame *f); // Não implementado
 void inst_new_impl(frame *f); // Não implementado
-void newarray_impl(frame *f); // Não implementado
+void newarray_impl(frame *f ,u1 atype); // Observação do -INT_MAX
 void anewarray_impl(frame *f); // Não implementado
-void arraylength_impl(frame *f); // Não implementado
+void arraylength_impl(frame *f);
 void athrow_impl(frame *f); // Não implementado
 void checkcast_impl(frame *f); // Não implementado
 void instanceof_impl(frame *f); // Não implementado
@@ -207,14 +208,4 @@ void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void goto_w(frame *f);
 void jsr_w(frame *f);
-
-
-
-
-
-
-
-
-
-
 #endif

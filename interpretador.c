@@ -5,6 +5,7 @@
 
 #include "interpretador.h"
 #include <stdlib.h>
+#include <limits.h>
 
 void aconst_null_impl(frame *f){
 	Push_operandos(f->p,0,REFERENCE_OP); // 0 do tipo referência quer dizer referência apontando para NULL
@@ -674,127 +675,127 @@ void i2s_impl(frame *f){
 	f->p = Push_operandos(f->p,resultado,SHORT_OP);
 }
 
-void ifeq_impl(frame *f){
+void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 
-	// Amanhãl menbra
+	
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando == 0){
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 		// Alterar o PC aqui para fazer o branch
 	}
-
 }
 
-void ifne_impl_imple(frame *f){
+void ifne_impl_imple(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 
-	if(valor1->topo->opernado !=0){
-		// Fazer o salt
+	if(valor1->topo->operando !=0){
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-variável sabe?
+void iflt(frame *f, u1 branchbyte1, u1 branchbyte2){
 
-void iflt(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 
 	if(valor->topo->valor1<0){
-
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void ifge_impl(frame *f){
+void ifge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
-	if(valor->topo->valor1 >= 0){
 
+	if(valor->topo->valor1 >= 0){
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void ifgt_impl(frame *{
+void ifgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor1->topo->operando > 0){
-		// Branch aqui
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void ifle_impl(frame *{
+void ifle_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando <= 0){
-		// Branch
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void icmpeq_impl(frame *f){
+void icmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando == valor2->topo->operando){
-		// Efetuar o branch
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void icmpne_impl(frame *f){
+void icmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando != valor2->topo->operando){
-		// Efetuar o branch
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void icmplt_impl(frame *f){
+void icmplt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando < valor2->topo->operando){
-		// Efetuar o branch
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void icmpge_impl(frame *f){
+void icmpge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando >= valor2->topo->operando){
-		// Efetuar o branch
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void icmpgt_impl(frame *f){
+void icmpgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando > valor2->topo->operando){
-		// Efetuar o branch
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void icmple_impl(frame *f){
+void icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando <= valor2->topo->operando){
-		// Efetuar o branch
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void acmpeq_impl(frame *f){
+void acmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando == valor2->topo->operando){
-		// Efetuar o branch
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void acmpne_impl(frame *f){
+void acmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando != valor2->topo->operando){
-		// Efetuar o branch
+		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
@@ -816,12 +817,14 @@ void ret_impl(frame *f,u1 index){
 	// Escrever no registrador PC
 }
 
+/***** O valor retornado é entre frames. Analisar como acessar a estrutura global *****/
 void ireturn_impl(frame *f){
 	// Analisar as condições do método que deve ser retornado
 
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	// Empilhar na pilha do frame do chamador
+	// Empilhar na pilha de operandos do frame do chamador
+	jvm->pilha_frames->prox = Push_operandos(valor);
 }
 
 void areturn_impl(frame *f){
@@ -831,10 +834,8 @@ void areturn_impl(frame *f){
 
 void inst_return_impl(frame *f){
 
-	// Retornar void para o chamador
-	void *a = NULL;
-
-	return(a);
+	// Empilhar NULL na pilha de operandos do frame chamador, ou seja, o próximo frame na pilha
+	jvm->pilha_frames->prox = Push_operandos(NULL);
 }
 
 void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -843,6 +844,8 @@ void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	// Resolver o field
 	struct Fieldref campo = f->cp[indice_cp];
+
+	f->p = Push_operandos(f->p,(i4) indice_cp,REFERENCE_OP);
 }
 
 void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -875,6 +878,100 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 
 	struct Methodref metodo = f->cp[indice_cp];
+}
+
+void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+
+	// Resolver a classe
+
+	// Alocar memória
+
+	// Colocar o ponteiro na pilha de operandos
+}
+
+void newarray_impl(frame *f, u1 atype){
+	i4 count = Pop_operandos(f->p);
+
+	void *endereco = NULL;
+	i4 referencia = 0;
+
+	if(count<0){
+		// Lançar exceção
+	}
+	else{
+		switch(atype){
+			case T_BOOLEAN:
+				endereco = malloc((count+1)*sizeof(u1));
+				referencia = (i4) endereco;
+			break;
+	
+			case T_CHAR:
+				endereco = malloc((count+1)*sizeof(i2));
+				referencia = (i4) endereco;
+			break;
+	
+			case T_FLOAT:
+				endereco = malloc((count+1)*sizeof(u4));
+				referencia = (i4) endereco;
+			break;
+	
+			case T_DOUBLE:
+				endereco = malloc(2*(count+1)*sizeof(u4));
+				referencia = (i4) endereco;
+			break;
+	
+			case T_BYTE:
+				endereco = malloc((count+1)*sizeof(i1));
+				referencia = (i4) endereco;
+			break;
+	
+			case T_SHORT:
+				endereco = malloc((count+1)*sizeof(i2));
+				referencia = (i4) endereco;
+			break;
+	
+			case T_INT:
+				endereco = malloc((count+1)*sizeof(i4));
+				referencia = (i4) endereco;
+			break;
+	
+			case T_LONG:
+				endereco = malloc(2*(count+1)*sizeof(i4));
+				referencia = (i4) endereco;
+			break;
+		}
+	
+		// Inicializar com os valores default
+		for(void *p=endereco,i=0;i<=count;i++,p++){
+			// Alocar com -INT_MAX para marcar o fim do array
+			if(i==count){
+				*p = -INT_MAX;
+			}
+			else{
+				*p=0;
+			}
+		}
+	
+		f->p = Push_operandos(f->p,referencia,REFERENCE_OP);
+	}
+}
+
+void arraylength_impl(frame *f){
+	pilha_operandos *array_ref = Pop_operandos(f->p);
+	i4 referencia = array_ref->operando;
+	int tamanho = 0;
+
+	/* Observação */
+	// Não tem como descobrir o tipo do elemento, a princípio.
+	// Como fazer esse incremento? Foi alocado como void, mas com sizeofs diferentes (observar instrução newarray)
+	// O void vai garantir que o incremento é o mesmo?
+	for (void *p = referencia;*p!=-INT_MAX;p++,tamanho++){
+		
+	}
+
+	f->p = Push_operandos(f->p,tamanho,INTEGER_OP);
+
 }
 
 void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
