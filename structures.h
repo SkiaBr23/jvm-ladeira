@@ -236,6 +236,19 @@ enum access_flags{
 
 typedef enum access_flags access_flags;
 
+enum tipos_array{
+	T_BOOLEAN = 4,
+	T_CHAR,
+	T_FLOAT,
+	T_DOUBLE,
+	T_BYTE,
+	T_SHORT,
+	T_INT,
+	T_LONG
+};
+
+typedef enum tipos_array tipos_array;
+
 /*Definição da estrutura de Attributes*/
 struct attribute_info {
 	/*Índice válido em Constant Pool, indicando
