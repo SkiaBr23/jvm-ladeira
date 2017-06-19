@@ -72,7 +72,7 @@ int main(int argc, char const *argv[]){
 			imprimirClassFile(jvm->classes->arquivoClass, stdout);
 			imprimirClassFile(jvm->classes->arquivoClass, outputFile);
 			fclose(outputFile);
-		}else{
+		} else {
 			printf("Erro ao criar arquivo de saida\n");
 		}
 	} else if (opcao == 2) {

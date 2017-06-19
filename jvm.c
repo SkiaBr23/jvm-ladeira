@@ -13,6 +13,7 @@ JVM* InicializarJVM() {
 	novo = (JVM*)malloc(sizeof(JVM));
 	novo->classes = NULL;
 	novo->frames = NULL;
+	novo->pc = 0;
 	return novo;
 }
 
