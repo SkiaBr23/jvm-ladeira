@@ -191,6 +191,7 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 // Pulei várias instruções
 void invokespecial_impl(frame *f); // Não implementado
+/* Próximo objetivo: implementar invokestatic */
 void invokestatic_impl(frame *f); // Não implementado
 void invokeinterface_impl(frame *f); // Não implementado
 void inst_new_impl(frame *f); // Não implementado

@@ -3,8 +3,13 @@ public class Main {
     public static final long varL = 246;
     public static Object a = null;
 
+    public static int quadrado(int a){
+    	return(a*a);
+    }
+
     public static void main(String[] args) {
         // Prints "Hello, World" to the terminal window.
+        int b = quadrado(5);
         System.out.println("Hello, World");
     }
 
