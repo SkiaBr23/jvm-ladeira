@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "instrucoes.h"
 #include "jvm.h"
 // #include "pilha_frames.h"
 #include "leitura.h"
@@ -10,6 +11,7 @@
 #define PUBLIC_STATIC 0x0009
 
 JVM *jvm = NULL;
+instrucao* instrucoes;
 
 JVM* CriarJVM(){
 	return NULL;
@@ -22,7 +24,10 @@ JVM* InicializarJVM() {
 	novo->classes = malloc(sizeof(classesCarregadas));
 	novo->frames = malloc(sizeof(pilha_frames));
 	novo->frames->topo = NULL;
-	novo->pc = 0;
+	novo->pc = 0; 
+
+	instrucoes = construirInstrucoes();
+
 	return novo;
 }
 
@@ -58,7 +63,6 @@ void executarJVM(){
 	method_info *metodos = jvm->classes->arquivoClass->methods;
 
 	int i=0;
-	jvm->frames = CriarPilha_frames();
 
 	for(method_info *aux=metodos;i<jvm->classes->arquivoClass->methods_count;aux++,i++){
 		char *stringmetodo = decodificaStringUTF8(jvm->classes->arquivoClass->constant_pool-1+aux->name_index);
@@ -88,12 +92,33 @@ void executarMetodo(method_info *m){
 
 			code_attribute *c = (code_attribute *) aux->info;
 
-			for(u1 *j=c->code;j<c->code+c->code_length;j++){
-				printf("%01x\t",*j);
-			}
+			interpretarCode(c->code,c->code_length);
 
 		}
 	}
+}
 
+void interpretarCode(u1 *code,u4 length){
+	u1 opcode;
+	for (u1 *j=code;j<code+length;){
+		opcode = *j;
+
+		instrucao i = instrucoes[opcode];
+		printf("%s\t",i.inst_nome);
+		j++;
+		u1 numarg = i.numarg;
+		if(numarg>0){
+
+			u1 *argumentos = malloc(numarg*sizeof(u1));
+	
+			for(u1 i=0;i<numarg;i++){
+				argumentos[i] = *j;
+				printf("%01x\t",argumentos[i]);
+				j++;
+			}
+		}
+
+		printf("\n\n");
+	}
 }
 

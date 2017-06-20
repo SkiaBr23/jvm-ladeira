@@ -9,14 +9,7 @@ lista_frames* Criarlista_frames(){
 
 lista_frames* InserirInicio_frames(lista_frames* lis,frame *f){
 	lista_frames *novo = (lista_frames*) malloc(sizeof(lista_frames));
-	novo->f = (frame*) malloc(sizeof(frame));
-	novo->f->end_retorno = f->end_retorno;
-	novo->f->p = malloc(sizeof(pilha_operandos));
-	novo->f->p = f->p;
-	novo->f->v = malloc(sizeof(vetor_locais));
-	novo->f->v = f->v;
-	// novo->f->cp = malloc(sizeof())
-	novo->f->cp = f->cp;
+	novo->f = f;
 	novo->prox = lis;
 	novo->ant = NULL;
 	
