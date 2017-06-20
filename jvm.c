@@ -33,3 +33,5 @@ int opcaoMenu () {
 	}
 	return op;
 }
+
+JVM *jvm = NULL;

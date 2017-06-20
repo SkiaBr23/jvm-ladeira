@@ -6,16 +6,18 @@
 
 struct jvm{
 	classesCarregadas * classes;
-	pilha_frames * frames;
+	pilha_frames *frames;
 	//O ENDERECO É DADO PELA "POSICAO DO PONTEIRO",POR EXEMPLO, NEWARRAY UTILIZA DOIS VALORES, O OPCODE DA INSTRUCAO E O VALOR DO
 	//TIPO, LOGO SOMA +2 EM PC, PERGUNTAR PARA O MAX!
 	u4 pc;
 };
 typedef struct jvm JVM;
 
+extern JVM *jvm;
+
 JVM* CriarJVM();
 JVM* InicializarJVM();
-int opcaoMenu ();
+int opcaoMenu();
 //CODIFICAR FUNCAO PARA LIBERAR JVM, CHAMANDO FUNCOES INTERNAS DE FREE DAS ESTRUTURAS
 //void LiberarLista_frames(lista_frames *lis);
 

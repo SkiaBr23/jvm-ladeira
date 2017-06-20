@@ -70,6 +70,7 @@ struct classFile{
 	attribute_info ** attributes;	// Tabela Attributes
 
 };
+
 typedef struct classFile ClassFile;
 
 

@@ -4,6 +4,8 @@
 */
 
 #include "interpretador.h"
+#include "jvm.h"
+#include "leitura.h"
 #include <stdlib.h>
 #include <limits.h>
 
@@ -190,34 +192,34 @@ void iaload_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i4 *endereco = malloc(sizeof(i4 ));
-	endereco = ((i4*) referencia->topo->operando) + (indice->topo->operando * sizeof(i4));
+	i4 endereco;
+	endereco = ((i4) referencia->topo->operando) + (indice->topo->operando * sizeof(i4));
 
 	// Objetivo: Acessar o conteúdo do endereço "referencia+indice"
 	// O código para esse acesso não parece correto, tem que analisar
-	Push_operandos(f->p,*endereco,INTEGER_OP);
+	Push_operandos(f->p,endereco,INTEGER_OP);
 }
 
 void faload_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i4 *endereco = malloc(sizeof(i4));
-	endereco = ((i4*) referencia->topo->operando) + (indice->topo->operando * sizeof(i4));
+	i4 endereco;
+	endereco = ((i4) referencia->topo->operando) + (indice->topo->operando * sizeof(i4));
 
 	// Acessar o conteúdo do endereço "referencia+indice"
 	// O código para esse acesso não parece correto, tem que analisar
-	Push_operandos(f->p,*endereco,FLOAT_OP);
+	Push_operandos(f->p,endereco,FLOAT_OP);
 }
 
 void aaload_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	u4 *endereco = malloc(sizeof(u4));
-	endereco = ((u4*) referencia->topo->operando) + (indice->topo->operando * sizeof(u4));
+	u4 endereco;
+	endereco = ((u4) referencia->topo->operando) + (indice->topo->operando * sizeof(u4));
 
-	Push_operandos(f->p,*endereco,REFERENCE_OP);
+	Push_operandos(f->p,endereco,REFERENCE_OP);
 }
 
 void baload_impl(frame *f){
@@ -225,9 +227,9 @@ void baload_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i1 *endereco = malloc(sizeof(i1));
-	endereco = ((i1*) referencia->topo->operando) + (indice->topo->operando * sizeof(i1));
-	i1 byte = *endereco;
+	i1 endereco;
+	endereco = ((i1) referencia->topo->operando) + (indice->topo->operando * sizeof(i1));
+	i1 byte = endereco;
 	//O Sign Extend foi feito?
 	Push_operandos(f->p,(i4) byte,BYTE_OP);
 }
@@ -236,9 +238,9 @@ void caload_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	u2 *endereco = malloc(sizeof(u2));
-	endereco = ((u2*) referencia->topo->operando) + (indice->topo->operando * sizeof(u2));
-	u2 caracter = *endereco;
+	u2 endereco;
+	endereco = ((u2) referencia->topo->operando) + (indice->topo->operando * sizeof(u2));
+	u2 caracter = endereco;
 	//O Zero Extend foi feito?
 	Push_operandos(f->p,(u4) caracter,CHAR_OP);
 }
@@ -247,9 +249,9 @@ void saload_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i2 *endereco = malloc(sizeof(i2));
-	endereco = ((i2*) referencia->topo->operando) + (indice->topo->operando * sizeof(i2));
-	i2 ashort = *endereco;
+	i2 endereco;
+	endereco = ((i2) referencia->topo->operando) + (indice->topo->operando * sizeof(i2));
+	i2 ashort = endereco;
 	//O Sign Extend foi feito?
 	Push_operandos(f->p,(i4) ashort,SHORT_OP);
 }
@@ -343,10 +345,10 @@ void iastore_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i4 *endereco = malloc(sizeof(i4));
-	endereco = ((i4*) array->topo->operando) + (indice->topo->operando * sizeof(i4));
+	i4 endereco;
+	endereco = ((i4) array->topo->operando) + (indice->topo->operando * sizeof(i4));
 
-	*endereco = valor->topo->operando;
+	endereco = valor->topo->operando;
 }
 
 void fastore_impl(frame *f){
@@ -354,10 +356,10 @@ void fastore_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i4 *endereco = malloc(sizeof(i4));
-	endereco = ((i4*) array->topo->operando) + (indice->topo->operando * sizeof(i4));
+	i4 endereco;
+	endereco = ((i4) array->topo->operando) + (indice->topo->operando * sizeof(i4));
 
-	*endereco = valor->topo->operando;
+	endereco = valor->topo->operando;
 }
 
 void bastore_impl(frame *f){
@@ -365,10 +367,10 @@ void bastore_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i1 *endereco = malloc(sizeof(i1));
-	endereco = ((i1*) array->topo->operando) + (indice->topo->operando * sizeof(i1));
+	i1 endereco;
+	endereco = ((i1) array->topo->operando) + (indice->topo->operando * sizeof(i1));
 
-	*endereco = valor->topo->operando;
+	endereco = valor->topo->operando;
 }
 
 void castore_impl(frame *f){
@@ -376,10 +378,10 @@ void castore_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	u2 *endereco = malloc(sizeof(u2));
-	endereco = ((u2*) array->topo->operando) + (indice->topo->operando * sizeof(u2));
+	u2 endereco;
+	endereco = ((u2) array->topo->operando) + (indice->topo->operando * sizeof(u2));
 
-	*endereco = valor->topo->operando;
+	endereco = valor->topo->operando;
 }
 
 void sastore_impl(frame *f){
@@ -387,10 +389,10 @@ void sastore_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i2 *endereco = malloc(sizeof(i2));
-	endereco = ((i2*) array->topo->operando) + (indice->topo->operando * sizeof(i2));
+	i2 endereco;
+	endereco = ((i2) array->topo->operando) + (indice->topo->operando * sizeof(i2));
 
-	*endereco = valor->topo->operando;
+	endereco = valor->topo->operando;
 }
 
 pilha_operandos* pop_impl(frame *f){
@@ -642,7 +644,7 @@ void iinc_impl(frame *f,u1 index, i1 constante){
 	// Estender o sinal para 32 bits
 	i4 inteiro_constante = (i4) constante;
 
-	f->v[index] += inteiro_constante;
+	f->v[index].variavel += inteiro_constante;
 }
 
 void i2b_impl(frame *f){
@@ -670,7 +672,7 @@ void i2s_impl(frame *f){
 
 	i2 truncado = (i2) valor1->topo->operando;
 
-	i4 resultado = (i4) valor1->topo->operando;
+	i4 resultado = (i4) truncado;
 
 	f->p = Push_operandos(f->p,resultado,SHORT_OP);
 }
@@ -678,27 +680,27 @@ void i2s_impl(frame *f){
 void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 
 	
-	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor = Pop_operandos(f->p);
 
-	if(valor1->topo->operando == 0){
+	if(valor->topo->operando == 0){
 		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 		// Alterar o PC aqui para fazer o branch
 	}
 }
 
 void ifne_impl_imple(frame *f, u1 branchbyte1, u1 branchbyte2){
-	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor = Pop_operandos(f->p);
 
-	if(valor1->topo->operando !=0){
+	if(valor->topo->operando !=0){
 		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
-void iflt(frame *f, u1 branchbyte1, u1 branchbyte2){
+void iflt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 
-	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor = Pop_operandos(f->p);
 
-	if(valor->topo->valor1<0){
+	if(valor->topo->operando<0){
 		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
@@ -706,7 +708,7 @@ void iflt(frame *f, u1 branchbyte1, u1 branchbyte2){
 void ifge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	if(valor->topo->valor1 >= 0){
+	if(valor->topo->operando >= 0){
 		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
@@ -714,15 +716,15 @@ void ifge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 void ifgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	if(valor1->topo->operando > 0){
+	if(valor->topo->operando > 0){
 		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
 void ifle_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
-	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor = Pop_operandos(f->p);
 
-	if(valor1->topo->operando <= 0){
+	if(valor->topo->operando <= 0){
 		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
@@ -799,7 +801,7 @@ void acmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-void inst_goto(frame *f,u1 branchbyte1, u1 branchbyte2){
+void inst_goto_impl(frame *f,u1 branchbyte1, u1 branchbyte2){
 	u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 
 	// Efetuar o branch com branch offset
@@ -812,7 +814,7 @@ void jsr_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 }
 
 void ret_impl(frame *f,u1 index){
-	u1 endereco_retorno = f->v[index];
+	// u1 endereco_retorno = f->v[index]->variavel;
 
 	// Escrever no registrador PC
 }
@@ -824,7 +826,7 @@ void ireturn_impl(frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	// Empilhar na pilha de operandos do frame do chamador
-	jvm->pilha_frames->prox = Push_operandos(valor);
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(i4)valor->topo->operando,valor->topo->tipo_operando);
 }
 
 void areturn_impl(frame *f){
@@ -835,7 +837,7 @@ void areturn_impl(frame *f){
 void inst_return_impl(frame *f){
 
 	// Empilhar NULL na pilha de operandos do frame chamador, ou seja, o próximo frame na pilha
-	jvm->pilha_frames->prox = Push_operandos(NULL);
+	// jvm->pilha_frames->prox = Push_operandos(NULL);
 }
 
 void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -843,7 +845,7 @@ void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 
 	// Resolver o field
-	struct Fieldref campo = f->cp[indice_cp];
+	// Fieldref campo = f->cp[indice_cp];
 
 	f->p = Push_operandos(f->p,(i4) indice_cp,REFERENCE_OP);
 }
@@ -853,7 +855,7 @@ void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	// Resolver o field
 
-	struct Fieldref campo = f->cp[indice_cp];
+	// Fieldref campo = f->cp[indice_cp];
 }
 
 void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -863,7 +865,7 @@ void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	// Resolver o field
 
-	struct Fieldref campo = f->cp[indice_cp];
+	// struct Fieldref campo = f->cp[indice_cp];
 }
 
 void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -871,13 +873,18 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	// Resolver o field 
 
-	struct Fieldref campo = f->cp[indice_cp];
+	// struct Fieldref campo = f->cp[indice_cp];
 }
 
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 
-	struct Methodref metodo = f->cp[indice_cp];
+	// struct Methodref metodo = f->cp[indice_cp];
+
+	char *nomeClasse = decodificaNIeNT(f->cp,indice_cp,CLASS_INDEX);
+
+	printf("%s\n",nomeClasse);
+
 }
 
 void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -891,7 +898,8 @@ void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 }
 
 void newarray_impl(frame *f, u1 atype){
-	i4 count = Pop_operandos(f->p);
+	pilha_operandos *count = Pop_operandos(f->p);
+	i4 countnum = count->topo->operando;
 
 	void *endereco = NULL;
 	i4 referencia = 0;
@@ -902,56 +910,56 @@ void newarray_impl(frame *f, u1 atype){
 	else{
 		switch(atype){
 			case T_BOOLEAN:
-				endereco = malloc((count+1)*sizeof(u1));
-				referencia = (i4) endereco;
+				endereco = (u1*) malloc((countnum+1)*sizeof(u1));
+				referencia = (u1) *((u1*) endereco);
 			break;
 	
 			case T_CHAR:
-				endereco = malloc((count+1)*sizeof(i2));
-				referencia = (i4) endereco;
+				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
+				referencia = (i2) *((i2*) endereco);
 			break;
 	
 			case T_FLOAT:
-				endereco = malloc((count+1)*sizeof(u4));
-				referencia = (i4) endereco;
+				endereco = (u4*) malloc((countnum+1)*sizeof(u4));
+				referencia = (u4) *((u4*) endereco);
 			break;
 	
 			case T_DOUBLE:
-				endereco = malloc(2*(count+1)*sizeof(u4));
-				referencia = (i4) endereco;
+				endereco = (u4*) malloc(2*(countnum+1)*sizeof(u4));
+				referencia = (u4) *((u4*) endereco);
 			break;
 	
 			case T_BYTE:
-				endereco = malloc((count+1)*sizeof(i1));
-				referencia = (i4) endereco;
+				endereco = (i1*) malloc((countnum+1)*sizeof(i1));
+				referencia = (i1) *((i1*) endereco);
 			break;
 	
 			case T_SHORT:
-				endereco = malloc((count+1)*sizeof(i2));
-				referencia = (i4) endereco;
+				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
+				referencia = (i2) *((i2*) endereco);
 			break;
 	
 			case T_INT:
-				endereco = malloc((count+1)*sizeof(i4));
-				referencia = (i4) endereco;
+				endereco = (i4*) malloc((countnum+1)*sizeof(i4));
+				referencia = (i4) *((i4*) endereco);
 			break;
 	
 			case T_LONG:
-				endereco = malloc(2*(count+1)*sizeof(i4));
-				referencia = (i4) endereco;
+				endereco = (i4*) malloc(2*(countnum+1)*sizeof(i4));
+				referencia = (i4) *((i4*) endereco);
 			break;
 		}
 	
-		// Inicializar com os valores default
-		for(void *p=endereco,i=0;i<=count;i++,p++){
+		/*// Inicializar com os valores default
+		for(void *p=endereco,i=0;i<=countnum;i++,p++){
 			// Alocar com -INT_MAX para marcar o fim do array
-			if(i==count){
+			if(i==countnum){
 				*p = -INT_MAX;
 			}
 			else{
 				*p=0;
 			}
-		}
+		}*/
 	
 		f->p = Push_operandos(f->p,referencia,REFERENCE_OP);
 	}
@@ -959,16 +967,16 @@ void newarray_impl(frame *f, u1 atype){
 
 void arraylength_impl(frame *f){
 	pilha_operandos *array_ref = Pop_operandos(f->p);
-	i4 referencia = array_ref->operando;
+	i4 referencia = array_ref->topo->operando;
 	int tamanho = 0;
 
 	/* Observação */
 	// Não tem como descobrir o tipo do elemento, a princípio.
 	// Como fazer esse incremento? Foi alocado como void, mas com sizeofs diferentes (observar instrução newarray)
 	// O void vai garantir que o incremento é o mesmo?
-	for (void *p = referencia;*p!=-INT_MAX;p++,tamanho++){
+	/*for (void *p = referencia;*p!=-INT_MAX;p++,tamanho++){
 		
-	}
+	}*/
 
 	f->p = Push_operandos(f->p,tamanho,INTEGER_OP);
 

@@ -160,19 +160,19 @@ void fcmpl_impl(frame *f); // Não implementado
 void fcmpg_impl(frame *f); // Não implementado
 void dcmpl_impl(frame *f); // Não implementado
 void dcmpg_impl(frame *f); // Não implementado
-void ifeq_impl(frame *f); 
-void ifne_impl(frame *f);
-void iflt_impl(frame *f);
-void ifge_impl(frame *f);
-void ifgt_impl(frame *f);
-void ifle_impl(frame *f);
-void icmpeq_impl(frame *f);
-void icmpne_impl(frame *f);
-void icmplt_impl(frame *f);
-void icmpgt_impl(frame *f);
-void icmple_impl(frame *f);
-void acmpeq_impl(frame *f);
-void acmpne_impl(frame *f);
+void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2); 
+void ifne_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+void iflt_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+void ifge_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+void ifgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+void ifle_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+void icmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+void icmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+void icmplt_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+void icmpgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+void icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+void acmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+void acmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void inst_goto_impl(frame *f,u1 branchbyte1, u1 branchbyte2);
 void jsr_impl(frame *f,u1 branchbyte1, u1 branchbyte2);
 void ret_impl(frame *f, u1 index);
@@ -194,7 +194,7 @@ void invokespecial_impl(frame *f); // Não implementado
 /* Próximo objetivo: implementar invokestatic */
 void invokestatic_impl(frame *f); // Não implementado
 void invokeinterface_impl(frame *f); // Não implementado
-void inst_new_impl(frame *f); // Não implementado
+void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
 void newarray_impl(frame *f ,u1 atype); // Observação do -INT_MAX
 void anewarray_impl(frame *f); // Não implementado
 void arraylength_impl(frame *f);
@@ -207,6 +207,6 @@ void wide_impl(frame *f); // Não implementado
 void multianewarray_impl(frame *f); // Não implementado
 void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
-void goto_w(frame *f);
-void jsr_w(frame *f);
+void goto_w_impl(frame *f);
+void jsr_w_impl(frame *f);
 #endif

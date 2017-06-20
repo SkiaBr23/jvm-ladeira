@@ -28,7 +28,6 @@ int main(int argc, char const *argv[]){
 	int outset = 0, inputset = 0;
 
 	/*Alocação da estrutura para o arquivo .class*/
-	JVM * jvm;
 	jvm = CriarJVM();
 	jvm = InicializarJVM();
 	jvm->classes = InserirFim(jvm->classes);
