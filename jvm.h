@@ -18,6 +18,9 @@ extern JVM *jvm;
 JVM* CriarJVM();
 JVM* InicializarJVM();
 int opcaoMenu();
+frame* criarFrame();
+void executarJVM();
+void executarMetodo(method_info *m);
 //CODIFICAR FUNCAO PARA LIBERAR JVM, CHAMANDO FUNCOES INTERNAS DE FREE DAS ESTRUTURAS
 //void LiberarLista_frames(lista_frames *lis);
 

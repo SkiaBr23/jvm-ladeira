@@ -8,13 +8,13 @@ pilha_frames* CriarPilha_frames(){
 }
 
 pilha_frames* Push_frames(pilha_frames *p, frame *f){
-	p->topo = InserirInicio(p->topo,f);
+	p->topo = InserirInicio_frames(p->topo,f);
 	return (p);
 }
 
 pilha_frames* Pop_frames(pilha_frames *p){
-	pilha_frames *elementotopo = Topo(fp
-	if(elementotopo==NULL){
+	pilha_frames *elementotopo = Topo_frames(p);
+	if(elementotopo->topo==NULL){
 		return(NULL);
 	}
 	p->topo = RemoverInicio_frames(p->topo);
@@ -22,9 +22,9 @@ pilha_frames* Pop_frames(pilha_frames *p){
 }
 
 pilha_frames* Topo_frames(pilha_frames *p){
-	return(p->topo);
+	return(p);
 }
 
 void ImprimirPilha_frames(pilha_frames *p){
-	ImprimirLista(p->topo);
+	ImprimirLista_frames(p->topo);
 }

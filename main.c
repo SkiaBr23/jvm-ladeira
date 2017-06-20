@@ -75,13 +75,15 @@ int main(int argc, char const *argv[]){
 			printf("Erro ao criar arquivo de saida\n");
 		}
 	} else if (opcao == 2) {
-		printf("Opcao ainda nao implementada! Encerrando...\n");
+
+		executarJVM();
+
+		// printf("Opcao ainda nao implementada! Encerrando...\n");
 		exit(1);
 	} else {
 		printf("Encerrando programa...\n");
 		exit(1);
 	}
-
 
 
 	free(jvm->classes->arquivoClass);
