@@ -127,8 +127,20 @@ void iload_impl(u1 index, frame *f){
 	Push_operandos(f->p,(i4) *(f->v[index].variavel),INTEGER_OP);
 }
 
+void lload_impl(u1 index, frame *f){
+	//Checar se a ordem ta certa, o topo da pilha deveria ser o LOW
+	Push_operandos(f->p,(i4) *(f->v[index].variavel),LONG_OP);
+	Push_operandos(f->p,(i4) *(f->v[index+1].variavel),LONG_OP);
+}
+
 void fload_impl(u1 index, frame *f){
 	Push_operandos(f->p, (i4) *(f->v[index].variavel),FLOAT_OP);
+}
+
+void dload_impl(u1 index, frame *f){
+	//Checar se a ordem ta certa, o topo da pilha deveria ser o LOW
+	Push_operandos(f->p,(i4) *(f->v[index].variavel),DOUBLE_OP);
+	Push_operandos(f->p,(i4) *(f->v[index+1].variavel),DOUBLE_OP);
 }
 
 void aload_impl(u1 index, frame *f){
@@ -151,6 +163,23 @@ void iload_3_impl(frame *f){
 	Push_operandos(f->p,(i4) *(f->v[3].variavel),INTEGER_OP);
 }
 
+void lload_0_impl(frame *f){
+	Push_operandos(f->p,(i4) *(f->v[0].variavel),LONG_OP);
+	Push_operandos(f->p,(i4) *(f->v[1].variavel),LONG_OP);
+}
+void lload_1_impl(frame *f){
+	Push_operandos(f->p,(i4) *(f->v[1].variavel),LONG_OP);
+	Push_operandos(f->p,(i4) *(f->v[2].variavel),LONG_OP);
+}
+void lload_2_impl(frame *f){
+	Push_operandos(f->p,(i4) *(f->v[2].variavel),LONG_OP);
+	Push_operandos(f->p,(i4) *(f->v[3].variavel),LONG_OP);
+}
+void lload_3_impl(frame *f){
+	Push_operandos(f->p,(i4) *(f->v[3].variavel),LONG_OP);
+	Push_operandos(f->p,(i4) *(f->v[4].variavel),LONG_OP);
+}
+
 void fload_0_impl(frame *f){
 	Push_operandos(f->p,(i4) *(f->v[0].variavel),FLOAT_OP);
 }
@@ -165,6 +194,23 @@ void fload_2_impl(frame *f){
 
 void fload_3_impl(frame *f){
 	Push_operandos(f->p,(i4) *(f->v[3].variavel),FLOAT_OP);
+}
+
+void dload_0_impl(frame *f){
+	Push_operandos(f->p,(i4) *(f->v[0].variavel),DOUBLE_OP);
+	Push_operandos(f->p,(i4) *(f->v[1].variavel),DOUBLE_OP);
+}
+void dload_1_impl(frame *f){
+	Push_operandos(f->p,(i4) *(f->v[1].variavel),DOUBLE_OP);
+	Push_operandos(f->p,(i4) *(f->v[2].variavel),DOUBLE_OP);
+}
+void dload_2_impl(frame *f){
+	Push_operandos(f->p,(i4) *(f->v[2].variavel),DOUBLE_OP);
+	Push_operandos(f->p,(i4) *(f->v[3].variavel),DOUBLE_OP);
+}
+void dload_3_impl(frame *f){
+	Push_operandos(f->p,(i4) *(f->v[3].variavel),DOUBLE_OP);
+	Push_operandos(f->p,(i4) *(f->v[4].variavel),DOUBLE_OP);
 }
 
 void aload_0_impl(frame *f){
@@ -198,6 +244,18 @@ void iaload_impl(frame *f){
 	Push_operandos(f->p,*endereco,INTEGER_OP);
 }
 
+void laload_impl(frame *f){
+	pilha_operandos *indice = Pop_operandos(f->p);
+	pilha_operandos *referencia = Pop_operandos(f->p);
+
+	i4 *endereco = malloc(sizeof(i4 ));
+	endereco = ((i4*) referencia->topo->operando) + (indice->topo->operando * sizeof(i4));
+
+	//Verificar ordem
+	Push_operandos(f->p,*endereco,LONG_OP);
+	Push_operandos(f->p,*(endereco++),LONG_OP);
+}
+
 void faload_impl(frame *f){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
@@ -208,6 +266,18 @@ void faload_impl(frame *f){
 	// Acessar o conteúdo do endereço "referencia+indice"
 	// O código para esse acesso não parece correto, tem que analisar
 	Push_operandos(f->p,*endereco,FLOAT_OP);
+}
+
+void daload_impl(frame *f){
+	pilha_operandos *indice = Pop_operandos(f->p);
+	pilha_operandos *referencia = Pop_operandos(f->p);
+
+	i4 *endereco = malloc(sizeof(i4 ));
+	endereco = ((i4*) referencia->topo->operando) + (indice->topo->operando * sizeof(i4));
+
+	//Verificar ordem
+	Push_operandos(f->p,*endereco,DOUBLE_OP);
+	Push_operandos(f->p,*(endereco++),DOUBLE_OP);
 }
 
 void aaload_impl(frame *f){
@@ -254,15 +324,31 @@ void saload_impl(frame *f){
 	Push_operandos(f->p,(i4) ashort,SHORT_OP);
 }
 
-void istore_impl(u1 index,frame *f){
+void istore_impl(u1 index, frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	*(f->v[index].variavel) = (u4) valor->topo->operando;
 }
 
+void lstore_impl(u1 index, frame *f){
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	*(f->v[index].variavel) = (u4) high_bytes->topo->operando;
+	*(f->v[index+1].variavel) = (u4) low_bytes->topo->operando;
+}
+
 void fstore_impl(u1 index, frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[index].variavel) = (u4) valor->topo->operando;
+}
+
+void dstore_impl(u1 index, frame *f){
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	*(f->v[index].variavel) = (u4) high_bytes->topo->operando;
+	*(f->v[index+1].variavel) = (u4) low_bytes->topo->operando;
 }
 
 void astore_impl(u1 index, frame *f){
@@ -290,6 +376,38 @@ void istore_3_impl(frame *f){
 	*(f->v[3].variavel) = (u4) valor->topo->operando;
 }
 
+void lstore_0_impl(frame *f){
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	*(f->v[0].variavel) = (u4) high_bytes->topo->operando;
+	*(f->v[1].variavel) = (u4) low_bytes->topo->operando;
+}
+
+void lstore_1_impl(frame *f){
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	*(f->v[1].variavel) = (u4) high_bytes->topo->operando;
+	*(f->v[2].variavel) = (u4) low_bytes->topo->operando;
+}
+
+void lstore_2_impl(frame *f){
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	*(f->v[2].variavel) = (u4) high_bytes->topo->operando;
+	*(f->v[3].variavel) = (u4) low_bytes->topo->operando;
+}
+
+void lstore_3_impl(frame *f){
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	*(f->v[3].variavel) = (u4) high_bytes->topo->operando;
+	*(f->v[4].variavel) = (u4) low_bytes->topo->operando;
+}
+
 void fstore_0_impl(frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[0].variavel) = (u4) valor->topo->operando;
@@ -313,6 +431,38 @@ void fstore_3_impl(frame *f){
 void astore_0_impl(frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[0].variavel) = (u4) valor->topo->operando;
+}
+
+void dstore_0_impl(frame *f){
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	*(f->v[0].variavel) = (u4) high_bytes->topo->operando;
+	*(f->v[1].variavel) = (u4) low_bytes->topo->operando;
+}
+
+void dstore_1_impl(frame *f){
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	*(f->v[1].variavel) = (u4) high_bytes->topo->operando;
+	*(f->v[2].variavel) = (u4) low_bytes->topo->operando;
+}
+
+void dstore_2_impl(frame *f){
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	*(f->v[2].variavel) = (u4) high_bytes->topo->operando;
+	*(f->v[3].variavel) = (u4) low_bytes->topo->operando;
+}
+
+void dstore_3_impl(frame *f){
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	*(f->v[3].variavel) = (u4) high_bytes->topo->operando;
+	*(f->v[4].variavel) = (u4) low_bytes->topo->operando;
 }
 
 void astore_1_impl(frame *f){
@@ -349,6 +499,21 @@ void iastore_impl(frame *f){
 	*endereco = valor->topo->operando;
 }
 
+void lastore_impl(frame *f){
+	
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+	pilha_operandos *indice = Pop_operandos(f->p);
+	pilha_operandos *array = Pop_operandos(f->p);
+
+	i4 *endereco = malloc(sizeof(i4));
+	endereco = ((i4*) array->topo->operando) + (indice->topo->operando * sizeof(i4));
+
+	*endereco = high_bytes->topo->operando;
+	endereco++;
+	*endereco = low_bytes->topo->operando;
+}
+
 void fastore_impl(frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
@@ -359,6 +524,22 @@ void fastore_impl(frame *f){
 
 	*endereco = valor->topo->operando;
 }
+
+void dastore_impl(frame *f){
+	
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+	pilha_operandos *indice = Pop_operandos(f->p);
+	pilha_operandos *array = Pop_operandos(f->p);
+
+	i4 *endereco = malloc(sizeof(i4));
+	endereco = ((i4*) array->topo->operando) + (indice->topo->operando * sizeof(i4));
+
+	*endereco = high_bytes->topo->operando;
+	endereco++;
+	*endereco = low_bytes->topo->operando;
+}
+
 
 void bastore_impl(frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
@@ -642,7 +823,7 @@ void iinc_impl(frame *f,u1 index, i1 constante){
 	// Estender o sinal para 32 bits
 	i4 inteiro_constante = (i4) constante;
 
-	f->v[index] += inteiro_constante;
+	f->v[index].variavel += inteiro_constante;
 }
 
 void i2b_impl(frame *f){
@@ -686,7 +867,7 @@ void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-void ifne_impl_imple(frame *f, u1 branchbyte1, u1 branchbyte2){
+void ifne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando !=0){
@@ -694,25 +875,25 @@ void ifne_impl_imple(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-void iflt(frame *f, u1 branchbyte1, u1 branchbyte2){
+void iflt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 
-	if(valor->topo->valor1<0){
+	if(valor1->topo->operando<0){
 		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
 void ifge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
-	pilha_operandos *valor = Pop_operandos(f->p);
+	pilha_operandos *valor1 = Pop_operandos(f->p);
 
-	if(valor->topo->valor1 >= 0){
+	if(valor1->topo->operando >= 0){
 		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 	}
 }
 
 void ifgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
-	pilha_operandos *valor = Pop_operandos(f->p);
+	pilha_operandos *valor1 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando > 0){
 		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
@@ -799,7 +980,7 @@ void acmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-void inst_goto(frame *f,u1 branchbyte1, u1 branchbyte2){
+void inst_goto_impl(frame *f,u1 branchbyte1, u1 branchbyte2){
 	u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
 
 	// Efetuar o branch com branch offset
@@ -812,7 +993,7 @@ void jsr_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 }
 
 void ret_impl(frame *f,u1 index){
-	u1 endereco_retorno = f->v[index];
+	u4 endereco_retorno = (u4) f->v[index].variavel; //?
 
 	// Escrever no registrador PC
 }
@@ -824,7 +1005,7 @@ void ireturn_impl(frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	// Empilhar na pilha de operandos do frame do chamador
-	jvm->pilha_frames->prox = Push_operandos(valor);
+	//jvm->pilha_frames->prox = Push_operandos(valor); JVM GLOBAL??
 }
 
 void areturn_impl(frame *f){
@@ -835,7 +1016,7 @@ void areturn_impl(frame *f){
 void inst_return_impl(frame *f){
 
 	// Empilhar NULL na pilha de operandos do frame chamador, ou seja, o próximo frame na pilha
-	jvm->pilha_frames->prox = Push_operandos(NULL);
+	//jvm->pilha_frames->prox = Push_operandos(NULL);
 }
 
 void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
