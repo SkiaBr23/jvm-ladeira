@@ -11,7 +11,7 @@ Alunos: Maximillian Fan Xavier - 12/0153271
 
 */
 
-/*Macro para verificação de inclusão de estrutura ClassFile*/
+/*Macro para verificação de inclusão de estrutura ClassFile */
 #ifndef	STRUCTURES_H
 #define STRUCTURES_H
 
