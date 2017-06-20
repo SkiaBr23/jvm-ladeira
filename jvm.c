@@ -110,7 +110,8 @@ void interpretarCode(u1 *code,u4 length){
 		if(numarg>0){
 
 			u1 *argumentos = malloc(numarg*sizeof(u1));
-	
+			// Criar vetor de ponteiro de funções
+			// Deixar todas as funções com a mesma assinatura
 			for(u1 i=0;i<numarg;i++){
 				argumentos[i] = *j;
 				printf("%01x\t",argumentos[i]);
