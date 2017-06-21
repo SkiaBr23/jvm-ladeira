@@ -9,46 +9,51 @@
 #include <stdlib.h>
 #include <limits.h>
 
-void aconst_null_impl(frame *f){
+void nop_impl(frame *par0, u1 par1, u1 par2){
+	// Não implementada
+}
+
+void aconst_null_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,0,REFERENCE_OP); // 0 do tipo referência quer dizer referência apontando para NULL
 }
 
-void iconst_m1_impl(frame *f){
+void iconst_m1_impl(frame *f, u1 par1, u1 par2){
 	i4 inteiro_sinal = (i4) -1;
 	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);
 }
 
-void iconst_0_impl(frame *f){
+void iconst_0_impl(frame *f, u1 par1, u1 par2){
 	i4 inteiro_sinal = (i4) 0;
 	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);
 }
 
-void iconst_1_impl(frame *f){
+void iconst_1_impl(frame *f, u1 par1, u1 par2){
 	i4 inteiro_sinal = (i4) 1;
 	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);
 }
 
-void iconst_2_impl(frame *f){
+void iconst_2_impl(frame *f, u1 par1, u1 par2){
 	i4 inteiro_sinal = (i4) 2;
 	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);
 }
 
-void iconst_3_impl(frame *f){
+void iconst_3_impl(frame *f, u1 par1, u1 par2){
 	i4 inteiro_sinal = (i4) 3;
 	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);
 }
 
-void iconst_4_impl(frame *f){
+void iconst_4_impl(frame *f, u1 par1, u1 par2){
 	i4 inteiro_sinal = (i4) 4;
 	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);
 }
 
-void iconst_5_impl(frame *f){
-	i4 inteiro_sinal = (i4) 5;
-	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);
+void iconst_5_impl(frame *f, u1 par1, u1 par2){
+	printf("EXECUÇÃO ICONST_5\n\n");
+	/*i4 inteiro_sinal = (i4) 5;
+	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);*/
 }
 
-void lconst_0_impl(frame *f){
+void lconst_0_impl(frame *f, u1 par1, u1 par2){
 
 	//Push 0L to stack
 	i4 high_bytes = (i4) 0;
@@ -59,7 +64,7 @@ void lconst_0_impl(frame *f){
 	Push_operandos(f->p,low_bytes,LONG_OP);
 }
 
-void lconst_1_impl(frame *f){
+void lconst_1_impl(frame *f, u1 par1, u1 par2){
 
 	//Push 1L to stack 
 	i4 high_bytes = (i4) 0;
@@ -70,28 +75,28 @@ void lconst_1_impl(frame *f){
 	Push_operandos(f->p,low_bytes,LONG_OP);
 }
 
-void fconst_0_impl(frame *f){
+void fconst_0_impl(frame *f, u1 par1, u1 par2){
 
 	i4 float_bytes = (i4) 0;
 	Push_operandos(f->p,float_bytes,FLOAT_OP);
 
 }
 
-void fconst_1_impl(frame *f){
+void fconst_1_impl(frame *f, u1 par1, u1 par2){
 
 	i4 float_bytes = 0x3f800000;
 	Push_operandos(f->p,float_bytes,FLOAT_OP);
 
 }
 
-void fconst_2_impl(frame *f){
+void fconst_2_impl(frame *f, u1 par1, u1 par2){
 
 	i4 float_bytes = 0x40000000;
 	Push_operandos(f->p,float_bytes,FLOAT_OP);
 
 }
 
-void dconst_0_impl(frame *f){
+void dconst_0_impl(frame *f, u1 par1, u1 par2){
 
 	//Push 0.0 double to stack
 	i4 high_bytes = (i4) 0;
@@ -102,7 +107,7 @@ void dconst_0_impl(frame *f){
 	Push_operandos(f->p,low_bytes,DOUBLE_OP);
 }
 
-void dconst_1_impl(frame *f){
+void dconst_1_impl(frame *f, u1 par1, u1 par2){
 
 	//Push 1.0 double to stack
 	i4 high_bytes = 0x3FF00000;	
@@ -113,82 +118,134 @@ void dconst_1_impl(frame *f){
 	Push_operandos(f->p,low_bytes,DOUBLE_OP);
 }
 
-void bipush_impl(u1 byte, frame *f){
+void bipush_impl(frame *f, u1 byte, u1 par1){
 	i4 byte_int = (i4) byte;
 	Push_operandos(f->p,byte_int,BYTE_OP);
 }
 
-void sipush_impl(u1 byte1, u1 byte2, frame *f){
+void sipush_impl(frame *f, u1 byte1, u1 byte2){
 	u2 byte_short = (byte1 << 8) | byte2;
 	i4 byte_int = (i4) byte_short;
 	Push_operandos(f->p,byte_int,SHORT_OP);
 	Push_operandos(f->p,byte_int,SHORT_OP);
 }
 
-void iload_impl(u1 index, frame *f){
+void ldc_impl(frame *par0, u1 par1, u1 par2){
+
+}
+
+void ldc_w_impl(frame *par0, u1 par1, u1 par2){
+
+}
+
+void ldc2_w_impl(frame *par0, u1 par1, u1 par2){
+
+}
+
+void iload_impl(frame *f, u1 index, u1 par1){
 	Push_operandos(f->p,(i4) *(f->v[index].variavel),INTEGER_OP);
 }
 
-void fload_impl(u1 index, frame *f){
+void lload_impl(frame *f, u1 index, u1 par1){
+
+}
+
+void fload_impl(frame *f, u1 index, u1 par1){
 	Push_operandos(f->p, (i4) *(f->v[index].variavel),FLOAT_OP);
 }
 
-void aload_impl(u1 index, frame *f){
+void dload_impl(frame *par0, u1 par1, u1 par2){
+
+}
+
+void aload_impl(frame *f, u1 index, u1 par1){
 	Push_operandos(f->p, (i4) *(f->v[index].variavel),REFERENCE_OP);
 }
 
-void iload_0_impl(frame *f){
+void iload_0_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[0].variavel),INTEGER_OP);
 }
 
-void iload_1_impl(frame *f){
+void iload_1_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[1].variavel),INTEGER_OP);
 }
 
-void iload_2_impl(frame *f){
+void iload_2_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[2].variavel),INTEGER_OP);
 }
 
-void iload_3_impl(frame *f){
+void iload_3_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[3].variavel),INTEGER_OP);
 }
 
-void fload_0_impl(frame *f){
+void lload_0_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void lload_1_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void lload_2_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void lload_3_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void fload_0_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[0].variavel),FLOAT_OP);
 }
 
-void fload_1_impl(frame *f){
+void fload_1_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[1].variavel),FLOAT_OP);
 }
 
-void fload_2_impl(frame *f){
+void fload_2_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[2].variavel),FLOAT_OP);
 }
 
-void fload_3_impl(frame *f){
+void fload_3_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[3].variavel),FLOAT_OP);
 }
 
-void aload_0_impl(frame *f){
+void dload_0_impl(frame *f, u1 par1, u1 par2){
+	
+}
+
+void dload_1_impl(frame *f, u1 par1, u1 par2){
+	
+}
+
+void dload_2_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void dload_3_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void aload_0_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[0].variavel),REFERENCE_OP);
 }
 
-void aload_1_impl(frame *f){
+void aload_1_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[1].variavel),REFERENCE_OP);
 }
 
-void aload_2_impl(frame *f){
+void aload_2_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[2].variavel),REFERENCE_OP);
 }
 
-void aload_3_impl(frame *f){
+void aload_3_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[3].variavel),REFERENCE_OP);
 }
 
 
 /* Verificar endereçamento */
 /* Vale para iaload a saload */
-void iaload_impl(frame *f){
+void iaload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
@@ -200,7 +257,11 @@ void iaload_impl(frame *f){
 	Push_operandos(f->p,endereco,INTEGER_OP);
 }
 
-void faload_impl(frame *f){
+void laload_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void faload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
@@ -212,7 +273,11 @@ void faload_impl(frame *f){
 	Push_operandos(f->p,endereco,FLOAT_OP);
 }
 
-void aaload_impl(frame *f){
+void daload_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void aaload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
@@ -222,7 +287,7 @@ void aaload_impl(frame *f){
 	Push_operandos(f->p,endereco,REFERENCE_OP);
 }
 
-void baload_impl(frame *f){
+void baload_impl(frame *f, u1 par1, u1 par2){
 
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
@@ -234,7 +299,7 @@ void baload_impl(frame *f){
 	Push_operandos(f->p,(i4) byte,BYTE_OP);
 }
 
-void caload_impl(frame *f){
+void caload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
@@ -245,7 +310,7 @@ void caload_impl(frame *f){
 	Push_operandos(f->p,(u4) caracter,CHAR_OP);
 }
 
-void saload_impl(frame *f){
+void saload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
@@ -256,78 +321,121 @@ void saload_impl(frame *f){
 	Push_operandos(f->p,(i4) ashort,SHORT_OP);
 }
 
-void istore_impl(u1 index,frame *f){
+void istore_impl(frame *f, u1 index,u1 par1){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	*(f->v[index].variavel) = (u4) valor->topo->operando;
 }
 
-void fstore_impl(u1 index, frame *f){
+void lstore_impl(frame *f, u1 index, u1 par1){
+
+}
+
+void fstore_impl(frame *f, u1 index,u1 par1){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[index].variavel) = (u4) valor->topo->operando;
 }
 
-void astore_impl(u1 index, frame *f){
+void dstore_impl(frame *f, u1 index, u1 par1){
+
+}
+
+void astore_impl(frame *f, u1 index,u1 par1){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[index].variavel) = (u4) valor->topo->operando;
 }
 
-void istore_0_impl(frame *f){
+void istore_0_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[0].variavel) = (u4) valor->topo->operando;
 }
 
-void istore_1_impl(frame *f){
-	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[1].variavel) = (u4) valor->topo->operando;
+void istore_1_impl(frame *f, u1 par1, u1 par2){
+
+	printf("EXECUÇÃO ISTORE_1\n\n");
+
+	/*pilha_operandos *valor = Pop_operandos(f->p);
+	*(f->v[1].variavel) = (u4) valor->topo->operando;*/
 }
 
-void istore_2_impl(frame *f){
+void istore_2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[2].variavel) = (u4) valor->topo->operando;
 }
 
-void istore_3_impl(frame *f){
+void istore_3_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[3].variavel) = (u4) valor->topo->operando;
 }
 
-void fstore_0_impl(frame *f){
+void lstore_0_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void lstore_1_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void lstore_2_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void lstore_3_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void fstore_0_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[0].variavel) = (u4) valor->topo->operando;
 }
 
-void fstore_1_impl(frame *f){
+void fstore_1_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[1].variavel) = (u4) valor->topo->operando;
 }
 
-void fstore_2_impl(frame *f){
+void fstore_2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[2].variavel) = (u4) valor->topo->operando;
 }
 
-void fstore_3_impl(frame *f){
+void fstore_3_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[3].variavel) = (u4) valor->topo->operando;
 }
 
-void astore_0_impl(frame *f){
+void dstore_0_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void dstore_1_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void dstore_2_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void dstore_3_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void astore_0_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[0].variavel) = (u4) valor->topo->operando;
 }
 
-void astore_1_impl(frame *f){
+void astore_1_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[1].variavel) = (u4) valor->topo->operando;
 }
 
-void astore_2_impl(frame *f){
+void astore_2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[2].variavel) = (u4) valor->topo->operando;
 }
 
-void astore_3_impl(frame *f){
+void astore_3_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[3].variavel) = (u4) valor->topo->operando;
 }
@@ -339,7 +447,7 @@ void astore_3_impl(frame *f){
 	
 	Não sabemos se isso está logicamente/semanticamente correto.
 */
-void iastore_impl(frame *f){
+void iastore_impl(frame *f, u1 par1, u1 par2){
 	// Convém criar função pra desempilhar 3 valores, sei lá. Pra generalizar isso. Vamos analisar.
 	pilha_operandos *valor = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
@@ -351,7 +459,11 @@ void iastore_impl(frame *f){
 	endereco = valor->topo->operando;
 }
 
-void fastore_impl(frame *f){
+void lastore_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void fastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
@@ -362,7 +474,15 @@ void fastore_impl(frame *f){
 	endereco = valor->topo->operando;
 }
 
-void bastore_impl(frame *f){
+void dastore_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void aastore_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void bastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
@@ -373,7 +493,7 @@ void bastore_impl(frame *f){
 	endereco = valor->topo->operando;
 }
 
-void castore_impl(frame *f){
+void castore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
@@ -384,7 +504,7 @@ void castore_impl(frame *f){
 	endereco = valor->topo->operando;
 }
 
-void sastore_impl(frame *f){
+void sastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
@@ -423,12 +543,20 @@ pilha_operandos** pop2_impl(frame *f){
 	return(vetor_retorno);
 }
 
-void dup_impl(frame *f){
+void pop_fantasma(frame *par0, u1 par1, u1 par2){
+
+}
+
+void pop2_fantasma(frame *par0, u1 par1, u1 par2){
+
+}
+
+void dup_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Topo_operandos(f->p);
 	f->p = Push_operandos(f->p,valor->topo->operando,valor->topo->tipo_operando);
 }
 
-void dup_x1_impl(frame *f){
+void dup_x1_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -437,7 +565,7 @@ void dup_x1_impl(frame *f){
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
 }
 
-void dup_x2_impl(frame *f){
+void dup_x2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 	pilha_operandos *valor3 = Pop_operandos(f->p);
@@ -461,7 +589,7 @@ void dup_x2_impl(frame *f){
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
 }
 
-void dup2_impl(frame *f){
+void dup2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -473,7 +601,7 @@ void dup2_impl(frame *f){
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
 }
 
-void dup2_x1_impl(frame *f){
+void dup2_x1_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 	pilha_operandos *valor3 = Pop_operandos(f->p);
@@ -483,7 +611,7 @@ void dup2_x1_impl(frame *f){
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
 }
 
-void dup2_x2_impl(frame *f){
+void dup2_x2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 	pilha_operandos *valor3 = Pop_operandos(f->p);
@@ -495,7 +623,7 @@ void dup2_x2_impl(frame *f){
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->tipo_operando);
 }
 
-void swap_impl(frame *f){
+void swap_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -503,7 +631,7 @@ void swap_impl(frame *f){
 	f->p = Push_operandos(f->p,valor2->topo->operando,valor2->topo->tipo_operando);
 }
 
-void iadd_impl(frame *f){
+void iadd_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -516,8 +644,21 @@ void iadd_impl(frame *f){
 
 }
 
+void ladd_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void fadd_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void dadd_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+
 // Overflow pode ocorrer, mas mesmo assim, exceção não é lançada. Ou seja, é só subtrair
-void isub_impl(frame *f){
+void isub_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -528,7 +669,19 @@ void isub_impl(frame *f){
 	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
 }
 
-void imul_impl(frame *f){
+void lsub_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void fsub_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void dsub_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void imul_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -539,7 +692,21 @@ void imul_impl(frame *f){
 	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
 }
 
-void idiv_impl(frame *f){
+void lmul_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void fmul_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void dmul_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+
+
+void idiv_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -553,7 +720,19 @@ void idiv_impl(frame *f){
 	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
 }
 
-void irem_impl(frame *f){
+void ldiv_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void fdiv_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void ddiv_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void irem_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -571,14 +750,38 @@ void irem_impl(frame *f){
 	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
 }
 
-void ineg_impl(frame *f){
+void lrem_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void frem_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void drem_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void ineg_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 
 	// Colocar o valor na pilha negado
 	f->p = Push_operandos(f->p,-(valor1->topo->operando),valor1->topo->tipo_operando);
 }
 
-void ishl_impl(frame *f){
+void lneg_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void fneg_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void dneg_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void ishl_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -589,8 +792,12 @@ void ishl_impl(frame *f){
 	f->p = Push_operandos(f->p,resultado,valor1->topo->tipo_operando);
 }
 
+void lshl_impl(frame *f, u1 par1, u1 par2){
 
-void ishr_impl(frame *f){
+}
+
+
+void ishr_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -601,8 +808,12 @@ void ishr_impl(frame *f){
 	f->p = Push_operandos(f->p,resultado,valor1->topo->tipo_operando);
 }
 
+void lshr_impl(frame *f, u1 par1, u1 par2){
+
+}
+
 // Verificar se a implementação é essa mesmo, para fazer a extensão do sinal
-void iushr_impl(frame *f){
+void iushr_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -613,7 +824,11 @@ void iushr_impl(frame *f){
 	f->p = Push_operandos(f->p,(i4) resultado,valor1->topo->tipo_operando);
 }
 
-void iand_impl(frame *f){
+void lushr_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void iand_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -622,7 +837,11 @@ void iand_impl(frame *f){
 	f->p = Push_operandos(f->p,resultado,valor1->topo->tipo_operando);
 }
 
-void ior_impl(frame *f){
+void land_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void ior_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -631,13 +850,21 @@ void ior_impl(frame *f){
 	f->p = Push_operandos(f->p,resultado,valor1->topo->tipo_operando);
 }
 
-void ixor_impl(frame *f){
+void lor_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void ixor_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	i4 resultado = valor1->topo->operando ^ valor2->topo->operando;
 
 	f->p = Push_operandos(f->p,resultado,valor1->topo->tipo_operando);
+}
+
+void lxor_impl(frame *f, u1 par1, u1 par2){
+
 }
 
 void iinc_impl(frame *f,u1 index, i1 constante){
@@ -647,7 +874,59 @@ void iinc_impl(frame *f,u1 index, i1 constante){
 	f->v[index].variavel += inteiro_constante;
 }
 
-void i2b_impl(frame *f){
+void iinc_fantasma(frame *par0, u1 par1, u1 par2){
+
+}
+
+void i2l_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void i2f_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void i2d_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void l2i_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void l2f_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void l2d_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void f2i_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void f2l_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void f2d_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void d2i_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void d2l_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void d2f_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void i2b_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 
 	i1 truncado = (i1) valor1->topo->operando;
@@ -657,7 +936,7 @@ void i2b_impl(frame *f){
 	f->p = Push_operandos(f->p,resultado,BYTE_OP);
 }
 
-void i2c_impl(frame *f){
+void i2c_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 
 	i1 truncado = (i1) valor1->topo->operando;
@@ -667,7 +946,7 @@ void i2c_impl(frame *f){
 	f->p = Push_operandos(f->p,resultado,CHAR_OP);
 }
 
-void i2s_impl(frame *f){
+void i2s_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 
 	i2 truncado = (i2) valor1->topo->operando;
@@ -675,6 +954,26 @@ void i2s_impl(frame *f){
 	i4 resultado = (i4) truncado;
 
 	f->p = Push_operandos(f->p,resultado,SHORT_OP);
+}
+
+void lcmp_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void fcmpl_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void fcmpg_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void dcmpl_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void dcmpg_impl(frame *f, u1 par1, u1 par2){
+
 }
 
 void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
@@ -688,7 +987,7 @@ void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-void ifne_impl_imple(frame *f, u1 branchbyte1, u1 branchbyte2){
+void ifne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando !=0){
@@ -729,7 +1028,7 @@ void ifle_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-void icmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
+void if_icmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -738,7 +1037,7 @@ void icmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-void icmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
+void if_icmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -747,7 +1046,7 @@ void icmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-void icmplt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
+void if_icmplt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -756,7 +1055,7 @@ void icmplt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-void icmpge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
+void if_icmpge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -765,7 +1064,7 @@ void icmpge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-void icmpgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
+void if_icmpgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -774,7 +1073,7 @@ void icmpgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-void icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
+void if_icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -813,14 +1112,22 @@ void jsr_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	// Efetuar o branch com branch offset
 }
 
-void ret_impl(frame *f,u1 index){
+void ret_impl(frame *f,u1 index, u1 par){
 	// u1 endereco_retorno = f->v[index]->variavel;
 
 	// Escrever no registrador PC
 }
 
+void tableswitch_fantasma(frame *par0, u1 par1, u1 par2){
+
+}
+
+void lookupswitch_fantasma(frame *par0, u1 par1, u1 par2){
+
+}
+
 /***** O valor retornado é entre frames. Analisar como acessar a estrutura global *****/
-void ireturn_impl(frame *f){
+void ireturn_impl(frame *f, u1 par1, u1 par2){
 	// Analisar as condições do método que deve ser retornado
 
 	pilha_operandos *valor = Pop_operandos(f->p);
@@ -829,15 +1136,29 @@ void ireturn_impl(frame *f){
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(i4)valor->topo->operando,valor->topo->tipo_operando);
 }
 
-void areturn_impl(frame *f){
+void lreturn_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void freturn_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void dreturn_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void areturn_impl(frame *f, u1 par1, u1 par2){
 	// Analisar mesmas coisas do ireturn
 	pilha_operandos *valor = Pop_operandos(f->p);
 }
 
-void inst_return_impl(frame *f){
+void inst_return_impl(frame *f, u1 par1, u1 par2){
+
+	printf("EXECUÇÃO RETURN\n\n");
 
 	// Empilhar NULL na pilha de operandos do frame chamador, ou seja, o próximo frame na pilha
-	// jvm->pilha_frames->prox = Push_operandos(NULL);
+	// jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,-1,-1);
 }
 
 void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -887,6 +1208,18 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 }
 
+void invokespecial_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void invokestatic_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void invokeinterface_impl(frame *f, u1 par1, u1 par2){
+
+}
+
 void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 
@@ -897,7 +1230,7 @@ void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	// Colocar o ponteiro na pilha de operandos
 }
 
-void newarray_impl(frame *f, u1 atype){
+void newarray_impl(frame *f, u1 atype, u1 par1){
 	pilha_operandos *count = Pop_operandos(f->p);
 	i4 countnum = count->topo->operando;
 
@@ -965,7 +1298,11 @@ void newarray_impl(frame *f, u1 atype){
 	}
 }
 
-void arraylength_impl(frame *f){
+void anewarray_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void arraylength_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *array_ref = Pop_operandos(f->p);
 	i4 referencia = array_ref->topo->operando;
 	int tamanho = 0;
@@ -979,6 +1316,34 @@ void arraylength_impl(frame *f){
 	}*/
 
 	f->p = Push_operandos(f->p,tamanho,INTEGER_OP);
+
+}
+
+void athrow_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void checkcast_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void instanceof_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void monitorenter_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void monitorexit_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void wide_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void multianewarray_impl(frame *f, u1 par1, u1 par2){
 
 }
 
@@ -1006,6 +1371,14 @@ void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	else{
 		// Continuar execução normalmente
 	}
+}
+
+void goto_w_impl(frame *f, u1 par1, u1 par2){
+
+}
+
+void jsr_w_impl(frame *f, u1 par1, u1 par2){
+
 }
 
 
