@@ -45,18 +45,14 @@ char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp){
 	return(nome_classe);
 }
 
-frame* transferePilhaVetor(frame *anterior, frame *novo){
+frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 	pilha_operandos *aux = CriarPilha_operandos();
 	int cont = 0;
-	printf("\n\n\nANTES WHILE\n\n\n");
 	while(anterior->p->topo!=NULL){
 		pilha_operandos *p = Pop_operandos(anterior->p);
-		printf("\n\n\nTIROU: %d\n\n\n",p->topo->operando);
 		aux = Push_operandos(aux,p->topo->operando,p->topo->tipo_operando);
 		cont++;
 	}
-
-
 
 	novo->v = malloc(cont*sizeof(vetor_locais));
 
@@ -66,6 +62,8 @@ frame* transferePilhaVetor(frame *anterior, frame *novo){
 		*(novo->v[i].variavel) = (u4) p->topo->operando;
 		novo->v[i].tipo_variavel = (u1) p->topo->tipo_operando;
 	}
+
+	*parametros_cont = cont;
 
 	return(novo);
 }
@@ -1278,9 +1276,10 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	if(resolverMetodo(f->cp,indice_cp)){
 		frame *f_novo = criarFrame(obterClasseDoMetodo(f->cp,indice_cp));
 		jvm->frames = Push_frames(jvm->frames,f_novo);
-		f_novo = transferePilhaVetor(f,f_novo);
-		// printf("VALOR: %04x\n\n\n",f_novo->v[0].variavel[0]);
-		for(int i=0;i<sizeof(f_novo->v)/sizeof(f_novo->v[0]);i++){
+		int *parametros_cont = malloc(sizeof(int));
+		f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
+		printf("%lu\n",sizeof(vetor_locais));
+		for(int i=0;i<*(parametros_cont);i++){
 			printf("VARIÁVEL LOCAL: %04x\n",*(f_novo->v[i].variavel));
 		}
 	}

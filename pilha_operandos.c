@@ -15,12 +15,11 @@ pilha_operandos* Push_operandos(pilha_operandos *p, u4 operando, u1 tipo_operand
 }
 
 pilha_operandos* Pop_operandos(pilha_operandos *p){
-	pilha_operandos *elementotopo = Topo_operandos(p);
+
+	pilha_operandos *aux = CriarPilha_operandos();
+	aux = Push_operandos(aux,p->topo->operando,p->topo->tipo_operando);
 	p->topo = RemoverInicio_operandos(p->topo);
-	if(elementotopo->topo==NULL){
-		return(NULL);
-	}
-	return (elementotopo);
+	return (aux);
 }
 
 pilha_operandos* Topo_operandos(pilha_operandos *p){

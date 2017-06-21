@@ -10,7 +10,7 @@
 bool resolverClasse(char *nome_classe);
 bool resolverMetodo(cp_info *cp, u2 indice_cp);
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp);
-frame* transferePilhaVetor(frame *anterior, frame *novo);
+frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont);
 
 void nop_impl(frame *par0,u1 par1, u1 par2); // Não implementado
 void aconst_null_impl(frame *f, u1 par1, u1 par2);
