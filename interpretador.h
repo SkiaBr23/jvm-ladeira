@@ -2,9 +2,16 @@
 #define INTERPRETADOR_H
 
 #include "instrucoes.h"
+#include <stdbool.h>
 
 /* Observar todas as instruções, pois a maioria delas está parcialmente implementada */
 /* Observar todas as intruções quanto ao lançamento de exceções */
+
+bool resolverClasse(char *nome_classe);
+bool resolverMetodo(cp_info *cp, u2 indice_cp);
+char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp);
+frame* transferePilhaVetor(frame *anterior, frame *novo);
+
 void nop_impl(frame *par0,u1 par1, u1 par2); // Não implementado
 void aconst_null_impl(frame *f, u1 par1, u1 par2);
 void iconst_m1_impl(frame *f, u1 par1, u1 par2);
@@ -197,7 +204,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 // Pulei várias instruções
 void invokespecial_impl(frame *f, u1 par1, u1 par2); // Não implementado
 /* Próximo objetivo: implementar invokestatic */
-void invokestatic_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
 void invokeinterface_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
 void newarray_impl(frame *f ,u1 atype, u1 par1); // Observação do -INT_MAX

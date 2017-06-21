@@ -4,11 +4,11 @@
 #include "lista_classes.h"
 #include "leitura.h"
 
-classesCarregadas* CriarLista(){
+classesCarregadas* CriarLista_classes(){
 	return NULL;
 }
 
-classesCarregadas* InserirFim(classesCarregadas* lis){
+classesCarregadas* InserirFim_classes(classesCarregadas* lis, ClassFile *arquivoClass){
 	classesCarregadas *novo;
 	classesCarregadas *ant = NULL;
 	classesCarregadas *p = lis;
@@ -19,7 +19,7 @@ classesCarregadas* InserirFim(classesCarregadas* lis){
 	}
 
 	novo = (classesCarregadas*)malloc(sizeof(classesCarregadas));
-	novo->arquivoClass = NULL;
+	novo->arquivoClass = arquivoClass;
 	novo->prox = NULL;
 	novo->ant = ant;
 	if (ant != NULL) {
@@ -30,7 +30,7 @@ classesCarregadas* InserirFim(classesCarregadas* lis){
 	}
 }
 
-classesCarregadas* RemoverFim(classesCarregadas* lis){
+classesCarregadas* RemoverFim_classes(classesCarregadas* lis){
 	classesCarregadas *p = lis, *ant = NULL;
 
 	while (p!=NULL){
@@ -53,8 +53,8 @@ classesCarregadas* RemoverFim(classesCarregadas* lis){
 	return lis;
 }
 
-classesCarregadas* RemoverElemento(classesCarregadas* lis, char *string){
-	classesCarregadas *p = BuscarElemento(lis, string);
+classesCarregadas* RemoverElemento_classes(classesCarregadas* lis, char *string){
+	classesCarregadas *p = BuscarElemento_classes(lis, string);
 
 	if(p==NULL){
 		return lis;
@@ -75,10 +75,10 @@ classesCarregadas* RemoverElemento(classesCarregadas* lis, char *string){
 	return lis;
 }
 
-classesCarregadas* BuscarElemento(classesCarregadas* lis, char *string){
+classesCarregadas* BuscarElemento_classes(classesCarregadas* lis, char *string){
 	classesCarregadas *p;
 	for(p=lis;p!=NULL;p=p->prox){
-		if(strcmp(decodificaNIeNT(p->arquivoClass->constant_pool,p->arquivoClass->this_class,CLASS_INDEX),string)==0){
+		if(strcmp(decodificaNIeNT(p->arquivoClass->constant_pool,p->arquivoClass->this_class,NAME_INDEX),string)==0){
 			return p;
 		}
 	}
@@ -86,7 +86,12 @@ classesCarregadas* BuscarElemento(classesCarregadas* lis, char *string){
 	return(NULL);
 }
 
-void ImprimirLista(classesCarregadas *lis){
+cp_info* BuscarCPClasseCorrente_classes(classesCarregadas *lis, char *string){
+	classesCarregadas *classeCorrente = BuscarElemento_classes(lis,string);
+	return(classeCorrente->arquivoClass->constant_pool);
+}
+
+void ImprimirLista_classes(classesCarregadas *lis){
 	classesCarregadas *p;
 
 	for(p=lis;p!=NULL;p=p->prox){
@@ -95,7 +100,7 @@ void ImprimirLista(classesCarregadas *lis){
 	}
 }
 
-void LiberarLista(classesCarregadas *lis){
+void LiberarLista_classes(classesCarregadas *lis){
 	classesCarregadas *p=lis;
 	while(p!=NULL){
 		classesCarregadas *t = p->prox;

@@ -14,12 +14,13 @@ struct classesCarregadas {
 };
 typedef struct classesCarregadas classesCarregadas;
 
-classesCarregadas* CriarLista();
-classesCarregadas* InserirFim(classesCarregadas *lis);
-classesCarregadas* RemoverFim(classesCarregadas *lis);
-classesCarregadas* RemoverElemento(classesCarregadas *lis, char *string);
-classesCarregadas* BuscarElemento(classesCarregadas *lis, char *string);
-void ImprimirLista(classesCarregadas *lis);
-void LiberarLista(classesCarregadas *lis);
+classesCarregadas* CriarLista_classes();
+classesCarregadas* InserirFim_classes(classesCarregadas *lis, ClassFile *arquivoClass);
+classesCarregadas* RemoverFim_classes(classesCarregadas *lis);
+classesCarregadas* RemoverElemento_classes(classesCarregadas *lis, char *string);
+classesCarregadas* BuscarElemento_classes(classesCarregadas *lis, char *string);
+cp_info* BuscarCPClasseCorrente_classes(classesCarregadas *lis, char *string);
+void ImprimirLista_classes(classesCarregadas *lis);
+void LiberarLista_classes(classesCarregadas *lis);
 
 #endif

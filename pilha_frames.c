@@ -4,7 +4,9 @@
 #include <string.h>
 
 pilha_frames* CriarPilha_frames(){
-	return NULL;
+	pilha_frames *p = malloc(sizeof(pilha_frames));
+	p->topo = NULL;
+	return p;
 }
 
 pilha_frames* Push_frames(pilha_frames *p, frame *f){

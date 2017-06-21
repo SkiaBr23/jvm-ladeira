@@ -43,7 +43,12 @@ lista_operandos* RemoverInicio_operandos(lista_operandos* lis){
 	lista_operandos* p=lis;
 	
 	lis = p->prox;
-	lis->ant = NULL;
+	if(lis!=NULL){
+		lis->ant = NULL;
+	}
+	else{
+		return(NULL);
+	}
 	
 	free(p);
 	return (lis);

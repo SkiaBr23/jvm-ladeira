@@ -23,9 +23,8 @@ JVM* InicializarJVM() {
 	JVM *novo;
 
 	novo = (JVM*)malloc(sizeof(JVM));
-	novo->classes = malloc(sizeof(classesCarregadas));
-	novo->frames = malloc(sizeof(pilha_frames));
-	novo->frames->topo = NULL;
+	novo->classes = CriarLista_classes();
+	novo->frames = CriarPilha_frames();
 	novo->pc = 0; 
 
 	instrucoes = construirInstrucoes();
@@ -50,12 +49,12 @@ int opcaoMenu () {
 	return op;
 }
 
-frame* criarFrame(){
+frame* criarFrame(char *classeCorrente){
 	frame *f = malloc(sizeof(frame));
 	f->end_retorno = jvm->pc;
 	f->p = CriarPilha_operandos();
 	f->v = NULL;
-	f->cp = jvm->classes->arquivoClass->constant_pool;
+	f->cp = BuscarCPClasseCorrente_classes(jvm->classes,classeCorrente);
 
 	return(f);
 }
@@ -72,12 +71,12 @@ void executarJVM(){
 
 		// Se for o método main
 		if(strcmp(stringmetodo,MAIN_NOME)==0 && strcmp(stringdescriptor,DESCRIPTOR_MAIN)==0 && aux->access_flags==PUBLIC_STATIC){
-			executarMetodo(aux);
+			executarMetodo(aux,"Main");
 		}
 	}
 }
 
-void executarMetodo(method_info *m){
+void executarMetodo(method_info *m, char* classeCorrente){
 	attribute_info *aux;
 
 	int posicao;
@@ -89,9 +88,8 @@ void executarMetodo(method_info *m){
 		printf("%s\n",nameindex);
 		// Se for o atributo code
 		if(strcmp(nameindex,"Code")==0){
-			frame *f = criarFrame();
+			frame *f = criarFrame(classeCorrente);
 			jvm->frames = Push_frames(jvm->frames,f);
-
 			code_attribute *c = (code_attribute *) aux->info;
 
 			interpretarCode(c->code,c->code_length);
@@ -106,7 +104,7 @@ void interpretarCode(u1 *code,u4 length){
 		opcode = *j;
 
 		instrucao i = instrucoes[opcode];
-		printf("%s\t",i.inst_nome);
+		printf("%s\n",i.inst_nome);
 		j++;
 		u1 numarg = i.numarg;
 		if(numarg>0){
@@ -119,8 +117,20 @@ void interpretarCode(u1 *code,u4 length){
 				printf("%01x\t",argumentos[arg]);
 				j++;
 			}
+
+			switch(numarg){
+				case 1:
+					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],0);
+				break;
+
+				case 2:
+					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],argumentos[1]);
+				break;
+			}
 		}
-		(*func_ptr[i.opcode])(jvm->frames->topo->f,0,0);
+		else if(numarg==0){
+			(*func_ptr[i.opcode])(jvm->frames->topo->f,0,0);
+		}
 
 		printf("\n\n");
 	}

@@ -8,6 +8,67 @@
 #include "leitura.h"
 #include <stdlib.h>
 #include <limits.h>
+#include <stdbool.h>
+
+bool resolverClasse(char* nome_classe){
+	classesCarregadas *c = BuscarElemento_classes(jvm->classes,nome_classe);
+
+	if(c!=NULL){
+		return true;
+	}
+	else{
+		return false;
+	}
+
+}
+
+/*
+	Depois da resolverMetodo, analisar semanticamente. Ver o número de argumentos, o tipo deles, ver se está tudo coerente com o descritor do método.
+*/
+bool resolverMetodo(cp_info *cp, u2 indice_cp){
+
+	cp_info *methodref = cp-1+indice_cp;
+	char *nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
+	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+
+	if(resolverClasse(nome_classe)){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp){
+	cp_info *methodref = cp-1+indice_cp;
+	char *nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
+	return(nome_classe);
+}
+
+frame* transferePilhaVetor(frame *anterior, frame *novo){
+	pilha_operandos *aux = CriarPilha_operandos();
+	int cont = 0;
+	printf("\n\n\nANTES WHILE\n\n\n");
+	while(anterior->p->topo!=NULL){
+		pilha_operandos *p = Pop_operandos(anterior->p);
+		printf("\n\n\nTIROU: %d\n\n\n",p->topo->operando);
+		aux = Push_operandos(aux,p->topo->operando,p->topo->tipo_operando);
+		cont++;
+	}
+
+
+
+	novo->v = malloc(cont*sizeof(vetor_locais));
+
+	for(int i=0;i<cont;i++){
+		pilha_operandos *p = Pop_operandos(aux);
+		novo->v[i].variavel = malloc(sizeof(u4));
+		*(novo->v[i].variavel) = (u4) p->topo->operando;
+		novo->v[i].tipo_variavel = (u1) p->topo->tipo_operando;
+	}
+
+	return(novo);
+}
 
 void nop_impl(frame *par0, u1 par1, u1 par2){
 	// Não implementada
@@ -48,9 +109,8 @@ void iconst_4_impl(frame *f, u1 par1, u1 par2){
 }
 
 void iconst_5_impl(frame *f, u1 par1, u1 par2){
-	printf("EXECUÇÃO ICONST_5\n\n");
-	/*i4 inteiro_sinal = (i4) 5;
-	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);*/
+	i4 inteiro_sinal = (i4) 5;
+	Push_operandos(f->p,(u4)inteiro_sinal,INTEGER_OP);
 }
 
 void lconst_0_impl(frame *f, u1 par1, u1 par2){
@@ -1158,7 +1218,7 @@ void inst_return_impl(frame *f, u1 par1, u1 par2){
 	printf("EXECUÇÃO RETURN\n\n");
 
 	// Empilhar NULL na pilha de operandos do frame chamador, ou seja, o próximo frame na pilha
-	// jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,-1,-1);
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,-1,-1);
 }
 
 void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -1212,7 +1272,18 @@ void invokespecial_impl(frame *f, u1 par1, u1 par2){
 
 }
 
-void invokestatic_impl(frame *f, u1 par1, u1 par2){
+void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+
+	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+	if(resolverMetodo(f->cp,indice_cp)){
+		frame *f_novo = criarFrame(obterClasseDoMetodo(f->cp,indice_cp));
+		jvm->frames = Push_frames(jvm->frames,f_novo);
+		f_novo = transferePilhaVetor(f,f_novo);
+		// printf("VALOR: %04x\n\n\n",f_novo->v[0].variavel[0]);
+		for(int i=0;i<sizeof(f_novo->v)/sizeof(f_novo->v[0]);i++){
+			printf("VARIÁVEL LOCAL: %04x\n",*(f_novo->v[i].variavel));
+		}
+	}
 
 }
 

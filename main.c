@@ -30,7 +30,7 @@ int main(int argc, char const *argv[]){
 	/*Alocação da estrutura para o arquivo .class*/
 	jvm = CriarJVM();
 	jvm = InicializarJVM();
-	jvm->classes = InserirFim(jvm->classes);
+	// jvm->classes = InserirFim(jvm->classes);
 	//classes->arquivoClass = (ClassFile*)malloc(sizeof(ClassFile));
 
 	/*Estrutura condicional que analisa se foi passado o nome do arquivo como parâmetro*/
@@ -62,7 +62,7 @@ int main(int argc, char const *argv[]){
 	}
 
 	/*Chamada da função que realiza a leitura do arquivo .class*/
-	jvm->classes->arquivoClass = lerArquivo(nomearquivo);
+	jvm->classes = InserirFim_classes(jvm->classes,lerArquivo(nomearquivo));
 
 	int opcao = opcaoMenu();
 	if (opcao == 1) {
