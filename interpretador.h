@@ -9,6 +9,8 @@
 
 bool resolverClasse(char *nome_classe);
 bool resolverMetodo(cp_info *cp, u2 indice_cp);
+char* obterNomeMetodo(cp_info *cp, u2 indice_cp);
+char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp);
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp);
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont);
 

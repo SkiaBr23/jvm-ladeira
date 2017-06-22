@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <stdbool.h>
+#include <string.h>
 
 bool resolverClasse(char* nome_classe){
 	classesCarregadas *c = BuscarElemento_classes(jvm->classes,nome_classe);
@@ -37,6 +38,23 @@ bool resolverMetodo(cp_info *cp, u2 indice_cp){
 	else{
 		return false;
 	}
+}
+
+char* obterNomeMetodo(cp_info *cp, u2 indice_cp){
+	cp_info *methodref = cp-1+indice_cp;
+	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	char *pch = strtok(descriptor,":");
+
+	return(pch);
+}
+
+char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp){
+	cp_info *methodref = cp-1+indice_cp;
+	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	char *pch = strtok(descriptor,":");
+	pch = strtok(NULL,":");
+
+	return(pch);
 }
 
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp){
@@ -1273,15 +1291,34 @@ void invokespecial_impl(frame *f, u1 par1, u1 par2){
 void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp);
 	if(resolverMetodo(f->cp,indice_cp)){
-		frame *f_novo = criarFrame(obterClasseDoMetodo(f->cp,indice_cp));
-		jvm->frames = Push_frames(jvm->frames,f_novo);
 		int *parametros_cont = malloc(sizeof(int));
+		char *classeNova = obterClasseDoMetodo(f->cp,indice_cp);
+		frame *f_novo = criarFrame(classeNova);
 		f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
+		jvm->frames = Push_frames(jvm->frames,f_novo);
 		printf("%lu\n",sizeof(vetor_locais));
 		for(int i=0;i<*(parametros_cont);i++){
 			printf("VARIÁVEL LOCAL: %04x\n",*(f_novo->v[i].variavel));
 		}
+
+		classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
+
+		method_info *metodos = classe->arquivoClass->methods;
+		printf("\n\nMETODOS DA CLASSE\n\n");
+		for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
+			// Verificar se o nome e o descriptor do método são iguais ao que está sendo analisado no .class
+			if(strcmp(nomemetodo,(classe->arquivoClass->constant_pool-1+aux->name_index)->UnionCP.UTF8.bytes)==0 && 
+				strcmp(descriptormetodo,(classe->arquivoClass->constant_pool-1+aux->descriptor_index)->UnionCP.UTF8.bytes)==0){
+				printf("\n\nÉ igual\n\n");
+				printf("\n\nNome: %s\n\n",nomemetodo);
+			}
+		}
+
+
+		// Executar o code do método invocado
 	}
 
 }
