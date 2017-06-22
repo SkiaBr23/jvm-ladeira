@@ -11,6 +11,9 @@
 #include <stdbool.h>
 #include <string.h>
 
+/*
+	Na hora de resolver a classe, executar o init dela
+*/
 bool resolverClasse(char* nome_classe){
 	classesCarregadas *c = BuscarElemento_classes(jvm->classes,nome_classe);
 
@@ -18,9 +21,14 @@ bool resolverClasse(char* nome_classe){
 		return true;
 	}
 	else{
-		return false;
+		char *nomearquivo = malloc((strlen(nome_classe)+7)*sizeof(char));
+		strcpy(nomearquivo,nome_classe);
+		strcat(nomearquivo,".class");
+		printf("Nome Arquivo: %s\n",nomearquivo);
+		ClassFile *classe = lerArquivo(nomearquivo);
+		jvm->classes = InserirFim_classes(jvm->classes,classe);
+		return true;
 	}
-
 }
 
 /*
@@ -304,6 +312,7 @@ void dload_3_impl(frame *f, u1 par1, u1 par2){
 }
 
 void aload_0_impl(frame *f, u1 par1, u1 par2){
+	printf("\n\nEXECUTANDO ALOAD_0\n\n");
 	Push_operandos(f->p,(i4) *(f->v[0].variavel),REFERENCE_OP);
 }
 
@@ -1290,6 +1299,13 @@ void invokespecial_impl(frame *f, u1 par1, u1 par2){
 
 }
 
+/*
+	Falta implementar o PC.
+
+	Antes de colocar as variáveis no vetor de variáveis locais do frame do método que será invocado,
+	elas devem ser convertidas para o tipo indicado no descriptor do método que será invocado
+
+*/
 void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
@@ -1301,10 +1317,11 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		frame *f_novo = criarFrame(classeNova);
 		f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 		jvm->frames = Push_frames(jvm->frames,f_novo);
-		printf("%lu\n",sizeof(vetor_locais));
+		// printf("%lu\n",sizeof(vetor_locais));
 		for(int i=0;i<*(parametros_cont);i++){
 			printf("VARIÁVEL LOCAL: %04x\n",*(f_novo->v[i].variavel));
 		}
+
 
 		classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
 
@@ -1314,7 +1331,6 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
 			if(strcmp(nomemetodo,(classe->arquivoClass->constant_pool-1+aux->name_index)->UnionCP.UTF8.bytes)==0 && 
 				strcmp(descriptormetodo,(classe->arquivoClass->constant_pool-1+aux->descriptor_index)->UnionCP.UTF8.bytes)==0){
-
 				// Executar o code do método invocado
 				executarMetodo(aux,classeNova,2);
 

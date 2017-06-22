@@ -83,8 +83,9 @@ void executarMetodo(method_info *m, char* classeCorrente, int chamador){
 
 	for(posicao=0;posicao<m->attributes_count;posicao++){
 		aux = (*(m->attributes+posicao));
+		classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,classeCorrente);
 		// code_attribute * auxCodePontual = (code_attribute*)(*(auxAttrCompleto+posicao))->info;
-		char *nameindex = decodificaStringUTF8(jvm->classes->arquivoClass->constant_pool-1+aux->attribute_name_index);
+		char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
 		printf("%s\n",nameindex);
 		// Se for o atributo code
 		if(strcmp(nameindex,"Code")==0){
