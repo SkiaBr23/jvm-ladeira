@@ -22,7 +22,11 @@ JVM* InicializarJVM();
 int opcaoMenu();
 frame* criarFrame(char *classeCorrente);
 void executarJVM();
-void executarMetodo(method_info *m, char *classeCorrente);
+/*
+	Função executarMetodo: chamador 1 quer dizer que a JVM está chamando a função.
+	Chamador 2 quer dizer que uma função de implementação de instruções chamou essa função (exemplo: invokestatic)
+*/
+void executarMetodo(method_info *m, char *classeCorrente, int chamador);
 //CODIFICAR FUNCAO PARA LIBERAR JVM, CHAMANDO FUNCOES INTERNAS DE FREE DAS ESTRUTURAS
 //void LiberarLista_frames(lista_frames *lis);
 void interpretarCode(u1 *code, u4 length);

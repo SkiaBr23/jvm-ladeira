@@ -71,12 +71,12 @@ void executarJVM(){
 
 		// Se for o método main
 		if(strcmp(stringmetodo,MAIN_NOME)==0 && strcmp(stringdescriptor,DESCRIPTOR_MAIN)==0 && aux->access_flags==PUBLIC_STATIC){
-			executarMetodo(aux,"Main");
+			executarMetodo(aux,"Main",1);
 		}
 	}
 }
 
-void executarMetodo(method_info *m, char* classeCorrente){
+void executarMetodo(method_info *m, char* classeCorrente, int chamador){
 	attribute_info *aux;
 
 	int posicao;
@@ -88,8 +88,10 @@ void executarMetodo(method_info *m, char* classeCorrente){
 		printf("%s\n",nameindex);
 		// Se for o atributo code
 		if(strcmp(nameindex,"Code")==0){
-			frame *f = criarFrame(classeCorrente);
-			jvm->frames = Push_frames(jvm->frames,f);
+			if(chamador==1){
+				frame *f = criarFrame(classeCorrente);
+				jvm->frames = Push_frames(jvm->frames,f);
+			}
 			code_attribute *c = (code_attribute *) aux->info;
 
 			interpretarCode(c->code,c->code_length);

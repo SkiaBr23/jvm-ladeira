@@ -239,6 +239,7 @@ void aload_impl(frame *f, u1 index, u1 par1){
 }
 
 void iload_0_impl(frame *f, u1 par1, u1 par2){
+	printf("\nExecutando iload_0\n");
 	Push_operandos(f->p,(i4) *(f->v[0].variavel),INTEGER_OP);
 }
 
@@ -758,6 +759,7 @@ void dsub_impl(frame *f, u1 par1, u1 par2){
 }
 
 void imul_impl(frame *f, u1 par1, u1 par2){
+	printf("\nExecutando imul\n");
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -1205,7 +1207,7 @@ void lookupswitch_fantasma(frame *par0, u1 par1, u1 par2){
 /***** O valor retornado é entre frames. Analisar como acessar a estrutura global *****/
 void ireturn_impl(frame *f, u1 par1, u1 par2){
 	// Analisar as condições do método que deve ser retornado
-
+	printf("\nExecutando ireturn\n");
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	// Empilhar na pilha de operandos do frame do chamador
@@ -1306,19 +1308,18 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 		classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
 
+		// Achar o método na classe que o contém
 		method_info *metodos = classe->arquivoClass->methods;
-		printf("\n\nMETODOS DA CLASSE\n\n");
 		for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
-			// Verificar se o nome e o descriptor do método são iguais ao que está sendo analisado no .class
+			// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
 			if(strcmp(nomemetodo,(classe->arquivoClass->constant_pool-1+aux->name_index)->UnionCP.UTF8.bytes)==0 && 
 				strcmp(descriptormetodo,(classe->arquivoClass->constant_pool-1+aux->descriptor_index)->UnionCP.UTF8.bytes)==0){
-				printf("\n\nÉ igual\n\n");
-				printf("\n\nNome: %s\n\n",nomemetodo);
+
+				// Executar o code do método invocado
+				executarMetodo(aux,classeNova,2);
+
 			}
 		}
-
-
-		// Executar o code do método invocado
 	}
 
 }
