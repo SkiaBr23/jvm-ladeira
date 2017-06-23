@@ -103,29 +103,29 @@ void dup2_x1_impl(frame *f);
 void dup2_x2_impl(frame *f);
 void swap_impl(frame *f);
 void iadd_impl(frame *f);
-void ladd_impl(frame *f); // Não implementado
-void fadd_impl(frame *f); // Não implementado
-void dadd_impl(frame *f); // Não implementado
+void ladd_impl(frame *f);
+void fadd_impl(frame *f);
+void dadd_impl(frame *f);
 void isub_impl(frame *f);
-void lsub_impl(frame *f); // Não implementado
-void fsub_impl(frame *f); // Não implementado
-void dsub_impl(frame *f); // Não implementado
+void lsub_impl(frame *f);
+void fsub_impl(frame *f);
+void dsub_impl(frame *f);
 void imul_impl(frame *f);
-void lmul_impl(frame *f); // Não implementado
-void fmul_impl(frame *f); // Não implementado
-void dmul_impl(frame *f); // Não implementado
+void lmul_impl(frame *f);
+void fmul_impl(frame *f);
+void dmul_impl(frame *f);
 void idiv_impl(frame *f);
-void ldiv_impl(frame *f); // Não implementado
-void fdiv_impl(frame *f); // Não implementado
-void ddiv_impl(frame *f); // Não implementado
+void ldiv_impl(frame *f);
+void fdiv_impl(frame *f);
+void ddiv_impl(frame *f);
 void irem_impl(frame *f);
 void lrem_impl(frame *f); // Não implementado
 void frem_impl(frame *f); // Não implementado
 void drem_impl(frame *f); // Não implementado
 void ineg_impl(frame *f);
-void lneg_impl(frame *f); // Não implementado
-void fneg_impl(frame *f); // Não implementado
-void dneg_impl(frame *f); // Não implementado
+void lneg_impl(frame *f);
+void fneg_impl(frame *f);
+void dneg_impl(frame *f);
 void ishl_impl(frame *f);
 void lshl_impl(frame *f); // Não implementado
 void ishr_impl(frame *f);

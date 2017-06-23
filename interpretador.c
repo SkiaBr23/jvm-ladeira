@@ -749,9 +749,9 @@ void fadd_impl(frame *f){
 		big_op = op1;
 		small_op = op2;
 	}
-	i4 operacao = (sinal(op1)!=sinal(op2))? 1:-1;
+	i4 operacao = (sinal(op1)!=sinal(op2))? -1:1;
 	i4 result_exp = expoente(big_op);
-	u4 result_mant = mantissa(big_op) + operacao*(mantissa(small_op) << (expoente(big_op) - expoente(small_op)));
+	u4 result_mant = mantissa(big_op) + (operacao*(mantissa(small_op) << (expoente(big_op) - expoente(small_op))));
 	u4 result_sin = sinal(big_op);
 
 	//Normaliza float
@@ -789,10 +789,10 @@ void dadd_impl(frame *f){
 		big_op = op1;
 		small_op = op2;
 	}
-	i4 operacao = (sinal(op1)!=sinal(op2))? 1:-1;
-	i8 result_exp = expoente(big_op);
-	u8 result_mant = mantissa(big_op) + operacao*(mantissa(small_op) << (expoente(big_op) - expoente(small_op)));
-	u8 result_sin = sinal(big_op);
+	i4 operacao = (sinal_d(op1)!=sinal_d(op2))? -1:1;
+	i8 result_exp = expoente_d(big_op);
+	u8 result_mant = mantissa_d(big_op) + (operacao*(mantissa_d(small_op) << (expoente_d(big_op) - expoente_d(small_op))));
+	u8 result_sin = sinal_d(big_op);
 
 	//Normaliza double
 	while((result_mant>>52) != 0){
@@ -811,36 +811,261 @@ void isub_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	pilha_operandos *valor3 = CriarPilha_operandos();
-
-	valor3 = Push_operandos(valor3,valor1->topo->operando-valor2->topo->operando, INTEGER_OP);
-	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
-	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
+	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
+	i4 result = valor1->topo->operando-valor2->topo->operando;
+	f->p = Push_operandos(f->p,result,INTEGER_OP);
 }
+
+void lsub_impl(frame *f){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+
+	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
+
+	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+
+	u8 result = long1 - long2;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, LONG_OP);
+
+}
+
+void fsub_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	u4 op1 = valor1->topo->operando;
+	u4 op2 = valor2->topo->operando;
+	u4 big_op, small_op;
+
+	if(expoente(op1)>expoente(op2)){
+		big_op = op1;
+		small_op = op2;
+	}else if(expoente(op2)>expoente(op1)){
+		big_op = op2;
+		small_op = op1;
+	}else if(mantissa(op2)>mantissa(op1)){
+		big_op = op2;
+		small_op = op1;
+	}else{
+		big_op = op1;
+		small_op = op2;
+	}
+	i4 operacao = (sinal(op1)!=sinal(op2))? 1:-1;
+	i4 result_exp = expoente(big_op);
+	u4 result_mant = mantissa(big_op) + (operacao*(mantissa(small_op) << (expoente(big_op) - expoente(small_op))));
+	u4 result_sin = sinal(big_op);
+
+	//Normaliza float
+	while((result_mant>>23) != 0){
+		result_mant = result_mant>>1;
+		result_exp++;
+	}
+
+	//Constroi float
+	u4 result = (result_sin<<31) | (result_exp<<23) | result_mant;
+
+	f->p = Push_operandos(f->p,result,FLOAT_OP);
+}
+
+void dsub_impl(frame *f){
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+	pilha_operandos *valor2_low = Pop_operandos(f->p);
+	pilha_operandos *valor2_high = Pop_operandos(f->p);
+
+	u8 op1 = ((u8)valor1_high->topo->operando << 32) | valor1_low->topo->operando;
+	u8 op2 = ((u8)valor2_high->topo->operando << 32) | valor2_low->topo->operando;
+	u8 big_op, small_op;
+
+	if(expoente_d(op1)>expoente_d(op2)){
+		big_op = op1;
+		small_op = op2;
+	}else if(expoente_d(op2)>expoente_d(op1)){
+		big_op = op2;
+		small_op = op1;
+	}else if(mantissa_d(op2)>mantissa_d(op1)){
+		big_op = op2;
+		small_op = op1;
+	}else{
+		big_op = op1;
+		small_op = op2;
+	}
+	i4 operacao = (sinal_d(op1)!=sinal_d(op2))? 1:-1;
+	i8 result_exp = expoente_d(big_op);
+	u8 result_mant = mantissa_d(big_op) + (operacao*(mantissa_d(small_op) << (expoente_d(big_op) - expoente_d(small_op))));
+	u8 result_sin = sinal_d(big_op);
+
+	//Normaliza double
+	while((result_mant>>52) != 0){
+		result_mant = result_mant>>1;
+		result_exp++;
+	}
+
+	//Constroi float
+	u8 result = (result_sin<<63) | (result_exp<<52) | result_mant;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), DOUBLE_OP);
+	f->p = Push_operandos(f->p, (u4)result, DOUBLE_OP);
+}
+
 
 void imul_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	pilha_operandos *valor3 = CriarPilha_operandos();
-
-	valor3 = Push_operandos(valor3,valor1->topo->operando*valor2->topo->operando, INTEGER_OP);
-	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
-	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
+	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
+	i4 result = valor1->topo->operando*valor2->topo->operando;
+	f->p = Push_operandos(f->p,result,INTEGER_OP);
 }
 
+void lmul_impl(frame *f){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+
+	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
+
+	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+
+	u8 result = long1 * long2;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, LONG_OP);
+
+}
+
+void fmul_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	u4 op1 = valor1->topo->operando;
+	u4 op2 = valor2->topo->operando;
+
+	i4 result_exp = expoente(op1) + expoente(op2);
+	u4 result_mant = mantissa(op1) * mantissa(op2);
+	u4 result_sin = sinal(op1) ^ sinal(op2);
+
+	//Normaliza float
+	while((result_mant>>23) != 0){
+		result_mant = result_mant>>1;
+		result_exp++;
+	}
+
+	//Constroi float
+	u4 result = (result_sin<<31) | (result_exp<<23) | result_mant;
+
+	f->p = Push_operandos(f->p,result,FLOAT_OP);
+}
+
+void dmul_impl(frame *f){
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+	pilha_operandos *valor2_low = Pop_operandos(f->p);
+	pilha_operandos *valor2_high = Pop_operandos(f->p);
+
+	u8 op1 = ((u8)valor1_high->topo->operando << 32) | valor1_low->topo->operando;
+	u8 op2 = ((u8)valor2_high->topo->operando << 32) | valor2_low->topo->operando;
+
+	i8 result_exp = expoente_d(op1) + expoente_d(op2);
+	u8 result_mant = mantissa_d(op1) * mantissa_d(op2);
+	u8 result_sin = sinal_d(op1) ^ sinal_d(op2);
+
+	//Normaliza double
+	while((result_mant>>52) != 0){
+		result_mant = result_mant>>1;
+		result_exp++;
+	}
+
+	//Constroi float
+	u8 result = (result_sin<<63) | (result_exp<<52) | result_mant;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), DOUBLE_OP);
+	f->p = Push_operandos(f->p, (u4)result, DOUBLE_OP);
+}
 void idiv_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	pilha_operandos *valor3 = CriarPilha_operandos();
-	if(valor2->topo->operando == 0){
-		// Lançar exceção ArithmeticException
-	}
-	valor3 = Push_operandos(valor3,valor1->topo->operando/valor2->topo->operando, INTEGER_OP);
-	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
+	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
+	i4 result = valor1->topo->operando/valor2->topo->operando;
+	f->p = Push_operandos(f->p,result,INTEGER_OP);
+}
 
-	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
+void ldiv_impl(frame *f){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+
+	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
+
+	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+
+	u8 result = long1 / long2;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, LONG_OP);
+
+}
+
+void fdiv_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	u4 op1 = valor1->topo->operando;
+	u4 op2 = valor2->topo->operando;
+
+	i4 result_exp = expoente(op1) - expoente(op2);
+	u4 result_mant = mantissa(op1) / mantissa(op2);
+	u4 result_sin = sinal(op1) ^ sinal(op2);
+
+	//Normaliza float
+	while((result_mant>>23) != 0){
+		result_mant = result_mant>>1;
+		result_exp++;
+	}
+
+	//Constroi float
+	u4 result = (result_sin<<31) | (result_exp<<23) | result_mant;
+
+	f->p = Push_operandos(f->p,result,FLOAT_OP);
+}
+
+void ddiv_impl(frame *f){
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+	pilha_operandos *valor2_low = Pop_operandos(f->p);
+	pilha_operandos *valor2_high = Pop_operandos(f->p);
+
+	u8 op1 = ((u8)valor1_high->topo->operando << 32) | valor1_low->topo->operando;
+	u8 op2 = ((u8)valor2_high->topo->operando << 32) | valor2_low->topo->operando;
+
+	i8 result_exp = expoente_d(op1) - expoente_d(op2);
+	u8 result_mant = mantissa_d(op1) / mantissa_d(op2);
+	u8 result_sin = sinal_d(op1) ^ sinal_d(op2);
+
+	//Normaliza double
+	while((result_mant>>52) != 0){
+		result_mant = result_mant>>1;
+		result_exp++;
+	}
+
+	//Constroi float
+	u8 result = (result_sin<<63) | (result_exp<<52) | result_mant;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), DOUBLE_OP);
+	f->p = Push_operandos(f->p, (u4)result, DOUBLE_OP);
 }
 
 void irem_impl(frame *f){
@@ -864,9 +1089,47 @@ void irem_impl(frame *f){
 void ineg_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 
-	// Colocar o valor na pilha negado
-	f->p = Push_operandos(f->p,-(valor1->topo->operando),valor1->topo->tipo_operando);
+	i4 result = -valor1->topo->operando;
+	f->p = Push_operandos(f->p,result,INTEGER_OP);
 }
+
+void lneg_impl(frame *f){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+	u8 result = -long1;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, LONG_OP);
+
+}
+
+void fneg_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+
+	u4 op1 = valor1->topo->operando;
+
+	//Constroi float
+	u4 result = op1 ^ 0X80000000; //Invert signal
+
+	f->p = Push_operandos(f->p,result,FLOAT_OP);
+}
+
+void dneg_impl(frame *f){
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+
+	u4 high_bytes = valor1_high->topo->operando
+	u4 low_bytes = valor1_low->topo->operando;
+
+	u4 result = high_bytes ^ 0X80000000; //Invert signal on high_bytes
+
+	f->p = Push_operandos(f->p, result, DOUBLE_OP);
+	f->p = Push_operandos(f->p, low_bytes, DOUBLE_OP);
+}
+
 
 void ishl_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);

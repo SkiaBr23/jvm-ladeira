@@ -53,18 +53,18 @@ typedef uint64_t u8;
 #ifndef FLOAT_DEF
 #define FLOAT_DEF
 
-#define expoente(x) (x << 1) >> 24
-#define mantissa(x) (x << 9) >> 9
-#define sinal(x) x >> 31
+#define expoente(x) ((x << 1) >> 24)
+#define mantissa(x) ((x << 9) >> 9)
+#define sinal(x) (x >> 31)
 
 #endif
 
 #ifndef DOUBLE_DEF
 #define DOUBLE_DEF
 
-#define expoente_d(x) (x << 1) >> 53
-#define mantissa_d(x) (x << 12) >> 12
-#define sinal_d(x) x >> 63
+#define expoente_d(x) ((x << 1) >> 53)
+#define mantissa_d(x) ((x << 12) >> 12)
+#define sinal_d(x) (x >> 63)
 
 #endif
 
