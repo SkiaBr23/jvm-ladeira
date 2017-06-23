@@ -47,6 +47,25 @@ u1, u2 e u4, respectivamente*/
 typedef uint8_t u1;
 typedef uint16_t u2;
 typedef uint32_t u4;
+typedef uint64_t u8;
+#endif
+
+#ifndef FLOAT_DEF
+#define FLOAT_DEF
+
+#define expoente(x) (x << 1) >> 24
+#define mantissa(x) (x << 9) >> 9
+#define sinal(x) x >> 31
+
+#endif
+
+#ifndef DOUBLE_DEF
+#define DOUBLE_DEF
+
+#define expoente_d(x) (x << 1) >> 53
+#define mantissa_d(x) (x << 12) >> 12
+#define sinal_d(x) x >> 63
+
 #endif
 
 #include "pilha_operandos.h"
@@ -235,6 +254,19 @@ enum access_flags{
 };
 
 typedef enum access_flags access_flags;
+
+enum tipos_array{
+	T_BOOLEAN = 4,
+	T_CHAR,
+	T_FLOAT,
+	T_DOUBLE,
+	T_BYTE,
+	T_SHORT,
+	T_INT,
+	T_LONG
+};
+
+typedef enum tipos_array tipos_array;
 
 /*Definição da estrutura de Attributes*/
 struct attribute_info {

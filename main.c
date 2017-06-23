@@ -18,8 +18,8 @@ Alunos: 		Maximillian Fan Xavier - 12/0153271
 /** Inclusão de bibliotecas para entrada e saída de dados, tratamento de strings e estruturas e mecanismos de leitura do arquivo .class
 */
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 #include "leitura.h"
 
 /**
