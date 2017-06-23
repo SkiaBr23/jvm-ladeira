@@ -110,6 +110,7 @@ void interpretarCode(u1 *code,u4 length){
 		printf("%s\n",i.inst_nome);
 		j++;
 		u1 numarg = i.numarg;
+		ImprimirPilha_operandos(jvm->frames->topo->f->p);
 		if(numarg>0){
 
 			u1 *argumentos = malloc(numarg*sizeof(u1));
@@ -117,7 +118,7 @@ void interpretarCode(u1 *code,u4 length){
 			// Deixar todas as funções com a mesma assinatura
 			for(u1 arg=0;arg<numarg;arg++){
 				argumentos[arg] = *j;
-				printf("%01x\t",argumentos[arg]);
+				// printf("%01x\t",argumentos[arg]);
 				j++;
 			}
 
@@ -135,7 +136,6 @@ void interpretarCode(u1 *code,u4 length){
 			}
 		}
 		else if(numarg==0){
-			ImprimirPilha_operandos(jvm->frames->topo->f->p);
 			(*func_ptr[i.opcode])(jvm->frames->topo->f,0,0);
 		}
 

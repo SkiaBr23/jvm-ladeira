@@ -1352,7 +1352,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	if(strcmp(nomemetodo,"println")==0){
 		// Imprimir com o printf do c
 		// Esvaziar a pilha de operandos
-		ImprimirPilha_operandos(f->p);
+		// ImprimirPilha_operandos(f->p);
 		pilha_operandos *string = Pop_operandos(f->p);
 		pilha_operandos *fieldOut = Pop_operandos(f->p);
 

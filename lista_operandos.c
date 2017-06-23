@@ -177,12 +177,12 @@ void ImprimirLista_operandos(lista_operandos *lis){
 	lista_operandos *p;
 	
 	for(p=lis;p!=NULL;p=p->prox){
-		printf("%01x\t",p->tipo_operando);
+		printf("Tipo: %d\t",p->tipo_operando);
 		if(p->tipo_operando<=8){
-			printf("%d\n\n",p->operando);
+			printf("Operando: %d\n\n",p->operando);
 		}
 		else{
-			printf("%s\n\n",(char*) p->referencia);
+			printf("Operando: %s\n\n",(char*) p->referencia);
 		}
 	}
 }
