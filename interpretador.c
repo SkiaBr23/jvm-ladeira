@@ -7,10 +7,12 @@
 #include <stdlib.h>
 #include <limits.h>
 
+//Insere NULL na pilha de operandos
 void aconst_null_impl(frame *f){
 	Push_operandos(f->p,0,REFERENCE_OP); // 0 do tipo referência quer dizer referência apontando para NULL
 }
 
+//Insere -1 na pilha de operandos
 void iconst_m1_impl(frame *f){
 	i4 inteiro_sinal = (i4) -1;
 	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);
@@ -46,6 +48,7 @@ void iconst_5_impl(frame *f){
 	Push_operandos(f->p,inteiro_sinal,INTEGER_OP);
 }
 
+//Insere 0L na pilha de operandos TOPO|lb|hb|...|base
 void lconst_0_impl(frame *f){
 
 	//Push 0L to stack
@@ -68,6 +71,7 @@ void lconst_1_impl(frame *f){
 	Push_operandos(f->p,low_bytes,LONG_OP);
 }
 
+//Insere 0.0 na pilha de operandos
 void fconst_0_impl(frame *f){
 
 	i4 float_bytes = (i4) 0;
@@ -89,6 +93,7 @@ void fconst_2_impl(frame *f){
 
 }
 
+//Insere 0.0d na pilha de operandos 
 void dconst_0_impl(frame *f){
 
 	//Push 0.0 double to stack
@@ -111,43 +116,51 @@ void dconst_1_impl(frame *f){
 	Push_operandos(f->p,low_bytes,DOUBLE_OP);
 }
 
+//Push sexted byte para a pilha de operandos
 void bipush_impl(u1 byte, frame *f){
 	i4 byte_int = (i4) byte;
 	Push_operandos(f->p,byte_int,BYTE_OP);
 }
 
+//Push sexted short para a pilha de operandos
 void sipush_impl(u1 byte1, u1 byte2, frame *f){
 	u2 byte_short = (byte1 << 8) | byte2;
 	i4 byte_int = (i4) byte_short;
 	Push_operandos(f->p,byte_int,SHORT_OP);
-	Push_operandos(f->p,byte_int,SHORT_OP);
 }
 
+//Carrega inteiro do frame para a pilha de operandos
 void iload_impl(u1 index, frame *f){
 	Push_operandos(f->p,(i4) *(f->v[index].variavel),INTEGER_OP);
 }
 
+//Carrega long do frame para a pilha de operandos
 void lload_impl(u1 index, frame *f){
 	//Checar se a ordem ta certa, o topo da pilha deveria ser o LOW
-	Push_operandos(f->p,(i4) *(f->v[index].variavel),LONG_OP);
-	Push_operandos(f->p,(i4) *(f->v[index+1].variavel),LONG_OP);
+	Push_operandos(f->p,(i4) *(f->v[index].variavel),LONG_OP);//high
+	Push_operandos(f->p,(i4) *(f->v[index+1].variavel),LONG_OP);//low
 }
 
+//Carrega float do frame para a pilha de operandos
 void fload_impl(u1 index, frame *f){
 	Push_operandos(f->p, (i4) *(f->v[index].variavel),FLOAT_OP);
 }
 
+//Carrega double do frame para a pilha de operandos
 void dload_impl(u1 index, frame *f){
 	//Checar se a ordem ta certa, o topo da pilha deveria ser o LOW
 	Push_operandos(f->p,(i4) *(f->v[index].variavel),DOUBLE_OP);
 	Push_operandos(f->p,(i4) *(f->v[index+1].variavel),DOUBLE_OP);
 }
 
+//Carrega referencia de array para a pilha de operandos
 void aload_impl(u1 index, frame *f){
 	Push_operandos(f->p, (i4) *(f->v[index].variavel),REFERENCE_OP);
 }
 
+//Carrega inteiro na posicao 0 para a pilha
 void iload_0_impl(frame *f){
+	//Implementar assim ou chamando iload_impl(0)?
 	Push_operandos(f->p,(i4) *(f->v[0].variavel),INTEGER_OP);
 }
 
@@ -163,9 +176,10 @@ void iload_3_impl(frame *f){
 	Push_operandos(f->p,(i4) *(f->v[3].variavel),INTEGER_OP);
 }
 
+//Carrega long na posicao 0 para a pilha
 void lload_0_impl(frame *f){
-	Push_operandos(f->p,(i4) *(f->v[0].variavel),LONG_OP);
-	Push_operandos(f->p,(i4) *(f->v[1].variavel),LONG_OP);
+	Push_operandos(f->p,(i4) *(f->v[0].variavel),LONG_OP);//high
+	Push_operandos(f->p,(i4) *(f->v[1].variavel),LONG_OP);//low
 }
 void lload_1_impl(frame *f){
 	Push_operandos(f->p,(i4) *(f->v[1].variavel),LONG_OP);
@@ -180,6 +194,7 @@ void lload_3_impl(frame *f){
 	Push_operandos(f->p,(i4) *(f->v[4].variavel),LONG_OP);
 }
 
+//Carrega float na posicao 0
 void fload_0_impl(frame *f){
 	Push_operandos(f->p,(i4) *(f->v[0].variavel),FLOAT_OP);
 }
@@ -196,9 +211,10 @@ void fload_3_impl(frame *f){
 	Push_operandos(f->p,(i4) *(f->v[3].variavel),FLOAT_OP);
 }
 
+//Carrega double na posicao 0 para a pilha
 void dload_0_impl(frame *f){
-	Push_operandos(f->p,(i4) *(f->v[0].variavel),DOUBLE_OP);
-	Push_operandos(f->p,(i4) *(f->v[1].variavel),DOUBLE_OP);
+	Push_operandos(f->p,(i4) *(f->v[0].variavel),DOUBLE_OP);//high
+	Push_operandos(f->p,(i4) *(f->v[1].variavel),DOUBLE_OP);//low
 }
 void dload_1_impl(frame *f){
 	Push_operandos(f->p,(i4) *(f->v[1].variavel),DOUBLE_OP);
@@ -213,6 +229,7 @@ void dload_3_impl(frame *f){
 	Push_operandos(f->p,(i4) *(f->v[4].variavel),DOUBLE_OP);
 }
 
+//Carrega referencia na posicao 0 para a pilha
 void aload_0_impl(frame *f){
 	Push_operandos(f->p,(i4) *(f->v[0].variavel),REFERENCE_OP);
 }
@@ -327,7 +344,7 @@ void saload_impl(frame *f){
 void istore_impl(u1 index, frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	*(f->v[index].variavel) = (u4) valor->topo->operando;
+	*(f->v[index].variavel) = (i4) valor->topo->operando;
 }
 
 void lstore_impl(u1 index, frame *f){
@@ -358,22 +375,22 @@ void astore_impl(u1 index, frame *f){
 
 void istore_0_impl(frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[0].variavel) = (u4) valor->topo->operando;
+	*(f->v[0].variavel) = (i4) valor->topo->operando;
 }
 
 void istore_1_impl(frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[1].variavel) = (u4) valor->topo->operando;
+	*(f->v[1].variavel) = (i4) valor->topo->operando;
 }
 
 void istore_2_impl(frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[2].variavel) = (u4) valor->topo->operando;
+	*(f->v[2].variavel) = (i4) valor->topo->operando;
 }
 
 void istore_3_impl(frame *f){
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[3].variavel) = (u4) valor->topo->operando;
+	*(f->v[3].variavel) = (i4) valor->topo->operando;
 }
 
 void lstore_0_impl(frame *f){
@@ -549,7 +566,7 @@ void bastore_impl(frame *f){
 	i1 *endereco = malloc(sizeof(i1));
 	endereco = ((i1*) array->topo->operando) + (indice->topo->operando * sizeof(i1));
 
-	*endereco = valor->topo->operando;
+	*endereco = (i1) valor->topo->operando;
 }
 
 void castore_impl(frame *f){
@@ -560,7 +577,7 @@ void castore_impl(frame *f){
 	u2 *endereco = malloc(sizeof(u2));
 	endereco = ((u2*) array->topo->operando) + (indice->topo->operando * sizeof(u2));
 
-	*endereco = valor->topo->operando;
+	*endereco = (u2) valor->topo->operando;
 }
 
 void sastore_impl(frame *f){
@@ -571,7 +588,7 @@ void sastore_impl(frame *f){
 	i2 *endereco = malloc(sizeof(i2));
 	endereco = ((i2*) array->topo->operando) + (indice->topo->operando * sizeof(i2));
 
-	*endereco = valor->topo->operando;
+	*endereco = (i2) valor->topo->operando;
 }
 
 pilha_operandos* pop_impl(frame *f){
@@ -686,15 +703,109 @@ void iadd_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	pilha_operandos *valor3 = CriarPilha_operandos();
-
 	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
-	valor3 = Push_operandos(valor3,valor1->topo->operando+valor2->topo->operando,valor1->topo->tipo_operando);
-	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
-	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->tipo_operando);
+	i4 result = valor1->topo->operando+valor2->topo->operando;
+	f->p = Push_operandos(f->p,result,INTEGER_OP);
 
 }
 
+void ladd_impl(frame *f){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+
+	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
+
+	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+
+	u8 result = long1 + long2;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, LONG_OP);
+
+}
+
+void fadd_impl(frame *f){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	u4 op1 = valor1->topo->operando;
+	u4 op2 = valor2->topo->operando;
+	u4 big_op, small_op;
+
+	if(expoente(op1)>expoente(op2)){
+		big_op = op1;
+		small_op = op2;
+	}else if(expoente(op2)>expoente(op1)){
+		big_op = op2;
+		small_op = op1;
+	}else if(mantissa(op2)>mantissa(op1)){
+		big_op = op2;
+		small_op = op1;
+	}else{
+		big_op = op1;
+		small_op = op2;
+	}
+	i4 operacao = (sinal(op1)!=sinal(op2))? 1:-1;
+	i4 result_exp = expoente(big_op);
+	u4 result_mant = mantissa(big_op) + operacao*(mantissa(small_op) << (expoente(big_op) - expoente(small_op)));
+	u4 result_sin = sinal(big_op);
+
+	//Normaliza float
+	while((result_mant>>23) != 0){
+		result_mant = result_mant>>1;
+		result_exp++;
+	}
+
+	//Constroi float
+	u4 result = (result_sin<<31) | (result_exp<<23) | result_mant;
+
+	f->p = Push_operandos(f->p,result,FLOAT_OP);
+
+}
+void dadd_impl(frame *f){
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+	pilha_operandos *valor2_low = Pop_operandos(f->p);
+	pilha_operandos *valor2_high = Pop_operandos(f->p);
+
+	u8 op1 = ((u8)valor1_high->topo->operando << 32) | valor1_low->topo->operando;
+	u8 op2 = ((u8)valor2_high->topo->operando << 32) | valor2_low->topo->operando;
+	u8 big_op, small_op;
+
+	if(expoente_d(op1)>expoente_d(op2)){
+		big_op = op1;
+		small_op = op2;
+	}else if(expoente_d(op2)>expoente_d(op1)){
+		big_op = op2;
+		small_op = op1;
+	}else if(mantissa_d(op2)>mantissa_d(op1)){
+		big_op = op2;
+		small_op = op1;
+	}else{
+		big_op = op1;
+		small_op = op2;
+	}
+	i4 operacao = (sinal(op1)!=sinal(op2))? 1:-1;
+	i8 result_exp = expoente(big_op);
+	u8 result_mant = mantissa(big_op) + operacao*(mantissa(small_op) << (expoente(big_op) - expoente(small_op)));
+	u8 result_sin = sinal(big_op);
+
+	//Normaliza double
+	while((result_mant>>52) != 0){
+		result_mant = result_mant>>1;
+		result_exp++;
+	}
+
+	//Constroi float
+	u8 result = (result_sin<<63) | (result_exp<<52) | result_mant;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), DOUBLE_OP);
+	f->p = Push_operandos(f->p, (u4)result, DOUBLE_OP);
+}
 // Overflow pode ocorrer, mas mesmo assim, exceção não é lançada. Ou seja, é só subtrair
 void isub_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);

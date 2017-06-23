@@ -47,6 +47,25 @@ u1, u2 e u4, respectivamente*/
 typedef uint8_t u1;
 typedef uint16_t u2;
 typedef uint32_t u4;
+typedef uint64_t u8;
+#endif
+
+#ifndef FLOAT_DEF
+#define FLOAT_DEF
+
+#define expoente(x) (x << 1) >> 24
+#define mantissa(x) (x << 9) >> 9
+#define sinal(x) x >> 31
+
+#endif
+
+#ifndef DOUBLE_DEF
+#define DOUBLE_DEF
+
+#define expoente_d(x) (x << 1) >> 53
+#define mantissa_d(x) (x << 12) >> 12
+#define sinal_d(x) x >> 63
+
 #endif
 
 #include "pilha_operandos.h"
