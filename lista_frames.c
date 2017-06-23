@@ -42,7 +42,9 @@ lista_frames* RemoverInicio_frames(lista_frames* lis){
 	lista_frames* p=lis;
 	
 	lis = p->prox;
-	lis->ant = NULL;
+	if(lis!=NULL){
+		lis->ant = NULL;
+	}
 	
 	free(p);
 	return (lis);

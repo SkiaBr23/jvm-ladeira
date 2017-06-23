@@ -21,6 +21,7 @@ typedef int32_t i4;
 /* Essa lista foi implementada utilizando strings. Substituir a string pelo elemento que será utilizado */
 struct lista_operandos{
 	i4 operando;
+	void *referencia;
 	u1 tipo_operando;
 	struct lista_operandos *prox,*ant;
 };
@@ -42,7 +43,7 @@ enum tipos_operandos{
 typedef enum tipos_operandos tipos_operandos;
 
 lista_operandos* CriarLista_operandos();
-lista_operandos* InserirInicio_operandos(lista_operandos *lis, i4 operando, u1 tipo_operando); 
+lista_operandos* InserirInicio_operandos(lista_operandos *lis, i4 operando, void *referencia, u1 tipo_operando); 
 lista_operandos* InserirFim_operandos(lista_operandos *lis, i4 operando, u1 tipo_operando);
 lista_operandos* RemoverInicio_operandos(lista_operandos *lis);
 lista_operandos* RemoverFim_operandos(lista_operandos *lis);

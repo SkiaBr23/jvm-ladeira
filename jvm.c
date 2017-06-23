@@ -122,6 +122,9 @@ void interpretarCode(u1 *code,u4 length){
 			}
 
 			switch(numarg){
+				case 0:
+					(*func_ptr[i.opcode])(jvm->frames->topo->f,0,0);
+				break;
 				case 1:
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],0);
 				break;
@@ -132,6 +135,7 @@ void interpretarCode(u1 *code,u4 length){
 			}
 		}
 		else if(numarg==0){
+			ImprimirPilha_operandos(jvm->frames->topo->f->p);
 			(*func_ptr[i.opcode])(jvm->frames->topo->f,0,0);
 		}
 

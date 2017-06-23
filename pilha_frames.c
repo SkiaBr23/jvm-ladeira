@@ -15,12 +15,10 @@ pilha_frames* Push_frames(pilha_frames *p, frame *f){
 }
 
 pilha_frames* Pop_frames(pilha_frames *p){
-	pilha_frames *elementotopo = Topo_frames(p);
-	if(elementotopo->topo==NULL){
-		return(NULL);
-	}
+	pilha_frames *aux = CriarPilha_frames();
+	aux = Push_frames(aux,p->topo->f);
 	p->topo = RemoverInicio_frames(p->topo);
-	return (elementotopo);
+	return (aux);
 }
 
 pilha_frames* Topo_frames(pilha_frames *p){

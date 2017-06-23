@@ -2,12 +2,13 @@
 #define INTERPRETADOR_H
 
 #include "instrucoes.h"
+#include "classFileStruct.h"
 #include <stdbool.h>
 
 /* Observar todas as instruções, pois a maioria delas está parcialmente implementada */
 /* Observar todas as intruções quanto ao lançamento de exceções */
 
-bool resolverClasse(char *nome_classe);
+ClassFile* resolverClasse(char *nome_classe);
 bool resolverMetodo(cp_info *cp, u2 indice_cp);
 char* obterNomeMetodo(cp_info *cp, u2 indice_cp);
 char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp);
@@ -32,7 +33,7 @@ void dconst_0_impl(frame *f, u1 par1, u1 par2);
 void dconst_1_impl(frame *f, u1 par1, u1 par2);
 void bipush_impl(frame *f, u1 byte, u1 par1);
 void sipush_impl(frame *f,u1 byte1, u1 byte2);
-void ldc_impl(frame *par0,u1 par1,u1 par2); // Não implementado
+void ldc_impl(frame *f,u1 indexbyte1,u1 par2); // Não implementado
 void ldc_w_impl(frame *par0, u1 par1, u1 par2); // Não implementado
 void ldc2_w_impl(frame *par0, u1 par1, u1 par2); // Não implementado
 void iload_impl(frame *f, u1 index, u1 par1);
