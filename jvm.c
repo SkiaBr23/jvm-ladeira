@@ -53,7 +53,11 @@ frame* criarFrame(char *classeCorrente){
 	frame *f = malloc(sizeof(frame));
 	f->end_retorno = jvm->pc;
 	f->p = CriarPilha_operandos();
-	f->v = NULL;
+	//TRES PARA DEBUG -ajustar!
+	f->v = malloc(3*sizeof(vetor_locais));
+	for (int i = 0; i < 3; i++) {
+		f->v[i].variavel = malloc(sizeof(u4));
+	}
 	f->cp = BuscarCPClasseCorrente_classes(jvm->classes,classeCorrente);
 
 	return(f);

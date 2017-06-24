@@ -492,8 +492,10 @@ void istore_1_impl(frame *f, u1 par1, u1 par2){
 
 	printf("EXECUÇÃO ISTORE_1\n\n");
 
-	/*pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[1].variavel) = (u4) valor->topo->operando;*/
+	pilha_operandos *valor = Pop_operandos(f->p);
+
+	*f->v[1].variavel = (u4) valor->topo->operando;
+
 }
 
 void istore_2_impl(frame *f, u1 par1, u1 par2){
@@ -1297,7 +1299,8 @@ void inst_return_impl(frame *f, u1 par1, u1 par2){
 	printf("EXECUÇÃO RETURN\n\n");
 
 	// Empilhar NULL na pilha de operandos do frame chamador, ou seja, o próximo frame na pilha
-	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,-INT_MAX,NULL,-1);
+	//jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,-INT_MAX,NULL,-1);
+	pilha_frames *desempilhado = Pop_frames(jvm->frames);
 }
 
 void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -1385,7 +1388,11 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		pilha_operandos *string = Pop_operandos(f->p);
 		pilha_operandos *fieldOut = Pop_operandos(f->p);
 
-		printf("\nString imprimir: %s\n",(char*) string->topo->referencia);
+		if (string->topo->tipo_operando == 10) {
+			printf("\nString imprimir: %s\n",(char*) string->topo->referencia);
+		} else {
+			printf("\nValor imprimir: %d\n",(i4) string->topo->operando);
+		}
 	}
 	else{
 		if(resolverMetodo(f->cp,indice_cp)){
