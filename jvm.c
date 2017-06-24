@@ -25,7 +25,7 @@ JVM* InicializarJVM() {
 	novo = (JVM*)malloc(sizeof(JVM));
 	novo->classes = CriarLista_classes();
 	novo->frames = CriarPilha_frames();
-	novo->pc = 0; 
+	novo->pc = 0;
 
 	instrucoes = construirInstrucoes();
 
@@ -128,7 +128,7 @@ void interpretarCode(u1 *code,u4 length){
 				break;
 
 				case 2:
-					printf("%d\n",i.opcode);
+					printf("Opcode Case 2: %02x\n",i.opcode);
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],argumentos[1]);
 				break;
 			}
@@ -140,4 +140,3 @@ void interpretarCode(u1 *code,u4 length){
 		printf("\n\n");
 	}
 }
-

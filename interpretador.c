@@ -157,7 +157,7 @@ void lconst_0_impl(frame *f, u1 par1, u1 par2){
 
 void lconst_1_impl(frame *f, u1 par1, u1 par2){
 
-	//Push 1L to stack 
+	//Push 1L to stack
 	i4 high_bytes = (i4) 0;
 	Push_operandos(f->p,high_bytes,NULL,LONG_OP);
 
@@ -201,7 +201,7 @@ void dconst_0_impl(frame *f, u1 par1, u1 par2){
 void dconst_1_impl(frame *f, u1 par1, u1 par2){
 
 	//Push 1.0 double to stack
-	i4 high_bytes = 0x3FF00000;	
+	i4 high_bytes = 0x3FF00000;
 	Push_operandos(f->p,high_bytes,NULL,DOUBLE_OP);
 
 	//TOPO DA PILHA FICA O LOW
@@ -348,11 +348,11 @@ void fload_3_impl(frame *f, u1 par1, u1 par2){
 }
 
 void dload_0_impl(frame *f, u1 par1, u1 par2){
-	
+
 }
 
 void dload_1_impl(frame *f, u1 par1, u1 par2){
-	
+
 }
 
 void dload_2_impl(frame *f, u1 par1, u1 par2){
@@ -582,7 +582,7 @@ void astore_3_impl(frame *f, u1 par1, u1 par2){
 	Objetivo da instrução: atribuir um valor a uma posição de um array de inteiros
 	Exemplo: v[2] = 3.
 	Pegar o endereço de v, somar com 2 "endereços de v" e o valor dessa posição de memória será igual a 3.
-	
+
 	Não sabemos se isso está logicamente/semanticamente correto.
 */
 void iastore_impl(frame *f, u1 par1, u1 par2){
@@ -664,8 +664,8 @@ pilha_operandos** pop2_impl(frame *f){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	pilha_operandos **vetor_retorno = malloc(2*sizeof(pilha_operandos));
-	vetor_retorno[0] = valor1;	
-	vetor_retorno[1] = valor2;	
+	vetor_retorno[0] = valor1;
+	vetor_retorno[1] = valor2;
 
 	// Optamos por não montar o valor aqui, pois depende da instrução seguinte, que realizará alguma operação
 	// A instrução de operação com os valores manipula do jeito que a gente precisar.
@@ -711,7 +711,7 @@ void dup_x2_impl(frame *f, u1 par1, u1 par2){
 	// Se for categoria 2
 	// Teoricamente não precisa desse if
 	// Se valor2 for categoria 2, tem que desempilhar o próximo
-	// Se não for, também tem que desempilhar o próximo 
+	// Se não for, também tem que desempilhar o próximo
 	/*if(valor2->topo->tipo_operando == LONG_OP || valor2->topo->tipo_operando == DOUBLE_OP){
 
 	}
@@ -1117,7 +1117,7 @@ void dcmpg_impl(frame *f, u1 par1, u1 par2){
 
 void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 
-	
+
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando == 0){
@@ -1338,7 +1338,7 @@ void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 
-	// Resolver o field 
+	// Resolver o field
 
 	// struct Fieldref campo = f->cp[indice_cp];
 }
@@ -1349,12 +1349,12 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp);
 	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp);
 
-	method_info *metodos = f->classes->topo->arquivoClass->methods;
-	method_info *aux = metodos;
+	/*method_info *metodos = f->classes->topo->arquivoClass->methods;
+	method_info *aux = metodos;*/
 
 	int achou = 0;
 
-	for(aux=metodos;aux<metodos+f->classes->topo->arquivoClass->methods_count;aux++){
+	/*for(aux=metodos;aux<metodos+f->classes->topo->arquivoClass->methods_count;aux++){
 		char *nome_metodo_lista = decodificaStringUTF8(f->cp-1+aux->name_index);
 		// O método está na classe corrente
 		if(strcmp(nomemetodo,nome_metodo_lista)==0){
@@ -1372,11 +1372,11 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	}
 	else{
 		// O método não está na classe corrente
-		/* Se o método não for encontrado na classe corrente, buscar o método na super_class da classe corrente */
+		//Se o método não for encontrado na classe corrente, buscar o método na super_class da classe corrente
 		// Verificar se ele é private
 		// Se ele for private, o acesso é ilegal, retorna exceção
 		// Se ele for encontrado na super_class e for protected, tá tudo ok
-	}
+	}*/
 
 	if(strcmp(nomemetodo,"println")==0){
 		// Imprimir com o printf do c
@@ -1389,7 +1389,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	}
 	else{
 		if(resolverMetodo(f->cp,indice_cp)){
-			
+
 		}
 	}
 
@@ -1411,6 +1411,7 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp);
 	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp);
+	printf("Vai rodar invoke static...\n");
 	if(resolverMetodo(f->cp,indice_cp)){
 		int *parametros_cont = malloc(sizeof(int));
 		char *classeNova = obterClasseDoMetodo(f->cp,indice_cp);
@@ -1429,7 +1430,7 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		method_info *metodos = classe->arquivoClass->methods;
 		for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
 			// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
-			if(strcmp(nomemetodo,(classe->arquivoClass->constant_pool-1+aux->name_index)->UnionCP.UTF8.bytes)==0 && 
+			if(strcmp(nomemetodo,(classe->arquivoClass->constant_pool-1+aux->name_index)->UnionCP.UTF8.bytes)==0 &&
 				strcmp(descriptormetodo,(classe->arquivoClass->constant_pool-1+aux->descriptor_index)->UnionCP.UTF8.bytes)==0){
 				// Executar o code do método invocado
 				executarMetodo(aux,classeNova,2);
@@ -1474,43 +1475,43 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 				endereco = (u1*) malloc((countnum+1)*sizeof(u1));
 				referencia = (u1) *((u1*) endereco);
 			break;
-	
+
 			case T_CHAR:
 				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
 				referencia = (i2) *((i2*) endereco);
 			break;
-	
+
 			case T_FLOAT:
 				endereco = (u4*) malloc((countnum+1)*sizeof(u4));
 				referencia = (u4) *((u4*) endereco);
 			break;
-	
+
 			case T_DOUBLE:
 				endereco = (u4*) malloc(2*(countnum+1)*sizeof(u4));
 				referencia = (u4) *((u4*) endereco);
 			break;
-	
+
 			case T_BYTE:
 				endereco = (i1*) malloc((countnum+1)*sizeof(i1));
 				referencia = (i1) *((i1*) endereco);
 			break;
-	
+
 			case T_SHORT:
 				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
 				referencia = (i2) *((i2*) endereco);
 			break;
-	
+
 			case T_INT:
 				endereco = (i4*) malloc((countnum+1)*sizeof(i4));
 				referencia = (i4) *((i4*) endereco);
 			break;
-	
+
 			case T_LONG:
 				endereco = (i4*) malloc(2*(countnum+1)*sizeof(i4));
 				referencia = (i4) *((i4*) endereco);
 			break;
 		}
-	
+
 		/*// Inicializar com os valores default
 		for(void *p=endereco,i=0;i<=countnum;i++,p++){
 			// Alocar com -INT_MAX para marcar o fim do array
@@ -1521,7 +1522,7 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 				*p=0;
 			}
 		}*/
-	
+
 		f->p = Push_operandos(f->p,-INT_MAX,referencia,REFERENCE_OP);
 	}
 }
@@ -1540,7 +1541,7 @@ void arraylength_impl(frame *f, u1 par1, u1 par2){
 	// Como fazer esse incremento? Foi alocado como void, mas com sizeofs diferentes (observar instrução newarray)
 	// O void vai garantir que o incremento é o mesmo?
 	/*for (void *p = referencia;*p!=-INT_MAX;p++,tamanho++){
-		
+
 	}*/
 
 	f->p = Push_operandos(f->p,tamanho,NULL,INTEGER_OP);
@@ -1608,30 +1609,3 @@ void goto_w_impl(frame *f, u1 par1, u1 par2){
 void jsr_w_impl(frame *f, u1 par1, u1 par2){
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
