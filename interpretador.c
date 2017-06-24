@@ -1420,19 +1420,27 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		jvm->frames = Push_frames(jvm->frames,f_novo);
 		// printf("%lu\n",sizeof(vetor_locais));
 		for(int i=0;i<*(parametros_cont);i++){
-			printf("VARIÁVEL LOCAL: %04x\n",*(f_novo->v[i].variavel));
+			printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
 		}
 
 
+		printf("Classe nova: %s\n",classeNova);
 		classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
+		if (classe != NULL) {
+			printf("Buscou a classe carregada...");
+		}
 
 		// Achar o método na classe que o contém
 		method_info *metodos = classe->arquivoClass->methods;
 		for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
 			// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
-			if(strcmp(nomemetodo,(classe->arquivoClass->constant_pool-1+aux->name_index)->UnionCP.UTF8.bytes)==0 &&
-				strcmp(descriptormetodo,(classe->arquivoClass->constant_pool-1+aux->descriptor_index)->UnionCP.UTF8.bytes)==0){
+			char * nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
+			char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
+
+			printf("Metodo da classe: %s\n",nomeMetodoAux);
+			if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
 				// Executar o code do método invocado
+				printf("Executando método...\n");
 				executarMetodo(aux,classeNova,2);
 
 			}
