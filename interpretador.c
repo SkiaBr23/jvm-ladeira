@@ -1356,12 +1356,11 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		pilha_operandos *string = Pop_operandos(f->p);
 		pilha_operandos *fieldOut = Pop_operandos(f->p);
 
-		printf("\nString imprimir: %s\n",string->topo->operando);
+		printf("\nString imprimir: %s\n",(char*) string->topo->referencia);
 	}
 	else{
-
 		if(resolverMetodo(f->cp,indice_cp)){
-	
+			
 		}
 	}
 
