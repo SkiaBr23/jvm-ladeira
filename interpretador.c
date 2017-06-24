@@ -1427,7 +1427,7 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		printf("Classe nova: %s\n",classeNova);
 		classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
 		if (classe != NULL) {
-			printf("Buscou a classe carregada...");
+			printf("Buscou a classe carregada...\n");
 		}
 
 		// Achar o método na classe que o contém
@@ -1437,8 +1437,8 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			char * nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
 			char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
 
-			printf("Metodo da classe: %s\n",nomeMetodoAux);
 			if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
+				printf("Metodo da classe: %s\n",nomeMetodoAux);
 				// Executar o code do método invocado
 				printf("Executando método...\n");
 				executarMetodo(aux,classeNova,2);
