@@ -209,7 +209,8 @@ void invokespecial_impl(frame *f, u1 par1, u1 par2); // Não implementado
 /* Próximo objetivo: implementar invokestatic */
 void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
 void invokeinterface_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
+void invokedynamic_fantasma(frame *par0, u1 par1, u1 par2); // Não implementado. /** Essa instrução só existe para criar uma posição "falsa" no vetor de ponteiros de função **/
+void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void newarray_impl(frame *f ,u1 atype, u1 par1); // Observação do -INT_MAX
 void anewarray_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void arraylength_impl(frame *f, u1 par1, u1 par2);
@@ -225,6 +226,6 @@ void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void goto_w_impl(frame *f, u1 par1, u1 par2);
 void jsr_w_impl(frame *f, u1 par1, u1 par2);
 
-extern void (*func_ptr[201])(frame *,u1,u1);
+extern void (*func_ptr[202])(frame *,u1,u1);
 
 #endif

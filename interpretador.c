@@ -1349,6 +1349,35 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp);
 	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp);
 
+	method_info *metodos = f->classes->topo->arquivoClass->methods;
+	method_info *aux = metodos;
+
+	int achou = 0;
+
+	for(aux=metodos;aux<metodos+f->classes->topo->arquivoClass->methods_count;aux++){
+		char *nome_metodo_lista = decodificaStringUTF8(f->cp-1+aux->name_index);
+		// O método está na classe corrente
+		if(strcmp(nomemetodo,nome_metodo_lista)==0){
+			// Achei o método
+			// Verificar access flags
+			// Aqui dentro, private é legal, por exemplo
+			achou = 1;
+			break;
+
+		}
+	}
+
+	if(achou==1){
+		// Se o método tiver access flag private, não tem problema
+	}
+	else{
+		// O método não está na classe corrente
+		/* Se o método não for encontrado na classe corrente, buscar o método na super_class da classe corrente */
+		// Verificar se ele é private
+		// Se ele for private, o acesso é ilegal, retorna exceção
+		// Se ele for encontrado na super_class e for protected, tá tudo ok
+	}
+
 	if(strcmp(nomemetodo,"println")==0){
 		// Imprimir com o printf do c
 		// Esvaziar a pilha de operandos
@@ -1415,14 +1444,18 @@ void invokeinterface_impl(frame *f, u1 par1, u1 par2){
 
 }
 
+void invokedynamic_fantasma(frame *par0, u1 par1, u1 par2){
+
+}
+
 void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+	char *nomeClasse = decodificaNIeNT(f->cp,indice_cp,NAME_INDEX);
+	printf("Nome da classe: %s\n",nomeClasse);
 
-	// Resolver a classe
+	ClassFile *classe = resolverClasse(nomeClasse);
 
-	// Alocar memória
-
-	// Colocar o ponteiro na pilha de operandos
+	f->p = Push_operandos(f->p,-INT_MAX,classe,REFERENCE_OP);
 }
 
 void newarray_impl(frame *f, u1 atype, u1 par1){
