@@ -49,13 +49,13 @@ int opcaoMenu () {
 	return op;
 }
 
-frame* criarFrame(char *classeCorrente){
+frame* criarFrame(char *classeCorrente, u2 max_locals){
 	frame *f = malloc(sizeof(frame));
 	f->end_retorno = jvm->pc;
 	f->p = CriarPilha_operandos();
 	//TRES PARA DEBUG -ajustar!
-	f->v = malloc(3*sizeof(vetor_locais));
-	for (int i = 0; i < 3; i++) {
+	f->v = malloc(max_locals*sizeof(vetor_locais));
+	for (int i = 0; i < max_locals; i++) {
 		f->v[i].variavel = malloc(sizeof(u4));
 	}
 	f->cp = BuscarCPClasseCorrente_classes(jvm->classes,classeCorrente);
@@ -95,11 +95,11 @@ void executarMetodo(method_info *m, char* classeCorrente, int chamador){
 		printf("Name Index: %s\n",nameindex);
 		// Se for o atributo code
 		if(strcmp(nameindex,"Code")==0){
+			code_attribute *c = (code_attribute *) aux->info;
 			if(chamador==1){
-				frame *f = criarFrame(classeCorrente);
+				frame *f = criarFrame(classeCorrente, c->max_locals);
 				jvm->frames = Push_frames(jvm->frames,f);
 			}
-			code_attribute *c = (code_attribute *) aux->info;
 
 			interpretarCode(c->code,c->code_length);
 

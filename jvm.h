@@ -20,7 +20,7 @@ extern instrucao* instrucoes;
 JVM* CriarJVM();
 JVM* InicializarJVM();
 int opcaoMenu();
-frame* criarFrame(char *classeCorrente);
+frame* criarFrame(char *classeCorrente, u2 max_locals);
 void executarJVM();
 /*
 	Função executarMetodo: chamador 1 quer dizer que a JVM está chamando a função.

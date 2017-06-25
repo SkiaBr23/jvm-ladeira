@@ -91,6 +91,22 @@ cp_info* BuscarCPClasseCorrente_classes(classesCarregadas *lis, char *string){
 	return(classeCorrente->arquivoClass->constant_pool);
 }
 
+method_info * BuscarMethodClasseCorrente_classes(classesCarregadas *lis, char * nomeClasse, char * nomeMetodo){
+	classesCarregadas *classeCorrente = BuscarElemento_classes(lis,nomeClasse);
+	method_info * auxMethod = classeCorrente->arquivoClass->methods;
+
+	for(method_info *aux = auxMethod;aux < auxMethod+classeCorrente->arquivoClass->methods_count;aux++){
+		// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
+		char * nomeMetodoAux = decodificaStringUTF8(classeCorrente->arquivoClass->constant_pool-1+aux->name_index);
+
+		if(strcmp(nomeMetodo,nomeMetodoAux) == 0){
+			return aux;
+		}
+	}
+
+	return NULL;
+}
+
 void ImprimirLista_classes(classesCarregadas *lis){
 	classesCarregadas *p;
 
