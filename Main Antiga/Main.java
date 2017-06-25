@@ -9,9 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
         // Prints "Hello, World" to the terminal window.
-        Quadrado.quadrado(5);
+        int valor = Quadrado.quadrado(5);
         // int b = quadrado(5);
-        System.out.println("Hello, World");
+        System.out.println("Hello, World " + valor);
     }
 
 }

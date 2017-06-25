@@ -210,7 +210,10 @@ void dconst_1_impl(frame *f, u1 par1, u1 par2){
 }
 
 void bipush_impl(frame *f, u1 byte, u1 par1){
-	i4 byte_int = (i4) byte;
+	int8_t aux = (int8_t)byte;
+	i4 byte_int = (i4) aux;
+
+	printf("Convertido: %08x\n",byte_int);
 	Push_operandos(f->p,byte_int,NULL,BYTE_OP);
 }
 
