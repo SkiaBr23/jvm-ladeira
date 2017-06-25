@@ -22,6 +22,30 @@ pilha_operandos* Pop_operandos(pilha_operandos *p){
 	return (aux);
 }
 
+bool pilhaVazia (pilha_operandos * p) {
+	if (p->topo == NULL) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+
+bool printVazio (pilha_operandos * p) {
+
+	int contador = 0;
+	u1 tipoOpAux;
+	for (lista_operandos * lo = p->topo; lo != NULL; lo = lo->prox) {
+		contador++;
+		tipoOpAux = lo->tipo_operando;
+	}
+	if (contador == 1 && tipoOpAux == 10) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 pilha_operandos* Topo_operandos(pilha_operandos *p){
 	return(p);
 }

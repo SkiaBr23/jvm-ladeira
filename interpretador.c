@@ -1385,18 +1385,26 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	}*/
 
 	if(strcmp(nomemetodo,"println")==0){
+		printf("Entrou no println\n");
 		// Imprimir com o printf do c
 		// Esvaziar a pilha de operandos
 		// ImprimirPilha_operandos(f->p);
-		pilha_operandos *string = Pop_operandos(f->p);
-		pilha_operandos *fieldOut = Pop_operandos(f->p);
+		if (!pilhaVazia(f->p)) {
+			if (!printVazio(f->p)) {
+				pilha_operandos *string = Pop_operandos(f->p);
+				pilha_operandos *fieldOut = Pop_operandos(f->p);
 
-		if (string->topo->tipo_operando == 10) {
-			printf("\nString imprimir: %s\n",(char*) string->topo->referencia);
-		} else if(string->topo->tipo_operando == 3) {
-			printf("\nChar imprimir: %c\n",(char)string->topo->operando);
-		} else {
-			printf("\nValor imprimir: %d\n",(i4) string->topo->operando);
+				if (string->topo->tipo_operando == 10) {
+					printf("\nString imprimir: %s\n",(char*) string->topo->referencia);
+				} else if(string->topo->tipo_operando == 3) {
+					printf("\nChar imprimir: %c\n",(char)string->topo->operando);
+				} else {
+					printf("\nValor imprimir: %d\n",(i4) string->topo->operando);
+				}
+			} else {
+				pilha_operandos *fieldOut = Pop_operandos(f->p);
+				printf("\n");
+			}
 		}
 	}
 	else{

@@ -2,6 +2,7 @@
 #define PILHA_OPERANDOS_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #ifndef TIPOS_U
 #define TIPOS_U
@@ -21,5 +22,7 @@ pilha_operandos* CriarPilha_operandos();
 pilha_operandos* Push_operandos(pilha_operandos *p, u4 operando, void *referencia, u1 tipo_operando);
 pilha_operandos* Pop_operandos(pilha_operandos *p);
 pilha_operandos* Topo_operandos(pilha_operandos *p);
+bool pilhaVazia (pilha_operandos * p);
+bool pilhaVazia (pilha_operandos * p);
 void ImprimirPilha_operandos(pilha_operandos *p);
 #endif
