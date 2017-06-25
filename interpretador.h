@@ -172,7 +172,7 @@ void fcmpl_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void fcmpg_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void dcmpl_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void dcmpg_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2); 
+void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void ifne_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void iflt_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void ifge_impl(frame *f, u1 branchbyte1, u1 branchbyte2);

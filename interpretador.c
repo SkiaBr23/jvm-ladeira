@@ -299,11 +299,11 @@ void aload_impl(frame *f, u1 index, u1 par1){
 }
 
 void iload_0_impl(frame *f, u1 par1, u1 par2){
-	printf("\nExecutando iload_0\n");
 	Push_operandos(f->p,(i4) *(f->v[0].variavel),NULL,INTEGER_OP);
 }
 
 void iload_1_impl(frame *f, u1 par1, u1 par2){
+	printf("Valor iload1: %d\n",*(f->v[1].variavel));
 	Push_operandos(f->p,(i4) *(f->v[1].variavel),NULL,INTEGER_OP);
 }
 
@@ -804,7 +804,7 @@ void isub_impl(frame *f, u1 par1, u1 par2){
 
 	pilha_operandos *valor3 = CriarPilha_operandos();
 
-	valor3 = Push_operandos(valor3,valor1->topo->operando-valor2->topo->operando, NULL,INTEGER_OP);
+	valor3 = Push_operandos(valor3,valor2->topo->operando-valor1->topo->operando, NULL,INTEGER_OP);
 	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
 	f->p = Push_operandos(f->p,valor3->topo->operando,NULL,valor3->topo->tipo_operando);
 }
@@ -855,7 +855,7 @@ void idiv_impl(frame *f, u1 par1, u1 par2){
 	if(valor2->topo->operando == 0){
 		// Lançar exceção ArithmeticException
 	}
-	valor3 = Push_operandos(valor3,valor1->topo->operando/valor2->topo->operando, NULL,INTEGER_OP);
+	valor3 = Push_operandos(valor3,valor2->topo->operando/valor1->topo->operando, NULL,INTEGER_OP);
 	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
 
 	f->p = Push_operandos(f->p,valor3->topo->operando,NULL,valor3->topo->tipo_operando);
@@ -874,16 +874,17 @@ void ddiv_impl(frame *f, u1 par1, u1 par2){
 }
 
 void irem_impl(frame *f, u1 par1, u1 par2){
+	printf("IREM------------------------------------------\n");
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	pilha_operandos *valor3 = CriarPilha_operandos();
 
-	if(valor2->topo->operando == 0){
+	if(valor1->topo->operando == 0){
 		// Lançar Arithmetic Exception
 	}
 
-	i4 valor_push = valor1->topo->operando - (valor1->topo->operando/valor2->topo->operando) * valor2->topo->operando;
+	i4 valor_push = valor2->topo->operando - (valor2->topo->operando/valor1->topo->operando) * valor1->topo->operando;
 
 	valor3 = Push_operandos(valor3,valor_push,NULL,valor1->topo->tipo_operando);
 	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
@@ -923,12 +924,13 @@ void dneg_impl(frame *f, u1 par1, u1 par2){
 }
 
 void ishl_impl(frame *f, u1 par1, u1 par2){
+	printf("Entrou no shl---------------------------------------------\n");
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	i4 s = (valor2->topo->operando << 27) >> 27;
+	i4 s = (valor1->topo->operando << 27) >> 27;
 
-	i4 resultado = valor1->topo->operando << s;
+	i4 resultado = valor2->topo->operando << s;
 
 	f->p = Push_operandos(f->p,resultado,NULL,valor1->topo->tipo_operando);
 }
@@ -942,9 +944,9 @@ void ishr_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	i4 s = (i4) (valor2->topo->operando << 27) >> 27;
+	i4 s = (i4) (valor1->topo->operando << 27) >> 27;
 
-	i4 resultado = (i4) valor1->topo->operando >> s;
+	i4 resultado = (i4) valor2->topo->operando >> s;
 
 	f->p = Push_operandos(f->p,resultado,NULL,valor1->topo->tipo_operando);
 }
@@ -973,7 +975,7 @@ void iand_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	i4 resultado = valor1->topo->operando & valor2->topo->operando;
+	i4 resultado = valor2->topo->operando & valor1->topo->operando;
 
 	f->p = Push_operandos(f->p,resultado,NULL,valor1->topo->tipo_operando);
 }
