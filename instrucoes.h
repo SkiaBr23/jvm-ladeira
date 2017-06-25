@@ -8,6 +8,8 @@ struct instrucao{
   u1 opcode;
   u1 numarg;
   u1 numop; // Número de operandos que a instrução dá pop na pilha de operandos.
+  u1 pc_instrucao;
+
 };
 
 typedef struct instrucao instrucao;
