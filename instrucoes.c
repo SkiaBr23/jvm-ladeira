@@ -1237,6 +1237,8 @@ instrucao* construirInstrucoes(void){
 				instrucoes[i].numop = -1;
 			break;
 		}
+	
+		instrucoes[i].pc_instrucao = instrucoes[i].numarg + 1;
 	}
 
 	return(instrucoes);
