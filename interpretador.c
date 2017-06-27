@@ -188,7 +188,7 @@ void fconst_2_impl(frame *f, u1 par1, u1 par2){
 
 }
 
-//Insere 0.0d na pilha de operandos 
+//Insere 0.0d na pilha de operandos
 void dconst_0_impl(frame *f, u1 par1, u1 par2){
 
 	//Push 0.0 double to stack
@@ -674,7 +674,7 @@ void iastore_impl(frame *f, u1 par1, u1 par2){
 }
 
 void lastore_impl(frame *f, u1 par1, u1 par2){
-	
+
 	pilha_operandos *low_bytes = Pop_operandos(f->p);
 	pilha_operandos *high_bytes = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
@@ -701,7 +701,7 @@ void fastore_impl(frame *f, u1 par1, u1 par2){
 }
 
 void dastore_impl(frame *f, u1 par1, u1 par2){
-	
+
 	pilha_operandos *low_bytes = Pop_operandos(f->p);
 	pilha_operandos *high_bytes = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
@@ -872,9 +872,11 @@ void iadd_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
+	pilha_operandos *valor3 = CriarPilha_operandos();
 	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
-	i4 result = valor1->topo->operando+valor2->topo->operando;
-	f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
+	valor3 = Push_operandos(valor3,valor1->topo->operando+valor2->topo->operando,NULL,valor1->topo->tipo_operando);
+	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
+	f->p = Push_operandos(f->p,valor3->topo->operando,NULL,valor3->topo->tipo_operando);
 
 }
 
@@ -1408,11 +1410,12 @@ void iinc_impl(frame *f,u1 index, i1 constante){
 	// Estender o sinal para 32 bits
 	i4 inteiro_constante = (i4) constante;
 
-	f->v[index].variavel += inteiro_constante;
+	*f->v[index].variavel += inteiro_constante;
 }
 
 void iinc_fantasma(frame *par0, u1 par1, u1 par2){
-
+	i1 valor = (i1)par2;
+	iinc_impl(par0,par1,valor);
 }
 
 void i2l_impl(frame *f, u1 par1, u1 par2){
@@ -1528,8 +1531,11 @@ void ifne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	if(valor->topo->operando !=0){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+	if(valor->topo->operando != 0){
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1606,8 +1612,13 @@ void if_icmpgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	if(valor1->topo->operando > valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+	if(valor2->topo->operando > valor1->topo->operando){
+		printf("Entrou....\n");
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		printf("Branch Offset: %d\n",branchoffset);
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1639,8 +1650,13 @@ void acmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 }
 
 void inst_goto_impl(frame *f,u1 branchbyte1, u1 branchbyte2){
-	u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+	int8_t bb1 = (int8_t)branchbyte1;
+	int8_t bb2 = (int8_t)branchbyte2;
+	int16_t branchoffset = (branchbyte1 << 8) | branchbyte2;
 
+	printf("Branch Goto: %d\n",branchoffset);
+
+	jvm->pc += branchoffset;
 	// Efetuar o branch com branch offset
 }
 
@@ -1797,7 +1813,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 				}
 			} else {
 				pilha_operandos *fieldOut = Pop_operandos(f->p);
-				printf("\n");
+				printf("\nSaltoDeLinha\n");
 			}
 		}
 	}
