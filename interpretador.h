@@ -141,17 +141,17 @@ void lneg_impl(frame *f, u1 par1, u1 par2);
 void fneg_impl(frame *f, u1 par1, u1 par2);
 void dneg_impl(frame *f, u1 par1, u1 par2);
 void ishl_impl(frame *f, u1 par1, u1 par2);
-void lshl_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lshl_impl(frame *f, u1 par1, u1 par2);
 void ishr_impl(frame *f, u1 par1, u1 par2);
-void lshr_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lshr_impl(frame *f, u1 par1, u1 par2);
 void iushr_impl(frame *f, u1 par1, u1 par2);
-void lushr_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lushr_impl(frame *f, u1 par1, u1 par2);
 void iand_impl(frame *f, u1 par1, u1 par2);
-void land_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void land_impl(frame *f, u1 par1, u1 par2);
 void ior_impl(frame *f, u1 par1, u1 par2);
-void lor_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lor_impl(frame *f, u1 par1, u1 par2);
 void ixor_impl(frame *f, u1 par1, u1 par2);
-void lxor_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lxor_impl(frame *f, u1 par1, u1 par2);
 void iinc_fantasma(frame *par0, u1 par1, u1 par2);
 void iinc_impl(frame *f, u1 index, i1 constante);
 void i2l_impl(frame *f, u1 par1, u1 par2); // Não implementado

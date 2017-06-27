@@ -1056,7 +1056,7 @@ void lsub_impl(frame *f, u1 par1, u1 par2){
 
 	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long1 - long2;
+	u8 result = long2 - long1;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, LONG_OP);
@@ -1351,6 +1351,21 @@ void ishl_impl(frame *f, u1 par1, u1 par2){
 
 void lshl_impl(frame *f, u1 par1, u1 par2){
 
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	i4 s = (valor2->topo->operando << 27) >> 27;
+
+
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	i8 long1 = ((i8)high_bytes->topo->operando << 32) | low_bytes->topo->operando;
+
+	i8 result = long1 << s;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
+
 }
 
 
@@ -1367,6 +1382,22 @@ void ishr_impl(frame *f, u1 par1, u1 par2){
 
 void lshr_impl(frame *f, u1 par1, u1 par2){
 
+
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	i4 s = (valor2->topo->operando << 27) >> 27;
+
+
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	i8 long1 = ((i8)high_bytes->topo->operando << 32) | low_bytes->topo->operando;
+
+	i8 result = long1 >> s;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
+
 }
 
 // Verificar se a implementação é essa mesmo, para fazer a extensão do sinal
@@ -1382,6 +1413,20 @@ void iushr_impl(frame *f, u1 par1, u1 par2){
 }
 
 void lushr_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	u4 s = (valor2->topo->operando << 27) >> 27;
+
+
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	u8 long1 = ((u8)high_bytes->topo->operando << 32) | low_bytes->topo->operando;
+
+	u8 result = long1 >> s;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
 
 }
 
@@ -1396,6 +1441,22 @@ void iand_impl(frame *f, u1 par1, u1 par2){
 
 void land_impl(frame *f, u1 par1, u1 par2){
 
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+
+	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
+
+	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+
+	u8 result = long2 & long1;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
+
 }
 
 void ior_impl(frame *f, u1 par1, u1 par2){
@@ -1409,6 +1470,22 @@ void ior_impl(frame *f, u1 par1, u1 par2){
 
 void lor_impl(frame *f, u1 par1, u1 par2){
 
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+
+	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
+
+	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+
+	u8 result = long2 | long1;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
+
 }
 
 void ixor_impl(frame *f, u1 par1, u1 par2){
@@ -1421,6 +1498,22 @@ void ixor_impl(frame *f, u1 par1, u1 par2){
 }
 
 void lxor_impl(frame *f, u1 par1, u1 par2){
+
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+
+	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
+
+	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+
+	u8 result = long2 ^ long1;
+
+	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
 
 }
 
