@@ -14,6 +14,7 @@ char* obterNomeMetodo(cp_info *cp, u2 indice_cp);
 char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp);
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp);
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont);
+double decodificaDoubleValor(u4 high, u4 low);
 
 void nop_impl(frame *par0,u1 par1, u1 par2); // Não implementado
 void aconst_null_impl(frame *f, u1 par1, u1 par2);

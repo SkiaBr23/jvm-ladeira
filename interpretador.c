@@ -10,6 +10,7 @@
 #include <limits.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 
 /*
 	Na hora de resolver a classe, executar o init dela
@@ -278,7 +279,21 @@ void ldc_w_impl(frame *par0, u1 par1, u1 par2){
 
 }
 
-void ldc2_w_impl(frame *par0, u1 par1, u1 par2){
+void ldc2_w_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
+	printf("Entrou aqui\n");
+	int8_t v1 = (int8_t)branchbyte1;
+	int8_t v2 = (int8_t)branchbyte2;
+	int16_t branchoffset = (v1 << 8) | v2;
+	cp_info * doubleValue = f->cp-1+branchoffset;
+	u4 high = doubleValue->UnionCP.Double.high_bytes;
+	u4 low = doubleValue->UnionCP.Double.low_bytes;
+
+	Push_operandos(f->p,high,NULL,DOUBLE_OP);//high
+	Push_operandos(f->p,low,NULL,DOUBLE_OP);//low
+
+	printf("Valores:\n");
+	printf("-> 0x%08x\n",high);
+	printf("-> 0x%08x\n",low);
 
 }
 //Carrega inteiro do frame para a pilha de operandos
@@ -614,6 +629,11 @@ void dstore_1_impl(frame *f, u1 par1, u1 par2){
 
 	*(f->v[1].variavel) = (u4) high_bytes->topo->operando;
 	*(f->v[2].variavel) = (u4) low_bytes->topo->operando;
+
+	printf("Valores depois do pop:\n");
+	printf("-> 0x%08x\n",*(f->v[1].variavel));
+	printf("-> 0x%08x\n",*(f->v[2].variavel));
+
 }
 
 void dstore_2_impl(frame *f, u1 par1, u1 par2){
@@ -630,6 +650,9 @@ void dstore_3_impl(frame *f, u1 par1, u1 par2){
 
 	*(f->v[3].variavel) = (u4) high_bytes->topo->operando;
 	*(f->v[4].variavel) = (u4) low_bytes->topo->operando;
+	printf("Valores depois do pop:\n");
+	printf("-> 0x%08x\n",*(f->v[3].variavel));
+	printf("-> 0x%08x\n",*(f->v[4].variavel));
 }
 
 void astore_0_impl(frame *f, u1 par1, u1 par2){
@@ -1802,12 +1825,19 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		if (!pilhaVazia(f->p)) {
 			if (!printVazio(f->p)) {
 				pilha_operandos *string = Pop_operandos(f->p);
+				pilha_operandos * v2;
+				if (string->topo->tipo_operando == DOUBLE_OP) {
+					v2 = Pop_operandos(f->p);
+				}
 				pilha_operandos *fieldOut = Pop_operandos(f->p);
 
 				if (string->topo->tipo_operando == 10) {
 					printf("\nString imprimir: %s\n",(char*) string->topo->referencia);
 				} else if(string->topo->tipo_operando == 3) {
 					printf("\nChar imprimir: %c\n",(char)string->topo->operando);
+				} else if (string->topo->tipo_operando == DOUBLE_OP) {
+					double valorSaida = decodificaDoubleValor(v2->topo->operando, string->topo->operando);
+					printf("Valor Double: %lf\n",valorSaida);
 				} else {
 					printf("\nValor imprimir: %d\n",(i4) string->topo->operando);
 				}
@@ -2058,4 +2088,14 @@ void goto_w_impl(frame *f, u1 par1, u1 par2){
 
 void jsr_w_impl(frame *f, u1 par1, u1 par2){
 
+}
+
+double decodificaDoubleValor (u4 high, u4 low) {
+	 long long valor = ((long long)(high)<<32) | (long long)low;
+	 int8_t sinal = ((valor>>63) == 0) ? 1 : -1;
+	 int16_t expon = ((valor>>52) & 0x7ffL);
+	 long long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
+
+	double retorno = sinal*mant*(pow(2,expon-1075));
+	return retorno;
 }
