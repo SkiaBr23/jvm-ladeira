@@ -1040,7 +1040,7 @@ void isub_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
-	i4 result = valor1->topo->operando-valor2->topo->operando;
+	i4 result = valor2->topo->operando-valor1->topo->operando;
 	f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
 }
 
@@ -1207,7 +1207,7 @@ void idiv_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
-	i4 result = valor1->topo->operando/valor2->topo->operando;
+	i4 result = valor2->topo->operando/valor1->topo->operando;
 	f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
 }
 
