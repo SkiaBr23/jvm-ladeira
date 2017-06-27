@@ -15,6 +15,7 @@ Alunos: 		Maximillian Fan Xavier - 12/0153271
 #include "leitura.h"
 #include <string.h>
 #include <math.h>
+#include <inttypes.h>
 #include "instrucoes.h"
 
 /*Função 'u1Read' que realiza a leitura de 1 byte do arquivo .class*/
@@ -939,12 +940,19 @@ char* organizandoFlags(char* flagsOrdemInversa){
 }
 
 double decodificaDoubleInfo (cp_info * cp) {
-	 long long valor = ((long long)(cp->UnionCP.Double.high_bytes)<<32) | (long long)cp->UnionCP.Double.low_bytes;
-	 int8_t sinal = ((valor>>63) == 0) ? 1 : -1;
-	 int16_t expon = ((valor>>52) & 0x7ffL);
-	 long long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
+	long long valor = ((long long)(cp->UnionCP.Double.high_bytes)<<32) | (long long)cp->UnionCP.Double.low_bytes;
+	int8_t sinal = ((valor>>63) == 0) ? 1 : -1;
+	int16_t expon = ((valor>>52) & 0x7ffL);
+	printf("Expoente Top: %d\n",expon);
+	printf("Sinal Top: %d\n",sinal);
+	long long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
+
+	printf("Valor Ajust-MANTISSA OK:\n");
+ 	printf("val1 = 0x%" PRIx64 "\n", mant);
 
 	double retorno = sinal*mant*(pow(2,expon-1075));
+
+	printf("Valor Final: %lf\n",retorno);
 	return retorno;
 }
 

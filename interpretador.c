@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <inttypes.h>
 
 /*
 	Na hora de resolver a classe, executar o init dela
@@ -966,8 +967,13 @@ void dadd_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor2_low = Pop_operandos(f->p);
 	pilha_operandos *valor2_high = Pop_operandos(f->p);
 
-	u8 op1 = ((u8)valor1_high->topo->operando << 32) | valor1_low->topo->operando;
-	u8 op2 = ((u8)valor2_high->topo->operando << 32) | valor2_low->topo->operando;
+	u8 op1 = ((u8)(valor1_high->topo->operando)<<32) | (u8)valor1_low->topo->operando;
+	u8 op2 = ((u8)valor2_high->topo->operando << 32) | (u8)valor2_low->topo->operando;
+
+	printf("Valores:\n");
+	printf("val1 = 0x%" PRIx64 "\n", op1);
+	printf("val2 = 0x%" PRIx64 "\n", op2);
+
 	u8 big_op, small_op;
 
 	if(expoente_d(op1)>expoente_d(op2)){
@@ -983,10 +989,26 @@ void dadd_impl(frame *f, u1 par1, u1 par2){
 		big_op = op1;
 		small_op = op2;
 	}
+
+	printf("Sinal1: %d\n",sinal_d(op1));
+
+	printf("Sinal2: %d\n",sinal_d(op2));
+
 	i4 operacao = (sinal_d(op1)!=sinal_d(op2))? -1:1;
 	i8 result_exp = expoente_d(big_op);
+	printf("ExpoenteFinal: %d\n",result_exp);
+
+
+
 	u8 result_mant = mantissa_d(big_op) + (operacao*(mantissa_d(small_op) << (expoente_d(big_op) - expoente_d(small_op))));
+
+	printf("valBIG = 0x%" PRIx64 "\n", mantissa_d(big_op));
+
+	printf("Valore Mant:\n");
+	printf("valM = 0x%" PRIx64 "\n", result_mant);
+
 	u8 result_sin = sinal_d(big_op);
+	printf("SinalFinal: %d\n",result_sin);
 
 	//Normaliza double
 	while((result_mant>>52) != 0){
@@ -994,8 +1016,17 @@ void dadd_impl(frame *f, u1 par1, u1 par2){
 		result_exp++;
 	}
 
+	printf("ExpoenteFinal2: %d\n",result_exp);
+
+	printf("Valore Mant2:\n");
+	printf("valM = 0x%" PRIx64 "\n", result_mant);
+
 	//Constroi float
 	u8 result = (result_sin<<63) | (result_exp<<52) | result_mant;
+
+	printf("Valore Ajustado:\n");
+	printf("valX = 0x%" PRIx64 "\n", result);
+
 
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, DOUBLE_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
