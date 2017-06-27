@@ -971,7 +971,7 @@ void dadd_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor2_high = Pop_operandos(f->p);
 
 	double op1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
-	double op1 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
+	double op2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
 
 	// u8 big_op, small_op;
 
@@ -1082,7 +1082,7 @@ void dsub_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor2_high = Pop_operandos(f->p);
 
 	double op1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
-	double op1 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
+	double op2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
 
 	double d_sub = op1-op2;
 	u8 sub = (u8)(*(u8*)&d_sub);
@@ -1142,7 +1142,7 @@ void dmul_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor2_high = Pop_operandos(f->p);
 
 	double op1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
-	double op1 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
+	double op2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
 
 	double d_res = op1*op2;
 	u8 res = (u8)(*(u8*)&d_res);
@@ -1249,7 +1249,7 @@ void ddiv_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor2_high = Pop_operandos(f->p);
 
 	double op1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
-	double op1 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
+	double op2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
 
 	double d_res = op1/op2;
 	u8 res = (u8)(*(u8*)&d_res);
