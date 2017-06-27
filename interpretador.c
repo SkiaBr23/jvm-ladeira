@@ -1028,7 +1028,7 @@ void dadd_impl(frame *f, u1 par1, u1 par2){
 
 	double d_sum = op1+op2;
 	u8 sum = (u8)(*(u8*)&d_sum);
-	u8 result = (sinal_d(sum)<<31) | (expoente_d(sum)<<23) | mantissa_d(sum);
+	u8 result = (sinal_d(sum)<<63) | (expoente_d(sum)<<52) | mantissa_d(sum);
 	
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, DOUBLE_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
@@ -1086,7 +1086,7 @@ void dsub_impl(frame *f, u1 par1, u1 par2){
 
 	double d_sub = op2-op1;
 	u8 sub = (u8)(*(u8*)&d_sub);
-	u8 result = (sinal_d(sub)<<31) | (expoente_d(sub)<<23) | mantissa_d(sub);
+	u8 result = (sinal_d(sub)<<63) | (expoente_d(sub)<<52) | mantissa_d(sub);
 	
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, DOUBLE_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
@@ -1146,7 +1146,7 @@ void dmul_impl(frame *f, u1 par1, u1 par2){
 
 	double d_res = op1*op2;
 	u8 res = (u8)(*(u8*)&d_res);
-	u8 result = (sinal_d(res)<<31) | (expoente_d(res)<<23) | mantissa_d(res);
+	u8 result = (sinal_d(res)<<63) | (expoente_d(res)<<52) | mantissa_d(res);
 	
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, DOUBLE_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
@@ -1223,7 +1223,7 @@ void ldiv_impl(frame *f, u1 par1, u1 par2){
 
 	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long1 / long2;
+	u8 result = long2 / long1;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
@@ -1253,7 +1253,7 @@ void ddiv_impl(frame *f, u1 par1, u1 par2){
 
 	double d_res = op2/op1;
 	u8 res = (u8)(*(u8*)&d_res);
-	u8 result = (sinal_d(res)<<31) | (expoente_d(res)<<23) | mantissa_d(res);
+	u8 result = (sinal_d(res)<<63) | (expoente_d(res)<<52) | mantissa_d(res);
 	
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, DOUBLE_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
