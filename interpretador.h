@@ -33,73 +33,73 @@ void dconst_0_impl(frame *f, u1 par1, u1 par2);
 void dconst_1_impl(frame *f, u1 par1, u1 par2);
 void bipush_impl(frame *f, u1 byte, u1 par1);
 void sipush_impl(frame *f,u1 byte1, u1 byte2);
-void ldc_impl(frame *f,u1 indexbyte1,u1 par2); // Não implementado
+void ldc_impl(frame *f,u1 indexbyte1,u1 par2);
 void ldc_w_impl(frame *par0, u1 par1, u1 par2); // Não implementado
 void ldc2_w_impl(frame *par0, u1 par1, u1 par2); // Não implementado
 void iload_impl(frame *f, u1 index, u1 par1);
-void lload_impl(frame *f, u1 index, u1 par1); // Não implementado
+void lload_impl(frame *f, u1 index, u1 par1);
 void fload_impl(frame *f, u1 index, u1 par1);
-void dload_impl(frame *par0, u1 par1,u1 par2); // Não implementado
+void dload_impl(frame *par0, u1 par1,u1 par2);
 void aload_impl(frame *f, u1 index, u1 par1);
 void iload_0_impl(frame *f, u1 par1, u1 par2);
 void iload_1_impl(frame *f, u1 par1, u1 par2);
 void iload_2_impl(frame *f, u1 par1, u1 par2);
 void iload_3_impl(frame *f, u1 par1, u1 par2);
-void lload_0_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void lload_1_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void lload_2_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void lload_3_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lload_0_impl(frame *f, u1 par1, u1 par2);
+void lload_1_impl(frame *f, u1 par1, u1 par2);
+void lload_2_impl(frame *f, u1 par1, u1 par2);
+void lload_3_impl(frame *f, u1 par1, u1 par2);
 void fload_0_impl(frame *f, u1 par1, u1 par2);
 void fload_1_impl(frame *f, u1 par1, u1 par2);
 void fload_2_impl(frame *f, u1 par1, u1 par2);
 void fload_3_impl(frame *f, u1 par1, u1 par2);
-void dload_0_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dload_1_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dload_2_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dload_3_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void dload_0_impl(frame *f, u1 par1, u1 par2);
+void dload_1_impl(frame *f, u1 par1, u1 par2);
+void dload_2_impl(frame *f, u1 par1, u1 par2);
+void dload_3_impl(frame *f, u1 par1, u1 par2);
 void aload_0_impl(frame *f, u1 par1, u1 par2);
 void aload_1_impl(frame *f, u1 par1, u1 par2);
 void aload_2_impl(frame *f, u1 par1, u1 par2);
 void aload_3_impl(frame *f, u1 par1, u1 par2);
 /* Verificar iaload até saload, tem que ajustar a lógica de acesso ao array no índice x. */
 void iaload_impl(frame *f, u1 par1, u1 par2);
-void laload_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void laload_impl(frame *f, u1 par1, u1 par2); 
 void faload_impl(frame *f, u1 par1, u1 par2);
-void daload_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void daload_impl(frame *f, u1 par1, u1 par2); 
 void aaload_impl(frame *f, u1 par1, u1 par2);
 void baload_impl(frame *f, u1 par1, u1 par2);
 void caload_impl(frame *f, u1 par1, u1 par2);
 void saload_impl(frame *f, u1 par1, u1 par2);
 void istore_impl(frame *f, u1 index, u1 par1);
-void lstore_impl(frame *f, u1 index, u1 par1); // Não implementado
+void lstore_impl(frame *f, u1 index, u1 par1);
 void fstore_impl(frame *f, u1 index, u1 par1);
-void dstore_impl(frame *f, u1 index, u1 par1); // Não implementado
+void dstore_impl(frame *f, u1 index, u1 par1);
 void astore_impl(frame *f,u1 index, u1 par1);
 void istore_0_impl(frame *f, u1 par1, u1 par2);
 void istore_1_impl(frame *f, u1 par1, u1 par2);
 void istore_2_impl(frame *f, u1 par1, u1 par2);
 void istore_3_impl(frame *f, u1 par1, u1 par2);
-void lstore_0_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void lstore_1_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void lstore_2_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void lstore_3_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lstore_0_impl(frame *f, u1 par1, u1 par2);
+void lstore_1_impl(frame *f, u1 par1, u1 par2);
+void lstore_2_impl(frame *f, u1 par1, u1 par2);
+void lstore_3_impl(frame *f, u1 par1, u1 par2);
 void fstore_0_impl(frame *f, u1 par1, u1 par2);
 void fstore_1_impl(frame *f, u1 par1, u1 par2);
 void fstore_2_impl(frame *f, u1 par1, u1 par2);
 void fstore_3_impl(frame *f, u1 par1, u1 par2);
-void dstore_0_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dstore_1_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dstore_2_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dstore_3_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void dstore_0_impl(frame *f, u1 par1, u1 par2);
+void dstore_1_impl(frame *f, u1 par1, u1 par2);
+void dstore_2_impl(frame *f, u1 par1, u1 par2);
+void dstore_3_impl(frame *f, u1 par1, u1 par2);
 void astore_0_impl(frame *f, u1 par1, u1 par2);
 void astore_1_impl(frame *f, u1 par1, u1 par2);
 void astore_2_impl(frame *f, u1 par1, u1 par2);
 void astore_3_impl(frame *f, u1 par1, u1 par2);
 void iastore_impl(frame *f, u1 par1, u1 par2);
-void lastore_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lastore_impl(frame *f, u1 par1, u1 par2); 
 void fastore_impl(frame *f, u1 par1, u1 par2);
-void dastore_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void aastore_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void dastore_impl(frame *f, u1 par1, u1 par2); 
+void aastore_impl(frame *f, u1 par1, u1 par2); // Não implementado - FODINHA essa
 void bastore_impl(frame *f, u1 par1, u1 par2);
 void castore_impl(frame *f, u1 par1, u1 par2);
 void sastore_impl(frame *f, u1 par1, u1 par2);
@@ -115,29 +115,29 @@ void dup2_x1_impl(frame *f, u1 par1, u1 par2);
 void dup2_x2_impl(frame *f, u1 par1, u1 par2);
 void swap_impl(frame *f, u1 par1, u1 par2);
 void iadd_impl(frame *f, u1 par1, u1 par2);
-void ladd_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void fadd_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dadd_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void ladd_impl(frame *f, u1 par1, u1 par2);
+void fadd_impl(frame *f, u1 par1, u1 par2);
+void dadd_impl(frame *f, u1 par1, u1 par2);
 void isub_impl(frame *f, u1 par1, u1 par2);
-void lsub_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void fsub_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dsub_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lsub_impl(frame *f, u1 par1, u1 par2);
+void fsub_impl(frame *f, u1 par1, u1 par2);
+void dsub_impl(frame *f, u1 par1, u1 par2);
 void imul_impl(frame *f, u1 par1, u1 par2);
-void lmul_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void fmul_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dmul_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lmul_impl(frame *f, u1 par1, u1 par2);
+void fmul_impl(frame *f, u1 par1, u1 par2);
+void dmul_impl(frame *f, u1 par1, u1 par2);
 void idiv_impl(frame *f, u1 par1, u1 par2);
-void ldiv_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void fdiv_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void ddiv_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void ldiv_impl(frame *f, u1 par1, u1 par2);
+void fdiv_impl(frame *f, u1 par1, u1 par2);
+void ddiv_impl(frame *f, u1 par1, u1 par2);
 void irem_impl(frame *f, u1 par1, u1 par2);
 void lrem_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void frem_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void drem_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void ineg_impl(frame *f, u1 par1, u1 par2);
-void lneg_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void fneg_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dneg_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lneg_impl(frame *f, u1 par1, u1 par2);
+void fneg_impl(frame *f, u1 par1, u1 par2);
+void dneg_impl(frame *f, u1 par1, u1 par2);
 void ishl_impl(frame *f, u1 par1, u1 par2);
 void lshl_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void ishr_impl(frame *f, u1 par1, u1 par2);
