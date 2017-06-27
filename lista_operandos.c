@@ -1,15 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 #include "lista_operandos.h"
 
 lista_operandos* Criarlista_operandos(){
 	return NULL;
 }
 
-lista_operandos* InserirInicio_operandos(lista_operandos* lis, i4 operando, u1 tipo_operando){
+lista_operandos* InserirInicio_operandos(lista_operandos* lis, i4 operando, void* referencia, u1 tipo_operando){
 	lista_operandos *novo= malloc(sizeof(lista_operandos));
-	novo->operando = operando;
+	if(tipo_operando<=8){
+		novo->operando = operando;
+		novo->referencia = NULL;
+	}
+	else{
+		/** Na hora de dar o pop, tratar **/
+		novo->operando = -INT_MAX;
+		novo->referencia = referencia;
+	}
 	novo->tipo_operando = tipo_operando;
 	novo->prox = lis;
 	novo->ant = NULL;
@@ -43,7 +52,9 @@ lista_operandos* RemoverInicio_operandos(lista_operandos* lis){
 	lista_operandos* p=lis;
 	
 	lis = p->prox;
-	lis->ant = NULL;
+	if(lis!=NULL){
+		lis->ant = NULL;
+	}
 	
 	free(p);
 	return (lis);
@@ -166,8 +177,13 @@ void ImprimirLista_operandos(lista_operandos *lis){
 	lista_operandos *p;
 	
 	for(p=lis;p!=NULL;p=p->prox){
-		printf("%01x\t",p->tipo_operando);
-		printf("%d\n",p->operando);
+		printf("Tipo: %d\t",p->tipo_operando);
+		if(p->tipo_operando<=8){
+			printf("Operando: %d\n\n",p->operando);
+		}
+		else{
+			printf("Operando: %s\n\n",(char*) p->referencia);
+		}
 	}
 }
 

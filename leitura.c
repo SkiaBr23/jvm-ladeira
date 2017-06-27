@@ -1031,9 +1031,9 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 	fprintf(fp, "Magic: %08x\n",arquivoClass->magic);
 	fprintf(fp, "Minor Version: %d\n",arquivoClass->minor_version);
 	valorMajor = decodificaMajorVersion(arquivoClass->major_version);
-	fprintf(fp, "Major Version: %d [%lf]\n",arquivoClass->major_version,valorMajor);
+	fprintf(fp, "Major Version: %d [%.1lf]\n",arquivoClass->major_version,valorMajor);
 	fprintf(fp, "Constant Pool Count: %d\n",arquivoClass->constant_pool_count);
-	fprintf(fp, "Access Flags: %04x\n",arquivoClass->access_flags);
+	fprintf(fp, "Access Flags: 0x%04x\n",arquivoClass->access_flags);
 	ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,arquivoClass->this_class,NAME_INDEX);
 	fprintf(fp, "This Class: cp_info#%d <%s>\n",arquivoClass->this_class, ponteiroprint);
 	ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,arquivoClass->super_class,NAME_INDEX);
