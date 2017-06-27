@@ -1029,7 +1029,7 @@ void dadd_impl(frame *f, u1 par1, u1 par2){
 	double d_sum = op1+op2;
 	u8 sum = (u8)(*(u8*)&d_sum);
 	u8 result = (sinal_d(sum)<<31) | (expoente_d(sum)<<23) | mantissa_d(sum);
-	
+
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, DOUBLE_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
 
@@ -1087,7 +1087,7 @@ void dsub_impl(frame *f, u1 par1, u1 par2){
 	double d_sub = op2-op1;
 	u8 sub = (u8)(*(u8*)&d_sub);
 	u8 result = (sinal_d(sub)<<31) | (expoente_d(sub)<<23) | mantissa_d(sub);
-	
+
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, DOUBLE_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
 
@@ -1147,7 +1147,7 @@ void dmul_impl(frame *f, u1 par1, u1 par2){
 	double d_res = op1*op2;
 	u8 res = (u8)(*(u8*)&d_res);
 	u8 result = (sinal_d(res)<<31) | (expoente_d(res)<<23) | mantissa_d(res);
-	
+
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, DOUBLE_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
 
@@ -1254,7 +1254,7 @@ void ddiv_impl(frame *f, u1 par1, u1 par2){
 	double d_res = op2/op1;
 	u8 res = (u8)(*(u8*)&d_res);
 	u8 result = (sinal_d(res)<<31) | (expoente_d(res)<<23) | mantissa_d(res);
-	
+
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, DOUBLE_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
 
@@ -1441,10 +1441,17 @@ void i2l_impl(frame *f, u1 par1, u1 par2){
 }
 
 void i2f_impl(frame *f, u1 par1, u1 par2){
-
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	i4 valor = (i4)valor1->topo->operando;
+	f->p = Push_operandos(f->p,(i4)valor,NULL,DOUBLE_OP);
 }
 
 void i2d_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	i8 valor = (i8)valor1->topo->operando;
+
+	f->p = Push_operandos(f->p,(i4)(valor>>32),NULL,DOUBLE_OP);
+	f->p = Push_operandos(f->p,(i4)((valor<<32)>>32),NULL,DOUBLE_OP);
 
 }
 
@@ -2102,7 +2109,7 @@ float decodificaFloatValor (u4 valor) {
 	int sinal = ((valor>>31) == 0) ? 1 : -1;
 	int expon = ((valor>>23) & 0xff);
 	int mant = (expon == 0) ? (valor & 0x7fffff)<<1 : (valor & 0x7fffff) | 0x800000;
-	
+
 	float retorno = (sinal)*(mant)*(pow(2,expon-150));
 	return retorno;
 }
