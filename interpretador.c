@@ -1069,7 +1069,7 @@ void fsub_impl(frame *f, u1 par1, u1 par2){
 
 	float op1 = decodificaFloatValor(valor1->topo->operando);
 	float op2 = decodificaFloatValor(valor2->topo->operando);
-	float f_sub = op1-op2;
+	float f_sub = op2-op1;
 	u4 sub = (u4)(*(u4*)&f_sub);
 	u4 result = (sinal(sub)<<31) | (expoente(sub)<<23) | mantissa(sub);
 	f->p = Push_operandos(f->p,result,NULL,FLOAT_OP);
@@ -1084,7 +1084,7 @@ void dsub_impl(frame *f, u1 par1, u1 par2){
 	double op1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
 	double op2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
 
-	double d_sub = op1-op2;
+	double d_sub = op2-op1;
 	u8 sub = (u8)(*(u8*)&d_sub);
 	u8 result = (sinal_d(sub)<<31) | (expoente_d(sub)<<23) | mantissa_d(sub);
 	
@@ -1236,7 +1236,7 @@ void fdiv_impl(frame *f, u1 par1, u1 par2){
 
 	float op1 = decodificaFloatValor(valor1->topo->operando);
 	float op2 = decodificaFloatValor(valor2->topo->operando);
-	float f_res = op1/op2;
+	float f_res = op2/op1;
 	u4 res = (u4)(*(u4*)&f_res);
 	u4 result = (sinal(res)<<31) | (expoente(res)<<23) | mantissa(res);
 	f->p = Push_operandos(f->p,result,NULL,FLOAT_OP);
@@ -1251,7 +1251,7 @@ void ddiv_impl(frame *f, u1 par1, u1 par2){
 	double op1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
 	double op2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
 
-	double d_res = op1/op2;
+	double d_res = op2/op1;
 	u8 res = (u8)(*(u8*)&d_res);
 	u8 result = (sinal_d(res)<<31) | (expoente_d(res)<<23) | mantissa_d(res);
 	
@@ -1833,6 +1833,9 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 				} else if (string->topo->tipo_operando == DOUBLE_OP) {
 					double valorSaida = decodificaDoubleValor(v2->topo->operando, string->topo->operando);
 					printf("Valor Double: %lf\n",valorSaida);
+				}else if(string->topo->tipo_operando == FLOAT_OP){
+					float valorSaida = decodificaFloatValor(string->topo->operando);
+					printf("Valor Float: %f\n",valorSaida);
 				} else {
 					printf("\nValor imprimir: %d\n",(i4) string->topo->operando);
 				}
