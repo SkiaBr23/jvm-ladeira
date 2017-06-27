@@ -109,15 +109,15 @@ void executarMetodo(method_info *m, char* classeCorrente, int chamador){
 
 void interpretarCode(u1 *code,u4 length){
 	u1 opcode;
+	int pcAtual;
 	for (u1 *j=code;j<code+length;){
 		opcode = *j;
-
+		pcAtual = jvm->pc;
 		instrucao i = instrucoes[opcode];
 		printf("Instrucao: %s\n",i.inst_nome);
 		printf("Opcode: %d\n",i.opcode);
 		j++;
 		u1 numarg = i.numarg;
-		ImprimirPilha_operandos(jvm->frames->topo->f->p);
 		if(numarg>0){
 
 			u1 *argumentos = malloc(numarg*sizeof(u1));
@@ -132,11 +132,20 @@ void interpretarCode(u1 *code,u4 length){
 			switch(numarg){
 				case 1:
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],0);
+					jvm->pc += i.pc_instrucao;
 				break;
 
 				case 2:
-					printf("Opcode Case 2: %02x\n",i.opcode);
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],argumentos[1]);
+					if (strcmp(i.inst_nome,"goto") == 0 || strcmp(i.inst_nome,"if_icmpgt") == 0 || strcmp(i.inst_nome,"ifne") == 0) {
+						if (pcAtual != jvm->pc) {
+							j = atualizarPCMetodoAtual(code,length);
+						} else {
+							jvm->pc += i.pc_instrucao;
+						}
+					} else {
+						jvm->pc += i.pc_instrucao;
+					}
 				break;
 			}
 		}
@@ -144,8 +153,46 @@ void interpretarCode(u1 *code,u4 length){
 			printf("Caiu no zero\n");
 			printf("Valor opcode: %d\n",i.opcode);
 			(*func_ptr[i.opcode])(jvm->frames->topo->f,0,0);
+			jvm->pc += i.pc_instrucao;
 		}
+	}
+}
 
-		printf("\n\n");
+u1 * atualizarPCMetodoAtual (u1 * code, u4 length) {
+	int contador = 0;
+	int numArgs = 0;
+	u1 opcode;
+	for (u1 * aux = code; aux < code+length; aux++) {
+			opcode = *aux;
+			instrucao i = instrucoes[opcode];
+			contador += i.pc_instrucao;
+			numArgs = i.numarg;
+			if(numArgs>0){
+				for(u1 arg = 0; arg < numArgs; arg++) {
+					aux++;
+				}
+			}
+			if (contador == jvm->pc) {
+				aux++;
+				return aux;
+			}
+	}
+	return 0;
+}
+
+void ImprimeCode (u1 * code, u4 length) {
+	int numArgs = 0;
+	printf("-------------------------IMPRIMIR CODE-------------------------\n");
+	for (u1 * saida = code; saida < code+length; saida++) {
+		u1 opcodeaux = *saida;
+		instrucao iaux = instrucoes[opcodeaux];
+		printf("Instrucao: %s\n",iaux.inst_nome);
+		printf("Salto: %d\n",iaux.pc_instrucao);
+		numArgs = iaux.numarg;
+		if(numArgs>0){
+			for(u1 arg = 0; arg < numArgs; arg++) {
+				saida++;
+			}
+		}
 	}
 }
