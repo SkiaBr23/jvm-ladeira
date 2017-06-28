@@ -1284,10 +1284,37 @@ void lrem_impl(frame *f, u1 par1, u1 par2){
 }
 
 void frem_impl(frame *f, u1 par1, u1 par2){
+	//Tratar casos de NaN e demais insucessos
+	pilha_operandos * valor1 = Pop_operandos(f->p);
+	pilha_operandos * valor2 = Pop_operandos(f->p);
+
+	float v1 = decodificaFloatValor(valor1->topo->operando);
+	float v2 = decodificaFloatValor(valor2->topo->operando);
+
+	float resultAux = fmodf(v2,v1);
+	u4 result = (u4)(*(u4*)&resultAux);
+
+	f->p = Push_operandos(f->p,result,NULL,FLOAT_OP);
 
 }
 
 void drem_impl(frame *f, u1 par1, u1 par2){
+	//Tratar casos de NaN e demais insucessos
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+	pilha_operandos *valor2_low = Pop_operandos(f->p);
+	pilha_operandos *valor2_high = Pop_operandos(f->p);
+
+	double v1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low);
+	double v2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low);
+
+	double resultAux = fmod(v2,v1);
+
+	printf("%lf\n",resultAux);
+	u8 result = (u8)(*(u8*)&resultAux);
+
+	f->p = Push_operandos(f->p,(u4)(result>>32),NULL,DOUBLE_OP);
+	f->p = Push_operandos(f->p,(u4)result,NULL,DOUBLE_OP);
 
 }
 
@@ -1326,13 +1353,19 @@ void dneg_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1_low = Pop_operandos(f->p);
 	pilha_operandos *valor1_high = Pop_operandos(f->p);
 
-	u4 high_bytes = valor1_high->topo->operando;
+	/*u4 high_bytes = valor1_high->topo->operando;
 	u4 low_bytes = valor1_low->topo->operando;
 
-	u4 result = high_bytes ^ 0X80000000; //Invert signal on high_bytes
+	u4 result = high_bytes ^ 0X80000000; //Invert signal on high_bytes*/
 
-	f->p = Push_operandos(f->p, result,NULL, DOUBLE_OP);
-	f->p = Push_operandos(f->p, low_bytes,NULL, DOUBLE_OP);
+	double valor = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
+
+	double d_sum = valor*(-1);
+	u8 sum = (u8)(*(u8*)&d_sum);
+	u8 result = (sinal_d(sum)<<63) | (expoente_d(sum)<<52) | mantissa_d(sum);
+
+	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, DOUBLE_OP);
+	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
 }
 
 
@@ -1542,7 +1575,7 @@ void i2l_impl(frame *f, u1 par1, u1 par2){
 void i2f_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	float valor = (float)valor1->topo->operando;
-	u4 flo = (u4)(*(u4*)&valor); 
+	u4 flo = (u4)(*(u4*)&valor);
 	f->p = Push_operandos(f->p,(u4)flo,NULL,FLOAT_OP);
 }
 
@@ -1570,7 +1603,7 @@ void l2f_impl(frame *f, u1 par1, u1 par2){
 
 	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 	float flo = (float) long1;
-	u4 valor = (u4)(*(u4*)&flo); 
+	u4 valor = (u4)(*(u4*)&flo);
 	f->p = Push_operandos(f->p, valor, NULL,FLOAT_OP);
 }
 
