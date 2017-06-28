@@ -139,7 +139,7 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		}
 
 		/*Leitura do valor 'methods_count', representando
-		a quantidade de entradas na tabela Method*/
+		a quantiade de entradas na tabela Method*/
 		arquivoClass->methods_count = u2Read(fp);
 
 		/*Estrutura condicional que verifica se a quantidade de entradas
@@ -399,6 +399,26 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				aux++;
 			break;
 
+			case 4:
+				aux2 = (u2*) malloc(sizeof(u2));
+				*aux2 = *(++aux) << 8;
+				*aux2 |= *(++aux);
+
+				stringargs = decodificarOperandoInstrucao(cp,*aux2,sizeCP);
+				strcat(retorno," #");
+				sprintf(stringaux,"%d",(int)*aux2);
+				strcat(retorno,stringaux);
+				strcat(retorno," ");
+				strcat(retorno,stringargs);
+				u2 *aux3 = (u2*) malloc(sizeof(u2));
+				*aux3 = *(++aux);
+				*aux3 = *aux3 | ((*(++aux)) << 8);
+				sprintf(stringaux,"%d",(int)*aux3);
+				strcat(retorno," count ");
+				strcat(retorno,stringaux);
+				strcat(retorno,"\n");
+				aux++;
+			break;
 			default:
 				strcat(retorno,"undefined");
 				aux++;
@@ -757,6 +777,20 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 				strcat(retorno,">");
 			break;
 
+			case CONSTANT_InterfaceMethodref:
+				stringNomeClasse = decodificaNIeNT(cp,cp_aux->UnionCP.InterfaceMethodref.class_index,NAME_INDEX);
+				stringNomeMetodo = decodificaNIeNT(cp,cp_aux->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
+
+				ponteiro2pontos = strchr(stringNomeMetodo,':');
+				*ponteiro2pontos = '\0';
+
+				strcpy(retorno,"<");
+				strcat(retorno,stringNomeClasse);
+				strcat(retorno,".");
+				strcat(retorno,stringNomeMetodo);
+				strcat(retorno,">");
+			break;
+
 			case CONSTANT_Fieldref:
 
 				stringNomeClasse = decodificaNIeNT(cp,cp_aux->UnionCP.Fieldref.class_index,NAME_INDEX);
@@ -784,9 +818,17 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 				strcat(retorno,stringGeral);
 				strcat(retorno,">");
 			break;
+
+			case CONSTANT_Class:
+				stringGeral = decodificaNIeNT(cp,cp_aux->UnionCP.Class.name_index,CLASS_INDEX);
+				strcpy(retorno,"<");
+				strcat(retorno,stringGeral);
+				strcat(retorno,">");
+			break;
+
 			default:
 				strcpy(retorno,"undefined");
-				break;
+			break;
 		}
 	} else {
 		sprintf(retorno,"%d",index);

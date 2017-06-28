@@ -2206,3 +2206,13 @@ float decodificaFloatValor (u4 valor) {
 	float retorno = (sinal)*(mant)*(pow(2,expon-150));
 	return retorno;
 }
+
+
+
+
+
+
+
+
+
+
