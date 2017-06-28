@@ -1266,18 +1266,13 @@ void irem_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	pilha_operandos *valor3 = CriarPilha_operandos();
-
 	if(valor1->topo->operando == 0){
 		// Lançar Arithmetic Exception
 	}
 
 	i4 valor_push = valor2->topo->operando - (valor2->topo->operando/valor1->topo->operando) * valor1->topo->operando;
 
-	valor3 = Push_operandos(valor3,valor_push,NULL,valor1->topo->tipo_operando);
-	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
-
-	f->p = Push_operandos(f->p,valor3->topo->operando,NULL,valor3->topo->tipo_operando);
+	f->p = Push_operandos(f->p,valor_push,NULL,INTEGER_OP);
 }
 
 void lrem_impl(frame *f, u1 par1, u1 par2){
@@ -1494,7 +1489,7 @@ void ixor_impl(frame *f, u1 par1, u1 par2){
 
 	i4 resultado = valor1->topo->operando ^ valor2->topo->operando;
 
-	f->p = Push_operandos(f->p,resultado,NULL,valor1->topo->tipo_operando);
+	f->p = Push_operandos(f->p,resultado,NULL,INTEGER_OP);
 }
 
 void lxor_impl(frame *f, u1 par1, u1 par2){
@@ -1615,22 +1610,109 @@ void i2s_impl(frame *f, u1 par1, u1 par2){
 }
 
 void lcmp_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
+	i8 long1 = ((i8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+
+	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
+
+	i8 long2 = ((i8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i4 retorno;
+	if(long2 > long1){
+		retorno = 1;
+	} else if(long2 < long1){
+		retorno = -1;
+	} else{
+		retorno = 0;
+	}
+
+	f->p = Push_operandos(f->p, retorno, NULL,INTEGER_OP);
 }
 
 void fcmpl_impl(frame *f, u1 par1, u1 par2){
+	//TODO Tratar NaN
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
 
+	float op1 = decodificaFloatValor(valor1->topo->operando);
+	float op2 = decodificaFloatValor(valor2->topo->operando);
+	i4 retorno;
+	if(op2 > op1){
+		retorno = 1;
+	} else if(op2 < op1){
+		retorno = -1;
+	} else{
+		retorno = 0;
+	}
+
+	f->p = Push_operandos(f->p, retorno, NULL,INTEGER_OP);
 }
 
 void fcmpg_impl(frame *f, u1 par1, u1 par2){
+	//TODO Tratar NaN
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	pilha_operandos *valor2 = Pop_operandos(f->p);
+
+	float op1 = decodificaFloatValor(valor1->topo->operando);
+	float op2 = decodificaFloatValor(valor2->topo->operando);
+	i4 retorno;
+	if(op2 > op1){
+		retorno = 1;
+	} else if(op2 < op1){
+		retorno = -1;
+	} else{
+		retorno = 0;
+	}
+
+	f->p = Push_operandos(f->p, retorno, NULL,INTEGER_OP);
 
 }
 
 void dcmpl_impl(frame *f, u1 par1, u1 par2){
 
+	//TODO Tratar NaN
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+	pilha_operandos *valor2_low = Pop_operandos(f->p);
+	pilha_operandos *valor2_high = Pop_operandos(f->p);
+
+	double op1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
+	double op2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
+	i4 retorno;
+	if(op2 > op1){
+		retorno = 1;
+	} else if(op2 < op1){
+		retorno = -1;
+	} else{
+		retorno = 0;
+	}
+
+	f->p = Push_operandos(f->p, retorno, NULL,INTEGER_OP);
+
 }
 
 void dcmpg_impl(frame *f, u1 par1, u1 par2){
+	//TODO Tratar NaN
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+	pilha_operandos *valor2_low = Pop_operandos(f->p);
+	pilha_operandos *valor2_high = Pop_operandos(f->p);
+
+	double op1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
+	double op2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
+	i4 retorno;
+	if(op2 > op1){
+		retorno = 1;
+	} else if(op2 < op1){
+		retorno = -1;
+	} else{
+		retorno = 0;
+	}
+
+	f->p = Push_operandos(f->p, retorno, NULL,INTEGER_OP);
 
 }
 
