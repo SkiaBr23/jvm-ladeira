@@ -902,6 +902,17 @@ char* decodificaAccessFlags(u2 flag){
 			flag-=SYNTHETIC;
 			strcat(retorno,"SYNTHETIC;");
 		}
+
+		if(flag>=ABSTRACT){
+			flag-=ABSTRACT;
+			strcat(retorno,"ABSTRACT;");
+		}
+
+		if(flag>=INTERFACE_FLAG){
+			flag-=INTERFACE_FLAG;
+			strcat(retorno,"INTERFACE;");
+		}
+
 		if(flag>=TRANSIENT){
 			flag-=TRANSIENT;
 			strcat(retorno,"TRANSIENT;");

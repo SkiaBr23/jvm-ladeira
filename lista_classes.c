@@ -111,7 +111,7 @@ void ImprimirLista_classes(classesCarregadas *lis){
 	classesCarregadas *p;
 
 	for(p=lis;p!=NULL;p=p->prox){
-		printf("%s",decodificaNIeNT(p->arquivoClass->constant_pool,p->arquivoClass->this_class,CLASS_INDEX));
+		printf("%s",decodificaNIeNT(p->arquivoClass->constant_pool,p->arquivoClass->this_class,NAME_INDEX));
 		printf("\n");
 	}
 }

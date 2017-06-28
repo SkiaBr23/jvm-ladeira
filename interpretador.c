@@ -92,7 +92,9 @@ char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp){
 	cp_info *methodref = cp-1+indice_cp;
-	char *nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
+	char *nome_classe = NULL;
+
+	nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
 	return(nome_classe);
 }
 
@@ -101,6 +103,7 @@ frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 	int cont = 0;
 	while(anterior->p->topo!=NULL){
 		pilha_operandos *p = Pop_operandos(anterior->p);
+		// Ordem reversa
 		aux = Push_operandos(aux,p->topo->operando,(void*)p->topo->referencia,p->topo->tipo_operando);
 		cont++;
 	}
@@ -120,6 +123,33 @@ frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 	}
 
 	*parametros_cont = cont;
+
+	return(novo);
+}
+
+frame *transferePilhaVetorCount(frame *f, frame *novo,int quantidade){
+	pilha_operandos *aux = CriarPilha_operandos();
+	int cont = 0;
+	while(cont<quantidade){
+		pilha_operandos *p = Pop_operandos(f->p);
+		// Ordem reversa
+		aux = Push_operandos(aux,p->topo->operando,(void*)p->topo->referencia,p->topo->tipo_operando);
+		cont++;
+	}
+
+	novo->v = malloc(cont*sizeof(vetor_locais));
+
+	for(int i=0;i<cont;i++){
+		pilha_operandos *p = Pop_operandos(aux);
+		novo->v[i].variavel = malloc(sizeof(u4));
+		if(p->topo->tipo_operando<=8){
+			*(novo->v[i].variavel) = (u4) p->topo->operando;
+		}
+		else{
+			*(novo->v[i].variavel) = (u4 *) p->topo->referencia;
+		}
+		novo->v[i].tipo_variavel = (u1) p->topo->tipo_operando;
+	}
 
 	return(novo);
 }
@@ -714,6 +744,8 @@ void iastore_impl(frame *f, u1 par1, u1 par2){
 
 	i4 endereco;
 	endereco = ((i4) array->topo->operando) + (indice->topo->operando * sizeof(i4));
+
+	// array->topo->referencia+indice->topo->operando = valor;
 
 	endereco = valor->topo->operando;
 }
@@ -2119,7 +2151,6 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			}
 		}
 	}
-
 }
 
 void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
@@ -2129,7 +2160,54 @@ void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
 	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,1);
 
 	if(resolverMetodo(f->cp,indice_cp,1)){
-		ImprimirLista_classes(jvm->classes);
+		// Assumindo que está na corrente, não há verificação
+		// Descobrir o nome da classe para fazer as coisas.
+		// Como descobrir o nome da classe, sendo que tem que pesquisar pela classe na lista de classes primeiro, para ter o nome dela?
+		// Deadlock da pesquisa
+		char *nomeClasse = decodificaNIeNT(jvm->frames->topo->f->cp,jvm->frames->topo->f->,NAME_INDEX); // Problema aqui
+		classesCarregadas *classeNova = BuscarElemento_classes(jvm->classes,nomeClasse);
+		method_info *methodAux = BuscarMethodClasseCorrente_classes(jvm->classes,classeNova,nomemetodo);
+		attribute_info *aux;
+		int posicao;
+		for(posicao=0;posicao<methodAux->attributes_count;posicao++){
+			aux = (*(methodAux->attributes+posicao));
+
+			char *nameindex = decodificaStringUTF8(classeNova->arquivoClass->constant_pool-1+aux->attribute_name_index);
+
+			if(strcmp(nameindex,"Code")==0){
+				code_attribute *c = (code_attribute *) aux->info;
+
+				frame *f_novo = criarFrame(classeNova,c->max_locals);
+				f_novo = transferePilhaVetorCount(f,f_novo,count);
+
+				jvm->frames = Push_frames(jvm->frames,f_novo);
+
+				for(int i=0;i<count;i++){
+					printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
+				}
+
+				classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
+
+				if(classe != NULL){
+					printf("Buscou a classe\n");
+				}
+
+				method_info *metodos = classe->arquivoClass->methods;
+
+				for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
+					char *nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
+					char *descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
+
+					if(strcmp(nomemetodo,nomeMetodoAux)==0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
+						printf("Metodo da interface: %s\n",nomeMetodoAux);
+						printf("Executando método...\n");
+						executarMetodo(aux,classeNova,2);
+					}
+				}
+			}
+		}
+
+
 	}
 
 
