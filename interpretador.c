@@ -38,11 +38,19 @@ ClassFile* resolverClasse(char* nome_classe){
 /*
 	Depois da resolverMetodo, analisar semanticamente. Ver o número de argumentos, o tipo deles, ver se está tudo coerente com o descritor do método.
 */
-bool resolverMetodo(cp_info *cp, u2 indice_cp){
+bool resolverMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 
 	cp_info *methodref = cp-1+indice_cp;
-	char *nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
-	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	char *nome_classe = NULL;
+	char *descriptor = NULL;
+	if(!interface){
+		nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	}
+	else{
+		nome_classe = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.class_index,NAME_INDEX);
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
+	}
 
 	if(resolverClasse(nome_classe)!=NULL){
 		return true;
@@ -52,17 +60,30 @@ bool resolverMetodo(cp_info *cp, u2 indice_cp){
 	}
 }
 
-char* obterNomeMetodo(cp_info *cp, u2 indice_cp){
+char* obterNomeMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 	cp_info *methodref = cp-1+indice_cp;
-	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	char *descriptor = NULL;
+	if(!interface){
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	}
+	else{
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
+	}
 	char *pch = strtok(descriptor,":");
 
 	return(pch);
 }
 
-char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp){
+char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 	cp_info *methodref = cp-1+indice_cp;
-	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	char *descriptor = NULL;
+	if(!interface){
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	}
+	else{
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
+	}
+
 	char *pch = strtok(descriptor,":");
 	pch = strtok(NULL,":");
 
@@ -1962,8 +1983,8 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 
-	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp);
-	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp);
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
 
 	/*method_info *metodos = f->classes->topo->arquivoClass->methods;
 	method_info *aux = metodos;*/
@@ -2028,7 +2049,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		}
 	}
 	else{
-		if(resolverMetodo(f->cp,indice_cp)){
+		if(resolverMetodo(f->cp,indice_cp,0)){
 
 		}
 	}
@@ -2049,10 +2070,10 @@ void invokespecial_impl(frame *f, u1 par1, u1 par2){
 void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
-	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp);
-	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp);
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
 	printf("Vai rodar invoke static...\n");
-	if(resolverMetodo(f->cp,indice_cp)){
+	if(resolverMetodo(f->cp,indice_cp,0)){
 		int *parametros_cont = malloc(sizeof(int));
 		char *classeNova = obterClasseDoMetodo(f->cp,indice_cp);
 		method_info * methodAux = BuscarMethodClasseCorrente_classes(jvm->classes, classeNova, nomemetodo);
@@ -2101,7 +2122,21 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 }
 
-void invokeinterface_impl(frame *f, u1 par1, u1 par2){
+void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
+	u2 indice_cp = normaliza_indice(indexbyte1,indexbyte2);
+
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,1);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,1);
+
+	if(resolverMetodo(f->cp,indice_cp,1)){
+		ImprimirLista_classes(jvm->classes);
+	}
+
+
+
+}
+
+void invokeinterface_fantasma(frame *par0, u1 par1, u1 par2){
 
 }
 

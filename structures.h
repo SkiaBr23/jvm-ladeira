@@ -65,7 +65,7 @@ typedef uint64_t u8;
 #define expoente_d(x) ((x << 1) >> 53)
 #define mantissa_d(x) ((x << 12) >> 12)
 #define sinal_d(x) (x >> 63)
-
+ 
 #endif
 
 #include "pilha_operandos.h"

@@ -5,13 +5,15 @@
 #include "classFileStruct.h"
 #include <stdbool.h>
 
+#define normaliza_indice(x,y) (x << 8) | y
+
 /* Observar todas as instruções, pois a maioria delas está parcialmente implementada */
 /* Observar todas as intruções quanto ao lançamento de exceções */
 
 ClassFile* resolverClasse(char *nome_classe);
-bool resolverMetodo(cp_info *cp, u2 indice_cp);
-char* obterNomeMetodo(cp_info *cp, u2 indice_cp);
-char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp);
+bool resolverMetodo(cp_info *cp, u2 indice_cp, u1 interface);
+char* obterNomeMetodo(cp_info *cp, u2 indice_cp, u1 interface);
+char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp, u1 interface);
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp);
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont);
 double decodificaDoubleValor(u4 high, u4 low);
@@ -210,7 +212,8 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void invokespecial_impl(frame *f, u1 par1, u1 par2); // Não implementado
 /* Próximo objetivo: implementar invokestatic */
 void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
-void invokeinterface_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void invokeinterface_fantasma(frame *par0, u1 par1, u1 par2);
+void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count); // Não implementado
 void invokedynamic_fantasma(frame *par0, u1 par1, u1 par2); // Não implementado. /** Essa instrução só existe para criar uma posição "falsa" no vetor de ponteiros de função **/
 void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void newarray_impl(frame *f ,u1 atype, u1 par1); // Observação do -INT_MAX
