@@ -24,6 +24,7 @@ frame* criarFrame(char *classeCorrente, u2 max_locals);
 void executarJVM();
 u1 * atualizarPCMetodoAtual (u1 * code, u4 length);
 void ImprimeCode (u1 * code, u4 length);
+bool instrucaoBranch (char * nomeInstrucao);
 /*
 	Função executarMetodo: chamador 1 quer dizer que a JVM está chamando a função.
 	Chamador 2 quer dizer que uma função de implementação de instruções chamou essa função (exemplo: invokestatic)
