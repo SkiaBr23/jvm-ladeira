@@ -138,7 +138,7 @@ void interpretarCode(u1 *code,u4 length){
 
 				case 2:
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],argumentos[1]);
-					if (strcmp(i.inst_nome,"goto") == 0 || strcmp(i.inst_nome,"if_icmpgt") == 0 || strcmp(i.inst_nome,"ifne") == 0) {
+					if (instrucaoBranch(i.inst_nome)) {
 						if (pcAtual != jvm->pc) {
 							j = atualizarPCMetodoAtual(code,length);
 						} else {
@@ -163,6 +163,46 @@ void interpretarCode(u1 *code,u4 length){
 			jvm->pc += i.pc_instrucao;
 		}
 	}
+}
+
+bool instrucaoBranch (char * nomeInstrucao) {
+	bool isBranch = false;
+	if (strcmp(nomeInstrucao,"goto") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"if_icmpgt") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"ifne") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"ifeq") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"iflt") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"ifge") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"ifle") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"ifgt") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"if_icmpeq") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"if_icmpne") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"if_icmplt") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"if_icmpge") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"if_icmple") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"if_acmpeq") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"if_acmpne") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"jsr") == 0) {
+		isBranch = true;
+	} else {
+		isBranch = false;
+	}
+	return isBranch;
 }
 
 u1 * atualizarPCMetodoAtual (u1 * code, u4 length) {

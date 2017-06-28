@@ -156,12 +156,12 @@ void ixor_impl(frame *f, u1 par1, u1 par2);
 void lxor_impl(frame *f, u1 par1, u1 par2);
 void iinc_fantasma(frame *par0, u1 par1, u1 par2);
 void iinc_impl(frame *f, u1 index, i1 constante);
-void i2l_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void i2f_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void i2d_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void l2i_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void l2f_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void l2d_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void i2l_impl(frame *f, u1 par1, u1 par2); 
+void i2f_impl(frame *f, u1 par1, u1 par2); 
+void i2d_impl(frame *f, u1 par1, u1 par2); 
+void l2i_impl(frame *f, u1 par1, u1 par2); 
+void l2f_impl(frame *f, u1 par1, u1 par2); 
+void l2d_impl(frame *f, u1 par1, u1 par2); 
 void f2i_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void f2l_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void f2d_impl(frame *f, u1 par1, u1 par2); // Não implementado

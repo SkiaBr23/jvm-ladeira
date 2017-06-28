@@ -262,6 +262,10 @@ void dconst_1_impl(frame *f, u1 par1, u1 par2){
 	//TOPO DA PILHA FICA O LOW
 	i4 low_bytes = (i4) 0;
 	Push_operandos(f->p,low_bytes,NULL,DOUBLE_OP);
+
+	u8 longv = ((u8)high_bytes << 32) | low_bytes;
+	u8 sum = (u8)(*(u8*)&longv);
+
 }
 
 //Push sexted byte para a pilha de operandos
@@ -1578,33 +1582,61 @@ void iinc_fantasma(frame *par0, u1 par1, u1 par2){
 }
 
 void i2l_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	i4 valor = (i4)valor1->topo->operando;
+
+	i8 valor_long = (i8)valor;
+
+	f->p = Push_operandos(f->p, (u4)(valor_long>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)valor_long, NULL,LONG_OP);
 
 }
 
 void i2f_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
-	i4 valor = (i4)valor1->topo->operando;
-	f->p = Push_operandos(f->p,(i4)valor,NULL,DOUBLE_OP);
+	float valor = (float)valor1->topo->operando;
+	u4 flo = (u4)(*(u4*)&valor); 
+	f->p = Push_operandos(f->p,(u4)flo,NULL,FLOAT_OP);
 }
 
 void i2d_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
-	i8 valor = (i8)valor1->topo->operando;
+	double valor = (double)valor1->topo->operando;
 
-	f->p = Push_operandos(f->p,(i4)(valor>>32),NULL,DOUBLE_OP);
-	f->p = Push_operandos(f->p,(i4)((valor<<32)>>32),NULL,DOUBLE_OP);
+	u8 doub = (u8)(*(u8*)&valor);
+
+	f->p = Push_operandos(f->p,(u4)(doub>>32),NULL,DOUBLE_OP);
+	f->p = Push_operandos(f->p,(u4)doub,NULL,DOUBLE_OP);
 
 }
 
 void l2i_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
+	f->p = Push_operandos(f->p, low_bytes1->topo->operando, NULL,INTEGER_OP);
 }
 
 void l2f_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
+	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	float flo = (float) long1;
+	u4 valor = (u4)(*(u4*)&flo); 
+	f->p = Push_operandos(f->p, valor, NULL,FLOAT_OP);
 }
 
 void l2d_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	double valor = (double) long1;
+	u8 doub = (u8)(*(u8*)&valor);
+
+	f->p = Push_operandos(f->p,(u4)(doub>>32),NULL,DOUBLE_OP);
+	f->p = Push_operandos(f->p,(u4)doub,NULL,DOUBLE_OP);
 
 }
 
@@ -1770,13 +1802,13 @@ void dcmpg_impl(frame *f, u1 par1, u1 par2){
 }
 
 void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
-
-
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando == 0){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
-		// Alterar o PC aqui para fazer o branch
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1797,7 +1829,10 @@ void iflt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando<0){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1805,7 +1840,10 @@ void ifge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando >= 0){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		uint8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1813,7 +1851,10 @@ void ifgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando > 0){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1821,7 +1862,10 @@ void ifle_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando <= 0){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1830,7 +1874,10 @@ void if_icmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando == valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1839,7 +1886,10 @@ void if_icmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando != valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1848,7 +1898,10 @@ void if_icmplt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando < valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1857,7 +1910,10 @@ void if_icmpge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando >= valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1866,11 +1922,9 @@ void if_icmpgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor2->topo->operando > valor1->topo->operando){
-		printf("Entrou....\n");
 		int8_t v1 = (int8_t)branchbyte1;
 		int8_t v2 = (int8_t)branchbyte2;
 		int16_t branchoffset = (v1 << 8) | v2;
-		printf("Branch Offset: %d\n",branchoffset);
 		jvm->pc += branchoffset;
 	}
 }
@@ -1880,7 +1934,10 @@ void if_icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando <= valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1889,7 +1946,10 @@ void acmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando == valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1898,25 +1958,26 @@ void acmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando != valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
 void inst_goto_impl(frame *f,u1 branchbyte1, u1 branchbyte2){
 	int8_t bb1 = (int8_t)branchbyte1;
 	int8_t bb2 = (int8_t)branchbyte2;
-	int16_t branchoffset = (branchbyte1 << 8) | branchbyte2;
-
-	printf("Branch Goto: %d\n",branchoffset);
+	int16_t branchoffset = (bb1 << 8) | bb2;
 
 	jvm->pc += branchoffset;
-	// Efetuar o branch com branch offset
 }
 
 void jsr_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
-	u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
-
-	// Efetuar o branch com branch offset
+	int8_t v1 = (int8_t)branchbyte1;
+	int8_t v2 = (int8_t)branchbyte2;
+	int16_t branchoffset = (v1 << 8) | v2;
+	jvm->pc += branchoffset;
 }
 
 void ret_impl(frame *f,u1 index, u1 par){
@@ -2384,12 +2445,15 @@ void jsr_w_impl(frame *f, u1 par1, u1 par2){
 }
 
 double decodificaDoubleValor (u4 high, u4 low) {
-	long long valor = ((long long)(high)<<32) | (long long)low;
-	int8_t sinal = ((valor>>63) == 0) ? 1 : -1;
-	int16_t expon = ((valor>>52) & 0x7ffL);
-	long long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
+	u8 valor = ((u8)(high)<<32) | (u8)low;
+	i1 sinal = ((valor>>63) == 0) ? 1 : -1;
+	i2 expon = ((valor>>52) & 0x7ffL);
+	u8 mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
 
 	double retorno = sinal*mant*(pow(2,expon-1075));
+	if(!retorno){
+		int a = 1;
+	}
 	return retorno;
 }
 
@@ -2401,13 +2465,3 @@ float decodificaFloatValor (u4 valor) {
 	float retorno = (sinal)*(mant)*(pow(2,expon-150));
 	return retorno;
 }
-
-
-
-
-
-
-
-
-
-
