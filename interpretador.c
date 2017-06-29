@@ -965,15 +965,15 @@ void ladd_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long1 + long2;
+	i8 result = long1 + long2;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, LONG_OP);
@@ -1024,15 +1024,15 @@ void lsub_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long2 - long1;
+	i8 result = long2 - long1;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, LONG_OP);
@@ -1084,15 +1084,15 @@ void lmul_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long1 * long2;
+	i8 result = long1 * long2;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, LONG_OP);
@@ -1191,15 +1191,15 @@ void ldiv_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long2 / long1;
+	i8 result = long2 / long1;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
@@ -1253,6 +1253,22 @@ void irem_impl(frame *f, u1 par1, u1 par2){
 
 void lrem_impl(frame *f, u1 par1, u1 par2){
 
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+
+	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
+
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+
+	i8 result = long2 - (long2/long1) * long1;
+	
+	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
+
 }
 
 void frem_impl(frame *f, u1 par1, u1 par2){
@@ -1301,9 +1317,9 @@ void lneg_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
-	u8 result = -long1;
+	i8 result = -long1;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
@@ -1567,7 +1583,7 @@ void l2f_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 	float flo = (float) long1;
 	u4 valor = (u4)(*(u4*)&flo);
 	f->p = Push_operandos(f->p, valor, NULL,FLOAT_OP);
@@ -1577,7 +1593,7 @@ void l2d_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 	double valor = (double) long1;
 	u8 doub = (u8)(*(u8*)&valor);
 

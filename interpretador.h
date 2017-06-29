@@ -39,7 +39,7 @@ void bipush_impl(frame *f, u1 byte, u1 par1);
 void sipush_impl(frame *f,u1 byte1, u1 byte2);
 void ldc_impl(frame *f,u1 indexbyte1,u1 par2);
 void ldc_w_impl(frame *par0, u1 par1, u1 par2); // Não implementado
-void ldc2_w_impl(frame *par0, u1 par1, u1 par2); // Não implementado
+void ldc2_w_impl(frame *par0, u1 par1, u1 par2);
 void iload_impl(frame *f, u1 index, u1 par1);
 void lload_impl(frame *f, u1 index, u1 par1);
 void fload_impl(frame *f, u1 index, u1 par1);
@@ -135,9 +135,9 @@ void ldiv_impl(frame *f, u1 par1, u1 par2);
 void fdiv_impl(frame *f, u1 par1, u1 par2);
 void ddiv_impl(frame *f, u1 par1, u1 par2);
 void irem_impl(frame *f, u1 par1, u1 par2);
-void lrem_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void frem_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void drem_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lrem_impl(frame *f, u1 par1, u1 par2);
+void frem_impl(frame *f, u1 par1, u1 par2);
+void drem_impl(frame *f, u1 par1, u1 par2);
 void ineg_impl(frame *f, u1 par1, u1 par2);
 void lneg_impl(frame *f, u1 par1, u1 par2);
 void fneg_impl(frame *f, u1 par1, u1 par2);
