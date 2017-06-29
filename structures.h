@@ -247,6 +247,7 @@ enum access_flags{
 	PROTECTED = 4,
 	STATIC = 8,
 	FINAL = 16,
+	SUPER = 32,
 	VOLATILE = 64,
 	TRANSIENT = 128,
 	INTERFACE_FLAG = 512,

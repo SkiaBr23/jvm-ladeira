@@ -9,6 +9,7 @@
 
 /* Observar todas as instruções, pois a maioria delas está parcialmente implementada */
 /* Observar todas as intruções quanto ao lançamento de exceções */
+/* Observar detalhes de instruções, principalmente os detalhes de invokes, por exemplo, no que tange à herança */
 
 ClassFile* resolverClasse(char *nome_classe);
 bool resolverMetodo(cp_info *cp, u2 indice_cp, u1 interface);
@@ -208,12 +209,10 @@ void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
-// Pulei várias instruções
-void invokespecial_impl(frame *f, u1 par1, u1 par2); // Não implementado
-/* Próximo objetivo: implementar invokestatic */
-void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
+void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
+void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void invokeinterface_fantasma(frame *par0, u1 par1, u1 par2);
-void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count); // Não implementado
+void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count);
 void invokedynamic_fantasma(frame *par0, u1 par1, u1 par2); // Não implementado. /** Essa instrução só existe para criar uma posição "falsa" no vetor de ponteiros de função **/
 void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void newarray_impl(frame *f ,u1 atype, u1 par1); // Observação do -INT_MAX

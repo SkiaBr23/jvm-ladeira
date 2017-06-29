@@ -917,6 +917,7 @@ char* decodificaAccessFlags(u2 flag){
 			flag-=TRANSIENT;
 			strcat(retorno,"TRANSIENT;");
 		}
+		
 		if(flag>=VOLATILE){
 			flag-=VOLATILE;
 			strcat(retorno,"VOLATILE;");

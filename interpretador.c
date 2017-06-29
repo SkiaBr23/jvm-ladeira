@@ -98,6 +98,60 @@ char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp){
 	return(nome_classe);
 }
 
+bool isSuper(u2 flag){
+	int super = false;
+	while(flag){
+
+		if(flag>=SYNTHETIC){
+			flag-=SYNTHETIC;
+		}
+
+		if(flag>=ABSTRACT){
+			flag-=ABSTRACT;
+		}
+
+		if(flag>=INTERFACE_FLAG){
+			flag-=INTERFACE_FLAG;
+		}
+
+		if(flag>=TRANSIENT){
+			flag-=TRANSIENT;
+		}
+		
+		if(flag>=VOLATILE){
+			flag-=VOLATILE;
+		}
+
+		if(flag>=SUPER){
+			flag-=SUPER;
+			super = true;
+			break;
+		}
+
+		if(flag>=FINAL){
+			flag-=FINAL;
+		}
+
+		if(flag>=STATIC){
+			flag-=STATIC;
+		}
+
+		if(flag>=PROTECTED){
+			flag-=PROTECTED;
+		}
+
+		if(flag>=PRIVATE){
+			flag-=PRIVATE;
+		}
+
+		if(flag>=PUBLIC){
+			flag-=PUBLIC;
+		}
+	}
+
+	return(super);
+}
+
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 	pilha_operandos *aux = CriarPilha_operandos();
 	int cont = 0;
@@ -2183,8 +2237,85 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 }
 
-void invokespecial_impl(frame *f, u1 par1, u1 par2){
+void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+	u2 indice_cp = normaliza_indice(indexbyte1,indexbyte2);
 
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
+	char *classeDoMetodo = NULL;
+	char *classePaiDaCorrente = NULL;
+	classesCarregadas *classeResolvida = NULL;
+	classesCarregadas *classeCorrente = NULL;
+
+	if(resolverMetodo(f->cp,indice_cp,0)){
+		classeDoMetodo = obterClasseDoMetodo(f->cp,indice_cp);
+		// Corrente é a filha
+		classeResolvida = BuscarElemento_classes(jvm->classes,classeDoMetodo);
+		classeCorrente = BuscarElemento_classes(jvm->classes,jvm->frames->topo->f->classeCorrente);
+
+		classePaiDaCorrente = decodificaNIeNT(classeCorrente->arquivoClass->constant_pool,classeCorrente->arquivoClass->super_class,NAME_INDEX);
+		printf("CLASSE PAI DA CORRENTE: %s\n",classePaiDaCorrente);
+
+		/**
+			3 condições do invokespecial
+			1. 
+			2. Se a classe do método resolvido é superclass da classe corrente, não chama
+			3. 
+		**/
+
+		// If não executa, else executa
+		if(isSuper(classeCorrente->arquivoClass->access_flags) && strcmp(classeDoMetodo,classePaiDaCorrente)==0 && (strcmp(nomemetodo,"init")!=0 || strcmp(nomemetodo,"clinit")!=0)){
+
+		}
+		else{
+			// Vai invocar o método
+
+			int *parametros_cont = malloc(sizeof(int));
+			method_info * methodAux = BuscarMethodClasseCorrente_classes(jvm->classes,classeDoMetodo, nomemetodo);
+			attribute_info *aux;
+			int posicao;
+			for(posicao = 0; posicao < methodAux->attributes_count; posicao++) {
+				aux = (*(methodAux->attributes+posicao));
+				classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,classeDoMetodo);
+				char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
+				if(strcmp(nameindex,"Code")==0){
+					code_attribute *c = (code_attribute *) aux->info;
+					frame *f_novo = criarFrame(classeDoMetodo,c->max_locals);
+					f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
+					jvm->frames = Push_frames(jvm->frames,f_novo);
+					// printf("%lu\n",sizeof(vetor_locais));
+					for(int i=0;i<*(parametros_cont);i++){
+						printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
+					}
+	
+	
+					printf("Classe nova: %s\n",classeDoMetodo);
+					classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeDoMetodo);
+					if (classe != NULL) {
+						printf("Buscou a classe carregada...\n");
+					}
+	
+					// Achar o método na classe que o contém
+					method_info *metodos = classe->arquivoClass->methods;
+					for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
+						// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
+						char * nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
+						char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
+	
+						if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
+							printf("Metodo da classe: %s\n",nomeMetodoAux);
+							// Executar o code do método invocado
+							printf("Executando método...\n");
+							executarMetodo(aux,classeDoMetodo,2);
+	
+						}
+					}
+				}
+			}
+
+		}
+
+	}
 }
 
 /*
@@ -2302,7 +2433,6 @@ void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
 						// Executar o code do método invocado
 						printf("Executando método...\n");
 						executarMetodo(aux,classeNova,2);
-
 					}
 				}
 			}
