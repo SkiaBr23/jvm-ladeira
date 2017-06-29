@@ -1542,7 +1542,7 @@ void i2f_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	float valor = (float)valor1->topo->operando;
 	u4 flo = (u4)(*(u4*)&valor);
-	f->p = Push_operandos(f->p,(u4)flo,NULL,FLOAT_OP);
+	f->p = Push_operandos(f->p,flo,NULL,FLOAT_OP);
 }
 
 void i2d_impl(frame *f, u1 par1, u1 par2){
@@ -1587,26 +1587,70 @@ void l2d_impl(frame *f, u1 par1, u1 par2){
 }
 
 void f2i_impl(frame *f, u1 par1, u1 par2){
-
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	float valor = decodificaFloatValor(valor1->topo->operando);
+	f->p = Push_operandos(f->p,(i4)valor,NULL,INTEGER_OP);
 }
 
 void f2l_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	float valor = decodificaFloatValor(valor1->topo->operando);
+	
+	i8 valor_long = (i8)valor;
 
+	f->p = Push_operandos(f->p, (u4)(valor_long>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)valor_long, NULL,LONG_OP);
 }
 
 void f2d_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	double valor = (double)decodificaFloatValor(valor1->topo->operando);
 
+	u8 doub = (u8)(*(u8*)&valor);
+
+	f->p = Push_operandos(f->p,(u4)(doub>>32),NULL,DOUBLE_OP);
+	f->p = Push_operandos(f->p,(u4)doub,NULL,DOUBLE_OP);
 }
 
 void d2i_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
 
+	u4 high_bytes = valor1_high->topo->operando;
+	u4 low_bytes = valor1_low->topo->operando;
+
+	double valor = decodificaDoubleValor(high_bytes, low_bytes);
+	f->p = Push_operandos(f->p,(i4)valor,NULL,INTEGER_OP);
 }
 
 void d2l_impl(frame *f, u1 par1, u1 par2){
 
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+
+	u4 high_bytes = valor1_high->topo->operando;
+	u4 low_bytes = valor1_low->topo->operando;
+
+	double valor = decodificaDoubleValor(high_bytes, low_bytes);
+
+	i8 valor_long = (i8)valor;
+
+	f->p = Push_operandos(f->p, (u4)(valor_long>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)valor_long, NULL,LONG_OP);
+
 }
 
 void d2f_impl(frame *f, u1 par1, u1 par2){
+
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+
+	u4 high_bytes = valor1_high->topo->operando;
+	u4 low_bytes = valor1_low->topo->operando;
+
+	float flo = (float) decodificaDoubleValor(high_bytes, low_bytes);
+	u4 valor = (u4)(*(u4*)&flo);
+	f->p = Push_operandos(f->p, valor, NULL,FLOAT_OP);
 
 }
 

@@ -162,12 +162,12 @@ void i2d_impl(frame *f, u1 par1, u1 par2);
 void l2i_impl(frame *f, u1 par1, u1 par2); 
 void l2f_impl(frame *f, u1 par1, u1 par2); 
 void l2d_impl(frame *f, u1 par1, u1 par2); 
-void f2i_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void f2l_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void f2d_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void d2i_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void d2l_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void d2f_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void f2i_impl(frame *f, u1 par1, u1 par2);
+void f2l_impl(frame *f, u1 par1, u1 par2);
+void f2d_impl(frame *f, u1 par1, u1 par2);
+void d2i_impl(frame *f, u1 par1, u1 par2);
+void d2l_impl(frame *f, u1 par1, u1 par2);
+void d2f_impl(frame *f, u1 par1, u1 par2);
 void i2b_impl(frame *f, u1 par1, u1 par2);
 void i2c_impl(frame *f, u1 par1, u1 par2);
 void i2s_impl(frame *f, u1 par1, u1 par2);
