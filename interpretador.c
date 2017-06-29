@@ -1019,15 +1019,15 @@ void ladd_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long1 + long2;
+	i8 result = long1 + long2;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, LONG_OP);
@@ -1040,35 +1040,7 @@ void fadd_impl(frame *f, u1 par1, u1 par2){
 
 	float op1 = decodificaFloatValor(valor1->topo->operando);
 	float op2 = decodificaFloatValor(valor2->topo->operando);
-	// u4 big_op, small_op;
 
-	// if(expoente(op1)>expoente(op2)){
-	// 	big_op = op1;
-	// 	small_op = op2;
-	// }else if(expoente(op2)>expoente(op1)){
-	// 	big_op = op2;
-	// 	small_op = op1;
-	// }else if(mantissa(op2)>mantissa(op1)){
-	// 	big_op = op2;
-	// 	small_op = op1;
-	// }else{
-	// 	big_op = op1;
-	// 	small_op = op2;
-	// }
-	// i4 operacao = (sinal(op1)!=sinal(op2))? -1:1;
-	// u4 result_exp = expoente(big_op);
-	// u4 result_mant = (mantissa(big_op)<<1) + (operacao*((mantissa(small_op)<<1) >> (expoente(big_op) - expoente(small_op))));
-	// u4 result_sin = sinal(big_op);
-
-	// result_mant = (result_mant << 31 != 0)? (result_mant >> 1) + 1 : (result_mant >> 1);
-	// // //Normaliza float
-	// // while((result_mant>>23) != 0){
-	// // 	result_mant = result_mant>>1;
-	// // 	result_exp++;
-	// // }
-
-	// //Constroi float
-	// u4 result = (result_sin<<31) | (result_exp<<23) | result_mant;
 	float f_sum = op1+op2;
 	u4 sum = (u4)(*(u4*)&f_sum);
 	u4 result = (sinal(sum)<<31) | (expoente(sum)<<23) | mantissa(sum);
@@ -1083,59 +1055,6 @@ void dadd_impl(frame *f, u1 par1, u1 par2){
 
 	double op1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
 	double op2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
-
-	// u8 big_op, small_op;
-
-	// if(expoente_d(op1)>expoente_d(op2)){
-	// 	big_op = op1;
-	// 	small_op = op2;
-	// }else if(expoente_d(op2)>expoente_d(op1)){
-	// 	big_op = op2;
-	// 	small_op = op1;
-	// }else if(mantissa_d(op2)>mantissa_d(op1)){
-	// 	big_op = op2;
-	// 	small_op = op1;
-	// }else{
-	// 	big_op = op1;
-	// 	small_op = op2;
-	// }
-
-	// printf("Sinal1: %d\n",sinal_d(op1));
-
-	// printf("Sinal2: %d\n",sinal_d(op2));
-
-	// i4 operacao = (sinal_d(op1)!=sinal_d(op2))? -1:1;
-	// i8 result_exp = expoente_d(big_op);
-	// printf("ExpoenteFinal: %d\n",result_exp);
-
-
-
-	// u8 result_mant = mantissa_d(big_op) + (operacao*(mantissa_d(small_op) << (expoente_d(big_op) - expoente_d(small_op))));
-
-	// printf("valBIG = 0x%" PRIx64 "\n", mantissa_d(big_op));
-
-	// printf("Valore Mant:\n");
-	// printf("valM = 0x%" PRIx64 "\n", result_mant);
-
-	// u8 result_sin = sinal_d(big_op);
-	// printf("SinalFinal: %d\n",result_sin);
-
-	// //Normaliza double
-	// while((result_mant>>52) != 0){
-	// 	result_mant = result_mant>>1;
-	// 	result_exp++;
-	// }
-
-	// printf("ExpoenteFinal2: %d\n",result_exp);
-
-	// printf("Valore Mant2:\n");
-	// printf("valM = 0x%" PRIx64 "\n", result_mant);
-
-	// //Constroi float
-	// u8 result = (result_sin<<63) | (result_exp<<52) | result_mant;
-
-	// printf("Valore Ajustado:\n");
-	// printf("valX = 0x%" PRIx64 "\n", result);
 
 	double d_sum = op1+op2;
 	u8 sum = (u8)(*(u8*)&d_sum);
@@ -1159,15 +1078,15 @@ void lsub_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long2 - long1;
+	i8 result = long2 - long1;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, LONG_OP);
@@ -1219,15 +1138,15 @@ void lmul_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long1 * long2;
+	i8 result = long1 * long2;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, LONG_OP);
@@ -1326,15 +1245,15 @@ void ldiv_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long2 / long1;
+	i8 result = long2 / long1;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
@@ -1388,6 +1307,22 @@ void irem_impl(frame *f, u1 par1, u1 par2){
 
 void lrem_impl(frame *f, u1 par1, u1 par2){
 
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+
+	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
+
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+
+	i8 result = long2 - (long2/long1) * long1;
+	
+	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
+
 }
 
 void frem_impl(frame *f, u1 par1, u1 par2){
@@ -1436,9 +1371,9 @@ void lneg_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
-	u8 result = -long1;
+	i8 result = -long1;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
@@ -1460,19 +1395,13 @@ void dneg_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1_low = Pop_operandos(f->p);
 	pilha_operandos *valor1_high = Pop_operandos(f->p);
 
-	/*u4 high_bytes = valor1_high->topo->operando;
+	u4 high_bytes = valor1_high->topo->operando;
 	u4 low_bytes = valor1_low->topo->operando;
 
-	u4 result = high_bytes ^ 0X80000000; //Invert signal on high_bytes*/
+	u4 result = high_bytes ^ 0X80000000; //Invert signal on high_bytes
 
-	double valor = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
-
-	double d_sum = valor*(-1);
-	u8 sum = (u8)(*(u8*)&d_sum);
-	u8 result = (sinal_d(sum)<<63) | (expoente_d(sum)<<52) | mantissa_d(sum);
-
-	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, DOUBLE_OP);
-	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
+	f->p = Push_operandos(f->p, result,NULL, DOUBLE_OP);
+	f->p = Push_operandos(f->p, low_bytes,NULL, DOUBLE_OP);
 }
 
 
@@ -1683,7 +1612,7 @@ void i2f_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	float valor = (float)valor1->topo->operando;
 	u4 flo = (u4)(*(u4*)&valor);
-	f->p = Push_operandos(f->p,(u4)flo,NULL,FLOAT_OP);
+	f->p = Push_operandos(f->p,flo,NULL,FLOAT_OP);
 }
 
 void i2d_impl(frame *f, u1 par1, u1 par2){
@@ -1708,7 +1637,7 @@ void l2f_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 	float flo = (float) long1;
 	u4 valor = (u4)(*(u4*)&flo);
 	f->p = Push_operandos(f->p, valor, NULL,FLOAT_OP);
@@ -1718,7 +1647,7 @@ void l2d_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 	double valor = (double) long1;
 	u8 doub = (u8)(*(u8*)&valor);
 
@@ -1728,26 +1657,70 @@ void l2d_impl(frame *f, u1 par1, u1 par2){
 }
 
 void f2i_impl(frame *f, u1 par1, u1 par2){
-
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	float valor = decodificaFloatValor(valor1->topo->operando);
+	f->p = Push_operandos(f->p,(i4)valor,NULL,INTEGER_OP);
 }
 
 void f2l_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	float valor = decodificaFloatValor(valor1->topo->operando);
+	
+	i8 valor_long = (i8)valor;
 
+	f->p = Push_operandos(f->p, (u4)(valor_long>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)valor_long, NULL,LONG_OP);
 }
 
 void f2d_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	double valor = (double)decodificaFloatValor(valor1->topo->operando);
 
+	u8 doub = (u8)(*(u8*)&valor);
+
+	f->p = Push_operandos(f->p,(u4)(doub>>32),NULL,DOUBLE_OP);
+	f->p = Push_operandos(f->p,(u4)doub,NULL,DOUBLE_OP);
 }
 
 void d2i_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
 
+	u4 high_bytes = valor1_high->topo->operando;
+	u4 low_bytes = valor1_low->topo->operando;
+
+	double valor = decodificaDoubleValor(high_bytes, low_bytes);
+	f->p = Push_operandos(f->p,(i4)valor,NULL,INTEGER_OP);
 }
 
 void d2l_impl(frame *f, u1 par1, u1 par2){
 
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+
+	u4 high_bytes = valor1_high->topo->operando;
+	u4 low_bytes = valor1_low->topo->operando;
+
+	double valor = decodificaDoubleValor(high_bytes, low_bytes);
+
+	i8 valor_long = (i8)valor;
+
+	f->p = Push_operandos(f->p, (u4)(valor_long>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)valor_long, NULL,LONG_OP);
+
 }
 
 void d2f_impl(frame *f, u1 par1, u1 par2){
+
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+
+	u4 high_bytes = valor1_high->topo->operando;
+	u4 low_bytes = valor1_low->topo->operando;
+
+	float flo = (float) decodificaDoubleValor(high_bytes, low_bytes);
+	u4 valor = (u4)(*(u4*)&flo);
+	f->p = Push_operandos(f->p, valor, NULL,FLOAT_OP);
 
 }
 
@@ -2611,22 +2584,12 @@ void jsr_w_impl(frame *f, u1 par1, u1 par2){
 
 double decodificaDoubleValor (u4 high, u4 low) {
 	u8 valor = ((u8)(high)<<32) | (u8)low;
-	i1 sinal = ((valor>>63) == 0) ? 1 : -1;
-	i2 expon = ((valor>>52) & 0x7ffL);
-	u8 mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
 
-	double retorno = sinal*mant*(pow(2,expon-1075));
-	if(!retorno){
-		int a = 1;
-	}
+	double retorno = (double)(*(double*)&valor);
 	return retorno;
 }
 
 float decodificaFloatValor (u4 valor) {
-	int sinal = ((valor>>31) == 0) ? 1 : -1;
-	int expon = ((valor>>23) & 0xff);
-	int mant = (expon == 0) ? (valor & 0x7fffff)<<1 : (valor & 0x7fffff) | 0x800000;
-
-	float retorno = (sinal)*(mant)*(pow(2,expon-150));
+	float retorno = (float)(*(float*)&valor);
 	return retorno;
 }

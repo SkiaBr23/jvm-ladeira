@@ -40,7 +40,7 @@ void bipush_impl(frame *f, u1 byte, u1 par1);
 void sipush_impl(frame *f,u1 byte1, u1 byte2);
 void ldc_impl(frame *f,u1 indexbyte1,u1 par2);
 void ldc_w_impl(frame *par0, u1 par1, u1 par2); // Não implementado
-void ldc2_w_impl(frame *par0, u1 par1, u1 par2); // Não implementado
+void ldc2_w_impl(frame *par0, u1 par1, u1 par2);
 void iload_impl(frame *f, u1 index, u1 par1);
 void lload_impl(frame *f, u1 index, u1 par1);
 void fload_impl(frame *f, u1 index, u1 par1);
@@ -136,9 +136,9 @@ void ldiv_impl(frame *f, u1 par1, u1 par2);
 void fdiv_impl(frame *f, u1 par1, u1 par2);
 void ddiv_impl(frame *f, u1 par1, u1 par2);
 void irem_impl(frame *f, u1 par1, u1 par2);
-void lrem_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void frem_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void drem_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lrem_impl(frame *f, u1 par1, u1 par2);
+void frem_impl(frame *f, u1 par1, u1 par2);
+void drem_impl(frame *f, u1 par1, u1 par2);
 void ineg_impl(frame *f, u1 par1, u1 par2);
 void lneg_impl(frame *f, u1 par1, u1 par2);
 void fneg_impl(frame *f, u1 par1, u1 par2);
@@ -163,12 +163,12 @@ void i2d_impl(frame *f, u1 par1, u1 par2);
 void l2i_impl(frame *f, u1 par1, u1 par2); 
 void l2f_impl(frame *f, u1 par1, u1 par2); 
 void l2d_impl(frame *f, u1 par1, u1 par2); 
-void f2i_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void f2l_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void f2d_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void d2i_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void d2l_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void d2f_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void f2i_impl(frame *f, u1 par1, u1 par2);
+void f2l_impl(frame *f, u1 par1, u1 par2);
+void f2d_impl(frame *f, u1 par1, u1 par2);
+void d2i_impl(frame *f, u1 par1, u1 par2);
+void d2l_impl(frame *f, u1 par1, u1 par2);
+void d2f_impl(frame *f, u1 par1, u1 par2);
 void i2b_impl(frame *f, u1 par1, u1 par2);
 void i2c_impl(frame *f, u1 par1, u1 par2);
 void i2s_impl(frame *f, u1 par1, u1 par2);
