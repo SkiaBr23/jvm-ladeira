@@ -101,7 +101,7 @@ char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp){
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 	pilha_operandos *aux = CriarPilha_operandos();
 	int cont = 0;
-	while(anterior->p->topo!=NULL){
+	while(anterior->p->topo!=NULL && cont<(*parametros_cont)){
 		pilha_operandos *p = Pop_operandos(anterior->p);
 		// Ordem reversa
 		aux = Push_operandos(aux,p->topo->operando,(void*)p->topo->referencia,p->topo->tipo_operando);
@@ -1974,6 +1974,7 @@ void if_icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
+// Operando ou referencia nesses compares do a?
 void acmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
@@ -2241,12 +2242,16 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 					}
 				}
-
 			}
 		}
 	}
 }
 
+/** 
+	O invokeinterface, nesse momento, está executando um método que foi declarado em uma interface, se esse método está implementado na classe atual.
+	Ou seja, falta analisar heranças. Se o método não existe na classe atual, mas existe em uma classe pai, o método da classe pai deve ser executado. Isso não está implementado.
+
+**/
 void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
 	u2 indice_cp = normaliza_indice(indexbyte1,indexbyte2);
 
@@ -2258,54 +2263,51 @@ void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
 		// Descobrir o nome da classe para fazer as coisas.
 		// Como descobrir o nome da classe, sendo que tem que pesquisar pela classe na lista de classes primeiro, para ter o nome dela?
 		// Deadlock da pesquisa
-		char *nomeClasse = decodificaNIeNT(jvm->frames->topo->f->cp,jvm->frames->topo->f->,NAME_INDEX); // Problema aqui
-		classesCarregadas *classeNova = BuscarElemento_classes(jvm->classes,nomeClasse);
-		method_info *methodAux = BuscarMethodClasseCorrente_classes(jvm->classes,classeNova,nomemetodo);
+
+		char *classeNova = malloc(100*sizeof(char));
+		strcpy(classeNova,jvm->frames->topo->f->classeCorrente);
+		method_info *methodAux = BuscarMethodClasseCorrente_classes(jvm->classes, classeNova, nomemetodo);
 		attribute_info *aux;
 		int posicao;
-		for(posicao=0;posicao<methodAux->attributes_count;posicao++){
+		for(posicao = 0; posicao < methodAux->attributes_count; posicao++) {
 			aux = (*(methodAux->attributes+posicao));
-
-			char *nameindex = decodificaStringUTF8(classeNova->arquivoClass->constant_pool-1+aux->attribute_name_index);
-
+			classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,classeNova);
+			char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
 			if(strcmp(nameindex,"Code")==0){
 				code_attribute *c = (code_attribute *) aux->info;
-
 				frame *f_novo = criarFrame(classeNova,c->max_locals);
 				f_novo = transferePilhaVetorCount(f,f_novo,count);
-
 				jvm->frames = Push_frames(jvm->frames,f_novo);
-
+				// printf("%lu\n",sizeof(vetor_locais));
 				for(int i=0;i<count;i++){
 					printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
 				}
 
-				classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
 
-				if(classe != NULL){
-					printf("Buscou a classe\n");
+				printf("Classe nova: %s\n",classeNova);
+				classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
+				if (classe != NULL) {
+					printf("Buscou a classe carregada...\n");
 				}
 
+				// Achar o método na classe que o contém
 				method_info *metodos = classe->arquivoClass->methods;
-
 				for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
-					char *nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
-					char *descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
+					// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
+					char * nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
+					char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
 
-					if(strcmp(nomemetodo,nomeMetodoAux)==0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
-						printf("Metodo da interface: %s\n",nomeMetodoAux);
+					if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
+						printf("Metodo da classe: %s\n",nomeMetodoAux);
+						// Executar o code do método invocado
 						printf("Executando método...\n");
 						executarMetodo(aux,classeNova,2);
+
 					}
 				}
 			}
 		}
-
-
 	}
-
-
-
 }
 
 void invokeinterface_fantasma(frame *par0, u1 par1, u1 par2){

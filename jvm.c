@@ -59,6 +59,9 @@ frame* criarFrame(char *classeCorrente, u2 max_locals){
 		f->v[i].variavel = malloc(sizeof(u4));
 	}
 	f->cp = BuscarCPClasseCorrente_classes(jvm->classes,classeCorrente);
+	f->vetor_length = max_locals;
+	f->classeCorrente = malloc(100*sizeof(char));
+	strcpy(f->classeCorrente,classeCorrente);
 
 	return(f);
 }

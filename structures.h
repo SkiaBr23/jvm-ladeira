@@ -842,7 +842,9 @@ struct frame{
 	u4 end_retorno; // Confirmar se é realmente endereço de retorno
 	pilha_operandos *p;
 	vetor_locais *v;
+	u2 vetor_length;
 	cp_info *cp;
+	char *classeCorrente;
 };
 
 typedef struct frame frame;
