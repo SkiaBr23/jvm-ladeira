@@ -38,11 +38,19 @@ ClassFile* resolverClasse(char* nome_classe){
 /*
 	Depois da resolverMetodo, analisar semanticamente. Ver o número de argumentos, o tipo deles, ver se está tudo coerente com o descritor do método.
 */
-bool resolverMetodo(cp_info *cp, u2 indice_cp){
+bool resolverMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 
 	cp_info *methodref = cp-1+indice_cp;
-	char *nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
-	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	char *nome_classe = NULL;
+	char *descriptor = NULL;
+	if(!interface){
+		nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	}
+	else{
+		nome_classe = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.class_index,NAME_INDEX);
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
+	}
 
 	if(resolverClasse(nome_classe)!=NULL){
 		return true;
@@ -52,17 +60,30 @@ bool resolverMetodo(cp_info *cp, u2 indice_cp){
 	}
 }
 
-char* obterNomeMetodo(cp_info *cp, u2 indice_cp){
+char* obterNomeMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 	cp_info *methodref = cp-1+indice_cp;
-	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	char *descriptor = NULL;
+	if(!interface){
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	}
+	else{
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
+	}
 	char *pch = strtok(descriptor,":");
 
 	return(pch);
 }
 
-char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp){
+char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 	cp_info *methodref = cp-1+indice_cp;
-	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	char *descriptor = NULL;
+	if(!interface){
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	}
+	else{
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
+	}
+
 	char *pch = strtok(descriptor,":");
 	pch = strtok(NULL,":");
 
@@ -71,15 +92,18 @@ char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp){
 
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp){
 	cp_info *methodref = cp-1+indice_cp;
-	char *nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
+	char *nome_classe = NULL;
+
+	nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
 	return(nome_classe);
 }
 
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 	pilha_operandos *aux = CriarPilha_operandos();
 	int cont = 0;
-	while(anterior->p->topo!=NULL){
+	while(anterior->p->topo!=NULL && cont<(*parametros_cont)){
 		pilha_operandos *p = Pop_operandos(anterior->p);
+		// Ordem reversa
 		aux = Push_operandos(aux,p->topo->operando,(void*)p->topo->referencia,p->topo->tipo_operando);
 		cont++;
 	}
@@ -99,6 +123,33 @@ frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 	}
 
 	*parametros_cont = cont;
+
+	return(novo);
+}
+
+frame *transferePilhaVetorCount(frame *f, frame *novo,int quantidade){
+	pilha_operandos *aux = CriarPilha_operandos();
+	int cont = 0;
+	while(cont<quantidade){
+		pilha_operandos *p = Pop_operandos(f->p);
+		// Ordem reversa
+		aux = Push_operandos(aux,p->topo->operando,(void*)p->topo->referencia,p->topo->tipo_operando);
+		cont++;
+	}
+
+	novo->v = malloc(cont*sizeof(vetor_locais));
+
+	for(int i=0;i<cont;i++){
+		pilha_operandos *p = Pop_operandos(aux);
+		novo->v[i].variavel = malloc(sizeof(u4));
+		if(p->topo->tipo_operando<=8){
+			*(novo->v[i].variavel) = (u4) p->topo->operando;
+		}
+		else{
+			*(novo->v[i].variavel) = (u4 *) p->topo->referencia;
+		}
+		novo->v[i].tipo_variavel = (u1) p->topo->tipo_operando;
+	}
 
 	return(novo);
 }
@@ -697,6 +748,8 @@ void iastore_impl(frame *f, u1 par1, u1 par2){
 
 	i4 endereco;
 	endereco = ((i4) array->topo->operando) + (indice->topo->operando * sizeof(i4));
+
+	// array->topo->referencia+indice->topo->operando = valor;
 
 	endereco = valor->topo->operando;
 }
@@ -1834,6 +1887,7 @@ void if_icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
+// Operando ou referencia nesses compares do a?
 void acmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
@@ -1969,8 +2023,8 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 
-	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp);
-	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp);
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
 
 	/*method_info *metodos = f->classes->topo->arquivoClass->methods;
 	method_info *aux = metodos;*/
@@ -2035,7 +2089,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		}
 	}
 	else{
-		if(resolverMetodo(f->cp,indice_cp)){
+		if(resolverMetodo(f->cp,indice_cp,0)){
 
 		}
 	}
@@ -2056,10 +2110,10 @@ void invokespecial_impl(frame *f, u1 par1, u1 par2){
 void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
-	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp);
-	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp);
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
 	printf("Vai rodar invoke static...\n");
-	if(resolverMetodo(f->cp,indice_cp)){
+	if(resolverMetodo(f->cp,indice_cp,0)){
 		int *parametros_cont = malloc(sizeof(int));
 		char *classeNova = obterClasseDoMetodo(f->cp,indice_cp);
 		method_info * methodAux = BuscarMethodClasseCorrente_classes(jvm->classes, classeNova, nomemetodo);
@@ -2101,14 +2155,75 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 					}
 				}
-
 			}
 		}
 	}
-
 }
 
-void invokeinterface_impl(frame *f, u1 par1, u1 par2){
+/** 
+	O invokeinterface, nesse momento, está executando um método que foi declarado em uma interface, se esse método está implementado na classe atual.
+	Ou seja, falta analisar heranças. Se o método não existe na classe atual, mas existe em uma classe pai, o método da classe pai deve ser executado. Isso não está implementado.
+
+**/
+void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
+	u2 indice_cp = normaliza_indice(indexbyte1,indexbyte2);
+
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,1);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,1);
+
+	if(resolverMetodo(f->cp,indice_cp,1)){
+		// Assumindo que está na corrente, não há verificação
+		// Descobrir o nome da classe para fazer as coisas.
+		// Como descobrir o nome da classe, sendo que tem que pesquisar pela classe na lista de classes primeiro, para ter o nome dela?
+		// Deadlock da pesquisa
+
+		char *classeNova = malloc(100*sizeof(char));
+		strcpy(classeNova,jvm->frames->topo->f->classeCorrente);
+		method_info *methodAux = BuscarMethodClasseCorrente_classes(jvm->classes, classeNova, nomemetodo);
+		attribute_info *aux;
+		int posicao;
+		for(posicao = 0; posicao < methodAux->attributes_count; posicao++) {
+			aux = (*(methodAux->attributes+posicao));
+			classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,classeNova);
+			char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
+			if(strcmp(nameindex,"Code")==0){
+				code_attribute *c = (code_attribute *) aux->info;
+				frame *f_novo = criarFrame(classeNova,c->max_locals);
+				f_novo = transferePilhaVetorCount(f,f_novo,count);
+				jvm->frames = Push_frames(jvm->frames,f_novo);
+				// printf("%lu\n",sizeof(vetor_locais));
+				for(int i=0;i<count;i++){
+					printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
+				}
+
+
+				printf("Classe nova: %s\n",classeNova);
+				classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
+				if (classe != NULL) {
+					printf("Buscou a classe carregada...\n");
+				}
+
+				// Achar o método na classe que o contém
+				method_info *metodos = classe->arquivoClass->methods;
+				for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
+					// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
+					char * nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
+					char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
+
+					if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
+						printf("Metodo da classe: %s\n",nomeMetodoAux);
+						// Executar o code do método invocado
+						printf("Executando método...\n");
+						executarMetodo(aux,classeNova,2);
+
+					}
+				}
+			}
+		}
+	}
+}
+
+void invokeinterface_fantasma(frame *par0, u1 par1, u1 par2){
 
 }
 

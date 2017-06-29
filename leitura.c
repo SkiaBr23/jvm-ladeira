@@ -366,6 +366,8 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 
 	for(aux=code;aux<code+length;){
 		int numarg = instrucoes[*aux].numarg;
+		char *nomeinst = malloc(100*sizeof(char));
+		strcpy(nomeinst,instrucoes[*aux].inst_nome);
 		strcat(retorno,instrucoes[*aux].inst_nome);
 		switch(numarg){
 			case 0:
@@ -412,11 +414,13 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				strcat(retorno,stringargs);
 				u2 *aux3 = (u2*) malloc(sizeof(u2));
 				*aux3 = *(++aux);
-				*aux3 = *aux3 | ((*(++aux)) << 8);
 				sprintf(stringaux,"%d",(int)*aux3);
 				strcat(retorno," count ");
 				strcat(retorno,stringaux);
 				strcat(retorno,"\n");
+				if(strcmp(nomeinst,"invokeinterface")==0){
+					aux++; // Incrementar porque é o 0;
+				}
 				aux++;
 			break;
 			default:
@@ -898,6 +902,17 @@ char* decodificaAccessFlags(u2 flag){
 			flag-=SYNTHETIC;
 			strcat(retorno,"SYNTHETIC;");
 		}
+
+		if(flag>=ABSTRACT){
+			flag-=ABSTRACT;
+			strcat(retorno,"ABSTRACT;");
+		}
+
+		if(flag>=INTERFACE_FLAG){
+			flag-=INTERFACE_FLAG;
+			strcat(retorno,"INTERFACE;");
+		}
+
 		if(flag>=TRANSIENT){
 			flag-=TRANSIENT;
 			strcat(retorno,"TRANSIENT;");

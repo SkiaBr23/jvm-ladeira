@@ -98,7 +98,6 @@ method_info * BuscarMethodClasseCorrente_classes(classesCarregadas *lis, char * 
 	for(method_info *aux = auxMethod;aux < auxMethod+classeCorrente->arquivoClass->methods_count;aux++){
 		// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
 		char * nomeMetodoAux = decodificaStringUTF8(classeCorrente->arquivoClass->constant_pool-1+aux->name_index);
-
 		if(strcmp(nomeMetodo,nomeMetodoAux) == 0){
 			return aux;
 		}
@@ -111,7 +110,7 @@ void ImprimirLista_classes(classesCarregadas *lis){
 	classesCarregadas *p;
 
 	for(p=lis;p!=NULL;p=p->prox){
-		printf("%s",decodificaNIeNT(p->arquivoClass->constant_pool,p->arquivoClass->this_class,CLASS_INDEX));
+		printf("%s",decodificaNIeNT(p->arquivoClass->constant_pool,p->arquivoClass->this_class,NAME_INDEX));
 		printf("\n");
 	}
 }
