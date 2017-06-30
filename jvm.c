@@ -26,6 +26,8 @@ JVM* InicializarJVM() {
 	novo->classes = CriarLista_classes();
 	novo->frames = CriarPilha_frames();
 	novo->pc = 0;
+	novo->excecao = 0;
+	novo->excecao_nome = malloc(100*sizeof(char));
 
 	instrucoes = construirInstrucoes();
 
@@ -104,13 +106,13 @@ void executarMetodo(method_info *m, char* classeCorrente, int chamador){
 				jvm->frames = Push_frames(jvm->frames,f);
 			}
 
-			interpretarCode(c->code,c->code_length);
+			interpretarCode(c->code,c->code_length,m);
 
 		}
 	}
 }
 
-void interpretarCode(u1 *code,u4 length){
+void interpretarCode(u1 *code,u4 length,method_info *m){
 	u1 opcode;
 	int pcAtual;
 	for (u1 *j=code;j<code+length;){
@@ -136,11 +138,23 @@ void interpretarCode(u1 *code,u4 length){
 			switch(numarg){
 				case 1:
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],0);
+					// Verificar se flag de exceção foi setada
+					// Se foi, chamar a função de verificar o handler.
+					// Se não foi, beleza
+					if(jvm->excecao==1){
+						verificaHandlerMetodo(m);
+					}
 					jvm->pc += i.pc_instrucao;
 				break;
 
 				case 2:
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],argumentos[1]);
+					// Verificar se flag de exceção foi setada
+					// Se foi, chamar a função de verificar o handler.
+					// Se não foi, beleza
+					if(jvm->excecao==1){
+						verificaHandlerMetodo(m);
+					}
 					if (instrucaoBranch(i.inst_nome)) {
 						if (pcAtual != jvm->pc) {
 							j = atualizarPCMetodoAtual(code,length);
@@ -155,6 +169,12 @@ void interpretarCode(u1 *code,u4 length){
 				case 4:
 					if(strcmp(i.inst_nome,"invokeinterface")==0){
 						invokeinterface_impl(jvm->frames->topo->f,argumentos[0],argumentos[1],argumentos[2]);
+						// Verificar se flag de exceção foi setada
+						// Se foi, chamar a função de verificar o handler.
+						// Se não foi, beleza
+						if(jvm->excecao==1){
+							verificaHandlerMetodo(m);
+						}
 					}
 				break;
 			}
@@ -166,6 +186,57 @@ void interpretarCode(u1 *code,u4 length){
 			jvm->pc += i.pc_instrucao;
 		}
 	}
+}
+
+void freeVetorLocais(vetor_locais *v, u2 vetor_length){
+	int cont = 0;
+
+	while(cont<vetor_length){
+		free(v[cont].variavel);
+		cont++;
+	}
+
+	free(v);
+}
+
+void verificaHandlerMetodo(method_info *m){
+
+	attribute_info *aux;
+
+	// Procurar no método corrente se existe um handler para a exceção que foi lançada
+	classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,jvm->frames->topo->f->classeCorrente);
+	int posicao;
+
+	for(posicao=0;posicao<m->attributes_count;posicao++){
+		aux = (*(m->attributes+posicao));
+		char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
+		printf("Name Index: %s\n",nameindex);
+		if(strcmp(nameindex,"Code")){
+			code_attribute *c = (code_attribute *) aux->info;
+			for(exception_table *tabelaaux = c->table;tabelaaux<c->table+c->exception_table_length;tabelaaux++){
+				char *nomeexcecao = decodificaNIeNT(classeAtual->arquivoClass->constant_pool,tabelaaux->catch_type,NAME_INDEX);
+				printf("NOME DA EXCEÇÃO: %s\n",nomeexcecao);
+				exit(1);
+			}
+		}
+	}
+
+
+	// Se existir, mudar o valor do PC para o handler
+
+
+
+	// Se não existir, desempilhar o método da pilha de frames e lançar a exceção para o chamador
+	// Desalocar operandos
+	while(jvm->frames->topo->f->p->topo!=NULL){
+		pilha_operandos *removido = Pop_operandos(jvm->frames->topo->f->p);
+	}
+
+	// Desalocar vetor
+	freeVetorLocais(jvm->frames->topo->f->v,jvm->frames->topo->f->vetor_length);
+
+	// Desempilhar o frame
+	pilha_frames *removido = Pop_frames(jvm->frames);
 }
 
 bool instrucaoBranch (char * nomeInstrucao) {

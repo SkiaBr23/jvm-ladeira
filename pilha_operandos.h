@@ -24,6 +24,5 @@ pilha_operandos* Push_operandos(pilha_operandos *p, u4 operando, void *referenci
 pilha_operandos* Pop_operandos(pilha_operandos *p);
 pilha_operandos* Topo_operandos(pilha_operandos *p);
 bool pilhaVazia (pilha_operandos * p);
-bool pilhaVazia (pilha_operandos * p);
 void ImprimirPilha_operandos(pilha_operandos *p);
 #endif

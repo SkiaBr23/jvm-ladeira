@@ -665,7 +665,11 @@ void istore_1_impl(frame *f, u1 par1, u1 par2){
 
 void istore_2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[2].variavel) = (i4) valor->topo->operando;
+
+	u4 teste = (u4) valor->topo->operando;
+	printf("\nDESEMPILHOU %d\n",teste);
+	*(f->v[2].variavel) = (u4) valor->topo->operando;
+	printf("\nSETOU O VETOR\n");
 }
 
 void istore_3_impl(frame *f, u1 par1, u1 par2){
@@ -1236,9 +1240,17 @@ void idiv_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
-	i4 result = valor2->topo->operando/valor1->topo->operando;
-	f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
+	if(valor1->topo->operando!=0){
+		// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
+		i4 result = valor2->topo->operando/valor1->topo->operando;
+		f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
+
+	}else{
+
+		jvm->excecao = 1;
+		strcpy(jvm->excecao_nome,"java/lang/ArithmeticException");
+
+	}
 }
 
 void ldiv_impl(frame *f, u1 par1, u1 par2){

@@ -11,6 +11,8 @@ struct jvm{
 	//O ENDERECO É DADO PELA "POSICAO DO PONTEIRO",POR EXEMPLO, NEWARRAY UTILIZA DOIS VALORES, O OPCODE DA INSTRUCAO E O VALOR DO
 	//TIPO, LOGO SOMA +2 EM PC, PERGUNTAR PARA O MAX!
 	u4 pc;
+	u2 excecao;
+	char *excecao_nome;
 };
 typedef struct jvm JVM;
 
@@ -32,6 +34,9 @@ bool instrucaoBranch (char * nomeInstrucao);
 void executarMetodo(method_info *m, char *classeCorrente, int chamador);
 //CODIFICAR FUNCAO PARA LIBERAR JVM, CHAMANDO FUNCOES INTERNAS DE FREE DAS ESTRUTURAS
 //void LiberarLista_frames(lista_frames *lis);
-void interpretarCode(u1 *code, u4 length);
+void interpretarCode(u1 *code, u4 length,method_info *m);
+void freeVetorLocais(vetor_locais *v, u2 vetor_length);
+void verificaHandlerMetodo(method_info *m);
+
 
 #endif
