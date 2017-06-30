@@ -65,7 +65,7 @@ typedef uint64_t u8;
 #define expoente_d(x) ((x << 1) >> 53)
 #define mantissa_d(x) ((x << 12) >> 12)
 #define sinal_d(x) (x >> 63)
-
+ 
 #endif
 
 #include "pilha_operandos.h"
@@ -247,8 +247,11 @@ enum access_flags{
 	PROTECTED = 4,
 	STATIC = 8,
 	FINAL = 16,
+	SUPER = 32,
 	VOLATILE = 64,
 	TRANSIENT = 128,
+	INTERFACE_FLAG = 512,
+	ABSTRACT = 1024,
 	SYNTHETIC = 4096,
 	ENUM = 16384
 };
@@ -840,7 +843,9 @@ struct frame{
 	u4 end_retorno; // Confirmar se é realmente endereço de retorno
 	pilha_operandos *p;
 	vetor_locais *v;
+	u2 vetor_length;
 	cp_info *cp;
+	char *classeCorrente;
 };
 
 typedef struct frame frame;

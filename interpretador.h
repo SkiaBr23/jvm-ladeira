@@ -5,13 +5,16 @@
 #include "classFileStruct.h"
 #include <stdbool.h>
 
+#define normaliza_indice(x,y) (x << 8) | y
+
 /* Observar todas as instruções, pois a maioria delas está parcialmente implementada */
 /* Observar todas as intruções quanto ao lançamento de exceções */
+/* Observar detalhes de instruções, principalmente os detalhes de invokes, por exemplo, no que tange à herança */
 
 ClassFile* resolverClasse(char *nome_classe);
-bool resolverMetodo(cp_info *cp, u2 indice_cp);
-char* obterNomeMetodo(cp_info *cp, u2 indice_cp);
-char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp);
+bool resolverMetodo(cp_info *cp, u2 indice_cp, u1 interface);
+char* obterNomeMetodo(cp_info *cp, u2 indice_cp, u1 interface);
+char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp, u1 interface);
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp);
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont);
 double decodificaDoubleValor(u4 high, u4 low);
@@ -37,7 +40,7 @@ void bipush_impl(frame *f, u1 byte, u1 par1);
 void sipush_impl(frame *f,u1 byte1, u1 byte2);
 void ldc_impl(frame *f,u1 indexbyte1,u1 par2);
 void ldc_w_impl(frame *par0, u1 par1, u1 par2); // Não implementado
-void ldc2_w_impl(frame *par0, u1 par1, u1 par2); // Não implementado
+void ldc2_w_impl(frame *par0, u1 par1, u1 par2);
 void iload_impl(frame *f, u1 index, u1 par1);
 void lload_impl(frame *f, u1 index, u1 par1);
 void fload_impl(frame *f, u1 index, u1 par1);
@@ -133,9 +136,9 @@ void ldiv_impl(frame *f, u1 par1, u1 par2);
 void fdiv_impl(frame *f, u1 par1, u1 par2);
 void ddiv_impl(frame *f, u1 par1, u1 par2);
 void irem_impl(frame *f, u1 par1, u1 par2);
-void lrem_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void frem_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void drem_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lrem_impl(frame *f, u1 par1, u1 par2);
+void frem_impl(frame *f, u1 par1, u1 par2);
+void drem_impl(frame *f, u1 par1, u1 par2);
 void ineg_impl(frame *f, u1 par1, u1 par2);
 void lneg_impl(frame *f, u1 par1, u1 par2);
 void fneg_impl(frame *f, u1 par1, u1 par2);
@@ -154,18 +157,18 @@ void ixor_impl(frame *f, u1 par1, u1 par2);
 void lxor_impl(frame *f, u1 par1, u1 par2);
 void iinc_fantasma(frame *par0, u1 par1, u1 par2);
 void iinc_impl(frame *f, u1 index, i1 constante);
-void i2l_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void i2f_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void i2d_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void l2i_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void l2f_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void l2d_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void f2i_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void f2l_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void f2d_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void d2i_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void d2l_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void d2f_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void i2l_impl(frame *f, u1 par1, u1 par2); 
+void i2f_impl(frame *f, u1 par1, u1 par2); 
+void i2d_impl(frame *f, u1 par1, u1 par2); 
+void l2i_impl(frame *f, u1 par1, u1 par2); 
+void l2f_impl(frame *f, u1 par1, u1 par2); 
+void l2d_impl(frame *f, u1 par1, u1 par2); 
+void f2i_impl(frame *f, u1 par1, u1 par2);
+void f2l_impl(frame *f, u1 par1, u1 par2);
+void f2d_impl(frame *f, u1 par1, u1 par2);
+void d2i_impl(frame *f, u1 par1, u1 par2);
+void d2l_impl(frame *f, u1 par1, u1 par2);
+void d2f_impl(frame *f, u1 par1, u1 par2);
 void i2b_impl(frame *f, u1 par1, u1 par2);
 void i2c_impl(frame *f, u1 par1, u1 par2);
 void i2s_impl(frame *f, u1 par1, u1 par2);
@@ -196,9 +199,9 @@ void lookupswitch_fantasma(frame *par0, u1 par1, u1 par2);
 void tableswitch_impl(frame *f);
 void lookupswitch_impl(frame *f);
 void ireturn_impl(frame *f, u1 par1, u1 par2);
-void lreturn_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void freturn_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dreturn_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lreturn_impl(frame *f, u1 par1, u1 par2);
+void freturn_impl(frame *f, u1 par1, u1 par2);
+void dreturn_impl(frame *f, u1 par1, u1 par2);
 void areturn_impl(frame *f, u1 par1, u1 par2);
 void inst_return_impl(frame *f, u1 par1, u1 par2);
 void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
@@ -206,11 +209,10 @@ void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
-// Pulei várias instruções
-void invokespecial_impl(frame *f, u1 par1, u1 par2); // Não implementado
-/* Próximo objetivo: implementar invokestatic */
-void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
-void invokeinterface_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
+void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
+void invokeinterface_fantasma(frame *par0, u1 par1, u1 par2);
+void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count);
 void invokedynamic_fantasma(frame *par0, u1 par1, u1 par2); // Não implementado. /** Essa instrução só existe para criar uma posição "falsa" no vetor de ponteiros de função **/
 void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void newarray_impl(frame *f ,u1 atype, u1 par1); // Observação do -INT_MAX

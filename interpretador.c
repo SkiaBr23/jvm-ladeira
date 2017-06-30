@@ -38,11 +38,19 @@ ClassFile* resolverClasse(char* nome_classe){
 /*
 	Depois da resolverMetodo, analisar semanticamente. Ver o número de argumentos, o tipo deles, ver se está tudo coerente com o descritor do método.
 */
-bool resolverMetodo(cp_info *cp, u2 indice_cp){
+bool resolverMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 
 	cp_info *methodref = cp-1+indice_cp;
-	char *nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
-	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	char *nome_classe = NULL;
+	char *descriptor = NULL;
+	if(!interface){
+		nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	}
+	else{
+		nome_classe = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.class_index,NAME_INDEX);
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
+	}
 
 	if(resolverClasse(nome_classe)!=NULL){
 		return true;
@@ -52,17 +60,30 @@ bool resolverMetodo(cp_info *cp, u2 indice_cp){
 	}
 }
 
-char* obterNomeMetodo(cp_info *cp, u2 indice_cp){
+char* obterNomeMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 	cp_info *methodref = cp-1+indice_cp;
-	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	char *descriptor = NULL;
+	if(!interface){
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	}
+	else{
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
+	}
 	char *pch = strtok(descriptor,":");
 
 	return(pch);
 }
 
-char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp){
+char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 	cp_info *methodref = cp-1+indice_cp;
-	char *descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	char *descriptor = NULL;
+	if(!interface){
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+	}
+	else{
+		descriptor = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
+	}
+
 	char *pch = strtok(descriptor,":");
 	pch = strtok(NULL,":");
 
@@ -71,15 +92,72 @@ char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp){
 
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp){
 	cp_info *methodref = cp-1+indice_cp;
-	char *nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
+	char *nome_classe = NULL;
+
+	nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
 	return(nome_classe);
+}
+
+bool isSuper(u2 flag){
+	int super = false;
+	while(flag){
+
+		if(flag>=SYNTHETIC){
+			flag-=SYNTHETIC;
+		}
+
+		if(flag>=ABSTRACT){
+			flag-=ABSTRACT;
+		}
+
+		if(flag>=INTERFACE_FLAG){
+			flag-=INTERFACE_FLAG;
+		}
+
+		if(flag>=TRANSIENT){
+			flag-=TRANSIENT;
+		}
+		
+		if(flag>=VOLATILE){
+			flag-=VOLATILE;
+		}
+
+		if(flag>=SUPER){
+			flag-=SUPER;
+			super = true;
+			break;
+		}
+
+		if(flag>=FINAL){
+			flag-=FINAL;
+		}
+
+		if(flag>=STATIC){
+			flag-=STATIC;
+		}
+
+		if(flag>=PROTECTED){
+			flag-=PROTECTED;
+		}
+
+		if(flag>=PRIVATE){
+			flag-=PRIVATE;
+		}
+
+		if(flag>=PUBLIC){
+			flag-=PUBLIC;
+		}
+	}
+
+	return(super);
 }
 
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 	pilha_operandos *aux = CriarPilha_operandos();
 	int cont = 0;
-	while(anterior->p->topo!=NULL){
+	while(anterior->p->topo!=NULL && cont<(*parametros_cont)){
 		pilha_operandos *p = Pop_operandos(anterior->p);
+		// Ordem reversa
 		aux = Push_operandos(aux,p->topo->operando,(void*)p->topo->referencia,p->topo->tipo_operando);
 		cont++;
 	}
@@ -99,6 +177,33 @@ frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 	}
 
 	*parametros_cont = cont;
+
+	return(novo);
+}
+
+frame *transferePilhaVetorCount(frame *f, frame *novo,int quantidade){
+	pilha_operandos *aux = CriarPilha_operandos();
+	int cont = 0;
+	while(cont<quantidade){
+		pilha_operandos *p = Pop_operandos(f->p);
+		// Ordem reversa
+		aux = Push_operandos(aux,p->topo->operando,(void*)p->topo->referencia,p->topo->tipo_operando);
+		cont++;
+	}
+
+	novo->v = malloc(cont*sizeof(vetor_locais));
+
+	for(int i=0;i<cont;i++){
+		pilha_operandos *p = Pop_operandos(aux);
+		novo->v[i].variavel = malloc(sizeof(u4));
+		if(p->topo->tipo_operando<=8){
+			*(novo->v[i].variavel) = (u4) p->topo->operando;
+		}
+		else{
+			*(novo->v[i].variavel) = (u4 *) p->topo->referencia;
+		}
+		novo->v[i].tipo_variavel = (u1) p->topo->tipo_operando;
+	}
 
 	return(novo);
 }
@@ -211,6 +316,10 @@ void dconst_1_impl(frame *f, u1 par1, u1 par2){
 	//TOPO DA PILHA FICA O LOW
 	i4 low_bytes = (i4) 0;
 	Push_operandos(f->p,low_bytes,NULL,DOUBLE_OP);
+
+	u8 longv = ((u8)high_bytes << 32) | low_bytes;
+	u8 sum = (u8)(*(u8*)&longv);
+
 }
 
 //Push sexted byte para a pilha de operandos
@@ -556,7 +665,11 @@ void istore_1_impl(frame *f, u1 par1, u1 par2){
 
 void istore_2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[2].variavel) = (i4) valor->topo->operando;
+
+	u4 teste = (u4) valor->topo->operando;
+	printf("\nDESEMPILHOU %d\n",teste);
+	*(f->v[2].variavel) = (u4) valor->topo->operando;
+	printf("\nSETOU O VETOR\n");
 }
 
 void istore_3_impl(frame *f, u1 par1, u1 par2){
@@ -694,8 +807,13 @@ void iastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *array = Pop_operandos(f->p);
 
 
+<<<<<<< HEAD
 	printf("TIPO OPERANDO ARR %d\n",array->topo->tipo_operando );
 	i4 *endereco = ((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i4));
+=======
+	// array->topo->referencia+indice->topo->operando = valor;
+
+>>>>>>> de20dcf524dfbcf67e82ff369d72b2655475d93c
 	endereco = valor->topo->operando;
 }
 
@@ -910,15 +1028,15 @@ void ladd_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long1 + long2;
+	i8 result = long1 + long2;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, LONG_OP);
@@ -931,35 +1049,7 @@ void fadd_impl(frame *f, u1 par1, u1 par2){
 
 	float op1 = decodificaFloatValor(valor1->topo->operando);
 	float op2 = decodificaFloatValor(valor2->topo->operando);
-	// u4 big_op, small_op;
 
-	// if(expoente(op1)>expoente(op2)){
-	// 	big_op = op1;
-	// 	small_op = op2;
-	// }else if(expoente(op2)>expoente(op1)){
-	// 	big_op = op2;
-	// 	small_op = op1;
-	// }else if(mantissa(op2)>mantissa(op1)){
-	// 	big_op = op2;
-	// 	small_op = op1;
-	// }else{
-	// 	big_op = op1;
-	// 	small_op = op2;
-	// }
-	// i4 operacao = (sinal(op1)!=sinal(op2))? -1:1;
-	// u4 result_exp = expoente(big_op);
-	// u4 result_mant = (mantissa(big_op)<<1) + (operacao*((mantissa(small_op)<<1) >> (expoente(big_op) - expoente(small_op))));
-	// u4 result_sin = sinal(big_op);
-
-	// result_mant = (result_mant << 31 != 0)? (result_mant >> 1) + 1 : (result_mant >> 1);
-	// // //Normaliza float
-	// // while((result_mant>>23) != 0){
-	// // 	result_mant = result_mant>>1;
-	// // 	result_exp++;
-	// // }
-
-	// //Constroi float
-	// u4 result = (result_sin<<31) | (result_exp<<23) | result_mant;
 	float f_sum = op1+op2;
 	u4 sum = (u4)(*(u4*)&f_sum);
 	u4 result = (sinal(sum)<<31) | (expoente(sum)<<23) | mantissa(sum);
@@ -974,59 +1064,6 @@ void dadd_impl(frame *f, u1 par1, u1 par2){
 
 	double op1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
 	double op2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
-
-	// u8 big_op, small_op;
-
-	// if(expoente_d(op1)>expoente_d(op2)){
-	// 	big_op = op1;
-	// 	small_op = op2;
-	// }else if(expoente_d(op2)>expoente_d(op1)){
-	// 	big_op = op2;
-	// 	small_op = op1;
-	// }else if(mantissa_d(op2)>mantissa_d(op1)){
-	// 	big_op = op2;
-	// 	small_op = op1;
-	// }else{
-	// 	big_op = op1;
-	// 	small_op = op2;
-	// }
-
-	// printf("Sinal1: %d\n",sinal_d(op1));
-
-	// printf("Sinal2: %d\n",sinal_d(op2));
-
-	// i4 operacao = (sinal_d(op1)!=sinal_d(op2))? -1:1;
-	// i8 result_exp = expoente_d(big_op);
-	// printf("ExpoenteFinal: %d\n",result_exp);
-
-
-
-	// u8 result_mant = mantissa_d(big_op) + (operacao*(mantissa_d(small_op) << (expoente_d(big_op) - expoente_d(small_op))));
-
-	// printf("valBIG = 0x%" PRIx64 "\n", mantissa_d(big_op));
-
-	// printf("Valore Mant:\n");
-	// printf("valM = 0x%" PRIx64 "\n", result_mant);
-
-	// u8 result_sin = sinal_d(big_op);
-	// printf("SinalFinal: %d\n",result_sin);
-
-	// //Normaliza double
-	// while((result_mant>>52) != 0){
-	// 	result_mant = result_mant>>1;
-	// 	result_exp++;
-	// }
-
-	// printf("ExpoenteFinal2: %d\n",result_exp);
-
-	// printf("Valore Mant2:\n");
-	// printf("valM = 0x%" PRIx64 "\n", result_mant);
-
-	// //Constroi float
-	// u8 result = (result_sin<<63) | (result_exp<<52) | result_mant;
-
-	// printf("Valore Ajustado:\n");
-	// printf("valX = 0x%" PRIx64 "\n", result);
 
 	double d_sum = op1+op2;
 	u8 sum = (u8)(*(u8*)&d_sum);
@@ -1050,15 +1087,15 @@ void lsub_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long2 - long1;
+	i8 result = long2 - long1;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, LONG_OP);
@@ -1110,15 +1147,15 @@ void lmul_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long1 * long2;
+	i8 result = long1 * long2;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32),NULL, LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result,NULL, LONG_OP);
@@ -1208,24 +1245,32 @@ void idiv_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
-	i4 result = valor2->topo->operando/valor1->topo->operando;
-	f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
+	if(valor1->topo->operando!=0){
+		// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
+		i4 result = valor2->topo->operando/valor1->topo->operando;
+		f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
+
+	}else{
+
+		jvm->excecao = 1;
+		strcpy(jvm->excecao_nome,"java/lang/ArithmeticException");
+
+	}
 }
 
 void ldiv_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
 
 	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
 
-	u8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
-	u8 result = long2 / long1;
+	i8 result = long2 / long1;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
@@ -1279,13 +1324,56 @@ void irem_impl(frame *f, u1 par1, u1 par2){
 
 void lrem_impl(frame *f, u1 par1, u1 par2){
 
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+
+
+	pilha_operandos *low_bytes2 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes2 = Pop_operandos(f->p);
+
+	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
+
+	i8 result = long2 - (long2/long1) * long1;
+	
+	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
+
 }
 
 void frem_impl(frame *f, u1 par1, u1 par2){
+	//Tratar casos de NaN e demais insucessos
+	pilha_operandos * valor1 = Pop_operandos(f->p);
+	pilha_operandos * valor2 = Pop_operandos(f->p);
+
+	float v1 = decodificaFloatValor(valor1->topo->operando);
+	float v2 = decodificaFloatValor(valor2->topo->operando);
+
+	float resultAux = fmodf(v2,v1);
+	u4 result = (u4)(*(u4*)&resultAux);
+
+	f->p = Push_operandos(f->p,result,NULL,FLOAT_OP);
 
 }
 
 void drem_impl(frame *f, u1 par1, u1 par2){
+	//Tratar casos de NaN e demais insucessos
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+	pilha_operandos *valor2_low = Pop_operandos(f->p);
+	pilha_operandos *valor2_high = Pop_operandos(f->p);
+
+	double v1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low);
+	double v2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low);
+
+	double resultAux = fmod(v2,v1);
+
+	printf("%lf\n",resultAux);
+	u8 result = (u8)(*(u8*)&resultAux);
+
+	f->p = Push_operandos(f->p,(u4)(result>>32),NULL,DOUBLE_OP);
+	f->p = Push_operandos(f->p,(u4)result,NULL,DOUBLE_OP);
 
 }
 
@@ -1300,9 +1388,9 @@ void lneg_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
 	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
-	u8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
 
-	u8 result = -long1;
+	i8 result = -long1;
 
 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
@@ -1527,57 +1615,129 @@ void iinc_fantasma(frame *par0, u1 par1, u1 par2){
 }
 
 void i2l_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	i4 valor = (i4)valor1->topo->operando;
+
+	i8 valor_long = (i8)valor;
+
+	f->p = Push_operandos(f->p, (u4)(valor_long>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)valor_long, NULL,LONG_OP);
 
 }
 
 void i2f_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
-	i4 valor = (i4)valor1->topo->operando;
-	f->p = Push_operandos(f->p,(i4)valor,NULL,DOUBLE_OP);
+	float valor = (float)valor1->topo->operando;
+	u4 flo = (u4)(*(u4*)&valor);
+	f->p = Push_operandos(f->p,flo,NULL,FLOAT_OP);
 }
 
 void i2d_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
-	i8 valor = (i8)valor1->topo->operando;
+	double valor = (double)valor1->topo->operando;
 
-	f->p = Push_operandos(f->p,(i4)(valor>>32),NULL,DOUBLE_OP);
-	f->p = Push_operandos(f->p,(i4)((valor<<32)>>32),NULL,DOUBLE_OP);
+	u8 doub = (u8)(*(u8*)&valor);
+
+	f->p = Push_operandos(f->p,(u4)(doub>>32),NULL,DOUBLE_OP);
+	f->p = Push_operandos(f->p,(u4)doub,NULL,DOUBLE_OP);
 
 }
 
 void l2i_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
+	f->p = Push_operandos(f->p, low_bytes1->topo->operando, NULL,INTEGER_OP);
 }
 
 void l2f_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
 
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	float flo = (float) long1;
+	u4 valor = (u4)(*(u4*)&flo);
+	f->p = Push_operandos(f->p, valor, NULL,FLOAT_OP);
 }
 
 void l2d_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
+	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+
+	i8 long1 = ((u8)high_bytes1->topo->operando << 32) | low_bytes1->topo->operando;
+	double valor = (double) long1;
+	u8 doub = (u8)(*(u8*)&valor);
+
+	f->p = Push_operandos(f->p,(u4)(doub>>32),NULL,DOUBLE_OP);
+	f->p = Push_operandos(f->p,(u4)doub,NULL,DOUBLE_OP);
 
 }
 
 void f2i_impl(frame *f, u1 par1, u1 par2){
-
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	float valor = decodificaFloatValor(valor1->topo->operando);
+	f->p = Push_operandos(f->p,(i4)valor,NULL,INTEGER_OP);
 }
 
 void f2l_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	float valor = decodificaFloatValor(valor1->topo->operando);
+	
+	i8 valor_long = (i8)valor;
 
+	f->p = Push_operandos(f->p, (u4)(valor_long>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)valor_long, NULL,LONG_OP);
 }
 
 void f2d_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1 = Pop_operandos(f->p);
+	double valor = (double)decodificaFloatValor(valor1->topo->operando);
 
+	u8 doub = (u8)(*(u8*)&valor);
+
+	f->p = Push_operandos(f->p,(u4)(doub>>32),NULL,DOUBLE_OP);
+	f->p = Push_operandos(f->p,(u4)doub,NULL,DOUBLE_OP);
 }
 
 void d2i_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
 
+	u4 high_bytes = valor1_high->topo->operando;
+	u4 low_bytes = valor1_low->topo->operando;
+
+	double valor = decodificaDoubleValor(high_bytes, low_bytes);
+	f->p = Push_operandos(f->p,(i4)valor,NULL,INTEGER_OP);
 }
 
 void d2l_impl(frame *f, u1 par1, u1 par2){
 
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+
+	u4 high_bytes = valor1_high->topo->operando;
+	u4 low_bytes = valor1_low->topo->operando;
+
+	double valor = decodificaDoubleValor(high_bytes, low_bytes);
+
+	i8 valor_long = (i8)valor;
+
+	f->p = Push_operandos(f->p, (u4)(valor_long>>32), NULL,LONG_OP);
+	f->p = Push_operandos(f->p, (u4)valor_long, NULL,LONG_OP);
+
 }
 
 void d2f_impl(frame *f, u1 par1, u1 par2){
+
+	pilha_operandos *valor1_low = Pop_operandos(f->p);
+	pilha_operandos *valor1_high = Pop_operandos(f->p);
+
+	u4 high_bytes = valor1_high->topo->operando;
+	u4 low_bytes = valor1_low->topo->operando;
+
+	float flo = (float) decodificaDoubleValor(high_bytes, low_bytes);
+	u4 valor = (u4)(*(u4*)&flo);
+	f->p = Push_operandos(f->p, valor, NULL,FLOAT_OP);
 
 }
 
@@ -1719,13 +1879,13 @@ void dcmpg_impl(frame *f, u1 par1, u1 par2){
 }
 
 void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
-
-
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando == 0){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
-		// Alterar o PC aqui para fazer o branch
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1746,7 +1906,10 @@ void iflt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando<0){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1754,7 +1917,10 @@ void ifge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando >= 0){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		uint8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1762,7 +1928,10 @@ void ifgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando > 0){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1770,7 +1939,10 @@ void ifle_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	if(valor->topo->operando <= 0){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1779,7 +1951,10 @@ void if_icmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando == valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1788,7 +1963,10 @@ void if_icmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando != valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1797,7 +1975,10 @@ void if_icmplt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando < valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1806,7 +1987,10 @@ void if_icmpge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando >= valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1815,11 +1999,9 @@ void if_icmpgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor2->topo->operando > valor1->topo->operando){
-		printf("Entrou....\n");
 		int8_t v1 = (int8_t)branchbyte1;
 		int8_t v2 = (int8_t)branchbyte2;
 		int16_t branchoffset = (v1 << 8) | v2;
-		printf("Branch Offset: %d\n",branchoffset);
 		jvm->pc += branchoffset;
 	}
 }
@@ -1829,16 +2011,23 @@ void if_icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando <= valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
+// Operando ou referencia nesses compares do a?
 void acmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando == valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
@@ -1847,25 +2036,26 @@ void acmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	if(valor1->topo->operando != valor2->topo->operando){
-		u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
+		int8_t v1 = (int8_t)branchbyte1;
+		int8_t v2 = (int8_t)branchbyte2;
+		int16_t branchoffset = (v1 << 8) | v2;
+		jvm->pc += branchoffset;
 	}
 }
 
 void inst_goto_impl(frame *f,u1 branchbyte1, u1 branchbyte2){
 	int8_t bb1 = (int8_t)branchbyte1;
 	int8_t bb2 = (int8_t)branchbyte2;
-	int16_t branchoffset = (branchbyte1 << 8) | branchbyte2;
-
-	printf("Branch Goto: %d\n",branchoffset);
+	int16_t branchoffset = (bb1 << 8) | bb2;
 
 	jvm->pc += branchoffset;
-	// Efetuar o branch com branch offset
 }
 
 void jsr_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
-	u2 branchoffset = (branchbyte1 << 8) | branchbyte2;
-
-	// Efetuar o branch com branch offset
+	int8_t v1 = (int8_t)branchbyte1;
+	int8_t v2 = (int8_t)branchbyte2;
+	int16_t branchoffset = (v1 << 8) | v2;
+	jvm->pc += branchoffset;
 }
 
 void ret_impl(frame *f,u1 index, u1 par){
@@ -1893,14 +2083,39 @@ void ireturn_impl(frame *f, u1 par1, u1 par2){
 }
 
 void lreturn_impl(frame *f, u1 par1, u1 par2){
+	// Analisar as condições do método que deve ser retornado
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	// Empilhar na pilha de operandos do frame do chamador
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)high_bytes->topo->operando,NULL,LONG_OP);
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)low_bytes->topo->operando,NULL,LONG_OP);
+	pilha_frames *desempilhado = Pop_frames(jvm->frames);
+	ImprimirPilha_frames(jvm->frames);
 
 }
 
 void freturn_impl(frame *f, u1 par1, u1 par2){
+	// Analisar as condições do método que deve ser retornado
+	pilha_operandos *valor = Pop_operandos(f->p);
+
+	// Empilhar na pilha de operandos do frame do chamador
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)valor->topo->operando,NULL,FLOAT_OP);
+	pilha_frames *desempilhado = Pop_frames(jvm->frames);
+	ImprimirPilha_frames(jvm->frames);
 
 }
 
 void dreturn_impl(frame *f, u1 par1, u1 par2){
+	// Analisar as condições do método que deve ser retornado
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	// Empilhar na pilha de operandos do frame do chamador
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)high_bytes->topo->operando,NULL,DOUBLE_OP);
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)low_bytes->topo->operando,NULL,DOUBLE_OP);
+	pilha_frames *desempilhado = Pop_frames(jvm->frames);
+	ImprimirPilha_frames(jvm->frames);
 
 }
 
@@ -1964,8 +2179,8 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 
-	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp);
-	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp);
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
 
 	/*method_info *metodos = f->classes->topo->arquivoClass->methods;
 	method_info *aux = metodos;*/
@@ -2030,15 +2245,92 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		}
 	}
 	else{
-		if(resolverMetodo(f->cp,indice_cp)){
+		if(resolverMetodo(f->cp,indice_cp,0)){
 
 		}
 	}
 
 }
 
-void invokespecial_impl(frame *f, u1 par1, u1 par2){
+void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+	u2 indice_cp = normaliza_indice(indexbyte1,indexbyte2);
 
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
+	char *classeDoMetodo = NULL;
+	char *classePaiDaCorrente = NULL;
+	classesCarregadas *classeResolvida = NULL;
+	classesCarregadas *classeCorrente = NULL;
+
+	if(resolverMetodo(f->cp,indice_cp,0)){
+		classeDoMetodo = obterClasseDoMetodo(f->cp,indice_cp);
+		// Corrente é a filha
+		classeResolvida = BuscarElemento_classes(jvm->classes,classeDoMetodo);
+		classeCorrente = BuscarElemento_classes(jvm->classes,jvm->frames->topo->f->classeCorrente);
+
+		classePaiDaCorrente = decodificaNIeNT(classeCorrente->arquivoClass->constant_pool,classeCorrente->arquivoClass->super_class,NAME_INDEX);
+		printf("CLASSE PAI DA CORRENTE: %s\n",classePaiDaCorrente);
+
+		/**
+			3 condições do invokespecial
+			1. 
+			2. Se a classe do método resolvido é superclass da classe corrente, não chama
+			3. 
+		**/
+
+		// If não executa, else executa
+		if(isSuper(classeCorrente->arquivoClass->access_flags) && strcmp(classeDoMetodo,classePaiDaCorrente)==0 && (strcmp(nomemetodo,"init")!=0 || strcmp(nomemetodo,"clinit")!=0)){
+
+		}
+		else{
+			// Vai invocar o método
+
+			int *parametros_cont = malloc(sizeof(int));
+			method_info * methodAux = BuscarMethodClasseCorrente_classes(jvm->classes,classeDoMetodo, nomemetodo);
+			attribute_info *aux;
+			int posicao;
+			for(posicao = 0; posicao < methodAux->attributes_count; posicao++) {
+				aux = (*(methodAux->attributes+posicao));
+				classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,classeDoMetodo);
+				char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
+				if(strcmp(nameindex,"Code")==0){
+					code_attribute *c = (code_attribute *) aux->info;
+					frame *f_novo = criarFrame(classeDoMetodo,c->max_locals);
+					f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
+					jvm->frames = Push_frames(jvm->frames,f_novo);
+					// printf("%lu\n",sizeof(vetor_locais));
+					for(int i=0;i<*(parametros_cont);i++){
+						printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
+					}
+	
+	
+					printf("Classe nova: %s\n",classeDoMetodo);
+					classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeDoMetodo);
+					if (classe != NULL) {
+						printf("Buscou a classe carregada...\n");
+					}
+	
+					// Achar o método na classe que o contém
+					method_info *metodos = classe->arquivoClass->methods;
+					for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
+						// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
+						char * nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
+						char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
+	
+						if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
+							printf("Metodo da classe: %s\n",nomeMetodoAux);
+							// Executar o code do método invocado
+							printf("Executando método...\n");
+							executarMetodo(aux,classeDoMetodo,2);
+	
+						}
+					}
+				}
+			}
+
+		}
+
+	}
 }
 
 /*
@@ -2051,10 +2343,10 @@ void invokespecial_impl(frame *f, u1 par1, u1 par2){
 void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
-	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp);
-	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp);
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
 	printf("Vai rodar invoke static...\n");
-	if(resolverMetodo(f->cp,indice_cp)){
+	if(resolverMetodo(f->cp,indice_cp,0)){
 		int *parametros_cont = malloc(sizeof(int));
 		char *classeNova = obterClasseDoMetodo(f->cp,indice_cp);
 		method_info * methodAux = BuscarMethodClasseCorrente_classes(jvm->classes, classeNova, nomemetodo);
@@ -2096,14 +2388,74 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 					}
 				}
-
 			}
 		}
 	}
-
 }
 
-void invokeinterface_impl(frame *f, u1 par1, u1 par2){
+/** 
+	O invokeinterface, nesse momento, está executando um método que foi declarado em uma interface, se esse método está implementado na classe atual.
+	Ou seja, falta analisar heranças. Se o método não existe na classe atual, mas existe em uma classe pai, o método da classe pai deve ser executado. Isso não está implementado.
+
+**/
+void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
+	u2 indice_cp = normaliza_indice(indexbyte1,indexbyte2);
+
+	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,1);
+	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,1);
+
+	if(resolverMetodo(f->cp,indice_cp,1)){
+		// Assumindo que está na corrente, não há verificação
+		// Descobrir o nome da classe para fazer as coisas.
+		// Como descobrir o nome da classe, sendo que tem que pesquisar pela classe na lista de classes primeiro, para ter o nome dela?
+		// Deadlock da pesquisa
+
+		char *classeNova = malloc(100*sizeof(char));
+		strcpy(classeNova,jvm->frames->topo->f->classeCorrente);
+		method_info *methodAux = BuscarMethodClasseCorrente_classes(jvm->classes, classeNova, nomemetodo);
+		attribute_info *aux;
+		int posicao;
+		for(posicao = 0; posicao < methodAux->attributes_count; posicao++) {
+			aux = (*(methodAux->attributes+posicao));
+			classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,classeNova);
+			char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
+			if(strcmp(nameindex,"Code")==0){
+				code_attribute *c = (code_attribute *) aux->info;
+				frame *f_novo = criarFrame(classeNova,c->max_locals);
+				f_novo = transferePilhaVetorCount(f,f_novo,count);
+				jvm->frames = Push_frames(jvm->frames,f_novo);
+				// printf("%lu\n",sizeof(vetor_locais));
+				for(int i=0;i<count;i++){
+					printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
+				}
+
+
+				printf("Classe nova: %s\n",classeNova);
+				classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
+				if (classe != NULL) {
+					printf("Buscou a classe carregada...\n");
+				}
+
+				// Achar o método na classe que o contém
+				method_info *metodos = classe->arquivoClass->methods;
+				for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
+					// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
+					char * nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
+					char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
+
+					if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
+						printf("Metodo da classe: %s\n",nomeMetodoAux);
+						// Executar o code do método invocado
+						printf("Executando método...\n");
+						executarMetodo(aux,classeNova,2);
+					}
+				}
+			}
+		}
+	}
+}
+
+void invokeinterface_fantasma(frame *par0, u1 par1, u1 par2){
 
 }
 
@@ -2273,30 +2625,13 @@ void jsr_w_impl(frame *f, u1 par1, u1 par2){
 }
 
 double decodificaDoubleValor (u4 high, u4 low) {
-	long long valor = ((long long)(high)<<32) | (long long)low;
-	int8_t sinal = ((valor>>63) == 0) ? 1 : -1;
-	int16_t expon = ((valor>>52) & 0x7ffL);
-	long long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
+	u8 valor = ((u8)(high)<<32) | (u8)low;
 
-	double retorno = sinal*mant*(pow(2,expon-1075));
+	double retorno = (double)(*(double*)&valor);
 	return retorno;
 }
 
 float decodificaFloatValor (u4 valor) {
-	int sinal = ((valor>>31) == 0) ? 1 : -1;
-	int expon = ((valor>>23) & 0xff);
-	int mant = (expon == 0) ? (valor & 0x7fffff)<<1 : (valor & 0x7fffff) | 0x800000;
-
-	float retorno = (sinal)*(mant)*(pow(2,expon-150));
+	float retorno = (float)(*(float*)&valor);
 	return retorno;
 }
-
-
-
-
-
-
-
-
-
-
