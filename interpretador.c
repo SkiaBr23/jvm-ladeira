@@ -2078,14 +2078,39 @@ void ireturn_impl(frame *f, u1 par1, u1 par2){
 }
 
 void lreturn_impl(frame *f, u1 par1, u1 par2){
+	// Analisar as condições do método que deve ser retornado
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	// Empilhar na pilha de operandos do frame do chamador
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)high_bytes->topo->operando,NULL,LONG_OP);
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)low_bytes->topo->operando,NULL,LONG_OP);
+	pilha_frames *desempilhado = Pop_frames(jvm->frames);
+	ImprimirPilha_frames(jvm->frames);
 
 }
 
 void freturn_impl(frame *f, u1 par1, u1 par2){
+	// Analisar as condições do método que deve ser retornado
+	pilha_operandos *valor = Pop_operandos(f->p);
+
+	// Empilhar na pilha de operandos do frame do chamador
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)valor->topo->operando,NULL,FLOAT_OP);
+	pilha_frames *desempilhado = Pop_frames(jvm->frames);
+	ImprimirPilha_frames(jvm->frames);
 
 }
 
 void dreturn_impl(frame *f, u1 par1, u1 par2){
+	// Analisar as condições do método que deve ser retornado
+	pilha_operandos *low_bytes = Pop_operandos(f->p);
+	pilha_operandos *high_bytes = Pop_operandos(f->p);
+
+	// Empilhar na pilha de operandos do frame do chamador
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)high_bytes->topo->operando,NULL,DOUBLE_OP);
+	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)low_bytes->topo->operando,NULL,DOUBLE_OP);
+	pilha_frames *desempilhado = Pop_frames(jvm->frames);
+	ImprimirPilha_frames(jvm->frames);
 
 }
 

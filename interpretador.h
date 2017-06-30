@@ -199,9 +199,9 @@ void lookupswitch_fantasma(frame *par0, u1 par1, u1 par2);
 void tableswitch_impl(frame *f);
 void lookupswitch_impl(frame *f);
 void ireturn_impl(frame *f, u1 par1, u1 par2);
-void lreturn_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void freturn_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void dreturn_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void lreturn_impl(frame *f, u1 par1, u1 par2);
+void freturn_impl(frame *f, u1 par1, u1 par2);
+void dreturn_impl(frame *f, u1 par1, u1 par2);
 void areturn_impl(frame *f, u1 par1, u1 par2);
 void inst_return_impl(frame *f, u1 par1, u1 par2);
 void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
