@@ -3,6 +3,7 @@
  * @brief Estrutura e cabeçalho da implementação da pilha de frames
  */
 
+/** Definição da macro */
 #ifndef PILHA_FRAMES_H
 #define PILHA_FRAMES_H
 
@@ -14,15 +15,11 @@
  * @struct pilha_frames
  * 
  * @brief Estrutura de dados da pilha de frames
+ * @see lista_frames.h
  * 
  */
-/**
- * @var pilha_frames::topo
- * Ponteiro sinalizado como 'topo' de uma lista de frames.
- * @see lista_frames.h
- */
 struct pilha_frames{
-	struct lista_frames *topo;
+	struct lista_frames *topo; /**< Detailed description after the member */
 };
 
 /**

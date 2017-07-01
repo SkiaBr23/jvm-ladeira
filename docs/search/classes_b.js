@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['verification_5ftype_5finfo',['verification_type_info',['../structverification__type__info.html',1,'']]],
-  ['vetor_5flocais',['vetor_locais',['../structvetor__locais.html',1,'']]]
+  ['signature_5fattribute',['signature_attribute',['../structsignature__attribute.html',1,'']]],
+  ['source_5ffile_5fattribute',['source_file_attribute',['../structsource__file__attribute.html',1,'']]],
+  ['sourcedebugextension_5fattribute',['sourceDebugExtension_attribute',['../structsourceDebugExtension__attribute.html',1,'']]],
+  ['stack_5fmap_5fframe',['stack_map_frame',['../structstack__map__frame.html',1,'']]],
+  ['stackmaptable_5fattribute',['stackMapTable_attribute',['../structstackMapTable__attribute.html',1,'']]]
 ];

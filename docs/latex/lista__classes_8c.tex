@@ -1,0 +1,93 @@
+\hypertarget{lista__classes_8c}{}\section{Referência do Arquivo lista\+\_\+classes.\+c}
+\label{lista__classes_8c}\index{lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}lista\+\_\+classes.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}leitura.\+h\char`\"{}}\newline
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$ \hyperlink{lista__classes_8c_a60b4fee666dc517813a5c7d6be2d881b}{Criar\+Lista\+\_\+classes} ()
+\item 
+\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$ \hyperlink{lista__classes_8c_a8fa90fd36506ceaf5cde836d77eced25}{Inserir\+Fim\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, \hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File} $\ast$arquivo\+Class)
+\item 
+\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$ \hyperlink{lista__classes_8c_a02b37b59899d7aa45249864349507fb9}{Remover\+Fim\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis)
+\item 
+\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$ \hyperlink{lista__classes_8c_a14122e823ae128b6bbbe04887308a0ca}{Remover\+Elemento\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, char $\ast$string)
+\item 
+\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$ \hyperlink{lista__classes_8c_aafc5fe146c0b29e710dfeae3989a9648}{Buscar\+Elemento\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, char $\ast$string)
+\item 
+\hyperlink{structcp__info}{cp\+\_\+info} $\ast$ \hyperlink{lista__classes_8c_a86aba2d3490f16f5b8e982641d8005bb}{Buscar\+C\+P\+Classe\+Corrente\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, char $\ast$string)
+\item 
+\hyperlink{structmethod__info}{method\+\_\+info} $\ast$ \hyperlink{lista__classes_8c_ae87a6b48366ebffe49cb9e705f8c896d}{Buscar\+Method\+Classe\+Corrente\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, char $\ast$nome\+Classe, char $\ast$nome\+Metodo)
+\item 
+void \hyperlink{lista__classes_8c_a6e1e13f14d233ba1e3398cf28f63e64f}{Imprimir\+Lista\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis)
+\item 
+void \hyperlink{lista__classes_8c_aafe7a22cfa21c4ed801ccdc82b56b0ed}{Liberar\+Lista\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis)
+\item 
+\hyperlink{structfield__info}{field\+\_\+info} $\ast$ \hyperlink{lista__classes_8c_aecf4550fb62164a78cf63d7311e66aff}{Buscar\+Field\+Classe\+Corrente\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, char $\ast$nome\+Classe, char $\ast$nome\+Field)
+\end{DoxyCompactItemize}
+
+
+\subsection{Funções}
+\mbox{\Hypertarget{lista__classes_8c_a86aba2d3490f16f5b8e982641d8005bb}\label{lista__classes_8c_a86aba2d3490f16f5b8e982641d8005bb}} 
+\index{lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}!Buscar\+C\+P\+Classe\+Corrente\+\_\+classes@{Buscar\+C\+P\+Classe\+Corrente\+\_\+classes}}
+\index{Buscar\+C\+P\+Classe\+Corrente\+\_\+classes@{Buscar\+C\+P\+Classe\+Corrente\+\_\+classes}!lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}}
+\subsubsection{\texorpdfstring{Buscar\+C\+P\+Classe\+Corrente\+\_\+classes()}{BuscarCPClasseCorrente\_classes()}}
+{\footnotesize\ttfamily \hyperlink{structcp__info}{cp\+\_\+info}$\ast$ Buscar\+C\+P\+Classe\+Corrente\+\_\+classes (\begin{DoxyParamCaption}\item[{\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$}]{lis,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__classes_8c_aafc5fe146c0b29e710dfeae3989a9648}\label{lista__classes_8c_aafc5fe146c0b29e710dfeae3989a9648}} 
+\index{lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}!Buscar\+Elemento\+\_\+classes@{Buscar\+Elemento\+\_\+classes}}
+\index{Buscar\+Elemento\+\_\+classes@{Buscar\+Elemento\+\_\+classes}!lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}}
+\subsubsection{\texorpdfstring{Buscar\+Elemento\+\_\+classes()}{BuscarElemento\_classes()}}
+{\footnotesize\ttfamily \hyperlink{structclassesCarregadas}{classes\+Carregadas}$\ast$ Buscar\+Elemento\+\_\+classes (\begin{DoxyParamCaption}\item[{\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$}]{lis,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__classes_8c_aecf4550fb62164a78cf63d7311e66aff}\label{lista__classes_8c_aecf4550fb62164a78cf63d7311e66aff}} 
+\index{lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}!Buscar\+Field\+Classe\+Corrente\+\_\+classes@{Buscar\+Field\+Classe\+Corrente\+\_\+classes}}
+\index{Buscar\+Field\+Classe\+Corrente\+\_\+classes@{Buscar\+Field\+Classe\+Corrente\+\_\+classes}!lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}}
+\subsubsection{\texorpdfstring{Buscar\+Field\+Classe\+Corrente\+\_\+classes()}{BuscarFieldClasseCorrente\_classes()}}
+{\footnotesize\ttfamily \hyperlink{structfield__info}{field\+\_\+info}$\ast$ Buscar\+Field\+Classe\+Corrente\+\_\+classes (\begin{DoxyParamCaption}\item[{\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$}]{lis,  }\item[{char $\ast$}]{nome\+Classe,  }\item[{char $\ast$}]{nome\+Field }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__classes_8c_ae87a6b48366ebffe49cb9e705f8c896d}\label{lista__classes_8c_ae87a6b48366ebffe49cb9e705f8c896d}} 
+\index{lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}!Buscar\+Method\+Classe\+Corrente\+\_\+classes@{Buscar\+Method\+Classe\+Corrente\+\_\+classes}}
+\index{Buscar\+Method\+Classe\+Corrente\+\_\+classes@{Buscar\+Method\+Classe\+Corrente\+\_\+classes}!lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}}
+\subsubsection{\texorpdfstring{Buscar\+Method\+Classe\+Corrente\+\_\+classes()}{BuscarMethodClasseCorrente\_classes()}}
+{\footnotesize\ttfamily \hyperlink{structmethod__info}{method\+\_\+info}$\ast$ Buscar\+Method\+Classe\+Corrente\+\_\+classes (\begin{DoxyParamCaption}\item[{\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$}]{lis,  }\item[{char $\ast$}]{nome\+Classe,  }\item[{char $\ast$}]{nome\+Metodo }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__classes_8c_a60b4fee666dc517813a5c7d6be2d881b}\label{lista__classes_8c_a60b4fee666dc517813a5c7d6be2d881b}} 
+\index{lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}!Criar\+Lista\+\_\+classes@{Criar\+Lista\+\_\+classes}}
+\index{Criar\+Lista\+\_\+classes@{Criar\+Lista\+\_\+classes}!lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}}
+\subsubsection{\texorpdfstring{Criar\+Lista\+\_\+classes()}{CriarLista\_classes()}}
+{\footnotesize\ttfamily \hyperlink{structclassesCarregadas}{classes\+Carregadas}$\ast$ Criar\+Lista\+\_\+classes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__classes_8c_a6e1e13f14d233ba1e3398cf28f63e64f}\label{lista__classes_8c_a6e1e13f14d233ba1e3398cf28f63e64f}} 
+\index{lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}!Imprimir\+Lista\+\_\+classes@{Imprimir\+Lista\+\_\+classes}}
+\index{Imprimir\+Lista\+\_\+classes@{Imprimir\+Lista\+\_\+classes}!lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}}
+\subsubsection{\texorpdfstring{Imprimir\+Lista\+\_\+classes()}{ImprimirLista\_classes()}}
+{\footnotesize\ttfamily void Imprimir\+Lista\+\_\+classes (\begin{DoxyParamCaption}\item[{\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$}]{lis }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__classes_8c_a8fa90fd36506ceaf5cde836d77eced25}\label{lista__classes_8c_a8fa90fd36506ceaf5cde836d77eced25}} 
+\index{lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}!Inserir\+Fim\+\_\+classes@{Inserir\+Fim\+\_\+classes}}
+\index{Inserir\+Fim\+\_\+classes@{Inserir\+Fim\+\_\+classes}!lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}}
+\subsubsection{\texorpdfstring{Inserir\+Fim\+\_\+classes()}{InserirFim\_classes()}}
+{\footnotesize\ttfamily \hyperlink{structclassesCarregadas}{classes\+Carregadas}$\ast$ Inserir\+Fim\+\_\+classes (\begin{DoxyParamCaption}\item[{\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$}]{lis,  }\item[{\hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File} $\ast$}]{arquivo\+Class }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__classes_8c_aafe7a22cfa21c4ed801ccdc82b56b0ed}\label{lista__classes_8c_aafe7a22cfa21c4ed801ccdc82b56b0ed}} 
+\index{lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}!Liberar\+Lista\+\_\+classes@{Liberar\+Lista\+\_\+classes}}
+\index{Liberar\+Lista\+\_\+classes@{Liberar\+Lista\+\_\+classes}!lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}}
+\subsubsection{\texorpdfstring{Liberar\+Lista\+\_\+classes()}{LiberarLista\_classes()}}
+{\footnotesize\ttfamily void Liberar\+Lista\+\_\+classes (\begin{DoxyParamCaption}\item[{\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$}]{lis }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__classes_8c_a14122e823ae128b6bbbe04887308a0ca}\label{lista__classes_8c_a14122e823ae128b6bbbe04887308a0ca}} 
+\index{lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}!Remover\+Elemento\+\_\+classes@{Remover\+Elemento\+\_\+classes}}
+\index{Remover\+Elemento\+\_\+classes@{Remover\+Elemento\+\_\+classes}!lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}}
+\subsubsection{\texorpdfstring{Remover\+Elemento\+\_\+classes()}{RemoverElemento\_classes()}}
+{\footnotesize\ttfamily \hyperlink{structclassesCarregadas}{classes\+Carregadas}$\ast$ Remover\+Elemento\+\_\+classes (\begin{DoxyParamCaption}\item[{\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$}]{lis,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{lista__classes_8c_a02b37b59899d7aa45249864349507fb9}\label{lista__classes_8c_a02b37b59899d7aa45249864349507fb9}} 
+\index{lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}!Remover\+Fim\+\_\+classes@{Remover\+Fim\+\_\+classes}}
+\index{Remover\+Fim\+\_\+classes@{Remover\+Fim\+\_\+classes}!lista\+\_\+classes.\+c@{lista\+\_\+classes.\+c}}
+\subsubsection{\texorpdfstring{Remover\+Fim\+\_\+classes()}{RemoverFim\_classes()}}
+{\footnotesize\ttfamily \hyperlink{structclassesCarregadas}{classes\+Carregadas}$\ast$ Remover\+Fim\+\_\+classes (\begin{DoxyParamCaption}\item[{\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$}]{lis }\end{DoxyParamCaption})}
+

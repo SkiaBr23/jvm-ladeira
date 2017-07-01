@@ -10,9 +10,15 @@ var searchData=
   ['end_5fretorno',['end_retorno',['../structframe.html#a5d2f3ff696847f4147ff799395a331fc',1,'frame']]],
   ['entries',['entries',['../structstackMapTable__attribute.html#a064170c738925362875e3337defc60d0',1,'stackMapTable_attribute']]],
   ['enum',['ENUM',['../structures_8h.html#aaea667445c15617b5c6ad01f0e53b481a5bc38f5ef3a09fbc02c3f3576277a5b9',1,'structures.h']]],
-  ['enum_5fconst_5findex',['enum_const_index',['../structelement__value.html#ae8482fa795543c28cfff6de025bfe5a0',1,'element_value']]],
+  ['enum_5fconst_5findex',['enum_const_index',['../structelement__value.html#abd757c88db2597823aed354328707ae6',1,'element_value']]],
+  ['excecao',['excecao',['../structjvm.html#a9a1827338d5d118644ec0a72a76a5d89',1,'jvm']]],
+  ['excecao_5fnome',['excecao_nome',['../structjvm.html#a471ac752db9424623227c661b194399b',1,'jvm']]],
   ['exception_5findex_5ftable',['exception_index_table',['../structexceptions__attribute.html#ae7a712d07214e739d25465f9806c514f',1,'exceptions_attribute']]],
   ['exception_5ftable',['exception_table',['../structexception__table.html',1,'exception_table'],['../structures_8h.html#a221b9693e220df24ce3b6a3df1e70605',1,'exception_table():&#160;structures.h']]],
   ['exception_5ftable_5flength',['exception_table_length',['../structcode__attribute.html#ab84a776a1bdeb79fde3b47279d8e12e4',1,'code_attribute']]],
-  ['exceptions_5fattribute',['exceptions_attribute',['../structexceptions__attribute.html',1,'exceptions_attribute'],['../structures_8h.html#ad649769a562016b03686cdbcee9362ba',1,'exceptions_attribute():&#160;structures.h']]]
+  ['exceptions_5fattribute',['exceptions_attribute',['../structexceptions__attribute.html',1,'exceptions_attribute'],['../structures_8h.html#ad649769a562016b03686cdbcee9362ba',1,'exceptions_attribute():&#160;structures.h']]],
+  ['executarjvm',['executarJVM',['../jvm_8c.html#a713d35f536711d10380226694fa8721b',1,'executarJVM():&#160;jvm.c'],['../jvm_8h.html#a713d35f536711d10380226694fa8721b',1,'executarJVM():&#160;jvm.c']]],
+  ['executarmetodo',['executarMetodo',['../jvm_8c.html#a7597ae8a141cbaf8e5798ae021bf2d09',1,'executarMetodo(method_info *m, char *classeCorrente, int chamador):&#160;jvm.c'],['../jvm_8h.html#a7597ae8a141cbaf8e5798ae021bf2d09',1,'executarMetodo(method_info *m, char *classeCorrente, int chamador):&#160;jvm.c']]],
+  ['expoente',['expoente',['../structures_8h.html#a60da5e13648d3b1a6ad09d57053d36cb',1,'structures.h']]],
+  ['expoente_5fd',['expoente_d',['../structures_8h.html#abcf71ca65131011f14e2a585be36d07a',1,'structures.h']]]
 ];

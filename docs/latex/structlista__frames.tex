@@ -2,38 +2,48 @@
 \label{structlista__frames}\index{lista\+\_\+frames@{lista\+\_\+frames}}
 
 
+Estrutura de dados da lista de frames.  
+
+
+
+
 {\ttfamily \#include $<$lista\+\_\+frames.\+h$>$}
 
-\subsection*{Atributos Públicos}
+\subsection*{Campos de Dados}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{structframe}{frame} $\ast$ \hyperlink{structlista__frames_ad7777179f480ab04a686cf8edf19addf}{f}
 \item 
-struct \hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{structlista__frames_ac33c75b9e66a517b493e6d35a3c1efb3}{prox}
-\item 
-struct \hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{structlista__frames_a624232f63eb62fe5a297439a4668032c}{ant}
+struct \hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$prox struct \hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{structlista__frames_a0bbbab3447435d5c260502d64b038551}{ant}
 \end{DoxyCompactItemize}
 
 
-\subsection{Atributos}
-\mbox{\Hypertarget{structlista__frames_a624232f63eb62fe5a297439a4668032c}\label{structlista__frames_a624232f63eb62fe5a297439a4668032c}} 
+\subsection{Descrição Detalhada}
+Estrutura de dados da lista de frames. 
+
+Definição da macro
+
+\begin{DoxySeeAlso}{Veja também}
+\hyperlink{structures_8h}{structures.\+h} 
+\end{DoxySeeAlso}
+
+
+\subsection{Campos}
+\mbox{\Hypertarget{structlista__frames_a0bbbab3447435d5c260502d64b038551}\label{structlista__frames_a0bbbab3447435d5c260502d64b038551}} 
 \index{lista\+\_\+frames@{lista\+\_\+frames}!ant@{ant}}
 \index{ant@{ant}!lista\+\_\+frames@{lista\+\_\+frames}}
 \subsubsection{\texorpdfstring{ant}{ant}}
-{\footnotesize\ttfamily struct \hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ lista\+\_\+frames\+::ant}
+{\footnotesize\ttfamily struct \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ prox struct \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ lista\+\_\+frames\+::ant}
 
-\mbox{\Hypertarget{structlista__frames_ad7777179f480ab04a686cf8edf19addf}\label{structlista__frames_ad7777179f480ab04a686cf8edf19addf}} 
+$<$ Ponteiro de acesso ao próximo nó da lista. Ponteiro de acesso ao nó anterior da lista. \mbox{\Hypertarget{structlista__frames_ad7777179f480ab04a686cf8edf19addf}\label{structlista__frames_ad7777179f480ab04a686cf8edf19addf}} 
 \index{lista\+\_\+frames@{lista\+\_\+frames}!f@{f}}
 \index{f@{f}!lista\+\_\+frames@{lista\+\_\+frames}}
 \subsubsection{\texorpdfstring{f}{f}}
 {\footnotesize\ttfamily \hyperlink{structframe}{frame}$\ast$ lista\+\_\+frames\+::f}
 
-\mbox{\Hypertarget{structlista__frames_ac33c75b9e66a517b493e6d35a3c1efb3}\label{structlista__frames_ac33c75b9e66a517b493e6d35a3c1efb3}} 
-\index{lista\+\_\+frames@{lista\+\_\+frames}!prox@{prox}}
-\index{prox@{prox}!lista\+\_\+frames@{lista\+\_\+frames}}
-\subsubsection{\texorpdfstring{prox}{prox}}
-{\footnotesize\ttfamily struct \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ lista\+\_\+frames\+::prox}
-
+Ponteiro para uma variável de frame. \begin{DoxySeeAlso}{Veja também}
+\hyperlink{structframe}{frame} 
+\end{DoxySeeAlso}
 
 
 A documentação para esta estrutura foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}

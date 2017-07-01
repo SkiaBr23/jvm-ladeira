@@ -1,6 +1,10 @@
 /**
  * @file instrucoes.c
  * @brief Arquivo fonte que monta o vetor de instruções e seus metadados.
+ * @details A partir de uma enumeração definida no arquivo cabeçalho, este código
+ * popula um vetor do tipo "instrucao" atribuindo os valores de nome, opcode, número
+ * de argumentos e número de operandos de todas as instruções implementadas neste trabalho.
+ * @see instrucoes.h
  * @see https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html
  */
 

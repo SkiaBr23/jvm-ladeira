@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>JVM - Grupo 4: Componentes Membros</title>
+<title>JVM - Grupo 4: Campos de Dados</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 </div>
 
 <div class="contents">
-<div class="textblock">Esta é a lista de todos os membros de classes com referências para a classe a que pertencem:</div>
+<div class="textblock">Esta é a lista de todas as estruturas e campos de uniões com referências para a estrutura/união a que pertencem:</div>
 
 <h3><a id="index_a"></a>- a -</h3><ul>
 <li>access_flags
@@ -78,15 +78,19 @@ $(function() {
 , <a class="el" href="structrunTimeVisibleAnnotations__attribute.html#a26ee34fb2f6d38aa18cd692099fe0e40">runTimeVisibleAnnotations_attribute</a>
 </li>
 <li>ant
-: <a class="el" href="structlista.html#a92e5a9da9a7788d2a85de746a88b336f">lista</a>
-, <a class="el" href="structlista__frames.html#a624232f63eb62fe5a297439a4668032c">lista_frames</a>
+: <a class="el" href="structclassesCarregadas.html#a2a075e91c50be2dbf5218507e5043a8e">classesCarregadas</a>
+, <a class="el" href="structlista.html#a92e5a9da9a7788d2a85de746a88b336f">lista</a>
+, <a class="el" href="structlista__frames.html#a0bbbab3447435d5c260502d64b038551">lista_frames</a>
 , <a class="el" href="structlista__operandos.html#abe9d6cbd0d571fc22564a95b17a98123">lista_operandos</a>
 </li>
 <li>append_frame
-: <a class="el" href="structstack__map__frame.html#a6a5b310b8bcd3d37a31a96406a987d99">stack_map_frame</a>
+: <a class="el" href="structstack__map__frame.html#a0b04ec1b411c1c57e328b674a2594e51">stack_map_frame</a>
+</li>
+<li>arquivoClass
+: <a class="el" href="structclassesCarregadas.html#a0bd56a3a1fe9cef7e3cd63a947cb2edb">classesCarregadas</a>
 </li>
 <li>array_value
-: <a class="el" href="structelement__value.html#a97368440bfd85de2d3508ac9fdea93ff">element_value</a>
+: <a class="el" href="structelement__value.html#ad8b56bf5bc16d7e5285ced8e4e33e30b">element_value</a>
 </li>
 <li>attribute_length
 : <a class="el" href="structattribute__info.html#a1ed8f679458c4bb0ed3315721588f50d">attribute_info</a>
@@ -133,7 +137,7 @@ $(function() {
 : <a class="el" href="structexception__table.html#ade50b30a987f3d3452a6de69eee0ada5">exception_table</a>
 </li>
 <li>chop_frame
-: <a class="el" href="structstack__map__frame.html#a27a14f523a1397381684cbb47c8a241f">stack_map_frame</a>
+: <a class="el" href="structstack__map__frame.html#a91903af38a05776c1f3c9993b5273f83">stack_map_frame</a>
 </li>
 <li>Class
 : <a class="el" href="structcp__info.html#aa2cc42e313a1550a5f5e8c0d7ffc58ee">cp_info</a>
@@ -141,6 +145,12 @@ $(function() {
 <li>class_index
 : <a class="el" href="structcp__info.html#a1c7c3f3e2f9a620669b5f5cc51249ef8">cp_info</a>
 , <a class="el" href="structenclosingMethod__attribute.html#a3f2ebf2e90b6eb973e3fc92d88307c06">enclosingMethod_attribute</a>
+</li>
+<li>classeCorrente
+: <a class="el" href="structframe.html#a9c7ccb24c4cc2e9c8e17f1f5e9809211">frame</a>
+</li>
+<li>classes
+: <a class="el" href="structjvm.html#a43783d4b1817816cccc62a08154190f6">jvm</a>
 </li>
 <li>classes_vector
 : <a class="el" href="structinnerClasses__attribute.html#a0179ecaaf1ae3febfc8553dcfb278679">innerClasses_attribute</a>
@@ -192,7 +202,7 @@ $(function() {
 : <a class="el" href="structcp__info.html#a936ea5aa3e0976dd8ee7e264e55b7470">cp_info</a>
 </li>
 <li>double_variable_info
-: <a class="el" href="structverification__type__info.html#a0198e2c34f8ffc66cbfe8adf0ab20170">verification_type_info</a>
+: <a class="el" href="structverification__type__info.html#ae2e04072010fa85856e99f2e5b723c1e">verification_type_info</a>
 </li>
 </ul>
 
@@ -217,7 +227,13 @@ $(function() {
 : <a class="el" href="structstackMapTable__attribute.html#a064170c738925362875e3337defc60d0">stackMapTable_attribute</a>
 </li>
 <li>enum_const_index
-: <a class="el" href="structelement__value.html#ae8482fa795543c28cfff6de025bfe5a0">element_value</a>
+: <a class="el" href="structelement__value.html#abd757c88db2597823aed354328707ae6">element_value</a>
+</li>
+<li>excecao
+: <a class="el" href="structjvm.html#a9a1827338d5d118644ec0a72a76a5d89">jvm</a>
+</li>
+<li>excecao_nome
+: <a class="el" href="structjvm.html#a471ac752db9424623227c661b194399b">jvm</a>
 </li>
 <li>exception_index_table
 : <a class="el" href="structexceptions__attribute.html#ae7a712d07214e739d25465f9806c514f">exceptions_attribute</a>
@@ -245,13 +261,16 @@ $(function() {
 : <a class="el" href="structcp__info.html#aab782dac6a2cafce3e898190d49329df">cp_info</a>
 </li>
 <li>float_variable_info
-: <a class="el" href="structverification__type__info.html#a21e1445357184dfacb843c0e9d75c5a3">verification_type_info</a>
+: <a class="el" href="structverification__type__info.html#afcf9cc760065729b332f191fbd3e9adf">verification_type_info</a>
 </li>
 <li>frame_type
 : <a class="el" href="structstack__map__frame.html#ae7d53e0f8daea6d5738a88ffb94e575c">stack_map_frame</a>
 </li>
+<li>frames
+: <a class="el" href="structjvm.html#a4277814c8cb94f0e77f09428d3d668b9">jvm</a>
+</li>
 <li>full_frame
-: <a class="el" href="structstack__map__frame.html#a5191673ddb13df19cc664836013b4f41">stack_map_frame</a>
+: <a class="el" href="structstack__map__frame.html#a413fe2a1fe069a672ed375193ddb3e3f">stack_map_frame</a>
 </li>
 </ul>
 
@@ -259,6 +278,9 @@ $(function() {
 <h3><a id="index_h"></a>- h -</h3><ul>
 <li>handler_pc
 : <a class="el" href="structexception__table.html#a8fe6fb5063598ad0d48aab5e617d6a35">exception_table</a>
+</li>
+<li>high
+: <a class="el" href="structfield__info.html#aa97ac1ab148b4dd06a21a0ab3d972209">field_info</a>
 </li>
 <li>high_bytes
 : <a class="el" href="structcp__info.html#a26996f9b4a0caab37c9cdbfd027eaed7">cp_info</a>
@@ -290,7 +312,7 @@ $(function() {
 : <a class="el" href="structcp__info.html#a2a51febf186f789356c2ce50ed6219c3">cp_info</a>
 </li>
 <li>integer_variable_info
-: <a class="el" href="structverification__type__info.html#a518dcb2dd60e556d8ea4059f6a6dd3b1">verification_type_info</a>
+: <a class="el" href="structverification__type__info.html#a622b07bc67a176d7a3d4513dc3687d0a">verification_type_info</a>
 </li>
 <li>InterfaceMethodref
 : <a class="el" href="structcp__info.html#a7b323182372d6d7a58f0caf6b762db98">cp_info</a>
@@ -335,7 +357,10 @@ $(function() {
 : <a class="el" href="structcp__info.html#a0275ac98f14502226fcc7be5f3b618ed">cp_info</a>
 </li>
 <li>long_variable_info
-: <a class="el" href="structverification__type__info.html#ae205fc70c729fd4a92d31af0becd819d">verification_type_info</a>
+: <a class="el" href="structverification__type__info.html#a6dddbb4250cda83faf00d2dbe869c4b6">verification_type_info</a>
+</li>
+<li>low
+: <a class="el" href="structfield__info.html#a578a358c12b99b512974ff10295582be">field_info</a>
 </li>
 <li>low_bytes
 : <a class="el" href="structcp__info.html#aff872b9dcff18e083ca9f73ef82ab14f">cp_info</a>
@@ -347,14 +372,11 @@ $(function() {
 <li>magic
 : <a class="el" href="structclassFile.html#a3fec808625410854af3cb80b7faeca10">classFile</a>
 </li>
-<li>main()
-: <a class="el" href="classMain.html#a8a5d0f827edddff706cc0e6740d0579a">Main</a>
-</li>
 <li>major_version
 : <a class="el" href="structclassFile.html#a3765d2f6ef5f54e8e2c554afadb795f6">classFile</a>
 </li>
 <li>map_frame_type
-: <a class="el" href="structstack__map__frame.html#aa924e6fab46f29a756e2649da800a419">stack_map_frame</a>
+: <a class="el" href="structstack__map__frame.html#ae487d6986750a023b9dfef9b10b2c5c8">stack_map_frame</a>
 </li>
 <li>max_locals
 : <a class="el" href="structcode__attribute.html#ab75487f3c1d38f9fb6ad5e71ab99dea2">code_attribute</a>
@@ -400,7 +422,7 @@ $(function() {
 : <a class="el" href="structcp__info.html#ad893962eccc22c7d9a6532aa43448ffa">cp_info</a>
 </li>
 <li>null_variable_info
-: <a class="el" href="structverification__type__info.html#a42ba92ebe27d42af296a395c54fa10ad">verification_type_info</a>
+: <a class="el" href="structverification__type__info.html#a8e9d762a5d2903b8c3e4d201b3e93a39">verification_type_info</a>
 </li>
 <li>num_annotations
 : <a class="el" href="structparameter__annotations.html#a7e5f9ee8189799d0424e291025d3c3fd">parameter_annotations</a>
@@ -449,7 +471,7 @@ $(function() {
 
 <h3><a id="index_o"></a>- o -</h3><ul>
 <li>object_variable_info
-: <a class="el" href="structverification__type__info.html#a8cc9c3b34278efa436261995cd97a326">verification_type_info</a>
+: <a class="el" href="structverification__type__info.html#a7c237ceba51b307a76bbacaa30702e90">verification_type_info</a>
 </li>
 <li>offset
 : <a class="el" href="structverification__type__info.html#a697499159761ac261e39a9f7aabfb27d">verification_type_info</a>
@@ -478,9 +500,15 @@ $(function() {
 : <a class="el" href="structruntimeInvisibleParameterAnnotations__attribute.html#a5e720df1952e818a4b5973aec115eade">runtimeInvisibleParameterAnnotations_attribute</a>
 , <a class="el" href="structruntimeVisibleParameterAnnotations__attribute.html#a42e5e477f793842b0caeba7b32088740">runtimeVisibleParameterAnnotations_attribute</a>
 </li>
+<li>pc
+: <a class="el" href="structjvm.html#ac879eb42576afb2256646f478a7f68c2">jvm</a>
+</li>
+<li>pc_instrucao
+: <a class="el" href="structinstrucao.html#adf700f8998ffadaabba2ebf5aa4f6e21">instrucao</a>
+</li>
 <li>prox
-: <a class="el" href="structlista.html#a3b0e375147c1163d74544fd206a1f1de">lista</a>
-, <a class="el" href="structlista__frames.html#ac33c75b9e66a517b493e6d35a3c1efb3">lista_frames</a>
+: <a class="el" href="structclassesCarregadas.html#a9be874f129111fad8157f3e4205e9e98">classesCarregadas</a>
+, <a class="el" href="structlista.html#a3b0e375147c1163d74544fd206a1f1de">lista</a>
 , <a class="el" href="structlista__operandos.html#a90699e5c7f710177b37754cd5231c9f5">lista_operandos</a>
 </li>
 </ul>
@@ -493,21 +521,24 @@ $(function() {
 <li>reference_kind
 : <a class="el" href="structcp__info.html#a13e5aa07b7aa482061b89f4d7379a2dd">cp_info</a>
 </li>
+<li>referencia
+: <a class="el" href="structlista__operandos.html#a5efba56f9f00715a8c9558292b851d37">lista_operandos</a>
+</li>
 </ul>
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>same_frame
-: <a class="el" href="structstack__map__frame.html#a761073b8521c7ac269b5357dfcf963b6">stack_map_frame</a>
+: <a class="el" href="structstack__map__frame.html#a00370b3f189d19b737ae16d392b64cfd">stack_map_frame</a>
 </li>
 <li>same_frame_extended
-: <a class="el" href="structstack__map__frame.html#adf8e43e48aaaf7efd8ef26bcce53e07e">stack_map_frame</a>
+: <a class="el" href="structstack__map__frame.html#a307da2ccb0d04150af9661324d8a36eb">stack_map_frame</a>
 </li>
 <li>same_locals_1_stack_item_frame
-: <a class="el" href="structstack__map__frame.html#a5503eba82f65aaa1b91d7bebf48f778a">stack_map_frame</a>
+: <a class="el" href="structstack__map__frame.html#a716df0682a4941e130d69ee87db5545f">stack_map_frame</a>
 </li>
 <li>same_locals_1_stack_item_frame_extended
-: <a class="el" href="structstack__map__frame.html#a13c670726708696c2f2b9d12309d7038">stack_map_frame</a>
+: <a class="el" href="structstack__map__frame.html#a6260d1ad8fd7b980baac858d66779601">stack_map_frame</a>
 </li>
 <li>signature_index
 : <a class="el" href="structsignature__attribute.html#a63a67e73289180add457fbc0ae36413f">signature_attribute</a>
@@ -527,7 +558,8 @@ $(function() {
 : <a class="el" href="structcp__info.html#a0b6107f2f01ff36a3d7d05175675b043">cp_info</a>
 </li>
 <li>string
-: <a class="el" href="structlista.html#a1ba5a9f199d6bf09cb40c905d50685f0">lista</a>
+: <a class="el" href="structfield__info.html#a3628f44d66536cd28d270a4ec12514f3">field_info</a>
+, <a class="el" href="structlista.html#a1ba5a9f199d6bf09cb40c905d50685f0">lista</a>
 </li>
 <li>string_index
 : <a class="el" href="structcp__info.html#ae760e12a2ee01b0ace3d35170ca07981">cp_info</a>
@@ -557,18 +589,18 @@ $(function() {
 : <a class="el" href="structvetor__locais.html#a8f30386b3b7757677d00d6e14e535278">vetor_locais</a>
 </li>
 <li>top_variable_info
-: <a class="el" href="structverification__type__info.html#ae8a25f3b3f2824a904c772ecbbd249e1">verification_type_info</a>
+: <a class="el" href="structverification__type__info.html#ab881a8ef77dc9d79b2f1271807d9c38a">verification_type_info</a>
 </li>
 <li>topo
 : <a class="el" href="structpilha.html#af710a80cc659420807a4e273fba075a1">pilha</a>
-, <a class="el" href="structpilha__frames.html#adaba794f60371c7bcefb8f592e586c90">pilha_frames</a>
+, <a class="el" href="structpilha__frames.html#a0f1e93df36de953f6ee6789cea5fd34f">pilha_frames</a>
 , <a class="el" href="structpilha__operandos.html#a993dd7722eed1663f266c36ecf0b8417">pilha_operandos</a>
 </li>
 <li>type_index
 : <a class="el" href="structannotation.html#ac1579f92b65639fa8646311a2520e58c">annotation</a>
 </li>
 <li>type_info
-: <a class="el" href="structverification__type__info.html#a694db81e19f00bd3af2cfa2fca4c81d2">verification_type_info</a>
+: <a class="el" href="structverification__type__info.html#ab47e1887d0e10211164b9d0a16d79565">verification_type_info</a>
 </li>
 <li>type_name_index
 : <a class="el" href="structelement__value.html#ad1925807cc4b5a79fa7fa56d46462ecb">element_value</a>
@@ -578,13 +610,16 @@ $(function() {
 
 <h3><a id="index_u"></a>- u -</h3><ul>
 <li>uninitialized_variable_info
-: <a class="el" href="structverification__type__info.html#a732c79b23b52ddb0f77b5e25360d5253">verification_type_info</a>
+: <a class="el" href="structverification__type__info.html#add124f08b7f592406443d601651970d9">verification_type_info</a>
 </li>
 <li>uninitializedThis_variable_info
-: <a class="el" href="structverification__type__info.html#a8b83ff57fc01ffdd4f7761af5ab72885">verification_type_info</a>
+: <a class="el" href="structverification__type__info.html#a9b1dd36fc75aad3dc228875395a1c4ef">verification_type_info</a>
 </li>
 <li>UnionCP
 : <a class="el" href="structcp__info.html#aad04019f28f2b6191ace6ab762e051a5">cp_info</a>
+</li>
+<li>UnionStaticData
+: <a class="el" href="structfield__info.html#ad4f7c1536ad2cd1fe84816c97d2ce373">field_info</a>
 </li>
 <li>UTF8
 : <a class="el" href="structcp__info.html#a3a9e08ded40cde605289d41a69978159">cp_info</a>
@@ -597,17 +632,14 @@ $(function() {
 : <a class="el" href="structframe.html#a01ae11b1517de21c420c3c9a6a267401">frame</a>
 </li>
 <li>value
-: <a class="el" href="structelement__value.html#a4e0b4dd7c57280a3c485e3f5d03bee80">element_value</a>
+: <a class="el" href="structelement__value.html#a4d0a32ca39ecb90de9af608585c10054">element_value</a>
 , <a class="el" href="structelement__value__pairs.html#ab1c879e0865cca531bd7565a71995668">element_value_pairs</a>
-</li>
-<li>varD
-: <a class="el" href="classMain.html#a93ce78827008b629fd0afc68309b9413">Main</a>
 </li>
 <li>variavel
 : <a class="el" href="structvetor__locais.html#a474212032f52e10c83331da9efdbf0e8">vetor_locais</a>
 </li>
-<li>varL
-: <a class="el" href="classMain.html#ae9ca95a4f1cfc8a167b4afd7af44b17e">Main</a>
+<li>vetor_length
+: <a class="el" href="structframe.html#aec98a2c044409e921f45ac926ace588e">frame</a>
 </li>
 </ul>
 </div><!-- contents -->

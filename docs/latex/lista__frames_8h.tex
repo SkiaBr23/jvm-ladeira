@@ -1,13 +1,18 @@
 \hypertarget{lista__frames_8h}{}\section{Referência do Arquivo lista\+\_\+frames.\+h}
 \label{lista__frames_8h}\index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
+
+
+Estrutura e cabeçalho da implementação da lista de frames.  
+
+
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdint.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}structures.\+h\char`\"{}}\newline
-\subsection*{Componentes}
+\subsection*{Estruturas de Dados}
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structlista__frames}{lista\+\_\+frames}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Estrutura de dados da lista de frames. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Definições de Tipos}
 \begin{DoxyCompactItemize}
 \item 
@@ -17,29 +22,24 @@ typedef struct \hyperlink{structlista__frames}{lista\+\_\+frames} \hyperlink{lis
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{lista__frames_8h_a7041cf9c2f19c45559d61f1a6c956620}{Criar\+Lista\+\_\+frames} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Inicializa uma lista de frames sem valor. \end{DoxyCompactList}\item 
 \hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{lista__frames_8h_a25edaccba8549d7ecd43091365cbc870}{Inserir\+Inicio\+\_\+frames} (\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$lis, \hyperlink{structframe}{frame} $\ast$f)
-\item 
+\begin{DoxyCompactList}\small\item\em Insere um frame no início da lista de frames do programa. \end{DoxyCompactList}\item 
 \hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{lista__frames_8h_af96401110cd5e69ead58c60e689e802b}{Inserir\+Fim\+\_\+frames} (\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$lis, \hyperlink{structframe}{frame} $\ast$f)
-\item 
+\begin{DoxyCompactList}\small\item\em Insere um frame no fim da lista de frames do programa. \end{DoxyCompactList}\item 
 \hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{lista__frames_8h_a091a3efb54e077eed292971a7169db07}{Remover\+Inicio\+\_\+frames} (\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$lis)
-\item 
+\begin{DoxyCompactList}\small\item\em Remove o frame do início da lista de frames do programa. \end{DoxyCompactList}\item 
 \hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{lista__frames_8h_a3cd16e29eb17b1ef4db48678baf4d9de}{Remover\+Fim\+\_\+frames} (\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$lis)
-\item 
-\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{lista__frames_8h_aaa509e58f0b1e43f3dcc2fa83fcfbf0e}{Remover\+Elemento\+\_\+frames} (\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$lis, \hyperlink{structframe}{frame} $\ast$f)
-\item 
-\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{lista__frames_8h_a6352bb9ca247434066a378f2a27b833f}{Buscar\+Elemento\+\_\+frames} (\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$lis, \hyperlink{structframe}{frame} $\ast$f)
-\item 
-\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{lista__frames_8h_aa3da5130faca0b72ded9e121df6bbd4b}{Buscar\+Posicao\+\_\+frames} (\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$lis, int posicao)
-\item 
-\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{lista__frames_8h_aede84ac9631922eddcd5741d9cdc97dc}{Inserir\+Posicao\+\_\+frames} (\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$lis, \hyperlink{structframe}{frame} $\ast$f, int posicao)
-\item 
-\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$ \hyperlink{lista__frames_8h_a392ac8399b397231a84524dc30a40637}{Remover\+Posicao\+\_\+frames} (\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$lis, int posicao)
-\item 
+\begin{DoxyCompactList}\small\item\em Remove o frame do fim da lista de frames do programa. \end{DoxyCompactList}\item 
 void \hyperlink{lista__frames_8h_af153c85cf78bb6fc88c2316459fbdd27}{Imprimir\+Lista\+\_\+frames} (\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$lis)
-\item 
+\begin{DoxyCompactList}\small\item\em Imprime na tela uma representação textual da lista de frames. \end{DoxyCompactList}\item 
 void \hyperlink{lista__frames_8h_a552278b58235cea3bf0bd65a4e17a815}{Liberar\+Lista\+\_\+frames} (\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$lis)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Libera a memória utilizada por toda a lista de frames. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Estrutura e cabeçalho da implementação da lista de frames. 
+
 
 
 \subsection{Definições dos tipos}
@@ -49,78 +49,130 @@ void \hyperlink{lista__frames_8h_a552278b58235cea3bf0bd65a4e17a815}{Liberar\+Lis
 \subsubsection{\texorpdfstring{lista\+\_\+frames}{lista\_frames}}
 {\footnotesize\ttfamily typedef struct \hyperlink{structlista__frames}{lista\+\_\+frames} \hyperlink{structlista__frames}{lista\+\_\+frames}}
 
-
+Definição do tipo \hyperlink{structlista__frames}{lista\+\_\+frames} 
 
 \subsection{Funções}
-\mbox{\Hypertarget{lista__frames_8h_a6352bb9ca247434066a378f2a27b833f}\label{lista__frames_8h_a6352bb9ca247434066a378f2a27b833f}} 
-\index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Buscar\+Elemento\+\_\+frames@{Buscar\+Elemento\+\_\+frames}}
-\index{Buscar\+Elemento\+\_\+frames@{Buscar\+Elemento\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
-\subsubsection{\texorpdfstring{Buscar\+Elemento\+\_\+frames()}{BuscarElemento\_frames()}}
-{\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Buscar\+Elemento\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis,  }\item[{\hyperlink{structframe}{frame} $\ast$}]{f }\end{DoxyParamCaption})}
-
-\mbox{\Hypertarget{lista__frames_8h_aa3da5130faca0b72ded9e121df6bbd4b}\label{lista__frames_8h_aa3da5130faca0b72ded9e121df6bbd4b}} 
-\index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Buscar\+Posicao\+\_\+frames@{Buscar\+Posicao\+\_\+frames}}
-\index{Buscar\+Posicao\+\_\+frames@{Buscar\+Posicao\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
-\subsubsection{\texorpdfstring{Buscar\+Posicao\+\_\+frames()}{BuscarPosicao\_frames()}}
-{\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Buscar\+Posicao\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis,  }\item[{int}]{posicao }\end{DoxyParamCaption})}
-
 \mbox{\Hypertarget{lista__frames_8h_a7041cf9c2f19c45559d61f1a6c956620}\label{lista__frames_8h_a7041cf9c2f19c45559d61f1a6c956620}} 
 \index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Criar\+Lista\+\_\+frames@{Criar\+Lista\+\_\+frames}}
 \index{Criar\+Lista\+\_\+frames@{Criar\+Lista\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
 \subsubsection{\texorpdfstring{Criar\+Lista\+\_\+frames()}{CriarLista\_frames()}}
 {\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Criar\+Lista\+\_\+frames (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Inicializa uma lista de frames sem valor. 
+
+\begin{DoxyReturn}{Retorna}
+Uma lista de frames com valor nulo 
+\end{DoxyReturn}
 \mbox{\Hypertarget{lista__frames_8h_af153c85cf78bb6fc88c2316459fbdd27}\label{lista__frames_8h_af153c85cf78bb6fc88c2316459fbdd27}} 
 \index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Imprimir\+Lista\+\_\+frames@{Imprimir\+Lista\+\_\+frames}}
 \index{Imprimir\+Lista\+\_\+frames@{Imprimir\+Lista\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
 \subsubsection{\texorpdfstring{Imprimir\+Lista\+\_\+frames()}{ImprimirLista\_frames()}}
 {\footnotesize\ttfamily void Imprimir\+Lista\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis }\end{DoxyParamCaption})}
 
+
+
+Imprime na tela uma representação textual da lista de frames. 
+
+O campo end\+\_\+retorno (endereço de retorno) de todos os frames da lista é impresso na tela em formato hexadecimal. 
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Lista de frames a ser impressa \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Observação}
+A definir impressão definitiva 
+\end{DoxyNote}
 \mbox{\Hypertarget{lista__frames_8h_af96401110cd5e69ead58c60e689e802b}\label{lista__frames_8h_af96401110cd5e69ead58c60e689e802b}} 
 \index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Inserir\+Fim\+\_\+frames@{Inserir\+Fim\+\_\+frames}}
 \index{Inserir\+Fim\+\_\+frames@{Inserir\+Fim\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
 \subsubsection{\texorpdfstring{Inserir\+Fim\+\_\+frames()}{InserirFim\_frames()}}
 {\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Inserir\+Fim\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis,  }\item[{\hyperlink{structframe}{frame} $\ast$}]{f }\end{DoxyParamCaption})}
 
+
+
+Insere um frame no fim da lista de frames do programa. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro da lista de frames \\
+\hline
+{\em f} & Frame a ser inserido na lista\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Lista de frames com o novo frame inserido no final 
+\end{DoxyReturn}
 \mbox{\Hypertarget{lista__frames_8h_a25edaccba8549d7ecd43091365cbc870}\label{lista__frames_8h_a25edaccba8549d7ecd43091365cbc870}} 
 \index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Inserir\+Inicio\+\_\+frames@{Inserir\+Inicio\+\_\+frames}}
 \index{Inserir\+Inicio\+\_\+frames@{Inserir\+Inicio\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
 \subsubsection{\texorpdfstring{Inserir\+Inicio\+\_\+frames()}{InserirInicio\_frames()}}
 {\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Inserir\+Inicio\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis,  }\item[{\hyperlink{structframe}{frame} $\ast$}]{f }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{lista__frames_8h_aede84ac9631922eddcd5741d9cdc97dc}\label{lista__frames_8h_aede84ac9631922eddcd5741d9cdc97dc}} 
-\index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Inserir\+Posicao\+\_\+frames@{Inserir\+Posicao\+\_\+frames}}
-\index{Inserir\+Posicao\+\_\+frames@{Inserir\+Posicao\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
-\subsubsection{\texorpdfstring{Inserir\+Posicao\+\_\+frames()}{InserirPosicao\_frames()}}
-{\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Inserir\+Posicao\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis,  }\item[{\hyperlink{structframe}{frame} $\ast$}]{f,  }\item[{int}]{posicao }\end{DoxyParamCaption})}
 
+
+Insere um frame no início da lista de frames do programa. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro da lista de frames \\
+\hline
+{\em f} & Frame a ser inserido na lista\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Lista de frames com o novo frame inserido no início 
+\end{DoxyReturn}
 \mbox{\Hypertarget{lista__frames_8h_a552278b58235cea3bf0bd65a4e17a815}\label{lista__frames_8h_a552278b58235cea3bf0bd65a4e17a815}} 
 \index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Liberar\+Lista\+\_\+frames@{Liberar\+Lista\+\_\+frames}}
 \index{Liberar\+Lista\+\_\+frames@{Liberar\+Lista\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
 \subsubsection{\texorpdfstring{Liberar\+Lista\+\_\+frames()}{LiberarLista\_frames()}}
 {\footnotesize\ttfamily void Liberar\+Lista\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{lista__frames_8h_aaa509e58f0b1e43f3dcc2fa83fcfbf0e}\label{lista__frames_8h_aaa509e58f0b1e43f3dcc2fa83fcfbf0e}} 
-\index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Remover\+Elemento\+\_\+frames@{Remover\+Elemento\+\_\+frames}}
-\index{Remover\+Elemento\+\_\+frames@{Remover\+Elemento\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
-\subsubsection{\texorpdfstring{Remover\+Elemento\+\_\+frames()}{RemoverElemento\_frames()}}
-{\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Remover\+Elemento\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis,  }\item[{\hyperlink{structframe}{frame} $\ast$}]{f }\end{DoxyParamCaption})}
 
+
+Libera a memória utilizada por toda a lista de frames. 
+
+A lista de frames é iterada e todos os elementos são liberados com o comando free(p). Evita vazamentos de memória.
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Lista de frames a ser liberada \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{lista__frames_8h_a3cd16e29eb17b1ef4db48678baf4d9de}\label{lista__frames_8h_a3cd16e29eb17b1ef4db48678baf4d9de}} 
 \index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Remover\+Fim\+\_\+frames@{Remover\+Fim\+\_\+frames}}
 \index{Remover\+Fim\+\_\+frames@{Remover\+Fim\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
 \subsubsection{\texorpdfstring{Remover\+Fim\+\_\+frames()}{RemoverFim\_frames()}}
 {\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Remover\+Fim\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis }\end{DoxyParamCaption})}
 
+
+
+Remove o frame do fim da lista de frames do programa. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro da lista de frames \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Lista de frames com o último elemento removido 
+\end{DoxyReturn}
 \mbox{\Hypertarget{lista__frames_8h_a091a3efb54e077eed292971a7169db07}\label{lista__frames_8h_a091a3efb54e077eed292971a7169db07}} 
 \index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Remover\+Inicio\+\_\+frames@{Remover\+Inicio\+\_\+frames}}
 \index{Remover\+Inicio\+\_\+frames@{Remover\+Inicio\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
 \subsubsection{\texorpdfstring{Remover\+Inicio\+\_\+frames()}{RemoverInicio\_frames()}}
 {\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Remover\+Inicio\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{lista__frames_8h_a392ac8399b397231a84524dc30a40637}\label{lista__frames_8h_a392ac8399b397231a84524dc30a40637}} 
-\index{lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}!Remover\+Posicao\+\_\+frames@{Remover\+Posicao\+\_\+frames}}
-\index{Remover\+Posicao\+\_\+frames@{Remover\+Posicao\+\_\+frames}!lista\+\_\+frames.\+h@{lista\+\_\+frames.\+h}}
-\subsubsection{\texorpdfstring{Remover\+Posicao\+\_\+frames()}{RemoverPosicao\_frames()}}
-{\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Remover\+Posicao\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis,  }\item[{int}]{posicao }\end{DoxyParamCaption})}
 
+
+Remove o frame do início da lista de frames do programa. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro da lista de frames \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Lista de frames com o primeiro elemento removido 
+\end{DoxyReturn}

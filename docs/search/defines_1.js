@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['field_5findex',['FIELD_INDEX',['../structures_8h.html#af7fa7810639488208a40375e896720a5',1,'structures.h']]]
+  ['descriptor_5fclinit',['DESCRIPTOR_CLINIT',['../jvm_8h.html#a53be15bf5afd9d49ec68b83d98e6999c',1,'jvm.h']]],
+  ['descriptor_5fmain',['DESCRIPTOR_MAIN',['../jvm_8h.html#a5b1508925ece1388dab67460293cd45c',1,'jvm.h']]],
+  ['double_5fdef',['DOUBLE_DEF',['../structures_8h.html#a2eea8fac25b45df469bc01ccde553fdf',1,'structures.h']]]
 ];

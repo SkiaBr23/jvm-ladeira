@@ -4,7 +4,7 @@
 
 {\ttfamily \#include $<$structures.\+h$>$}
 
-\subsection*{Atributos Públicos}
+\subsection*{Campos de Dados}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} \hyperlink{structfield__info_aa622dc9a5b5353d2f3eb2f416dacab4b}{access\+\_\+flags}
@@ -16,10 +16,19 @@
 \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} \hyperlink{structfield__info_a83bfa4ff84a608e3dbd1c3968ebe1b80}{attributes\+\_\+count}
 \item 
 \hyperlink{structattribute__info}{attribute\+\_\+info} $\ast$$\ast$ \hyperlink{structfield__info_a754de0f0fd6e62c413cca2979ca5debd}{attributes}
-\end{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} $\ast$ \hyperlink{structfield__info_a578a358c12b99b512974ff10295582be}{low}\\
+\>\hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} $\ast$ \hyperlink{structfield__info_aa97ac1ab148b4dd06a21a0ab3d972209}{high}\\
+\>\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} $\ast$ \hyperlink{structfield__info_a3628f44d66536cd28d270a4ec12514f3}{string}\\
+\} \hyperlink{structfield__info_ad4f7c1536ad2cd1fe84816c97d2ce373}{UnionStaticData}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
 
 
-\subsection{Atributos}
+\subsection{Campos}
 \mbox{\Hypertarget{structfield__info_aa622dc9a5b5353d2f3eb2f416dacab4b}\label{structfield__info_aa622dc9a5b5353d2f3eb2f416dacab4b}} 
 \index{field\+\_\+info@{field\+\_\+info}!access\+\_\+flags@{access\+\_\+flags}}
 \index{access\+\_\+flags@{access\+\_\+flags}!field\+\_\+info@{field\+\_\+info}}
@@ -44,11 +53,35 @@
 \subsubsection{\texorpdfstring{descriptor\+\_\+index}{descriptor\_index}}
 {\footnotesize\ttfamily \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} field\+\_\+info\+::descriptor\+\_\+index}
 
+\mbox{\Hypertarget{structfield__info_aa97ac1ab148b4dd06a21a0ab3d972209}\label{structfield__info_aa97ac1ab148b4dd06a21a0ab3d972209}} 
+\index{field\+\_\+info@{field\+\_\+info}!high@{high}}
+\index{high@{high}!field\+\_\+info@{field\+\_\+info}}
+\subsubsection{\texorpdfstring{high}{high}}
+{\footnotesize\ttfamily \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4}$\ast$ field\+\_\+info\+::high}
+
+\mbox{\Hypertarget{structfield__info_a578a358c12b99b512974ff10295582be}\label{structfield__info_a578a358c12b99b512974ff10295582be}} 
+\index{field\+\_\+info@{field\+\_\+info}!low@{low}}
+\index{low@{low}!field\+\_\+info@{field\+\_\+info}}
+\subsubsection{\texorpdfstring{low}{low}}
+{\footnotesize\ttfamily \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4}$\ast$ field\+\_\+info\+::low}
+
 \mbox{\Hypertarget{structfield__info_a425e3ae85badd81c67ef00acca85ad9e}\label{structfield__info_a425e3ae85badd81c67ef00acca85ad9e}} 
 \index{field\+\_\+info@{field\+\_\+info}!name\+\_\+index@{name\+\_\+index}}
 \index{name\+\_\+index@{name\+\_\+index}!field\+\_\+info@{field\+\_\+info}}
 \subsubsection{\texorpdfstring{name\+\_\+index}{name\_index}}
 {\footnotesize\ttfamily \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} field\+\_\+info\+::name\+\_\+index}
+
+\mbox{\Hypertarget{structfield__info_a3628f44d66536cd28d270a4ec12514f3}\label{structfield__info_a3628f44d66536cd28d270a4ec12514f3}} 
+\index{field\+\_\+info@{field\+\_\+info}!string@{string}}
+\index{string@{string}!field\+\_\+info@{field\+\_\+info}}
+\subsubsection{\texorpdfstring{string}{string}}
+{\footnotesize\ttfamily \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}$\ast$ field\+\_\+info\+::string}
+
+\mbox{\Hypertarget{structfield__info_ad4f7c1536ad2cd1fe84816c97d2ce373}\label{structfield__info_ad4f7c1536ad2cd1fe84816c97d2ce373}} 
+\index{field\+\_\+info@{field\+\_\+info}!Union\+Static\+Data@{Union\+Static\+Data}}
+\index{Union\+Static\+Data@{Union\+Static\+Data}!field\+\_\+info@{field\+\_\+info}}
+\subsubsection{\texorpdfstring{Union\+Static\+Data}{UnionStaticData}}
+{\footnotesize\ttfamily union \{ ... \}  field\+\_\+info\+::\+Union\+Static\+Data}
 
 
 

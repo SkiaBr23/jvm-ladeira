@@ -62,8 +62,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Atributos Públicos</a> &#124;
-<a href="structfield__info-members.html">Lista de todos os Membros</a>  </div>
+<a href="#pub-attribs">Campos de Dados</a>  </div>
   <div class="headertitle">
 <div class="title">Referência da Estrutura field_info</div>  </div>
 </div><!--header-->
@@ -72,7 +71,7 @@ $(function() {
 <p><code>#include &lt;<a class="el" href="structures_8h_source.html">structures.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Atributos Públicos</h2></td></tr>
+Campos de Dados</h2></td></tr>
 <tr class="memitem:aa622dc9a5b5353d2f3eb2f416dacab4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfield__info.html#aa622dc9a5b5353d2f3eb2f416dacab4b">access_flags</a></td></tr>
 <tr class="separator:aa622dc9a5b5353d2f3eb2f416dacab4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a425e3ae85badd81c67ef00acca85ad9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfield__info.html#a425e3ae85badd81c67ef00acca85ad9e">name_index</a></td></tr>
@@ -83,8 +82,17 @@ Atributos Públicos</h2></td></tr>
 <tr class="separator:a83bfa4ff84a608e3dbd1c3968ebe1b80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a754de0f0fd6e62c413cca2979ca5debd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structattribute__info.html">attribute_info</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfield__info.html#a754de0f0fd6e62c413cca2979ca5debd">attributes</a></td></tr>
 <tr class="separator:a754de0f0fd6e62c413cca2979ca5debd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4f7c1536ad2cd1fe84816c97d2ce373"><td class="memItemLeft" >union {</td></tr>
+<tr class="memitem:ade06ccfb0672fccbf989fcb436db8919"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="lista__operandos_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> *&#160;&#160;&#160;<a class="el" href="structfield__info.html#a578a358c12b99b512974ff10295582be">low</a></td></tr>
+<tr class="separator:ade06ccfb0672fccbf989fcb436db8919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad37225a7df47c839386af996beed26fb"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="lista__operandos_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> *&#160;&#160;&#160;<a class="el" href="structfield__info.html#aa97ac1ab148b4dd06a21a0ab3d972209">high</a></td></tr>
+<tr class="separator:ad37225a7df47c839386af996beed26fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf1e34cebb9473d96fe0cfe7ae3ad5b8"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> *&#160;&#160;&#160;<a class="el" href="structfield__info.html#a3628f44d66536cd28d270a4ec12514f3">string</a></td></tr>
+<tr class="separator:aaf1e34cebb9473d96fe0cfe7ae3ad5b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4f7c1536ad2cd1fe84816c97d2ce373"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfield__info.html#ad4f7c1536ad2cd1fe84816c97d2ce373">UnionStaticData</a></td></tr>
+<tr class="separator:ad4f7c1536ad2cd1fe84816c97d2ce373"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Atributos</h2>
+<h2 class="groupheader">Campos</h2>
 <a id="aa622dc9a5b5353d2f3eb2f416dacab4b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa622dc9a5b5353d2f3eb2f416dacab4b">&#9670;&nbsp;</a></span>access_flags</h2>
 
@@ -141,6 +149,34 @@ Atributos Públicos</h2></td></tr>
 
 </div>
 </div>
+<a id="aa97ac1ab148b4dd06a21a0ab3d972209"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa97ac1ab148b4dd06a21a0ab3d972209">&#9670;&nbsp;</a></span>high</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lista__operandos_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a>* field_info::high</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a578a358c12b99b512974ff10295582be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a578a358c12b99b512974ff10295582be">&#9670;&nbsp;</a></span>low</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lista__operandos_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a>* field_info::low</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a425e3ae85badd81c67ef00acca85ad9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a425e3ae85badd81c67ef00acca85ad9e">&#9670;&nbsp;</a></span>name_index</h2>
 
@@ -149,6 +185,34 @@ Atributos Públicos</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> field_info::name_index</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3628f44d66536cd28d270a4ec12514f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3628f44d66536cd28d270a4ec12514f3">&#9670;&nbsp;</a></span>string</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>* field_info::string</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4f7c1536ad2cd1fe84816c97d2ce373"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4f7c1536ad2cd1fe84816c97d2ce373">&#9670;&nbsp;</a></span>UnionStaticData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">union { ... }  field_info::UnionStaticData</td>
         </tr>
       </table>
 </div><div class="memdoc">

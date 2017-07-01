@@ -62,7 +62,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Componentes</a> &#124;
+<a href="#nested-classes">Estruturas de Dados</a> &#124;
 <a href="#define-members">Definições e Macros</a> &#124;
 <a href="#typedef-members">Definições de Tipos</a> &#124;
 <a href="#enum-members">Enumerações</a>  </div>
@@ -76,7 +76,7 @@ $(function() {
 <p><a href="structures_8h_source.html">Vá para o código-fonte deste arquivo.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Componentes</h2></td></tr>
+Estruturas de Dados</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcp__info.html">cp_info</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structattribute__info.html">attribute_info</a></td></tr>
@@ -152,6 +152,22 @@ Componentes</h2></td></tr>
 Definições e Macros</h2></td></tr>
 <tr class="memitem:a15b7b54f84c933d1dc59bc77919a3368"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a15b7b54f84c933d1dc59bc77919a3368">TIPOS_U</a></td></tr>
 <tr class="separator:a15b7b54f84c933d1dc59bc77919a3368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5f856c12fa3e5b02dc5073c62cc47a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#af5f856c12fa3e5b02dc5073c62cc47a4">FLOAT_DEF</a></td></tr>
+<tr class="separator:af5f856c12fa3e5b02dc5073c62cc47a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60da5e13648d3b1a6ad09d57053d36cb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a60da5e13648d3b1a6ad09d57053d36cb">expoente</a>(x)&#160;&#160;&#160;((x &lt;&lt; 1) &gt;&gt; 24)</td></tr>
+<tr class="separator:a60da5e13648d3b1a6ad09d57053d36cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accc2e5821ce816129805ed1c55102ef5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#accc2e5821ce816129805ed1c55102ef5">mantissa</a>(x)&#160;&#160;&#160;((x &lt;&lt; 9) &gt;&gt; 9)</td></tr>
+<tr class="separator:accc2e5821ce816129805ed1c55102ef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f97f56c3fb26193961b6b0c990c36c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a30f97f56c3fb26193961b6b0c990c36c">sinal</a>(x)&#160;&#160;&#160;(x &gt;&gt; 31)</td></tr>
+<tr class="separator:a30f97f56c3fb26193961b6b0c990c36c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eea8fac25b45df469bc01ccde553fdf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a2eea8fac25b45df469bc01ccde553fdf">DOUBLE_DEF</a></td></tr>
+<tr class="separator:a2eea8fac25b45df469bc01ccde553fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcf71ca65131011f14e2a585be36d07a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#abcf71ca65131011f14e2a585be36d07a">expoente_d</a>(x)&#160;&#160;&#160;((x &lt;&lt; 1) &gt;&gt; 53)</td></tr>
+<tr class="separator:abcf71ca65131011f14e2a585be36d07a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49bc2edc17642c90385b20da22cef65b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a49bc2edc17642c90385b20da22cef65b">mantissa_d</a>(x)&#160;&#160;&#160;((x &lt;&lt; 12) &gt;&gt; 12)</td></tr>
+<tr class="separator:a49bc2edc17642c90385b20da22cef65b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34c5275815213ec1d1e0d9bccb6a154f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a34c5275815213ec1d1e0d9bccb6a154f">sinal_d</a>(x)&#160;&#160;&#160;(x &gt;&gt; 63)</td></tr>
+<tr class="separator:a34c5275815213ec1d1e0d9bccb6a154f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a460d8c84503828433ddece54d19f3149"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a460d8c84503828433ddece54d19f3149">MAXU1</a>&#160;&#160;&#160;255</td></tr>
 <tr class="separator:a460d8c84503828433ddece54d19f3149"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0480f005dd86738db3308eaa5776b9e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#ae0480f005dd86738db3308eaa5776b9e">MAXU2</a>&#160;&#160;&#160;65535</td></tr>
@@ -181,10 +197,14 @@ Definições de Tipos</h2></td></tr>
 <tr class="separator:a732cde1300aafb73b0ea6c2558a7a54f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5be1f726785414dd1b77d60df074c9d"><td class="memItemLeft" align="right" valign="top">typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a></td></tr>
 <tr class="separator:ae5be1f726785414dd1b77d60df074c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4d1c3d548028e31400378ec81026110"><td class="memItemLeft" align="right" valign="top">typedef uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#ae4d1c3d548028e31400378ec81026110">u8</a></td></tr>
+<tr class="separator:ae4d1c3d548028e31400378ec81026110"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac152ca02fa3b57b8d90f0ae0b30f099a"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcp__info.html">cp_info</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#ac152ca02fa3b57b8d90f0ae0b30f099a">cp_info</a></td></tr>
 <tr class="separator:ac152ca02fa3b57b8d90f0ae0b30f099a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6ff417a9d59f05fee9c38d95f02383a"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481">access_flags</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#aa6ff417a9d59f05fee9c38d95f02383a">access_flags</a></td></tr>
 <tr class="separator:aa6ff417a9d59f05fee9c38d95f02383a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31a03b98e415ff60c7683edd326872e1"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8">tipos_array</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a31a03b98e415ff60c7683edd326872e1">tipos_array</a></td></tr>
+<tr class="separator:a31a03b98e415ff60c7683edd326872e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b1e7b81c7ca3b550a1973f2d8672950"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structattribute__info.html">attribute_info</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a7b1e7b81c7ca3b550a1973f2d8672950">attribute_info</a></td></tr>
 <tr class="separator:a7b1e7b81c7ca3b550a1973f2d8672950"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92465becb59d258f61da663b1a202b14"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structfield__info.html">field_info</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a92465becb59d258f61da663b1a202b14">field_info</a></td></tr>
@@ -284,14 +304,30 @@ Enumerações</h2></td></tr>
 <a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481ae55a36a850c67d46b3b3325de7fce0b8">STATIC</a> = 8, 
 <br />
 &#160;&#160;<a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481afb43b8264ea4d3dd9957ba1b3fd3f3d5">FINAL</a> = 16, 
+<a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481af877c1dc1b78a33c3c949ed8ac6aac8f">SUPER</a> = 32, 
 <a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481ad2cbe40cd1e913a07a0d702786a14922">VOLATILE</a> = 64, 
 <a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481a189628bd9c66ada3fb11593230091ad4">TRANSIENT</a> = 128, 
-<a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481a71f76fa1f9dd08a6852a5ed13669c95f">SYNTHETIC</a> = 4096, 
 <br />
-&#160;&#160;<a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481a5bc38f5ef3a09fbc02c3f3576277a5b9">ENUM</a> = 16384
+&#160;&#160;<a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481a36afbef5b8629a12725d3a5c32ec7e3d">INTERFACE_FLAG</a> = 512, 
+<a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481a7b62cfe03ccf259e4f0a1be2bf90491f">ABSTRACT</a> = 1024, 
+<a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481a71f76fa1f9dd08a6852a5ed13669c95f">SYNTHETIC</a> = 4096, 
+<a class="el" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481a5bc38f5ef3a09fbc02c3f3576277a5b9">ENUM</a> = 16384
 <br />
  }</td></tr>
 <tr class="separator:aaea667445c15617b5c6ad01f0e53b481"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10f4dfa4cc56f9dc100ed8b124308cf8"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8">tipos_array</a> { <br />
+&#160;&#160;<a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8ae9a41de21d41da1b2f4195dd8829d6e3">T_BOOLEAN</a> = 4, 
+<a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8afc1d9070a444ece92960119b8b6d71b3">T_CHAR</a>, 
+<a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8afa49937803703ecf8a7c66d2457041d4">T_FLOAT</a>, 
+<a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8a875b555dccbb4f76c01f6d3b64cb23be">T_DOUBLE</a>, 
+<br />
+&#160;&#160;<a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8a62be7e90fa01bd88b476e0bebdae6bb1">T_BYTE</a>, 
+<a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8af6e1ea54f8e10a8fc777843afc797c22">T_SHORT</a>, 
+<a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8aa30cbb0eb56b7263a35f9d6643e12c83">T_INT</a>, 
+<a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8a1f8887255ce9ce523e5c497f14d9d842">T_LONG</a>
+<br />
+ }</td></tr>
+<tr class="separator:a10f4dfa4cc56f9dc100ed8b124308cf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Definições e macros</h2>
 <a id="a3f5033dcfb4bfa9ee7e9de053bff97c2"></a>
@@ -308,6 +344,56 @@ Enumerações</h2></td></tr>
 
 </div>
 </div>
+<a id="a2eea8fac25b45df469bc01ccde553fdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2eea8fac25b45df469bc01ccde553fdf">&#9670;&nbsp;</a></span>DOUBLE_DEF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DOUBLE_DEF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60da5e13648d3b1a6ad09d57053d36cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60da5e13648d3b1a6ad09d57053d36cb">&#9670;&nbsp;</a></span>expoente</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define expoente</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;((x &lt;&lt; 1) &gt;&gt; 24)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abcf71ca65131011f14e2a585be36d07a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcf71ca65131011f14e2a585be36d07a">&#9670;&nbsp;</a></span>expoente_d</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define expoente_d</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;((x &lt;&lt; 1) &gt;&gt; 53)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af7fa7810639488208a40375e896720a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af7fa7810639488208a40375e896720a5">&#9670;&nbsp;</a></span>FIELD_INDEX</h2>
 
@@ -316,6 +402,56 @@ Enumerações</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define FIELD_INDEX&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af5f856c12fa3e5b02dc5073c62cc47a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5f856c12fa3e5b02dc5073c62cc47a4">&#9670;&nbsp;</a></span>FLOAT_DEF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FLOAT_DEF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="accc2e5821ce816129805ed1c55102ef5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accc2e5821ce816129805ed1c55102ef5">&#9670;&nbsp;</a></span>mantissa</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define mantissa</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;((x &lt;&lt; 9) &gt;&gt; 9)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a49bc2edc17642c90385b20da22cef65b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49bc2edc17642c90385b20da22cef65b">&#9670;&nbsp;</a></span>mantissa_d</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define mantissa_d</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;((x &lt;&lt; 12) &gt;&gt; 12)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -414,6 +550,42 @@ Enumerações</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define NAME_INDEX&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a30f97f56c3fb26193961b6b0c990c36c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30f97f56c3fb26193961b6b0c990c36c">&#9670;&nbsp;</a></span>sinal</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define sinal</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;(x &gt;&gt; 31)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34c5275815213ec1d1e0d9bccb6a154f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34c5275815213ec1d1e0d9bccb6a154f">&#9670;&nbsp;</a></span>sinal_d</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define sinal_d</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;(x &gt;&gt; 63)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -925,6 +1097,20 @@ Enumerações</h2></td></tr>
 
 </div>
 </div>
+<a id="a31a03b98e415ff60c7683edd326872e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31a03b98e415ff60c7683edd326872e1">&#9670;&nbsp;</a></span>tipos_array</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef enum <a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8">tipos_array</a> <a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8">tipos_array</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad9f4cdb6757615aae2fad89dab3c5470"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad9f4cdb6757615aae2fad89dab3c5470">&#9670;&nbsp;</a></span>u1</h2>
 
@@ -961,6 +1147,20 @@ Enumerações</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">typedef uint32_t <a class="el" href="lista__operandos_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4d1c3d548028e31400378ec81026110"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4d1c3d548028e31400378ec81026110">&#9670;&nbsp;</a></span>u8</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint64_t <a class="el" href="lista__operandos_8h.html#ae4d1c3d548028e31400378ec81026110">u8</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1013,8 +1213,11 @@ Enumerações</h2></td></tr>
 <tr><td class="fieldname"><a id="aaea667445c15617b5c6ad01f0e53b481a4eca054070419f48846f93d1e09f2ac6"></a>PROTECTED&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aaea667445c15617b5c6ad01f0e53b481ae55a36a850c67d46b3b3325de7fce0b8"></a>STATIC&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aaea667445c15617b5c6ad01f0e53b481afb43b8264ea4d3dd9957ba1b3fd3f3d5"></a>FINAL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaea667445c15617b5c6ad01f0e53b481af877c1dc1b78a33c3c949ed8ac6aac8f"></a>SUPER&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aaea667445c15617b5c6ad01f0e53b481ad2cbe40cd1e913a07a0d702786a14922"></a>VOLATILE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aaea667445c15617b5c6ad01f0e53b481a189628bd9c66ada3fb11593230091ad4"></a>TRANSIENT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaea667445c15617b5c6ad01f0e53b481a36afbef5b8629a12725d3a5c32ec7e3d"></a>INTERFACE_FLAG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aaea667445c15617b5c6ad01f0e53b481a7b62cfe03ccf259e4f0a1be2bf90491f"></a>ABSTRACT&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aaea667445c15617b5c6ad01f0e53b481a71f76fa1f9dd08a6852a5ed13669c95f"></a>SYNTHETIC&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aaea667445c15617b5c6ad01f0e53b481a5bc38f5ef3a09fbc02c3f3576277a5b9"></a>ENUM&#160;</td><td class="fielddoc"></td></tr>
 </table>
@@ -1047,6 +1250,30 @@ Enumerações</h2></td></tr>
 <tr><td class="fieldname"><a id="a583540b6f8d0dcbe8f43f2b3f955fb30ac9fdca41420c578c73fadfa67d4ae26a"></a>CONSTANT_MethodHandle&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a583540b6f8d0dcbe8f43f2b3f955fb30a52dbe317b7b19ea9d13a8b185842d245"></a>CONSTANT_MethodType&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a583540b6f8d0dcbe8f43f2b3f955fb30a914abae8d35d480c7856e97ca4fc00e0"></a>CONSTANT_InvokeDynamic&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a10f4dfa4cc56f9dc100ed8b124308cf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10f4dfa4cc56f9dc100ed8b124308cf8">&#9670;&nbsp;</a></span>tipos_array</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="structures_8h.html#a10f4dfa4cc56f9dc100ed8b124308cf8">tipos_array</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Valores de enumerações</th></tr><tr><td class="fieldname"><a id="a10f4dfa4cc56f9dc100ed8b124308cf8ae9a41de21d41da1b2f4195dd8829d6e3"></a>T_BOOLEAN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a10f4dfa4cc56f9dc100ed8b124308cf8afc1d9070a444ece92960119b8b6d71b3"></a>T_CHAR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a10f4dfa4cc56f9dc100ed8b124308cf8afa49937803703ecf8a7c66d2457041d4"></a>T_FLOAT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a10f4dfa4cc56f9dc100ed8b124308cf8a875b555dccbb4f76c01f6d3b64cb23be"></a>T_DOUBLE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a10f4dfa4cc56f9dc100ed8b124308cf8a62be7e90fa01bd88b476e0bebdae6bb1"></a>T_BYTE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a10f4dfa4cc56f9dc100ed8b124308cf8af6e1ea54f8e10a8fc777843afc797c22"></a>T_SHORT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a10f4dfa4cc56f9dc100ed8b124308cf8aa30cbb0eb56b7263a35f9d6643e12c83"></a>T_INT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a10f4dfa4cc56f9dc100ed8b124308cf8a1f8887255ce9ce523e5c497f14d9d842"></a>T_LONG&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>

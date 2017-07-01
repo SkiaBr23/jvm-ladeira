@@ -3,7 +3,7 @@
 #include <string.h>
 #include "lista_frames.h"
 
-lista_frames* Criarlista_frames(){
+lista_frames* CriarLista_frames(){
 	return NULL;
 }
 

@@ -9,9 +9,13 @@
 \item 
 \hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$ \hyperlink{pilha__operandos_8c_aa3b2bde86d0b8c3ed4d1c4e32c047b8c}{Criar\+Pilha\+\_\+operandos} ()
 \item 
-\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$ \hyperlink{pilha__operandos_8c_a7dfd3b6fb1d570ff16cb350c94e3e9ff}{Push\+\_\+operandos} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p, \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} operando, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
+\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$ \hyperlink{pilha__operandos_8c_a4eda82fd56c755c0354c032a74d68a30}{Push\+\_\+operandos} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p, \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} operando, void $\ast$referencia, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
 \item 
 \hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$ \hyperlink{pilha__operandos_8c_a1a305cf54da84e6754e19302713fa3c1}{Pop\+\_\+operandos} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
+\item 
+bool \hyperlink{pilha__operandos_8c_adfcc4bc1d942133ea35b7f5776f94549}{pilha\+Vazia} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
+\item 
+bool \hyperlink{pilha__operandos_8c_a3f29eb413998d19a727f107de0ce77cb}{print\+Vazio} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
 \item 
 \hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$ \hyperlink{pilha__operandos_8c_adaefdd5bf10228846ae7aa24d29d8757}{Topo\+\_\+operandos} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
 \item 
@@ -32,17 +36,29 @@ void \hyperlink{pilha__operandos_8c_abaa4f790f229e0f7e6bd12cf3cd77952}{Imprimir\
 \subsubsection{\texorpdfstring{Imprimir\+Pilha\+\_\+operandos()}{ImprimirPilha\_operandos()}}
 {\footnotesize\ttfamily void Imprimir\+Pilha\+\_\+operandos (\begin{DoxyParamCaption}\item[{\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$}]{p }\end{DoxyParamCaption})}
 
+\mbox{\Hypertarget{pilha__operandos_8c_adfcc4bc1d942133ea35b7f5776f94549}\label{pilha__operandos_8c_adfcc4bc1d942133ea35b7f5776f94549}} 
+\index{pilha\+\_\+operandos.\+c@{pilha\+\_\+operandos.\+c}!pilha\+Vazia@{pilha\+Vazia}}
+\index{pilha\+Vazia@{pilha\+Vazia}!pilha\+\_\+operandos.\+c@{pilha\+\_\+operandos.\+c}}
+\subsubsection{\texorpdfstring{pilha\+Vazia()}{pilhaVazia()}}
+{\footnotesize\ttfamily bool pilha\+Vazia (\begin{DoxyParamCaption}\item[{\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$}]{p }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{pilha__operandos_8c_a1a305cf54da84e6754e19302713fa3c1}\label{pilha__operandos_8c_a1a305cf54da84e6754e19302713fa3c1}} 
 \index{pilha\+\_\+operandos.\+c@{pilha\+\_\+operandos.\+c}!Pop\+\_\+operandos@{Pop\+\_\+operandos}}
 \index{Pop\+\_\+operandos@{Pop\+\_\+operandos}!pilha\+\_\+operandos.\+c@{pilha\+\_\+operandos.\+c}}
 \subsubsection{\texorpdfstring{Pop\+\_\+operandos()}{Pop\_operandos()}}
 {\footnotesize\ttfamily \hyperlink{structpilha__operandos}{pilha\+\_\+operandos}$\ast$ Pop\+\_\+operandos (\begin{DoxyParamCaption}\item[{\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$}]{p }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{pilha__operandos_8c_a7dfd3b6fb1d570ff16cb350c94e3e9ff}\label{pilha__operandos_8c_a7dfd3b6fb1d570ff16cb350c94e3e9ff}} 
+\mbox{\Hypertarget{pilha__operandos_8c_a3f29eb413998d19a727f107de0ce77cb}\label{pilha__operandos_8c_a3f29eb413998d19a727f107de0ce77cb}} 
+\index{pilha\+\_\+operandos.\+c@{pilha\+\_\+operandos.\+c}!print\+Vazio@{print\+Vazio}}
+\index{print\+Vazio@{print\+Vazio}!pilha\+\_\+operandos.\+c@{pilha\+\_\+operandos.\+c}}
+\subsubsection{\texorpdfstring{print\+Vazio()}{printVazio()}}
+{\footnotesize\ttfamily bool print\+Vazio (\begin{DoxyParamCaption}\item[{\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$}]{p }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pilha__operandos_8c_a4eda82fd56c755c0354c032a74d68a30}\label{pilha__operandos_8c_a4eda82fd56c755c0354c032a74d68a30}} 
 \index{pilha\+\_\+operandos.\+c@{pilha\+\_\+operandos.\+c}!Push\+\_\+operandos@{Push\+\_\+operandos}}
 \index{Push\+\_\+operandos@{Push\+\_\+operandos}!pilha\+\_\+operandos.\+c@{pilha\+\_\+operandos.\+c}}
 \subsubsection{\texorpdfstring{Push\+\_\+operandos()}{Push\_operandos()}}
-{\footnotesize\ttfamily \hyperlink{structpilha__operandos}{pilha\+\_\+operandos}$\ast$ Push\+\_\+operandos (\begin{DoxyParamCaption}\item[{\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$}]{p,  }\item[{\hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4}}]{operando,  }\item[{\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}}]{tipo\+\_\+operando }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{structpilha__operandos}{pilha\+\_\+operandos}$\ast$ Push\+\_\+operandos (\begin{DoxyParamCaption}\item[{\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$}]{p,  }\item[{\hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4}}]{operando,  }\item[{void $\ast$}]{referencia,  }\item[{\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}}]{tipo\+\_\+operando }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{pilha__operandos_8c_adaefdd5bf10228846ae7aa24d29d8757}\label{pilha__operandos_8c_adaefdd5bf10228846ae7aa24d29d8757}} 
 \index{pilha\+\_\+operandos.\+c@{pilha\+\_\+operandos.\+c}!Topo\+\_\+operandos@{Topo\+\_\+operandos}}

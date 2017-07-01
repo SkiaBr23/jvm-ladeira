@@ -3,13 +3,14 @@
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}lista\+\_\+operandos.\+h\char`\"{}}\newline
 \subsection*{Funções}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8c_ab714feedbf7dd9e9634145643cad1742}{Criarlista\+\_\+operandos} ()
 \item 
-\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8c_a68fc6f5c584196c0b0a4ea802f12109b}{Inserir\+Inicio\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} operando, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8c_afc0999a6041d8f8dcbfa0805b3a6cc1b}{Inserir\+Inicio\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} operando, void $\ast$referencia, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
 \item 
 \hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8c_a8748c2c7ff4f160afa7aec1b263fb06d}{Inserir\+Fim\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} operando, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
 \item 
@@ -64,13 +65,13 @@ void \hyperlink{lista__operandos_8c_a9c412c67fcf57cf29f600fc6433a2dcd}{Liberar\+
 \subsubsection{\texorpdfstring{Inserir\+Fim\+\_\+operandos()}{InserirFim\_operandos()}}
 {\footnotesize\ttfamily \hyperlink{structlista__operandos}{lista\+\_\+operandos}$\ast$ Inserir\+Fim\+\_\+operandos (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$}]{lis,  }\item[{\hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4}}]{operando,  }\item[{\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}}]{tipo\+\_\+operando }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{lista__operandos_8c_a68fc6f5c584196c0b0a4ea802f12109b}\label{lista__operandos_8c_a68fc6f5c584196c0b0a4ea802f12109b}} 
+\mbox{\Hypertarget{lista__operandos_8c_afc0999a6041d8f8dcbfa0805b3a6cc1b}\label{lista__operandos_8c_afc0999a6041d8f8dcbfa0805b3a6cc1b}} 
 \index{lista\+\_\+operandos.\+c@{lista\+\_\+operandos.\+c}!Inserir\+Inicio\+\_\+operandos@{Inserir\+Inicio\+\_\+operandos}}
 \index{Inserir\+Inicio\+\_\+operandos@{Inserir\+Inicio\+\_\+operandos}!lista\+\_\+operandos.\+c@{lista\+\_\+operandos.\+c}}
 \subsubsection{\texorpdfstring{Inserir\+Inicio\+\_\+operandos()}{InserirInicio\_operandos()}}
-{\footnotesize\ttfamily \hyperlink{structlista__operandos}{lista\+\_\+operandos}$\ast$ Inserir\+Inicio\+\_\+operandos (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$}]{lis,  }\item[{\hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4}}]{operando,  }\item[{\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}}]{tipo\+\_\+operando }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{structlista__operandos}{lista\+\_\+operandos}$\ast$ Inserir\+Inicio\+\_\+operandos (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$}]{lis,  }\item[{\hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4}}]{operando,  }\item[{void $\ast$}]{referencia,  }\item[{\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}}]{tipo\+\_\+operando }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{lista__operandos_8c_aa49007dfb979ab20a47e6075c67522c7}\label{lista__operandos_8c_aa49007dfb979ab20a47e6075c67522c7}} 
+Na hora de dar o pop, tratar \mbox{\Hypertarget{lista__operandos_8c_aa49007dfb979ab20a47e6075c67522c7}\label{lista__operandos_8c_aa49007dfb979ab20a47e6075c67522c7}} 
 \index{lista\+\_\+operandos.\+c@{lista\+\_\+operandos.\+c}!Inserir\+Posicao\+\_\+operandos@{Inserir\+Posicao\+\_\+operandos}}
 \index{Inserir\+Posicao\+\_\+operandos@{Inserir\+Posicao\+\_\+operandos}!lista\+\_\+operandos.\+c@{lista\+\_\+operandos.\+c}}
 \subsubsection{\texorpdfstring{Inserir\+Posicao\+\_\+operandos()}{InserirPosicao\_operandos()}}

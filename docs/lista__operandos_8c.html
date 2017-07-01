@@ -70,14 +70,15 @@ $(function() {
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;limits.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="lista__operandos_8h_source.html">lista_operandos.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funções</h2></td></tr>
 <tr class="memitem:ab714feedbf7dd9e9634145643cad1742"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlista__operandos.html">lista_operandos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lista__operandos_8c.html#ab714feedbf7dd9e9634145643cad1742">Criarlista_operandos</a> ()</td></tr>
 <tr class="separator:ab714feedbf7dd9e9634145643cad1742"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68fc6f5c584196c0b0a4ea802f12109b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlista__operandos.html">lista_operandos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lista__operandos_8c.html#a68fc6f5c584196c0b0a4ea802f12109b">InserirInicio_operandos</a> (<a class="el" href="structlista__operandos.html">lista_operandos</a> *lis, <a class="el" href="lista__operandos_8h.html#a7bc084923d20fddbe46335d882c6fda2">i4</a> operando, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> tipo_operando)</td></tr>
-<tr class="separator:a68fc6f5c584196c0b0a4ea802f12109b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc0999a6041d8f8dcbfa0805b3a6cc1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlista__operandos.html">lista_operandos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lista__operandos_8c.html#afc0999a6041d8f8dcbfa0805b3a6cc1b">InserirInicio_operandos</a> (<a class="el" href="structlista__operandos.html">lista_operandos</a> *lis, <a class="el" href="lista__operandos_8h.html#a7bc084923d20fddbe46335d882c6fda2">i4</a> operando, void *referencia, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> tipo_operando)</td></tr>
+<tr class="separator:afc0999a6041d8f8dcbfa0805b3a6cc1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8748c2c7ff4f160afa7aec1b263fb06d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlista__operandos.html">lista_operandos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lista__operandos_8c.html#a8748c2c7ff4f160afa7aec1b263fb06d">InserirFim_operandos</a> (<a class="el" href="structlista__operandos.html">lista_operandos</a> *lis, <a class="el" href="lista__operandos_8h.html#a7bc084923d20fddbe46335d882c6fda2">i4</a> operando, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> tipo_operando)</td></tr>
 <tr class="separator:a8748c2c7ff4f160afa7aec1b263fb06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9bbc289de84fb8d1b8ea40fb8ac510e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlista__operandos.html">lista_operandos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lista__operandos_8c.html#aa9bbc289de84fb8d1b8ea40fb8ac510e">RemoverInicio_operandos</a> (<a class="el" href="structlista__operandos.html">lista_operandos</a> *lis)</td></tr>
@@ -231,8 +232,8 @@ Funções</h2></td></tr>
 
 </div>
 </div>
-<a id="a68fc6f5c584196c0b0a4ea802f12109b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68fc6f5c584196c0b0a4ea802f12109b">&#9670;&nbsp;</a></span>InserirInicio_operandos()</h2>
+<a id="afc0999a6041d8f8dcbfa0805b3a6cc1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc0999a6041d8f8dcbfa0805b3a6cc1b">&#9670;&nbsp;</a></span>InserirInicio_operandos()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,6 +253,12 @@ Funções</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>referencia</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
           <td class="paramname"><em>tipo_operando</em>&#160;</td>
         </tr>
@@ -262,6 +269,7 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Na hora de dar o pop, tratar </p>
 
 </div>
 </div>

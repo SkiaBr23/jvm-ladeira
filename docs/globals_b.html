@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>JVM - Grupo 4: Membros dos Arquivos</title>
+<title>JVM - Grupo 4: Globais</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,21 +61,29 @@ $(function() {
 </div>
 
 <div class="contents">
-<div class="textblock">Esta é a lista de todos os membros dos arquivos com referências para seus respectivos arquivos:</div>
+<div class="textblock">Esta é a lista de todas as funções, variáveis, definições, enumerações e definições de tipos com referências para seus respectivos arquivos:</div>
 
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>baload
 : <a class="el" href="instrucoes_8h.html#aa19b38b70e34a2bf9af3be5aba356668abecb602a54dcda1e607b0250d9402160">instrucoes.h</a>
 </li>
+<li>baload_impl()
+: <a class="el" href="interpretador_8c.html#a83dca00976d35e93fa0ddd237cc5f91b">interpretador.c</a>
+, <a class="el" href="interpretador_8h.html#a83dca00976d35e93fa0ddd237cc5f91b">interpretador.h</a>
+</li>
 <li>bastore
 : <a class="el" href="instrucoes_8h.html#aa19b38b70e34a2bf9af3be5aba356668aa3a5161e24d208ac69f6250e98c75fb4">instrucoes.h</a>
+</li>
+<li>bastore_impl()
+: <a class="el" href="interpretador_8c.html#aa7cd9188ab992cae94e72e685fb103e4">interpretador.c</a>
+, <a class="el" href="interpretador_8h.html#aa7cd9188ab992cae94e72e685fb103e4">interpretador.h</a>
 </li>
 <li>bipush
 : <a class="el" href="instrucoes_8h.html#aa19b38b70e34a2bf9af3be5aba356668afd6c7d5aac2787536813938ae70e9f73">instrucoes.h</a>
 </li>
 <li>bipush_impl()
-: <a class="el" href="interpretador_8c.html#aeffb1c7b9032ea81f832caa6f8308dab">interpretador.c</a>
-, <a class="el" href="interpretador_8h.html#aeffb1c7b9032ea81f832caa6f8308dab">interpretador.h</a>
+: <a class="el" href="interpretador_8c.html#af8f40dfd4bef8eaa9ce50c11ff42a920">interpretador.c</a>
+, <a class="el" href="interpretador_8h.html#af8f40dfd4bef8eaa9ce50c11ff42a920">interpretador.h</a>
 </li>
 <li>BOOLEAN_OP
 : <a class="el" href="lista__operandos_8h.html#a4e4626fe04fb7e693e4747300a58f31fa32ea4cf3e4933d06248caea66308f31c">lista_operandos.h</a>
@@ -90,27 +98,37 @@ $(function() {
 : <a class="el" href="leitura_8c.html#ac2497de7aaaa254ef6528bfa85205686">leitura.c</a>
 , <a class="el" href="leitura_8h.html#ac2497de7aaaa254ef6528bfa85205686">leitura.h</a>
 </li>
+<li>BuscarCPClasseCorrente_classes()
+: <a class="el" href="lista__classes_8h.html#a86aba2d3490f16f5b8e982641d8005bb">lista_classes.h</a>
+, <a class="el" href="lista__classes_8c.html#a86aba2d3490f16f5b8e982641d8005bb">lista_classes.c</a>
+</li>
 <li>BuscarElemento()
 : <a class="el" href="lista__modelo_8c.html#a6e2af4da846d074b25c8d421c588bb1c">lista_modelo.c</a>
 , <a class="el" href="lista__modelo_8h.html#a6e2af4da846d074b25c8d421c588bb1c">lista_modelo.h</a>
 </li>
-<li>BuscarElemento_frames()
-: <a class="el" href="lista__frames_8h.html#a6352bb9ca247434066a378f2a27b833f">lista_frames.h</a>
+<li>BuscarElemento_classes()
+: <a class="el" href="lista__classes_8h.html#aafc5fe146c0b29e710dfeae3989a9648">lista_classes.h</a>
+, <a class="el" href="lista__classes_8c.html#aafc5fe146c0b29e710dfeae3989a9648">lista_classes.c</a>
 </li>
 <li>BuscarElemento_operandos()
-: <a class="el" href="lista__operandos_8h.html#a4ec017563a6ce7c74f40f9af8aab3943">lista_operandos.h</a>
-, <a class="el" href="lista__operandos_8c.html#a4ec017563a6ce7c74f40f9af8aab3943">lista_operandos.c</a>
+: <a class="el" href="lista__operandos_8c.html#a4ec017563a6ce7c74f40f9af8aab3943">lista_operandos.c</a>
+, <a class="el" href="lista__operandos_8h.html#a4ec017563a6ce7c74f40f9af8aab3943">lista_operandos.h</a>
+</li>
+<li>BuscarFieldClasseCorrente_classes()
+: <a class="el" href="lista__classes_8c.html#aecf4550fb62164a78cf63d7311e66aff">lista_classes.c</a>
+, <a class="el" href="lista__classes_8h.html#aecf4550fb62164a78cf63d7311e66aff">lista_classes.h</a>
+</li>
+<li>BuscarMethodClasseCorrente_classes()
+: <a class="el" href="lista__classes_8c.html#ae87a6b48366ebffe49cb9e705f8c896d">lista_classes.c</a>
+, <a class="el" href="lista__classes_8h.html#ae87a6b48366ebffe49cb9e705f8c896d">lista_classes.h</a>
 </li>
 <li>BuscarPosicao()
-: <a class="el" href="lista__modelo_8c.html#a9a5d51691dc0f6c55198b2dd24613b73">lista_modelo.c</a>
-, <a class="el" href="lista__modelo_8h.html#a9a5d51691dc0f6c55198b2dd24613b73">lista_modelo.h</a>
-</li>
-<li>BuscarPosicao_frames()
-: <a class="el" href="lista__frames_8h.html#aa3da5130faca0b72ded9e121df6bbd4b">lista_frames.h</a>
+: <a class="el" href="lista__modelo_8h.html#a9a5d51691dc0f6c55198b2dd24613b73">lista_modelo.h</a>
+, <a class="el" href="lista__modelo_8c.html#a9a5d51691dc0f6c55198b2dd24613b73">lista_modelo.c</a>
 </li>
 <li>BuscarPosicao_operandos()
-: <a class="el" href="lista__operandos_8c.html#aadadc29517d57ca747549d09fd6f3ff8">lista_operandos.c</a>
-, <a class="el" href="lista__operandos_8h.html#aadadc29517d57ca747549d09fd6f3ff8">lista_operandos.h</a>
+: <a class="el" href="lista__operandos_8h.html#aadadc29517d57ca747549d09fd6f3ff8">lista_operandos.h</a>
+, <a class="el" href="lista__operandos_8c.html#aadadc29517d57ca747549d09fd6f3ff8">lista_operandos.c</a>
 </li>
 <li>BYTE_OP
 : <a class="el" href="lista__operandos_8h.html#a4e4626fe04fb7e693e4747300a58f31fa8640b25ef78414a830fed77ea87c1f32">lista_operandos.h</a>

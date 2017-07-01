@@ -2,7 +2,7 @@
 \label{lista__operandos_8h}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdint.\+h$>$}\newline
-\subsection*{Componentes}
+\subsection*{Estruturas de Dados}
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structlista__operandos}{lista\+\_\+operandos}
@@ -22,6 +22,8 @@ typedef uint8\+\_\+t \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3
 typedef uint16\+\_\+t \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2}
 \item 
 typedef uint32\+\_\+t \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4}
+\item 
+typedef uint64\+\_\+t \hyperlink{lista__operandos_8h_ae4d1c3d548028e31400378ec81026110}{u8}
 \item 
 typedef int8\+\_\+t \hyperlink{lista__operandos_8h_a6be0d08d5318753334c788d23128142e}{i1}
 \item 
@@ -50,7 +52,18 @@ enum \hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31f}{tipos\+\_
 \hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa9d7b0e1f016c303f827c81ab00297bdd}{D\+O\+U\+B\+L\+E\+\_\+\+OP}, 
 \newline
 \hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fad177591f08eabd0ac4821477583a2017}{R\+E\+T\+U\+R\+N\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+OP}, 
-\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa7e1780a7fe80e9662c912c4dc0287c01}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+OP}
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa7e1780a7fe80e9662c912c4dc0287c01}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31faf8e3811bfd6668cfc098279958413eb9}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fae9a2c5571ddfb44eb2567ac9963236f0}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP}, 
+\newline
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa43b9a6149589c90cf24a1fb522669636}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa650c71fd895bcba8a6d779007e5e1943}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fab1fe63c9bbc6a67bbaf7acfee4920e87}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fab856ca3a684edce948ad99c89526321c}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+RT}, 
+\newline
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa86ff59343d6f8b574ad85da295bed34c}{OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa2206d96b3a68e10ca3b87f199483a21f}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa9b7bc3d03300a17dcf0497a143643655}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP}
  \}
 \end{DoxyCompactItemize}
 \subsection*{Funções}
@@ -58,7 +71,7 @@ enum \hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31f}{tipos\+\_
 \item 
 \hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_a4f0e71ddfa31aa409ae0496b2cd27a5a}{Criar\+Lista\+\_\+operandos} ()
 \item 
-\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_a68fc6f5c584196c0b0a4ea802f12109b}{Inserir\+Inicio\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} operando, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_afc0999a6041d8f8dcbfa0805b3a6cc1b}{Inserir\+Inicio\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} operando, void $\ast$referencia, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
 \item 
 \hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_a8748c2c7ff4f160afa7aec1b263fb06d}{Inserir\+Fim\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} operando, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
 \item 
@@ -152,6 +165,12 @@ void \hyperlink{lista__operandos_8h_a9c412c67fcf57cf29f600fc6433a2dcd}{Liberar\+
 \subsubsection{\texorpdfstring{u4}{u4}}
 {\footnotesize\ttfamily typedef uint32\+\_\+t \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4}}
 
+\mbox{\Hypertarget{lista__operandos_8h_ae4d1c3d548028e31400378ec81026110}\label{lista__operandos_8h_ae4d1c3d548028e31400378ec81026110}} 
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!u8@{u8}}
+\index{u8@{u8}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection{\texorpdfstring{u8}{u8}}
+{\footnotesize\ttfamily typedef uint64\+\_\+t \hyperlink{lista__operandos_8h_ae4d1c3d548028e31400378ec81026110}{u8}}
+
 
 
 \subsection{Enumerações}
@@ -202,6 +221,42 @@ R\+E\+T\+U\+R\+N\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+OP&\\
 R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+OP&\\
 \hline
 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP}}}\mbox{\Hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31faf8e3811bfd6668cfc098279958413eb9}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31faf8e3811bfd6668cfc098279958413eb9}} 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP}}}\mbox{\Hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fae9a2c5571ddfb44eb2567ac9963236f0}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fae9a2c5571ddfb44eb2567ac9963236f0}} 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP}}}\mbox{\Hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa43b9a6149589c90cf24a1fb522669636}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa43b9a6149589c90cf24a1fb522669636}} 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP}}}\mbox{\Hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa650c71fd895bcba8a6d779007e5e1943}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa650c71fd895bcba8a6d779007e5e1943}} 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP}}}\mbox{\Hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fab1fe63c9bbc6a67bbaf7acfee4920e87}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fab1fe63c9bbc6a67bbaf7acfee4920e87}} 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+RT@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+RT}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+RT@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+RT}}}\mbox{\Hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fab856ca3a684edce948ad99c89526321c}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fab856ca3a684edce948ad99c89526321c}} 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+RT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OP@{OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!OP@{OP}}}\mbox{\Hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa86ff59343d6f8b574ad85da295bed34c}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa86ff59343d6f8b574ad85da295bed34c}} 
+OP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP}}}\mbox{\Hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa2206d96b3a68e10ca3b87f199483a21f}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa2206d96b3a68e10ca3b87f199483a21f}} 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP}}}\mbox{\Hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa9b7bc3d03300a17dcf0497a143643655}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa9b7bc3d03300a17dcf0497a143643655}} 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP&\\
+\hline
+
 \end{DoxyEnumFields}
 
 
@@ -236,13 +291,13 @@ R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+OP&\\
 \subsubsection{\texorpdfstring{Inserir\+Fim\+\_\+operandos()}{InserirFim\_operandos()}}
 {\footnotesize\ttfamily \hyperlink{structlista__operandos}{lista\+\_\+operandos}$\ast$ Inserir\+Fim\+\_\+operandos (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$}]{lis,  }\item[{\hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4}}]{operando,  }\item[{\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}}]{tipo\+\_\+operando }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{lista__operandos_8h_a68fc6f5c584196c0b0a4ea802f12109b}\label{lista__operandos_8h_a68fc6f5c584196c0b0a4ea802f12109b}} 
+\mbox{\Hypertarget{lista__operandos_8h_afc0999a6041d8f8dcbfa0805b3a6cc1b}\label{lista__operandos_8h_afc0999a6041d8f8dcbfa0805b3a6cc1b}} 
 \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Inserir\+Inicio\+\_\+operandos@{Inserir\+Inicio\+\_\+operandos}}
 \index{Inserir\+Inicio\+\_\+operandos@{Inserir\+Inicio\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
 \subsubsection{\texorpdfstring{Inserir\+Inicio\+\_\+operandos()}{InserirInicio\_operandos()}}
-{\footnotesize\ttfamily \hyperlink{structlista__operandos}{lista\+\_\+operandos}$\ast$ Inserir\+Inicio\+\_\+operandos (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$}]{lis,  }\item[{\hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4}}]{operando,  }\item[{\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}}]{tipo\+\_\+operando }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \hyperlink{structlista__operandos}{lista\+\_\+operandos}$\ast$ Inserir\+Inicio\+\_\+operandos (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$}]{lis,  }\item[{\hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4}}]{operando,  }\item[{void $\ast$}]{referencia,  }\item[{\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}}]{tipo\+\_\+operando }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{lista__operandos_8h_aa49007dfb979ab20a47e6075c67522c7}\label{lista__operandos_8h_aa49007dfb979ab20a47e6075c67522c7}} 
+Na hora de dar o pop, tratar \mbox{\Hypertarget{lista__operandos_8h_aa49007dfb979ab20a47e6075c67522c7}\label{lista__operandos_8h_aa49007dfb979ab20a47e6075c67522c7}} 
 \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Inserir\+Posicao\+\_\+operandos@{Inserir\+Posicao\+\_\+operandos}}
 \index{Inserir\+Posicao\+\_\+operandos@{Inserir\+Posicao\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
 \subsubsection{\texorpdfstring{Inserir\+Posicao\+\_\+operandos()}{InserirPosicao\_operandos()}}
