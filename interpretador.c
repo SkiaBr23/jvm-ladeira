@@ -774,9 +774,21 @@ void astore_0_impl(frame *f, u1 par1, u1 par2){
 	*(f->v[0].variavel) = (i4) valor->topo->referencia;
 }
 
+// TODO: verificar
 void astore_1_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[1].variavel) = (i4) valor->topo->referencia;
+	printf("REFERENCIA ASTORE1 ============= %04x \n", (i4)valor->topo->referencia);
+
+
+   // REFERENCIA APONTA PARA VARIAVEL QUE CONTEM O ENDERECO BASE DO ARRAY
+
+
+	i4 *endereco = ((i4) valor->topo->referencia) + (1 * sizeof(i4));
+	// array->topo->referencia+indice->topo->operando = valor;
+
+	printf("VALOR OPERANDITO ====================>>> %d\n", endereco );
+
 }
 
 void astore_2_impl(frame *f, u1 par1, u1 par2){
@@ -807,14 +819,36 @@ void iastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *array = Pop_operandos(f->p);
 
 
-<<<<<<< HEAD
-	printf("TIPO OPERANDO ARR %d\n",array->topo->tipo_operando );
-	i4 *endereco = ((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i4));
-=======
-	// array->topo->referencia+indice->topo->operando = valor;
+	//printf("REFERENCIA BASE ====== %04x\n",	 *((i4*)array->topo->referencia) );
+	printf("CONTEUDO REF ARR + INDICE %04x\n", (i4 *) (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i4))));
+	i4 *endereco_array = (i4 *) (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i4)));
 
->>>>>>> de20dcf524dfbcf67e82ff369d72b2655475d93c
-	endereco = valor->topo->operando;
+
+	//	void *endereco = NULL;
+	//  i4 referencia = 0;
+
+	//endereco = (i4*) malloc((countnum+1)*sizeof(i4));
+	//referencia = (i4) *((i4*) endereco);
+
+
+
+
+
+
+
+
+
+	// array->topo->referencia+indice->topo->operando = valor;
+	i4 endereco_valor = valor->topo->operando;
+	//printf("ENDERECO VALORITO ========++++> %d\n",endereco_valor);
+
+
+	///*endereco_array = endereco_valor;
+
+	//printf("VALOR SETADO FINAL ==========+> %d\n",*endereco_array);
+
+	/*printf("IASTORE REFERENZA ============ %04x\n",array->topo->referencia);
+	printf("IASTORE NO VALOR  ============ %d\n",endereco );*/
 }
 
 void lastore_impl(frame *f, u1 par1, u1 par2){
@@ -2517,6 +2551,7 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 			case T_INT:
 				endereco = (i4*) malloc((countnum+1)*sizeof(i4));
 				referencia = (i4) *((i4*) endereco);
+				printf("NEWARRAY ========== %04x ======== %04x\n",endereco,referencia);
 			break;
 
 			case T_LONG:
