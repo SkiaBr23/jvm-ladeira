@@ -1,3 +1,8 @@
+/**
+ * @file lista_frames.c
+ * @brief Funções de controle da lista de frames
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

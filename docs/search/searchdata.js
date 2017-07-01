@@ -8,7 +8,8 @@ var indexSectionsWithContent =
   5: "abcefijlmprstuv",
   6: "ait",
   7: "abcdefgijlmnoprstvw",
-  8: "cdefmnpst"
+  8: "cdefmnpst",
+  9: "l"
 };
 
 var indexSectionNames =
@@ -21,7 +22,8 @@ var indexSectionNames =
   5: "typedefs",
   6: "enums",
   7: "enumvalues",
-  8: "defines"
+  8: "defines",
+  9: "pages"
 };
 
 var indexSectionLabels =
@@ -34,6 +36,7 @@ var indexSectionLabels =
   5: "Definições de Tipos",
   6: "Enumerações",
   7: "Valores de enumerações",
-  8: "Definições e Macros"
+  8: "Definições e Macros",
+  9: "Páginas"
 };
 

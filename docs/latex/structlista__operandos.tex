@@ -2,6 +2,11 @@
 \label{structlista__operandos}\index{lista\+\_\+operandos@{lista\+\_\+operandos}}
 
 
+Estrutura de dados da lista de operandos.  
+
+
+
+
 {\ttfamily \#include $<$lista\+\_\+operandos.\+h$>$}
 
 \subsection*{Campos de Dados}
@@ -15,42 +20,50 @@ void $\ast$ \hyperlink{structlista__operandos_a5efba56f9f00715a8c9558292b851d37}
 \item 
 struct \hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{structlista__operandos_a90699e5c7f710177b37754cd5231c9f5}{prox}
 \item 
-struct \hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{structlista__operandos_abe9d6cbd0d571fc22564a95b17a98123}{ant}
+struct \hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{structlista__operandos_a23159c6dfeb873d67e8d51c312c551ee}{ant}
 \end{DoxyCompactItemize}
 
 
+\subsection{Descrição Detalhada}
+Estrutura de dados da lista de operandos. 
+
+\begin{DoxySeeAlso}{Veja também}
+\href{https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-2.html#jvms-2.6.2}{\tt https\+://docs.\+oracle.\+com/javase/specs/jvms/se7/html/jvms-\/2.\+html\#jvms-\/2.\+6.\+2} 
+\end{DoxySeeAlso}
+
+
 \subsection{Campos}
-\mbox{\Hypertarget{structlista__operandos_abe9d6cbd0d571fc22564a95b17a98123}\label{structlista__operandos_abe9d6cbd0d571fc22564a95b17a98123}} 
+\mbox{\Hypertarget{structlista__operandos_a23159c6dfeb873d67e8d51c312c551ee}\label{structlista__operandos_a23159c6dfeb873d67e8d51c312c551ee}} 
 \index{lista\+\_\+operandos@{lista\+\_\+operandos}!ant@{ant}}
 \index{ant@{ant}!lista\+\_\+operandos@{lista\+\_\+operandos}}
 \subsubsection{\texorpdfstring{ant}{ant}}
-{\footnotesize\ttfamily struct \hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ lista\+\_\+operandos\+::ant}
+{\footnotesize\ttfamily struct \hyperlink{structlista__operandos}{lista\+\_\+operandos}$\ast$ lista\+\_\+operandos\+::ant}
 
-\mbox{\Hypertarget{structlista__operandos_ab978dbacb8f42fd87f19cca8e804d121}\label{structlista__operandos_ab978dbacb8f42fd87f19cca8e804d121}} 
+Ponteiro de acesso ao nó anterior da lista \mbox{\Hypertarget{structlista__operandos_ab978dbacb8f42fd87f19cca8e804d121}\label{structlista__operandos_ab978dbacb8f42fd87f19cca8e804d121}} 
 \index{lista\+\_\+operandos@{lista\+\_\+operandos}!operando@{operando}}
 \index{operando@{operando}!lista\+\_\+operandos@{lista\+\_\+operandos}}
 \subsubsection{\texorpdfstring{operando}{operando}}
 {\footnotesize\ttfamily \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} lista\+\_\+operandos\+::operando}
 
-\mbox{\Hypertarget{structlista__operandos_a90699e5c7f710177b37754cd5231c9f5}\label{structlista__operandos_a90699e5c7f710177b37754cd5231c9f5}} 
+Caso o operando seja um valor, é armazenado nesta variável \mbox{\Hypertarget{structlista__operandos_a90699e5c7f710177b37754cd5231c9f5}\label{structlista__operandos_a90699e5c7f710177b37754cd5231c9f5}} 
 \index{lista\+\_\+operandos@{lista\+\_\+operandos}!prox@{prox}}
 \index{prox@{prox}!lista\+\_\+operandos@{lista\+\_\+operandos}}
 \subsubsection{\texorpdfstring{prox}{prox}}
 {\footnotesize\ttfamily struct \hyperlink{structlista__operandos}{lista\+\_\+operandos}$\ast$ lista\+\_\+operandos\+::prox}
 
-\mbox{\Hypertarget{structlista__operandos_a5efba56f9f00715a8c9558292b851d37}\label{structlista__operandos_a5efba56f9f00715a8c9558292b851d37}} 
+Ponteiro de acesso ao próximo nó da lista \mbox{\Hypertarget{structlista__operandos_a5efba56f9f00715a8c9558292b851d37}\label{structlista__operandos_a5efba56f9f00715a8c9558292b851d37}} 
 \index{lista\+\_\+operandos@{lista\+\_\+operandos}!referencia@{referencia}}
 \index{referencia@{referencia}!lista\+\_\+operandos@{lista\+\_\+operandos}}
 \subsubsection{\texorpdfstring{referencia}{referencia}}
 {\footnotesize\ttfamily void$\ast$ lista\+\_\+operandos\+::referencia}
 
-\mbox{\Hypertarget{structlista__operandos_af64bc84846f21a809f68b783f0e39f40}\label{structlista__operandos_af64bc84846f21a809f68b783f0e39f40}} 
+Caso o operando seja uma referência, é armazenado nesta variável \mbox{\Hypertarget{structlista__operandos_af64bc84846f21a809f68b783f0e39f40}\label{structlista__operandos_af64bc84846f21a809f68b783f0e39f40}} 
 \index{lista\+\_\+operandos@{lista\+\_\+operandos}!tipo\+\_\+operando@{tipo\+\_\+operando}}
 \index{tipo\+\_\+operando@{tipo\+\_\+operando}!lista\+\_\+operandos@{lista\+\_\+operandos}}
 \subsubsection{\texorpdfstring{tipo\+\_\+operando}{tipo\_operando}}
 {\footnotesize\ttfamily \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} lista\+\_\+operandos\+::tipo\+\_\+operando}
 
-
+Tipo do operando armazenado na estrutura. A lista de opções está definida na enumeração {\ttfamily tipos\+\_\+operandos} 
 
 A documentação para esta estrutura foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
 \item 

@@ -19,7 +19,7 @@
  * 
  */
 struct pilha_frames{
-	struct lista_frames *topo; /**< Detailed description after the member */
+	struct lista_frames *topo; /**< Ponteiro para o topo da pilha de frames */
 };
 
 /**

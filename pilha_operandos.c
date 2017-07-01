@@ -1,3 +1,7 @@
+/**
+ * @file pilha_operandos.c
+ * @brief Arquivo de implementação das funções de controle da pilha de operandos
+ */
 #include "pilha_operandos.h"
 #include <stdio.h>
 #include <stdlib.h>

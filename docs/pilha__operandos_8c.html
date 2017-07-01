@@ -67,6 +67,9 @@ $(function() {
 <div class="title">Referência do Arquivo pilha_operandos.c</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Arquivo de implementação das funções de controle da pilha de operandos.  
+<a href="#details">Mais...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="pilha__operandos_8h_source.html">pilha_operandos.h</a>&quot;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
@@ -75,21 +78,29 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funções</h2></td></tr>
 <tr class="memitem:aa3b2bde86d0b8c3ed4d1c4e32c047b8c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpilha__operandos.html">pilha_operandos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pilha__operandos_8c.html#aa3b2bde86d0b8c3ed4d1c4e32c047b8c">CriarPilha_operandos</a> ()</td></tr>
+<tr class="memdesc:aa3b2bde86d0b8c3ed4d1c4e32c047b8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa uma pilha de frames.  <a href="#aa3b2bde86d0b8c3ed4d1c4e32c047b8c">Mais...</a><br /></td></tr>
 <tr class="separator:aa3b2bde86d0b8c3ed4d1c4e32c047b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4eda82fd56c755c0354c032a74d68a30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpilha__operandos.html">pilha_operandos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pilha__operandos_8c.html#a4eda82fd56c755c0354c032a74d68a30">Push_operandos</a> (<a class="el" href="structpilha__operandos.html">pilha_operandos</a> *p, <a class="el" href="lista__operandos_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> operando, void *referencia, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> tipo_operando)</td></tr>
+<tr class="memdesc:a4eda82fd56c755c0354c032a74d68a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insere um operando no topo da pilha de operandos.  <a href="#a4eda82fd56c755c0354c032a74d68a30">Mais...</a><br /></td></tr>
 <tr class="separator:a4eda82fd56c755c0354c032a74d68a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a305cf54da84e6754e19302713fa3c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpilha__operandos.html">pilha_operandos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pilha__operandos_8c.html#a1a305cf54da84e6754e19302713fa3c1">Pop_operandos</a> (<a class="el" href="structpilha__operandos.html">pilha_operandos</a> *p)</td></tr>
+<tr class="memdesc:a1a305cf54da84e6754e19302713fa3c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove o operando localizado no topo da pilha de operandos.  <a href="#a1a305cf54da84e6754e19302713fa3c1">Mais...</a><br /></td></tr>
 <tr class="separator:a1a305cf54da84e6754e19302713fa3c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfcc4bc1d942133ea35b7f5776f94549"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pilha__operandos_8c.html#adfcc4bc1d942133ea35b7f5776f94549">pilhaVazia</a> (<a class="el" href="structpilha__operandos.html">pilha_operandos</a> *p)</td></tr>
+<tr class="memdesc:adfcc4bc1d942133ea35b7f5776f94549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica se a pilha de operandos está vazia.  <a href="#adfcc4bc1d942133ea35b7f5776f94549">Mais...</a><br /></td></tr>
 <tr class="separator:adfcc4bc1d942133ea35b7f5776f94549"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f29eb413998d19a727f107de0ce77cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pilha__operandos_8c.html#a3f29eb413998d19a727f107de0ce77cb">printVazio</a> (<a class="el" href="structpilha__operandos.html">pilha_operandos</a> *p)</td></tr>
 <tr class="separator:a3f29eb413998d19a727f107de0ce77cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaefdd5bf10228846ae7aa24d29d8757"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpilha__operandos.html">pilha_operandos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pilha__operandos_8c.html#adaefdd5bf10228846ae7aa24d29d8757">Topo_operandos</a> (<a class="el" href="structpilha__operandos.html">pilha_operandos</a> *p)</td></tr>
+<tr class="memdesc:adaefdd5bf10228846ae7aa24d29d8757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acessa o topo da pilha de operandos.  <a href="#adaefdd5bf10228846ae7aa24d29d8757">Mais...</a><br /></td></tr>
 <tr class="separator:adaefdd5bf10228846ae7aa24d29d8757"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abaa4f790f229e0f7e6bd12cf3cd77952"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pilha__operandos_8c.html#abaa4f790f229e0f7e6bd12cf3cd77952">ImprimirPilha_operandos</a> (<a class="el" href="structpilha__operandos.html">pilha_operandos</a> *p)</td></tr>
+<tr class="memdesc:abaa4f790f229e0f7e6bd12cf3cd77952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imprime na tela uma representação textual da pilha de operandos.  <a href="#abaa4f790f229e0f7e6bd12cf3cd77952">Mais...</a><br /></td></tr>
 <tr class="separator:abaa4f790f229e0f7e6bd12cf3cd77952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Funções</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição Detalhada</h2>
+<div class="textblock"><p>Arquivo de implementação das funções de controle da pilha de operandos. </p>
+</div><h2 class="groupheader">Funções</h2>
 <a id="aa3b2bde86d0b8c3ed4d1c4e32c047b8c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa3b2bde86d0b8c3ed4d1c4e32c047b8c">&#9670;&nbsp;</a></span>CriarPilha_operandos()</h2>
 
@@ -104,6 +115,9 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Inicializa uma pilha de frames. </p>
+<p>Esta função inicializa uma pilha de operandos vazia para utilização posterior </p><dl class="section return"><dt>Retorna</dt><dd>Pilha de operandos com valor nulo </dd></dl>
 
 </div>
 </div>
@@ -123,6 +137,15 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Imprime na tela uma representação textual da pilha de operandos. </p>
+<p>Esta função apenas invoca a função ImprimirLista_operandos do <a class="el" href="lista__operandos_8h.html" title="Estrutura e cabeçalho da implementação da pilha de operandos do programa. ">lista_operandos.h</a></p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Ponteiro para a pilha de operandos a ser impressa </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="adfcc4bc1d942133ea35b7f5776f94549"></a>
@@ -141,6 +164,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Verifica se a pilha de operandos está vazia. </p>
+<p>A função checa se o topo da pilha contém o valor NULO.</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Ponteiro para a pilha de operandos </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>booleano TRUE (pilha está vazia) ou FALSE (pilha não está vazia) </dd></dl>
+
 </div>
 </div>
 <a id="a1a305cf54da84e6754e19302713fa3c1"></a>
@@ -158,6 +191,15 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Remove o operando localizado no topo da pilha de operandos. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Ponteiro para a pilha de operandos </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Pilha de operandos com o elemento do topo removido </dd></dl>
 
 </div>
 </div>
@@ -217,6 +259,18 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Insere um operando no topo da pilha de operandos. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Ponteiro para a pilha de operandos </td></tr>
+    <tr><td class="paramname">operando</td><td>Operando de valor direto a ser inserido na pilha </td></tr>
+    <tr><td class="paramname">referencia</td><td>Operando de referência a ser inserido na lista </td></tr>
+    <tr><td class="paramname">tipo_operando</td><td>Definição do tipo de operando a ser inserido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Ponteiro para a pilha de operandos após a inserção do novo operando </dd></dl>
+
 </div>
 </div>
 <a id="adaefdd5bf10228846ae7aa24d29d8757"></a>
@@ -234,6 +288,15 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Acessa o topo da pilha de operandos. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Ponteiro para a pilha de operandos </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Ponteiro referente ao topo da pilha </dd></dl>
 
 </div>
 </div>

@@ -1,10 +1,15 @@
-#include <stdio.h>
+/**
+ * @file lista_operandos.c
+ * @brief Funções de controle da lista de operandos
+ */
+
+ #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
 #include "lista_operandos.h"
 
-lista_operandos* Criarlista_operandos(){
+lista_operandos* CriarLista_operandos(){
 	return NULL;
 }
 
@@ -15,7 +20,7 @@ lista_operandos* InserirInicio_operandos(lista_operandos* lis, i4 operando, void
 		novo->referencia = NULL;
 	}
 	else{
-		/** Na hora de dar o pop, tratar **/
+		/* Na hora de dar o pop, tratar */
 		novo->operando = -INT_MAX;
 		novo->referencia = referencia;
 	}
@@ -30,7 +35,7 @@ lista_operandos* InserirInicio_operandos(lista_operandos* lis, i4 operando, void
 	return novo;
 }
 
-lista_operandos* InserirFim_operandos(lista_operandos* lis, i4 operando, u1 tipo_operando){
+lista_operandos* InserirFim_operandos(lista_operandos* lis, i4 operando, void *referencia, u1 tipo_operando){
 	lista_operandos *novo; lista_operandos *ant = NULL; lista_operandos *p = lis;
 	
 	while(p!=NULL){
@@ -39,7 +44,15 @@ lista_operandos* InserirFim_operandos(lista_operandos* lis, i4 operando, u1 tipo
 	}
 	
 	novo = malloc(sizeof(lista_operandos));
+
+	if(tipo_operando <= 8){
 	novo->operando = operando;
+	novo->referencia = NULL;
+	} 
+	else {
+		novo->operando = -INT_MAX;
+		novo->referencia = referencia;
+	}
 	novo->tipo_operando = tipo_operando;
 	novo->prox = NULL;
 	novo->ant = ant;
