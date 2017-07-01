@@ -432,7 +432,7 @@ void dload_impl(frame *f, u1 index, u1 par2){
 
 //Carrega referencia de array para a pilha de operandos
 void aload_impl(frame *f, u1 index, u1 par1){
-	Push_operandos(f->p,-INT_MAX,f->v[index].variavel,REFERENCE_OP);
+	Push_operandos(f->p,-INT_MAX,*f->v[index].variavel,f->v[index].tipo_variavel);
 }
 
 //Carrega inteiro na posicao 0 para a pilha
@@ -507,19 +507,19 @@ void dload_3_impl(frame *f, u1 par1, u1 par2){
 //Carrega referencia na posicao 0 para a pilha
 void aload_0_impl(frame *f, u1 par1, u1 par2){
 	printf("\n\nEXECUTANDO ALOAD_0\n\n");
-	Push_operandos(f->p,-INT_MAX,f->v[0].variavel,REFERENCE_OP);
+	Push_operandos(f->p,-INT_MAX,*f->v[0].variavel,f->v[0].tipo_variavel);
 }
 
 void aload_1_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,f->v[1].variavel,REFERENCE_OP);
+	Push_operandos(f->p,-INT_MAX,*f->v[1].variavel,f->v[1].tipo_variavel);
 }
 
 void aload_2_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,f->v[2].variavel,REFERENCE_OP);
+	Push_operandos(f->p,-INT_MAX,*f->v[2].variavel,f->v[2].tipo_variavel);
 }
 
 void aload_3_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,f->v[3].variavel,REFERENCE_OP);
+	Push_operandos(f->p,-INT_MAX,*f->v[3].variavel,f->v[3].tipo_variavel);
 }
 
 
@@ -528,13 +528,10 @@ void aload_3_impl(frame *f, u1 par1, u1 par2){
 void iaload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
-	
+
 	i4* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(i4));
 
-	printf("===========INTZERA LOADANDO É O %d\n",*endereco);
-	// Objetivo: Acessar o conteúdo do endereço "referencia+indice"
-	// O código para esse acesso não parece correto, tem que analisar
-	 Push_operandos(f->p,*endereco,NULL,INTEGER_OP);
+    Push_operandos(f->p,*endereco,NULL,INTEGER_OP);
 }
 
 void laload_impl(frame *f, u1 par1, u1 par2){
@@ -647,6 +644,7 @@ void dstore_impl(frame *f, u1 index, u1 par1){
 void astore_impl(frame *f, u1 index,u1 par1){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[index].variavel) = (i4) valor->topo->referencia;
+	f->v[index].tipo_variavel = valor->topo->tipo_operando;
 }
 
 void istore_0_impl(frame *f, u1 par1, u1 par2){
@@ -771,33 +769,27 @@ void dstore_3_impl(frame *f, u1 par1, u1 par2){
 void astore_0_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[0].variavel) = (i4) valor->topo->referencia;
+	f->v[0].tipo_variavel = valor->topo->tipo_operando;
 }
 
 // TODO: verificar
 void astore_1_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[1].variavel) = (i4) valor->topo->referencia;
-	printf("REFERENCIA ASTORE1 ============= %04x \n", (i4)valor->topo->referencia);
-
-
-   // REFERENCIA APONTA PARA VARIAVEL QUE CONTEM O ENDERECO BASE DO ARRAY
-
-
-	i4 *endereco = ((i4) valor->topo->referencia) + (1 * sizeof(i4));
-	// array->topo->referencia+indice->topo->operando = valor;
-
-	printf("VALOR OPERANDITO ====================>>> %d\n", endereco );
+	f->v[1].tipo_variavel = valor->topo->tipo_operando;
 
 }
 
 void astore_2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[2].variavel) = (i4) valor->topo->referencia;
+	f->v[2].tipo_variavel = valor->topo->tipo_operando;
 }
 
 void astore_3_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[3].variavel) = (i4) valor->topo->referencia;
+	f->v[3].tipo_variavel = valor->topo->tipo_operando;
 }
 
 /*
@@ -817,37 +809,8 @@ void iastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-
-	//printf("REFERENCIA BASE ====== %04x\n",	 *((i4*)array->topo->referencia) );
-	printf("CONTEUDO REF ARR + INDICE %04x\n", (i4 *) (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i4))));
-	i4 *endereco_array = (i4 *) (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i4)));
-
-
-	//	void *endereco = NULL;
-	//  i4 referencia = 0;
-
-	//endereco = (i4*) malloc((countnum+1)*sizeof(i4));
-	//referencia = (i4) *((i4*) endereco);
-
-
-
-
-
-
-
-
-
-	// array->topo->referencia+indice->topo->operando = valor;
-	i4 endereco_valor = valor->topo->operando;
-	//printf("ENDERECO VALORITO ========++++> %d\n",endereco_valor);
-
-
-	///*endereco_array = endereco_valor;
-
-	//printf("VALOR SETADO FINAL ==========+> %d\n",*endereco_array);
-
-	/*printf("IASTORE REFERENZA ============ %04x\n",array->topo->referencia);
-	printf("IASTORE NO VALOR  ============ %d\n",endereco );*/
+	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i4)));
+	*endereco_array = valor->topo->operando;
 }
 
 void lastore_impl(frame *f, u1 par1, u1 par2){
@@ -2525,7 +2488,6 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 	i4 countnum = count->topo->operando;
 
 	void *endereco = NULL;
-	i4 referencia = 0;
 	if(count<0){
 		// Lançar exceção
 	}
@@ -2533,43 +2495,39 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 		switch(atype){
 			case T_BOOLEAN:
 				endereco = (u1*) malloc((countnum+1)*sizeof(u1));
-				referencia = (u1) *((u1*) endereco);
+				
 			break;
 
 			case T_CHAR:
 				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
-				referencia = (i2) *((i2*) endereco);
+				
 			break;
 
 			case T_FLOAT:
 				endereco = (u4*) malloc((countnum+1)*sizeof(u4));
-				referencia = (u4) *((u4*) endereco);
+				
 			break;
 
 			case T_DOUBLE:
 				endereco = (u4*) malloc(2*(countnum+1)*sizeof(u4));
-				referencia = (u4) *((u4*) endereco);
-			break;
+				break;
 
 			case T_BYTE:
 				endereco = (i1*) malloc((countnum+1)*sizeof(i1));
-				referencia = (i1) *((i1*) endereco);
+				
 			break;
 
 			case T_SHORT:
 				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
-				referencia = (i2) *((i2*) endereco);
+				
 			break;
 
 			case T_INT:
 				endereco = (i4*) malloc((countnum+1)*sizeof(i4));
-				referencia = (i4) *((i4*) endereco);
-				printf("NEWARRAY ========== %04x ======== %04x\n",endereco,referencia);
 			break;
 
 			case T_LONG:
 				endereco = (i4*) malloc(2*(countnum+1)*sizeof(i4));
-				referencia = (i4) *((i4*) endereco);
 			break;
 		}
 
@@ -2585,7 +2543,7 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 		}*/
 
 		// atype + 8 = Transformando tipo de array pra tipo de referencia (ver estrutura)
-		f->p = Push_operandos(f->p,-INT_MAX,referencia,atype + 7);
+		f->p = Push_operandos(f->p,-INT_MAX,endereco,atype + 7);
 	}
 }
 
