@@ -657,7 +657,7 @@ void istore_1_impl(frame *f, u1 par1, u1 par2){
 	printf("EXECUÇÃO ISTORE_1\n\n");
 
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[1].variavel) = (i4) valor->topo->operando;
+	*(f->v[1].variavel) = (u4) valor->topo->operando;
 }
 
 void istore_2_impl(frame *f, u1 par1, u1 par2){
@@ -671,7 +671,7 @@ void istore_2_impl(frame *f, u1 par1, u1 par2){
 
 void istore_3_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[3].variavel) = (i4) valor->topo->operando;
+	*(f->v[3].variavel) = (u4) valor->topo->operando;
 }
 
 void lstore_0_impl(frame *f, u1 par1, u1 par2){
@@ -2369,6 +2369,10 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 				code_attribute *c = (code_attribute *) aux->info;
 				frame *f_novo = criarFrame(classeNova,c->max_locals);
 				printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
+				printf("IMPRESSÃO DE VETOR DE VARIÁVEIS LOCAIS DO FRAME ANTES DA TRANSFERÊNCIA\n");
+				for (int i = 0;i<f->vetor_length;i++){
+					printf("VARIAVEL: %d\n",*(f->v[i].variavel));
+				}
 				f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 				jvm->frames = Push_frames(jvm->frames,f_novo);
 				// printf("%lu\n",sizeof(vetor_locais));
