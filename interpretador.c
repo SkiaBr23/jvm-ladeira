@@ -441,7 +441,6 @@ void iload_0_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(i4) *(f->v[0].variavel),NULL,INTEGER_OP);
 }
 void iload_1_impl(frame *f, u1 par1, u1 par2){
-	printf("Valor iload1: %d\n",*(f->v[1].variavel));
 	Push_operandos(f->p,(i4) *(f->v[1].variavel),NULL,INTEGER_OP);
 }
 
