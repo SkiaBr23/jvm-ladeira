@@ -36,7 +36,7 @@ void executarMetodo(method_info *m, char *classeCorrente, int chamador);
 //void LiberarLista_frames(lista_frames *lis);
 void interpretarCode(u1 *code, u4 length,method_info *m);
 void freeVetorLocais(vetor_locais *v, u2 vetor_length);
-void verificaHandlerMetodo(method_info *m);
+u2 verificaHandlerMetodo(method_info *m);
 
 
 #endif

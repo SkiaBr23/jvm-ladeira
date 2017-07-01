@@ -115,6 +115,7 @@ void executarMetodo(method_info *m, char* classeCorrente, int chamador){
 void interpretarCode(u1 *code,u4 length,method_info *m){
 	u1 opcode;
 	int pcAtual;
+	u2 handler_pc=0;
 	for (u1 *j=code;j<code+length;){
 		opcode = *j;
 		pcAtual = jvm->pc;
@@ -142,7 +143,9 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 					// Se foi, chamar a função de verificar o handler.
 					// Se não foi, beleza
 					if(jvm->excecao==1){
-						verificaHandlerMetodo(m);
+						handler_pc = verificaHandlerMetodo(m);
+						jvm->pc = handler_pc;
+						j = atualizarPCMetodoAtual(code,length);
 					}
 					jvm->pc += i.pc_instrucao;
 				break;
@@ -153,7 +156,9 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 					// Se foi, chamar a função de verificar o handler.
 					// Se não foi, beleza
 					if(jvm->excecao==1){
-						verificaHandlerMetodo(m);
+						handler_pc = verificaHandlerMetodo(m);
+						jvm->pc = handler_pc;
+						j = atualizarPCMetodoAtual(code,length);
 					}
 					if (instrucaoBranch(i.inst_nome)) {
 						if (pcAtual != jvm->pc) {
@@ -173,7 +178,9 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 						// Se foi, chamar a função de verificar o handler.
 						// Se não foi, beleza
 						if(jvm->excecao==1){
-							verificaHandlerMetodo(m);
+							handler_pc = verificaHandlerMetodo(m);
+							jvm->pc = handler_pc;
+							j = atualizarPCMetodoAtual(code,length);
 						}
 					}
 				break;
@@ -185,8 +192,9 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 			(*func_ptr[i.opcode])(jvm->frames->topo->f,0,0);
 
 			if(jvm->excecao==1){
-				printf("Opa\n");
-				verificaHandlerMetodo(m);
+				handler_pc = verificaHandlerMetodo(m);
+				jvm->pc = handler_pc;
+				j = atualizarPCMetodoAtual(code,length);
 			}
 
 			jvm->pc += i.pc_instrucao;
@@ -205,7 +213,7 @@ void freeVetorLocais(vetor_locais *v, u2 vetor_length){
 	free(v);
 }
 
-void verificaHandlerMetodo(method_info *m){
+u2 verificaHandlerMetodo(method_info *m){
 
 	attribute_info *aux;
 
@@ -222,7 +230,7 @@ void verificaHandlerMetodo(method_info *m){
 			for(exception_table *tabelaaux = c->table;tabelaaux<c->table+c->exception_table_length;tabelaaux++){
 				char *nomeexcecao = decodificaNIeNT(classeAtual->arquivoClass->constant_pool,tabelaaux->catch_type,NAME_INDEX);
 				printf("NOME DA EXCEÇÃO: %s\n",nomeexcecao);
-				exit(1);
+				return(tabelaaux->handler_pc);
 			}
 		}
 	}
@@ -243,6 +251,9 @@ void verificaHandlerMetodo(method_info *m){
 
 	// Desempilhar o frame
 	pilha_frames *removido = Pop_frames(jvm->frames);
+
+	// NÃO VAI RETORNAR ZERO, ISSO AQUI É UM PLACEHOLDER
+	return(0);
 }
 
 bool instrucaoBranch (char * nomeInstrucao) {
