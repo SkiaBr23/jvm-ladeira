@@ -445,7 +445,7 @@ void iload_1_impl(frame *f, u1 par1, u1 par2){
 }
 
 void iload_2_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,(i4) *(f->v[2].variavel),NULL,INTEGER_OP);
+	Push_operandos(f->p,(i4) (f->v[2].variavel),NULL,INTEGER_OP);
 }
 
 void iload_3_impl(frame *f, u1 par1, u1 par2){
@@ -665,8 +665,20 @@ void istore_2_impl(frame *f, u1 par1, u1 par2){
 
 	u4 teste = (u4) valor->topo->operando;
 	printf("\nDESEMPILHOU %d\n",teste);
-	*(f->v[2].variavel) = (u4) valor->topo->operando;
+
+	//*(f->v[2].variavel) = (u4) valor->topo->operando;
+	f->v[2].variavel = (u4) valor->topo->operando;
+	
+	for (int i = 0; i < f->vetor_length; ++i){
+		
+		printf("Vetor Variaveis: ------- :%d\n", f->v[i].variavel);
+	}
+
+
 	printf("\nSETOU O VETOR\n");
+
+
+
 }
 
 void istore_3_impl(frame *f, u1 par1, u1 par2){
@@ -2374,7 +2386,7 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 				printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
 				printf("IMPRESSÃO DE VETOR DE VARIÁVEIS LOCAIS DO FRAME ANTES DA TRANSFERÊNCIA\n");
 				for (int i = 0;i<f->vetor_length;i++){
-					printf("VARIAVEL: %d\n",*(f->v[i].variavel));
+					printf("VARIAVEL: %d\n",f->v[i].variavel);
 				}
 				f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 				jvm->frames = Push_frames(jvm->frames,f_novo);
