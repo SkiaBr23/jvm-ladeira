@@ -183,6 +183,12 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 			printf("Caiu no zero\n");
 			printf("Valor opcode: %d\n",i.opcode);
 			(*func_ptr[i.opcode])(jvm->frames->topo->f,0,0);
+
+			if(jvm->excecao==1){
+				printf("Opa\n");
+				verificaHandlerMetodo(m);
+			}
+
 			jvm->pc += i.pc_instrucao;
 		}
 	}
@@ -205,13 +211,13 @@ void verificaHandlerMetodo(method_info *m){
 
 	// Procurar no método corrente se existe um handler para a exceção que foi lançada
 	classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,jvm->frames->topo->f->classeCorrente);
-	int posicao;
+	method_info *auxmetodo;
 
-	for(posicao=0;posicao<m->attributes_count;posicao++){
-		aux = (*(m->attributes+posicao));
+	for(auxmetodo=m;auxmetodo<m+m->attributes_count;auxmetodo++){
+		aux = (*auxmetodo->attributes);
 		char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
 		printf("Name Index: %s\n",nameindex);
-		if(strcmp(nameindex,"Code")){
+		if(strcmp(nameindex,"Code")==0){
 			code_attribute *c = (code_attribute *) aux->info;
 			for(exception_table *tabelaaux = c->table;tabelaaux<c->table+c->exception_table_length;tabelaaux++){
 				char *nomeexcecao = decodificaNIeNT(classeAtual->arquivoClass->constant_pool,tabelaaux->catch_type,NAME_INDEX);

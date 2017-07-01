@@ -1241,16 +1241,17 @@ void idiv_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
+	printf("VALOR 1: %d\n",valor1->topo->operando);
+	printf("VALOR 2: %d\n",valor2->topo->operando);
+
 	if(valor1->topo->operando!=0){
 		// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
 		i4 result = valor2->topo->operando/valor1->topo->operando;
 		f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
 
 	}else{
-
 		jvm->excecao = 1;
 		strcpy(jvm->excecao_nome,"java/lang/ArithmeticException");
-
 	}
 }
 
