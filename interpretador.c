@@ -2329,6 +2329,7 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 				if(strcmp(nameindex,"Code")==0){
 					code_attribute *c = (code_attribute *) aux->info;
 					frame *f_novo = criarFrame(classeDoMetodo,c->max_locals);
+					*parametros_cont = c->max_locals;
 					f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 					jvm->frames = Push_frames(jvm->frames,f_novo);
 					// printf("%lu\n",sizeof(vetor_locais));
@@ -2378,9 +2379,13 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
 	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
+	int *parametros_cont = malloc(sizeof(int));
+	*parametros_cont = 0;
+
+	// Realizar a contagem de parâmetros
+
 	printf("Vai rodar invoke static...\n");
 	if(resolverMetodo(f->cp,indice_cp,0)){
-		int *parametros_cont = malloc(sizeof(int));
 		char *classeNova = obterClasseDoMetodo(f->cp,indice_cp);
 		method_info * methodAux = BuscarMethodClasseCorrente_classes(jvm->classes, classeNova, nomemetodo);
 		attribute_info *aux;
@@ -2392,6 +2397,8 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			if(strcmp(nameindex,"Code")==0){
 				code_attribute *c = (code_attribute *) aux->info;
 				frame *f_novo = criarFrame(classeNova,c->max_locals);
+				*parametros_cont = c->max_locals;
+				printf("ANTES DA CHAMADA: %d\n",*parametros_cont);
 				f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 				jvm->frames = Push_frames(jvm->frames,f_novo);
 				// printf("%lu\n",sizeof(vetor_locais));
