@@ -2264,21 +2264,88 @@ void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 }
 
 void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
-	pilha_operandos *objeto = Pop_operandos(f->p);
-
-	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
-
-	// Resolver o field
-
-	// struct Fieldref campo = f->cp[indice_cp];
+    u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+    cp_info *aux = f->cp-1+indice_cp;
+    char *classedoField = decodificaNIeNT(f->cp,aux->UnionCP.Fieldref.class_index,NAME_INDEX);
+    if(strcmp(classedoField,"java/lang/System")==0){
+        f->p = Push_operandos(f->p,-INT_MAX,"out",REFERENCE_OP);
+    } else{
+        classesCarregadas * nova = BuscarElemento_classes(jvm->classes,classedoField);
+        if (nova == NULL) {
+            if (resolverClasse(classedoField) == NULL) {
+                printf("Falha ao abrir classe com field estático, encerrando.\n");
+                exit(1);
+            }
+        } else {
+            cp_info * nameTypeField = f->cp-1+aux->UnionCP.Fieldref.name_and_type_index;
+            char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
+            field_info * fieldSaida = BuscarFieldClasseCorrente_classes(jvm->classes, classedoField, nomeField);
+    
+            if (fieldSaida != NULL) {
+                if (fieldSaida->access_flags != 0x0008) {
+                    char * descriptorFieldAux = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
+                    if (descriptorFieldValidate(descriptorFieldAux) < 5) {
+                        i4 valorPushed = *fieldSaida->UnionStaticData.low;
+                        f->p = Push_operandos(f->p,valorPushed,NULL,INTEGER_OP);
+                        printf("Empilhou na pilha\n");
+                    } else if (descriptorFieldValidate(descriptorFieldAux) == 5 || descriptorFieldValidate(descriptorFieldAux) == 6) {
+                        i4 valorPushedLow = *fieldSaida->UnionStaticData.low;
+                        i4 valorPushedHigh = *fieldSaida->UnionStaticData.high;
+                        if (descriptorFieldValidate(descriptorFieldAux) == 5) {
+                            f->p = Push_operandos(f->p,valorPushedHigh,NULL,DOUBLE_OP);
+                            f->p = Push_operandos(f->p,valorPushedLow,NULL,DOUBLE_OP);
+                        } else {
+                            f->p = Push_operandos(f->p,valorPushedHigh,NULL,LONG_OP);
+                            f->p = Push_operandos(f->p,valorPushedLow,NULL,DOUBLE_OP);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Resolver o field
+    // struct Fieldref campo = f->cp[indice_cp];
 }
 
 void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
-	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
-
-	// Resolver o field
-
-	// struct Fieldref campo = f->cp[indice_cp];
+    u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+    cp_info * field = f->cp-1+indice_cp;
+    char * nomeClasse = decodificaNIeNT(f->cp,field->UnionCP.Fieldref.class_index,NAME_INDEX);
+    printf("Claaaaaaaaaaaaaaasse: %s\n",nomeClasse);
+    classesCarregadas * nova = BuscarElemento_classes(jvm->classes,nomeClasse);
+    if (nova == NULL) {
+        if (resolverClasse(nomeClasse) == NULL) {
+            printf("Falha ao abrir classe com field estático, encerrando.\n");
+            exit(1);
+        }
+    } else {
+        cp_info * nameTypeField = f->cp-1+field->UnionCP.Fieldref.name_and_type_index;
+        char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
+        printf("Nome do fieeeeeeeeeeeeeeeeeeld: %s\n",nomeField);
+        field_info * fieldSaida = BuscarFieldClasseCorrente_classes(jvm->classes, nomeClasse, nomeField);
+        if (fieldSaida != NULL) {
+            if (fieldSaida->access_flags != 0x0008) {
+                char * descriptorFieldAux = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
+                if (descriptorFieldValidate(descriptorFieldAux) < 5) {
+                    pilha_operandos *valor = Pop_operandos(f->p);
+                    fieldSaida->UnionStaticData.low = (u4*) malloc(sizeof(u4));
+                    *fieldSaida->UnionStaticData.low = (u4)valor->topo->operando;
+                    printf("Empilhou float 0x%08x\n",*fieldSaida->UnionStaticData.low);
+                } else if (descriptorFieldValidate(descriptorFieldAux) == 5 || descriptorFieldValidate(descriptorFieldAux) == 6) {
+                    pilha_operandos *valorLow = Pop_operandos(f->p);
+                    pilha_operandos *valorHigh = Pop_operandos(f->p);
+                    fieldSaida->UnionStaticData.low = (u4*) malloc(sizeof(u4));
+                    fieldSaida->UnionStaticData.high = (u4*) malloc(sizeof(u4));
+                    *fieldSaida->UnionStaticData.low = (u4)valorLow->topo->operando;
+                    *fieldSaida->UnionStaticData.high = (u4)valorHigh->topo->operando;
+                    printf("Empilhou double 0x%08x\n",*fieldSaida->UnionStaticData.high);
+                    printf("Empilhou double 0x%08x\n",*fieldSaida->UnionStaticData.low);
+                }
+            }
+        }
+    }
+    // Resolver o field
+    // struct Fieldref campo = f->cp[indice_cp];
 }
 
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
