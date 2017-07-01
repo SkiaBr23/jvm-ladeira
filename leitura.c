@@ -756,6 +756,8 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 	char *stringGeral;// = malloc(100*sizeof(char));
 	char *ponteiro2pontos;// = malloc(100*sizeof(char));
 	cp_info *cp_aux = cp+index-1;
+	long long saidaLong;
+	double valorSaida;
 
 
 	if (index < sizeCP) {
@@ -825,6 +827,24 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 
 			case CONSTANT_Class:
 				stringGeral = decodificaNIeNT(cp,cp_aux->UnionCP.Class.name_index,CLASS_INDEX);
+				strcpy(retorno,"<");
+				strcat(retorno,stringGeral);
+				strcat(retorno,">");
+			break;
+
+			case CONSTANT_Double:
+				valorSaida = decodificaDoubleInfo(cp_aux);
+				stringGeral = (char*)malloc(100*sizeof(char));
+				sprintf(stringGeral,"%lf",valorSaida);
+				strcpy(retorno,"<");
+				strcat(retorno,stringGeral);
+				strcat(retorno,">");
+			break;
+
+			case CONSTANT_Long:
+				saidaLong = decodificaLongInfo(cp_aux);
+				stringGeral = (char*)malloc(100*sizeof(char));
+				sprintf(stringGeral,"%lld",saidaLong);
 				strcpy(retorno,"<");
 				strcat(retorno,stringGeral);
 				strcat(retorno,">");
