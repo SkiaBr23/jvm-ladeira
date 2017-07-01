@@ -2253,6 +2253,8 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
 	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
+	char *descriptorcopia = malloc(strlen(descriptormetodo)*sizeof(char));
+	strcpy(descriptorcopia,descriptormetodo);
 	char *classeDoMetodo = NULL;
 	char *classePaiDaCorrente = NULL;
 	classesCarregadas *classeResolvida = NULL;
@@ -2286,7 +2288,6 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			attribute_info *aux;
 			int posicao;
 			char *pch = strtok(descriptormetodo,"()");
-			printf("PCH: %s\n",pch);
 			*parametros_cont += strlen(pch);
 
 			for(posicao = 0; posicao < methodAux->attributes_count; posicao++) {
@@ -2318,7 +2319,7 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 						char * nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
 						char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
 	
-						if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
+						if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptorcopia,descriptorMetodoAux) == 0){
 							printf("Metodo da classe: %s\n",nomeMetodoAux);
 							// Executar o code do método invocado
 							printf("Executando método...\n");
@@ -2346,13 +2347,14 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
 	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
+	char *descriptorcopia = malloc(strlen(descriptormetodo)*sizeof(char));
+	strcpy(descriptorcopia,descriptormetodo);
 	int *parametros_cont = malloc(sizeof(int));
 	*parametros_cont = 0;
 
 	// Realizar a contagem de parâmetros
 
 	char *pch = strtok(descriptormetodo,"()");
-	printf("PCH: %s\n",pch);
 	*parametros_cont += strlen(pch);
 
 	printf("Vai rodar invoke static...\n");
@@ -2394,7 +2396,7 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 					char * nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
 					char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
 
-					if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
+					if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptorcopia,descriptorMetodoAux) == 0){
 						printf("Metodo da classe: %s\n",nomeMetodoAux);
 						// Executar o code do método invocado
 						printf("Executando método...\n");
