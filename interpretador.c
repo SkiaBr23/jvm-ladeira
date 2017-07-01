@@ -90,6 +90,27 @@ char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 	return(pch);
 }
 
+int descriptorFieldValidate (char * descriptor) {
+	if (strcmp(descriptor,"I") == 0) {
+		return 0;
+	} else if (strcmp(descriptor,"F") == 0) {
+		return 1;
+	} else if (strcmp(descriptor,"B") == 0) {
+		return 2;
+	} else if (strcmp(descriptor,"C") == 0) {
+		return 3;
+	} else if (strcmp(descriptor,"S") == 0) {
+		return 4;
+	} else if (strcmp(descriptor,"L") == 0) {
+		return 5;
+	} else if (strcmp(descriptor,"D") == 0) {
+		return 6;
+	} else if (strcmp(descriptor,"A") == 0) {
+		return 7;
+	}
+	return 0;
+}
+
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp){
 	cp_info *methodref = cp-1+indice_cp;
 	char *nome_classe = NULL;
@@ -1983,7 +2004,7 @@ void if_icmplt_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	if(valor1->topo->operando < valor2->topo->operando){
+	if(valor2->topo->operando < valor1->topo->operando){
 		int8_t v1 = (int8_t)branchbyte1;
 		int8_t v2 = (int8_t)branchbyte2;
 		int16_t branchoffset = (v1 << 8) | v2;
@@ -1995,7 +2016,7 @@ void if_icmpge_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	if(valor1->topo->operando >= valor2->topo->operando){
+	if(valor2->topo->operando >= valor1->topo->operando){
 		int8_t v1 = (int8_t)branchbyte1;
 		int8_t v2 = (int8_t)branchbyte2;
 		int16_t branchoffset = (v1 << 8) | v2;
@@ -2019,7 +2040,7 @@ void if_icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	if(valor1->topo->operando <= valor2->topo->operando){
+	if(valor2->topo->operando <= valor1->topo->operando){
 		int8_t v1 = (int8_t)branchbyte1;
 		int8_t v2 = (int8_t)branchbyte2;
 		int16_t branchoffset = (v1 << 8) | v2;
@@ -2152,18 +2173,93 @@ void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	char *classedoField = decodificaNIeNT(f->cp,aux->UnionCP.Fieldref.class_index,NAME_INDEX);
 	if(strcmp(classedoField,"java/lang/System")==0){
 		f->p = Push_operandos(f->p,-INT_MAX,"out",REFERENCE_OP);
-	}
-	else{
-		// Não vai empilhar string, vai ser uma referência pro field, isso aqui é só placeholder
-		f->p = Push_operandos(f->p,-INT_MAX,classedoField,REFERENCE_OP);
+	} else{
+		classesCarregadas * nova = BuscarElemento_classes(jvm->classes,classedoField);
+		if (nova == NULL) {
+			if (resolverClasse(classedoField) == NULL) {
+				printf("Falha ao abrir classe com field estático, encerrando.\n");
+				exit(1);
+			}
+		} else {
+			cp_info * nameTypeField = f->cp-1+aux->UnionCP.Fieldref.name_and_type_index;
+
+
+			char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
+
+
+			field_info * fieldSaida = BuscarFieldClasseCorrente_classes(jvm->classes, classedoField, nomeField);
+			if (fieldSaida != NULL) {
+				if (fieldSaida->access_flags == 0x0008) {
+					char * descriptorFieldAux = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
+					if (descriptorFieldValidate(descriptorFieldAux) < 5) {
+						i4 valorPushed = *fieldSaida->UnionStaticData.low;
+						f->p = Push_operandos(f->p,valorPushed,NULL,INTEGER_OP);
+						printf("Empilhou na pilha\n");
+					} else if (descriptorFieldValidate(descriptorFieldAux) == 5 || descriptorFieldValidate(descriptorFieldAux) == 6) {
+						i4 valorPushedLow = *fieldSaida->UnionStaticData.low;
+						i4 valorPushedHigh = *fieldSaida->UnionStaticData.high;
+						if (descriptorFieldValidate(descriptorFieldAux) == 5) {
+							f->p = Push_operandos(f->p,valorPushedHigh,NULL,DOUBLE_OP);
+							f->p = Push_operandos(f->p,valorPushedLow,NULL,DOUBLE_OP);
+						} else {
+							f->p = Push_operandos(f->p,valorPushedHigh,NULL,LONG_OP);
+							f->p = Push_operandos(f->p,valorPushedLow,NULL,DOUBLE_OP);
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
 void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 
-	// Resolver o field
+	cp_info * field = f->cp-1+indice_cp;
 
+	// Resolver o field
+	char * nomeClasse = decodificaNIeNT(f->cp,field->UnionCP.Fieldref.class_index,NAME_INDEX);
+	classesCarregadas * nova = BuscarElemento_classes(jvm->classes,nomeClasse);
+	if (nova == NULL) {
+		if (resolverClasse(nomeClasse) == NULL) {
+			printf("Falha ao abrir classe com field estático, encerrando.\n");
+			exit(1);
+		}
+	} else {
+		cp_info * nameTypeField = f->cp-1+field->UnionCP.Fieldref.name_and_type_index;
+
+
+		char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
+
+
+		field_info * fieldSaida = BuscarFieldClasseCorrente_classes(jvm->classes, nomeClasse, nomeField);
+		if (fieldSaida != NULL) {
+			if (fieldSaida->access_flags == 0x0008) {
+				char * descriptorFieldAux = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
+				if (descriptorFieldValidate(descriptorFieldAux) < 5) {
+					pilha_operandos *valor = Pop_operandos(f->p);
+					fieldSaida->UnionStaticData.low = (u4*) malloc(sizeof(u4));
+					*fieldSaida->UnionStaticData.low = (u4)valor->topo->operando;
+					printf("Empilhou float\n");
+				} else if (descriptorFieldValidate(descriptorFieldAux) == 5 || descriptorFieldValidate(descriptorFieldAux) == 6) {
+					pilha_operandos *valorLow = Pop_operandos(f->p);
+					pilha_operandos *valorHigh = Pop_operandos(f->p);
+					fieldSaida->UnionStaticData.low = (u4*) malloc(sizeof(u4));
+					fieldSaida->UnionStaticData.high = (u4*) malloc(sizeof(u4));
+					*fieldSaida->UnionStaticData.low = (u4)valorLow->topo->operando;
+					*fieldSaida->UnionStaticData.high = (u4)valorHigh->topo->operando;
+					printf("Empilhou double\n");
+				}
+			}
+		}
+	}
+
+	//Obter classe que contém o field
+	//Inicializar a classe que contém o field, caso
+	//a classe nao tenha sido inicializada
+	//Obter field dessa classe, buscas na classe que contem
+	//esse field e retornar ele
+	//Obter tipo pelo name and type index
 	// Fieldref campo = f->cp[indice_cp];
 }
 

@@ -301,6 +301,12 @@ struct field_info{
 	u2 attributes_count;
 	/*Array de estruturas Attribute Info*/
 	attribute_info ** attributes;
+	
+	union {
+        u4 * low;
+        u4 * high;
+        u1 * string;
+    }UnionStaticData;
 };
 typedef struct field_info field_info;
 

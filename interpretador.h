@@ -15,6 +15,7 @@ ClassFile* resolverClasse(char *nome_classe);
 bool resolverMetodo(cp_info *cp, u2 indice_cp, u1 interface);
 char* obterNomeMetodo(cp_info *cp, u2 indice_cp, u1 interface);
 char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp, u1 interface);
+int descriptorFieldValidate (char * descriptor);
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp);
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont);
 double decodificaDoubleValor(u4 high, u4 low);

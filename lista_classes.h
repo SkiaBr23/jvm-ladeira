@@ -23,5 +23,6 @@ cp_info* BuscarCPClasseCorrente_classes(classesCarregadas *lis, char *string);
 method_info * BuscarMethodClasseCorrente_classes(classesCarregadas *lis, char *nomeClasse,char*nomeMetodo);
 void ImprimirLista_classes(classesCarregadas *lis);
 void LiberarLista_classes(classesCarregadas *lis);
+field_info * BuscarFieldClasseCorrente_classes(classesCarregadas *lis, char * nomeClasse, char * nomeField);
 
 #endif

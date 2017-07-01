@@ -123,3 +123,18 @@ void LiberarLista_classes(classesCarregadas *lis){
 		p=t;
 	}
 }
+
+field_info * BuscarFieldClasseCorrente_classes(classesCarregadas *lis, char * nomeClasse, char * nomeField){
+	classesCarregadas *classeCorrente = BuscarElemento_classes(lis,nomeClasse);
+	field_info * auxField = classeCorrente->arquivoClass->fields;
+
+	for(field_info *aux = auxField;aux < auxField+classeCorrente->arquivoClass->fields_count;aux++){
+		// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
+		char * nomeFieldAux = decodificaStringUTF8(classeCorrente->arquivoClass->constant_pool-1+aux->name_index);
+		if(strcmp(nomeField,nomeFieldAux) == 0){
+			return aux;
+		}
+	}
+
+	return NULL;
+}

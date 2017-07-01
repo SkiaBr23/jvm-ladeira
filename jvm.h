@@ -38,5 +38,12 @@ void interpretarCode(u1 *code, u4 length,method_info *m);
 void freeVetorLocais(vetor_locais *v, u2 vetor_length);
 u2 verificaHandlerMetodo(method_info *m);
 
+#define MAIN_NOME "main"
+#define DESCRIPTOR_MAIN "([Ljava/lang/String;)V"
+#define PUBLIC_STATIC 0x0009
+
+#define CLINIT_NOME "<clinit>"
+#define DESCRIPTOR_CLINIT "()V"
+#define STATICCLINIT 0x0008
 
 #endif
