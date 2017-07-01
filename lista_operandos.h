@@ -9,6 +9,7 @@
 typedef uint8_t u1;
 typedef uint16_t u2;
 typedef uint32_t u4;
+typedef uint64_t u8;
 #endif
 
 #ifndef TIPOS_I
@@ -22,6 +23,7 @@ typedef int64_t i8;
 /* Essa lista foi implementada utilizando strings. Substituir a string pelo elemento que será utilizado */
 struct lista_operandos{
 	i4 operando;
+	void *referencia;
 	u1 tipo_operando;
 	struct lista_operandos *prox,*ant;
 };
@@ -37,13 +39,21 @@ enum tipos_operandos{
 	LONG_OP,
 	DOUBLE_OP,
 	RETURN_ADDRESS_OP,
-	REFERENCE_OP
+	REFERENCE_OP,
+	REFERENCE_ARRAY_BOOLEAN_OP,
+	REFERENCE_ARRAY_CHAR_OP,
+	REFERENCE_ARRAY_FLOAT_OP,
+	REFERENCE_ARRAY_DOUBLE_OP,
+	REFERENCE_ARRAY_BYTE_OP,
+	REFERENCE_ARRAY_SHORT,OP,
+	REFERENCE_ARRAY_INT_OP,
+	REFERENCE_ARRAY_LONG_OP
 };
 
 typedef enum tipos_operandos tipos_operandos;
 
 lista_operandos* CriarLista_operandos();
-lista_operandos* InserirInicio_operandos(lista_operandos *lis, i4 operando, u1 tipo_operando); 
+lista_operandos* InserirInicio_operandos(lista_operandos *lis, i4 operando, void *referencia, u1 tipo_operando); 
 lista_operandos* InserirFim_operandos(lista_operandos *lis, i4 operando, u1 tipo_operando);
 lista_operandos* RemoverInicio_operandos(lista_operandos *lis);
 lista_operandos* RemoverFim_operandos(lista_operandos *lis);

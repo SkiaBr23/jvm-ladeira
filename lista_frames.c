@@ -8,8 +8,7 @@ lista_frames* Criarlista_frames(){
 }
 
 lista_frames* InserirInicio_frames(lista_frames* lis,frame *f){
-	lista_frames *novo= malloc(sizeof(lista_frames));
-	novo->f = malloc(sizeof(frame));
+	lista_frames *novo = (lista_frames*) malloc(sizeof(lista_frames));
 	novo->f = f;
 	novo->prox = lis;
 	novo->ant = NULL;
@@ -17,6 +16,7 @@ lista_frames* InserirInicio_frames(lista_frames* lis,frame *f){
 	if (lis!=NULL){
 		lis->ant = novo;
 	}
+
 	
 	return novo;
 }
@@ -42,7 +42,9 @@ lista_frames* RemoverInicio_frames(lista_frames* lis){
 	lista_frames* p=lis;
 	
 	lis = p->prox;
-	lis->ant = NULL;
+	if(lis!=NULL){
+		lis->ant = NULL;
+	}
 	
 	free(p);
 	return (lis);
@@ -63,8 +65,8 @@ lista_frames* RemoverFim_frames(lista_frames* lis){
 	return lis;
 }
 
-lista_frames* RemoverElemento_frames(lista_frames* lis,frame *f){
-	lista_frames *p = BuscarElemento(lis, f);
+/*lista_frames* RemoverElemento_frames(lista_frames* lis,frame *f){
+	// lista_frames *p = BuscarElemento_frames(lis, f);
 	
 	if(p==NULL){
 		return lis;
@@ -83,14 +85,14 @@ lista_frames* RemoverElemento_frames(lista_frames* lis,frame *f){
 	free(p);
 	
 	return lis;
-}
+}*/
 
 void ImprimirLista_frames(lista_frames *lis){
 	lista_frames *f;
 	
 	for(f=lis;f!=NULL;f=f->prox){
-		printf("%04x\n\n",f->retorno);
-		ImprimirPilha(f->p);
+		printf("%04x\n\n",f->f->end_retorno);
+		// ImprimirPilha_frames(f->p);
 	}
 }
 

@@ -35,9 +35,13 @@ struct instrucao{
   char inst_nome[50];
   u1 opcode;
   u1 numarg;
+<<<<<<< HEAD
+  u1 numop;
+=======
   u1 numop; // Número de operandos que a instrução dá pop na pilha de operandos.
   u1 pc_instrucao;
 
+>>>>>>> forca-branch
 };
 
 /**

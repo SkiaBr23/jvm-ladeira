@@ -3,7 +3,7 @@ Universidade de Brasília - 01/2017
 Software Básico - Turma A
 Projeto Leitor/Exibidor de arquivo .class
 
-Alunos: Maximillian Fan Xavier - 12/0153271
+Alunos: 		Maximillian Fan Xavier - 12/0153271
 				Rafael Dias da Costa - 12/0133253
 				Murilo Cerqueira Medeiros - 12/0130637
 				Eduardo Sousa da Silva - 13/0108405
@@ -15,6 +15,7 @@ Alunos: Maximillian Fan Xavier - 12/0153271
 #include "leitura.h"
 #include <string.h>
 #include <math.h>
+#include <inttypes.h>
 #include "instrucoes.h"
 
 /*Função 'u1Read' que realiza a leitura de 1 byte do arquivo .class*/
@@ -138,7 +139,7 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 		}
 
 		/*Leitura do valor 'methods_count', representando
-		a quantidade de entradas na tabela Method*/
+		a quantiade de entradas na tabela Method*/
 		arquivoClass->methods_count = u2Read(fp);
 
 		/*Estrutura condicional que verifica se a quantidade de entradas
@@ -365,6 +366,8 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 
 	for(aux=code;aux<code+length;){
 		int numarg = instrucoes[*aux].numarg;
+		char *nomeinst = malloc(100*sizeof(char));
+		strcpy(nomeinst,instrucoes[*aux].inst_nome);
 		strcat(retorno,instrucoes[*aux].inst_nome);
 		switch(numarg){
 			case 0:
@@ -398,6 +401,28 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				aux++;
 			break;
 
+			case 4:
+				aux2 = (u2*) malloc(sizeof(u2));
+				*aux2 = *(++aux) << 8;
+				*aux2 |= *(++aux);
+
+				stringargs = decodificarOperandoInstrucao(cp,*aux2,sizeCP);
+				strcat(retorno," #");
+				sprintf(stringaux,"%d",(int)*aux2);
+				strcat(retorno,stringaux);
+				strcat(retorno," ");
+				strcat(retorno,stringargs);
+				u2 *aux3 = (u2*) malloc(sizeof(u2));
+				*aux3 = *(++aux);
+				sprintf(stringaux,"%d",(int)*aux3);
+				strcat(retorno," count ");
+				strcat(retorno,stringaux);
+				strcat(retorno,"\n");
+				if(strcmp(nomeinst,"invokeinterface")==0){
+					aux++; // Incrementar porque é o 0;
+				}
+				aux++;
+			break;
 			default:
 				strcat(retorno,"undefined");
 				aux++;
@@ -731,6 +756,8 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 	char *stringGeral;// = malloc(100*sizeof(char));
 	char *ponteiro2pontos;// = malloc(100*sizeof(char));
 	cp_info *cp_aux = cp+index-1;
+	long long saidaLong;
+	double valorSaida;
 
 
 	if (index < sizeCP) {
@@ -748,6 +775,20 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 				ponteiro2pontos = strchr(stringNomeMetodo,':');
 				*ponteiro2pontos = '\0';
 
+
+				strcpy(retorno,"<");
+				strcat(retorno,stringNomeClasse);
+				strcat(retorno,".");
+				strcat(retorno,stringNomeMetodo);
+				strcat(retorno,">");
+			break;
+
+			case CONSTANT_InterfaceMethodref:
+				stringNomeClasse = decodificaNIeNT(cp,cp_aux->UnionCP.InterfaceMethodref.class_index,NAME_INDEX);
+				stringNomeMetodo = decodificaNIeNT(cp,cp_aux->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
+
+				ponteiro2pontos = strchr(stringNomeMetodo,':');
+				*ponteiro2pontos = '\0';
 
 				strcpy(retorno,"<");
 				strcat(retorno,stringNomeClasse);
@@ -783,9 +824,35 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 				strcat(retorno,stringGeral);
 				strcat(retorno,">");
 			break;
+
+			case CONSTANT_Class:
+				stringGeral = decodificaNIeNT(cp,cp_aux->UnionCP.Class.name_index,CLASS_INDEX);
+				strcpy(retorno,"<");
+				strcat(retorno,stringGeral);
+				strcat(retorno,">");
+			break;
+
+			case CONSTANT_Double:
+				valorSaida = decodificaDoubleInfo(cp_aux);
+				stringGeral = (char*)malloc(100*sizeof(char));
+				sprintf(stringGeral,"%lf",valorSaida);
+				strcpy(retorno,"<");
+				strcat(retorno,stringGeral);
+				strcat(retorno,">");
+			break;
+
+			case CONSTANT_Long:
+				saidaLong = decodificaLongInfo(cp_aux);
+				stringGeral = (char*)malloc(100*sizeof(char));
+				sprintf(stringGeral,"%lld",saidaLong);
+				strcpy(retorno,"<");
+				strcat(retorno,stringGeral);
+				strcat(retorno,">");
+			break;
+
 			default:
 				strcpy(retorno,"undefined");
-				break;
+			break;
 		}
 	} else {
 		sprintf(retorno,"%d",index);
@@ -855,10 +922,22 @@ char* decodificaAccessFlags(u2 flag){
 			flag-=SYNTHETIC;
 			strcat(retorno,"SYNTHETIC;");
 		}
+
+		if(flag>=ABSTRACT){
+			flag-=ABSTRACT;
+			strcat(retorno,"ABSTRACT;");
+		}
+
+		if(flag>=INTERFACE_FLAG){
+			flag-=INTERFACE_FLAG;
+			strcat(retorno,"INTERFACE;");
+		}
+
 		if(flag>=TRANSIENT){
 			flag-=TRANSIENT;
 			strcat(retorno,"TRANSIENT;");
 		}
+		
 		if(flag>=VOLATILE){
 			flag-=VOLATILE;
 			strcat(retorno,"VOLATILE;");
@@ -939,12 +1018,19 @@ char* organizandoFlags(char* flagsOrdemInversa){
 }
 
 double decodificaDoubleInfo (cp_info * cp) {
-	 long long valor = ((long long)(cp->UnionCP.Double.high_bytes)<<32) | (long long)cp->UnionCP.Double.low_bytes;
-	 int8_t sinal = ((valor>>63) == 0) ? 1 : -1;
-	 int16_t expon = ((valor>>52) & 0x7ffL);
-	 long long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
+	long long valor = ((long long)(cp->UnionCP.Double.high_bytes)<<32) | (long long)cp->UnionCP.Double.low_bytes;
+	int8_t sinal = ((valor>>63) == 0) ? 1 : -1;
+	int16_t expon = ((valor>>52) & 0x7ffL);
+	printf("Expoente Top: %d\n",expon);
+	printf("Sinal Top: %d\n",sinal);
+	long long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
+
+	printf("Valor Ajust-MANTISSA OK:\n");
+ 	printf("val1 = 0x%" PRIx64 "\n", mant);
 
 	double retorno = sinal*mant*(pow(2,expon-1075));
+
+	printf("Valor Final: %lf\n",retorno);
 	return retorno;
 }
 
@@ -1031,9 +1117,9 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 	fprintf(fp, "Magic: %08x\n",arquivoClass->magic);
 	fprintf(fp, "Minor Version: %d\n",arquivoClass->minor_version);
 	valorMajor = decodificaMajorVersion(arquivoClass->major_version);
-	fprintf(fp, "Major Version: %d [%lf]\n",arquivoClass->major_version,valorMajor);
+	fprintf(fp, "Major Version: %d [%.1lf]\n",arquivoClass->major_version,valorMajor);
 	fprintf(fp, "Constant Pool Count: %d\n",arquivoClass->constant_pool_count);
-	fprintf(fp, "Access Flags: %04x\n",arquivoClass->access_flags);
+	fprintf(fp, "Access Flags: 0x%04x\n",arquivoClass->access_flags);
 	ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,arquivoClass->this_class,NAME_INDEX);
 	fprintf(fp, "This Class: cp_info#%d <%s>\n",arquivoClass->this_class, ponteiroprint);
 	ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,arquivoClass->super_class,NAME_INDEX);

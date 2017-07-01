@@ -18,9 +18,10 @@ Alunos: 		Maximillian Fan Xavier - 12/0153271
 /** Inclusão de bibliotecas para entrada e saída de dados, tratamento de strings e estruturas e mecanismos de leitura do arquivo .class
 */
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 #include "leitura.h"
+#include "jvm.h"
 
 /**
  * 
@@ -38,7 +39,10 @@ int main(int argc, char const *argv[]){
 	int outset = 0, inputset = 0;  
 
 	/*Alocação da estrutura para o arquivo .class*/
-	ClassFile *arquivoClass = malloc(sizeof(ClassFile));
+	jvm = CriarJVM();
+	jvm = InicializarJVM();
+	// jvm->classes = InserirFim(jvm->classes);
+	//classes->arquivoClass = (ClassFile*)malloc(sizeof(ClassFile));
 
 	/*Estrutura condicional que analisa se foi passado o nome do arquivo como parâmetro*/
 	if(argc > 1){
@@ -56,7 +60,7 @@ int main(int argc, char const *argv[]){
 			} else if(strlen(argv[2]) > 6 && !strcmp(argv[2] + strlen(argv[2]) - 6, ".class")){
 				strcpy(nomearquivo, argv[2]);
 				inputset = 1;
-			}	
+			}
 		}
 	}
 	if(!inputset){
@@ -66,21 +70,36 @@ int main(int argc, char const *argv[]){
 	if(!outset){
 		printf("Digite o nome do arquivo de saida\n");
 		scanf("%s",outputName);
-	}	
-
-	/*Chamada da função que realiza a leitura do arquivo .class*/
-	arquivoClass = lerArquivo(nomearquivo);
-
-	FILE *outputFile = fopen(outputName, "w");
-	if (arquivoClass != NULL && outputFile != NULL) {
-		imprimirClassFile(arquivoClass, stdout);
-		imprimirClassFile(arquivoClass, outputFile);
-		fclose(outputFile);
-	}else{
-		printf("Erro ao criar arquivo de saida\n");
 	}
 
-	free(arquivoClass);
+	/*Chamada da função que realiza a leitura do arquivo .class*/
+	jvm->classes = InserirFim_classes(jvm->classes,lerArquivo(nomearquivo));
+
+	int opcao = opcaoMenu();
+	if (opcao == 1) {
+		FILE *outputFile = fopen(outputName, "w");
+		if (jvm->classes->arquivoClass != NULL && outputFile != NULL) {
+			imprimirClassFile(jvm->classes->arquivoClass, stdout);
+			imprimirClassFile(jvm->classes->arquivoClass, outputFile);
+			fclose(outputFile);
+		} else {
+			printf("Erro ao criar arquivo de saida\n");
+		}
+	} else if (opcao == 2) {
+
+		executarJVM();
+
+		// printf("Opcao ainda nao implementada! Encerrando...\n");
+		exit(1);
+	} else {
+		printf("Encerrando programa...\n");
+		exit(1);
+	}
+
+
+	free(jvm->classes->arquivoClass);
+	free(jvm->classes);
+	free(jvm);
 	free(nomearquivo);
 	free(outputName);
 
