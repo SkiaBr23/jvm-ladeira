@@ -112,7 +112,7 @@ void sastore_impl(frame *f, u1 par1, u1 par2);
 pilha_operandos* pop_impl(frame *f);
 pilha_operandos** pop2_impl(frame *f);
 void pop_fantasma(frame *par0, u1 par1, u1 par2);
-void pop2_fantasma(frame *par0, u1 par1, u1 par2);
+void pop2_fantasma(frame *par0, u1 par1, u1 par2);//Nao implementado
 void dup_impl(frame *f, u1 par1, u1 par2);
 void dup_x1_impl(frame *f, u1 par1, u1 par2);
 void dup_x2_impl(frame *f, u1 par1, u1 par2);
@@ -194,17 +194,17 @@ void acmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void acmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void inst_goto_impl(frame *f,u1 branchbyte1, u1 branchbyte2);
 void jsr_impl(frame *f,u1 branchbyte1, u1 branchbyte2);
-void ret_impl(frame *f, u1 index, u1 par1);
-void tableswitch_fantasma(frame *par0, u1 par1, u1 par2);
-void lookupswitch_fantasma(frame *par0, u1 par1, u1 par2);
+void ret_impl(frame *f, u1 index, u1 par1); //Nao implementado
+void tableswitch_fantasma(frame *par0, u1 par1, u1 par2); //Nao implementado
+void lookupswitch_fantasma(frame *par0, u1 par1, u1 par2); //Nao implementado
 void tableswitch_impl(frame *f);
 void lookupswitch_impl(frame *f);
 void ireturn_impl(frame *f, u1 par1, u1 par2);
 void lreturn_impl(frame *f, u1 par1, u1 par2);
 void freturn_impl(frame *f, u1 par1, u1 par2);
 void dreturn_impl(frame *f, u1 par1, u1 par2);
-void areturn_impl(frame *f, u1 par1, u1 par2);
-void inst_return_impl(frame *f, u1 par1, u1 par2);
+void areturn_impl(frame *f, u1 par1, u1 par2); //Nao implementado
+void inst_return_impl(frame *f, u1 par1, u1 par2); //Nao implementado
 void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
@@ -213,9 +213,9 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
 void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void invokeinterface_fantasma(frame *par0, u1 par1, u1 par2);
-void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count);
-void invokedynamic_fantasma(frame *par0, u1 par1, u1 par2); // Não implementado. /** Essa instrução só existe para criar uma posição "falsa" no vetor de ponteiros de função **/
-void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
+void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count);//Nao implementado
+void invokedynamic_fantasma(frame *par0, u1 par1, u1 par2);
+void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2);//Nao implementado
 void newarray_impl(frame *f ,u1 atype, u1 par1); // Observação do -INT_MAX
 void anewarray_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void arraylength_impl(frame *f, u1 par1, u1 par2);
@@ -226,10 +226,10 @@ void monitorenter_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void monitorexit_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void wide_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void multianewarray_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
-void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
-void goto_w_impl(frame *f, u1 par1, u1 par2);
-void jsr_w_impl(frame *f, u1 par1, u1 par2);
+void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2); //Nao implementado
+void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);//Nao implementado
+void goto_w_impl(frame *f, u1 par1, u1 par2);//Nao implementado
+void jsr_w_impl(frame *f, u1 par1, u1 par2);//Nao implementado
 
 extern void (*func_ptr[202])(frame *,u1,u1);
 
