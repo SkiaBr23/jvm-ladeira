@@ -2294,6 +2294,7 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	char *classePaiDaCorrente = NULL;
 	classesCarregadas *classeResolvida = NULL;
 	classesCarregadas *classeCorrente = NULL;
+	int *parametros_cont = malloc(sizeof(int));
 
 	if(resolverMetodo(f->cp,indice_cp,0)){
 		classeDoMetodo = obterClasseDoMetodo(f->cp,indice_cp);
@@ -2318,10 +2319,13 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		else{
 			// Vai invocar o método
 
-			int *parametros_cont = malloc(sizeof(int));
 			method_info * methodAux = BuscarMethodClasseCorrente_classes(jvm->classes,classeDoMetodo, nomemetodo);
 			attribute_info *aux;
 			int posicao;
+			char *pch = strtok(descriptormetodo,"()");
+			printf("PCH: %s\n",pch);
+			*parametros_cont += strlen(pch);
+
 			for(posicao = 0; posicao < methodAux->attributes_count; posicao++) {
 				aux = (*(methodAux->attributes+posicao));
 				classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,classeDoMetodo);
@@ -2329,7 +2333,7 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 				if(strcmp(nameindex,"Code")==0){
 					code_attribute *c = (code_attribute *) aux->info;
 					frame *f_novo = criarFrame(classeDoMetodo,c->max_locals);
-					*parametros_cont = c->max_locals;
+					printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
 					f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 					jvm->frames = Push_frames(jvm->frames,f_novo);
 					// printf("%lu\n",sizeof(vetor_locais));
@@ -2384,6 +2388,10 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	// Realizar a contagem de parâmetros
 
+	char *pch = strtok(descriptormetodo,"()");
+	printf("PCH: %s\n",pch);
+	*parametros_cont += strlen(pch);
+
 	printf("Vai rodar invoke static...\n");
 	if(resolverMetodo(f->cp,indice_cp,0)){
 		char *classeNova = obterClasseDoMetodo(f->cp,indice_cp);
@@ -2397,8 +2405,7 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			if(strcmp(nameindex,"Code")==0){
 				code_attribute *c = (code_attribute *) aux->info;
 				frame *f_novo = criarFrame(classeNova,c->max_locals);
-				*parametros_cont = c->max_locals;
-				printf("ANTES DA CHAMADA: %d\n",*parametros_cont);
+				printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
 				f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 				jvm->frames = Push_frames(jvm->frames,f_novo);
 				// printf("%lu\n",sizeof(vetor_locais));
