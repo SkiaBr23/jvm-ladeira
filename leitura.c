@@ -358,14 +358,15 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 
 	char *retorno = (char*)malloc(1000*sizeof(char));
 	char *stringaux = (char*)malloc(100*sizeof(char));
-	u2 *aux2;
+	u2 *aux2=NULL;
 	// u2 tag = 0;
-	char *stringargs;
-	char *stringdecod;// = (char*)malloc(100*sizeof(char));
+	char *stringargs=NULL;
+	char *stringdecod=NULL;
 	strcpy(retorno,"");
 
 	for(aux=code;aux<code+length;){
 		int numarg = instrucoes[*aux].numarg;
+		int opcode = instrucoes[*aux].opcode;
 		char *nomeinst = malloc(100*sizeof(char));
 		strcpy(nomeinst,instrucoes[*aux].inst_nome);
 		strcat(retorno,instrucoes[*aux].inst_nome);
@@ -375,33 +376,48 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				aux++;
 			break;
 			case 1:
-				strcat(retorno," #");
-				sprintf(stringaux,"%d",*(++aux));
-				strcat(retorno,stringaux);
-				strcat(retorno," ");
-				stringdecod = decodificarOperandoInstrucao(cp,*aux,sizeCP);
-				strcat(retorno,stringdecod);
-				strcat(retorno,"\n");
+				if(opcode==bipush || opcode==istore || opcode == iload){
+					sprintf(stringaux," %d\n",*(++aux));
+					strcat(retorno,stringaux);
+				}
+
+				else{
+					strcat(retorno," #");
+					strcat(retorno,stringaux);
+					strcat(retorno," ");
+					stringdecod = decodificarOperandoInstrucao(cp,*aux,sizeCP);
+					strcat(retorno,stringdecod);
+					strcat(retorno,"\n");
+				}
 				aux++;
 			break;
 
 			case 2:
-				aux2 = (u2*)malloc(sizeof(u2));
-				*aux2 = *(++aux) << 8;
-				*aux2 |= *(++aux);
 
-				//stringargs = (char*)malloc(100*sizeof(char));
-				stringargs = decodificarOperandoInstrucao(cp,*aux2,sizeCP);
-				strcat(retorno," #");
-				sprintf(stringaux,"%d",(int)*aux2);
-				strcat(retorno,stringaux);
-				strcat(retorno," ");
-				strcat(retorno,stringargs);
-				strcat(retorno,"\n");
+				if(opcode==iinc){
+					sprintf(stringaux," %d by %d\n",*(++aux),*(++aux));
+					strcat(retorno,stringaux);
+				}
+				else{
+
+					aux2 = (u2*)malloc(sizeof(u2));
+					*aux2 = *(++aux) << 8;
+					*aux2 |= *(++aux);
+	
+					//stringargs = (char*)malloc(100*sizeof(char));
+					stringargs = decodificarOperandoInstrucao(cp,*aux2,sizeCP);
+					strcat(retorno," #");
+					sprintf(stringaux,"%d",(int)*aux2);
+					strcat(retorno,stringaux);
+					strcat(retorno," ");
+					strcat(retorno,stringargs);
+					strcat(retorno,"\n");
+				}
 				aux++;
 			break;
 
 			case 4:
+				// Fazer leitura do wide quando não é iinc
 				aux2 = (u2*) malloc(sizeof(u2));
 				*aux2 = *(++aux) << 8;
 				*aux2 |= *(++aux);
@@ -423,18 +439,33 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				}
 				aux++;
 			break;
+			case 5:
+				// Leitura do Wide aqui
+			break;
+			
 			default:
 				strcat(retorno,"undefined");
 				aux++;
 			break;
 
+
 		}
 	}
 
-	//free(stringdecod); - Esse free da problema.
-	free(stringargs);
-	free(aux2);
-	//free(stringaux); - Esse free da problema.
+	if(stringargs!=NULL){
+		free(stringargs);
+	}
+	if(aux2!=NULL){
+		free(aux2);
+	}
+
+	if(stringdecod!=NULL){
+		free(stringdecod);
+	}
+
+	if(stringaux!=NULL){
+		free(stringaux);
+	}
 	return(retorno);
 }
 
@@ -1296,8 +1327,8 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 
 			if (strcmp(ponteiroprint,"Code") == 0) {
 				code_attribute * auxCodePontual = (code_attribute*)(*(auxAttrCompleto+posicao))->info;
-				fprintf(fp, "Max Stack: %d\n",auxCodePontual->max_stack);
-				fprintf(fp, "Max Locals: %d\n",auxCodePontual->max_locals);
+				fprintf(fp, "Minor Version: %d\n",auxCodePontual->max_stack);
+				fprintf(fp, "Maximum local variables: %d\n",auxCodePontual->max_locals);
 				fprintf(fp, "Code length: %d\n",auxCodePontual->code_length);
 				fprintf(fp, "\n\n----Code----\n\n");
 				if(auxCodePontual->code_length > 0) {
