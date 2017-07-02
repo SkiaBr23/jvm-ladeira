@@ -83,7 +83,7 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 	if (fp == NULL) {
 		/*Caso positivo, encerra o programa*/
 		printf("Ocorreu um problema ao abrir o arquivo, finalizando programa!\n");
-		return NULL;
+		exit(1);
 	} else {
 		/*Caso contrário, prossegue com a leitura do arquivo .class*/
 		/*Alocação da estrutura ClassFile em memória*/
@@ -413,9 +413,9 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				}
 
 				else{
+					sprintf(stringaux," %d ",*(++aux));
 					strcat(retorno," #");
 					strcat(retorno,stringaux);
-					strcat(retorno," ");
 					stringdecod = decodificarOperandoInstrucao(cp,*aux,sizeCP);
 					strcat(retorno,stringdecod);
 					strcat(retorno,"\n");
