@@ -227,7 +227,8 @@ void instanceof_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS S
 void monitorenter_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
 void monitorexit_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
 void wide_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
-void multianewarray_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions); // Não implementado
+void multianewarray_fantasma(frame *f, u1 par1, u1 par2); // Não implementado
 void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void goto_w_impl(frame *f, u1 par1, u1 par2);
