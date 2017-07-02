@@ -1398,6 +1398,7 @@ void ddiv_impl(frame *f, u1 par1, u1 par2){
 
 void irem_impl(frame *f, u1 par1, u1 par2){
 	printf("IREM------------------------------------------\n");
+	
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -1406,6 +1407,7 @@ void irem_impl(frame *f, u1 par1, u1 par2){
 	}
 
 	i4 valor_push = valor2->topo->operando - (valor2->topo->operando/valor1->topo->operando) * valor1->topo->operando;
+	printf("PIROCA VALOR PUSH DO CARALHO: %d\n",valor_push);
 
 	f->p = Push_operandos(f->p,valor_push,NULL,INTEGER_OP);
 }
