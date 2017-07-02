@@ -682,6 +682,9 @@ void istore_1_impl(frame *f, u1 par1, u1 par2){
 }
 
 void istore_2_impl(frame *f, u1 par1, u1 par2){
+
+	ImprimirPilha_operandos(f->p);
+
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	u4 teste = (u4) valor->topo->operando;
@@ -689,11 +692,11 @@ void istore_2_impl(frame *f, u1 par1, u1 par2){
 
 	//*(f->v[2].variavel) = (u4) valor->topo->operando;
 	f->v[2].variavel = (u4) valor->topo->operando;
-	
-	for (int i = 0; i < f->vetor_length; ++i){
+
+	//for (int i = 0; i < f->vetor_length; ++i){
 		
-		printf("Vetor Variaveis: ------- :%d\n", f->v[i].variavel);
-	}
+	//	printf("Vetor Variaveis: ------- :%d\n", f->v[i].variavel);
+	//}
 
 
 	printf("\nSETOU O VETOR\n");
@@ -820,7 +823,9 @@ void astore_2_impl(frame *f, u1 par1, u1 par2){
 }
 
 void astore_3_impl(frame *f, u1 par1, u1 par2){
+
 	pilha_operandos *valor = Pop_operandos(f->p);
+
 	*(f->v[3].variavel) = (i4) valor->topo->referencia;
 	f->v[3].tipo_variavel = valor->topo->tipo_operando;
 }
@@ -1276,16 +1281,20 @@ void idiv_impl(frame *f, u1 par1, u1 par2){
 
 	printf("VALOR 1: %d\n",valor1->topo->operando);
 	printf("VALOR 2: %d\n",valor2->topo->operando);
+	i4 result;
+
 
 	if(valor1->topo->operando!=0){
 		// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
-		i4 result = valor2->topo->operando/valor1->topo->operando;
-		f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
-
+		result = valor2->topo->operando/valor1->topo->operando;
+	
 	}else{
 		jvm->excecao = 1;
+		//Caso ocorra uma excecao, temos que result deve ser 1.
+		result = valor2->topo->operando/valor2->topo->operando;
 		strcpy(jvm->excecao_nome,"java/lang/ArithmeticException");
 	}
+	f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
 }
 
 void ldiv_impl(frame *f, u1 par1, u1 par2){
@@ -2498,8 +2507,13 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 						if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptorcopia,descriptorMetodoAux) == 0){
 							printf("Metodo da classe: %s\n",nomeMetodoAux);
 							// Executar o code do método invocado
+							jvm->pc +=3;
+							f->end_retorno = jvm->pc;
+							printf("f->end_retorno: %d\n", f->end_retorno);
+							jvm->pc = 0;
 							printf("Executando método...\n");
 							executarMetodo(aux,classeDoMetodo,2);
+							jvm->pc = f->end_retorno;
 	
 						}
 					}
@@ -2507,7 +2521,6 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			}
 
 		}
-
 	}
 }
 
@@ -2528,6 +2541,7 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	int *parametros_cont = malloc(sizeof(int));
 	*parametros_cont = 0;
 
+
 	// Realizar a contagem de parâmetros
 
 	char *pch = strtok(descriptormetodo,"()");
@@ -2546,17 +2560,17 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			if(strcmp(nameindex,"Code")==0){
 				code_attribute *c = (code_attribute *) aux->info;
 				frame *f_novo = criarFrame(classeNova,c->max_locals);
-				printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
-				printf("IMPRESSÃO DE VETOR DE VARIÁVEIS LOCAIS DO FRAME ANTES DA TRANSFERÊNCIA\n");
-				for (int i = 0;i<f->vetor_length;i++){
-					printf("VARIAVEL: %d\n",f->v[i].variavel);
-				}
+				//printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
+				//printf("IMPRESSÃO DE VETOR DE VARIÁVEIS LOCAIS DO FRAME ANTES DA TRANSFERÊNCIA\n");
+				//for (int i = 0;i<f->vetor_length;i++){
+				//	printf("VARIAVEL: %d\n",f->v[i].variavel);
+				//}
 				f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 				jvm->frames = Push_frames(jvm->frames,f_novo);
 				// printf("%lu\n",sizeof(vetor_locais));
-				for(int i=0;i<*(parametros_cont);i++){
-					printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
-				}
+				//for(int i=0;i<*(parametros_cont);i++){
+				//	printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
+				//}
 
 
 				printf("Classe nova: %s\n",classeNova);
@@ -2575,8 +2589,13 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 					if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptorcopia,descriptorMetodoAux) == 0){
 						printf("Metodo da classe: %s\n",nomeMetodoAux);
 						// Executar o code do método invocado
+						jvm->pc +=3;
+						f->end_retorno = jvm->pc;
+						printf("f->end_retorno: %d\n", f->end_retorno);
+						jvm->pc = 0;
 						printf("Executando método...\n");
 						executarMetodo(aux,classeNova,2);
+						jvm->pc = f->end_retorno;
 
 					}
 				}
