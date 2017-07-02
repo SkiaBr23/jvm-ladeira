@@ -462,11 +462,19 @@ void ldc2_w_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	int8_t v2 = (int8_t)branchbyte2;
 	int16_t branchoffset = (v1 << 8) | v2;
 	cp_info * doubleValue = f->cp-1+branchoffset;
-	u4 high = doubleValue->UnionCP.Double.high_bytes;
-	u4 low = doubleValue->UnionCP.Double.low_bytes;
 
-	Push_operandos(f->p,high,NULL,DOUBLE_OP);//high
-	Push_operandos(f->p,low,NULL,DOUBLE_OP);//low
+	u4 high,low;
+
+	if(f->p->topo->tipo_operando == DOUBLE_OP){
+		high = doubleValue->UnionCP.Double.high_bytes;
+		low = doubleValue->UnionCP.Double.low_bytes;
+	} else {
+		high = doubleValue->UnionCP.Long.high_bytes;
+		low = doubleValue->UnionCP.Long.low_bytes;
+	}
+
+	Push_operandos(f->p,high,NULL,f->p->topo->tipo_operando);//high
+	Push_operandos(f->p,low,NULL,f->p->topo->tipo_operando);//low
 
 	printf("Valores:\n");
 	printf("-> 0x%08x\n",high);
@@ -606,7 +614,6 @@ void laload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
 	i4* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * 2 * sizeof(i4));
-
 	//Verificar ordem
 	Push_operandos(f->p,*endereco,NULL,LONG_OP);
 	Push_operandos(f->p,*(endereco++),NULL,LONG_OP);
@@ -669,11 +676,10 @@ void saload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i2 endereco;
-	endereco = ((i2) referencia->topo->operando) + (indice->topo->operando * sizeof(i2));
-	i2 ashort = endereco;
+	i4* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(i2));
+
 	//O Sign Extend foi feito?
-	Push_operandos(f->p,(i4) ashort,NULL,SHORT_OP);
+	Push_operandos(f->p,*endereco,NULL,SHORT_OP);
 }
 
 void istore_impl(frame *f, u1 index,u1 par1){
@@ -909,9 +915,12 @@ void lastore_impl(frame *f, u1 par1, u1 par2){
 
 	*endereco_array = high_bytes->topo->operando;
 
+	printf("================ GUARDANDO HIGH::: %d\n",*endereco_array);
 	endereco_array = endereco_array + sizeof(i4);
 
 	*endereco_array = low_bytes->topo->operando;
+
+	printf("================ GUARDANDO LOW::: %d\n",*endereco_array);
 /*
 	endereco = high_bytes->topo->operando;
 	endereco = endereco + sizeof(i4);
@@ -978,10 +987,8 @@ void sastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i2 endereco;
-	endereco = ((i2) array->topo->operando) + (indice->topo->operando * sizeof(i2));
-
-	endereco = valor->topo->operando;
+	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i2)));
+	*endereco_array = valor->topo->operando;
 }
 
 void aastore_impl(frame *f, u1 par1, u1 par2){
@@ -2982,6 +2989,7 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 					else{
 						*(i4 *)p=0;
 					}
+					printf("NEWARRAY LOOP  %d ============== %d\n",i, *(i4 *)p);
 				}
 			break;
 		}
@@ -3035,6 +3043,8 @@ void arraylength_impl(frame *f, u1 par1, u1 par2){
 		case REFERENCE_ARRAY_DOUBLE_OP:
 			ref_size = 2*sizeof(u4);
 			for (void *p = referencia;;p+=ref_size,tamanho++){
+				printf("DOUBLERA ============ %d\n",*(u4*)p );
+				getchar();
 				if (*(u4 *)p == UINT32_MAX){
 					break;
 				}
@@ -3066,10 +3076,9 @@ void arraylength_impl(frame *f, u1 par1, u1 par2){
 		break;
 		case REFERENCE_ARRAY_LONG_OP:
 			ref_size = 2*sizeof(i4);
-			printf("ENTRANDO CALCULO LONG\n");
+			printf("ENTRANDO CALCULO LONG ==== %d\n",*(i4 *)referencia);
 			for (void *p = referencia;;p+=ref_size,tamanho++){
-				printf("VALOR LONGERA =========>>> %ld \n",*(i4 *)p);
-				getchar();
+				printf("VALOR LONGERA =========>>> %d\n",*(i4 *)p);
 				if (*(i4 *)p == INT32_MAX){
 					break;
 				}
