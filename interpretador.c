@@ -183,7 +183,7 @@ bool isSuper(u2 flag){
 }
 
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
-	
+
 	pilha_operandos *aux = CriarPilha_operandos();
 	int cont = 0;
 	while(anterior->p->topo!=NULL && cont<(*parametros_cont)){
@@ -986,10 +986,8 @@ void sastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i2 endereco;
-	endereco = ((i2) array->topo->operando) + (indice->topo->operando * sizeof(i2));
-
-	endereco = valor->topo->operando;
+	i2 * endereco_array =  (((i2) array->topo->referencia) + (indice->topo->operando * sizeof(i2)));
+	*endereco_array = valor->topo->operando;
 }
 
 void aastore_impl(frame *f, u1 par1, u1 par2){
@@ -1363,11 +1361,11 @@ void idiv_impl(frame *f, u1 par1, u1 par2){
 		result = valor2->topo->operando/valor2->topo->operando;
 		printf("OOOOOOOOHHHHHHHH REEEEESULT: %d\n", result);
 		strcpy(jvm->excecao_nome,"java/lang/ArithmeticException");
-		
+
 		messageErrorDiv = messageError;
 		f->p = Push_operandos(f->p,result,messageErrorDiv,REFERENCE_OP);
 	}
-	
+
 
 	ImprimirPilha_operandos(f->p);
 }
