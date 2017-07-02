@@ -3,6 +3,7 @@
 
 #include "instrucoes.h"
 #include "classFileStruct.h"
+#include "jvm.h"
 #include <stdbool.h>
 
 #define normaliza_indice(x,y) (x << 8) | y
@@ -20,6 +21,8 @@ char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp);
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont);
 double decodificaDoubleValor(u4 high, u4 low);
 float decodificaFloatValor(u4 valor);
+int getParametrosNaoStatic (ClassFile * classe);
+Lista_Objetos * InsereObjeto (Lista_Objetos * lis, ClassFile * classe, int parametrosNaoStatic);
 
 void nop_impl(frame *par0,u1 par1, u1 par2);
 void aconst_null_impl(frame *f, u1 par1, u1 par2);
@@ -69,9 +72,9 @@ void aload_2_impl(frame *f, u1 par1, u1 par2);
 void aload_3_impl(frame *f, u1 par1, u1 par2);
 /* Verificar iaload até saload, tem que ajustar a lógica de acesso ao array no índice x. */
 void iaload_impl(frame *f, u1 par1, u1 par2);
-void laload_impl(frame *f, u1 par1, u1 par2); 
+void laload_impl(frame *f, u1 par1, u1 par2);
 void faload_impl(frame *f, u1 par1, u1 par2);
-void daload_impl(frame *f, u1 par1, u1 par2); 
+void daload_impl(frame *f, u1 par1, u1 par2);
 void aaload_impl(frame *f, u1 par1, u1 par2);
 void baload_impl(frame *f, u1 par1, u1 par2);
 void caload_impl(frame *f, u1 par1, u1 par2);
@@ -102,9 +105,9 @@ void astore_1_impl(frame *f, u1 par1, u1 par2);
 void astore_2_impl(frame *f, u1 par1, u1 par2);
 void astore_3_impl(frame *f, u1 par1, u1 par2);
 void iastore_impl(frame *f, u1 par1, u1 par2);
-void lastore_impl(frame *f, u1 par1, u1 par2); 
+void lastore_impl(frame *f, u1 par1, u1 par2);
 void fastore_impl(frame *f, u1 par1, u1 par2);
-void dastore_impl(frame *f, u1 par1, u1 par2); 
+void dastore_impl(frame *f, u1 par1, u1 par2);
 void aastore_impl(frame *f, u1 par1, u1 par2); // Não implementado - FODINHA essa
 void bastore_impl(frame *f, u1 par1, u1 par2);
 void castore_impl(frame *f, u1 par1, u1 par2);
@@ -160,12 +163,12 @@ void iinc_fantasma(frame *par0, u1 par1, u1 par2);
 void iinc_impl(frame *f, u1 index, i1 constante);
 void iinc_wide_fantasma(frame *f, u1 indexbyte1, u1 indexbyte2, u1 constbyte1, u1 constbyte2);
 void iinc_wide(frame *f, u2 indexbyte, i2 constbyte);
-void i2l_impl(frame *f, u1 par1, u1 par2); 
-void i2f_impl(frame *f, u1 par1, u1 par2); 
-void i2d_impl(frame *f, u1 par1, u1 par2); 
-void l2i_impl(frame *f, u1 par1, u1 par2); 
-void l2f_impl(frame *f, u1 par1, u1 par2); 
-void l2d_impl(frame *f, u1 par1, u1 par2); 
+void i2l_impl(frame *f, u1 par1, u1 par2);
+void i2f_impl(frame *f, u1 par1, u1 par2);
+void i2d_impl(frame *f, u1 par1, u1 par2);
+void l2i_impl(frame *f, u1 par1, u1 par2);
+void l2f_impl(frame *f, u1 par1, u1 par2);
+void l2d_impl(frame *f, u1 par1, u1 par2);
 void f2i_impl(frame *f, u1 par1, u1 par2);
 void f2l_impl(frame *f, u1 par1, u1 par2);
 void f2d_impl(frame *f, u1 par1, u1 par2);
@@ -227,7 +230,8 @@ void instanceof_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS S
 void monitorenter_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
 void monitorexit_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
 void wide_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
-void multianewarray_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions); // Não implementado
+void multianewarray_fantasma(frame *f, u1 par1, u1 par2); // Não implementado
 void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void goto_w_impl(frame *f, u1 par1, u1 par2);
