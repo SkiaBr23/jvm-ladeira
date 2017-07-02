@@ -24,6 +24,7 @@ JVM* InicializarJVM() {
 	novo->frames = CriarPilha_frames();
 	novo->pc = 0;
 	novo->excecao = 0;
+	novo->objetos = NULL;
 	novo->excecao_nome = malloc(100*sizeof(char));
 
 	instrucoes = construirInstrucoes();
@@ -311,21 +312,21 @@ u2 verificaHandlerMetodo(method_info *m){
 					printf("NOME DA EXCEÇÃO: %s\n",nomeexcecao);
 					if(strcmp(nomeexcecao,jvm->excecao_nome)==0){
 						// Retornar o valor do Handler se achar a excecao que foi lancada
-						return(tabelaaux->handler_pc);	
+						return(tabelaaux->handler_pc);
 					}
 				}
 			}
 		}
-	
+
 		// Se não encontrar o handler, desempilhar o frame corrente da pilha de frames e retornar -INT_MAX para indicar que o handler não foi encontrado
 		// Desalocar operandos
 		while(jvm->frames->topo->f->p->topo!=NULL){
 			pilha_operandos *removido = Pop_operandos(jvm->frames->topo->f->p);
 		}
-	
+
 		// Desalocar vetor
 		freeVetorLocais(jvm->frames->topo->f->v,jvm->frames->topo->f->vetor_length);
-	
+
 		// Desempilhar o frame
 		pilha_frames *removido = Pop_frames(jvm->frames);
 	}

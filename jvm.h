@@ -5,13 +5,21 @@
 #include "pilha_frames.h"
 #include "instrucoes.h"
 
+struct lista_objetos {
+	ClassFile * obj;
+	u1 sizeData;
+	u4 * data;
+	struct lista_objetos * prox;
+	struct lista_objetos * ant;
+};
+typedef struct lista_objetos Lista_Objetos;
+
 struct jvm{
 	classesCarregadas * classes;
 	pilha_frames *frames;
-	//O ENDERECO É DADO PELA "POSICAO DO PONTEIRO",POR EXEMPLO, NEWARRAY UTILIZA DOIS VALORES, O OPCODE DA INSTRUCAO E O VALOR DO
-	//TIPO, LOGO SOMA +2 EM PC, PERGUNTAR PARA O MAX!
 	u4 pc;
 	u2 excecao;
+	Lista_Objetos * objetos;
 	char *excecao_nome;
 };
 typedef struct jvm JVM;

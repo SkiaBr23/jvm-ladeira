@@ -138,7 +138,7 @@ bool isSuper(u2 flag){
 		if(flag>=TRANSIENT){
 			flag-=TRANSIENT;
 		}
-		
+
 		if(flag>=VOLATILE){
 			flag-=VOLATILE;
 		}
@@ -743,7 +743,7 @@ void istore_2_impl(frame *f, u1 par1, u1 par2){
 	f->v[2].variavel = (u4) valor->topo->operando;
 
 	//for (int i = 0; i < f->vetor_length; ++i){
-		
+
 	//	printf("Vetor Variaveis: ------- :%d\n", f->v[i].variavel);
 	//}
 
@@ -1336,7 +1336,7 @@ void idiv_impl(frame *f, u1 par1, u1 par2){
 	if(valor1->topo->operando!=0){
 		// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
 		result = valor2->topo->operando/valor1->topo->operando;
-	
+
 	}else{
 		jvm->excecao = 1;
 		//Caso ocorra uma excecao, temos que result deve ser 1.
@@ -1424,7 +1424,7 @@ void lrem_impl(frame *f, u1 par1, u1 par2){
 	i8 long2 = ((u8)high_bytes2->topo->operando << 32) | low_bytes2->topo->operando;
 
 	i8 result = long2 - (long2/long1) * long1;
-	
+
 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,LONG_OP);
 	f->p = Push_operandos(f->p, (u4)result, NULL,LONG_OP);
 
@@ -1785,7 +1785,7 @@ void f2i_impl(frame *f, u1 par1, u1 par2){
 void f2l_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	float valor = decodificaFloatValor(valor1->topo->operando);
-	
+
 	i8 valor_long = (i8)valor;
 
 	f->p = Push_operandos(f->p, (u4)(valor_long>>32), NULL,LONG_OP);
@@ -2353,7 +2353,7 @@ void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
             cp_info * nameTypeField = f->cp-1+aux->UnionCP.Fieldref.name_and_type_index;
             char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
             field_info * fieldSaida = BuscarFieldClasseCorrente_classes(jvm->classes, classedoField, nomeField);
-    
+
             if (fieldSaida != NULL) {
                 if (fieldSaida->access_flags != 0x0008) {
                     char * descriptorFieldAux = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
@@ -2521,9 +2521,9 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 		/**
 			3 condições do invokespecial
-			1. 
+			1.
 			2. Se a classe do método resolvido é superclass da classe corrente, não chama
-			3. 
+			3.
 		**/
 
 		// If não executa, else executa
@@ -2553,21 +2553,21 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 					for(int i=0;i<*(parametros_cont);i++){
 						printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
 					}
-	
-	
+
+
 					printf("Classe nova: %s\n",classeDoMetodo);
 					classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeDoMetodo);
 					if (classe != NULL) {
 						printf("Buscou a classe carregada...\n");
 					}
-	
+
 					// Achar o método na classe que o contém
 					method_info *metodos = classe->arquivoClass->methods;
 					for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
 						// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
 						char * nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
 						char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
-	
+
 						if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptorcopia,descriptorMetodoAux) == 0){
 							printf("Metodo da classe: %s\n",nomeMetodoAux);
 							// Executar o code do método invocado
@@ -2578,7 +2578,7 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 							printf("Executando método...\n");
 							executarMetodo(aux,classeDoMetodo,2);
 							jvm->pc = f->end_retorno;
-	
+
 						}
 					}
 				}
@@ -2668,7 +2668,7 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	}
 }
 
-/** 
+/**
 	O invokeinterface, nesse momento, está executando um método que foi declarado em uma interface, se esse método está implementado na classe atual.
 	Ou seja, falta analisar heranças. Se o método não existe na classe atual, mas existe em uma classe pai, o método da classe pai deve ser executado. Isso não está implementado.
 
@@ -2742,10 +2742,47 @@ void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 	char *nomeClasse = decodificaNIeNT(f->cp,indice_cp,NAME_INDEX);
 	printf("Nome da classe: %s\n",nomeClasse);
-
 	ClassFile *classe = resolverClasse(nomeClasse);
-
+	int numFields = getParametrosNaoStatic(classe);
+	jvm->objetos = InsereObjeto(jvm->objetos, classe,numFields);
 	f->p = Push_operandos(f->p,-INT_MAX,classe,REFERENCE_OP);
+}
+
+Lista_Objetos * InsereObjeto (Lista_Objetos * lis, ClassFile * classe, int parametrosNaoStatic) {
+	Lista_Objetos * objeto = (Lista_Objetos*)malloc(sizeof(Lista_Objetos));
+	objeto->obj = classe;
+	objeto->sizeData = parametrosNaoStatic;
+	objeto->data = (u4*)malloc(parametrosNaoStatic*sizeof(u4));
+	objeto->prox = NULL;
+	objeto->ant = NULL;
+
+	Lista_Objetos * aux;
+	Lista_Objetos * ultimo;
+	if (lis != NULL) {
+		aux = lis;
+		while (aux != NULL) {
+			ultimo = aux;
+			aux = aux->prox;
+		}
+		ultimo->prox = objeto;
+		objeto->ant = ultimo;
+		return lis;
+	} else {
+		return objeto;
+	}
+}
+
+int getParametrosNaoStatic (ClassFile * classe) {
+	ClassFile * classeAux = classe;
+	int contador = 0;
+	if (classeAux->fields_count > 0) {
+		for (field_info * fieldAux = classeAux->fields; fieldAux < classeAux->fields+classeAux->fields_count; fieldAux++) {
+			if (fieldAux->access_flags != 0x0008) {
+				contador++;
+			}
+		}
+	}
+	return contador;
 }
 
 void newarray_impl(frame *f, u1 atype, u1 par1){
@@ -2760,17 +2797,17 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 		switch(atype){
 			case T_BOOLEAN:
 				endereco = (u1*) malloc((countnum+1)*sizeof(u1));
-				
+
 			break;
 
 			case T_CHAR:
 				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
-				
+
 			break;
 
 			case T_FLOAT:
 				endereco = (u4*) malloc((countnum+1)*sizeof(u4));
-				
+
 			break;
 
 			case T_DOUBLE:
@@ -2779,12 +2816,12 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 
 			case T_BYTE:
 				endereco = (i1*) malloc((countnum+1)*sizeof(i1));
-				
+
 			break;
 
 			case T_SHORT:
 				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
-				
+
 			break;
 
 			case T_INT:
