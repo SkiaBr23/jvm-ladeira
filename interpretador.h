@@ -23,6 +23,7 @@ double decodificaDoubleValor(u4 high, u4 low);
 float decodificaFloatValor(u4 valor);
 int getParametrosNaoStatic (ClassFile * classe);
 Lista_Objetos * InsereObjeto (Lista_Objetos * lis, ClassFile * classe, int parametrosNaoStatic);
+bool buscaStaticFlags (char * accessFlags);
 
 void nop_impl(frame *par0,u1 par1, u1 par2);
 void aconst_null_impl(frame *f, u1 par1, u1 par2);
