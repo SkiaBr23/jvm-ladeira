@@ -175,6 +175,7 @@ bool isSuper(u2 flag){
 }
 
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
+	
 	pilha_operandos *aux = CriarPilha_operandos();
 	int cont = 0;
 	while(anterior->p->topo!=NULL && cont<(*parametros_cont)){
@@ -183,8 +184,6 @@ frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 		aux = Push_operandos(aux,p->topo->operando,(void*)p->topo->referencia,p->topo->tipo_operando);
 		cont++;
 	}
-
-	novo->v = malloc(cont*sizeof(vetor_locais));
 
 	for(int i=0;i<cont;i++){
 		pilha_operandos *p = Pop_operandos(aux);
@@ -735,12 +734,14 @@ void istore_2_impl(frame *f, u1 par1, u1 par2){
 
 	ImprimirPilha_operandos(f->p);
 
+
+
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	u4 teste = (u4) valor->topo->operando;
 	printf("\nDESEMPILHOU %d\n",teste);
+	printf("Endereco de f->v[2].variavel: %04x\n", f->v[2].variavel);
 
-	//*(f->v[2].variavel) = (u4) valor->topo->operando;
 	*(f->v[2].variavel) = (u4) valor->topo->operando;
 
 	//for (int i = 0; i < f->vetor_length; ++i){
@@ -2496,7 +2497,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
                         printf("Valor Float: %f\n",valorSaida_float);
                     break;
                     case LONG_OP:
-                        printf("Long imprimir AAAAAAAAAAAAHHHHHHHH: %d\n",(i4)string->topo->operando);
+                        printf("Long imprimir: %d\n",(i4)string->topo->operando);
                     break;
                     case DOUBLE_OP:
                         valorSaida_double = decodificaDoubleValor(v2->topo->operando, string->topo->operando);
@@ -2650,6 +2651,7 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
+	printf("Nome metodo AAAAHHHHHHHHH: %s\n", nomemetodo);
 	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
 	char *descriptorcopia = malloc(strlen(descriptormetodo)*sizeof(char));
 	strcpy(descriptorcopia,descriptormetodo);

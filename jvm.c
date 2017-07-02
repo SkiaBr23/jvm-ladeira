@@ -55,6 +55,7 @@ frame* criarFrame(char *classeCorrente, u2 max_locals){
 	//TRES PARA DEBUG -ajustar!
 	f->v = malloc(max_locals*sizeof(vetor_locais));
 	for (int i = 0; i < max_locals; i++) {
+		//printf("Criando posicao %d da classe %s\n",i, classeCorrente);
 		f->v[i].variavel = malloc(sizeof(u4));
 	}
 	f->cp = BuscarCPClasseCorrente_classes(jvm->classes,classeCorrente);
