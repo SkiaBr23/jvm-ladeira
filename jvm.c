@@ -245,6 +245,8 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 					// Chamar a função ou com switch case, ou ajustando cada função internamente
 
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],argumentos[1]);
+
+					jvm->pc += i.numarg+1;
 				}
 				else{
 					u1 *argumentos = malloc(i.numarg*2*sizeof(u1));
@@ -255,6 +257,8 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 					}
 
 					iinc_wide_fantasma(jvm->frames->topo->f,argumentos[0],argumentos[1],argumentos[2],argumentos[3]);
+
+					jvm->pc += i.numarg*2-1;
 				}
 			}
 			else{
