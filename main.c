@@ -83,7 +83,8 @@ int main(int argc, char const *argv[]){
 			imprimirClassFile(jvm->classes->arquivoClass, outputFile);
 			fclose(outputFile);
 		} else {
-			printf("Erro ao criar arquivo de saida\n");
+			printf("Erro ao criar arquivo de saida. O programa será encerrado.\n");
+			exit(1);
 		}
 	} else if (opcao == 2) {
 

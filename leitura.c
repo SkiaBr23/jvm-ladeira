@@ -83,7 +83,7 @@ ClassFile* lerArquivo (char * nomeArquivo) {
 	if (fp == NULL) {
 		/*Caso positivo, encerra o programa*/
 		printf("Ocorreu um problema ao abrir o arquivo, finalizando programa!\n");
-		return NULL;
+		exit(1);
 	} else {
 		/*Caso contrário, prossegue com a leitura do arquivo .class*/
 		/*Alocação da estrutura ClassFile em memória*/
@@ -354,11 +354,12 @@ method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp) {
 }
 
 char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *instrucoes){
-	u1 *aux;
-
-	char *retorno = (char*)malloc(1000*sizeof(char));
+	u1 *aux=NULL,*aux3=NULL;
+	char *retorno = (char*)malloc(10000*sizeof(char));
 	char *stringaux = (char*)malloc(100*sizeof(char));
-	u2 *aux2=NULL;
+	u2 *aux2=NULL,*aux4=NULL;
+	u2 *indexbyte=NULL;
+	i2 *constbyte = NULL;
 	// u2 tag = 0;
 	char *stringargs=NULL;
 	char *stringdecod=NULL;
@@ -372,7 +373,37 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 		strcat(retorno,instrucoes[*aux].inst_nome);
 		switch(numarg){
 			case 0:
-				strcat(retorno,"\n");
+				if(opcode==wide){
+					// Leitura do Wide do iinc aqui
+					aux3 = malloc(sizeof(u1));
+					*aux3 = *(++aux);
+
+					if(instrucoes[*aux3].opcode==iinc){
+	
+						indexbyte = malloc(sizeof(u2));
+						*indexbyte = *(++aux) << 8;
+						*indexbyte |= *(++aux);
+		
+						constbyte = malloc(sizeof(i2));
+						*constbyte = (i2) *(++aux) << 8;
+						*constbyte |= (i2) *(++aux);
+		
+						sprintf(stringaux,"\n%s %d by %d\n",instrucoes[*aux3].inst_nome,(int) *indexbyte,(int) *constbyte);
+						strcat(retorno,stringaux);
+					}
+					else{
+	
+						aux2 = (u2*) malloc(sizeof(u2));
+						*aux2 = *(++aux) << 8;
+						*aux2 |= *(++aux);
+
+						sprintf(stringaux,"\n%s %d\n",instrucoes[*aux3].inst_nome, (int) *aux2);
+						strcat(retorno,stringaux);
+					}
+				}
+				else{
+					strcat(retorno,"\n");
+				}
 				aux++;
 			break;
 			case 1:
@@ -382,9 +413,9 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				}
 
 				else{
+					sprintf(stringaux," %d ",*(++aux));
 					strcat(retorno," #");
 					strcat(retorno,stringaux);
-					strcat(retorno," ");
 					stringdecod = decodificarOperandoInstrucao(cp,*aux,sizeCP);
 					strcat(retorno,stringdecod);
 					strcat(retorno,"\n");
@@ -418,17 +449,18 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 
 			case 4:
 				// Fazer leitura do wide quando não é iinc
+
 				aux2 = (u2*) malloc(sizeof(u2));
 				*aux2 = *(++aux) << 8;
 				*aux2 |= *(++aux);
-
+	
 				stringargs = decodificarOperandoInstrucao(cp,*aux2,sizeCP);
 				strcat(retorno," #");
 				sprintf(stringaux,"%d",(int)*aux2);
 				strcat(retorno,stringaux);
 				strcat(retorno," ");
 				strcat(retorno,stringargs);
-				u2 *aux3 = (u2*) malloc(sizeof(u2));
+				aux3 = (u2*) malloc(sizeof(u2));
 				*aux3 = *(++aux);
 				sprintf(stringaux,"%d",(int)*aux3);
 				strcat(retorno," count ");
@@ -437,10 +469,8 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				if(strcmp(nomeinst,"invokeinterface")==0){
 					aux++; // Incrementar porque é o 0;
 				}
+
 				aux++;
-			break;
-			case 5:
-				// Leitura do Wide aqui
 			break;
 			
 			default:
