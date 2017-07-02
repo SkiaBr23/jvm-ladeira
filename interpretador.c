@@ -476,7 +476,7 @@ void ldc2_w_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 }
 //Carrega inteiro do frame para a pilha de operandos
 void iload_impl(frame *f, u1 index, u1 par1){
-	Push_operandos(f->p,(i4) f->v[index].variavel,NULL,INTEGER_OP);
+	Push_operandos(f->p,(i4) *(f->v[index].variavel),NULL,INTEGER_OP);
 }
 
 //Carrega long do frame para a pilha de operandos
@@ -513,7 +513,7 @@ void iload_1_impl(frame *f, u1 par1, u1 par2){
 }
 
 void iload_2_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,(i4) (f->v[2].variavel),NULL,INTEGER_OP);
+	Push_operandos(f->p,(i4) *(f->v[2].variavel),NULL,INTEGER_OP);
 }
 
 void iload_3_impl(frame *f, u1 par1, u1 par2){
@@ -687,7 +687,7 @@ void istore_impl(frame *f, u1 index,u1 par1){
 	printf("Opcode: %d\n",istore);
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	f->v[index].variavel = (i4) valor->topo->operando;
+	*(f->v[index].variavel) = (i4) valor->topo->operando;
 }
 
 void lstore_impl(frame *f, u1 index, u1 par1){
@@ -741,7 +741,7 @@ void istore_2_impl(frame *f, u1 par1, u1 par2){
 	printf("\nDESEMPILHOU %d\n",teste);
 
 	//*(f->v[2].variavel) = (u4) valor->topo->operando;
-	f->v[2].variavel = (u4) valor->topo->operando;
+	*(f->v[2].variavel) = (u4) valor->topo->operando;
 
 	//for (int i = 0; i < f->vetor_length; ++i){
 		
@@ -1694,8 +1694,8 @@ void lxor_impl(frame *f, u1 par1, u1 par2){
 void iinc_impl(frame *f,u1 index, i1 constante){
 	// Estender o sinal para 32 bits
 	i4 inteiro_constante = (i4) constante;
-
-	f->v[index].variavel += inteiro_constante;
+	printf("INCREMENTANDO =========+> %d\n",inteiro_constante );
+	*(f->v[index].variavel) += inteiro_constante;
 }
 
 void iinc_fantasma(frame *par0, u1 par1, u1 par2){
@@ -2423,79 +2423,129 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 }
 
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
-	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
-
-	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
-	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
-
-	/*method_info *metodos = f->classes->topo->arquivoClass->methods;
-	method_info *aux = metodos;*/
-
-	int achou = 0;
-
-	/*for(aux=metodos;aux<metodos+f->classes->topo->arquivoClass->methods_count;aux++){
-		char *nome_metodo_lista = decodificaStringUTF8(f->cp-1+aux->name_index);
-		// O método está na classe corrente
-		if(strcmp(nomemetodo,nome_metodo_lista)==0){
-			// Achei o método
-			// Verificar access flags
-			// Aqui dentro, private é legal, por exemplo
-			achou = 1;
-			break;
-
-		}
-	}
-
-	if(achou==1){
-		// Se o método tiver access flag private, não tem problema
-	}
-	else{
-		// O método não está na classe corrente
-		//Se o método não for encontrado na classe corrente, buscar o método na super_class da classe corrente
-		// Verificar se ele é private
-		// Se ele for private, o acesso é ilegal, retorna exceção
-		// Se ele for encontrado na super_class e for protected, tá tudo ok
-	}*/
-
-	if(strcmp(nomemetodo,"println")==0){
-		printf("Entrou no println\n");
-		// Imprimir com o printf do c
-		// Esvaziar a pilha de operandos
-		// ImprimirPilha_operandos(f->p);
-		if (!pilhaVazia(f->p)) {
-			if (!printVazio(f->p)) {
-				pilha_operandos *string = Pop_operandos(f->p);
-				pilha_operandos * v2;
-				if (string->topo->tipo_operando == DOUBLE_OP) {
-					v2 = Pop_operandos(f->p);
-				}
-				pilha_operandos *fieldOut = Pop_operandos(f->p);
-
-				if (string->topo->tipo_operando == 10) {
-					printf("\nString imprimir: %s\n",(char*) string->topo->referencia);
-				} else if(string->topo->tipo_operando == 3) {
-					printf("\nChar imprimir: %c\n",(char)string->topo->operando);
-				} else if (string->topo->tipo_operando == DOUBLE_OP) {
-					double valorSaida = decodificaDoubleValor(v2->topo->operando, string->topo->operando);
-					printf("Valor Double: %lf\n",valorSaida);
-				}else if(string->topo->tipo_operando == FLOAT_OP){
-					float valorSaida = decodificaFloatValor(string->topo->operando);
-					printf("Valor Float: %f\n",valorSaida);
-				} else {
-					printf("\nValor imprimir: %d\n",(i4) string->topo->operando);
-				}
-			} else {
-				pilha_operandos *fieldOut = Pop_operandos(f->p);
-				printf("\nSaltoDeLinha\n");
-			}
-		}
-	}
-	else{
-		if(resolverMetodo(f->cp,indice_cp,0)){
-
-		}
-	}
-
+    u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+ 
+    char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
+    char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
+ 
+    /*method_info *metodos = f->classes->topo->arquivoClass->methods;
+    method_info *aux = metodos;*/
+ 
+    int achou = 0;
+ 
+    /*for(aux=metodos;aux<metodos+f->classes->topo->arquivoClass->methods_count;aux++){
+        char *nome_metodo_lista = decodificaStringUTF8(f->cp-1+aux->name_index);
+        // O método está na classe corrente
+        if(strcmp(nomemetodo,nome_metodo_lista)==0){
+            // Achei o método
+            // Verificar access flags
+            // Aqui dentro, private é legal, por exemplo
+            achou = 1;
+            break;
+ 
+        }
+    }
+ 
+    if(achou==1){
+        // Se o método tiver access flag private, não tem problema
+    }
+    else{
+        // O método não está na classe corrente
+        //Se o método não for encontrado na classe corrente, buscar o método na super_class da classe corrente
+        // Verificar se ele é private
+        // Se ele for private, o acesso é ilegal, retorna exceção
+        // Se ele for encontrado na super_class e for protected, tá tudo ok
+    }*/
+ 
+    if(strcmp(nomemetodo,"println")==0){
+        double valorSaida_double;
+        float valorSaida_float;
+ 
+        printf("Entrou no println\n");
+        // Imprimir com o printf do c
+        // Esvaziar a pilha de operandos
+        // ImprimirPilha_operandos(f->p);
+        if (!pilhaVazia(f->p)) {
+            if (!printVazio(f->p)) {
+                pilha_operandos *string = Pop_operandos(f->p);
+                pilha_operandos * v2;
+                if (string->topo->tipo_operando == DOUBLE_OP) {
+                    v2 = Pop_operandos(f->p);
+                }
+                pilha_operandos *fieldOut = Pop_operandos(f->p);
+ 
+                switch(string->topo->tipo_operando){
+ 
+                    case BOOLEAN_OP:
+                        printf("Integer imprimir: %d\n",(i4)string->topo->operando);
+                    break;
+                    case BYTE_OP:
+                        printf("Integer imprimir: %d\n",(i4)string->topo->operando);
+                    break;
+                    case CHAR_OP:
+                        printf("\nChar imprimir: %c\n",(char)string->topo->operando);
+                    break;
+                    case SHORT_OP:
+                        printf("Integer imprimir: %d\n",(i4)string->topo->operando);
+                    break;
+                    case INTEGER_OP:
+                        printf("Integer imprimir: %d\n",(i4)string->topo->operando);
+                    break;
+                    case FLOAT_OP:
+                        valorSaida_float = decodificaFloatValor(string->topo->operando);
+                        printf("Valor Float: %f\n",valorSaida_float);
+                    break;
+                    case LONG_OP:
+                        printf("Long imprimir AAAAAAAAAAAAHHHHHHHH: %d\n",(i4)string->topo->operando);
+                    break;
+                    case DOUBLE_OP:
+                        valorSaida_double = decodificaDoubleValor(v2->topo->operando, string->topo->operando);
+                        printf("Valor Double: %lf\n",valorSaida_double);
+                    break;
+                    case RETURN_ADDRESS_OP:
+                        printf("Operando: %s\n\n",(char*)string->topo->referencia);
+                    break;
+                    case REFERENCE_ARRAY_BOOLEAN_OP:
+                        printf("[Z@%p\n",(u4*) string->topo->referencia);
+                    break;
+                    case REFERENCE_ARRAY_CHAR_OP:
+                        printf("Operando: %s\n\n",(char*) string->topo->referencia);
+                    break;
+                    case REFERENCE_ARRAY_FLOAT_OP:
+                        printf("Referencia: [F@%04x\n",(u4*) string->topo->referencia);
+                    break;
+                    case REFERENCE_ARRAY_DOUBLE_OP:
+                        printf("Referencia: [D@%04x\n",(u4*) string->topo->referencia);
+                    break;
+                    case REFERENCE_ARRAY_BYTE_OP:
+                        printf("Referencia: [B@%04x\n",(u4*) string->topo->referencia);
+                    break;
+                    case REFERENCE_ARRAY_SHORT_OP:
+                        printf("Referencia: [S@%04x\n",(u4*) string->topo->referencia);
+                    break;
+                    case REFERENCE_ARRAY_INT_OP:
+                        printf("Referencia: [I@%04x\n",(u4*) string->topo->referencia);
+                    break;
+                    case REFERENCE_ARRAY_LONG_OP:
+                        printf("Referencia: [J@%04x\n",(u4*) string->topo->referencia);
+                    break;
+                    case REFERENCE_OP:
+                        printf("Operando: %s\n\n",(char*) string->topo->referencia);
+                    break;
+                }
+ 
+            } else {
+                pilha_operandos *fieldOut = Pop_operandos(f->p);
+                printf("\nSaltoDeLinha\n");
+            }
+        }
+    }
+    else{
+        if(resolverMetodo(f->cp,indice_cp,0)){
+ 
+        }
+    }
+ 
 }
 
 void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -2872,7 +2922,7 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
 					// Alocar com -INT_MAX para marcar o fim do array
 					if(i==countnum){
-						*(i4 *)p = LONG_MAX;
+						*(i4 *)p = INT32_MAX;
 					}
 					else{
 						*(i4 *)p=0;
@@ -2962,7 +3012,7 @@ void arraylength_impl(frame *f, u1 par1, u1 par2){
 		case REFERENCE_ARRAY_LONG_OP:
 			ref_size = 2*sizeof(i4);
 			for (void *p = referencia;;p+=ref_size,tamanho++){
-				if (*(i4 *)p == LONG_MAX){
+				if (*(i4 *)p == INT32_MAX){
 					break;
 				}
 			}

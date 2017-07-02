@@ -12,15 +12,18 @@ public class testarray{
 		float arrayfloat[] = {3.4f,3.5f,3.6f};
 		double arraydouble[] = {3.4,3.5,3.6};
 		byte arraybyte[] = {'b','y','t'};
-
+/*
 		System.out.println(array.length);
 		System.out.println(arrayshort.length);
 		System.out.println(arraybool.length);
 		System.out.println(arraychar.length);
 		System.out.println(arrayfloat.length);
 		System.out.println(arraybyte.length);
-		System.out.println(arraydouble.length);
-		for(int j = 0; j < array.length; j++){
+		System.out.println(arraydouble.length);*/
+		//System.out.println(arraylong.length);
+
+		System.out.println(array.length);
+		for(int j = 0; j < 3; j++){
 			System.out.println(array[j]);
 		}
 
