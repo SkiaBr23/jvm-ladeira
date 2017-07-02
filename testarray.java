@@ -7,7 +7,7 @@ public class testarray{
 		int array[] = {4,5,6};
 
 
-		System.out.println(array[1]);	
+		System.out.println(array);	
 
 	}
 }
