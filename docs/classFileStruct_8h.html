@@ -3,8 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.13"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
 <title>JVM - Grupo 4: Referência do Arquivo classFileStruct.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -12,6 +11,9 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -32,19 +34,40 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Gerado por Doxygen 1.8.13 -->
+<!-- Gerado por Doxygen 1.8.11 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
-<script type="text/javascript">
-$(function() {
-  initMenu('',true,false,'search.php','Busca');
-  $(document).ready(function() { init_search(); });
-});
-</script>
-<div id="main-nav"></div>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;Principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="annotated.html"><span>Estruturas&#160;de&#160;Dados</span></a></li>
+      <li class="current"><a href="files.html"><span>Arquivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Busca" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Lista&#160;de&#160;Arquivos</span></a></li>
+      <li><a href="globals.html"><span>Globais</span></a></li>
+    </ul>
+  </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -90,9 +113,7 @@ Definições de Tipos</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição Detalhada</h2>
 <div class="textblock"><p>Arquivo cabeçalho de definição da estrutura de ClassFile. </p>
 <p>Definição da estrutura de ClassFile. Uma estrutura de um arquivo .class no Java possui as seguintes características: </p><div class="fragment"><div class="line"><a class="code" href="lista__operandos_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> magic;</div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> minor_version;</div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> major_version;</div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> constant_pool_count;</div><div class="line"><a class="code" href="structcp__info.html">cp_info</a> constant_pool[constant_pool_count];</div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> <a class="code" href="structures_8h.html#aaea667445c15617b5c6ad01f0e53b481">access_flags</a>;</div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> this_class;</div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> super_class;</div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> interfaces_count;</div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> interfaces[interfaces_count];</div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> fields_count;</div><div class="line"><a class="code" href="structfield__info.html">field_info</a> fields[fields_count]; </div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> methods_count;</div><div class="line"><a class="code" href="structmethod__info.html">method_info</a> methods[methods_count]; </div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> attributes_count;</div><div class="line"><a class="code" href="structattribute__info.html">attribute_info</a> attibutes[attributes_count];</div></div><!-- fragment --><p>Onde: </p><div class="fragment"><div class="line"><a class="code" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> = <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> -&gt; uint8_t</div><div class="line"><a class="code" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> = <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> -&gt; uint16_t</div><div class="line"><a class="code" href="lista__operandos_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> = <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> -&gt; uint32_t</div></div><!-- fragment --> </div><h2 class="groupheader">Definições dos tipos</h2>
-<a id="aed419e54ca9f7e5ab3b22a3036af9993"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed419e54ca9f7e5ab3b22a3036af9993">&#9670;&nbsp;</a></span>ClassFile</h2>
-
+<a class="anchor" id="aed419e54ca9f7e5ab3b22a3036af9993"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -111,7 +132,7 @@ Definições de Tipos</h2></td></tr>
 <hr class="footer"/><address class="footer"><small>
 Gerado por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.13
+</a> 1.8.11
 </small></address>
 </body>
 </html>
