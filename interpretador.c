@@ -2512,22 +2512,22 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
                         printf("Operando: %s\n\n",(char*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_FLOAT_OP:
-                        printf("Referencia: [F@%04x\n",(u4*) string->topo->referencia);
+                        printf("Referencia: [F@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_DOUBLE_OP:
-                        printf("Referencia: [D@%04x\n",(u4*) string->topo->referencia);
+                        printf("Referencia: [D@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_BYTE_OP:
-                        printf("Referencia: [B@%04x\n",(u4*) string->topo->referencia);
+                        printf("Referencia: [B@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_SHORT_OP:
-                        printf("Referencia: [S@%04x\n",(u4*) string->topo->referencia);
+                        printf("Referencia: [S@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_INT_OP:
-                        printf("Referencia: [I@%04x\n",(u4*) string->topo->referencia);
+                        printf("Referencia: [I@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_LONG_OP:
-                        printf("Referencia: [J@%04x\n",(u4*) string->topo->referencia);
+                        printf("Referencia: [J@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_OP:
                         printf("Operando: %s\n\n",(char*) string->topo->referencia);
