@@ -287,7 +287,7 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 			if(jvm->excecao==1){
 				handler_pc = verificaHandlerMetodo(m);
 				if(handler_pc!=USHRT_MAX){
-					jvm->excecao = 0;
+					//jvm->excecao = 0;
 					free(jvm->excecao_nome);
 					jvm->excecao_nome = malloc(100*sizeof(char));
 					jvm->pc = handler_pc;

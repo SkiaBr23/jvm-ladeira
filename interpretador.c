@@ -1333,19 +1333,28 @@ void idiv_impl(frame *f, u1 par1, u1 par2){
 	printf("VALOR 1: %d\n",valor1->topo->operando);
 	printf("VALOR 2: %d\n",valor2->topo->operando);
 	i4 result;
+	void *messageErrorDiv = NULL;
+	char *messageError = "java.lang.ArithmeticException: / by zero";
 
 
 	if(valor1->topo->operando!=0){
 		// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
 		result = valor2->topo->operando/valor1->topo->operando;
+		f->p = Push_operandos(f->p,result,messageErrorDiv,INTEGER_OP);
 
 	}else{
 		jvm->excecao = 1;
 		//Caso ocorra uma excecao, temos que result deve ser 1.
 		result = valor2->topo->operando/valor2->topo->operando;
+		printf("OOOOOOOOHHHHHHHH REEEEESULT: %d\n", result);
 		strcpy(jvm->excecao_nome,"java/lang/ArithmeticException");
+		
+		messageErrorDiv = messageError;
+		f->p = Push_operandos(f->p,result,messageErrorDiv,REFERENCE_OP);
 	}
-	f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
+	
+
+	ImprimirPilha_operandos(f->p);
 }
 
 void ldiv_impl(frame *f, u1 par1, u1 par2){
@@ -2478,16 +2487,16 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
                 switch(string->topo->tipo_operando){
 
                     case BOOLEAN_OP:
-                        printf("Integer imprimir: %d\n",(i4)string->topo->operando);
+                        printf("Boolean imprimir: %d\n",(i4)string->topo->operando);
                     break;
                     case BYTE_OP:
-                        printf("Integer imprimir: %d\n",(i4)string->topo->operando);
+                        printf("Byte imprimir: %d\n",(i4)string->topo->operando);
                     break;
                     case CHAR_OP:
                         printf("\nChar imprimir: %c\n",(char)string->topo->operando);
                     break;
                     case SHORT_OP:
-                        printf("Integer imprimir: %d\n",(i4)string->topo->operando);
+                        printf("Short imprimir: %d\n",(i4)string->topo->operando);
                     break;
                     case INTEGER_OP:
                         printf("Integer imprimir: %d\n",(i4)string->topo->operando);
@@ -2501,7 +2510,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
                     break;
                     case DOUBLE_OP:
                         valorSaida_double = decodificaDoubleValor(v2->topo->operando, string->topo->operando);
-                        printf("Valor Double: %lf\n",valorSaida_double);
+                        printf("Double imprimir: %lf\n",valorSaida_double);
                     break;
                     case RETURN_ADDRESS_OP:
                         printf("Operando: %s\n\n",(char*)string->topo->referencia);
