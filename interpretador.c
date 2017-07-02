@@ -230,7 +230,7 @@ frame *transferePilhaVetorCount(frame *f, frame *novo,int quantidade){
 }
 
 void nop_impl(frame *par0, u1 par1, u1 par2){
-	// Não implementada
+	return;
 }
 
 void aconst_null_impl(frame *f, u1 par1, u1 par2){
@@ -406,7 +406,53 @@ void ldc_impl(frame *f, u1 indexbyte1, u1 par2){
 
 }
 
-void ldc_w_impl(frame *par0, u1 par1, u1 par2){
+void ldc_w_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+	u2 indice_cp = normaliza_indice(indexbyte1,indexbyte2);
+	cp_info *item = f->cp-1 + indice_cp;
+	void *valor=NULL;
+	u4 num=0;
+	void *classe=NULL;
+
+	printf("\n\nEXECUTANDO LDC_w\n\n");
+	printf("\nitem->tag: %d\n",item->tag);
+
+	switch(item->tag){
+		case CONSTANT_String:
+			valor = (char*) decodificaStringUTF8(f->cp-1+item->UnionCP.String.string_index);
+			f->p = Push_operandos(f->p,-INT_MAX,valor,REFERENCE_OP);
+			u4 *endereco = (u4*) f->p->topo->referencia;
+
+			printf("STRING EMPILHADA: %s\n",(char*) endereco);
+		break;
+		case CONSTANT_Float:
+			num = item->UnionCP.Float.bytes;
+			f->p = Push_operandos(f->p,num,NULL,FLOAT_OP);
+		break;
+		case CONSTANT_Integer:
+			num = item->UnionCP.Integer.bytes;
+			f->p = Push_operandos(f->p,num,NULL,INTEGER_OP);
+		break;
+		case CONSTANT_Class:
+			valor = (char*) decodificaStringUTF8(f->cp-1+item->UnionCP.Class.name_index);
+			classe = resolverClasse(valor);
+			f->p = Push_operandos(f->p,-INT_MAX,classe,REFERENCE_OP);
+		break;
+		default:
+			printf("\nName index: %d\n",item->UnionCP.Methodref.class_index);
+			printf("\nName and type index: %d\n",item->UnionCP.Methodref.name_and_type_index);
+			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.class_index,NAME_INDEX);
+			printf("\nPORCARIA: %s\n",valor);
+			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+			printf("\nPORCARIA: %s\n",valor);
+
+		break;
+
+		/* Implementar depois, pois não temos no arquivo */
+		/*case CONSTANT_MethodHandle:
+		break;
+		case CONSTANT_MethodType:
+		break;*/
+	}
 
 }
 
@@ -2500,7 +2546,6 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 							// Executar o code do método invocado
 							printf("Executando método...\n");
 							executarMetodo(aux,classeDoMetodo,2);
-	
 						}
 					}
 				}
@@ -2770,7 +2815,7 @@ void monitorexit_impl(frame *f, u1 par1, u1 par2){
 
 }
 
-void wide_impl(frame *f, u1 par1, u1 par2){
+void wide_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 }
 
