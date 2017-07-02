@@ -158,6 +158,8 @@ void ixor_impl(frame *f, u1 par1, u1 par2);
 void lxor_impl(frame *f, u1 par1, u1 par2);
 void iinc_fantasma(frame *par0, u1 par1, u1 par2);
 void iinc_impl(frame *f, u1 index, i1 constante);
+void iinc_wide_fantasma(frame *f, u1 indexbyte1, u1 indexbyte2, u1 constbyte1, u1 constbyte2);
+void iinc_wide(frame *f, u2 indexbyte, i2 constbyte);
 void i2l_impl(frame *f, u1 par1, u1 par2); 
 void i2f_impl(frame *f, u1 par1, u1 par2); 
 void i2d_impl(frame *f, u1 par1, u1 par2); 
@@ -225,7 +227,6 @@ void instanceof_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS S
 void monitorenter_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
 void monitorexit_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
 void wide_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
-void wide_formato_2(frame *f, u1 iinc, u1 indexbyte1, u1 indexbyte2, u1 constbyte1, u1 constbyte2);
 void multianewarray_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);

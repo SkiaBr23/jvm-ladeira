@@ -237,6 +237,16 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],argumentos[1]);
 				}
+				else{
+					u1 *argumentos = malloc(i.numarg*2*sizeof(u1));
+
+					for (u1 arg=0;arg<i.numarg*2;arg++){
+						argumentos[arg] = *j;
+						j++;
+					}
+
+					iinc_wide_fantasma(jvm->frames->topo->f,argumentos[0],argumentos[1],argumentos[2],argumentos[3]);
+				}
 			}
 			else{
 
