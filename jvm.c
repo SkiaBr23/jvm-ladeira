@@ -127,8 +127,9 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 		opcode = *j;
 		pcAtual = jvm->pc;
 		instrucao i = instrucoes[opcode];
-		printf("Instrucao: %s\n",i.inst_nome);
+		printf("Instrucao OOOOOOOOHHHHHHHHH: %s\n",i.inst_nome);
 		printf("Opcode: %d\n",i.opcode);
+		printf("Valor de PC: %d\n", pcAtual);
 		u1 numarg = i.numarg;
 		j++;
 		if(numarg>0){
@@ -160,6 +161,7 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 						}
 						jvm->pc = handler_pc;
 						j = atualizarPCMetodoAtual(code,length);
+						jvm->excecao = 0;
 					}
 					jvm->pc += i.pc_instrucao;
 				break;
@@ -179,12 +181,17 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 						}
 						jvm->pc = handler_pc;
 						j = atualizarPCMetodoAtual(code,length);
+						jvm->excecao = 0;
 					}
 					if (instrucaoBranch(i.inst_nome)) {
 						if (pcAtual != jvm->pc) {
 							j = atualizarPCMetodoAtual(code,length);
 						} else {
-							jvm->pc += i.pc_instrucao;
+							if(strcmp(i.inst_nome, "invokestatic") != 0 ||
+							strcmp(i.inst_nome, "invokevirtual") != 0 ||
+							strcmp(i.inst_nome, "invokespecial") != 0)
+								jvm->pc += i.pc_instrucao;
+
 						}
 					} else {
 						jvm->pc += i.pc_instrucao;
@@ -224,6 +231,7 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 							}
 							jvm->pc = handler_pc;
 							j = atualizarPCMetodoAtual(code,length);
+							jvm->excecao = 0;
 						}
 					}
 				break;
@@ -280,6 +288,7 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 				}
 				jvm->pc = handler_pc;
 				j = atualizarPCMetodoAtual(code,length);
+				jvm->excecao = 0;
 			}
 
 			jvm->pc += i.pc_instrucao;

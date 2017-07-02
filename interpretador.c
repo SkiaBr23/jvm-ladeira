@@ -12,6 +12,7 @@
 #include <string.h>
 #include <math.h>
 #include <inttypes.h>
+#include <stdint.h>
 
 /*
 	Na hora de resolver a classe, executar o init dela
@@ -731,6 +732,9 @@ void istore_1_impl(frame *f, u1 par1, u1 par2){
 }
 
 void istore_2_impl(frame *f, u1 par1, u1 par2){
+
+	ImprimirPilha_operandos(f->p);
+
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	u4 teste = (u4) valor->topo->operando;
@@ -738,11 +742,11 @@ void istore_2_impl(frame *f, u1 par1, u1 par2){
 
 	//*(f->v[2].variavel) = (u4) valor->topo->operando;
 	f->v[2].variavel = (u4) valor->topo->operando;
-	
-	for (int i = 0; i < f->vetor_length; ++i){
+
+	//for (int i = 0; i < f->vetor_length; ++i){
 		
-		printf("Vetor Variaveis: ------- :%d\n", f->v[i].variavel);
-	}
+	//	printf("Vetor Variaveis: ------- :%d\n", f->v[i].variavel);
+	//}
 
 
 	printf("\nSETOU O VETOR\n");
@@ -869,7 +873,9 @@ void astore_2_impl(frame *f, u1 par1, u1 par2){
 }
 
 void astore_3_impl(frame *f, u1 par1, u1 par2){
+
 	pilha_operandos *valor = Pop_operandos(f->p);
+
 	*(f->v[3].variavel) = (i4) valor->topo->referencia;
 	f->v[3].tipo_variavel = valor->topo->tipo_operando;
 }
@@ -1325,16 +1331,20 @@ void idiv_impl(frame *f, u1 par1, u1 par2){
 
 	printf("VALOR 1: %d\n",valor1->topo->operando);
 	printf("VALOR 2: %d\n",valor2->topo->operando);
+	i4 result;
+
 
 	if(valor1->topo->operando!=0){
 		// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
-		i4 result = valor2->topo->operando/valor1->topo->operando;
-		f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
-
+		result = valor2->topo->operando/valor1->topo->operando;
+	
 	}else{
 		jvm->excecao = 1;
+		//Caso ocorra uma excecao, temos que result deve ser 1.
+		result = valor2->topo->operando/valor2->topo->operando;
 		strcpy(jvm->excecao_nome,"java/lang/ArithmeticException");
 	}
+	f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
 }
 
 void ldiv_impl(frame *f, u1 par1, u1 par2){
@@ -2562,15 +2572,20 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 						if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptorcopia,descriptorMetodoAux) == 0){
 							printf("Metodo da classe: %s\n",nomeMetodoAux);
 							// Executar o code do método invocado
+							jvm->pc +=3;
+							f->end_retorno = jvm->pc;
+							printf("f->end_retorno: %d\n", f->end_retorno);
+							jvm->pc = 0;
 							printf("Executando método...\n");
 							executarMetodo(aux,classeDoMetodo,2);
+							jvm->pc = f->end_retorno;
+	
 						}
 					}
 				}
 			}
 
 		}
-
 	}
 }
 
@@ -2591,6 +2606,7 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	int *parametros_cont = malloc(sizeof(int));
 	*parametros_cont = 0;
 
+
 	// Realizar a contagem de parâmetros
 
 	char *pch = strtok(descriptormetodo,"()");
@@ -2609,17 +2625,17 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			if(strcmp(nameindex,"Code")==0){
 				code_attribute *c = (code_attribute *) aux->info;
 				frame *f_novo = criarFrame(classeNova,c->max_locals);
-				printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
-				printf("IMPRESSÃO DE VETOR DE VARIÁVEIS LOCAIS DO FRAME ANTES DA TRANSFERÊNCIA\n");
-				for (int i = 0;i<f->vetor_length;i++){
-					printf("VARIAVEL: %d\n",f->v[i].variavel);
-				}
+				//printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
+				//printf("IMPRESSÃO DE VETOR DE VARIÁVEIS LOCAIS DO FRAME ANTES DA TRANSFERÊNCIA\n");
+				//for (int i = 0;i<f->vetor_length;i++){
+				//	printf("VARIAVEL: %d\n",f->v[i].variavel);
+				//}
 				f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 				jvm->frames = Push_frames(jvm->frames,f_novo);
 				// printf("%lu\n",sizeof(vetor_locais));
-				for(int i=0;i<*(parametros_cont);i++){
-					printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
-				}
+				//for(int i=0;i<*(parametros_cont);i++){
+				//	printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
+				//}
 
 
 				printf("Classe nova: %s\n",classeNova);
@@ -2638,8 +2654,13 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 					if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptorcopia,descriptorMetodoAux) == 0){
 						printf("Metodo da classe: %s\n",nomeMetodoAux);
 						// Executar o code do método invocado
+						jvm->pc +=3;
+						f->end_retorno = jvm->pc;
+						printf("f->end_retorno: %d\n", f->end_retorno);
+						jvm->pc = 0;
 						printf("Executando método...\n");
 						executarMetodo(aux,classeNova,2);
+						jvm->pc = f->end_retorno;
 
 					}
 				}
@@ -2731,8 +2752,9 @@ void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 void newarray_impl(frame *f, u1 atype, u1 par1){
 	pilha_operandos *count = Pop_operandos(f->p);
 	i4 countnum = count->topo->operando;
-
+	int ref_size = 0;
 	void *endereco = NULL;
+	int i = 0;
 	if(count<0){
 		// Lançar exceção
 	}
@@ -2740,53 +2762,125 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 		switch(atype){
 			case T_BOOLEAN:
 				endereco = (u1*) malloc((countnum+1)*sizeof(u1));
-				
+				ref_size = sizeof(u1);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(u1 *)p = CHAR_MAX;
+					}
+					else{
+						*(u1 *)p=0;
+					}
+				}	
 			break;
 
 			case T_CHAR:
 				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
-				
+				ref_size = sizeof(i2);	
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(i2 *)p = SHRT_MAX;
+					}
+					else{
+						*(i2 *)p=0;
+					}
+				}
 			break;
 
 			case T_FLOAT:
 				endereco = (u4*) malloc((countnum+1)*sizeof(u4));
-				
+				ref_size = sizeof(u4);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(u4 *)p = INT_MAX;
+					}
+					else{
+						*(u4 *)p=0;
+					}
+				}
 			break;
 
 			case T_DOUBLE:
 				endereco = (u4*) malloc(2*(countnum+1)*sizeof(u4));
+				ref_size = 2*sizeof(u4);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(u4 *)p = UINT32_MAX;
+					}
+					else{
+						*(u4 *)p=0;
+					}
+				}
 				break;
 
 			case T_BYTE:
 				endereco = (i1*) malloc((countnum+1)*sizeof(i1));
-				
+				ref_size = sizeof(i1);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(i1 *)p = CHAR_MAX;
+					}
+					else{
+						*(i1 *)p=0;
+					}
+				}
 			break;
 
 			case T_SHORT:
 				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
-				
+				ref_size = sizeof(i2);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(i2 *)p = SHRT_MAX;
+					}
+					else{
+						*(i2 *)p=0;
+					}
+				}
 			break;
 
 			case T_INT:
 				endereco = (i4*) malloc((countnum+1)*sizeof(i4));
+				ref_size = sizeof(i4);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(i4 *)p = INT_MAX;
+					}
+					else{
+						*(i4 *)p=0;
+					}
+				}
 			break;
 
 			case T_LONG:
 				endereco = (i4*) malloc(2*(countnum+1)*sizeof(i4));
+				ref_size = 2*sizeof(i4);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(i4 *)p = LONG_MAX;
+					}
+					else{
+						*(i4 *)p=0;
+					}
+				}
 			break;
 		}
-
-		/*// Inicializar com os valores default
-		for(void *p=endereco,i=0;i<=countnum;i++,p++){
-			// Alocar com -INT_MAX para marcar o fim do array
-			if(i==countnum){
-				*p = -INT_MAX;
-			}
-			else{
-				*p=0;
-			}
-		}*/
-
+		
 		// atype + 8 = Transformando tipo de array pra tipo de referencia (ver estrutura)
 		f->p = Push_operandos(f->p,-INT_MAX,endereco,atype + 7);
 	}
@@ -2798,16 +2892,82 @@ void anewarray_impl(frame *f, u1 par1, u1 par2){
 
 void arraylength_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *array_ref = Pop_operandos(f->p);
-	i4 referencia = array_ref->topo->operando;
-	int tamanho = 0;
+	void *referencia = array_ref->topo->referencia;
+	u1 tipo_referencia = array_ref->topo->tipo_operando;
 
-	/* Observação */
+	int tamanho = 0;
+	int ref_size = 0;
+	/* Observação
 	// Não tem como descobrir o tipo do elemento, a princípio.
 	// Como fazer esse incremento? Foi alocado como void, mas com sizeofs diferentes (observar instrução newarray)
 	// O void vai garantir que o incremento é o mesmo?
-	/*for (void *p = referencia;*p!=-INT_MAX;p++,tamanho++){
-
-	}*/
+	*/
+	switch(tipo_referencia){
+		case REFERENCE_ARRAY_BOOLEAN_OP:
+			ref_size = sizeof(u1);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(u1 *)p == CHAR_MAX){
+					break;
+				}
+			}	
+		break;
+		case REFERENCE_ARRAY_CHAR_OP:
+				ref_size = sizeof(i2);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(i2 *)p == SHRT_MAX){
+					break;
+				}
+			}			
+		break;
+		case REFERENCE_ARRAY_FLOAT_OP:
+			ref_size = sizeof(u4);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(u4 *)p == INT_MAX){
+					break;
+				}
+			}			
+		break;
+		case REFERENCE_ARRAY_DOUBLE_OP:
+			ref_size = 2*sizeof(u4);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(u4 *)p == UINT32_MAX){
+					break;
+				}
+			}
+		break;
+		case REFERENCE_ARRAY_BYTE_OP:
+			ref_size = sizeof(i1);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(i1 *)p == CHAR_MAX){
+					break;
+				}
+			}		
+		break;
+		case REFERENCE_ARRAY_SHORT_OP:
+			ref_size = sizeof(i2);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(i2 *)p == SHRT_MAX){
+					break;
+				}
+			}			
+		break;
+		case REFERENCE_ARRAY_INT_OP:
+			ref_size = sizeof(i4);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(i4 *)p == INT_MAX){
+					break;
+				}
+			}	
+		break;
+		case REFERENCE_ARRAY_LONG_OP:
+			ref_size = 2*sizeof(i4);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(i4 *)p == LONG_MAX){
+					break;
+				}
+			}
+		break;
+	}
 
 	f->p = Push_operandos(f->p,tamanho,NULL,INTEGER_OP);
 

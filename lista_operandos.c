@@ -195,7 +195,38 @@ void ImprimirLista_operandos(lista_operandos *lis){
 			printf("Operando: %d\n\n",p->operando);
 		}
 		else{
-			printf("Operando: %s\n\n",(char*) p->referencia);
+			switch(p->tipo_operando){
+				case RETURN_ADDRESS_OP:
+					printf("Operando: %s\n\n",(char*) p->referencia);
+				break;
+				case REFERENCE_ARRAY_BOOLEAN_OP:
+					printf("[Z@%04x\n",(u4*) p->referencia);
+				break;
+				case REFERENCE_ARRAY_CHAR_OP:
+					printf("Operando: %s\n\n",(char*) p->referencia);
+				break;
+				case REFERENCE_ARRAY_FLOAT_OP:
+					printf("[F@%04x\n",(u4*) p->referencia);
+				break;
+				case REFERENCE_ARRAY_DOUBLE_OP:
+					printf("[D@%04x\n",(u4*) p->referencia);
+				break;
+				case REFERENCE_ARRAY_BYTE_OP:
+					printf("[B@%04x\n",(u4*) p->referencia);
+				break;
+				case REFERENCE_ARRAY_SHORT_OP:
+					printf("[S@%04x\n",(u4*) p->referencia);
+				break;
+				case REFERENCE_ARRAY_INT_OP:
+					printf("[I@%04x\n",(u4*) p->referencia);
+				break;
+				case REFERENCE_ARRAY_LONG_OP:
+					printf("[J@%04x\n",(u4*) p->referencia);
+				break;
+				case REFERENCE_OP:
+					printf("Operando: %s\n\n",(char*) p->referencia);
+				break;
+			}
 		}
 	}
 }
