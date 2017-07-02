@@ -643,9 +643,9 @@ void aaload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
 	u4 endereco;
-	endereco = ((u4) referencia->topo->operando) + (indice->topo->operando * sizeof(u4));
+	endereco = ((u4) referencia->topo->referencia) + (indice->topo->operando * sizeof(u4));
 
-	// Push_operandos(f->p,endereco,REFERENCE_OP);
+	Push_operandos(f->p,-INT_MAX,endereco,REFERENCE_OP);
 }
 
 void baload_impl(frame *f, u1 par1, u1 par2){
@@ -3002,21 +3002,69 @@ void multianewarray_fantasma(frame *f, u1 par1, u1 par2){
 }
 void* inicializa_multiarray_recursivo(void* endereco, i4* counts, char* tipos){
 	switch(tipos[1]){
-		case '[':
+		case '[':{
 			endereco = (void**)malloc(counts[0]*sizeof(void*));
 			void ** endereco_aux = endereco;
 			for(u4 i = 0; i < counts[0]; i++){
-				inicializa_multiarray_recursivo(endereco_aux, &counts[1], &tipos[1]);
+				*endereco_aux = inicializa_multiarray_recursivo(endereco_aux, &counts[1], &tipos[1]);
 				endereco_aux++;
 			}
 			break;
-		case 'I':
-			endereco = (i4*)malloc(counts[0]*sizeof(void*));
+		}
+		case 'I':{
+			endereco = (i4*)malloc(counts[0]*sizeof(i4));
+			i4* endereco_aux = endereco;
 			for(u4 i = 0; i < counts[0]; i++){
-				// i4 x = 0;
-				// *((i4*)endereco[i])=x;
+				*endereco_aux=0;
+				endereco_aux++;
 			}
-		break;
+			break;
+		}
+		case 'B':{
+			endereco = (i1*)malloc(counts[0]*sizeof(i1));
+			i1* endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux=0;
+				endereco_aux++;
+			}
+			break;
+		}
+		case 'S':{
+			endereco = (i2*)malloc(counts[0]*sizeof(i2));
+			i2* endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux=0;
+				endereco_aux++;
+			}
+			break;
+		}
+		case 'J':{//LONG
+			endereco = (i8*)malloc(counts[0]*sizeof(i8));
+			i8* endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux=0;
+				endereco_aux++;
+			}
+			break;
+		}
+		case 'F':{
+			endereco = (float*)malloc(counts[0]*sizeof(float));
+			float* endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux=0;
+				endereco_aux++;
+			}
+			break;
+		}
+		case 'D':{
+			endereco = (double*)malloc(counts[0]*sizeof(double));
+			double* endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux=0;
+				endereco_aux++;
+			}
+			break;
+		}
 		default:
 		break;
 	}
@@ -3026,75 +3074,23 @@ void multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions){
 
 	u2 indice_cp = normaliza_indice(indexbyte1,indexbyte2);
 	cp_info *item = f->cp-1 + indice_cp;
-	void *tipos=NULL;
-	tipos = (char*) decodificaStringUTF8(f->cp-1+item->UnionCP.Class.name_index);
+	char* tipos = decodificaStringUTF8(f->cp-1+item->UnionCP.Class.name_index);
+	char* tipos_aux = (char*)malloc(sizeof(char));
 	i4* counts = (i4*)malloc(dimensions*sizeof(i4));
 	void *endereco = NULL;
-	for(u1 i = 0; i < dimensions; i++){
+	printf("%s\n", tipos);
+	getchar();
+	for(u1 i = dimensions; i > 0; i--){ //Eh ao contrario, dimensao-n no indice 0, dimensao-0 no indice n
 		pilha_operandos *valor = Pop_operandos(f->p);
-		counts[i] = valor->topo->operando;
+		counts[i-1] = valor->topo->operando;
 		if(counts[i] < 0){
 			//Lancar NegativeArraySizeException
-		}else if(counts[i] == 0){
-			//Parar de alocar
 		}
 	}
 
 	endereco = inicializa_multiarray_recursivo(endereco, counts, tipos);
 
-	// 	switch(atype){
-	// 		case T_BOOLEAN:
-	// 			endereco = (u1*) malloc((countnum+1)*sizeof(u1));
-				
-	// 		break;
-
-	// 		case T_CHAR:
-	// 			endereco = (i2*) malloc((countnum+1)*sizeof(i2));
-				
-	// 		break;
-
-	// 		case T_FLOAT:
-	// 			endereco = (u4*) malloc((countnum+1)*sizeof(u4));
-				
-	// 		break;
-
-	// 		case T_DOUBLE:
-	// 			endereco = (u4*) malloc(2*(countnum+1)*sizeof(u4));
-	// 			break;
-
-	// 		case T_BYTE:
-	// 			endereco = (i1*) malloc((countnum+1)*sizeof(i1));
-				
-	// 		break;
-
-	// 		case T_SHORT:
-	// 			endereco = (i2*) malloc((countnum+1)*sizeof(i2));
-				
-	// 		break;
-
-	// 		case T_INT:
-	// 			endereco = (i4*) malloc((countnum+1)*sizeof(i4));
-	// 		break;
-
-	// 		case T_LONG:
-	// 			endereco = (i4*) malloc(2*(countnum+1)*sizeof(i4));
-	// 		break;
-	// 	}
-
-	// 	/*// Inicializar com os valores default
-	// 	for(void *p=endereco,i=0;i<=countnum;i++,p++){
-	// 		// Alocar com -INT_MAX para marcar o fim do array
-	// 		if(i==countnum){
-	// 			*p = -INT_MAX;
-	// 		}
-	// 		else{
-	// 			*p=0;
-	// 		}
-	// 	}*/
-
-	// 	// atype + 8 = Transformando tipo de array pra tipo de referencia (ver estrutura)
-	// 	f->p = Push_operandos(f->p,-INT_MAX,endereco,atype + 7);
-	// }
+	f->p = Push_operandos(f->p,-INT_MAX,endereco,REFERENCE_OP);
 	free(counts);
 
 }
