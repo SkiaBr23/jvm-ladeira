@@ -92,6 +92,12 @@ char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 }
 
 int descriptorFieldValidate (char * descriptor) {
+
+	if (*descriptor == 'L') {
+		printf("Entrou piranha\n");
+		return 5;
+	}
+
 	if (strcmp(descriptor,"I") == 0) {
 		return 0;
 	} else if (strcmp(descriptor,"F") == 0) {
@@ -104,10 +110,12 @@ int descriptorFieldValidate (char * descriptor) {
 		return 4;
 	} else if (strcmp(descriptor,"L") == 0) {
 		return 5;
-	} else if (strcmp(descriptor,"D") == 0) {
+	} else if (strcmp(descriptor,"Z") == 0) {
 		return 6;
-	} else if (strcmp(descriptor,"A") == 0) {
+	} else if (strcmp(descriptor,"D") == 0) {
 		return 7;
+	} else if (strcmp(descriptor,"J") == 0) {
+		return 8;
 	}
 	return 0;
 }
@@ -2232,6 +2240,8 @@ void inst_return_impl(frame *f, u1 par1, u1 par2){
 
 	printf("EXECUÇÃO RETURN\n\n");
 
+	ImprimirPilha_operandos(f->p);
+
 	// Empilhar NULL na pilha de operandos do frame chamador, ou seja, o próximo frame na pilha
 	//jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,-INT_MAX,NULL,-1);
 	pilha_frames *desempilhado = Pop_frames(jvm->frames);
@@ -2263,21 +2273,32 @@ void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 			field_info * fieldSaida = BuscarFieldClasseCorrente_classes(jvm->classes, classedoField, nomeField);
 			if (fieldSaida != NULL) {
-				if (fieldSaida->access_flags == 0x0008) {
+				char * accessF = decodificaAccessFlags(fieldSaida->access_flags);
+
+				if (buscaStaticFlags(accessF)) {
 					char * descriptorFieldAux = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
-					if (descriptorFieldValidate(descriptorFieldAux) < 5) {
-						i4 valorPushed = *fieldSaida->UnionStaticData.low;
-						f->p = Push_operandos(f->p,valorPushed,NULL,INTEGER_OP);
+					if (descriptorFieldValidate(descriptorFieldAux) < 7) {
+						if (descriptorFieldValidate(descriptorFieldAux) == 1) {
+							i4 valorPushed = *fieldSaida->dadosStatics->low;
+							f->p = Push_operandos(f->p,valorPushed,NULL,FLOAT_OP);
+						} else if (descriptorFieldValidate(descriptorFieldAux) == 5) {
+							u4 * valorPushed = fieldSaida->dadosStatics->low;
+							printf("ENDERECO PAU NU CU FDP ARROMBADO: %s\n",(char*)valorPushed);
+							f->p = Push_operandos(f->p,-INT_MAX,(void*)valorPushed,REFERENCE_STRING_OP);
+						} else {
+							i4 valorPushed = *fieldSaida->dadosStatics->low;
+							f->p = Push_operandos(f->p,valorPushed,NULL,INTEGER_OP);
+						}
 						printf("Empilhou na pilha\n");
-					} else if (descriptorFieldValidate(descriptorFieldAux) == 5 || descriptorFieldValidate(descriptorFieldAux) == 6) {
-						i4 valorPushedLow = *fieldSaida->UnionStaticData.low;
-						i4 valorPushedHigh = *fieldSaida->UnionStaticData.high;
-						if (descriptorFieldValidate(descriptorFieldAux) == 5) {
+					} else if (descriptorFieldValidate(descriptorFieldAux) == 7 || descriptorFieldValidate(descriptorFieldAux) == 8) {
+						i4 valorPushedLow = *fieldSaida->dadosStatics->low;
+						i4 valorPushedHigh = *fieldSaida->dadosStatics->high;
+						if (descriptorFieldValidate(descriptorFieldAux) == 7) {
 							f->p = Push_operandos(f->p,valorPushedHigh,NULL,DOUBLE_OP);
 							f->p = Push_operandos(f->p,valorPushedLow,NULL,DOUBLE_OP);
 						} else {
 							f->p = Push_operandos(f->p,valorPushedHigh,NULL,LONG_OP);
-							f->p = Push_operandos(f->p,valorPushedLow,NULL,DOUBLE_OP);
+							f->p = Push_operandos(f->p,valorPushedLow,NULL,LONG_OP);
 						}
 					}
 				}
@@ -2291,6 +2312,7 @@ void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	cp_info * field = f->cp-1+indice_cp;
 
+	printf("PUTA MERDA\n");
 	// Resolver o field
 	char * nomeClasse = decodificaNIeNT(f->cp,field->UnionCP.Fieldref.class_index,NAME_INDEX);
 	classesCarregadas * nova = BuscarElemento_classes(jvm->classes,nomeClasse);
@@ -2302,27 +2324,40 @@ void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	} else {
 		cp_info * nameTypeField = f->cp-1+field->UnionCP.Fieldref.name_and_type_index;
 
-
 		char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
 
 
 		field_info * fieldSaida = BuscarFieldClasseCorrente_classes(jvm->classes, nomeClasse, nomeField);
 		if (fieldSaida != NULL) {
-			if (fieldSaida->access_flags == 0x0008) {
+			char * accessF = decodificaAccessFlags(fieldSaida->access_flags);
+
+			if (buscaStaticFlags(accessF)) {
+
 				char * descriptorFieldAux = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
-				if (descriptorFieldValidate(descriptorFieldAux) < 5) {
+				if (descriptorFieldValidate(descriptorFieldAux) < 7) {
 					pilha_operandos *valor = Pop_operandos(f->p);
-					fieldSaida->UnionStaticData.low = (u4*) malloc(sizeof(u4));
-					*fieldSaida->UnionStaticData.low = (u4)valor->topo->operando;
-					printf("Empilhou float\n");
-				} else if (descriptorFieldValidate(descriptorFieldAux) == 5 || descriptorFieldValidate(descriptorFieldAux) == 6) {
+					fieldSaida->dadosStatics = (staticData*)malloc(sizeof(staticData));
+					fieldSaida->dadosStatics->low = (u4*) malloc(sizeof(u4));
+					fieldSaida->dadosStatics->high = NULL;
+					if (valor->topo->tipo_operando == REFERENCE_OP) {
+						printf("Entrou aqui piranha----------------------------------------\n");
+						printf("Opa: %s\n",(char*)valor->topo->referencia);
+						fieldSaida->dadosStatics->low = (u4*)valor->topo->referencia;
+						printf("ENDERECO LOCACO PAU NU CU: %s\n",(char*)fieldSaida->dadosStatics->low);
+					} else {
+						*fieldSaida->dadosStatics->low = (u4)valor->topo->operando;
+					}
+					printf("Empilhou float 0x%08x\n",*fieldSaida->dadosStatics->low);
+				} else if (descriptorFieldValidate(descriptorFieldAux) == 7 || descriptorFieldValidate(descriptorFieldAux) == 8) {
 					pilha_operandos *valorLow = Pop_operandos(f->p);
 					pilha_operandos *valorHigh = Pop_operandos(f->p);
-					fieldSaida->UnionStaticData.low = (u4*) malloc(sizeof(u4));
-					fieldSaida->UnionStaticData.high = (u4*) malloc(sizeof(u4));
-					*fieldSaida->UnionStaticData.low = (u4)valorLow->topo->operando;
-					*fieldSaida->UnionStaticData.high = (u4)valorHigh->topo->operando;
-					printf("Empilhou double\n");
+					fieldSaida->dadosStatics = (staticData*)malloc(sizeof(staticData));
+					fieldSaida->dadosStatics->low = (u4*) malloc(sizeof(u4));
+					fieldSaida->dadosStatics->high = (u4*) malloc(sizeof(u4));
+					*fieldSaida->dadosStatics->low = (u4)valorLow->topo->operando;
+					*fieldSaida->dadosStatics->high = (u4)valorHigh->topo->operando;
+					printf("Empilhou double high: 0x%08x\n", *fieldSaida->dadosStatics->high);
+					printf("Empilhou double low: 0x%08x\n", *fieldSaida->dadosStatics->low);
 				}
 			}
 		}
@@ -2335,6 +2370,21 @@ void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	//esse field e retornar ele
 	//Obter tipo pelo name and type index
 	// Fieldref campo = f->cp[indice_cp];
+}
+
+bool buscaStaticFlags (char * accessFlags) {
+	char * acc = (char*) malloc(100*sizeof(char));
+	strcpy(acc,accessFlags);
+	const char s[2] = " ";
+  char * token;
+  token = strtok(acc, s);
+  while(token != NULL) {
+  	if (strcmp(token,"STATIC") == 0) {
+			return true;
+		}
+    token = strtok(NULL, s);
+  }
+	return false;
 }
 
 void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -2359,12 +2409,12 @@ void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
                 if (fieldSaida->access_flags != 0x0008) {
                     char * descriptorFieldAux = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
                     if (descriptorFieldValidate(descriptorFieldAux) < 5) {
-                        i4 valorPushed = *fieldSaida->UnionStaticData.low;
+                        i4 valorPushed = *fieldSaida->dadosStatics->low;
                         f->p = Push_operandos(f->p,valorPushed,NULL,INTEGER_OP);
                         printf("Empilhou na pilha\n");
                     } else if (descriptorFieldValidate(descriptorFieldAux) == 5 || descriptorFieldValidate(descriptorFieldAux) == 6) {
-                        i4 valorPushedLow = *fieldSaida->UnionStaticData.low;
-                        i4 valorPushedHigh = *fieldSaida->UnionStaticData.high;
+                        i4 valorPushedLow = *fieldSaida->dadosStatics->low;
+                        i4 valorPushedHigh = *fieldSaida->dadosStatics->high;
                         if (descriptorFieldValidate(descriptorFieldAux) == 5) {
                             f->p = Push_operandos(f->p,valorPushedHigh,NULL,DOUBLE_OP);
                             f->p = Push_operandos(f->p,valorPushedLow,NULL,DOUBLE_OP);
@@ -2402,18 +2452,18 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
                 char * descriptorFieldAux = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
                 if (descriptorFieldValidate(descriptorFieldAux) < 5) {
                     pilha_operandos *valor = Pop_operandos(f->p);
-                    fieldSaida->UnionStaticData.low = (u4*) malloc(sizeof(u4));
-                    *fieldSaida->UnionStaticData.low = (u4)valor->topo->operando;
-                    printf("Empilhou float 0x%08x\n",*fieldSaida->UnionStaticData.low);
+                    fieldSaida->dadosStatics->low = (u4*) malloc(sizeof(u4));
+                    *fieldSaida->dadosStatics->high = (u4)valor->topo->operando;
+                    printf("Empilhou float 0x%08x\n",*fieldSaida->dadosStatics->low);
                 } else if (descriptorFieldValidate(descriptorFieldAux) == 5 || descriptorFieldValidate(descriptorFieldAux) == 6) {
                     pilha_operandos *valorLow = Pop_operandos(f->p);
                     pilha_operandos *valorHigh = Pop_operandos(f->p);
-                    fieldSaida->UnionStaticData.low = (u4*) malloc(sizeof(u4));
-                    fieldSaida->UnionStaticData.high = (u4*) malloc(sizeof(u4));
-                    *fieldSaida->UnionStaticData.low = (u4)valorLow->topo->operando;
-                    *fieldSaida->UnionStaticData.high = (u4)valorHigh->topo->operando;
-                    printf("Empilhou double 0x%08x\n",*fieldSaida->UnionStaticData.high);
-                    printf("Empilhou double 0x%08x\n",*fieldSaida->UnionStaticData.low);
+                    fieldSaida->dadosStatics->low = (u4*) malloc(sizeof(u4));
+                    fieldSaida->dadosStatics->high = (u4*) malloc(sizeof(u4));
+                    *fieldSaida->dadosStatics->low = (u4)valorLow->topo->operando;
+                    *fieldSaida->dadosStatics->high = (u4)valorHigh->topo->operando;
+                    printf("Empilhou double 0x%08x\n",*fieldSaida->dadosStatics->high);
+                    printf("Empilhou double 0x%08x\n",*fieldSaida->dadosStatics->low);
                 }
             }
         }
@@ -2422,11 +2472,31 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
     // struct Fieldref campo = f->cp[indice_cp];
 }
 
+void imprimirValoresStatic (classesCarregadas * class) {
+	ClassFile * c = class->arquivoClass;
+	for (field_info * aux = c->fields; aux < c->fields+c->fields_count;aux++) {
+		char * acc = decodificaAccessFlags(aux->access_flags);
+		if (buscaStaticFlags(acc)) {
+			if (aux->dadosStatics->low != NULL) {
+				printf("Valor: 0x%08x\n",*(aux->dadosStatics->low));
+			}
+			if (aux->dadosStatics->high != NULL) {
+				printf("Valor: 0x%08x\n",*(aux->dadosStatics->high));
+			}
+		}
+	}
+}
+
+
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+
+		u4 * end;
     u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
+		i4 valorAux;
 
     char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
     char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
+
 
     /*method_info *metodos = f->classes->topo->arquivoClass->methods;
     method_info *aux = metodos;*/
@@ -2457,6 +2527,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
         // Se ele for encontrado na super_class e for protected, tá tudo ok
     }*/
 
+		ImprimirPilha_operandos(f->p);
     if(strcmp(nomemetodo,"println")==0){
         double valorSaida_double;
         float valorSaida_float;
@@ -2532,6 +2603,10 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
                     case REFERENCE_OP:
                         printf("Operando: %s\n\n",(char*) string->topo->referencia);
                     break;
+										case REFERENCE_STRING_OP:
+											end = (u4*)string->topo->referencia;
+											printf("Operando: %s\n",(char*)(end));
+											break;
                 }
 
             } else {
