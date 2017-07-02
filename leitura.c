@@ -358,10 +358,10 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 
 	char *retorno = (char*)malloc(1000*sizeof(char));
 	char *stringaux = (char*)malloc(100*sizeof(char));
-	u2 *aux2;
+	u2 *aux2=NULL;
 	// u2 tag = 0;
-	char *stringargs;
-	char *stringdecod;// = (char*)malloc(100*sizeof(char));
+	char *stringargs=NULL;
+	char *stringdecod=NULL;
 	strcpy(retorno,"");
 
 	for(aux=code;aux<code+length;){
@@ -432,8 +432,12 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 	}
 
 	//free(stringdecod); - Esse free da problema.
-	free(stringargs);
-	free(aux2);
+	if(stringargs!=NULL){
+		free(stringargs);
+	}
+	if(aux2!=NULL){
+		free(aux2);
+	}
 	//free(stringaux); - Esse free da problema.
 	return(retorno);
 }
@@ -1296,7 +1300,7 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 
 			if (strcmp(ponteiroprint,"Code") == 0) {
 				code_attribute * auxCodePontual = (code_attribute*)(*(auxAttrCompleto+posicao))->info;
-				fprintf(fp, "Max Stack: %d\n",auxCodePontual->max_stack);
+				fprintf(fp, "Minor Version: %d\n",auxCodePontual->max_stack);
 				fprintf(fp, "Max Locals: %d\n",auxCodePontual->max_locals);
 				fprintf(fp, "Code length: %d\n",auxCodePontual->code_length);
 				fprintf(fp, "\n\n----Code----\n\n");
