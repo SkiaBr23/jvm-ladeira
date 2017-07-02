@@ -21,7 +21,7 @@ frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont);
 double decodificaDoubleValor(u4 high, u4 low);
 float decodificaFloatValor(u4 valor);
 
-void nop_impl(frame *par0,u1 par1, u1 par2); // Não implementado
+void nop_impl(frame *par0,u1 par1, u1 par2);
 void aconst_null_impl(frame *f, u1 par1, u1 par2);
 void iconst_m1_impl(frame *f, u1 par1, u1 par2);
 void iconst_0_impl(frame *f, u1 par1, u1 par2);
@@ -40,8 +40,8 @@ void dconst_1_impl(frame *f, u1 par1, u1 par2);
 void bipush_impl(frame *f, u1 byte, u1 par1);
 void sipush_impl(frame *f,u1 byte1, u1 byte2);
 void ldc_impl(frame *f,u1 indexbyte1,u1 par2);
-void ldc_w_impl(frame *par0, u1 par1, u1 par2); // Não implementado
-void ldc2_w_impl(frame *par0, u1 par1, u1 par2);
+void ldc_w_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
+void ldc2_w_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void iload_impl(frame *f, u1 index, u1 par1);
 void lload_impl(frame *f, u1 index, u1 par1);
 void fload_impl(frame *f, u1 index, u1 par1);
@@ -158,6 +158,8 @@ void ixor_impl(frame *f, u1 par1, u1 par2);
 void lxor_impl(frame *f, u1 par1, u1 par2);
 void iinc_fantasma(frame *par0, u1 par1, u1 par2);
 void iinc_impl(frame *f, u1 index, i1 constante);
+void iinc_wide_fantasma(frame *f, u1 indexbyte1, u1 indexbyte2, u1 constbyte1, u1 constbyte2);
+void iinc_wide(frame *f, u2 indexbyte, i2 constbyte);
 void i2l_impl(frame *f, u1 par1, u1 par2); 
 void i2f_impl(frame *f, u1 par1, u1 par2); 
 void i2d_impl(frame *f, u1 par1, u1 par2); 
@@ -219,12 +221,12 @@ void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
 void newarray_impl(frame *f ,u1 atype, u1 par1); // Observação do -INT_MAX
 void anewarray_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void arraylength_impl(frame *f, u1 par1, u1 par2);
-void athrow_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void checkcast_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void instanceof_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void monitorenter_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void monitorexit_impl(frame *f, u1 par1, u1 par2); // Não implementado
-void wide_impl(frame *f, u1 par1, u1 par2); // Não implementado
+void athrow_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
+void checkcast_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
+void instanceof_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
+void monitorenter_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
+void monitorexit_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
+void wide_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
 void multianewarray_impl(frame *f, u1 par1, u1 par2); // Não implementado
 void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);

@@ -5,10 +5,10 @@
 Funções de controle da lista de frames.  
 
 
-{\ttfamily \#include $<$stdio.\+h$>$}\newline
-{\ttfamily \#include $<$stdlib.\+h$>$}\newline
-{\ttfamily \#include $<$string.\+h$>$}\newline
-{\ttfamily \#include \char`\"{}lista\+\_\+frames.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}lista\+\_\+frames.\+h\char`\"{}}\\*
 \subsection*{Funções}
 \begin{DoxyCompactItemize}
 \item 
@@ -34,12 +34,13 @@ Funções de controle da lista de frames.
 
 
 \subsection{Funções}
-\mbox{\Hypertarget{lista__frames_8c_a7041cf9c2f19c45559d61f1a6c956620}\label{lista__frames_8c_a7041cf9c2f19c45559d61f1a6c956620}} 
 \index{lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}!Criar\+Lista\+\_\+frames@{Criar\+Lista\+\_\+frames}}
 \index{Criar\+Lista\+\_\+frames@{Criar\+Lista\+\_\+frames}!lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}}
-\subsubsection{\texorpdfstring{Criar\+Lista\+\_\+frames()}{CriarLista\_frames()}}
-{\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Criar\+Lista\+\_\+frames (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{Criar\+Lista\+\_\+frames()}{CriarLista_frames()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+frames}$\ast$ Criar\+Lista\+\_\+frames (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__frames_8c_a7041cf9c2f19c45559d61f1a6c956620}{}\label{lista__frames_8c_a7041cf9c2f19c45559d61f1a6c956620}
 
 
 Inicializa uma lista de frames sem valor. 
@@ -47,12 +48,13 @@ Inicializa uma lista de frames sem valor.
 \begin{DoxyReturn}{Retorna}
 Uma lista de frames com valor nulo 
 \end{DoxyReturn}
-\mbox{\Hypertarget{lista__frames_8c_af153c85cf78bb6fc88c2316459fbdd27}\label{lista__frames_8c_af153c85cf78bb6fc88c2316459fbdd27}} 
 \index{lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}!Imprimir\+Lista\+\_\+frames@{Imprimir\+Lista\+\_\+frames}}
 \index{Imprimir\+Lista\+\_\+frames@{Imprimir\+Lista\+\_\+frames}!lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}}
-\subsubsection{\texorpdfstring{Imprimir\+Lista\+\_\+frames()}{ImprimirLista\_frames()}}
-{\footnotesize\ttfamily void Imprimir\+Lista\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{Imprimir\+Lista\+\_\+frames(lista\+\_\+frames $\ast$lis)}{ImprimirLista_frames(lista_frames *lis)}}]{\setlength{\rightskip}{0pt plus 5cm}void Imprimir\+Lista\+\_\+frames (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+frames} $\ast$}]{lis}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__frames_8c_af153c85cf78bb6fc88c2316459fbdd27}{}\label{lista__frames_8c_af153c85cf78bb6fc88c2316459fbdd27}
 
 
 Imprime na tela uma representação textual da lista de frames. 
@@ -65,12 +67,14 @@ O campo end\+\_\+retorno (endereço de retorno) de todos os frames da lista é i
 \begin{DoxyNote}{Observação}
 A definir impressão definitiva 
 \end{DoxyNote}
-\mbox{\Hypertarget{lista__frames_8c_af96401110cd5e69ead58c60e689e802b}\label{lista__frames_8c_af96401110cd5e69ead58c60e689e802b}} 
 \index{lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}!Inserir\+Fim\+\_\+frames@{Inserir\+Fim\+\_\+frames}}
 \index{Inserir\+Fim\+\_\+frames@{Inserir\+Fim\+\_\+frames}!lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}}
-\subsubsection{\texorpdfstring{Inserir\+Fim\+\_\+frames()}{InserirFim\_frames()}}
-{\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Inserir\+Fim\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis,  }\item[{\hyperlink{structframe}{frame} $\ast$}]{f }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{Inserir\+Fim\+\_\+frames(lista\+\_\+frames $\ast$lis, frame $\ast$f)}{InserirFim_frames(lista_frames *lis, frame *f)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+frames}$\ast$ Inserir\+Fim\+\_\+frames (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+frames} $\ast$}]{lis, }
+\item[{{\bf frame} $\ast$}]{f}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__frames_8c_af96401110cd5e69ead58c60e689e802b}{}\label{lista__frames_8c_af96401110cd5e69ead58c60e689e802b}
 
 
 Insere um frame no fim da lista de frames do programa. 
@@ -85,12 +89,14 @@ Insere um frame no fim da lista de frames do programa.
 \begin{DoxyReturn}{Retorna}
 Lista de frames com o novo frame inserido no final 
 \end{DoxyReturn}
-\mbox{\Hypertarget{lista__frames_8c_a25edaccba8549d7ecd43091365cbc870}\label{lista__frames_8c_a25edaccba8549d7ecd43091365cbc870}} 
 \index{lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}!Inserir\+Inicio\+\_\+frames@{Inserir\+Inicio\+\_\+frames}}
 \index{Inserir\+Inicio\+\_\+frames@{Inserir\+Inicio\+\_\+frames}!lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}}
-\subsubsection{\texorpdfstring{Inserir\+Inicio\+\_\+frames()}{InserirInicio\_frames()}}
-{\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Inserir\+Inicio\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis,  }\item[{\hyperlink{structframe}{frame} $\ast$}]{f }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{Inserir\+Inicio\+\_\+frames(lista\+\_\+frames $\ast$lis, frame $\ast$f)}{InserirInicio_frames(lista_frames *lis, frame *f)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+frames}$\ast$ Inserir\+Inicio\+\_\+frames (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+frames} $\ast$}]{lis, }
+\item[{{\bf frame} $\ast$}]{f}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__frames_8c_a25edaccba8549d7ecd43091365cbc870}{}\label{lista__frames_8c_a25edaccba8549d7ecd43091365cbc870}
 
 
 Insere um frame no início da lista de frames do programa. 
@@ -105,12 +111,13 @@ Insere um frame no início da lista de frames do programa.
 \begin{DoxyReturn}{Retorna}
 Lista de frames com o novo frame inserido no início 
 \end{DoxyReturn}
-\mbox{\Hypertarget{lista__frames_8c_a552278b58235cea3bf0bd65a4e17a815}\label{lista__frames_8c_a552278b58235cea3bf0bd65a4e17a815}} 
 \index{lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}!Liberar\+Lista\+\_\+frames@{Liberar\+Lista\+\_\+frames}}
 \index{Liberar\+Lista\+\_\+frames@{Liberar\+Lista\+\_\+frames}!lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}}
-\subsubsection{\texorpdfstring{Liberar\+Lista\+\_\+frames()}{LiberarLista\_frames()}}
-{\footnotesize\ttfamily void Liberar\+Lista\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{Liberar\+Lista\+\_\+frames(lista\+\_\+frames $\ast$lis)}{LiberarLista_frames(lista_frames *lis)}}]{\setlength{\rightskip}{0pt plus 5cm}void Liberar\+Lista\+\_\+frames (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+frames} $\ast$}]{lis}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__frames_8c_a552278b58235cea3bf0bd65a4e17a815}{}\label{lista__frames_8c_a552278b58235cea3bf0bd65a4e17a815}
 
 
 Libera a memória utilizada por toda a lista de frames. 
@@ -122,12 +129,13 @@ A lista de frames é iterada e todos os elementos são liberados com o comando f
 {\em lis} & Lista de frames a ser liberada \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{lista__frames_8c_a3cd16e29eb17b1ef4db48678baf4d9de}\label{lista__frames_8c_a3cd16e29eb17b1ef4db48678baf4d9de}} 
 \index{lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}!Remover\+Fim\+\_\+frames@{Remover\+Fim\+\_\+frames}}
 \index{Remover\+Fim\+\_\+frames@{Remover\+Fim\+\_\+frames}!lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}}
-\subsubsection{\texorpdfstring{Remover\+Fim\+\_\+frames()}{RemoverFim\_frames()}}
-{\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Remover\+Fim\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{Remover\+Fim\+\_\+frames(lista\+\_\+frames $\ast$lis)}{RemoverFim_frames(lista_frames *lis)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+frames}$\ast$ Remover\+Fim\+\_\+frames (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+frames} $\ast$}]{lis}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__frames_8c_a3cd16e29eb17b1ef4db48678baf4d9de}{}\label{lista__frames_8c_a3cd16e29eb17b1ef4db48678baf4d9de}
 
 
 Remove o frame do fim da lista de frames do programa. 
@@ -140,12 +148,13 @@ Remove o frame do fim da lista de frames do programa.
 \begin{DoxyReturn}{Retorna}
 Lista de frames com o último elemento removido 
 \end{DoxyReturn}
-\mbox{\Hypertarget{lista__frames_8c_a091a3efb54e077eed292971a7169db07}\label{lista__frames_8c_a091a3efb54e077eed292971a7169db07}} 
 \index{lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}!Remover\+Inicio\+\_\+frames@{Remover\+Inicio\+\_\+frames}}
 \index{Remover\+Inicio\+\_\+frames@{Remover\+Inicio\+\_\+frames}!lista\+\_\+frames.\+c@{lista\+\_\+frames.\+c}}
-\subsubsection{\texorpdfstring{Remover\+Inicio\+\_\+frames()}{RemoverInicio\_frames()}}
-{\footnotesize\ttfamily \hyperlink{structlista__frames}{lista\+\_\+frames}$\ast$ Remover\+Inicio\+\_\+frames (\begin{DoxyParamCaption}\item[{\hyperlink{structlista__frames}{lista\+\_\+frames} $\ast$}]{lis }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{Remover\+Inicio\+\_\+frames(lista\+\_\+frames $\ast$lis)}{RemoverInicio_frames(lista_frames *lis)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+frames}$\ast$ Remover\+Inicio\+\_\+frames (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+frames} $\ast$}]{lis}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__frames_8c_a091a3efb54e077eed292971a7169db07}{}\label{lista__frames_8c_a091a3efb54e077eed292971a7169db07}
 
 
 Remove o frame do início da lista de frames do programa. 

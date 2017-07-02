@@ -230,7 +230,7 @@ frame *transferePilhaVetorCount(frame *f, frame *novo,int quantidade){
 }
 
 void nop_impl(frame *par0, u1 par1, u1 par2){
-	// Não implementada
+	return;
 }
 
 void aconst_null_impl(frame *f, u1 par1, u1 par2){
@@ -406,7 +406,53 @@ void ldc_impl(frame *f, u1 indexbyte1, u1 par2){
 
 }
 
-void ldc_w_impl(frame *par0, u1 par1, u1 par2){
+void ldc_w_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+	u2 indice_cp = normaliza_indice(indexbyte1,indexbyte2);
+	cp_info *item = f->cp-1 + indice_cp;
+	void *valor=NULL;
+	u4 num=0;
+	void *classe=NULL;
+
+	printf("\n\nEXECUTANDO LDC_w\n\n");
+	printf("\nitem->tag: %d\n",item->tag);
+
+	switch(item->tag){
+		case CONSTANT_String:
+			valor = (char*) decodificaStringUTF8(f->cp-1+item->UnionCP.String.string_index);
+			f->p = Push_operandos(f->p,-INT_MAX,valor,REFERENCE_OP);
+			u4 *endereco = (u4*) f->p->topo->referencia;
+
+			printf("STRING EMPILHADA: %s\n",(char*) endereco);
+		break;
+		case CONSTANT_Float:
+			num = item->UnionCP.Float.bytes;
+			f->p = Push_operandos(f->p,num,NULL,FLOAT_OP);
+		break;
+		case CONSTANT_Integer:
+			num = item->UnionCP.Integer.bytes;
+			f->p = Push_operandos(f->p,num,NULL,INTEGER_OP);
+		break;
+		case CONSTANT_Class:
+			valor = (char*) decodificaStringUTF8(f->cp-1+item->UnionCP.Class.name_index);
+			classe = resolverClasse(valor);
+			f->p = Push_operandos(f->p,-INT_MAX,classe,REFERENCE_OP);
+		break;
+		default:
+			printf("\nName index: %d\n",item->UnionCP.Methodref.class_index);
+			printf("\nName and type index: %d\n",item->UnionCP.Methodref.name_and_type_index);
+			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.class_index,NAME_INDEX);
+			printf("\nPORCARIA: %s\n",valor);
+			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+			printf("\nPORCARIA: %s\n",valor);
+
+		break;
+
+		/* Implementar depois, pois não temos no arquivo */
+		/*case CONSTANT_MethodHandle:
+		break;
+		case CONSTANT_MethodType:
+		break;*/
+	}
 
 }
 
@@ -429,7 +475,7 @@ void ldc2_w_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 }
 //Carrega inteiro do frame para a pilha de operandos
 void iload_impl(frame *f, u1 index, u1 par1){
-	Push_operandos(f->p,(i4) *(f->v[index].variavel),NULL,INTEGER_OP);
+	Push_operandos(f->p,(i4) f->v[index].variavel,NULL,INTEGER_OP);
 }
 
 //Carrega long do frame para a pilha de operandos
@@ -636,9 +682,11 @@ void saload_impl(frame *f, u1 par1, u1 par2){
 }
 
 void istore_impl(frame *f, u1 index,u1 par1){
+	printf("Executando istore\n");
+	printf("Opcode: %d\n",istore);
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	*(f->v[index].variavel) = (i4) valor->topo->operando;
+	f->v[index].variavel = (i4) valor->topo->operando;
 }
 
 void lstore_impl(frame *f, u1 index, u1 par1){
@@ -663,6 +711,7 @@ void dstore_impl(frame *f, u1 index, u1 par1){
 }
 
 void astore_impl(frame *f, u1 index,u1 par1){
+	printf("Executando astore\n\n");
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[index].variavel) = (i4) valor->topo->referencia;
 	f->v[index].tipo_variavel = valor->topo->tipo_operando;
@@ -1645,12 +1694,27 @@ void iinc_impl(frame *f,u1 index, i1 constante){
 	// Estender o sinal para 32 bits
 	i4 inteiro_constante = (i4) constante;
 
-	*f->v[index].variavel += inteiro_constante;
+	f->v[index].variavel += inteiro_constante;
 }
 
 void iinc_fantasma(frame *par0, u1 par1, u1 par2){
 	i1 valor = (i1)par2;
 	iinc_impl(par0,par1,valor);
+}
+
+void iinc_wide_fantasma(frame *f, u1 indexbyte1, u1 indexbyte2, u1 constbyte1, u1 constbyte2){
+	u2 indexbyte = normaliza_indice(indexbyte1,indexbyte2);
+	i2 constbyte = (i2) ((i1) (constbyte1 << 8) | (i1) constbyte2);
+
+	iinc_wide(f,indexbyte,constbyte);
+}
+
+void iinc_wide(frame *f, u2 indexbyte, i2 constbyte){
+	printf("Executando iinc_wide\n");
+	printf("Opcode: %d\n",iinc);
+	i4 inteiro_constante = (i4) constbyte;
+
+	f->v[indexbyte].variavel += inteiro_constante;
 }
 
 void i2l_impl(frame *f, u1 par1, u1 par2){
@@ -2789,8 +2853,8 @@ void monitorexit_impl(frame *f, u1 par1, u1 par2){
 
 }
 
-void wide_impl(frame *f, u1 par1, u1 par2){
-
+void wide_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
+	return;
 }
 
 void multianewarray_impl(frame *f, u1 par1, u1 par2){

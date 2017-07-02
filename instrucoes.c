@@ -1197,8 +1197,8 @@ instrucao* construirInstrucoes(void){
 			case wide:
 				strcpy(instrucoes[i].inst_nome,"wide");
 				instrucoes[i].opcode = wide;
-				instrucoes[i].numarg = 5;
-				instrucoes[i].numop = -1;
+				instrucoes[i].numarg = 0;
+				instrucoes[i].numop = 0;
 			break;
 			case multianewarray:
 				strcpy(instrucoes[i].inst_nome,"multianewarray");
