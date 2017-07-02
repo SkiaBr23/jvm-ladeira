@@ -575,19 +575,19 @@ void dload_3_impl(frame *f, u1 par1, u1 par2){
 //Carrega referencia na posicao 0 para a pilha
 void aload_0_impl(frame *f, u1 par1, u1 par2){
 	printf("\n\nEXECUTANDO ALOAD_0\n\n");
-	Push_operandos(f->p,-INT_MAX,*f->v[0].variavel,f->v[0].tipo_variavel);
+	Push_operandos(f->p,-INT_MAX,*(f->v[0].variavel),f->v[0].tipo_variavel);
 }
 
 void aload_1_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,*f->v[1].variavel,f->v[1].tipo_variavel);
+	Push_operandos(f->p,-INT_MAX,*(f->v[1].variavel),f->v[1].tipo_variavel);
 }
 
 void aload_2_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,*f->v[2].variavel,f->v[2].tipo_variavel);
+	Push_operandos(f->p,-INT_MAX,*(f->v[2].variavel),f->v[2].tipo_variavel);
 }
 
 void aload_3_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,*f->v[3].variavel,f->v[3].tipo_variavel);
+	Push_operandos(f->p,-INT_MAX,*(f->v[3].variavel),f->v[3].tipo_variavel);
 }
 
 
@@ -606,8 +606,7 @@ void laload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i4 *endereco = malloc(sizeof(i4 ));
-	endereco = ((i4*) referencia->topo->operando) + (indice->topo->operando * sizeof(i4));
+	i4* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * 2 * sizeof(i4));
 
 	//Verificar ordem
 	Push_operandos(f->p,*endereco,NULL,LONG_OP);
@@ -618,20 +617,16 @@ void faload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i4 endereco;
-	endereco = ((i4) referencia->topo->operando) + (indice->topo->operando * sizeof(i4));
+	i4* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(i4));
 
-	// Acessar o conteúdo do endereço "referencia+indice"
-	// O código para esse acesso não parece correto, tem que analisar
-	// Push_operandos(f->p,endereco,FLOAT_OP);
+    Push_operandos(f->p,*endereco,NULL,FLOAT_OP);
 }
 
 void daload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i4 *endereco = malloc(sizeof(i4 ));
-	endereco = ((i4*) referencia->topo->operando) + (indice->topo->operando * sizeof(i4));
+	u4* endereco = ((u4) referencia->topo->referencia) + (indice->topo->operando * 2 * sizeof(u4));
 
 	//Verificar ordem
 	Push_operandos(f->p,*endereco,NULL,DOUBLE_OP);
@@ -860,6 +855,7 @@ void astore_0_impl(frame *f, u1 par1, u1 par2){
 
 // TODO: verificar
 void astore_1_impl(frame *f, u1 par1, u1 par2){
+	ImprimirPilha_operandos(f->p);
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[1].variavel) = (i4) valor->topo->referencia;
 	f->v[1].tipo_variavel = valor->topo->tipo_operando;
@@ -908,12 +904,17 @@ void lastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i4 endereco;
-	endereco = ((i4) array->topo->operando) + (indice->topo->operando * sizeof(i4));
+	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * 2 * sizeof(i4)));
 
+	*endereco_array = high_bytes->topo->operando;
+
+	endereco_array = endereco_array + sizeof(i4);
+
+	*endereco_array = low_bytes->topo->operando;
+/*
 	endereco = high_bytes->topo->operando;
 	endereco = endereco + sizeof(i4);
-	endereco = low_bytes->topo->operando;
+	endereco = low_bytes->topo->operando;*/
 }
 
 void fastore_impl(frame *f, u1 par1, u1 par2){
@@ -922,10 +923,8 @@ void fastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i4 endereco;
-	endereco = ((i4) array->topo->operando) + (indice->topo->operando * sizeof(i4));
-
-	endereco = valor->topo->operando;
+	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i4)));
+	*endereco_array = valor->topo->operando;
 }
 
 void dastore_impl(frame *f, u1 par1, u1 par2){
@@ -935,12 +934,20 @@ void dastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i4 endereco;
+/*	i4 endereco;
 	endereco = ((i4) array->topo->operando) + (indice->topo->operando * sizeof(i4));
 
 	endereco = high_bytes->topo->operando;
 	endereco = endereco + sizeof(i4);
-	endereco = low_bytes->topo->operando;
+	endereco = low_bytes->topo->operando;*/
+
+	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * 2 * sizeof(i4)));
+
+	*endereco_array = high_bytes->topo->operando;
+
+	endereco_array = endereco_array + sizeof(i4);
+
+	*endereco_array = low_bytes->topo->operando;
 }
 
 void bastore_impl(frame *f, u1 par1, u1 par2){
@@ -2847,7 +2854,7 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
 					// Alocar com -INT_MAX para marcar o fim do array
 					if(i==countnum){
-						*(u4 *)p = INT_MAX;
+						*(u4 *)p = UINT32_MAX;
 					}
 					else{
 						*(u4 *)p=0;
@@ -2856,7 +2863,7 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 			break;
 
 			case T_DOUBLE:
-				endereco = (u4*) malloc(2*(countnum+1)*sizeof(u4));
+				endereco = (u4*) malloc((2*(countnum)+1)*sizeof(u4));
 				ref_size = 2*sizeof(u4);
 				/*// Inicializar com os valores default */
 				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
@@ -2916,12 +2923,12 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 			break;
 
 			case T_LONG:
-				endereco = (i4*) malloc(2*(countnum+1)*sizeof(i4));
+				endereco = (i4*) malloc((2*(countnum)+1)*sizeof(i4));
 				ref_size = 2*sizeof(i4);
 				/*// Inicializar com os valores default */
 				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
 					// Alocar com -INT_MAX para marcar o fim do array
-					if(i==countnum){
+					if(i == countnum){
 						*(i4 *)p = INT32_MAX;
 					}
 					else{
@@ -2972,7 +2979,7 @@ void arraylength_impl(frame *f, u1 par1, u1 par2){
 		case REFERENCE_ARRAY_FLOAT_OP:
 			ref_size = sizeof(u4);
 			for (void *p = referencia;;p+=ref_size,tamanho++){
-				if (*(u4 *)p == INT_MAX){
+				if (*(u4 *)p == UINT32_MAX){
 					break;
 				}
 			}			
@@ -3011,7 +3018,10 @@ void arraylength_impl(frame *f, u1 par1, u1 par2){
 		break;
 		case REFERENCE_ARRAY_LONG_OP:
 			ref_size = 2*sizeof(i4);
+			printf("ENTRANDO CALCULO LONG\n");
 			for (void *p = referencia;;p+=ref_size,tamanho++){
+				printf("VALOR LONGERA =========>>> %ld \n",*(i4 *)p);
+				getchar();
 				if (*(i4 *)p == INT32_MAX){
 					break;
 				}
