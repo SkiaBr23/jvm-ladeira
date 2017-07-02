@@ -500,7 +500,8 @@ void dload_impl(frame *f, u1 index, u1 par2){
 
 //Carrega referencia de array para a pilha de operandos
 void aload_impl(frame *f, u1 index, u1 par1){
-	Push_operandos(f->p,-INT_MAX,*(f->v[index].variavel),f->v[index].tipo_variavel);
+	u4 conteudo = *(f->v[index].variavel);
+	Push_operandos(f->p,-INT_MAX,(void *) &conteudo,f->v[index].tipo_variavel);
 }
 
 //Carrega inteiro na posicao 0 para a pilha
@@ -575,19 +576,23 @@ void dload_3_impl(frame *f, u1 par1, u1 par2){
 //Carrega referencia na posicao 0 para a pilha
 void aload_0_impl(frame *f, u1 par1, u1 par2){
 	printf("\n\nEXECUTANDO ALOAD_0\n\n");
-	Push_operandos(f->p,-INT_MAX,*f->v[0].variavel,f->v[0].tipo_variavel);
+	u4 conteudo = *(f->v[0].variavel);
+	Push_operandos(f->p,-INT_MAX,(void *) &conteudo,f->v[0].tipo_variavel);
 }
 
 void aload_1_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,*f->v[1].variavel,f->v[1].tipo_variavel);
+	u4 conteudo = *(f->v[1].variavel);
+	Push_operandos(f->p,-INT_MAX,(void *) &conteudo,f->v[1].tipo_variavel);
 }
 
 void aload_2_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,*f->v[2].variavel,f->v[2].tipo_variavel);
+	u4 conteudo = *(f->v[2].variavel);
+	Push_operandos(f->p,-INT_MAX,(void *) &conteudo,f->v[2].tipo_variavel);
 }
 
 void aload_3_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,*f->v[3].variavel,f->v[3].tipo_variavel);
+	u4 conteudo = *(f->v[3].variavel);
+	Push_operandos(f->p,-INT_MAX,(void *) &conteudo,f->v[3].tipo_variavel);
 }
 
 
