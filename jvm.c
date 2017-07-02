@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 #include "instrucoes.h"
 #include "jvm.h"
 // #include "pilha_frames.h"
@@ -128,8 +129,8 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 		instrucao i = instrucoes[opcode];
 		printf("Instrucao: %s\n",i.inst_nome);
 		printf("Opcode: %d\n",i.opcode);
-		j++;
 		u1 numarg = i.numarg;
+		j++;
 		if(numarg>0){
 
 			u1 *argumentos = malloc(numarg*sizeof(u1));
@@ -150,6 +151,13 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 					// Se não foi, beleza
 					if(jvm->excecao==1){
 						handler_pc = verificaHandlerMetodo(m);
+						// Se encontrou o handler
+						if(handler_pc!=USHRT_MAX){
+							jvm->excecao = 0;
+							free(jvm->excecao_nome);
+							jvm->excecao_nome = malloc(100*sizeof(char));
+							jvm->pc = handler_pc;
+						}
 						jvm->pc = handler_pc;
 						j = atualizarPCMetodoAtual(code,length);
 					}
@@ -163,6 +171,12 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 					// Se não foi, beleza
 					if(jvm->excecao==1){
 						handler_pc = verificaHandlerMetodo(m);
+						if(handler_pc!=USHRT_MAX){
+							jvm->excecao = 0;
+							free(jvm->excecao_nome);
+							jvm->excecao_nome = malloc(100*sizeof(char));
+							jvm->pc = handler_pc;
+						}
 						jvm->pc = handler_pc;
 						j = atualizarPCMetodoAtual(code,length);
 					}
@@ -185,6 +199,12 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 						// Se não foi, beleza
 						if(jvm->excecao==1){
 							handler_pc = verificaHandlerMetodo(m);
+							if(handler_pc!=USHRT_MAX){
+								jvm->excecao = 0;
+								free(jvm->excecao_nome);
+								jvm->excecao_nome = malloc(100*sizeof(char));
+								jvm->pc = handler_pc;
+							}
 							jvm->pc = handler_pc;
 							j = atualizarPCMetodoAtual(code,length);
 						}
@@ -195,10 +215,52 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 		else if(numarg==0){
 			printf("Caiu no zero\n");
 			printf("Valor opcode: %d\n",i.opcode);
-			(*func_ptr[i.opcode])(jvm->frames->topo->f,0,0);
+
+			// Verificar se é a instrução wide
+			if(strcmp(i.inst_nome,"wide")==0){
+				// Obter o opcode da instrução que deve ser modificada
+				u1 novo_opcode = *j;
+				i = instrucoes[novo_opcode];
+				j++;
+				// Verificar se é diferente de iinc
+				if(novo_opcode!=iinc){
+					// Pegar os parâmetros
+					u1 *argumentos = malloc(numarg*sizeof(u1));
+					// Obter um argumento a mais, porque é o índice que será modificado
+					for(u1 arg=0;arg<i.numarg+1;arg++){
+						argumentos[arg] = *j;
+						// printf("%01x\t",argumentos[arg]);
+						j++;
+					}
+
+					// Chamar a função ou com switch case, ou ajustando cada função internamente
+
+					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],argumentos[1]);
+				}
+				else{
+					u1 *argumentos = malloc(i.numarg*2*sizeof(u1));
+
+					for (u1 arg=0;arg<i.numarg*2;arg++){
+						argumentos[arg] = *j;
+						j++;
+					}
+
+					iinc_wide_fantasma(jvm->frames->topo->f,argumentos[0],argumentos[1],argumentos[2],argumentos[3]);
+				}
+			}
+			else{
+
+				(*func_ptr[i.opcode])(jvm->frames->topo->f,0,0);
+			}
 
 			if(jvm->excecao==1){
 				handler_pc = verificaHandlerMetodo(m);
+				if(handler_pc!=USHRT_MAX){
+					jvm->excecao = 0;
+					free(jvm->excecao_nome);
+					jvm->excecao_nome = malloc(100*sizeof(char));
+					jvm->pc = handler_pc;
+				}
 				jvm->pc = handler_pc;
 				j = atualizarPCMetodoAtual(code,length);
 			}
@@ -227,39 +289,40 @@ u2 verificaHandlerMetodo(method_info *m){
 	classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,jvm->frames->topo->f->classeCorrente);
 	method_info *auxmetodo;
 
-	for(auxmetodo=m;auxmetodo<m+m->attributes_count;auxmetodo++){
-		aux = (*auxmetodo->attributes);
-		char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
-		printf("Name Index: %s\n",nameindex);
-		if(strcmp(nameindex,"Code")==0){
-			code_attribute *c = (code_attribute *) aux->info;
-			for(exception_table *tabelaaux = c->table;tabelaaux<c->table+c->exception_table_length;tabelaaux++){
-				char *nomeexcecao = decodificaNIeNT(classeAtual->arquivoClass->constant_pool,tabelaaux->catch_type,NAME_INDEX);
-				printf("NOME DA EXCEÇÃO: %s\n",nomeexcecao);
-				return(tabelaaux->handler_pc);
+	while(jvm->frames->topo!=NULL){
+
+		for(auxmetodo=m;auxmetodo<m+m->attributes_count;auxmetodo++){
+			aux = (*auxmetodo->attributes);
+			char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
+			printf("Name Index: %s\n",nameindex);
+			if(strcmp(nameindex,"Code")==0){
+				code_attribute *c = (code_attribute *) aux->info;
+				for(exception_table *tabelaaux = c->table;tabelaaux<c->table+c->exception_table_length;tabelaaux++){
+					char *nomeexcecao = decodificaNIeNT(classeAtual->arquivoClass->constant_pool,tabelaaux->catch_type,NAME_INDEX);
+					printf("NOME DA EXCEÇÃO: %s\n",nomeexcecao);
+					if(strcmp(nomeexcecao,jvm->excecao_nome)==0){
+						// Retornar o valor do Handler se achar a excecao que foi lancada
+						return(tabelaaux->handler_pc);	
+					}
+				}
 			}
 		}
+	
+		// Se não encontrar o handler, desempilhar o frame corrente da pilha de frames e retornar -INT_MAX para indicar que o handler não foi encontrado
+		// Desalocar operandos
+		while(jvm->frames->topo->f->p->topo!=NULL){
+			pilha_operandos *removido = Pop_operandos(jvm->frames->topo->f->p);
+		}
+	
+		// Desalocar vetor
+		freeVetorLocais(jvm->frames->topo->f->v,jvm->frames->topo->f->vetor_length);
+	
+		// Desempilhar o frame
+		pilha_frames *removido = Pop_frames(jvm->frames);
 	}
 
-
-	// Se existir, mudar o valor do PC para o handler
-
-
-
-	// Se não existir, desempilhar o método da pilha de frames e lançar a exceção para o chamador
-	// Desalocar operandos
-	while(jvm->frames->topo->f->p->topo!=NULL){
-		pilha_operandos *removido = Pop_operandos(jvm->frames->topo->f->p);
-	}
-
-	// Desalocar vetor
-	freeVetorLocais(jvm->frames->topo->f->v,jvm->frames->topo->f->vetor_length);
-
-	// Desempilhar o frame
-	pilha_frames *removido = Pop_frames(jvm->frames);
-
-	// NÃO VAI RETORNAR ZERO, ISSO AQUI É UM PLACEHOLDER
-	return(0);
+	// Retornar USHRT_MAX para indicar que o handler não foi encontrado
+	return(USHRT_MAX);
 }
 
 bool instrucaoBranch (char * nomeInstrucao) {
