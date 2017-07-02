@@ -476,7 +476,7 @@ void ldc2_w_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 }
 //Carrega inteiro do frame para a pilha de operandos
 void iload_impl(frame *f, u1 index, u1 par1){
-	Push_operandos(f->p,(i4) f->v[index].variavel,NULL,INTEGER_OP);
+	Push_operandos(f->p,(i4) *(f->v[index].variavel),NULL,INTEGER_OP);
 }
 
 //Carrega long do frame para a pilha de operandos
@@ -500,7 +500,7 @@ void dload_impl(frame *f, u1 index, u1 par2){
 
 //Carrega referencia de array para a pilha de operandos
 void aload_impl(frame *f, u1 index, u1 par1){
-	Push_operandos(f->p,-INT_MAX,*f->v[index].variavel,f->v[index].tipo_variavel);
+	Push_operandos(f->p,-INT_MAX,*(f->v[index].variavel),f->v[index].tipo_variavel);
 }
 
 //Carrega inteiro na posicao 0 para a pilha
@@ -513,7 +513,7 @@ void iload_1_impl(frame *f, u1 par1, u1 par2){
 }
 
 void iload_2_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,(i4) (f->v[2].variavel),NULL,INTEGER_OP);
+	Push_operandos(f->p,(i4) *(f->v[2].variavel),NULL,INTEGER_OP);
 }
 
 void iload_3_impl(frame *f, u1 par1, u1 par2){
@@ -687,7 +687,7 @@ void istore_impl(frame *f, u1 index,u1 par1){
 	printf("Opcode: %d\n",istore);
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	f->v[index].variavel = (i4) valor->topo->operando;
+	*(f->v[index].variavel) = (i4) valor->topo->operando;
 }
 
 void lstore_impl(frame *f, u1 index, u1 par1){
@@ -741,7 +741,7 @@ void istore_2_impl(frame *f, u1 par1, u1 par2){
 	printf("\nDESEMPILHOU %d\n",teste);
 
 	//*(f->v[2].variavel) = (u4) valor->topo->operando;
-	f->v[2].variavel = (u4) valor->topo->operando;
+	*(f->v[2].variavel) = (u4) valor->topo->operando;
 
 	//for (int i = 0; i < f->vetor_length; ++i){
 		
@@ -1400,6 +1400,8 @@ void ddiv_impl(frame *f, u1 par1, u1 par2){
 void irem_impl(frame *f, u1 par1, u1 par2){
 	printf("IREM------------------------------------------\n");
 	
+	ImprimirPilha_operandos(f->p);
+
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -1697,7 +1699,7 @@ void iinc_impl(frame *f,u1 index, i1 constante){
 	// Estender o sinal para 32 bits
 	i4 inteiro_constante = (i4) constante;
 
-	f->v[index].variavel += inteiro_constante;
+	*(f->v[index].variavel) += inteiro_constante;
 }
 
 void iinc_fantasma(frame *par0, u1 par1, u1 par2){
