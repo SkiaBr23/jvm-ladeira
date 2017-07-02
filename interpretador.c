@@ -12,6 +12,7 @@
 #include <string.h>
 #include <math.h>
 #include <inttypes.h>
+#include <stdint.h>
 
 /*
 	Na hora de resolver a classe, executar o init dela
@@ -2668,8 +2669,9 @@ void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 void newarray_impl(frame *f, u1 atype, u1 par1){
 	pilha_operandos *count = Pop_operandos(f->p);
 	i4 countnum = count->topo->operando;
-
+	int ref_size = 0;
 	void *endereco = NULL;
+	int i = 0;
 	if(count<0){
 		// Lançar exceção
 	}
@@ -2677,53 +2679,125 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 		switch(atype){
 			case T_BOOLEAN:
 				endereco = (u1*) malloc((countnum+1)*sizeof(u1));
-				
+				ref_size = sizeof(u1);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(u1 *)p = CHAR_MAX;
+					}
+					else{
+						*(u1 *)p=0;
+					}
+				}	
 			break;
 
 			case T_CHAR:
 				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
-				
+				ref_size = sizeof(i2);	
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(i2 *)p = SHRT_MAX;
+					}
+					else{
+						*(i2 *)p=0;
+					}
+				}
 			break;
 
 			case T_FLOAT:
 				endereco = (u4*) malloc((countnum+1)*sizeof(u4));
-				
+				ref_size = sizeof(u4);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(u4 *)p = INT_MAX;
+					}
+					else{
+						*(u4 *)p=0;
+					}
+				}
 			break;
 
 			case T_DOUBLE:
 				endereco = (u4*) malloc(2*(countnum+1)*sizeof(u4));
+				ref_size = 2*sizeof(u4);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(u4 *)p = UINT32_MAX;
+					}
+					else{
+						*(u4 *)p=0;
+					}
+				}
 				break;
 
 			case T_BYTE:
 				endereco = (i1*) malloc((countnum+1)*sizeof(i1));
-				
+				ref_size = sizeof(i1);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(i1 *)p = CHAR_MAX;
+					}
+					else{
+						*(i1 *)p=0;
+					}
+				}
 			break;
 
 			case T_SHORT:
 				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
-				
+				ref_size = sizeof(i2);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(i2 *)p = SHRT_MAX;
+					}
+					else{
+						*(i2 *)p=0;
+					}
+				}
 			break;
 
 			case T_INT:
 				endereco = (i4*) malloc((countnum+1)*sizeof(i4));
+				ref_size = sizeof(i4);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(i4 *)p = INT_MAX;
+					}
+					else{
+						*(i4 *)p=0;
+					}
+				}
 			break;
 
 			case T_LONG:
 				endereco = (i4*) malloc(2*(countnum+1)*sizeof(i4));
+				ref_size = 2*sizeof(i4);
+				/*// Inicializar com os valores default */
+				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
+					// Alocar com -INT_MAX para marcar o fim do array
+					if(i==countnum){
+						*(i4 *)p = LONG_MAX;
+					}
+					else{
+						*(i4 *)p=0;
+					}
+				}
 			break;
 		}
-
-		/*// Inicializar com os valores default
-		for(void *p=endereco,i=0;i<=countnum;i++,p++){
-			// Alocar com -INT_MAX para marcar o fim do array
-			if(i==countnum){
-				*p = -INT_MAX;
-			}
-			else{
-				*p=0;
-			}
-		}*/
-
+		
 		// atype + 8 = Transformando tipo de array pra tipo de referencia (ver estrutura)
 		f->p = Push_operandos(f->p,-INT_MAX,endereco,atype + 7);
 	}
@@ -2735,16 +2809,82 @@ void anewarray_impl(frame *f, u1 par1, u1 par2){
 
 void arraylength_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *array_ref = Pop_operandos(f->p);
-	i4 referencia = array_ref->topo->operando;
-	int tamanho = 0;
+	void *referencia = array_ref->topo->referencia;
+	u1 tipo_referencia = array_ref->topo->tipo_operando;
 
-	/* Observação */
+	int tamanho = 0;
+	int ref_size = 0;
+	/* Observação
 	// Não tem como descobrir o tipo do elemento, a princípio.
 	// Como fazer esse incremento? Foi alocado como void, mas com sizeofs diferentes (observar instrução newarray)
 	// O void vai garantir que o incremento é o mesmo?
-	/*for (void *p = referencia;*p!=-INT_MAX;p++,tamanho++){
-
-	}*/
+	*/
+	switch(tipo_referencia){
+		case REFERENCE_ARRAY_BOOLEAN_OP:
+			ref_size = sizeof(u1);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(u1 *)p == CHAR_MAX){
+					break;
+				}
+			}	
+		break;
+		case REFERENCE_ARRAY_CHAR_OP:
+				ref_size = sizeof(i2);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(i2 *)p == SHRT_MAX){
+					break;
+				}
+			}			
+		break;
+		case REFERENCE_ARRAY_FLOAT_OP:
+			ref_size = sizeof(u4);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(u4 *)p == INT_MAX){
+					break;
+				}
+			}			
+		break;
+		case REFERENCE_ARRAY_DOUBLE_OP:
+			ref_size = 2*sizeof(u4);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(u4 *)p == UINT32_MAX){
+					break;
+				}
+			}
+		break;
+		case REFERENCE_ARRAY_BYTE_OP:
+			ref_size = sizeof(i1);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(i1 *)p == CHAR_MAX){
+					break;
+				}
+			}		
+		break;
+		case REFERENCE_ARRAY_SHORT_OP:
+			ref_size = sizeof(i2);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(i2 *)p == SHRT_MAX){
+					break;
+				}
+			}			
+		break;
+		case REFERENCE_ARRAY_INT_OP:
+			ref_size = sizeof(i4);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(i4 *)p == INT_MAX){
+					break;
+				}
+			}	
+		break;
+		case REFERENCE_ARRAY_LONG_OP:
+			ref_size = 2*sizeof(i4);
+			for (void *p = referencia;;p+=ref_size,tamanho++){
+				if (*(i4 *)p == LONG_MAX){
+					break;
+				}
+			}
+		break;
+	}
 
 	f->p = Push_operandos(f->p,tamanho,NULL,INTEGER_OP);
 
