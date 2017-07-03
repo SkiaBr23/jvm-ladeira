@@ -14,25 +14,174 @@
 /** Macro para normalizar índice do pool de constantes */
 #define normaliza_indice(x,y) (x << 8) | y
 
-
+/**
+ * @brief Função para resolver (analisar e alocar caso nao alocada) uma classe
+ * 
+ * @param nome_classe Nome da classe a ser resolvida
+ * @return Ponteiro para a classe resolvida
+ */
 ClassFile* resolverClasse(char *nome_classe);
+
+/**
+ * @brief Função para resolver (analisar parâmetros, nome e descriptor) método
+ * 
+ * @param cp Ponteiro para constant pool
+ * @param indice_cp Índice a ser acessado na constante pool
+ * @param interface Flag para sinalizar método de interface
+ * @return Valor booleano representando o sucesso da execucção da resolução
+ */
 bool resolverMetodo(cp_info *cp, u2 indice_cp, u1 interface);
+
+/**
+ * @brief Função para obter o nome de um método na constant pool
+ * 
+ * @param cp Ponteiro para constant pool
+ * @param indice_cp Índice a ser acessado na constante pool
+ * @param interface Flag para sinalizar método de interface
+ * @return Ponteiro de char representando a string contendo o nome do método
+ */
 char* obterNomeMetodo(cp_info *cp, u2 indice_cp, u1 interface);
+
+/**
+ * @brief Função para obter o descriptor de um método
+ * 
+ * @param cp Ponteiro para constant pool
+ * @param indice_cp Índice a ser acessado na constante pool
+ * @param interface Flag para sinalizar método de interface
+ * @return Ponteiro de char representando a string contendo o descriptor do método
+ */
 char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp, u1 interface);
+
+/**
+ * @brief Função para obter o tipo do descriptor do método
+ * 
+ * @param descriptor Ponteiro de char representando a string contendo o descriptor do método
+ * @return Valor inteiro representando o tipo do descriptor do método
+ */
 int descriptorFieldValidate (char * descriptor);
+
+/**
+ * @brief Função para obter a classe executante de um método
+ * 
+ * @param cp Ponteiro para constant pool
+ * @param indice_cp Índice a ser acessado na constante pool
+ * 
+ * @return Ponteiro de char representando a string contendo o nome da classe de um método
+ */
 char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp);
+
+/**
+ * @brief Função para transferir os valores da pilha de operandos de um frame para o vetor de variáveis locais do próximo frame
+ * 
+ * @param anterior Frame anterior (previamente executado)
+ * @param novo Frame novo sendo alocado para execução de método
+ * @param parametros_cont Contador de parâmetros a serem passados para o array de variáveis locais do novo frame
+ * @return Retorna um ponteiro para frame, com o array de variáveis locais atualizado
+ */
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont);
+
+/**
+ * @brief Função para decodificar operandos em um valor double (64 bits)
+ * 
+ * @param high Parte alta do valor double (32 bits)
+ * @param low Parte baixa do valor double (32 bits)
+ * 
+ * @return Valor double decodificado
+ */
 double decodificaDoubleValor(u4 high, u4 low);
+
+/**
+ * @brief Função para decodificar operando em um valor float (32 bits)
+ * 
+ * @param valor 4 bytes do tipo unsigned representando o valor float
+ * @return Valor float decodificado
+ */
 float decodificaFloatValor(u4 valor);
+
+/**
+ * @brief Função para decodificar operandos em um valor long (64 bits)
+ * 
+ * @param high Parte alta do valor long (32 bits)
+ * @param low Parte baixa do valor long (32 bits)
+ * 
+ * @return Valor long decodificado
+ */
 long decodificaLongValor (u4 high, u4 low);
+
+/**
+ * @brief Função para obter a quantidade de campos da classe que não são estáticos (atributos de classe)
+ * 
+ * @param classe Ponteiro para a classe alocada
+ * @return Valor inteiro com a quantidade de campos que não são do tipo static
+ */
 int getParametrosNaoStatic (ClassFile * classe);
+
+/**
+ * @brief Função para inserir um objeto novo na lista de objetos
+ * 
+ * @param lis Ponteiro para o começo da lista de objetos
+ * @param classe Referência para a classe (objeto) a ser alocada na lista
+ * @param parametrosNaoStatic Quantidade de parâmetros que não são static
+ * @return Ponteiro para a lista de objetos atualizado com a inserção do novo objeto
+ */
 Lista_Objetos * InsereObjeto (Lista_Objetos * lis, ClassFile * classe, int parametrosNaoStatic);
+
+/**
+ * @brief Função para verificar se um método ou field é do tipo static
+ * 
+ * @param accessFlags String contendo o accessflags do método ou field
+ * @return Valor booleano indicando que o método ou field é do tipo static
+ */
 bool buscaStaticFlags (char * accessFlags);
+
+/**
+ * @brief Função para obter a quantidade de parâmetros a serem passados para um método
+ * 
+ * @param descriptor String contendo o descriptor do método (parâmetros e tipo de retorno)
+ * @return Valor inteiro representando a quantidade de parâmetros a serem passados para o método
+ */
 int getParametrosCount (char * descriptor);
+
+/**
+ * @brief Função para buscar um objeto na lista de objetos
+ * 
+ * @param p Ponteiro de classe contendo a referência ao objeto
+ * @return Retorna um ponteiro para a lista de objetos
+ */
 Lista_Objetos * buscaObjetoViaReferencia (ClassFile * p);
+
+/**
+ * @brief Função para obter a posição do field no array de dados de instância (dados não estáticos)
+ * 
+ * @param obj Ponteiro para o objeto alocado
+ * @param nomeField Nome do field pertencente ao objeto
+ * 
+ * @return Posição do field no array de dados não estáticos
+ */
 int getPositionField (ClassFile * obj, char * nomeField);
+
+/**
+ * @brief Função para instanciar um objeto novo
+ * 
+ * @param nomeClasse Ponteiro para char contendo a string do nome da classe
+ * @return Ponteiro para o objeto alocado
+ */
 ClassFile * instanciarClasse (char * nomeClasse);
+
+/**
+ * @brief Função para obter o tipo do operando a ser alocado na pilha de operandos
+ * 
+ * @param descriptorRetorno Ponteiro de char contendo a string que representa o descriptor do método
+ * @return Valor inteiro representando o tipo do operando a ser alocado na pilha de operandos
+ */
 int getTipoOperandoSaida(char * descriptorRetorno);
+
+/**
+ * @brief Função para obter o modo de empilhamento do valor de retorno de um método
+ * 
+ * @param descriptor Ponteiro de char contendo a string que representa o descriptor do método
+ * @return Valor inteiro representando o modo de empilhamento do valor de retorno de um método na pilha de operandos
+ */
 int getTipoRetorno (char * descriptor);
 
 
