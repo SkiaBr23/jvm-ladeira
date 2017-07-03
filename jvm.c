@@ -391,6 +391,10 @@ bool instrucaoBranch (char * nomeInstrucao) {
 		isBranch = true;
 	} else if (strcmp(nomeInstrucao,"jsr") == 0) {
 		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"ifnonnull") == 0) {
+		isBranch = true;
+	} else if (strcmp(nomeInstrucao,"ifnull") == 0) {
+		isBranch = true;
 	} else {
 		isBranch = false;
 	}

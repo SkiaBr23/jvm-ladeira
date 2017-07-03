@@ -882,23 +882,7 @@ pilha_operandos* pop_impl(frame *f){
 pilha_operandos** pop2_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
-
-	pilha_operandos **vetor_retorno = malloc(2*sizeof(pilha_operandos));
-	vetor_retorno[0] = valor1;
-	vetor_retorno[1] = valor2;
-
-	// Optamos por não montar o valor aqui, pois depende da instrução seguinte, que realizará alguma operação
-	// A instrução de operação com os valores manipula do jeito que a gente precisar.
-	/*// Se for categoria 2
-	if(valor1->topo->tipo_operando == DOUBLE_OP || valor1->topo->tipo_operando == LONG_OP){
-		vetor_retorno[0]->topo = malloc
-	}
-	// Se for categoria 1
-	else{
-
-	}*/
-
-	return(vetor_retorno);
+	return NULL;
 }
 
 void pop_fantasma(frame *f, u1 par1, u1 par2){
@@ -3055,12 +3039,13 @@ void multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions){
 void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	u2 offset = 0;
+	i2 offset = 0;
 
-	if(valor==NULL){
-		offset = (branchbyte1 << 8) | branchbyte2;
-	}
-	else{
+	if (valor->topo->referencia == NULL) {
+		i1 v1 = (i1)branchbyte1;
+		i1 v2 = (i1)branchbyte2;
+		offset = (v1 << 8) | v2;
+		jvm->pc += offset;
 	}
 }
 
@@ -3071,10 +3056,13 @@ void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	u2 offset = 0;
+	i2 offset = 0;
 
-	if(valor!=NULL){
-		offset = (branchbyte1 << 8) | branchbyte2;
+	if(valor->topo->referencia != NULL) {
+		i1 v1 = (i1)branchbyte1;
+		i1 v2 = (i1)branchbyte2;
+		offset = (v1 << 8) | v2;
+		jvm->pc += offset;
 	}
 }
 /** Goto_w_impl
