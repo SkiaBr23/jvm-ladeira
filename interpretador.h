@@ -310,55 +310,457 @@ void dcmpg_impl(frame *f, u1 par1, u1 par2);
 void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void ifne_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void iflt_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Branch será efetuado se o inteiro no topo da pilha for maior ou igual ao valor zero
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o índice do branch
+ * @param branchbyte2 Byte que será concatenado para montar o índice do branch
+ */
 void ifge_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Branch será efetuado se o inteiro no topo da pilha for maior do que o valor zero
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o índice do branch
+ * @param branchbyte2 Byte que será concatenado para montar o índice do branch
+ */
 void ifgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Branch será efetuado se o inteiro no topo da pilha for menor do que o valor zero
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o índice do branch
+ * @param branchbyte2 Byte que será concatenado para montar o índice do branch
+ */
 void ifle_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Branch será efetuado se o inteiro no topo da pilha for igual ao próximo inteiro na pilha
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o índice do branch
+ * @param branchbyte2 Byte que será concatenado para montar o índice do branch
+ */
 void if_icmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Branch será efetuado se o inteiro no topo da pilha for diferente do próximo inteiro na pilha
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o índice do branch
+ * @param branchbyte2 Byte que será concatenado para montar o índice do branch
+ */
 void if_icmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Branch será efetuado se o inteiro no topo da pilha for maior do que o próximo inteiro na pilha
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o índice do branch
+ * @param branchbyte2 Byte que será concatenado para montar o índice do branch
+ */
 void if_icmplt_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Branch será efetuado se o inteiro no topo da pilha for menor do que o próximo inteiro na pilha
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o índice do branch
+ * @param branchbyte2 Byte que será concatenado para montar o índice do branch
+ */
 void if_icmpge_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Branch será efetuado se o inteiro no topo da pilha for menor do que o próximo inteiro na pilha
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o índice do branch
+ * @param branchbyte2 Byte que será concatenado para montar o índice do branch
+ */
 void if_icmpgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Branch será efetuado se o inteiro no topo da pilha for maior do que o próximo inteiro na pilha
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o índice do branch
+ * @param branchbyte2 Byte que será concatenado para montar o índice do branch
+ */
 void if_icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Branch será efetuado se as referências na pilha forem iguais
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o índice do branch
+ * @param branchbyte2 Byte que será concatenado para montar o índice do branch
+ */
 void acmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Branch será efetuado se as referências na pilha não forem iguais
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o índice do branch
+ * @param branchbyte2 Byte que será concatenado para montar o índice do branch
+ */
 void acmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief A instrução sempre efetuará um branch
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Parâmetro que será concatenado para montar o índice do branch
+ * @param branchbyte2 Parâmetro que será concatenado para montar o índice do branch
+ */
 void inst_goto_impl(frame *f,u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Instrução para efetuar um branch para um offset, dentro do código do mesmo método sendo executado
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Parâmetro que será concatenado para montar o índice do branch
+ * @param branchbyte2 Parâmetro que será concatenado para montar o índice do branch
+ */
 void jsr_impl(frame *f,u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Instrução para retornar de uma subrotina
+ * 
+ * @param f Frame corrente
+ * @param index Índice no vetor de variáveis locais do frame corrente
+ * @param par1 Esse parâmetro não será utilizado na prática
+ */
 void ret_impl(frame *f, u1 index, u1 par1);
+
+/**
+ * @brief Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto
+ * 
+ * @param par0 Esse parâmetro não será utilizado na prática
+ * @param par1 Esse parâmetro não será utilizado na prática
+ * @param par2 Esse parâmetro não será utilizado na prática
+ */
 void tableswitch_fantasma(frame *par0, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto
+ * 
+ * @param par0 Esse parâmetro não será utilizado na prática
+ * @param par1 Esse parâmetro não será utilizado na prática
+ * @param par2 Esse parâmetro não será utilizado na prática
+ */
 void lookupswitch_fantasma(frame *par0, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para acessar uma jump table por index e efetuar um jump
+ * 
+ * @param f Frame corrente
+ */
 void tableswitch_impl(frame *f);
+
+/**
+ * @brief Instrução para acessar uma chave em um jump table e efetuar um jump
+ * 
+ * @param f Frame corrente
+ */
 void lookupswitch_impl(frame *f);
+
+/**
+ * @brief Instrução para retornar um inteiro de um método
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void ireturn_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para retornar um long de um método
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void lreturn_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para retornar um float de um método
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void freturn_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para retornar um double de um método
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void dreturn_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para retornar uma referência de um método
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void areturn_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para retornar void de um método
+ * 
+ * @param f Frame corrente
+ * @param par1 Parâmetro não utilizado
+ * @param par2 Parâmetro não utilizado
+ */
 void inst_return_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para obter um field estático de uma classe
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
+
+/**
+ * @brief Instrução para setar um field estático em uma classe
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
+
+/**
+ * @brief Instrução para obter o field de um objeto
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
+
+/**
+ * @brief Instrução para setar um field em um objeto
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
+
+/**
+ * @brief Função para invocar um método de instância, geralmente utilizada para impressão em tela
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
-void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
+
+/**
+ * @brief Instrução para invocar um método de instância
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
+void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
+
+/**
+ * @brief Instrução para invocar um método estático (método de classe)
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
+
+/**
+ * @brief Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto
+ * 
+ * @param f Esse parâmetro não será utilizado na prática
+ * @param par1 Esse parâmetro não será utilizado na prática
+ * @param par2 Esse parâmetro não será utilizado na prática
+ */
 void invokeinterface_fantasma(frame *par0, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para invocar um método de interface
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param count Um byte que não pode ser zero
+ */
 void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count);
-void invokedynamic_fantasma(frame *par0, u1 par1, u1 par2); // Não implementado. /** Essa instrução só existe para criar uma posição "falsa" no vetor de ponteiros de função **/
+
+/**
+ * @brief Instrução para invocar um método dinâmico. Essa instrução só existe para criar uma posição "falsa" no vetor de ponteiros de função
+ * @details [long description]
+ * 
+ * @param par0 Parâmetro não utilizado
+ * @param par1 Parâmetro não utilizado
+ * @param par2 Parâmetro não utilizado
+ */
+void invokedynamic_fantasma(frame *par0, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para criar um novo objeto
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param indexbyte2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
 void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
-void newarray_impl(frame *f ,u1 atype, u1 par1); // Observação do -INT_MAX
-void anewarray_impl(frame *f, u1 par1, u1 par2); // Não implementado
+
+/**
+ * @brief Função para criar um novo array de um dado tipo
+ * 
+ * @param f Frame corrente
+ * @param atype Tipo do array que deve ser criado
+ * @param par1 Parâmetro não utilizado
+ */
+void newarray_impl(frame *f ,u1 atype, u1 par1);
+
+/**
+ * @brief Criar um novo array do tipo referência
+ * @details [long description]
+ * 
+ * @param f Frame corrente
+ * @param par1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param par2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
+void anewarray_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para obter o tamanho de um array
+ * 
+ * @param f Frame corrente
+ * @param par1 Parâmetro não utilizado
+ * @param par2 Parâmetro não utilizado
+ */
 void arraylength_impl(frame *f, u1 par1, u1 par2);
-void athrow_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
-void checkcast_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
-void instanceof_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
-void monitorenter_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
-void monitorexit_impl(frame *f, u1 par1, u1 par2); // Não implementado - ESSAS SÃO OPCIONAIS
-void wide_impl(frame *f, u1 indexbyte1, u1 indexbyte2); // Não implementado
-void multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions); // Não implementado
-void multianewarray_fantasma(frame *f, u1 par1, u1 par2); // Não implementado
+
+/**
+ * @brief Instrução para lançar uma exceção ou erro
+ * 
+ * @param f Frame corrente
+ * @param par1 Parâmetro não utilizado
+ * @param par2 Parâmetro não utilizado
+ */
+void athrow_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para verificar se um objeto é de um determinado tipo
+ * 
+ * @param f Frame corrente
+ * @param par1 Byte que será concatenado para acessar uma entrada na constant pool
+ * @param par2 Byte que será concatenado para acessar uma entrada na constant pool
+ */
+void checkcast_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para determinar se um objeto é de um eterminado tipo
+ * 
+ * @param f Frame corrente
+ * @param par1 Byte que será concatenado para acessar uma entrada na constant pool
+ *
+ * @param par2 Byte que será concatenado para acessar uma entrada na constant pool
+ *
+ */
+void instanceof_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para entrar no monitor de um objeto
+ * 
+ * @param f Frame corrente
+ * @param par1 Parâmetro não utilizado
+ * @param par2 Parâmetro não utilizado
+ */
+void monitorenter_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para sair de um monitor de um objeto
+ * 
+ * @param f Frame corrente
+ * @param par1 Parâmetro não utilizado
+ * @param par2 Parâmetro não utilizado
+ */
+void monitorexit_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para estender a próxima instrução para ter o dobro de bytes de índice. 
+ * 
+ * @param f Parâmetro não utilizado
+ * @param indexbyte1 Parâmetro não utilizado
+ * @param indexbyte2 Parâmetro não utilizado
+ */
+void wide_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
+
+/**
+ * @brief Instrução que irá criar um array multidimensional
+ * 
+ * @param f Frame corrente
+ * @param indexbyte1 Byte que será concatenado para montar um índice para a constant pool da classe corrente
+ * @param indexbyte2 Byte que será concatenado para montar um índice para a constant pool da classe corrente
+ * @param dimensions Número de dimensões do array
+ */
+void multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions);
+
+/**
+ * @brief Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto
+ * 
+ * @param f Esse parâmetro não será utilizado na prática
+ * @param par1 Esse parâmetro não será utilizado na prática
+ * @param par2 Esse parâmetro não será utilizado na prática
+ */
+void multianewarray_fantasma(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução que irá efetuar um branch caso a referência no topo da pilha seja nula
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o offset do branch
+ * @param branchbyte2 Byte que será concatenado para montar o offset do branch
+ */
 void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Instrução que irá efetuar um branch caso a referência no topo da pilha não seja nula
+ * 
+ * @param f Frame corrente
+ * @param branchbyte1 Byte que será concatenado para montar o offset do branch
+ * @param branchbyte2 Byte que será concatenado para montar o offset do branch
+ */
 void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief A instrução sempre efetuará um branch, para um offset wide
+ * 
+ * @param f Frame corrente
+ * @param par1 Parâmetro que será concatenado para montar o índice do branch
+ * @param par2 Parâmetro que será concatenado para montar o índice do branch
+ */
 void goto_w_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução para efetuar um branch para um offset wide, de 32 bits, dentro do código do mesmo método sendo executado
+ * 
+ * @param f Frame corrente
+ * @param par1 Parâmetro que será concatenado para montar o índice do branch
+ * @param par2 Parâmetro que será concatenado para montar o índice do branch
+ */
 void jsr_w_impl(frame *f, u1 par1, u1 par2);
 
 extern void (*func_ptr[202])(frame *,u1,u1);
