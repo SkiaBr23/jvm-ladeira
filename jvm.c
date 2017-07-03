@@ -81,6 +81,10 @@ void executarJVM(){
         if(strcmp(stringmetodo,CLINIT_NOME)==0 && strcmp(stringdescriptor,DESCRIPTOR_CLINIT)==0 && methodAux->access_flags==STATICCLINIT){
             executarMetodo(methodAux,classeExecutavel,1);
         }
+
+        if(strcmp(stringmetodo,INIT_NOME)==0 && strcmp(stringdescriptor,DESCRIPTOR_INIT)==0 && methodAux->access_flags==PUBLIC){
+            executarMetodo(methodAux,classeExecutavel,1);
+        }
     }
 
 	int i=0;
