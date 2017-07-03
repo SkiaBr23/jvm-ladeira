@@ -130,6 +130,18 @@ Funções</h2></td></tr>
 <tr class="separator:a48f87cee6dd6a755b917030668385c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac35643f2a48457591ea4f409d6ecec76"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ac35643f2a48457591ea4f409d6ecec76">buscaStaticFlags</a> (char *accessFlags)</td></tr>
 <tr class="separator:ac35643f2a48457591ea4f409d6ecec76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ea344b9fcd1ad04bfb5b1fe679729e5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a9ea344b9fcd1ad04bfb5b1fe679729e5">getParametrosCount</a> (char *descriptor)</td></tr>
+<tr class="separator:a9ea344b9fcd1ad04bfb5b1fe679729e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a763acf7d4814679feadd889e4f756cac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="jvm_8h.html#a44d196f61b6d8bad019106cbc5da18d0">Lista_Objetos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a763acf7d4814679feadd889e4f756cac">buscaObjetoViaReferencia</a> (<a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *p)</td></tr>
+<tr class="separator:a763acf7d4814679feadd889e4f756cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a4ffd2dc3291b09f0eba004b3989726"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a5a4ffd2dc3291b09f0eba004b3989726">getPositionField</a> (<a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *obj, char *nomeField)</td></tr>
+<tr class="separator:a5a4ffd2dc3291b09f0eba004b3989726"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6961f0abc35f19bb8eb2a90abfd90312"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a6961f0abc35f19bb8eb2a90abfd90312">instanciarClasse</a> (char *nomeClasse)</td></tr>
+<tr class="separator:a6961f0abc35f19bb8eb2a90abfd90312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98f75106054d7c758c07584b0345123a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a98f75106054d7c758c07584b0345123a">getTipoOperandoSaida</a> (char *descriptorRetorno)</td></tr>
+<tr class="separator:a98f75106054d7c758c07584b0345123a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c94309854df69624823725b29db9318"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a8c94309854df69624823725b29db9318">getTipoRetorno</a> (char *descriptor)</td></tr>
+<tr class="separator:a8c94309854df69624823725b29db9318"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae65dcccf3c1058ca276f014f46f03cab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ae65dcccf3c1058ca276f014f46f03cab">nop_impl</a> (<a class="el" href="structframe.html">frame</a> *par0, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
 <tr class="separator:ae65dcccf3c1058ca276f014f46f03cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adab1a7c93444468815bcbc1e5754cf4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#adab1a7c93444468815bcbc1e5754cf4f">aconst_null_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
@@ -967,6 +979,7 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>areturn_impl </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Futuras Atividades:</a></b></dt><dd>TERMINAR </dd></dl>
 
 </div>
 </div>
@@ -1284,6 +1297,22 @@ Variáveis</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a763acf7d4814679feadd889e4f756cac"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="jvm_8h.html#a44d196f61b6d8bad019106cbc5da18d0">Lista_Objetos</a>* buscaObjetoViaReferencia </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -3380,6 +3409,22 @@ Variáveis</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a9ea344b9fcd1ad04bfb5b1fe679729e5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int getParametrosCount </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>descriptor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ad71b4e1c8179f35bd7a6b2b640b6e7a5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -3390,6 +3435,32 @@ Variáveis</h2></td></tr>
           <td class="paramtype"><a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *&#160;</td>
           <td class="paramname"><em>classe</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5a4ffd2dc3291b09f0eba004b3989726"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int getPositionField </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomeField</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -3428,6 +3499,38 @@ Variáveis</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a98f75106054d7c758c07584b0345123a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int getTipoOperandoSaida </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>descriptorRetorno</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8c94309854df69624823725b29db9318"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int getTipoRetorno </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>descriptor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a93ccb036273453537acc8dd0b9ef074c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -3457,6 +3560,7 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Goto_w_impl </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Futuras Atividades:</a></b></dt><dd>IMPLEMENTAR </dd></dl>
 
 </div>
 </div>
@@ -4449,6 +4553,7 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>ifnonnull_impl </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Futuras Atividades:</a></b></dt><dd>IMPLEMENTAR </dd></dl>
 
 </div>
 </div>
@@ -4481,6 +4586,7 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>ifnull_impl </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Futuras Atividades:</a></b></dt><dd>IMPLEMENTAR </dd></dl>
 
 </div>
 </div>
@@ -4973,6 +5079,7 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>inst_return_impl </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Futuras Atividades:</a></b></dt><dd>TERMINAR </dd></dl>
 
 </div>
 </div>
@@ -5002,6 +5109,22 @@ Variáveis</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6961f0abc35f19bb8eb2a90abfd90312"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a>* instanciarClasse </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomeClasse</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -5687,6 +5810,7 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>jsr_w_impl </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Futuras Atividades:</a></b></dt><dd>IMPLEMENTAR </dd></dl>
 
 </div>
 </div>
@@ -7159,6 +7283,7 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>pop2_impl </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Futuras Atividades:</a></b></dt><dd>TERMINAR </dd></dl>
 
 </div>
 </div>

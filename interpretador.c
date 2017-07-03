@@ -44,14 +44,11 @@ bool resolverMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 
 	cp_info *methodref = cp-1+indice_cp;
 	char *nome_classe = NULL;
-	char *descriptor = NULL;
 	if(!interface){
-		nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);
-		descriptor = decodificaNIeNT(cp,methodref->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
+		nome_classe = decodificaNIeNT(cp,methodref->UnionCP.Methodref.class_index,NAME_INDEX);;
 	}
 	else{
 		nome_classe = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.class_index,NAME_INDEX);
-		descriptor = decodificaNIeNT(cp,methodref->UnionCP.InterfaceMethodref.name_and_type_index,NAME_AND_TYPE);
 	}
 
 	if(resolverClasse(nome_classe)!=NULL){
@@ -95,7 +92,6 @@ char* obterDescriptorMetodo(cp_info *cp, u2 indice_cp, u1 interface){
 int descriptorFieldValidate (char * descriptor) {
 
 	if (*descriptor == 'L') {
-		printf("Entrou piranha\n");
 		return 5;
 	}
 
@@ -716,7 +712,7 @@ void dstore_impl(frame *f, u1 index, u1 par1){
 void astore_impl(frame *f, u1 index,u1 par1){
 	printf("Executando astore\n\n");
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[index].variavel) = (i4) valor->topo->referencia;
+	*(f->v[index].variavel) = (intptr_t) valor->topo->referencia;
 	f->v[index].tipo_variavel = valor->topo->tipo_operando;
 }
 
@@ -985,6 +981,10 @@ pilha_operandos* pop_impl(frame *f){
 	return(valor);
 }
 
+/** pop2_impl
+* @todo TERMINAR 
+*/
+
 pilha_operandos** pop2_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
@@ -1008,7 +1008,7 @@ pilha_operandos** pop2_impl(frame *f){
 }
 
 void pop_fantasma(frame *f, u1 par1, u1 par2){
-	pilha_operandos *desempilhado = pop_impl(f);
+	pop_impl(f);
 }
 
 void pop2_fantasma(frame *par0, u1 par1, u1 par2){
@@ -1756,7 +1756,7 @@ void i2d_impl(frame *f, u1 par1, u1 par2){
 
 void l2i_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *low_bytes1 = Pop_operandos(f->p);
-	pilha_operandos *high_bytes1 = Pop_operandos(f->p);
+	Pop_operandos(f->p);
 
 	f->p = Push_operandos(f->p, low_bytes1->topo->operando, NULL,INTEGER_OP);
 }
@@ -2189,7 +2189,7 @@ void ireturn_impl(frame *f, u1 par1, u1 par2){
 
 	// Empilhar na pilha de operandos do frame do chamador
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(i4)valor->topo->operando,NULL,valor->topo->tipo_operando);
-	pilha_frames *desempilhado = Pop_frames(jvm->frames);
+	Pop_frames(jvm->frames);
 	ImprimirPilha_frames(jvm->frames);
 }
 
@@ -2201,7 +2201,7 @@ void lreturn_impl(frame *f, u1 par1, u1 par2){
 	// Empilhar na pilha de operandos do frame do chamador
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)high_bytes->topo->operando,NULL,LONG_OP);
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)low_bytes->topo->operando,NULL,LONG_OP);
-	pilha_frames *desempilhado = Pop_frames(jvm->frames);
+	Pop_frames(jvm->frames);
 	ImprimirPilha_frames(jvm->frames);
 
 }
@@ -2212,7 +2212,7 @@ void freturn_impl(frame *f, u1 par1, u1 par2){
 
 	// Empilhar na pilha de operandos do frame do chamador
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)valor->topo->operando,NULL,FLOAT_OP);
-	pilha_frames *desempilhado = Pop_frames(jvm->frames);
+	Pop_frames(jvm->frames);
 	ImprimirPilha_frames(jvm->frames);
 
 }
@@ -2225,16 +2225,24 @@ void dreturn_impl(frame *f, u1 par1, u1 par2){
 	// Empilhar na pilha de operandos do frame do chamador
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)high_bytes->topo->operando,NULL,DOUBLE_OP);
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)low_bytes->topo->operando,NULL,DOUBLE_OP);
-	pilha_frames *desempilhado = Pop_frames(jvm->frames);
+	Pop_frames(jvm->frames);
 	ImprimirPilha_frames(jvm->frames);
 
 }
 
+/** areturn_impl
+* @todo TERMINAR
+*/
 void areturn_impl(frame *f, u1 par1, u1 par2){
 	// Analisar mesmas coisas do ireturn
-	pilha_operandos *valor = Pop_operandos(f->p);
+
+	// pilha_operandos *valor = 
+	Pop_operandos(f->p);
 }
 
+/** inst_return_impl
+* @todo TERMINAR
+*/
 void inst_return_impl(frame *f, u1 par1, u1 par2){
 
 	printf("EXECUÇÃO RETURN\n\n");
@@ -2243,7 +2251,7 @@ void inst_return_impl(frame *f, u1 par1, u1 par2){
 
 	// Empilhar NULL na pilha de operandos do frame chamador, ou seja, o próximo frame na pilha
 	//jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,-INT_MAX,NULL,-1);
-	pilha_frames *desempilhado = Pop_frames(jvm->frames);
+	Pop_frames(jvm->frames);
 }
 
 void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -2311,7 +2319,6 @@ void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	cp_info * field = f->cp-1+indice_cp;
 
-	printf("PUTA MERDA\n");
 	// Resolver o field
 	char * nomeClasse = decodificaNIeNT(f->cp,field->UnionCP.Fieldref.class_index,NAME_INDEX);
 	classesCarregadas * nova = BuscarElemento_classes(jvm->classes,nomeClasse);
@@ -2339,14 +2346,10 @@ void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 					fieldSaida->dadosStatics->low = (u4*) malloc(sizeof(u4));
 					fieldSaida->dadosStatics->high = NULL;
 					if (valor->topo->tipo_operando == REFERENCE_OP) {
-						printf("Entrou aqui piranha----------------------------------------\n");
-						printf("Opa: %s\n",(char*)valor->topo->referencia);
 						fieldSaida->dadosStatics->low = (u4*)valor->topo->referencia;
-						printf("ENDERECO LOCACO PAU NU CU: %s\n",(char*)fieldSaida->dadosStatics->low);
 					} else {
 						*fieldSaida->dadosStatics->low = (u4)valor->topo->operando;
 					}
-					printf("Empilhou float 0x%08x\n",*fieldSaida->dadosStatics->low);
 				} else if (descriptorFieldValidate(descriptorFieldAux) == 7 || descriptorFieldValidate(descriptorFieldAux) == 8) {
 					pilha_operandos *valorLow = Pop_operandos(f->p);
 					pilha_operandos *valorHigh = Pop_operandos(f->p);
@@ -2355,8 +2358,6 @@ void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 					fieldSaida->dadosStatics->high = (u4*) malloc(sizeof(u4));
 					*fieldSaida->dadosStatics->low = (u4)valorLow->topo->operando;
 					*fieldSaida->dadosStatics->high = (u4)valorHigh->topo->operando;
-					printf("Empilhou double high: 0x%08x\n", *fieldSaida->dadosStatics->high);
-					printf("Empilhou double low: 0x%08x\n", *fieldSaida->dadosStatics->low);
 				}
 			}
 		}
@@ -2393,7 +2394,6 @@ void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
     if(strcmp(classedoField,"java/lang/System")==0){
         f->p = Push_operandos(f->p,-INT_MAX,"out",REFERENCE_OP);
     } else {
-			printf("Entrou no else...\n");
 			cp_info * nameTypeField = f->cp-1+aux->UnionCP.Fieldref.name_and_type_index;
 			char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
 			char * descriptorRetorno = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
@@ -2401,32 +2401,17 @@ void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			printf("%s\n",descriptorRetorno);
 			int tipoRetorno = getTipoRetorno(descriptorRetorno);
 			if (tipoRetorno != -1) {
-				printf("Nome do fieeeeeeeeeeeeeeeeeeld: %s\n",nomeField);
-				printf("Aqui-----GETFIELD-----------------\n");
-				getchar();
-				ImprimirPilha_operandos(f->p);
-				getchar();
 				pilha_operandos * objetoRef = Pop_operandos(f->p);
 				ClassFile * buscado = (ClassFile*)objetoRef->topo->referencia;
 				Lista_Objetos * obj = buscaObjetoViaReferencia(buscado);
 				if (obj != NULL) {
-					printf("Nao é nulo...\n");
-					printf("NOme field: %s\n",nomeField);
-					printf("Eita piranha oh ein: 0x%08x\n",(i4*)obj->obj);
 					int posicaoField = getPositionField(obj->obj, nomeField);
-					printf("Ja pegou a posicao...\n");
 					if (posicaoField != -1) {
 						if (tipoRetorno == 1) {
-							printf("Passou...............\n");
-							printf("Posicao: %d\n",posicaoField);
-							printf("Quantidade de dados: %d\n",obj->sizeData);
 							u4 * valorLow = (u4*)malloc(sizeof(u4));
 							*valorLow = obj->data[posicaoField];
-							printf("eeeeeeeeeeeitaaaa\n");
 							int tipoOperandoSaida = getTipoOperandoSaida(descriptorRetorno);
-							printf("Opaaaaaaaaaaaaaaa\n");
 							f->p = Push_operandos(f->p,*valorLow,NULL,tipoOperandoSaida);
-							printf("Valor armazenado: 0x%08x\n",*valorLow);
 						} else {
 							u4 * valorHigh = (u4*)malloc(sizeof(u4));
 							*valorHigh = obj->data[posicaoField];
@@ -2435,17 +2420,14 @@ void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 							int tipoOperandoSaida = getTipoOperandoSaida(descriptorRetorno);
 							f->p = Push_operandos(f->p,*valorHigh,NULL,tipoOperandoSaida);
 							f->p = Push_operandos(f->p,*valorLow,NULL,tipoOperandoSaida);
-							printf("Valor armazenado High: 0x%08x\n",*valorHigh);
-							printf("Valor armazenado Low: 0x%08x\n",*valorLow);
 						}
 					} else {
-						printf("Nao achou ein..........\n");
+						exit(1);
 					}
 
 				}
 			}
 		}
-		getchar();
 }
 
 int getTipoOperandoSaida(char * descriptorRetorno) {
@@ -2494,7 +2476,6 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
     u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
     cp_info * field = f->cp-1+indice_cp;
     char * nomeClasse = decodificaNIeNT(f->cp,field->UnionCP.Fieldref.class_index,NAME_INDEX);
-    printf("Claaaaaaaaaaaaaaasse: %s\n",nomeClasse);
     classesCarregadas * nova = BuscarElemento_classes(jvm->classes,nomeClasse);
     if (nova == NULL) {
         if (resolverClasse(nomeClasse) == NULL) {
@@ -2504,9 +2485,6 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
     } else {
         cp_info * nameTypeField = f->cp-1+field->UnionCP.Fieldref.name_and_type_index;
         char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
-        printf("Nome do fieeeeeeeeeeeeeeeeeeld: %s\n",nomeField);
-				printf("Aqui----------------------\n");
-				ImprimirPilha_operandos(f->p);
         pilha_operandos * valorPopedLow = Pop_operandos(f->p);
 				pilha_operandos * valorPopedHigh = NULL;
 				if (valorPopedLow->topo->tipo_operando == DOUBLE_OP || valorPopedLow->topo->tipo_operando == LONG_OP) {
@@ -2514,32 +2492,21 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 				}
 				pilha_operandos * objetoRef = Pop_operandos(f->p);
 				ClassFile * buscado = (ClassFile*)objetoRef->topo->referencia;
-				printf("Eita piranha: 0x%08x\n",(i4*)(jvm->objetos->obj));
-				printf("Eita piranha: 0x%08x\n",(i4*)buscado);
 				Lista_Objetos * obj = buscaObjetoViaReferencia(buscado);
-				printf("Catou objeto...\n");
 				if (obj != NULL) {
-					printf("Nao é nulo...\n");
-					printf("NOme field: %s\n",nomeField);
-					printf("Eita piranha oh ein: 0x%08x\n",(i4*)obj->obj);
 					int posicaoField = getPositionField(obj->obj, nomeField);
-					printf("Ja pegou a posicao...\n");
 					if (posicaoField != -1) {
 						if (valorPopedHigh == NULL) {
 							obj->data[posicaoField] = valorPopedLow->topo->operando;
-							printf("Valor armazenado: 0x%08x\n",obj->data[posicaoField]);
 						} else {
 							obj->data[posicaoField] = valorPopedHigh->topo->operando;
 							obj->data[posicaoField+1] = valorPopedLow->topo->operando;
-							printf("Valor armazenado High: 0x%08x\n",obj->data[posicaoField]);
-							printf("Valor armazenado Low: 0x%08x\n",obj->data[posicaoField+1]);
 						}
 					} else {
-						printf("Nao achou ein..........\n");
+						exit(1);
 					}
 
 				}
-				getchar();
     }
 }
 
@@ -2587,46 +2554,14 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	u4 * end;
     u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
-		i4 valorAux;
-		char *classeDoMetodo = NULL;
-		int *parametros_cont = malloc(sizeof(int));
+	char *classeDoMetodo = NULL;
+	int *parametros_cont = malloc(sizeof(int));
 
     char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
     char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
 		char *descriptorcopia = malloc(strlen(descriptormetodo)*sizeof(char));
 		strcpy(descriptorcopia,descriptormetodo);
 
-
-    /*method_info *metodos = f->classes->topo->arquivoClass->methods;
-    method_info *aux = metodos;*/
-
-    int achou = 0;
-
-    /*for(aux=metodos;aux<metodos+f->classes->topo->arquivoClass->methods_count;aux++){
-        char *nome_metodo_lista = decodificaStringUTF8(f->cp-1+aux->name_index);
-        // O método está na classe corrente
-        if(strcmp(nomemetodo,nome_metodo_lista)==0){
-            // Achei o método
-            // Verificar access flags
-            // Aqui dentro, private é legal, por exemplo
-            achou = 1;
-            break;
-
-        }
-    }
-
-    if(achou==1){
-        // Se o método tiver access flag private, não tem problema
-    }
-    else{
-        // O método não está na classe corrente
-        //Se o método não for encontrado na classe corrente, buscar o método na super_class da classe corrente
-        // Verificar se ele é private
-        // Se ele for private, o acesso é ilegal, retorna exceção
-        // Se ele for encontrado na super_class e for protected, tá tudo ok
-    }*/
-
-		ImprimirPilha_operandos(f->p);
     if(strcmp(nomemetodo,"println")==0){
         double valorSaida_double;
         float valorSaida_float;
@@ -2642,7 +2577,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
                 if (string->topo->tipo_operando == DOUBLE_OP) {
                     v2 = Pop_operandos(f->p);
                 }
-                pilha_operandos *fieldOut = Pop_operandos(f->p);
+                Pop_operandos(f->p);
 
                 switch(string->topo->tipo_operando){
 
@@ -2709,7 +2644,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
                 }
 
             } else {
-                pilha_operandos *fieldOut = Pop_operandos(f->p);
+                Pop_operandos(f->p);
                 printf("\nSaltoDeLinha\n");
             }
         }
@@ -2729,8 +2664,6 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 						if(strcmp(nameindex,"Code")==0){
 							code_attribute *c = (code_attribute *) aux->info;
 							frame *f_novo = criarFrame(classeDoMetodo,c->max_locals);
-							printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
-							ImprimirPilha_operandos(f->p);
 							f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 							jvm->frames = Push_frames(jvm->frames,f_novo);
 							// printf("%lu\n",sizeof(vetor_locais));
@@ -2782,7 +2715,6 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	strcpy(descriptorcopia,descriptormetodo);
 	char *classeDoMetodo = NULL;
 	char *classePaiDaCorrente = NULL;
-	classesCarregadas *classeResolvida = NULL;
 	classesCarregadas *classeCorrente = NULL;
 	int *parametros_cont = malloc(sizeof(int));
 
@@ -2792,7 +2724,6 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		// Corrente é a filha
 		printf("CLASSE DO METODO ------------------------> %s\n",classeDoMetodo);
 		printf("CLASSE CORRENTE ------------------------> %s\n",jvm->frames->topo->f->classeCorrente);
-		classeResolvida = BuscarElemento_classes(jvm->classes,classeDoMetodo);
 		classeCorrente = BuscarElemento_classes(jvm->classes,jvm->frames->topo->f->classeCorrente);
 
 		classePaiDaCorrente = decodificaNIeNT(classeCorrente->arquivoClass->constant_pool,classeCorrente->arquivoClass->super_class,NAME_INDEX);

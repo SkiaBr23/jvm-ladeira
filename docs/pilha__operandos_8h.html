@@ -147,6 +147,9 @@ Funções</h2></td></tr>
 <tr class="memitem:abaa4f790f229e0f7e6bd12cf3cd77952"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pilha__operandos_8h.html#abaa4f790f229e0f7e6bd12cf3cd77952">ImprimirPilha_operandos</a> (<a class="el" href="structpilha__operandos.html">pilha_operandos</a> *p)</td></tr>
 <tr class="memdesc:abaa4f790f229e0f7e6bd12cf3cd77952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imprime na tela uma representação textual da pilha de operandos.  <a href="#abaa4f790f229e0f7e6bd12cf3cd77952">Mais...</a><br /></td></tr>
 <tr class="separator:abaa4f790f229e0f7e6bd12cf3cd77952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f29eb413998d19a727f107de0ce77cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pilha__operandos_8h.html#a3f29eb413998d19a727f107de0ce77cb">printVazio</a> (<a class="el" href="structpilha__operandos.html">pilha_operandos</a> *p)</td></tr>
+<tr class="memdesc:a3f29eb413998d19a727f107de0ce77cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifica se o campo no topo da pilha de operandos é um salto de linha (na impressão)  <a href="#a3f29eb413998d19a727f107de0ce77cb">Mais...</a><br /></td></tr>
+<tr class="separator:a3f29eb413998d19a727f107de0ce77cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição Detalhada</h2>
 <div class="textblock"><p>Estrutura e cabeçalho da implementação da pilha de operandos. </p>
@@ -323,6 +326,31 @@ Funções</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Retorna</dt><dd>Pilha de operandos com o elemento do topo removido </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3f29eb413998d19a727f107de0ce77cb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool printVazio </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpilha__operandos.html">pilha_operandos</a> *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifica se o campo no topo da pilha de operandos é um salto de linha (na impressão) </p>
+<p>Algumas exceções podem imprimir um salto de linha, ou chamadas de <code>System.out.println</code> sem argumentos.</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Ponteiro para a pilha de operandos a ser verificada </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

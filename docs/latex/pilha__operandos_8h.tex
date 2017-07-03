@@ -45,7 +45,9 @@ typedef struct \hyperlink{structpilha__operandos}{pilha\+\_\+operandos} \hyperli
 bool \hyperlink{pilha__operandos_8h_adfcc4bc1d942133ea35b7f5776f94549}{pilha\+Vazia} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
 \begin{DoxyCompactList}\small\item\em Verifica se a pilha de operandos está vazia. \end{DoxyCompactList}\item 
 void \hyperlink{pilha__operandos_8h_abaa4f790f229e0f7e6bd12cf3cd77952}{Imprimir\+Pilha\+\_\+operandos} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
-\begin{DoxyCompactList}\small\item\em Imprime na tela uma representação textual da pilha de operandos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Imprime na tela uma representação textual da pilha de operandos. \end{DoxyCompactList}\item 
+bool \hyperlink{pilha__operandos_8h_a3f29eb413998d19a727f107de0ce77cb}{print\+Vazio} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
+\begin{DoxyCompactList}\small\item\em Verifica se o campo no topo da pilha de operandos é um salto de linha (na impressão) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Descrição Detalhada}
@@ -154,6 +156,24 @@ Remove o operando localizado no topo da pilha de operandos.
 \begin{DoxyReturn}{Retorna}
 Pilha de operandos com o elemento do topo removido 
 \end{DoxyReturn}
+\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!print\+Vazio@{print\+Vazio}}
+\index{print\+Vazio@{print\+Vazio}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{print\+Vazio(pilha\+\_\+operandos $\ast$p)}{printVazio(pilha_operandos *p)}}]{\setlength{\rightskip}{0pt plus 5cm}bool print\+Vazio (
+\begin{DoxyParamCaption}
+\item[{{\bf pilha\+\_\+operandos} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{pilha__operandos_8h_a3f29eb413998d19a727f107de0ce77cb}{}\label{pilha__operandos_8h_a3f29eb413998d19a727f107de0ce77cb}
+
+
+Verifica se o campo no topo da pilha de operandos é um salto de linha (na impressão) 
+
+Algumas exceções podem imprimir um salto de linha, ou chamadas de {\ttfamily System.\+out.\+println} sem argumentos.
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em p} & Ponteiro para a pilha de operandos a ser verificada \\
+\hline
+\end{DoxyParams}
 \index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!Push\+\_\+operandos@{Push\+\_\+operandos}}
 \index{Push\+\_\+operandos@{Push\+\_\+operandos}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
 \subsubsection[{\texorpdfstring{Push\+\_\+operandos(pilha\+\_\+operandos $\ast$p, u4 operando, void $\ast$referencia, u1 tipo\+\_\+operando)}{Push_operandos(pilha_operandos *p, u4 operando, void *referencia, u1 tipo_operando)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pilha\+\_\+operandos}$\ast$ Push\+\_\+operandos (

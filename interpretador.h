@@ -29,6 +29,7 @@ Lista_Objetos * buscaObjetoViaReferencia (ClassFile * p);
 int getPositionField (ClassFile * obj, char * nomeField);
 ClassFile * instanciarClasse (char * nomeClasse);
 int getTipoOperandoSaida(char * descriptorRetorno);
+int getTipoRetorno (char * descriptor);
 
 void nop_impl(frame *par0,u1 par1, u1 par2);
 void aconst_null_impl(frame *f, u1 par1, u1 par2);

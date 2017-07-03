@@ -4,9 +4,10 @@
 public class teste{
 	public static void main(String args[]){
 
-		int a[] = {1,2,3};
+		String piroquinha = "piroquinha";
 
-		System.out.println(a[1]);
+
+		System.out.println(piroquinha);
 
 	}
 }

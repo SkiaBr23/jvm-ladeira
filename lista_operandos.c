@@ -223,8 +223,11 @@ void ImprimirLista_operandos(lista_operandos *lis){
 				case REFERENCE_ARRAY_LONG_OP:
 					printf("[J@%p\n",(u4*) p->referencia);
 				break;
+				case REFERENCE_STRING_OP:
+					printf("String: %s\n", (char *) p->referencia);
+				break;
 				case REFERENCE_OP:
-					printf("Operando: 0x%08x\n\n", p->referencia);
+					printf("Operando: 0x%p\n\n", (u4*) p->referencia);
 				break;
 			}
 		}
