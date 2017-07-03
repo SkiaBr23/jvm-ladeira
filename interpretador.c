@@ -507,7 +507,7 @@ void dload_impl(frame *f, u1 index, u1 par2){
 
 //Carrega referencia de array para a pilha de operandos
 void aload_impl(frame *f, u1 index, u1 par1){
-	Push_operandos(f->p,-INT_MAX,*(f->v[index].variavel),f->v[index].tipo_variavel);
+	Push_operandos(f->p,-INT_MAX,(void*)(intptr_t)*(f->v[index].variavel),f->v[index].tipo_variavel);
 }
 
 //Carrega inteiro na posicao 0 para a pilha
@@ -581,19 +581,20 @@ void dload_3_impl(frame *f, u1 par1, u1 par2){
 
 //Carrega referencia na posicao 0 para a pilha
 void aload_0_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,*(f->v[0].variavel),f->v[0].tipo_variavel);
+	Push_operandos(f->p,-INT_MAX,(void*)(intptr_t)*(f->v[0].variavel),f->v[0].tipo_variavel);
 }
 
 void aload_1_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,*(f->v[1].variavel),f->v[1].tipo_variavel);
+
+	Push_operandos(f->p,-INT_MAX,(void*)(intptr_t)*(f->v[1].variavel),f->v[1].tipo_variavel);
 }
 
 void aload_2_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,*(f->v[2].variavel),f->v[2].tipo_variavel);
+	Push_operandos(f->p,-INT_MAX,(void*)(intptr_t)*(f->v[2].variavel),f->v[2].tipo_variavel);
 }
 
 void aload_3_impl(frame *f, u1 par1, u1 par2){
-	Push_operandos(f->p,-INT_MAX,*(f->v[3].variavel),f->v[3].tipo_variavel);
+	Push_operandos(f->p,-INT_MAX,(void*)(intptr_t)*(f->v[3].variavel),f->v[3].tipo_variavel);
 }
 
 
@@ -603,7 +604,7 @@ void iaload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i4* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(i4));
+	u4* endereco = (referencia->topo->referencia) + (indice->topo->operando * sizeof(i4));
 
     Push_operandos(f->p,*endereco,NULL,INTEGER_OP);
 }
@@ -612,7 +613,7 @@ void laload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i4* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * 2 * sizeof(i4));
+	u4* endereco = (referencia->topo->referencia) + (indice->topo->operando * 2 * sizeof(i4));
 	//Verificar ordem
 	Push_operandos(f->p,*endereco,NULL,LONG_OP);
 	Push_operandos(f->p,*(endereco++),NULL,LONG_OP);
@@ -622,7 +623,7 @@ void faload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i4* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(i4));
+	u4* endereco = (referencia->topo->referencia) + (indice->topo->operando * sizeof(i4));
 
     Push_operandos(f->p,*endereco,NULL,FLOAT_OP);
 }
@@ -631,7 +632,7 @@ void daload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	u4* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * 2 * sizeof(u4));
+	u4* endereco = ( referencia->topo->referencia) + (indice->topo->operando * 2 * sizeof(u4));
 
 	//Verificar ordem
 	Push_operandos(f->p,*endereco,NULL,DOUBLE_OP);
@@ -982,12 +983,12 @@ void sastore_impl(frame *f, u1 par1, u1 par2){
 }
 
 void aastore_impl(frame *f, u1 par1, u1 par2){
-	pilha_operandos *valor = Pop_operandos(f->p);
+/*	pilha_operandos *valor = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
 	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(u2)));
-	*endereco_array = valor->topo->operando;
+	*endereco_array = valor->topo->operando;*/
 
 }
 
