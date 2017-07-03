@@ -1,15 +1,7 @@
-/*
-Universidade de Brasília - 01/2017
-Software Básico - Turma A
-Projeto Leitor/Exibidor de arquivo .class
-
-Alunos: 		Maximillian Fan Xavier - 12/0153271
-				Rafael Dias da Costa - 12/0133253
-				Murilo Cerqueira Medeiros - 12/0130637
-				Eduardo Sousa da Silva - 13/0108405
-				Eduardo Schuabb Duarte - 11/0010876
-
-*/
+/**
+ * @file leitura.c
+ * @brief Arquivo cabeçalho contendo funções do leitor/exibidor de .class
+ */
 
 /*Inclusão de estruturas e assinatura de funções de leitura*/
 #include "leitura.h"

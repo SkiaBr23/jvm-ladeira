@@ -1,9 +1,8 @@
-
-
-
 public class Child extends Parent {
 
-  public Child() {
-    setOutput("child");
-  }
+	public static int a = 42;
+
+  	public Child() {
+  	  setOutput("child");
+  	}
 }
