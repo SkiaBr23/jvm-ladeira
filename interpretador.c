@@ -640,7 +640,7 @@ void daload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	u4* endereco = ((u4) referencia->topo->referencia) + (indice->topo->operando * 2 * sizeof(u4));
+	u4* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * 2 * sizeof(u4));
 
 	//Verificar ordem
 	Push_operandos(f->p,*endereco,NULL,DOUBLE_OP);
@@ -662,29 +662,26 @@ void baload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i1 endereco;
-	endereco = ((i1) referencia->topo->operando) + (indice->topo->operando * sizeof(i1));
-	i1 byte = endereco;
+	i1* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(i1));
 	//O Sign Extend foi feito?
-	Push_operandos(f->p,(i4) byte,NULL,BYTE_OP);
+	Push_operandos(f->p,*endereco,NULL,BYTE_OP);
 }
 
 void caload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	u2 endereco;
-	endereco = ((u2) referencia->topo->operando) + (indice->topo->operando * sizeof(u2));
-	u2 caracter = endereco;
+	u2* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(u2));
+
 	//O Zero Extend foi feito?
-	Push_operandos(f->p,(u4) caracter,NULL,CHAR_OP);
+	Push_operandos(f->p,*endereco,NULL,CHAR_OP);
 }
 
 void saload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i4* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(i2));
+	i2* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(i2));
 
 	//O Sign Extend foi feito?
 	Push_operandos(f->p,*endereco,NULL,SHORT_OP);
@@ -923,12 +920,9 @@ void lastore_impl(frame *f, u1 par1, u1 par2){
 
 	*endereco_array = high_bytes->topo->operando;
 
-	printf("================ GUARDANDO HIGH::: %d\n",*endereco_array);
-	endereco_array = endereco_array + sizeof(i4);
+	endereco_array++;
 
 	*endereco_array = low_bytes->topo->operando;
-
-	printf("================ GUARDANDO LOW::: %d\n",*endereco_array);
 /*
 	endereco = high_bytes->topo->operando;
 	endereco = endereco + sizeof(i4);
@@ -959,11 +953,11 @@ void dastore_impl(frame *f, u1 par1, u1 par2){
 	endereco = endereco + sizeof(i4);
 	endereco = low_bytes->topo->operando;*/
 
-	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * 2 * sizeof(i4)));
+	u4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * 2 * sizeof(u4)));
 
 	*endereco_array = high_bytes->topo->operando;
 
-	endereco_array = endereco_array + sizeof(i4);
+	endereco_array++;
 
 	*endereco_array = low_bytes->topo->operando;
 }
@@ -973,10 +967,8 @@ void bastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i1 endereco;
-	endereco = ((i1) array->topo->operando) + (indice->topo->operando * sizeof(i1));
-
-	endereco = valor->topo->operando;
+	i1 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i1)));
+	*endereco_array = valor->topo->operando;
 }
 
 void castore_impl(frame *f, u1 par1, u1 par2){
@@ -984,10 +976,8 @@ void castore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	u2 endereco;
-	endereco = ((u2) array->topo->operando) + (indice->topo->operando * sizeof(u2));
-
-	endereco = valor->topo->operando;
+	u2 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(u2)));
+	*endereco_array = valor->topo->operando;
 }
 
 void sastore_impl(frame *f, u1 par1, u1 par2){
@@ -995,7 +985,7 @@ void sastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i2)));
+	i2 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i2)));
 	*endereco_array = valor->topo->operando;
 }
 
@@ -1726,7 +1716,6 @@ void lxor_impl(frame *f, u1 par1, u1 par2){
 void iinc_impl(frame *f,u1 index, i1 constante){
 	// Estender o sinal para 32 bits
 	i4 inteiro_constante = (i4) constante;
-	printf("INCREMENTANDO =========+> %d\n",inteiro_constante );
 	*(f->v[index].variavel) += inteiro_constante;
 }
 
@@ -2514,9 +2503,9 @@ void imprimirValoresStatic (classesCarregadas * class) {
 
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
-		u4 * end;
+	u4 * end;
     u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
-		i4 valorAux;
+	i4 valorAux;
 
     char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
     char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
@@ -2601,7 +2590,7 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
                         printf("Operando: %s\n\n",(char*)string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_BOOLEAN_OP:
-                        printf("[Z@%p\n",(u4*) string->topo->referencia);
+                        printf("Referencia: [Z@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_CHAR_OP:
                         printf("Operando: %s\n\n",(char*) string->topo->referencia);
@@ -2627,10 +2616,10 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
                     case REFERENCE_OP:
                         printf("Operando: %s\n\n",(char*) string->topo->referencia);
                     break;
-										case REFERENCE_STRING_OP:
-											end = (u4*)string->topo->referencia;
-											printf("Operando: %s\n",(char*)(end));
-											break;
+					case REFERENCE_STRING_OP:
+						end = (u4*)string->topo->referencia;
+						printf("Operando: %s\n",(char*)(end));
+					break;
                 }
 
             } else {
@@ -3118,8 +3107,6 @@ void arraylength_impl(frame *f, u1 par1, u1 par2){
 		case REFERENCE_ARRAY_DOUBLE_OP:
 			ref_size = 2*sizeof(u4);
 			for (void *p = referencia;;p+=ref_size,tamanho++){
-				printf("DOUBLERA ============ %d\n",*(u4*)p );
-				getchar();
 				if (*(u4 *)p == UINT32_MAX){
 					break;
 				}
@@ -3151,9 +3138,7 @@ void arraylength_impl(frame *f, u1 par1, u1 par2){
 		break;
 		case REFERENCE_ARRAY_LONG_OP:
 			ref_size = 2*sizeof(i4);
-			printf("ENTRANDO CALCULO LONG ==== %d\n",*(i4 *)referencia);
 			for (void *p = referencia;;p+=ref_size,tamanho++){
-				printf("VALOR LONGERA =========>>> %d\n",*(i4 *)p);
 				if (*(i4 *)p == INT32_MAX){
 					break;
 				}
