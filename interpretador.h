@@ -8,10 +8,6 @@
 
 #define normaliza_indice(x,y) (x << 8) | y
 
-/* Observar todas as instruções, pois a maioria delas está parcialmente implementada */
-/* Observar todas as intruções quanto ao lançamento de exceções */
-/* Observar detalhes de instruções, principalmente os detalhes de invokes, por exemplo, no que tange à herança */
-
 ClassFile* resolverClasse(char *nome_classe);
 bool resolverMetodo(cp_info *cp, u2 indice_cp, u1 interface);
 char* obterNomeMetodo(cp_info *cp, u2 indice_cp, u1 interface);
@@ -21,6 +17,7 @@ char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp);
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont);
 double decodificaDoubleValor(u4 high, u4 low);
 float decodificaFloatValor(u4 valor);
+long decodificaLongValor (u4 high, u4 low);
 int getParametrosNaoStatic (ClassFile * classe);
 Lista_Objetos * InsereObjeto (Lista_Objetos * lis, ClassFile * classe, int parametrosNaoStatic);
 bool buscaStaticFlags (char * accessFlags);

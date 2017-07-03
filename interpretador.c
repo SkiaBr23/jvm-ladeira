@@ -355,7 +355,6 @@ void ldc_impl(frame *f, u1 indexbyte1, u1 par2){
 		case CONSTANT_String:
 			valor = (char*) decodificaStringUTF8(f->cp-1+item->UnionCP.String.string_index);
 			f->p = Push_operandos(f->p,-INT_MAX,valor,REFERENCE_OP);
-			u4 *endereco = (u4*) f->p->topo->referencia;
 		break;
 		case CONSTANT_Float:
 			num = item->UnionCP.Float.bytes;
@@ -390,7 +389,6 @@ void ldc_w_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		case CONSTANT_String:
 			valor = (char*) decodificaStringUTF8(f->cp-1+item->UnionCP.String.string_index);
 			f->p = Push_operandos(f->p,-INT_MAX,valor,REFERENCE_OP);
-			u4 *endereco = (u4*) f->p->topo->referencia;
 		break;
 		case CONSTANT_Float:
 			num = item->UnionCP.Float.bytes;
@@ -408,7 +406,6 @@ void ldc_w_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		default:
 			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.class_index,NAME_INDEX);
 			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
-
 		break;
 	}
 
@@ -573,7 +570,8 @@ void laload_impl(frame *f, u1 par1, u1 par2){
 	u4* endereco = (referencia->topo->referencia) + (indice->topo->operando * 2 * sizeof(i4));
 	//Verificar ordem
 	Push_operandos(f->p,*endereco,NULL,LONG_OP);
-	Push_operandos(f->p,*(endereco++),NULL,LONG_OP);
+	endereco++;
+	Push_operandos(f->p,*(endereco),NULL,LONG_OP);
 }
 
 void faload_impl(frame *f, u1 par1, u1 par2){
@@ -593,7 +591,8 @@ void daload_impl(frame *f, u1 par1, u1 par2){
 
 	//Verificar ordem
 	Push_operandos(f->p,*endereco,NULL,DOUBLE_OP);
-	Push_operandos(f->p,*(endereco++),NULL,DOUBLE_OP);
+	endereco++;
+	Push_operandos(f->p,*(endereco),NULL,DOUBLE_OP);
 }
 
 void aaload_impl(frame *f, u1 par1, u1 par2){
@@ -768,7 +767,6 @@ void astore_0_impl(frame *f, u1 par1, u1 par2){
 }
 
 void astore_1_impl(frame *f, u1 par1, u1 par2){
-	ImprimirPilha_operandos(f->p);
 	pilha_operandos *valor = Pop_operandos(f->p);
 
 	*(f->v[1].variavel) = (intptr_t) valor->topo->referencia;
@@ -876,8 +874,8 @@ pilha_operandos* pop_impl(frame *f){
 }
 
 pilha_operandos** pop2_impl(frame *f){
-	pilha_operandos *valor1 = Pop_operandos(f->p);
-	pilha_operandos *valor2 = Pop_operandos(f->p);
+	Pop_operandos(f->p);
+	Pop_operandos(f->p);
 	return NULL;
 }
 
@@ -2278,22 +2276,6 @@ Lista_Objetos * buscaObjetoViaReferencia (ClassFile * p) {
 	return NULL;
 }
 
-void imprimirValoresStatic (classesCarregadas * class) {
-	ClassFile * c = class->arquivoClass;
-	for (field_info * aux = c->fields; aux < c->fields+c->fields_count;aux++) {
-		char * acc = decodificaAccessFlags(aux->access_flags);
-		if (buscaStaticFlags(acc)) {
-			if (aux->dadosStatics->low != NULL) {
-				printf("Valor: 0x%08x\n",*(aux->dadosStatics->low));
-			}
-			if (aux->dadosStatics->high != NULL) {
-				printf("Valor: 0x%08x\n",*(aux->dadosStatics->high));
-			}
-		}
-	}
-}
-
-
 void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	u4 * end;
@@ -2309,83 +2291,84 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
     if(strcmp(nomemetodo,"println")==0){
         double valorSaida_double;
         float valorSaida_float;
+        long valorSaida_long;
 
         if (!pilhaVazia(f->p)) {
             if (!printVazio(f->p)) {
                 pilha_operandos *string = Pop_operandos(f->p);
                 pilha_operandos * v2;
-                if (string->topo->tipo_operando == DOUBLE_OP) {
+                if (string->topo->tipo_operando == DOUBLE_OP || string->topo->tipo_operando == LONG_OP) {
                     v2 = Pop_operandos(f->p);
                 }
                 Pop_operandos(f->p);
-
                 switch(string->topo->tipo_operando){
 
                     case BOOLEAN_OP:
-                        printf("Boolean imprimir: %d\n",(i4)string->topo->operando);
+                        printf("%d\n",(i4)string->topo->operando);
                     break;
                     case BYTE_OP:
-                        printf("Byte imprimir: %d\n",(i4)string->topo->operando);
+                        printf("%d\n",(i4)string->topo->operando);
                     break;
                     case CHAR_OP:
-                        printf("\nChar imprimir: %c\n",(char)string->topo->operando);
+                        printf("%c\n",(char)string->topo->operando);
                     break;
                     case SHORT_OP:
-                        printf("Short imprimir: %d\n",(i4)string->topo->operando);
+                        printf("%d\n",(i4)string->topo->operando);
                     break;
                     case INTEGER_OP:
-                        printf("Integer imprimir: %d\n",(i4)string->topo->operando);
+                        printf("%d\n",(i4)string->topo->operando);
                     break;
                     case FLOAT_OP:
                         valorSaida_float = decodificaFloatValor(string->topo->operando);
-                        printf("Valor Float: %f\n",valorSaida_float);
+                        printf("%g\n",valorSaida_float);
                     break;
                     case LONG_OP:
-                        printf("Long imprimir: %d\n",(i4)string->topo->operando);
+                    	valorSaida_long = decodificaLongValor(v2->topo->operando,string->topo->operando);
+                        printf("%ld\n",valorSaida_long);
                     break;
                     case DOUBLE_OP:
                         valorSaida_double = decodificaDoubleValor(v2->topo->operando, string->topo->operando);
-                        printf("Double imprimir: %lf\n",valorSaida_double);
+                        printf("%g\n",valorSaida_double);
                     break;
                     case RETURN_ADDRESS_OP:
-                        printf("Operando: %s\n\n",(char*)string->topo->referencia);
+                        printf("[@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_BOOLEAN_OP:
-                        printf("Referencia: [Z@%p\n",(u4*) string->topo->referencia);
+                        printf("[Z@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_CHAR_OP:
-                        printf("Operando: %s\n\n",(char*) string->topo->referencia);
+                        printf("%s\n",(char*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_FLOAT_OP:
-                        printf("Referencia: [F@%p\n",(u4*) string->topo->referencia);
+                        printf("[F@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_DOUBLE_OP:
-                        printf("Referencia: [D@%p\n",(u4*) string->topo->referencia);
+                        printf("[D@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_BYTE_OP:
-                        printf("Referencia: [B@%p\n",(u4*) string->topo->referencia);
+                        printf("[B@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_SHORT_OP:
-                        printf("Referencia: [S@%p\n",(u4*) string->topo->referencia);
+                        printf("[S@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_INT_OP:
-                        printf("Referencia: [I@%p\n",(u4*) string->topo->referencia);
+                        printf("[I@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_ARRAY_LONG_OP:
-                        printf("Referencia: [J@%p\n",(u4*) string->topo->referencia);
+                        printf("[J@%p\n",(u4*) string->topo->referencia);
                     break;
                     case REFERENCE_OP:
-                        printf("Operando: %s\n\n",(char*) string->topo->referencia);
+                        printf("[@%p\n",(u4*) string->topo->referencia);
                     break;
 					case REFERENCE_STRING_OP:
 						end = (u4*)string->topo->referencia;
-						printf("Operando: %s\n",(char*)(end));
+						printf("%s\n",(char*)(end));
 					break;
                 }
 
             } else {
                 Pop_operandos(f->p);
-                printf("\nSaltoDeLinha\n");
+                printf("\n");
             }
         }
     }
@@ -3010,7 +2993,6 @@ void multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions){
 	u2 indice_cp = normaliza_indice(indexbyte1,indexbyte2);
 	cp_info *item = f->cp-1 + indice_cp;
 	char* tipos = decodificaStringUTF8(f->cp-1+item->UnionCP.Class.name_index);
-	char* tipos_aux = (char*)malloc(sizeof(char));
 	i4* counts = (i4*)malloc(dimensions*sizeof(i4));
 	void *endereco = NULL;
 	for(u1 i = dimensions; i > 0; i--){
@@ -3066,6 +3048,12 @@ double decodificaDoubleValor (u4 high, u4 low) {
 	u8 valor = ((u8)(high)<<32) | (u8)low;
 
 	double retorno = (double)(*(double*)&valor);
+	return retorno;
+}
+
+long decodificaLongValor (u4 high, u4 low) {
+	u8 valor = ((u8)(high)<<32) | (u8)low;
+	long retorno = (long)(*(long*)&valor);
 	return retorno;
 }
 
