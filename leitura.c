@@ -354,7 +354,7 @@ method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp) {
 }
 
 char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *instrucoes){
-	u1 *aux=NULL,*aux3=NULL,*aux5=NULL,*aux7=NULL;
+	u1 *aux=NULL,*aux3=NULL,*aux5=NULL,*aux7=NULL, *aux_inc1=NULL, *aux_inc2=NULL;
 	char *retorno = (char*)malloc(10000*sizeof(char));
 	char *stringaux = (char*)malloc(100*sizeof(char));
 	u2 *aux2=NULL,*aux4=NULL;
@@ -430,7 +430,13 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 			case 2:
 
 				if(opcode==iinc){
-					sprintf(stringaux," %d by %d\n",*(++aux),*(++aux));
+					aux_inc1 = (u1 *) malloc(sizeof(u1));
+					*aux_inc1 = *(++aux);
+					aux_inc2 = (u1 *) malloc(sizeof(u1));
+					*aux_inc2 = *(++aux);						
+
+
+					sprintf(stringaux," %d by %d\n",*(aux_inc1),*(aux_inc2));
 					strcat(retorno,stringaux);
 				}
 				else if(opcode==ifeq || opcode==ifne || opcode==iflt || opcode==ifge || opcode==ifgt || opcode==ifle || opcode==if_icmpeq || opcode==if_icmpne || opcode==if_icmplt || opcode==if_icmpge || opcode==if_icmpgt || opcode==if_icmple){
@@ -482,9 +488,9 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				strcat(retorno,stringaux);
 				strcat(retorno," ");
 				strcat(retorno,stringargs);
-				aux3 = (u2*) malloc(sizeof(u2));
-				*aux3 = *(++aux);
-				sprintf(stringaux,"%d",(int)*aux3);
+				aux4 = (u2*) malloc(sizeof(u2));
+				*aux4 = *(++aux);
+				sprintf(stringaux,"%d",(int)*aux4);
 				strcat(retorno," count ");
 				strcat(retorno,stringaux);
 				strcat(retorno,"\n");
@@ -1118,7 +1124,7 @@ double decodificaDoubleInfo (cp_info * cp) {
 	long long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
 
 	printf("Valor Ajust-MANTISSA OK:\n");
- 	printf("val1 = 0x%" PRIx64 "\n", mant);
+ 	printf("val1 = 0x%llx\n", mant);
 
 	double retorno = sinal*mant*(pow(2,expon-1075));
 

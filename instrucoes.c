@@ -174,7 +174,7 @@ instrucao* construirInstrucoes(void){
 				instrucoes[i].numop = 0;
 			break;
 			case aload:
-				strcpy(instrucoes[i].inst_nome,"alod");
+				strcpy(instrucoes[i].inst_nome,"aload");
 				instrucoes[i].opcode = aload;
 				instrucoes[i].numarg = 1;
 				instrucoes[i].numop = 0;

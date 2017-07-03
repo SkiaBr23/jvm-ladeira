@@ -1,4 +1,5 @@
-/*
+
+ /*
 	Observar os comentários das instruções. Praticamente todas precisam ser finalizadas.
 	Entender como acessar a constant pool, e como fazer as invocações de métodos, obtenção de fields e campos static, etc.
 */
@@ -654,7 +655,7 @@ void baload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i1* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(i1));
+	i1* endereco = (referencia->topo->referencia) + (indice->topo->operando * sizeof(i1));
 	//O Sign Extend foi feito?
 	Push_operandos(f->p,*endereco,NULL,BYTE_OP);
 }
@@ -663,7 +664,7 @@ void caload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	u2* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(u2));
+	u2* endereco = (referencia->topo->referencia) + (indice->topo->operando * sizeof(u2));
 
 	//O Zero Extend foi feito?
 	Push_operandos(f->p,*endereco,NULL,CHAR_OP);
@@ -673,7 +674,7 @@ void saload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	i2* endereco = ((i4) referencia->topo->referencia) + (indice->topo->operando * sizeof(i2));
+	i2* endereco = (referencia->topo->referencia) + (indice->topo->operando * sizeof(i2));
 
 	//O Sign Extend foi feito?
 	Push_operandos(f->p,*endereco,NULL,SHORT_OP);
@@ -729,29 +730,8 @@ void istore_1_impl(frame *f, u1 par1, u1 par2){
 }
 
 void istore_2_impl(frame *f, u1 par1, u1 par2){
-
-	ImprimirPilha_operandos(f->p);
-
-
-
 	pilha_operandos *valor = Pop_operandos(f->p);
-
-	u4 teste = (u4) valor->topo->operando;
-	printf("\nDESEMPILHOU %d\n",teste);
-	printf("Endereco de f->v[2].variavel: %04x\n", f->v[2].variavel);
-
 	*(f->v[2].variavel) = (u4) valor->topo->operando;
-
-	//for (int i = 0; i < f->vetor_length; ++i){
-
-	//	printf("Vetor Variaveis: ------- :%d\n", f->v[i].variavel);
-	//}
-
-
-	printf("\nSETOU O VETOR\n");
-
-
-
 }
 
 void istore_3_impl(frame *f, u1 par1, u1 par2){
@@ -898,7 +878,7 @@ void iastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i4)));
+	i4 *endereco_array =  ((array->topo->referencia) + (indice->topo->operando * sizeof(i4)));
 	*endereco_array = valor->topo->operando;
 }
 
@@ -909,7 +889,7 @@ void lastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * 2 * sizeof(i4)));
+	i4 *endereco_array =  ((array->topo->referencia) + (indice->topo->operando * 2 * sizeof(i4)));
 
 	*endereco_array = high_bytes->topo->operando;
 
@@ -928,7 +908,7 @@ void fastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i4)));
+	i4 *endereco_array =  ((array->topo->referencia) + (indice->topo->operando * sizeof(i4)));
 	*endereco_array = valor->topo->operando;
 }
 
@@ -946,7 +926,7 @@ void dastore_impl(frame *f, u1 par1, u1 par2){
 	endereco = endereco + sizeof(i4);
 	endereco = low_bytes->topo->operando;*/
 
-	u4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * 2 * sizeof(u4)));
+	u4 *endereco_array =  ((array->topo->referencia) + (indice->topo->operando * 2 * sizeof(u4)));
 
 	*endereco_array = high_bytes->topo->operando;
 
@@ -960,7 +940,7 @@ void bastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i1 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i1)));
+	i1 *endereco_array =  ((array->topo->referencia) + (indice->topo->operando * sizeof(i1)));
 	*endereco_array = valor->topo->operando;
 }
 
@@ -969,7 +949,7 @@ void castore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	u2 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(u2)));
+	u2 *endereco_array =  ((array->topo->referencia) + (indice->topo->operando * sizeof(u2)));
 	*endereco_array = valor->topo->operando;
 }
 
@@ -978,7 +958,7 @@ void sastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i2 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(i2)));
+	i2 *endereco_array =  ((array->topo->referencia) + (indice->topo->operando * sizeof(i2)));
 	*endereco_array = valor->topo->operando;
 }
 
@@ -1474,8 +1454,8 @@ void drem_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor2_low = Pop_operandos(f->p);
 	pilha_operandos *valor2_high = Pop_operandos(f->p);
 
-	double v1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low);
-	double v2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low);
+	double v1 = decodificaDoubleValor(valor1_high->topo->operando,valor1_low->topo->operando);
+	double v2 = decodificaDoubleValor(valor2_high->topo->operando,valor2_low->topo->operando);
 
 	double resultAux = fmod(v2,v1);
 
@@ -3271,6 +3251,10 @@ void multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions){
 
 }
 
+
+/** ifnull_impl
+* @todo IMPLEMENTAR
+*/
 void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
@@ -3280,10 +3264,13 @@ void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 		offset = (branchbyte1 << 8) | branchbyte2;
 	}
 	else{
-		// Continuar execução normalmente
 	}
 }
 
+
+/** ifnonnull_impl
+* @todo IMPLEMENTAR
+*/
 void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
@@ -3292,15 +3279,17 @@ void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	if(valor!=NULL){
 		offset = (branchbyte1 << 8) | branchbyte2;
 	}
-	else{
-		// Continuar execução normalmente
-	}
 }
-
+/** Goto_w_impl
+* @todo IMPLEMENTAR
+*/
 void goto_w_impl(frame *f, u1 par1, u1 par2){
-
 }
 
+
+/**jsr_w_impl
+* @todo IMPLEMENTAR
+*/
 void jsr_w_impl(frame *f, u1 par1, u1 par2){
 
 }
