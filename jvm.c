@@ -1,10 +1,14 @@
+/**
+ * @file jvm.c
+ * @brief Arquivo cabeçalho contendo funções relacionadas à execução do arquivo
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
 #include "instrucoes.h"
 #include "jvm.h"
-// #include "pilha_frames.h"
 #include "leitura.h"
 #include "interpretador.h"
 

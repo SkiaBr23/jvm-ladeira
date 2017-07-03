@@ -1164,16 +1164,8 @@ double decodificaDoubleInfo (cp_info * cp) {
 	long long valor = ((long long)(cp->UnionCP.Double.high_bytes)<<32) | (long long)cp->UnionCP.Double.low_bytes;
 	int8_t sinal = ((valor>>63) == 0) ? 1 : -1;
 	int16_t expon = ((valor>>52) & 0x7ffL);
-	printf("Expoente Top: %d\n",expon);
-	printf("Sinal Top: %d\n",sinal);
 	long long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
-
-	printf("Valor Ajust-MANTISSA OK:\n");
- 	printf("val1 = 0x%llx\n", mant);
-
 	double retorno = sinal*mant*(pow(2,expon-1075));
-
-	printf("Valor Final: %lf\n",retorno);
 	return retorno;
 }
 
@@ -1320,9 +1312,9 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				fprintf(fp, "Long High Bytes: 0x%08x\n",aux->UnionCP.Long.high_bytes);
 				fprintf(fp, "Long Low Bytes: 0x%08x\n",aux->UnionCP.Long.low_bytes);
 				fprintf(fp, "Long: %lld\n",longValue);
-				aux++;
 				fprintf(fp, "--------------Entrada [%d]--------------\n",contador);
-				printf("(large numeric continued)\n");
+				fprintf(fp, "(large numeric continued)\n");
+				aux++;
 				contador++;
 				break;
 			case CONSTANT_Double:
@@ -1330,10 +1322,11 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				fprintf(fp, "Double High Bytes: 0x%08x\n",aux->UnionCP.Double.high_bytes);
 				fprintf(fp, "Double Low Bytes: 0x%08x\n",aux->UnionCP.Double.low_bytes);
 				fprintf(fp, "Double: %lf\n",valor);
-				aux++;
 				fprintf(fp, "--------------Entrada [%d]--------------\n",contador);
-				printf("(large numeric continued)\n");
+				fprintf(fp, "(large numeric continued)\n");
+				aux++;
 				contador++;
+				continue;
 				break;
 			case CONSTANT_NameAndType:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);

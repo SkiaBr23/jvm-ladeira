@@ -1,9 +1,3 @@
-
- /*
-	Observar os comentários das instruções. Praticamente todas precisam ser finalizadas.
-	Entender como acessar a constant pool, e como fazer as invocações de métodos, obtenção de fields e campos static, etc.
-*/
-
 #include "interpretador.h"
 #include "jvm.h"
 #include "leitura.h"
