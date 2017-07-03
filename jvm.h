@@ -54,4 +54,7 @@ u2 verificaHandlerMetodo(method_info *m);
 #define DESCRIPTOR_CLINIT "()V"
 #define STATICCLINIT 0x0008
 
+#define INIT_NOME "<init>"
+#define DESCRIPTOR_INIT "()V"
+
 #endif

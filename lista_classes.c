@@ -1,3 +1,8 @@
+/**
+ * @file lista_classes.c
+ * @brief Funções de manipulação da lista de classes
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

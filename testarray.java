@@ -21,9 +21,11 @@ public class testarray{
 		for(int j = 0; j < arraybool.length; j++){
 			System.out.println(arraybool[j]);
 		}
+
 		for(int j = 0; j < arraylong.length; j++){
 			System.out.println(arraylong[j]);
 		}
+		
 		for(int j = 0; j < arrayshort.length; j++){
 			System.out.println(arrayshort[j]);
 		}

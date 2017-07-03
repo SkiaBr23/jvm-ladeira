@@ -53,10 +53,8 @@ frame* criarFrame(char *classeCorrente, u2 max_locals){
 	frame *f = malloc(sizeof(frame));
 	f->end_retorno = jvm->pc;
 	f->p = CriarPilha_operandos();
-	//TRES PARA DEBUG -ajustar!
 	f->v = malloc(max_locals*sizeof(vetor_locais));
 	for (int i = 0; i < max_locals; i++) {
-		//printf("Criando posicao %d da classe %s\n",i, classeCorrente);
 		f->v[i].variavel = malloc(sizeof(u4));
 	}
 	f->cp = BuscarCPClasseCorrente_classes(jvm->classes,classeCorrente);
@@ -79,6 +77,10 @@ void executarJVM(){
 
         // Se for o método main
         if(strcmp(stringmetodo,CLINIT_NOME)==0 && strcmp(stringdescriptor,DESCRIPTOR_CLINIT)==0 && methodAux->access_flags==STATICCLINIT){
+            executarMetodo(methodAux,classeExecutavel,1);
+        }
+
+        if(strcmp(stringmetodo,INIT_NOME)==0 && strcmp(stringdescriptor,DESCRIPTOR_INIT)==0 && methodAux->access_flags==PUBLIC){
             executarMetodo(methodAux,classeExecutavel,1);
         }
     }
@@ -104,9 +106,7 @@ void executarMetodo(method_info *m, char* classeCorrente, int chamador){
 	for(posicao=0;posicao<m->attributes_count;posicao++){
 		aux = (*(m->attributes+posicao));
 		classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,classeCorrente);
-		// code_attribute * auxCodePontual = (code_attribute*)(*(auxAttrCompleto+posicao))->info;
 		char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
-		printf("Name Index: %s\n",nameindex);
 		// Se for o atributo code
 		if(strcmp(nameindex,"Code")==0){
 			code_attribute *c = (code_attribute *) aux->info;
@@ -129,29 +129,21 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 		opcode = *j;
 		pcAtual = jvm->pc;
 		instrucao i = instrucoes[opcode];
-		printf("Instrucao OOOOOOOOHHHHHHHHH: %s\n",i.inst_nome);
-		printf("Opcode: %d\n",i.opcode);
-		printf("Valor de PC: %d\n", pcAtual);
 		u1 numarg = i.numarg;
 		j++;
 		if(numarg>0){
 
 			u1 *argumentos = malloc(numarg*sizeof(u1));
-			// u1 *indexbytes = malloc(2*sizeof(u1));
 			// Criar vetor de ponteiro de funções
 			// Deixar todas as funções com a mesma assinatura
 			for(u1 arg=0;arg<numarg;arg++){
 				argumentos[arg] = *j;
-				// printf("%01x\t",argumentos[arg]);
 				j++;
 			}
 
 			switch(numarg){
 				case 1:
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],0);
-					// Verificar se flag de exceção foi setada
-					// Se foi, chamar a função de verificar o handler.
-					// Se não foi, beleza
 					if(jvm->excecao==1){
 						handler_pc = verificaHandlerMetodo(m);
 						// Se encontrou o handler
@@ -171,8 +163,6 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 				case 2:
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],argumentos[1]);
 					// Verificar se flag de exceção foi setada
-					// Se foi, chamar a função de verificar o handler.
-					// Se não foi, beleza
 					if(jvm->excecao==1){
 						handler_pc = verificaHandlerMetodo(m);
 						if(handler_pc!=USHRT_MAX){
@@ -221,8 +211,6 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 					if(strcmp(i.inst_nome,"invokeinterface")==0){
 						invokeinterface_impl(jvm->frames->topo->f,argumentos[0],argumentos[1],argumentos[2]);
 						// Verificar se flag de exceção foi setada
-						// Se foi, chamar a função de verificar o handler.
-						// Se não foi, beleza
 						if(jvm->excecao==1){
 							handler_pc = verificaHandlerMetodo(m);
 							if(handler_pc!=USHRT_MAX){
@@ -240,9 +228,6 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 			}
 		}
 		else if(numarg==0){
-			printf("Caiu no zero\n");
-			printf("Valor opcode: %d\n",i.opcode);
-
 			// Verificar se é a instrução wide
 			if(strcmp(i.inst_nome,"wide")==0){
 				// Obter o opcode da instrução que deve ser modificada
@@ -256,11 +241,8 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 					// Obter um argumento a mais, porque é o índice que será modificado
 					for(u1 arg=0;arg<i.numarg+1;arg++){
 						argumentos[arg] = *j;
-						// printf("%01x\t",argumentos[arg]);
 						j++;
 					}
-
-					// Chamar a função ou com switch case, ou ajustando cada função internamente
 
 					(*func_ptr[i.opcode])(jvm->frames->topo->f,argumentos[0],argumentos[1]);
 
@@ -287,7 +269,6 @@ void interpretarCode(u1 *code,u4 length,method_info *m){
 			if(jvm->excecao==1){
 				handler_pc = verificaHandlerMetodo(m);
 				if(handler_pc!=USHRT_MAX){
-					//jvm->excecao = 0;
 					free(jvm->excecao_nome);
 					jvm->excecao_nome = malloc(100*sizeof(char));
 					jvm->pc = handler_pc;
@@ -326,12 +307,10 @@ u2 verificaHandlerMetodo(method_info *m){
 		for(auxmetodo=m;auxmetodo<m+m->attributes_count;auxmetodo++){
 			aux = (*auxmetodo->attributes);
 			char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
-			printf("Name Index: %s\n",nameindex);
 			if(strcmp(nameindex,"Code")==0){
 				code_attribute *c = (code_attribute *) aux->info;
 				for(exception_table *tabelaaux = c->table;tabelaaux<c->table+c->exception_table_length;tabelaaux++){
 					char *nomeexcecao = decodificaNIeNT(classeAtual->arquivoClass->constant_pool,tabelaaux->catch_type,NAME_INDEX);
-					printf("NOME DA EXCEÇÃO: %s\n",nomeexcecao);
 					if(strcmp(nomeexcecao,jvm->excecao_nome)==0){
 						// Retornar o valor do Handler se achar a excecao que foi lancada
 						return(tabelaaux->handler_pc);
@@ -425,12 +404,9 @@ u1 * atualizarPCMetodoAtual (u1 * code, u4 length) {
 
 void ImprimeCode (u1 * code, u4 length) {
 	int numArgs = 0;
-	printf("-------------------------IMPRIMIR CODE-------------------------\n");
 	for (u1 * saida = code; saida < code+length; saida++) {
 		u1 opcodeaux = *saida;
 		instrucao iaux = instrucoes[opcodeaux];
-		printf("Instrucao: %s\n",iaux.inst_nome);
-		printf("Salto: %d\n",iaux.pc_instrucao);
 		numArgs = iaux.numarg;
 		if(numArgs>0){
 			for(u1 arg = 0; arg < numArgs; arg++) {

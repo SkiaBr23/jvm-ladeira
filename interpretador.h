@@ -1,4 +1,9 @@
-#ifndef INTERPRETADOR_H
+/**
+ * @file interpretador.c
+ * @brief Arquivo fonte que contém a implementação das instruções e funções auxiliares.
+ */
+
+ #ifndef INTERPRETADOR_H
 #define INTERPRETADOR_H
 
 #include "instrucoes.h"
@@ -6,11 +11,9 @@
 #include "jvm.h"
 #include <stdbool.h>
 
+/** Macro para normalizar índice do pool de constantes */
 #define normaliza_indice(x,y) (x << 8) | y
 
-/* Observar todas as instruções, pois a maioria delas está parcialmente implementada */
-/* Observar todas as intruções quanto ao lançamento de exceções */
-/* Observar detalhes de instruções, principalmente os detalhes de invokes, por exemplo, no que tange à herança */
 
 ClassFile* resolverClasse(char *nome_classe);
 bool resolverMetodo(cp_info *cp, u2 indice_cp, u1 interface);
@@ -21,6 +24,7 @@ char* obterClasseDoMetodo(cp_info *cp, u2 indice_cp);
 frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont);
 double decodificaDoubleValor(u4 high, u4 low);
 float decodificaFloatValor(u4 valor);
+long decodificaLongValor (u4 high, u4 low);
 int getParametrosNaoStatic (ClassFile * classe);
 Lista_Objetos * InsereObjeto (Lista_Objetos * lis, ClassFile * classe, int parametrosNaoStatic);
 bool buscaStaticFlags (char * accessFlags);
@@ -31,21 +35,134 @@ ClassFile * instanciarClasse (char * nomeClasse);
 int getTipoOperandoSaida(char * descriptorRetorno);
 int getTipoRetorno (char * descriptor);
 
+
+/**
+ * @brief Não executa nada =)
+ * 
+ * @param par0 -
+ * @param par1 -
+ * @param par2 -
+ */
 void nop_impl(frame *par0,u1 par1, u1 par2);
+/**
+ * @brief Faz o push de um valor nulo para a pilha de operandos 
+ * @param f Ponteiro para o frame]
+ * @param par1 -
+ * @param par2 -
+ */
 void aconst_null_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param f [description]
+ * @param par1 [description]
+ * @param par2 [description]
+ */
 void iconst_m1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 0 \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void iconst_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 1 \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void iconst_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 2 \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void iconst_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 3 \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void iconst_3_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 4 \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void iconst_4_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 5 \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void iconst_5_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 0 \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lconst_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 1 \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lconst_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 0 \c float
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fconst_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 1 \c float
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fconst_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 2 \c float
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fconst_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 0 \c double
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void dconst_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push para a pilha de operando da constante 1 \c double
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void dconst_1_impl(frame *f, u1 par1, u1 par2);
 void bipush_impl(frame *f, u1 byte, u1 par1);
 void sipush_impl(frame *f,u1 byte1, u1 byte2);
