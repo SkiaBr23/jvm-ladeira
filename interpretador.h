@@ -164,124 +164,950 @@ void dconst_0_impl(frame *f, u1 par1, u1 par2);
  * @param par2 -
  */
 void dconst_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Faz o push de um byte na pilha de operandos
+ * 
+ * @param f Ponteiro para o frame
+ * @param byte Byte a ser empilhado
+ * @param par1 -
+ */
 void bipush_impl(frame *f, u1 byte, u1 par1);
+/**
+ * @brief Faz o push de um short na pilha de operandos
+ * 
+ * @param f Ponteiro para o frame
+ * @param byte Primeiro byte do short
+ * @param par1 Segundo byte do short
+ */
 void sipush_impl(frame *f,u1 byte1, u1 byte2);
+/**
+ * @brief Faz o push de um valor presente na constant pool
+ * @param f Ponteiro para o frame
+ * @param indexbyte1 Índice da constant pool
+ * @param par2 -
+ */
 void ldc_impl(frame *f,u1 indexbyte1,u1 par2);
+/**
+ * @brief Faz o push de um valor presente na constant pool
+ * @param f Ponteiro para o frame
+ * @param indexbyte1 Índice da constant pool (primeira parte)
+ * @param indexbyte2 Índice da constant pool (segunda parte)
+ */
 void ldc_w_impl(frame *f, u1 indexbyte1, u1 indexbyte2);
+/**
+ * @brief Faz o push de um valor long ou double presente na constant pool
+ * @param f Ponteiro para o frame
+ * @param branchbyte1 Índice da constant pool (primeira parte)
+ * @param branchbyte2 Índice da constant pool (segunda parte)
+ */
 void ldc2_w_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+/**
+ * @brief Carrega um valor \c int do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param index Índice no vetor de variáveis locais
+ * @param par1 -
+ */
 void iload_impl(frame *f, u1 index, u1 par1);
+/**
+ * @brief Carrega um valor \c long do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param index Índice no vetor de variáveis locais
+ * @param par1 -
+ */
 void lload_impl(frame *f, u1 index, u1 par1);
+/**
+ * @brief Carrega um valor \c float do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param index Índice no vetor de variáveis locais
+ * @param par1 -
+ */
 void fload_impl(frame *f, u1 index, u1 par1);
+/**
+ * @brief Carrega um valor \c double do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param index Índice no vetor de variáveis locais
+ * @param par1 -
+ */
 void dload_impl(frame *par0, u1 par1,u1 par2);
+/**
+ * @brief Carrega uma referência do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param index Índice no vetor de variáveis locais
+ * @param par1 -
+ */
 void aload_impl(frame *f, u1 index, u1 par1);
+/**
+ * @brief Carrega um valor \c int da posição 0 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void iload_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c int da posição 1 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void iload_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c int da posição 2 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void iload_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c int da posição 3 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void iload_3_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c long da posição 0 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void lload_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c long da posição 1 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void lload_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c long da posição 2 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void lload_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c long da posição 3 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void lload_3_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c float da posição 0 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void fload_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c float da posição 1 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void fload_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c float da posição 2 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void fload_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c float da posição 3 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void fload_3_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c double da posição 0 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void dload_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c double da posição 1 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void dload_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c double da posição 2 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void dload_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um valor \c double da posição 3 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void dload_3_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega uma referência da posição 0 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void aload_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega uma referência da posição 1 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void aload_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega uma referência da posição 2 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void aload_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega uma referência da posição 3 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par2 -
+ * @param par1 -
+ */
 void aload_3_impl(frame *f, u1 par1, u1 par2);
-/* Verificar iaload até saload, tem que ajustar a lógica de acesso ao array no índice x. */
+/**
+ * @brief Carrega um \c int de um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void iaload_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um \c long de um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void laload_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um \c float de um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void faload_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um \c double de um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void daload_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega uma referência de um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void aaload_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um \c byte de um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void baload_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um \c char de um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void caload_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Carrega um \c short de um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void saload_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c int no vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param index Índice do vetor de variáveis locais
+ */
 void istore_impl(frame *f, u1 index, u1 par1);
+/**
+ * @brief Armazena um \c long no vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param index Índice do vetor de variáveis locais
+ */
 void lstore_impl(frame *f, u1 index, u1 par1);
+/**
+ * @brief Armazena um \c float no vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param index Índice do vetor de variáveis locais
+ */
 void fstore_impl(frame *f, u1 index, u1 par1);
+/**
+ * @brief Armazena um \c double no vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param index Índice do vetor de variáveis locais
+ */
 void dstore_impl(frame *f, u1 index, u1 par1);
+/**
+ * @brief Armazena uma referência no vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param index Índice do vetor de variáveis locais
+ */
 void astore_impl(frame *f,u1 index, u1 par1);
+/**
+ * @brief Armazena um \c int na posição 0 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void istore_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c int na posição 1 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void istore_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c int na posição 2 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void istore_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c int na posição 3 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void istore_3_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c long na posição 0 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lstore_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c long na posição 1 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lstore_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c long na posição 2 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lstore_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c long na posição 3 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lstore_3_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c float na posição 0 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fstore_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c float na posição 1 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fstore_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c float na posição 2 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fstore_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c float na posição 3 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fstore_3_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c double na posição 0 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void dstore_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c double na posição 1 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void dstore_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c double na posição 2 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void dstore_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um \c double na posição 3 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void dstore_3_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena uma referência na posição 0 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void astore_0_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena uma referência na posição 1 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void astore_1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena uma referência na posição 2 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void astore_2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena uma referência na posição 3 do vetor de variáveis locais
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void astore_3_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um valor \c int em um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void iastore_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um valor \c long em um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lastore_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um valor \c float em um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fastore_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um valor \c double em um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void dastore_impl(frame *f, u1 par1, u1 par2);
-void aastore_impl(frame *f, u1 par1, u1 par2); // Não implementado - FODINHA essa
+/**
+ * @brief Armazena uma referência em um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
+void aastore_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um valor \c byte em um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void bastore_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um valor \c char em um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void castore_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Armazena um valor \c short em um array
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void sastore_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Remove o valor de topo da pilha de operandos
+ * 
+ * @param f Ponteiro para o frame
+ */
 pilha_operandos* pop_impl(frame *f);
+/**
+ * @brief Remove os dois valores de topo da pilha de operandos
+ * 
+ * @param f Ponteiro para o frame
+ */
 pilha_operandos** pop2_impl(frame *f);
+/**
+ * @brief PlaceHolder para ocupar posicao no vetor de posicoes da instrucao pop
+ * @details [long description]
+ * 
+ * @param par0 frame.
+ * @param par1 -
+ * @param par2 -
+ */
 void pop_fantasma(frame *par0, u1 par1, u1 par2);
+/**
+ * @brief PlaceHolder para ocupar posicao no vetor de posicoes da instrucao pop2
+ * @details [long description]
+ * 
+ * @param par0 frame.
+ * @param par1 -
+ * @param par2 -
+ */
 void pop2_fantasma(frame *par0, u1 par1, u1 par2);
+/**
+ * @brief Duplica o valor no topo da pilha de operandos.
+ * @details [long description]
+ * 
+ * @param f frame.
+ * @param par1 -
+ * @param par2 -
+ */
 void dup_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Duplica o valor no topo da pilha de operandos e insere dois valores a baixo.
+ * @details [long description]
+ * 
+ * @param f frame.
+ * @param par1 -
+ * @param par2 -
+ */
 void dup_x1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Duplica o valor no topo da pilha de operandos e insere dois ou três valores a baixo.
+ * @details [long description]
+ * 
+ * @param f frame.
+ * @param par1 -
+ * @param par2 -
+ */
 void dup_x2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Duplica o primeiro ou o segundo valor no topo da pilha de operandos e insere logo abaixo.
+ * @details [long description]
+ * 
+ * @param f frame.
+ * @param par1 -
+ * @param par2 -
+ */
 void dup2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Duplica o primeiro ou o segundo valor no topo da pilha de operandos e insere dois valores a baixo.
+ * @details [long description]
+ * 
+ * @param f frame.
+ * @param par1 -
+ * @param par2 -
+ */
 void dup2_x1_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Duplica o primeiro ou o segundo valor no topo da pilha de operandos e insere dois ou três valores a baixo.
+ * @details [long description]
+ * 
+ * @param f frame.
+ * @param par1 -
+ * @param par2 -
+ */
 void dup2_x2_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Inverte os dois operandos do topo da pilha
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void swap_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma soma de \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void iadd_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma soma de \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void ladd_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma soma de \c float
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fadd_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma soma de \c double
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void dadd_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma subtração de \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void isub_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma subtração de \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lsub_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma subtração de \c float
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fsub_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma subtração de \c double
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void dsub_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma multiplicação de \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void imul_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma multiplicação de \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lmul_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma multiplicação de \c float
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fmul_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma multiplicação de \c double
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void dmul_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma divisão de \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void idiv_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma divisão de \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void ldiv_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma divisão de \c float
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void fdiv_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa uma divisão de \c double
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void ddiv_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Calcula o resto \c int da divisão entre dois operandos
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void irem_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Calcula o resto \c long da divisão entre dois operandos
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lrem_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Calcula o resto \c float da divisão entre dois operandos
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void frem_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Calcula o resto \c double da divisão entre dois operandos
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void drem_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Inverte o sinal de um \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -		
+ * @param par2 -
+ */
 void ineg_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Inverte o sinal de um \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -		
+ * @param par2 -
+ */
 void lneg_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Inverte o sinal de um \c float
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -		
+ * @param par2 -
+ */
 void fneg_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Inverte o sinal de um \c double
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -		
+ * @param par2 -
+ */
 void dneg_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa um shift left em um \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -		
+ * @param par2 -
+ */
 void ishl_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa um shift left em um \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -		
+ * @param par2 -
+ */
 void lshl_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa um shift right em um \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -		
+ * @param par2 -
+ */
 void ishr_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa um shift right em um \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -		
+ * @param par2 -
+ */
 void lshr_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa um shift right lógico em um \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -		
+ * @param par2 -
+ */
 void iushr_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa um shift right lógico em um \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -		
+ * @param par2 -
+ */
 void lushr_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa a operação "AND" de dois \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void iand_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa a operação "AND" de dois \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void land_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa a operação "OR" de dois \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void ior_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa a operação "OR" de dois \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lor_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa a operação "XOR" de dois \c int
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void ixor_impl(frame *f, u1 par1, u1 par2);
+/**
+ * @brief Executa a operação "XOR" de dois \c long
+ * 
+ * @param f Ponteiro para o frame
+ * @param par1 -
+ * @param par2 -
+ */
 void lxor_impl(frame *f, u1 par1, u1 par2);
 void iinc_fantasma(frame *par0, u1 par1, u1 par2);
 void iinc_impl(frame *f, u1 index, i1 constante);
