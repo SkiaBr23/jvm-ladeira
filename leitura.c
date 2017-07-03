@@ -415,6 +415,46 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 					sprintf(stringaux," %d\n",*(++aux));
 					strcat(retorno,stringaux);
 				}
+				else if(opcode == newarray){
+					aux3 = (u1*) malloc(sizeof(u1));
+					*aux3 = *(++aux);
+					sprintf(stringaux," %d ",*aux3);
+					switch(*aux3){
+						case T_BOOLEAN:
+							strcat(stringaux,"(boolean)\n");
+						break;
+
+						case T_CHAR:
+							strcat(stringaux,"(char)\n");
+						break;
+
+						case T_FLOAT:
+							strcat(stringaux,"(float)\n");
+						break;
+
+						case T_DOUBLE:
+							strcat(stringaux,"(double)\n");
+						break;
+
+						case T_BYTE:
+							strcat(stringaux,"(byte)\n");
+						break;
+
+						case T_SHORT:
+							strcat(stringaux,"(short)\n");
+						break;
+
+						case T_INT:
+							strcat(stringaux,"(int)\n");
+						break;
+
+						case T_LONG:
+							strcat(stringaux,"(long)\n");
+						break;
+					}
+
+					strcat(retorno,stringaux);
+				}
 
 				else{
 					sprintf(stringaux,"%d ",*(++aux));
