@@ -88,6 +88,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 <div class="title">Referência do Arquivo interpretador.c</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Arquivo fonte da implementação das instruções e funções auxiliares.  
+<a href="#details">Mais...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="interpretador_8h_source.html">interpretador.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="jvm_8h_source.html">jvm.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="leitura_8h_source.html">leitura.h</a>&quot;</code><br />
@@ -127,7 +130,7 @@ Funções</h2></td></tr>
 <tr class="memitem:afbe1a74bed5d93cfa0b9919f4fd71270"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structframe.html">frame</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#afbe1a74bed5d93cfa0b9919f4fd71270">transferePilhaVetorCount</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="structframe.html">frame</a> *novo, int quantidade)</td></tr>
 <tr class="separator:afbe1a74bed5d93cfa0b9919f4fd71270"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae65dcccf3c1058ca276f014f46f03cab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#ae65dcccf3c1058ca276f014f46f03cab">nop_impl</a> (<a class="el" href="structframe.html">frame</a> *par0, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
-<tr class="memdesc:ae65dcccf3c1058ca276f014f46f03cab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Não executa nada =)  <a href="#ae65dcccf3c1058ca276f014f46f03cab">Mais...</a><br /></td></tr>
+<tr class="memdesc:ae65dcccf3c1058ca276f014f46f03cab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Não executa nada.  <a href="#ae65dcccf3c1058ca276f014f46f03cab">Mais...</a><br /></td></tr>
 <tr class="separator:ae65dcccf3c1058ca276f014f46f03cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adab1a7c93444468815bcbc1e5754cf4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#adab1a7c93444468815bcbc1e5754cf4f">aconst_null_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
 <tr class="memdesc:adab1a7c93444468815bcbc1e5754cf4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Faz o push de um valor nulo para a pilha de operandos.  <a href="#adab1a7c93444468815bcbc1e5754cf4f">Mais...</a><br /></td></tr>
@@ -529,42 +532,61 @@ Funções</h2></td></tr>
 <tr class="memdesc:af270b0c9d76038c4f93b6a3563bbb033"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executa a operação "XOR" de dois <code>long</code>.  <a href="#af270b0c9d76038c4f93b6a3563bbb033">Mais...</a><br /></td></tr>
 <tr class="separator:af270b0c9d76038c4f93b6a3563bbb033"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f7571e76cf945ef8682ac68084e9128"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#a8f7571e76cf945ef8682ac68084e9128">iinc_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> index, <a class="el" href="lista__operandos_8h.html#a6be0d08d5318753334c788d23128142e">i1</a> constante)</td></tr>
+<tr class="memdesc:a8f7571e76cf945ef8682ac68084e9128"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para incrementar um valor no vetor de variáveis locais do frame.  <a href="#a8f7571e76cf945ef8682ac68084e9128">Mais...</a><br /></td></tr>
 <tr class="separator:a8f7571e76cf945ef8682ac68084e9128"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5802ef6711babf3d30bd4aa5c8f39a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#ad5802ef6711babf3d30bd4aa5c8f39a6">iinc_fantasma</a> (<a class="el" href="structframe.html">frame</a> *par0, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:ad5802ef6711babf3d30bd4aa5c8f39a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para mapear a execução da instrução iinc.  <a href="#ad5802ef6711babf3d30bd4aa5c8f39a6">Mais...</a><br /></td></tr>
 <tr class="separator:ad5802ef6711babf3d30bd4aa5c8f39a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf8f1db06ae2b6aea4d594deed4da8a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#adf8f1db06ae2b6aea4d594deed4da8a4">iinc_wide_fantasma</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> constbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> constbyte2)</td></tr>
+<tr class="memdesc:adf8f1db06ae2b6aea4d594deed4da8a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para mapear a execução da instrução iinc_wide.  <a href="#adf8f1db06ae2b6aea4d594deed4da8a4">Mais...</a><br /></td></tr>
 <tr class="separator:adf8f1db06ae2b6aea4d594deed4da8a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13c65f68ac61b078ccf7d325353ea958"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#a13c65f68ac61b078ccf7d325353ea958">iinc_wide</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> indexbyte, <a class="el" href="lista__operandos_8h.html#a71fa27a2ba58296c5995f3f9b9af37e1">i2</a> constbyte)</td></tr>
+<tr class="memdesc:a13c65f68ac61b078ccf7d325353ea958"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para incrementar um valor no vetor de variáveis locais do frame.  <a href="#a13c65f68ac61b078ccf7d325353ea958">Mais...</a><br /></td></tr>
 <tr class="separator:a13c65f68ac61b078ccf7d325353ea958"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf6c9b6c939b98336957bc8ac9590983"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#acf6c9b6c939b98336957bc8ac9590983">i2l_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:acf6c9b6c939b98336957bc8ac9590983"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor inteiro para long.  <a href="#acf6c9b6c939b98336957bc8ac9590983">Mais...</a><br /></td></tr>
 <tr class="separator:acf6c9b6c939b98336957bc8ac9590983"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0a572bf0fca1b29eb16bcdd6588caf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#ad0a572bf0fca1b29eb16bcdd6588caf6">i2f_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:ad0a572bf0fca1b29eb16bcdd6588caf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor inteiro para float.  <a href="#ad0a572bf0fca1b29eb16bcdd6588caf6">Mais...</a><br /></td></tr>
 <tr class="separator:ad0a572bf0fca1b29eb16bcdd6588caf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e572f6e41989d1e4d408cea82c415ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#a9e572f6e41989d1e4d408cea82c415ed">i2d_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a9e572f6e41989d1e4d408cea82c415ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor inteiro para double.  <a href="#a9e572f6e41989d1e4d408cea82c415ed">Mais...</a><br /></td></tr>
 <tr class="separator:a9e572f6e41989d1e4d408cea82c415ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1a64f96035ceb184ac4bba8b863f26b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#af1a64f96035ceb184ac4bba8b863f26b">l2i_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:af1a64f96035ceb184ac4bba8b863f26b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor long para inteiro.  <a href="#af1a64f96035ceb184ac4bba8b863f26b">Mais...</a><br /></td></tr>
 <tr class="separator:af1a64f96035ceb184ac4bba8b863f26b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bad246af55e0f9d982203e23a546372"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#a2bad246af55e0f9d982203e23a546372">l2f_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a2bad246af55e0f9d982203e23a546372"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor long para float.  <a href="#a2bad246af55e0f9d982203e23a546372">Mais...</a><br /></td></tr>
 <tr class="separator:a2bad246af55e0f9d982203e23a546372"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef38073bfab1128d8a6d3381d0d4f5bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#aef38073bfab1128d8a6d3381d0d4f5bc">l2d_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:aef38073bfab1128d8a6d3381d0d4f5bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor long para double.  <a href="#aef38073bfab1128d8a6d3381d0d4f5bc">Mais...</a><br /></td></tr>
 <tr class="separator:aef38073bfab1128d8a6d3381d0d4f5bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c9595ce3fe6bbe818896174810e8b03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#a3c9595ce3fe6bbe818896174810e8b03">f2i_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a3c9595ce3fe6bbe818896174810e8b03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor float para inteiro.  <a href="#a3c9595ce3fe6bbe818896174810e8b03">Mais...</a><br /></td></tr>
 <tr class="separator:a3c9595ce3fe6bbe818896174810e8b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a622192a82a602807629d5f13fb70c359"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#a622192a82a602807629d5f13fb70c359">f2l_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a622192a82a602807629d5f13fb70c359"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor float para long.  <a href="#a622192a82a602807629d5f13fb70c359">Mais...</a><br /></td></tr>
 <tr class="separator:a622192a82a602807629d5f13fb70c359"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac399948f2173d49596e01d7ad8205aae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#ac399948f2173d49596e01d7ad8205aae">f2d_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:ac399948f2173d49596e01d7ad8205aae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor float para double.  <a href="#ac399948f2173d49596e01d7ad8205aae">Mais...</a><br /></td></tr>
 <tr class="separator:ac399948f2173d49596e01d7ad8205aae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc3af1f21503b5b693b2432356d2005e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#adc3af1f21503b5b693b2432356d2005e">d2i_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:adc3af1f21503b5b693b2432356d2005e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor double para inteiro.  <a href="#adc3af1f21503b5b693b2432356d2005e">Mais...</a><br /></td></tr>
 <tr class="separator:adc3af1f21503b5b693b2432356d2005e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac41dd421e58e6ae6665edbb89dc060c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#ac41dd421e58e6ae6665edbb89dc060c5">d2l_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:ac41dd421e58e6ae6665edbb89dc060c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor double para long.  <a href="#ac41dd421e58e6ae6665edbb89dc060c5">Mais...</a><br /></td></tr>
 <tr class="separator:ac41dd421e58e6ae6665edbb89dc060c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52a92bfa0456ea29c98c5bcf2bf77815"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#a52a92bfa0456ea29c98c5bcf2bf77815">d2f_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a52a92bfa0456ea29c98c5bcf2bf77815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor double para float.  <a href="#a52a92bfa0456ea29c98c5bcf2bf77815">Mais...</a><br /></td></tr>
 <tr class="separator:a52a92bfa0456ea29c98c5bcf2bf77815"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d9e2120b5e9e0d2fa860cb2f56caccb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#a6d9e2120b5e9e0d2fa860cb2f56caccb">i2b_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a6d9e2120b5e9e0d2fa860cb2f56caccb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor inteiro para byte.  <a href="#a6d9e2120b5e9e0d2fa860cb2f56caccb">Mais...</a><br /></td></tr>
 <tr class="separator:a6d9e2120b5e9e0d2fa860cb2f56caccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bd96d359b11905153230d5a707c787d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#a4bd96d359b11905153230d5a707c787d">i2c_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a4bd96d359b11905153230d5a707c787d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor inteiro para char.  <a href="#a4bd96d359b11905153230d5a707c787d">Mais...</a><br /></td></tr>
 <tr class="separator:a4bd96d359b11905153230d5a707c787d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e7394eab6c6446efeaa8562837f218d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#a3e7394eab6c6446efeaa8562837f218d">i2s_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a3e7394eab6c6446efeaa8562837f218d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para converter valor inteiro para short.  <a href="#a3e7394eab6c6446efeaa8562837f218d">Mais...</a><br /></td></tr>
 <tr class="separator:a3e7394eab6c6446efeaa8562837f218d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad54c4c75df5ad40ac0d14c711a03df80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8c.html#ad54c4c75df5ad40ac0d14c711a03df80">lcmp_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
 <tr class="memdesc:ad54c4c75df5ad40ac0d14c711a03df80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que compara valores long oriundos da pilha de operandos.  <a href="#ad54c4c75df5ad40ac0d14c711a03df80">Mais...</a><br /></td></tr>
@@ -773,7 +795,10 @@ Funções</h2></td></tr>
 <tr class="memdesc:a3795a0cceadd541bc68eb650c0c7595a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para decodificar operando em um valor float (32 bits)  <a href="#a3795a0cceadd541bc68eb650c0c7595a">Mais...</a><br /></td></tr>
 <tr class="separator:a3795a0cceadd541bc68eb650c0c7595a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Funções</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição Detalhada</h2>
+<div class="textblock"><p>Arquivo fonte da implementação das instruções e funções auxiliares. </p>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="interpretador_8h.html" title="Arquivo cabeçalho da implementação das instruções e funções auxiliares. ">interpretador.h</a> </dd></dl>
+</div><h2 class="groupheader">Funções</h2>
 <a class="anchor" id="a81efb674d368b1b7cd1f13ecffe60fbb"></a>
 <div class="memitem">
 <div class="memproto">
@@ -808,8 +833,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -850,8 +875,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -976,8 +1001,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame] </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1018,8 +1043,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1060,8 +1085,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1102,8 +1127,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1144,8 +1169,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1187,7 +1212,7 @@ Funções</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
     <tr><td class="paramname">index</td><td>Índice no vetor de variáveis locais </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1355,8 +1380,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1397,8 +1422,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1439,8 +1464,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1481,8 +1506,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1523,7 +1548,7 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
     <tr><td class="paramname">index</td><td>Índice do vetor de variáveis locais </td></tr>
   </table>
   </dd>
@@ -1607,8 +1632,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1649,8 +1674,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1692,7 +1717,7 @@ Funções</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
     <tr><td class="paramname">byte</td><td>Byte a ser empilhado </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1783,8 +1808,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1825,8 +1850,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -1905,6 +1930,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para converter valor double para float. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="adc3af1f21503b5b693b2432356d2005e"></a>
@@ -1937,6 +1972,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para converter valor double para inteiro. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="ac41dd421e58e6ae6665edbb89dc060c5"></a>
@@ -1968,6 +2013,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para converter valor double para long. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2005,8 +2060,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2047,8 +2102,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2089,8 +2144,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2215,8 +2270,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2257,8 +2312,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2299,8 +2354,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2463,8 +2518,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2505,8 +2560,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2547,8 +2602,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2589,8 +2644,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2632,7 +2687,7 @@ Funções</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
     <tr><td class="paramname">index</td><td>Índice no vetor de variáveis locais </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2673,8 +2728,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2715,8 +2770,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2757,8 +2812,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2841,8 +2896,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2883,8 +2938,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2925,8 +2980,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -2967,8 +3022,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3009,7 +3064,7 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
     <tr><td class="paramname">index</td><td>Índice do vetor de variáveis locais </td></tr>
   </table>
   </dd>
@@ -3051,8 +3106,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3094,8 +3149,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>frame. </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3137,8 +3192,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>frame. </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3180,8 +3235,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>frame. </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3223,8 +3278,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>frame. </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3266,8 +3321,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>frame. </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3309,8 +3364,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>frame. </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3347,6 +3402,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para converter valor float para double. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a3c9595ce3fe6bbe818896174810e8b03"></a>
@@ -3379,6 +3444,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para converter valor float para inteiro. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a622192a82a602807629d5f13fb70c359"></a>
@@ -3410,6 +3485,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para converter valor float para long. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -3447,8 +3532,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3489,8 +3574,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3531,8 +3616,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3657,8 +3742,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3699,8 +3784,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3741,8 +3826,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3783,8 +3868,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3825,8 +3910,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3867,8 +3952,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3909,8 +3994,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3951,8 +4036,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -3994,7 +4079,7 @@ Funções</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
     <tr><td class="paramname">index</td><td>Índice no vetor de variáveis locais </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -4035,8 +4120,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -4077,8 +4162,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -4119,8 +4204,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -4203,8 +4288,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -4245,8 +4330,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -4287,8 +4372,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -4329,8 +4414,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -4371,7 +4456,7 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
     <tr><td class="paramname">index</td><td>Índice do vetor de variáveis locais </td></tr>
   </table>
   </dd>
@@ -4413,8 +4498,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -4713,6 +4798,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para converter valor inteiro para byte. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a4bd96d359b11905153230d5a707c787d"></a>
@@ -4744,6 +4839,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para converter valor inteiro para char. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -4777,6 +4882,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para converter valor inteiro para double. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="ad0a572bf0fca1b29eb16bcdd6588caf6"></a>
@@ -4808,6 +4923,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para converter valor inteiro para float. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -4841,6 +4966,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para converter valor inteiro para long. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a3e7394eab6c6446efeaa8562837f218d"></a>
@@ -4872,6 +5007,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para converter valor inteiro para short. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -4909,8 +5054,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -4951,8 +5096,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -4993,8 +5138,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -5035,8 +5180,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -5077,8 +5222,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -5119,8 +5264,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -5161,8 +5306,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -5203,8 +5348,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -5245,8 +5390,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -5287,8 +5432,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -5372,8 +5517,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -5998,6 +6143,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para mapear a execução da instrução iinc. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">par0</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Byte para indexar o acesso no vetor de variáveis locais </td></tr>
+    <tr><td class="paramname">par2</td><td>Valor inteiro contendo o incremento a ser realizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a8f7571e76cf945ef8682ac68084e9128"></a>
@@ -6030,6 +6185,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para incrementar um valor no vetor de variáveis locais do frame. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">index</td><td>Byte para indexar o acesso no vetor de variáveis locais </td></tr>
+    <tr><td class="paramname">ante</td><td>Valor inteiro contendo o incremento a ser realizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a13c65f68ac61b078ccf7d325353ea958"></a>
@@ -6061,6 +6226,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para incrementar um valor no vetor de variáveis locais do frame. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">indexbyte</td><td>Byte duplo para indexar o acesso no vetor de variáveis locais </td></tr>
+    <tr><td class="paramname">byte</td><td>Byte duplo contendo o incremento no vetor de variáveis locais </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -6106,6 +6281,18 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para mapear a execução da instrução iinc_wide. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte high para indexar o acesso no vetor de variáveis locais </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte low para indexar o acesso no vetor de variáveis locais </td></tr>
+    <tr><td class="paramname">byte1</td><td>Byte high a ser utilizado no incremento da variável no vetor de variáveis locais </td></tr>
+    <tr><td class="paramname">byte2</td><td>Byte low a ser utilizado no incremento da variável no vetor de variáveis locais </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="abad883afe8691ac323c9b4631f30e288"></a>
@@ -6142,8 +6329,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -6184,8 +6371,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -6226,8 +6413,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -6268,8 +6455,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -6311,7 +6498,7 @@ Funções</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
     <tr><td class="paramname">index</td><td>Índice no vetor de variáveis locais </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -6352,8 +6539,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -6394,8 +6581,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -6964,8 +7151,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7006,8 +7193,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7090,8 +7277,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7132,8 +7319,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7190,8 +7377,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7232,8 +7419,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7274,8 +7461,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7316,8 +7503,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7358,7 +7545,7 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
     <tr><td class="paramname">index</td><td>Índice do vetor de variáveis locais </td></tr>
   </table>
   </dd>
@@ -7400,8 +7587,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7442,8 +7629,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7484,8 +7671,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7606,6 +7793,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para converter valor long para double. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a2bad246af55e0f9d982203e23a546372"></a>
@@ -7638,6 +7835,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para converter valor long para float. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="af1a64f96035ceb184ac4bba8b863f26b"></a>
@@ -7669,6 +7876,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para converter valor long para inteiro. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -7706,8 +7923,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7748,8 +7965,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7790,8 +8007,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7832,8 +8049,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7916,8 +8133,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -7958,8 +8175,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8043,7 +8260,7 @@ Funções</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
     <tr><td class="paramname">indexbyte1</td><td>Índice da constant pool </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8126,8 +8343,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8168,8 +8385,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8210,8 +8427,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8252,8 +8469,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8294,8 +8511,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8337,7 +8554,7 @@ Funções</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
     <tr><td class="paramname">index</td><td>Índice no vetor de variáveis locais </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8378,8 +8595,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8420,8 +8637,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8504,8 +8721,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8546,8 +8763,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8630,8 +8847,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8672,8 +8889,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8714,8 +8931,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8756,8 +8973,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8798,8 +9015,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8840,8 +9057,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8882,7 +9099,7 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
     <tr><td class="paramname">index</td><td>Índice do vetor de variáveis locais </td></tr>
   </table>
   </dd>
@@ -8924,8 +9141,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -8966,8 +9183,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -9008,8 +9225,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -9263,12 +9480,12 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Não executa nada =) </p>
+<p>Não executa nada. </p>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
-    <tr><td class="paramname">par0</td><td>- </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par0</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -9432,8 +9649,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">par0</td><td>frame. </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -9499,8 +9716,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">par0</td><td>frame. </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -9759,8 +9976,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -9801,8 +10018,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>
@@ -9885,8 +10102,8 @@ Funções</h2></td></tr>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Ponteiro para o frame </td></tr>
-    <tr><td class="paramname">par1</td><td>- </td></tr>
-    <tr><td class="paramname">par2</td><td>- </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
   </table>
   </dd>
 </dl>

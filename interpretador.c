@@ -1,3 +1,9 @@
+/**
+ * @file interpretador.c
+ * @brief Arquivo fonte da implementação das instruções e funções auxiliares.
+ * @see interpretador.h
+ */
+
 #include "interpretador.h"
 #include "jvm.h"
 #include "leitura.h"

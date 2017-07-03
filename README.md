@@ -43,12 +43,12 @@ O programa imprime a saída na tela e neste arquivo.
 
 ##Projeto lógico da JVM
 
-![](docs/img/logic_flow.png)
+![](logic_flow.png)
 
 
 ##Diagrama de estruturas utilizadas
 
-![](docs/img/diagramaEstruturas.png)
+![](diagramaEstruturas.png)
 
 
 

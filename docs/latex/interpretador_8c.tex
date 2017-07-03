@@ -1,5 +1,10 @@
 \hypertarget{interpretador_8c}{}\section{Referência do Arquivo interpretador.\+c}
 \label{interpretador_8c}\index{interpretador.\+c@{interpretador.\+c}}
+
+
+Arquivo fonte da implementação das instruções e funções auxiliares.  
+
+
 {\ttfamily \#include \char`\"{}interpretador.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}jvm.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}leitura.\+h\char`\"{}}\\*
@@ -32,7 +37,7 @@ bool \hyperlink{interpretador_8c_a945fa3bb7ab48c61e8ebbbb70113c0e4}{is\+Super} (
 \hyperlink{structframe}{frame} $\ast$ \hyperlink{interpretador_8c_afbe1a74bed5d93cfa0b9919f4fd71270}{transfere\+Pilha\+Vetor\+Count} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{structframe}{frame} $\ast$novo, int quantidade)
 \item 
 void \hyperlink{interpretador_8c_ae65dcccf3c1058ca276f014f46f03cab}{nop\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$par0, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\begin{DoxyCompactList}\small\item\em Não executa nada =) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Não executa nada. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_adab1a7c93444468815bcbc1e5754cf4f}{aconst\+\_\+null\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
 \begin{DoxyCompactList}\small\item\em Faz o push de um valor nulo para a pilha de operandos. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a6b02c4d166cf73811dc701037c0867f7}{iconst\+\_\+m1\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
@@ -300,43 +305,43 @@ void \hyperlink{interpretador_8c_aa0f15017ea1e86a34fd7cb0aaee40ee7}{ixor\+\_\+im
 void \hyperlink{interpretador_8c_af270b0c9d76038c4f93b6a3563bbb033}{lxor\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
 \begin{DoxyCompactList}\small\item\em Executa a operação \char`\"{}\+X\+O\+R\char`\"{} de dois {\ttfamily long}. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a8f7571e76cf945ef8682ac68084e9128}{iinc\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} index, \hyperlink{lista__operandos_8h_a6be0d08d5318753334c788d23128142e}{i1} constante)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para incrementar um valor no vetor de variáveis locais do frame. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_ad5802ef6711babf3d30bd4aa5c8f39a6}{iinc\+\_\+fantasma} (\hyperlink{structframe}{frame} $\ast$par0, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Função para mapear a execução da instrução iinc. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_adf8f1db06ae2b6aea4d594deed4da8a4}{iinc\+\_\+wide\+\_\+fantasma} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} constbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} constbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Função para mapear a execução da instrução iinc\+\_\+wide. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a13c65f68ac61b078ccf7d325353ea958}{iinc\+\_\+wide} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} indexbyte, \hyperlink{lista__operandos_8h_a71fa27a2ba58296c5995f3f9b9af37e1}{i2} constbyte)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para incrementar um valor no vetor de variáveis locais do frame. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_acf6c9b6c939b98336957bc8ac9590983}{i2l\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor inteiro para long. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_ad0a572bf0fca1b29eb16bcdd6588caf6}{i2f\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor inteiro para float. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a9e572f6e41989d1e4d408cea82c415ed}{i2d\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor inteiro para double. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_af1a64f96035ceb184ac4bba8b863f26b}{l2i\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor long para inteiro. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a2bad246af55e0f9d982203e23a546372}{l2f\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor long para float. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_aef38073bfab1128d8a6d3381d0d4f5bc}{l2d\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor long para double. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a3c9595ce3fe6bbe818896174810e8b03}{f2i\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor float para inteiro. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a622192a82a602807629d5f13fb70c359}{f2l\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor float para long. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_ac399948f2173d49596e01d7ad8205aae}{f2d\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor float para double. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_adc3af1f21503b5b693b2432356d2005e}{d2i\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor double para inteiro. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_ac41dd421e58e6ae6665edbb89dc060c5}{d2l\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor double para long. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a52a92bfa0456ea29c98c5bcf2bf77815}{d2f\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor double para float. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a6d9e2120b5e9e0d2fa860cb2f56caccb}{i2b\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor inteiro para byte. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a4bd96d359b11905153230d5a707c787d}{i2c\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor inteiro para char. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a3e7394eab6c6446efeaa8562837f218d}{i2s\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para converter valor inteiro para short. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_ad54c4c75df5ad40ac0d14c711a03df80}{lcmp\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
 \begin{DoxyCompactList}\small\item\em Instrução que compara valores long oriundos da pilha de operandos. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a75f211f0c1ac8947336f5f4172b3b398}{fcmpl\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
@@ -477,6 +482,14 @@ float \hyperlink{interpretador_8c_a3795a0cceadd541bc68eb650c0c7595a}{decodifica\
 \begin{DoxyCompactList}\small\item\em Função para decodificar operando em um valor float (32 bits) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\subsection{Descrição Detalhada}
+Arquivo fonte da implementação das instruções e funções auxiliares. 
+
+\begin{DoxySeeAlso}{Veja também}
+\hyperlink{interpretador_8h}{interpretador.\+h} 
+\end{DoxySeeAlso}
+
+
 \subsection{Funções}
 \index{interpretador.\+c@{interpretador.\+c}!aaload\+\_\+impl@{aaload\+\_\+impl}}
 \index{aaload\+\_\+impl@{aaload\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
@@ -495,9 +508,9 @@ Carrega uma referência de um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!aastore\+\_\+impl@{aastore\+\_\+impl}}
@@ -517,9 +530,9 @@ Armazena uma referência em um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!acmpeq\+\_\+impl@{acmpeq\+\_\+impl}}
@@ -583,9 +596,9 @@ Faz o push de um valor nulo para a pilha de operandos.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame\mbox{]} \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!aload\+\_\+0\+\_\+impl@{aload\+\_\+0\+\_\+impl}}
@@ -605,9 +618,9 @@ Carrega uma referência da posição 0 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!aload\+\_\+1\+\_\+impl@{aload\+\_\+1\+\_\+impl}}
@@ -627,9 +640,9 @@ Carrega uma referência da posição 1 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!aload\+\_\+2\+\_\+impl@{aload\+\_\+2\+\_\+impl}}
@@ -649,9 +662,9 @@ Carrega uma referência da posição 2 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!aload\+\_\+3\+\_\+impl@{aload\+\_\+3\+\_\+impl}}
@@ -671,9 +684,9 @@ Carrega uma referência da posição 3 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!aload\+\_\+impl@{aload\+\_\+impl}}
@@ -695,7 +708,7 @@ Carrega uma referência do vetor de variáveis locais.
 \hline
 {\em index} & Índice no vetor de variáveis locais \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!anewarray\+\_\+impl@{anewarray\+\_\+impl}}
@@ -783,9 +796,9 @@ Armazena uma referência na posição 0 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!astore\+\_\+1\+\_\+impl@{astore\+\_\+1\+\_\+impl}}
@@ -805,9 +818,9 @@ Armazena uma referência na posição 1 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!astore\+\_\+2\+\_\+impl@{astore\+\_\+2\+\_\+impl}}
@@ -827,9 +840,9 @@ Armazena uma referência na posição 2 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!astore\+\_\+3\+\_\+impl@{astore\+\_\+3\+\_\+impl}}
@@ -849,9 +862,9 @@ Armazena uma referência na posição 3 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!astore\+\_\+impl@{astore\+\_\+impl}}
@@ -871,7 +884,7 @@ Armazena uma referência no vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 {\em index} & Índice do vetor de variáveis locais \\
 \hline
@@ -915,9 +928,9 @@ Carrega um {\ttfamily byte} de um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!bastore\+\_\+impl@{bastore\+\_\+impl}}
@@ -937,9 +950,9 @@ Armazena um valor {\ttfamily byte} em um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!bipush\+\_\+impl@{bipush\+\_\+impl}}
@@ -961,7 +974,7 @@ Faz o push de um byte na pilha de operandos.
 \hline
 {\em byte} & Byte a ser empilhado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!busca\+Objeto\+Via\+Referencia@{busca\+Objeto\+Via\+Referencia}}
@@ -1019,9 +1032,9 @@ Carrega um {\ttfamily char} de um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!castore\+\_\+impl@{castore\+\_\+impl}}
@@ -1041,9 +1054,9 @@ Armazena um valor {\ttfamily char} em um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!checkcast\+\_\+impl@{checkcast\+\_\+impl}}
@@ -1077,6 +1090,19 @@ Instrução para verificar se um objeto é de um determinado tipo.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a52a92bfa0456ea29c98c5bcf2bf77815}{}\label{interpretador_8c_a52a92bfa0456ea29c98c5bcf2bf77815}
+
+
+Instrução para converter valor double para float. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!d2i\+\_\+impl@{d2i\+\_\+impl}}
 \index{d2i\+\_\+impl@{d2i\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{d2i\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{d2i_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void d2i\+\_\+impl (
@@ -1086,6 +1112,19 @@ Instrução para verificar se um objeto é de um determinado tipo.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_adc3af1f21503b5b693b2432356d2005e}{}\label{interpretador_8c_adc3af1f21503b5b693b2432356d2005e}
+
+
+Instrução para converter valor double para inteiro. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!d2l\+\_\+impl@{d2l\+\_\+impl}}
 \index{d2l\+\_\+impl@{d2l\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{d2l\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{d2l_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void d2l\+\_\+impl (
@@ -1095,6 +1134,19 @@ Instrução para verificar se um objeto é de um determinado tipo.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ac41dd421e58e6ae6665edbb89dc060c5}{}\label{interpretador_8c_ac41dd421e58e6ae6665edbb89dc060c5}
+
+
+Instrução para converter valor double para long. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dadd\+\_\+impl@{dadd\+\_\+impl}}
 \index{dadd\+\_\+impl@{dadd\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{dadd\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{dadd_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void dadd\+\_\+impl (
@@ -1112,9 +1164,9 @@ Executa uma soma de {\ttfamily double}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!daload\+\_\+impl@{daload\+\_\+impl}}
@@ -1134,9 +1186,9 @@ Carrega um {\ttfamily double} de um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dastore\+\_\+impl@{dastore\+\_\+impl}}
@@ -1156,9 +1208,9 @@ Armazena um valor {\ttfamily double} em um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dcmpg\+\_\+impl@{dcmpg\+\_\+impl}}
@@ -1222,9 +1274,9 @@ Faz o push para a pilha de operando da constante 0 {\ttfamily double}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dconst\+\_\+1\+\_\+impl@{dconst\+\_\+1\+\_\+impl}}
@@ -1244,9 +1296,9 @@ Faz o push para a pilha de operando da constante 1 {\ttfamily double}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ddiv\+\_\+impl@{ddiv\+\_\+impl}}
@@ -1266,9 +1318,9 @@ Executa uma divisão de {\ttfamily double}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!decodifica\+Double\+Valor@{decodifica\+Double\+Valor}}
@@ -1370,9 +1422,9 @@ Carrega um valor {\ttfamily double} da posição 0 do vetor de variáveis locais
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dload\+\_\+1\+\_\+impl@{dload\+\_\+1\+\_\+impl}}
@@ -1392,9 +1444,9 @@ Carrega um valor {\ttfamily double} da posição 1 do vetor de variáveis locais
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dload\+\_\+2\+\_\+impl@{dload\+\_\+2\+\_\+impl}}
@@ -1414,9 +1466,9 @@ Carrega um valor {\ttfamily double} da posição 2 do vetor de variáveis locais
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dload\+\_\+3\+\_\+impl@{dload\+\_\+3\+\_\+impl}}
@@ -1436,9 +1488,9 @@ Carrega um valor {\ttfamily double} da posição 3 do vetor de variáveis locais
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dload\+\_\+impl@{dload\+\_\+impl}}
@@ -1460,7 +1512,7 @@ Carrega um valor {\ttfamily double} do vetor de variáveis locais.
 \hline
 {\em index} & Índice no vetor de variáveis locais \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dmul\+\_\+impl@{dmul\+\_\+impl}}
@@ -1480,9 +1532,9 @@ Executa uma multiplicação de {\ttfamily double}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dneg\+\_\+impl@{dneg\+\_\+impl}}
@@ -1502,9 +1554,9 @@ Inverte o sinal de um {\ttfamily double}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!drem\+\_\+impl@{drem\+\_\+impl}}
@@ -1524,9 +1576,9 @@ Calcula o resto {\ttfamily double} da divisão entre dois operandos.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dreturn\+\_\+impl@{dreturn\+\_\+impl}}
@@ -1568,9 +1620,9 @@ Armazena um {\ttfamily double} na posição 0 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dstore\+\_\+1\+\_\+impl@{dstore\+\_\+1\+\_\+impl}}
@@ -1590,9 +1642,9 @@ Armazena um {\ttfamily double} na posição 1 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dstore\+\_\+2\+\_\+impl@{dstore\+\_\+2\+\_\+impl}}
@@ -1612,9 +1664,9 @@ Armazena um {\ttfamily double} na posição 2 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dstore\+\_\+3\+\_\+impl@{dstore\+\_\+3\+\_\+impl}}
@@ -1634,9 +1686,9 @@ Armazena um {\ttfamily double} na posição 3 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dstore\+\_\+impl@{dstore\+\_\+impl}}
@@ -1656,7 +1708,7 @@ Armazena um {\ttfamily double} no vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 {\em index} & Índice do vetor de variáveis locais \\
 \hline
@@ -1678,9 +1730,9 @@ Executa uma subtração de {\ttfamily double}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dup2\+\_\+impl@{dup2\+\_\+impl}}
@@ -1702,9 +1754,9 @@ Duplica o primeiro ou o segundo valor no topo da pilha de operandos e insere log
 \begin{DoxyParams}{Parâmetros}
 {\em f} & frame. \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dup2\+\_\+x1\+\_\+impl@{dup2\+\_\+x1\+\_\+impl}}
@@ -1726,9 +1778,9 @@ Duplica o primeiro ou o segundo valor no topo da pilha de operandos e insere doi
 \begin{DoxyParams}{Parâmetros}
 {\em f} & frame. \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dup2\+\_\+x2\+\_\+impl@{dup2\+\_\+x2\+\_\+impl}}
@@ -1750,9 +1802,9 @@ Duplica o primeiro ou o segundo valor no topo da pilha de operandos e insere doi
 \begin{DoxyParams}{Parâmetros}
 {\em f} & frame. \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dup\+\_\+impl@{dup\+\_\+impl}}
@@ -1774,9 +1826,9 @@ Duplica o valor no topo da pilha de operandos.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & frame. \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dup\+\_\+x1\+\_\+impl@{dup\+\_\+x1\+\_\+impl}}
@@ -1798,9 +1850,9 @@ Duplica o valor no topo da pilha de operandos e insere dois valores a baixo.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & frame. \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dup\+\_\+x2\+\_\+impl@{dup\+\_\+x2\+\_\+impl}}
@@ -1822,9 +1874,9 @@ Duplica o valor no topo da pilha de operandos e insere dois ou três valores a b
 \begin{DoxyParams}{Parâmetros}
 {\em f} & frame. \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!f2d\+\_\+impl@{f2d\+\_\+impl}}
@@ -1836,6 +1888,19 @@ Duplica o valor no topo da pilha de operandos e insere dois ou três valores a b
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ac399948f2173d49596e01d7ad8205aae}{}\label{interpretador_8c_ac399948f2173d49596e01d7ad8205aae}
+
+
+Instrução para converter valor float para double. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!f2i\+\_\+impl@{f2i\+\_\+impl}}
 \index{f2i\+\_\+impl@{f2i\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{f2i\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{f2i_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void f2i\+\_\+impl (
@@ -1845,6 +1910,19 @@ Duplica o valor no topo da pilha de operandos e insere dois ou três valores a b
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a3c9595ce3fe6bbe818896174810e8b03}{}\label{interpretador_8c_a3c9595ce3fe6bbe818896174810e8b03}
+
+
+Instrução para converter valor float para inteiro. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!f2l\+\_\+impl@{f2l\+\_\+impl}}
 \index{f2l\+\_\+impl@{f2l\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{f2l\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{f2l_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void f2l\+\_\+impl (
@@ -1854,6 +1932,19 @@ Duplica o valor no topo da pilha de operandos e insere dois ou três valores a b
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a622192a82a602807629d5f13fb70c359}{}\label{interpretador_8c_a622192a82a602807629d5f13fb70c359}
+
+
+Instrução para converter valor float para long. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fadd\+\_\+impl@{fadd\+\_\+impl}}
 \index{fadd\+\_\+impl@{fadd\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{fadd\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{fadd_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void fadd\+\_\+impl (
@@ -1871,9 +1962,9 @@ Executa uma soma de {\ttfamily float}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!faload\+\_\+impl@{faload\+\_\+impl}}
@@ -1893,9 +1984,9 @@ Carrega um {\ttfamily float} de um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fastore\+\_\+impl@{fastore\+\_\+impl}}
@@ -1915,9 +2006,9 @@ Armazena um valor {\ttfamily float} em um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fcmpg\+\_\+impl@{fcmpg\+\_\+impl}}
@@ -1981,9 +2072,9 @@ Faz o push para a pilha de operando da constante 0 {\ttfamily float}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fconst\+\_\+1\+\_\+impl@{fconst\+\_\+1\+\_\+impl}}
@@ -2003,9 +2094,9 @@ Faz o push para a pilha de operando da constante 1 {\ttfamily float}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fconst\+\_\+2\+\_\+impl@{fconst\+\_\+2\+\_\+impl}}
@@ -2025,9 +2116,9 @@ Faz o push para a pilha de operando da constante 2 {\ttfamily float}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fdiv\+\_\+impl@{fdiv\+\_\+impl}}
@@ -2047,9 +2138,9 @@ Executa uma divisão de {\ttfamily float}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fload\+\_\+0\+\_\+impl@{fload\+\_\+0\+\_\+impl}}
@@ -2069,9 +2160,9 @@ Carrega um valor {\ttfamily float} da posição 0 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fload\+\_\+1\+\_\+impl@{fload\+\_\+1\+\_\+impl}}
@@ -2091,9 +2182,9 @@ Carrega um valor {\ttfamily float} da posição 1 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fload\+\_\+2\+\_\+impl@{fload\+\_\+2\+\_\+impl}}
@@ -2113,9 +2204,9 @@ Carrega um valor {\ttfamily float} da posição 2 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fload\+\_\+3\+\_\+impl@{fload\+\_\+3\+\_\+impl}}
@@ -2135,9 +2226,9 @@ Carrega um valor {\ttfamily float} da posição 3 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fload\+\_\+impl@{fload\+\_\+impl}}
@@ -2159,7 +2250,7 @@ Carrega um valor {\ttfamily float} do vetor de variáveis locais.
 \hline
 {\em index} & Índice no vetor de variáveis locais \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fmul\+\_\+impl@{fmul\+\_\+impl}}
@@ -2179,9 +2270,9 @@ Executa uma multiplicação de {\ttfamily float}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fneg\+\_\+impl@{fneg\+\_\+impl}}
@@ -2201,9 +2292,9 @@ Inverte o sinal de um {\ttfamily float}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!frem\+\_\+impl@{frem\+\_\+impl}}
@@ -2223,9 +2314,9 @@ Calcula o resto {\ttfamily float} da divisão entre dois operandos.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!freturn\+\_\+impl@{freturn\+\_\+impl}}
@@ -2267,9 +2358,9 @@ Armazena um {\ttfamily float} na posição 0 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fstore\+\_\+1\+\_\+impl@{fstore\+\_\+1\+\_\+impl}}
@@ -2289,9 +2380,9 @@ Armazena um {\ttfamily float} na posição 1 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fstore\+\_\+2\+\_\+impl@{fstore\+\_\+2\+\_\+impl}}
@@ -2311,9 +2402,9 @@ Armazena um {\ttfamily float} na posição 2 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fstore\+\_\+3\+\_\+impl@{fstore\+\_\+3\+\_\+impl}}
@@ -2333,9 +2424,9 @@ Armazena um {\ttfamily float} na posição 3 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fstore\+\_\+impl@{fstore\+\_\+impl}}
@@ -2355,7 +2446,7 @@ Armazena um {\ttfamily float} no vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 {\em index} & Índice do vetor de variáveis locais \\
 \hline
@@ -2377,9 +2468,9 @@ Executa uma subtração de {\ttfamily float}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!getfield\+\_\+impl@{getfield\+\_\+impl}}
@@ -2555,6 +2646,19 @@ A instrução sempre efetuará um branch, para um offset wide.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a6d9e2120b5e9e0d2fa860cb2f56caccb}{}\label{interpretador_8c_a6d9e2120b5e9e0d2fa860cb2f56caccb}
+
+
+Instrução para converter valor inteiro para byte. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!i2c\+\_\+impl@{i2c\+\_\+impl}}
 \index{i2c\+\_\+impl@{i2c\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{i2c\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{i2c_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void i2c\+\_\+impl (
@@ -2564,6 +2668,19 @@ A instrução sempre efetuará um branch, para um offset wide.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a4bd96d359b11905153230d5a707c787d}{}\label{interpretador_8c_a4bd96d359b11905153230d5a707c787d}
+
+
+Instrução para converter valor inteiro para char. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!i2d\+\_\+impl@{i2d\+\_\+impl}}
 \index{i2d\+\_\+impl@{i2d\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{i2d\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{i2d_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void i2d\+\_\+impl (
@@ -2573,6 +2690,19 @@ A instrução sempre efetuará um branch, para um offset wide.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a9e572f6e41989d1e4d408cea82c415ed}{}\label{interpretador_8c_a9e572f6e41989d1e4d408cea82c415ed}
+
+
+Instrução para converter valor inteiro para double. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!i2f\+\_\+impl@{i2f\+\_\+impl}}
 \index{i2f\+\_\+impl@{i2f\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{i2f\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{i2f_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void i2f\+\_\+impl (
@@ -2582,6 +2712,19 @@ A instrução sempre efetuará um branch, para um offset wide.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ad0a572bf0fca1b29eb16bcdd6588caf6}{}\label{interpretador_8c_ad0a572bf0fca1b29eb16bcdd6588caf6}
+
+
+Instrução para converter valor inteiro para float. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!i2l\+\_\+impl@{i2l\+\_\+impl}}
 \index{i2l\+\_\+impl@{i2l\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{i2l\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{i2l_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void i2l\+\_\+impl (
@@ -2591,6 +2734,19 @@ A instrução sempre efetuará um branch, para um offset wide.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_acf6c9b6c939b98336957bc8ac9590983}{}\label{interpretador_8c_acf6c9b6c939b98336957bc8ac9590983}
+
+
+Instrução para converter valor inteiro para long. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!i2s\+\_\+impl@{i2s\+\_\+impl}}
 \index{i2s\+\_\+impl@{i2s\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{i2s\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{i2s_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void i2s\+\_\+impl (
@@ -2600,6 +2756,19 @@ A instrução sempre efetuará um branch, para um offset wide.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a3e7394eab6c6446efeaa8562837f218d}{}\label{interpretador_8c_a3e7394eab6c6446efeaa8562837f218d}
+
+
+Instrução para converter valor inteiro para short. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iadd\+\_\+impl@{iadd\+\_\+impl}}
 \index{iadd\+\_\+impl@{iadd\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{iadd\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{iadd_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void iadd\+\_\+impl (
@@ -2617,9 +2786,9 @@ Executa uma soma de {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iaload\+\_\+impl@{iaload\+\_\+impl}}
@@ -2639,9 +2808,9 @@ Carrega um {\ttfamily int} de um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iand\+\_\+impl@{iand\+\_\+impl}}
@@ -2661,9 +2830,9 @@ Executa a operação \char`\"{}\+A\+N\+D\char`\"{} de dois {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iastore\+\_\+impl@{iastore\+\_\+impl}}
@@ -2683,9 +2852,9 @@ Armazena um valor {\ttfamily int} em um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iconst\+\_\+0\+\_\+impl@{iconst\+\_\+0\+\_\+impl}}
@@ -2705,9 +2874,9 @@ Faz o push para a pilha de operando da constante 0 {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iconst\+\_\+1\+\_\+impl@{iconst\+\_\+1\+\_\+impl}}
@@ -2727,9 +2896,9 @@ Faz o push para a pilha de operando da constante 1 {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iconst\+\_\+2\+\_\+impl@{iconst\+\_\+2\+\_\+impl}}
@@ -2749,9 +2918,9 @@ Faz o push para a pilha de operando da constante 2 {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iconst\+\_\+3\+\_\+impl@{iconst\+\_\+3\+\_\+impl}}
@@ -2771,9 +2940,9 @@ Faz o push para a pilha de operando da constante 3 {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iconst\+\_\+4\+\_\+impl@{iconst\+\_\+4\+\_\+impl}}
@@ -2793,9 +2962,9 @@ Faz o push para a pilha de operando da constante 4 {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iconst\+\_\+5\+\_\+impl@{iconst\+\_\+5\+\_\+impl}}
@@ -2815,9 +2984,9 @@ Faz o push para a pilha de operando da constante 5 {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iconst\+\_\+m1\+\_\+impl@{iconst\+\_\+m1\+\_\+impl}}
@@ -2861,9 +3030,9 @@ Executa uma divisão de {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!if\+\_\+icmpeq\+\_\+impl@{if\+\_\+icmpeq\+\_\+impl}}
@@ -3183,6 +3352,19 @@ Instrução que irá efetuar um branch caso a referência no topo da pilha seja 
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ad5802ef6711babf3d30bd4aa5c8f39a6}{}\label{interpretador_8c_ad5802ef6711babf3d30bd4aa5c8f39a6}
+
+
+Função para mapear a execução da instrução iinc. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em par0} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Byte para indexar o acesso no vetor de variáveis locais \\
+\hline
+{\em par2} & Valor inteiro contendo o incremento a ser realizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iinc\+\_\+impl@{iinc\+\_\+impl}}
 \index{iinc\+\_\+impl@{iinc\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{iinc\+\_\+impl(frame $\ast$f, u1 index, i1 constante)}{iinc_impl(frame *f, u1 index, i1 constante)}}]{\setlength{\rightskip}{0pt plus 5cm}void iinc\+\_\+impl (
@@ -3192,6 +3374,19 @@ Instrução que irá efetuar um branch caso a referência no topo da pilha seja 
 \item[{{\bf i1}}]{constante}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a8f7571e76cf945ef8682ac68084e9128}{}\label{interpretador_8c_a8f7571e76cf945ef8682ac68084e9128}
+
+
+Instrução para incrementar um valor no vetor de variáveis locais do frame. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em index} & Byte para indexar o acesso no vetor de variáveis locais \\
+\hline
+{\em ante} & Valor inteiro contendo o incremento a ser realizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iinc\+\_\+wide@{iinc\+\_\+wide}}
 \index{iinc\+\_\+wide@{iinc\+\_\+wide}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{iinc\+\_\+wide(frame $\ast$f, u2 indexbyte, i2 constbyte)}{iinc_wide(frame *f, u2 indexbyte, i2 constbyte)}}]{\setlength{\rightskip}{0pt plus 5cm}void iinc\+\_\+wide (
@@ -3201,6 +3396,19 @@ Instrução que irá efetuar um branch caso a referência no topo da pilha seja 
 \item[{{\bf i2}}]{constbyte}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a13c65f68ac61b078ccf7d325353ea958}{}\label{interpretador_8c_a13c65f68ac61b078ccf7d325353ea958}
+
+
+Instrução para incrementar um valor no vetor de variáveis locais do frame. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em indexbyte} & Byte duplo para indexar o acesso no vetor de variáveis locais \\
+\hline
+{\em byte} & Byte duplo contendo o incremento no vetor de variáveis locais \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iinc\+\_\+wide\+\_\+fantasma@{iinc\+\_\+wide\+\_\+fantasma}}
 \index{iinc\+\_\+wide\+\_\+fantasma@{iinc\+\_\+wide\+\_\+fantasma}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{iinc\+\_\+wide\+\_\+fantasma(frame $\ast$f, u1 indexbyte1, u1 indexbyte2, u1 constbyte1, u1 constbyte2)}{iinc_wide_fantasma(frame *f, u1 indexbyte1, u1 indexbyte2, u1 constbyte1, u1 constbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void iinc\+\_\+wide\+\_\+fantasma (
@@ -3212,6 +3420,23 @@ Instrução que irá efetuar um branch caso a referência no topo da pilha seja 
 \item[{{\bf u1}}]{constbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_adf8f1db06ae2b6aea4d594deed4da8a4}{}\label{interpretador_8c_adf8f1db06ae2b6aea4d594deed4da8a4}
+
+
+Função para mapear a execução da instrução iinc\+\_\+wide. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em indexbyte1} & Byte high para indexar o acesso no vetor de variáveis locais \\
+\hline
+{\em indexbyte2} & Byte low para indexar o acesso no vetor de variáveis locais \\
+\hline
+{\em byte1} & Byte high a ser utilizado no incremento da variável no vetor de variáveis locais \\
+\hline
+{\em byte2} & Byte low a ser utilizado no incremento da variável no vetor de variáveis locais \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iload\+\_\+0\+\_\+impl@{iload\+\_\+0\+\_\+impl}}
 \index{iload\+\_\+0\+\_\+impl@{iload\+\_\+0\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{iload\+\_\+0\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{iload_0_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void iload\+\_\+0\+\_\+impl (
@@ -3229,9 +3454,9 @@ Carrega um valor {\ttfamily int} da posição 0 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iload\+\_\+1\+\_\+impl@{iload\+\_\+1\+\_\+impl}}
@@ -3251,9 +3476,9 @@ Carrega um valor {\ttfamily int} da posição 1 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iload\+\_\+2\+\_\+impl@{iload\+\_\+2\+\_\+impl}}
@@ -3273,9 +3498,9 @@ Carrega um valor {\ttfamily int} da posição 2 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iload\+\_\+3\+\_\+impl@{iload\+\_\+3\+\_\+impl}}
@@ -3295,9 +3520,9 @@ Carrega um valor {\ttfamily int} da posição 3 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iload\+\_\+impl@{iload\+\_\+impl}}
@@ -3319,7 +3544,7 @@ Carrega um valor {\ttfamily int} do vetor de variáveis locais.
 \hline
 {\em index} & Índice no vetor de variáveis locais \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!imul\+\_\+impl@{imul\+\_\+impl}}
@@ -3339,9 +3564,9 @@ Executa uma multiplicação de {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ineg\+\_\+impl@{ineg\+\_\+impl}}
@@ -3361,9 +3586,9 @@ Inverte o sinal de um {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!inicializa\+\_\+multiarray\+\_\+recursivo@{inicializa\+\_\+multiarray\+\_\+recursivo}}
@@ -3661,9 +3886,9 @@ Executa a operação \char`\"{}\+O\+R\char`\"{} de dois {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!irem\+\_\+impl@{irem\+\_\+impl}}
@@ -3683,9 +3908,9 @@ Calcula o resto {\ttfamily int} da divisão entre dois operandos.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ireturn\+\_\+impl@{ireturn\+\_\+impl}}
@@ -3727,9 +3952,9 @@ Executa um shift left em um {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ishr\+\_\+impl@{ishr\+\_\+impl}}
@@ -3749,9 +3974,9 @@ Executa um shift right em um {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!is\+Super@{is\+Super}}
@@ -3778,9 +4003,9 @@ Armazena um {\ttfamily int} na posição 0 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!istore\+\_\+1\+\_\+impl@{istore\+\_\+1\+\_\+impl}}
@@ -3800,9 +4025,9 @@ Armazena um {\ttfamily int} na posição 1 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!istore\+\_\+2\+\_\+impl@{istore\+\_\+2\+\_\+impl}}
@@ -3822,9 +4047,9 @@ Armazena um {\ttfamily int} na posição 2 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!istore\+\_\+3\+\_\+impl@{istore\+\_\+3\+\_\+impl}}
@@ -3844,9 +4069,9 @@ Armazena um {\ttfamily int} na posição 3 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!istore\+\_\+impl@{istore\+\_\+impl}}
@@ -3866,7 +4091,7 @@ Armazena um {\ttfamily int} no vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 {\em index} & Índice do vetor de variáveis locais \\
 \hline
@@ -3888,9 +4113,9 @@ Executa uma subtração de {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iushr\+\_\+impl@{iushr\+\_\+impl}}
@@ -3910,9 +4135,9 @@ Executa um shift right lógico em um {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ixor\+\_\+impl@{ixor\+\_\+impl}}
@@ -3932,9 +4157,9 @@ Executa a operação \char`\"{}\+X\+O\+R\char`\"{} de dois {\ttfamily int}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!jsr\+\_\+impl@{jsr\+\_\+impl}}
@@ -3990,6 +4215,19 @@ Instrução para efetuar um branch para um offset wide, de 32 bits, dentro do c�
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_aef38073bfab1128d8a6d3381d0d4f5bc}{}\label{interpretador_8c_aef38073bfab1128d8a6d3381d0d4f5bc}
+
+
+Instrução para converter valor long para double. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!l2f\+\_\+impl@{l2f\+\_\+impl}}
 \index{l2f\+\_\+impl@{l2f\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{l2f\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{l2f_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void l2f\+\_\+impl (
@@ -3999,6 +4237,19 @@ Instrução para efetuar um branch para um offset wide, de 32 bits, dentro do c�
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a2bad246af55e0f9d982203e23a546372}{}\label{interpretador_8c_a2bad246af55e0f9d982203e23a546372}
+
+
+Instrução para converter valor long para float. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!l2i\+\_\+impl@{l2i\+\_\+impl}}
 \index{l2i\+\_\+impl@{l2i\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{l2i\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{l2i_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void l2i\+\_\+impl (
@@ -4008,6 +4259,19 @@ Instrução para efetuar um branch para um offset wide, de 32 bits, dentro do c�
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_af1a64f96035ceb184ac4bba8b863f26b}{}\label{interpretador_8c_af1a64f96035ceb184ac4bba8b863f26b}
+
+
+Instrução para converter valor long para inteiro. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ladd\+\_\+impl@{ladd\+\_\+impl}}
 \index{ladd\+\_\+impl@{ladd\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{ladd\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{ladd_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ladd\+\_\+impl (
@@ -4025,9 +4289,9 @@ Executa uma soma de {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!laload\+\_\+impl@{laload\+\_\+impl}}
@@ -4047,9 +4311,9 @@ Carrega um {\ttfamily long} de um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!land\+\_\+impl@{land\+\_\+impl}}
@@ -4069,9 +4333,9 @@ Executa a operação \char`\"{}\+A\+N\+D\char`\"{} de dois {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lastore\+\_\+impl@{lastore\+\_\+impl}}
@@ -4091,9 +4355,9 @@ Armazena um valor {\ttfamily long} em um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lcmp\+\_\+impl@{lcmp\+\_\+impl}}
@@ -4135,9 +4399,9 @@ Faz o push para a pilha de operando da constante 0 {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lconst\+\_\+1\+\_\+impl@{lconst\+\_\+1\+\_\+impl}}
@@ -4157,9 +4421,9 @@ Faz o push para a pilha de operando da constante 1 {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ldc2\+\_\+w\+\_\+impl@{ldc2\+\_\+w\+\_\+impl}}
@@ -4203,7 +4467,7 @@ Faz o push de um valor presente na constant pool.
 \hline
 {\em indexbyte1} & Índice da constant pool \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ldc\+\_\+w\+\_\+impl@{ldc\+\_\+w\+\_\+impl}}
@@ -4245,9 +4509,9 @@ Executa uma divisão de {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lload\+\_\+0\+\_\+impl@{lload\+\_\+0\+\_\+impl}}
@@ -4267,9 +4531,9 @@ Carrega um valor {\ttfamily long} da posição 0 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lload\+\_\+1\+\_\+impl@{lload\+\_\+1\+\_\+impl}}
@@ -4289,9 +4553,9 @@ Carrega um valor {\ttfamily long} da posição 1 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lload\+\_\+2\+\_\+impl@{lload\+\_\+2\+\_\+impl}}
@@ -4311,9 +4575,9 @@ Carrega um valor {\ttfamily long} da posição 2 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lload\+\_\+3\+\_\+impl@{lload\+\_\+3\+\_\+impl}}
@@ -4333,9 +4597,9 @@ Carrega um valor {\ttfamily long} da posição 3 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lload\+\_\+impl@{lload\+\_\+impl}}
@@ -4357,7 +4621,7 @@ Carrega um valor {\ttfamily long} do vetor de variáveis locais.
 \hline
 {\em index} & Índice no vetor de variáveis locais \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lmul\+\_\+impl@{lmul\+\_\+impl}}
@@ -4377,9 +4641,9 @@ Executa uma multiplicação de {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lneg\+\_\+impl@{lneg\+\_\+impl}}
@@ -4399,9 +4663,9 @@ Inverte o sinal de um {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lookupswitch\+\_\+fantasma@{lookupswitch\+\_\+fantasma}}
@@ -4443,9 +4707,9 @@ Executa a operação \char`\"{}\+O\+R\char`\"{} de dois {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lrem\+\_\+impl@{lrem\+\_\+impl}}
@@ -4465,9 +4729,9 @@ Calcula o resto {\ttfamily long} da divisão entre dois operandos.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lreturn\+\_\+impl@{lreturn\+\_\+impl}}
@@ -4509,9 +4773,9 @@ Executa um shift left em um {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lshr\+\_\+impl@{lshr\+\_\+impl}}
@@ -4531,9 +4795,9 @@ Executa um shift right em um {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lstore\+\_\+0\+\_\+impl@{lstore\+\_\+0\+\_\+impl}}
@@ -4553,9 +4817,9 @@ Armazena um {\ttfamily long} na posição 0 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lstore\+\_\+1\+\_\+impl@{lstore\+\_\+1\+\_\+impl}}
@@ -4575,9 +4839,9 @@ Armazena um {\ttfamily long} na posição 1 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lstore\+\_\+2\+\_\+impl@{lstore\+\_\+2\+\_\+impl}}
@@ -4597,9 +4861,9 @@ Armazena um {\ttfamily long} na posição 2 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lstore\+\_\+3\+\_\+impl@{lstore\+\_\+3\+\_\+impl}}
@@ -4619,9 +4883,9 @@ Armazena um {\ttfamily long} na posição 3 do vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lstore\+\_\+impl@{lstore\+\_\+impl}}
@@ -4641,7 +4905,7 @@ Armazena um {\ttfamily long} no vetor de variáveis locais.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
 {\em index} & Índice do vetor de variáveis locais \\
 \hline
@@ -4663,9 +4927,9 @@ Executa uma subtração de {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lushr\+\_\+impl@{lushr\+\_\+impl}}
@@ -4685,9 +4949,9 @@ Executa um shift right lógico em um {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lxor\+\_\+impl@{lxor\+\_\+impl}}
@@ -4707,9 +4971,9 @@ Executa a operação \char`\"{}\+X\+O\+R\char`\"{} de dois {\ttfamily long}.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!monitorenter\+\_\+impl@{monitorenter\+\_\+impl}}
@@ -4836,15 +5100,15 @@ Função para criar um novo array de um dado tipo.
 )}\hypertarget{interpretador_8c_ae65dcccf3c1058ca276f014f46f03cab}{}\label{interpretador_8c_ae65dcccf3c1058ca276f014f46f03cab}
 
 
-Não executa nada =) 
+Não executa nada. 
 
 
 \begin{DoxyParams}{Parâmetros}
-{\em par0} & -\/ \\
+{\em par0} & Parâmetro não utilizado \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!obter\+Classe\+Do\+Metodo@{obter\+Classe\+Do\+Metodo}}
@@ -4938,9 +5202,9 @@ Place\+Holder para ocupar posicao no vetor de posicoes da instrucao pop2.
 \begin{DoxyParams}{Parâmetros}
 {\em par0} & frame. \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!pop2\+\_\+impl@{pop2\+\_\+impl}}
@@ -4978,9 +5242,9 @@ Place\+Holder para ocupar posicao no vetor de posicoes da instrucao pop.
 \begin{DoxyParams}{Parâmetros}
 {\em par0} & frame. \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!pop\+\_\+impl@{pop\+\_\+impl}}
@@ -5126,9 +5390,9 @@ Carrega um {\ttfamily short} de um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!sastore\+\_\+impl@{sastore\+\_\+impl}}
@@ -5148,9 +5412,9 @@ Armazena um valor {\ttfamily short} em um array.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!sipush\+\_\+impl@{sipush\+\_\+impl}}
@@ -5192,9 +5456,9 @@ Inverte os dois operandos do topo da pilha.
 \begin{DoxyParams}{Parâmetros}
 {\em f} & Ponteiro para o frame \\
 \hline
-{\em par1} & -\/ \\
+{\em par1} & Parâmetro não utilizado \\
 \hline
-{\em par2} & -\/ \\
+{\em par2} & Parâmetro não utilizado \\
 \hline
 \end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!tableswitch\+\_\+fantasma@{tableswitch\+\_\+fantasma}}
