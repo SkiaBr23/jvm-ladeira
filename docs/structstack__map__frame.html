@@ -22,7 +22,6 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">JVM - Grupo 4
    &#160;<span id="projectnumber">0.1</span>
@@ -41,7 +40,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Página&#160;Principal</span></a></li>
-      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
       <li class="current"><a href="annotated.html"><span>Estruturas&#160;de&#160;Dados</span></a></li>
       <li><a href="files.html"><span>Arquivos</span></a></li>
       <li>
@@ -253,6 +251,11 @@ Campos de Dados</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>he frame type same_locals_1_stack_item_frame_extended indicates that the frame has exactly the same locals as the previous stack map frame and that the number of stack items is 1. The offset_delta value for the frame is given explicitly.</p>
+<p>f the frame_type is chop_frame, it means that the operand stack is empty and the current locals are the same as the locals in the previous frame, except that the k last locals are absent. The value of k is given by the formula 251 - frame_type.</p>
+<p>If the frame type is same_frame_extended, it means the frame has exactly the same locals as the previous stack map frame and that the number of stack items is zero.</p>
+<p>If the frame_type is append_frame, it means that the operand stack is empty and the current locals are the same as the locals in the previous frame, except that k additional locals are defined. The value of k is given by the formula frame_type - 251</p>
+<p>The frame type full_frame is represented by the tag value 255. </p>
 
 </div>
 </div>
@@ -313,6 +316,7 @@ Campos de Dados</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>If the frame_type is same_locals_1_stack_item_frame, it means the frame has exactly the same locals as the previous stack map frame and that the number of stack items is 1 </p>
 
 </div>
 </div>

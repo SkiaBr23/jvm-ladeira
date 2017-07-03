@@ -1,6 +1,6 @@
 /**
- * @file interpretador.c
- * @brief Arquivo fonte que contém a implementação das instruções e funções auxiliares.
+ * @file interpretador.h
+ * @brief Arquivo cabeçalho da implementação das instruções e funções auxiliares.
  */
 
  #ifndef INTERPRETADOR_H
