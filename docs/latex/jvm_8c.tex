@@ -1,0 +1,301 @@
+\hypertarget{jvm_8c}{}\section{Referência do Arquivo jvm.\+c}
+\label{jvm_8c}\index{jvm.\+c@{jvm.\+c}}
+
+
+Arquivo cabeçalho contendo funções relacionadas à execução do arquivo.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$limits.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}instrucoes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}jvm.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}leitura.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}interpretador.\+h\char`\"{}}\\*
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{jvm_8h_a36df1d3591b105d3d4e4e00e7ee9498c}{J\+VM} $\ast$ \hyperlink{jvm_8c_a8a7112ea88d395459941cbaafa51ea98}{Criar\+J\+VM} ()
+\begin{DoxyCompactList}\small\item\em Função para inicializar a estrutura da J\+VM com nulo. \end{DoxyCompactList}\item 
+\hyperlink{jvm_8h_a36df1d3591b105d3d4e4e00e7ee9498c}{J\+VM} $\ast$ \hyperlink{jvm_8c_a296f9ddc212714719c49e4cfc0a3461e}{Inicializar\+J\+VM} ()
+\begin{DoxyCompactList}\small\item\em Função para inicializar a estrutura da J\+VM, alocando os campos da estrutura, e setando os valores iniciais. \end{DoxyCompactList}\item 
+int \hyperlink{jvm_8c_abc71d20bef45f0510b4fd6643a40ed52}{opcao\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Função para apresentar o menu para o usuário. \end{DoxyCompactList}\item 
+\hyperlink{structframe}{frame} $\ast$ \hyperlink{jvm_8c_aaaa91ab2001f62b4df3b5ef193e5fc51}{criar\+Frame} (char $\ast$classe\+Corrente, \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} max\+\_\+locals)
+\begin{DoxyCompactList}\small\item\em Função para criar um frame e inicializar com os valores default. \end{DoxyCompactList}\item 
+void \hyperlink{jvm_8c_a713d35f536711d10380226694fa8721b}{executar\+J\+VM} ()
+\begin{DoxyCompactList}\small\item\em A função inicia a interpretação do arquivo .class, chamando outras funções da interpretação. \end{DoxyCompactList}\item 
+void \hyperlink{jvm_8c_a7597ae8a141cbaf8e5798ae021bf2d09}{executar\+Metodo} (\hyperlink{structmethod__info}{method\+\_\+info} $\ast$m, char $\ast$classe\+Corrente, int chamador)
+\begin{DoxyCompactList}\small\item\em Função que executa o código de um método. \end{DoxyCompactList}\item 
+void \hyperlink{jvm_8c_a312403d0b2928fc335e4cc57067ee029}{interpretar\+Code} (\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} $\ast$code, \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} length, \hyperlink{structmethod__info}{method\+\_\+info} $\ast$m)
+\begin{DoxyCompactList}\small\item\em Função para interpretar as instruções do Code de um método. \end{DoxyCompactList}\item 
+void \hyperlink{jvm_8c_a2ecf2c686f20ff7269d89c39263068eb}{free\+Vetor\+Locais} (\hyperlink{structvetor__locais}{vetor\+\_\+locais} $\ast$v, \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} vetor\+\_\+length)
+\begin{DoxyCompactList}\small\item\em Função para liberar o vetor de variáveis locais da memória. \end{DoxyCompactList}\item 
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} \hyperlink{jvm_8c_a042997c5708162db884ddcaec55d5d3e}{verifica\+Handler\+Metodo} (\hyperlink{structmethod__info}{method\+\_\+info} $\ast$m)
+\begin{DoxyCompactList}\small\item\em Função para encontrar em um método o PC do handler da exceção lançada na J\+VM. \end{DoxyCompactList}\item 
+bool \hyperlink{jvm_8c_a5a2fcaf7218407641523857cea5e8c05}{instrucao\+Branch} (char $\ast$nome\+Instrucao)
+\begin{DoxyCompactList}\small\item\em Avalia se a instrução passada como parâmetro é uma instrução do tipo branch. \end{DoxyCompactList}\item 
+\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} $\ast$ \hyperlink{jvm_8c_aae70b67add7e68b5be88dc5ffc1128d7}{atualizar\+P\+C\+Metodo\+Atual} (\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} $\ast$code, \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} length)
+\begin{DoxyCompactList}\small\item\em Função para atualizar o PC, de acordo com a instrução branch previamente executada, verificando se o branch foi executado ou não. \end{DoxyCompactList}\item 
+void \hyperlink{jvm_8c_a5c2f00c1122f0d570ec59446d475bcc0}{Imprime\+Code} (\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} $\ast$code, \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} length)
+\begin{DoxyCompactList}\small\item\em Função para imprimir um Atributo Code de um método. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variáveis}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{jvm_8h_a36df1d3591b105d3d4e4e00e7ee9498c}{J\+VM} $\ast$ \hyperlink{jvm_8c_aaadd6bd4e20642a7a34ea6db728289ae}{jvm} = N\+U\+LL
+\item 
+\hyperlink{structinstrucao}{instrucao} $\ast$ \hyperlink{jvm_8c_aa7b71b2eb311631483ae2057257df739}{instrucoes}
+\item 
+void($\ast$ \hyperlink{jvm_8c_ae10e26f3963b2f4b36e36155c7edacbf}{func\+\_\+ptr} \mbox{[}202\mbox{]})(\hyperlink{structframe}{frame} $\ast$, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}) = \{\hyperlink{interpretador_8h_ae65dcccf3c1058ca276f014f46f03cab}{nop\+\_\+impl},\hyperlink{interpretador_8h_adab1a7c93444468815bcbc1e5754cf4f}{aconst\+\_\+null\+\_\+impl},\hyperlink{interpretador_8h_a6b02c4d166cf73811dc701037c0867f7}{iconst\+\_\+m1\+\_\+impl},\hyperlink{interpretador_8h_ad4f30241ea1b413e26f67131c4554ecf}{iconst\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_ae0eeb67a85bf3f1b21a6fe0a7f11d39a}{iconst\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_a11a5f97318774d09b704133fa6b97bf3}{iconst\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_a86fd54b40b6c4273dba024fe9b7a7952}{iconst\+\_\+3\+\_\+impl},\hyperlink{interpretador_8h_abb2d4ce445b342e0942b9f9b65371c76}{iconst\+\_\+4\+\_\+impl},\hyperlink{interpretador_8h_ac0031c5baa3d8ff64cb88ca6a855feec}{iconst\+\_\+5\+\_\+impl},\hyperlink{interpretador_8h_a802706e71ae2c56e8e59b0d584869dc1}{lconst\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_a6e443ff4b7b9f4badb6d32f6dd91a3a2}{lconst\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_a50273d518316daabbc0871713b5d7f8d}{fconst\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_a2c0125d518a35e76fbb3ef58060fddda}{fconst\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_aaa3387a300dbde119c6279128556e20e}{fconst\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_a104648f40530e0e634d80be4652afbc1}{dconst\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_a1fb74cbfa46a9218e174890fb5f0d86b}{dconst\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_af8f40dfd4bef8eaa9ce50c11ff42a920}{bipush\+\_\+impl},\hyperlink{interpretador_8h_a38cb2454df139c79c92d2fb982ffb1eb}{sipush\+\_\+impl},\hyperlink{interpretador_8h_a8fa4e527838bfe11ed60319f2229c608}{ldc\+\_\+impl},\hyperlink{interpretador_8h_aa72cd615dc4d9ba8f911ea139673659a}{ldc\+\_\+w\+\_\+impl},\hyperlink{interpretador_8h_ad283d69d6829abd469d60bff05fdb6be}{ldc2\+\_\+w\+\_\+impl},\hyperlink{interpretador_8h_a6f18ae9c69ebc1f3246c12ba9e09c57e}{iload\+\_\+impl},\hyperlink{interpretador_8h_a26525d3852198808f8d40cbe19cfb68a}{lload\+\_\+impl},\hyperlink{interpretador_8h_aeccceb07371386773e64ee1659acc713}{fload\+\_\+impl},\hyperlink{interpretador_8h_a213891c361b08fff777d22e7546bf73a}{dload\+\_\+impl},\hyperlink{interpretador_8h_a145a6d19681aea4c56979d6eeb078685}{aload\+\_\+impl},\hyperlink{interpretador_8h_abad883afe8691ac323c9b4631f30e288}{iload\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_a635fd77daa27f202c8a89e2c049e93c8}{iload\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_a57a0a84bff66e28b9526e64490ed61df}{iload\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_ad068c16d9f771cd95a52e6b2371096e5}{iload\+\_\+3\+\_\+impl},\hyperlink{interpretador_8h_a7d2fe0564f02c5c8b1d8f1feef0727b6}{lload\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_a061ed113f47c50bed83f41a1d93bbf34}{lload\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_ad21216cbe7217efc0cc0b0fb82532cce}{lload\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_a658e1daac16dc1461687cbe8757353d2}{lload\+\_\+3\+\_\+impl},\hyperlink{interpretador_8h_a20b34422225386075d0fd374f404b1ab}{fload\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_a9a1d14105ac88f2ca03a59d34b5f7c93}{fload\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_ac6ee5f8ac8f360ce6675c605c6a2613d}{fload\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_ad4d9c64b1f1a73f6b7c8ef8c6a324312}{fload\+\_\+3\+\_\+impl},\hyperlink{interpretador_8h_a242bbddc5d0242a8d28c0091df3afd25}{dload\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_a1a374faa57a4cc24e848b21da02a760f}{dload\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_a9d3458db6dd1e2bdd2b0c30799040181}{dload\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_ad8ea310aac14e05c4e355e9d46e9b346}{dload\+\_\+3\+\_\+impl},\hyperlink{interpretador_8h_a6a7225d872c25470aa8eec6cc591c895}{aload\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_a4652410d06402e8cce2e5417e0845c30}{aload\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_a71254f7d48891d56a6cc3f4ad08d1d41}{aload\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_a496800f3432df63fb9add1d99f464b5a}{aload\+\_\+3\+\_\+impl},\hyperlink{interpretador_8h_a4317b6c2565acf2b5a1df811317376bf}{iaload\+\_\+impl},\hyperlink{interpretador_8h_a7d3e2cfef216af32e72ffb548ea69191}{laload\+\_\+impl},\hyperlink{interpretador_8h_af9bf72ea82392914d54f62abe6d4b289}{faload\+\_\+impl},\hyperlink{interpretador_8h_af596796f1f6461f4d39b71794fe71050}{daload\+\_\+impl},\hyperlink{interpretador_8h_a81efb674d368b1b7cd1f13ecffe60fbb}{aaload\+\_\+impl},\hyperlink{interpretador_8h_a83dca00976d35e93fa0ddd237cc5f91b}{baload\+\_\+impl},\hyperlink{interpretador_8h_a297fe28b6ec7391e434ad244769db61c}{caload\+\_\+impl},\hyperlink{interpretador_8h_a77e82e7ed352bc6ff7847368c8113240}{saload\+\_\+impl},\hyperlink{interpretador_8h_a9a225d0890893d78f80cc8ea44e62f78}{istore\+\_\+impl},\hyperlink{interpretador_8h_adfa0a1e28242a38214de6dd935de09b7}{lstore\+\_\+impl},\hyperlink{interpretador_8h_a43ee0d4b5e950af7885c4db56ad4b087}{fstore\+\_\+impl},\hyperlink{interpretador_8h_a546ba281a4830f91da8f14e7f9504f9e}{dstore\+\_\+impl},\hyperlink{interpretador_8h_a3661c6376e7a38711285d76ccff67e21}{astore\+\_\+impl},\hyperlink{interpretador_8h_ad8a12f32ed07b69f3d8a1ce083925d0c}{istore\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_a6741d6fc1529ed32040c71faf9d7cf6c}{istore\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_ac1bbbcb890d658614ab26cf903b12a15}{istore\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_a5c9bfd081c2070b3d47efe8f787505ca}{istore\+\_\+3\+\_\+impl},\hyperlink{interpretador_8h_a079ff822228ec6ace47b76c05af126b0}{lstore\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_af9f444d8eea65e909c6b6e1a2224df49}{lstore\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_adcd40ac04f459664418c5ccba4dcfced}{lstore\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_a3af05256d8e0e3fe4a417cb85d1e3b45}{lstore\+\_\+3\+\_\+impl},\hyperlink{interpretador_8h_a7c206c36ac21b4aab390d0916a106c5a}{fstore\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_a61eb6df4e96cc899d017d72fd60dd9a8}{fstore\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_ab1f0e2f19a93ccc056b11c7bd52c4868}{fstore\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_ae1efdda16fe70bc83bb0763c274d03eb}{fstore\+\_\+3\+\_\+impl},\hyperlink{interpretador_8h_a228e94f89c8d21c89e9555491833f06c}{dstore\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_ab7b583fa73175cec9b809869f6bcb6d7}{dstore\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_ac92a7cf411ab6f27474f045f1efd13da}{dstore\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_a90eb60e8644b236361d5423b713fdd04}{dstore\+\_\+3\+\_\+impl},\hyperlink{interpretador_8h_a660462617c8db6470c5e9eaa5180840a}{astore\+\_\+0\+\_\+impl},\hyperlink{interpretador_8h_ad6259597af1825de363aca99c1d690e2}{astore\+\_\+1\+\_\+impl},\hyperlink{interpretador_8h_a989f1d6762be63b958b8416de4a2323b}{astore\+\_\+2\+\_\+impl},\hyperlink{interpretador_8h_a67e0fe8e8e40640ba5efc488255330a1}{astore\+\_\+3\+\_\+impl},\hyperlink{interpretador_8h_ae5e28b56fbd67be6f05cc406e2f16bdb}{iastore\+\_\+impl},\hyperlink{interpretador_8h_a50a4ccc65ff39affcbf676e766dd55da}{lastore\+\_\+impl},\hyperlink{interpretador_8h_ace5a061102d5077e5039d04f3b854e0b}{fastore\+\_\+impl},\hyperlink{interpretador_8h_ae574aa3924c7e9c57897709d3815335e}{dastore\+\_\+impl},\hyperlink{interpretador_8h_a4fe9bcb72feb60add7c586246eddf52e}{aastore\+\_\+impl},\hyperlink{interpretador_8h_aa7cd9188ab992cae94e72e685fb103e4}{bastore\+\_\+impl},\hyperlink{interpretador_8h_acf696af3bbf65f0ab641d7d120fe5670}{castore\+\_\+impl},\hyperlink{interpretador_8h_a3d6f61024d9c30cc2500ff1b90f34da0}{sastore\+\_\+impl},\hyperlink{interpretador_8h_afe0b965ba161c43ab84311ce60bcd7b1}{pop\+\_\+fantasma},\hyperlink{interpretador_8h_a5d5d9f7d9f25958a289ba40568230656}{pop2\+\_\+fantasma},\hyperlink{interpretador_8h_a5c72b260142fecd7fc0ec12ce35515c6}{dup\+\_\+impl},\hyperlink{interpretador_8h_acffb66384efb4311498b8c7a9e1f7ff4}{dup\+\_\+x1\+\_\+impl},\hyperlink{interpretador_8h_a2482e44b5f613becb2436e2c123dbc76}{dup\+\_\+x2\+\_\+impl},\hyperlink{interpretador_8h_a3f971b8711545083caa71fa649b95fb8}{dup2\+\_\+impl},\hyperlink{interpretador_8h_a9dcf8edb64de0375b217e40c29cbba57}{dup2\+\_\+x1\+\_\+impl},\hyperlink{interpretador_8h_aff0c03ff461cf9d523b64132ed41ed7c}{dup2\+\_\+x2\+\_\+impl},\hyperlink{interpretador_8h_af98f0676775ed48469a2633f0a09478b}{swap\+\_\+impl},\hyperlink{interpretador_8h_ad45484fb26bbdf9a60795619a8f50981}{iadd\+\_\+impl},\hyperlink{interpretador_8h_aa094e784326f81f572073eb9445eb057}{ladd\+\_\+impl},\hyperlink{interpretador_8h_a77a6aeac5663834f5460612940a0f51d}{fadd\+\_\+impl},\hyperlink{interpretador_8h_ae6f56842741149ebd5ac110f2a307972}{dadd\+\_\+impl},\hyperlink{interpretador_8h_ad990c269df8b610b24a34652ddf741c2}{isub\+\_\+impl},\hyperlink{interpretador_8h_a17e84bfb4d38193031f9ebedce175396}{lsub\+\_\+impl},\hyperlink{interpretador_8h_ab6cba90dfad1b0a11c2405eb32d64b92}{fsub\+\_\+impl},\hyperlink{interpretador_8h_a21f898aa10a306505f761f6113f9a723}{dsub\+\_\+impl},\hyperlink{interpretador_8h_a539166b43200064f25aa828779b2248e}{imul\+\_\+impl},\hyperlink{interpretador_8h_add9dcf19722fff51e53dac6ebd4cccf6}{lmul\+\_\+impl},\hyperlink{interpretador_8h_a1ce433df1343ebda0889bb444e8b066d}{fmul\+\_\+impl},\hyperlink{interpretador_8h_aaf6d6e95f3257851d043c8b4229688a1}{dmul\+\_\+impl},\hyperlink{interpretador_8h_af58a4d50033215aa293e1765d60c7362}{idiv\+\_\+impl},\hyperlink{interpretador_8h_a365af6b9fcead8951f1a51560f05d734}{ldiv\+\_\+impl},\hyperlink{interpretador_8h_a229bd532a515a53cc810cf54cfc5d03c}{fdiv\+\_\+impl},\hyperlink{interpretador_8h_a7ef342a6607ed416665a8a138b1a5135}{ddiv\+\_\+impl},\hyperlink{interpretador_8h_a72d9b5a8d3788375fb6dc542efdf4f67}{irem\+\_\+impl},\hyperlink{interpretador_8h_ad252f7e5bb8f0420cfab9ea4accdb7e6}{lrem\+\_\+impl},\hyperlink{interpretador_8h_a8b0ab18f8673bd2431b5b5db149367e3}{frem\+\_\+impl},\hyperlink{interpretador_8h_ae3e2a06211d64d5b604052cbe015ed18}{drem\+\_\+impl},\hyperlink{interpretador_8h_ad538695dcaef32109c8f9f3160ba3311}{ineg\+\_\+impl},\hyperlink{interpretador_8h_a3a2e70892d2332edd0f31281a1260b8d}{lneg\+\_\+impl},\hyperlink{interpretador_8h_aa62689fef4a7ab406344f8a7f7235f18}{fneg\+\_\+impl},\hyperlink{interpretador_8h_af65fb5a382492545ccc1c5329d9b3350}{dneg\+\_\+impl},\hyperlink{interpretador_8h_a606b000dfb6a3aa787382d060731c3d3}{ishl\+\_\+impl},\hyperlink{interpretador_8h_ac591f3d96ca85ab9e73bbbca1f95f30f}{lshl\+\_\+impl},\hyperlink{interpretador_8h_a5949009a26f1f77377b823f6b4fe84eb}{ishr\+\_\+impl},\hyperlink{interpretador_8h_af1abb0e30df04c183306d25b9ca479b3}{lshr\+\_\+impl},\hyperlink{interpretador_8h_a74785de6d41a3d4d6d6a820c167638d1}{iushr\+\_\+impl},\hyperlink{interpretador_8h_aeec3ed72bc674702df23ebff4f583aaf}{lushr\+\_\+impl},\hyperlink{interpretador_8h_a2534236c1a824622d367f75c3bcad4de}{iand\+\_\+impl},\hyperlink{interpretador_8h_a97b392d390057f97e7e4e0e23ae31257}{land\+\_\+impl},\hyperlink{interpretador_8h_a3597201ca2e99a8b51c28fef06b42d4b}{ior\+\_\+impl},\hyperlink{interpretador_8h_a9b047849e495b882e8b0e53d907b9fdc}{lor\+\_\+impl},\hyperlink{interpretador_8h_aa0f15017ea1e86a34fd7cb0aaee40ee7}{ixor\+\_\+impl},\hyperlink{interpretador_8h_af270b0c9d76038c4f93b6a3563bbb033}{lxor\+\_\+impl},\hyperlink{interpretador_8h_ad5802ef6711babf3d30bd4aa5c8f39a6}{iinc\+\_\+fantasma},\hyperlink{interpretador_8h_acf6c9b6c939b98336957bc8ac9590983}{i2l\+\_\+impl},\hyperlink{interpretador_8h_ad0a572bf0fca1b29eb16bcdd6588caf6}{i2f\+\_\+impl},\hyperlink{interpretador_8h_a9e572f6e41989d1e4d408cea82c415ed}{i2d\+\_\+impl},\hyperlink{interpretador_8h_af1a64f96035ceb184ac4bba8b863f26b}{l2i\+\_\+impl},\hyperlink{interpretador_8h_a2bad246af55e0f9d982203e23a546372}{l2f\+\_\+impl},\hyperlink{interpretador_8h_aef38073bfab1128d8a6d3381d0d4f5bc}{l2d\+\_\+impl},\hyperlink{interpretador_8h_a3c9595ce3fe6bbe818896174810e8b03}{f2i\+\_\+impl},\hyperlink{interpretador_8h_a622192a82a602807629d5f13fb70c359}{f2l\+\_\+impl},\hyperlink{interpretador_8h_ac399948f2173d49596e01d7ad8205aae}{f2d\+\_\+impl},\hyperlink{interpretador_8h_adc3af1f21503b5b693b2432356d2005e}{d2i\+\_\+impl},\hyperlink{interpretador_8h_ac41dd421e58e6ae6665edbb89dc060c5}{d2l\+\_\+impl},\hyperlink{interpretador_8h_a52a92bfa0456ea29c98c5bcf2bf77815}{d2f\+\_\+impl},\hyperlink{interpretador_8h_a6d9e2120b5e9e0d2fa860cb2f56caccb}{i2b\+\_\+impl},\hyperlink{interpretador_8h_a4bd96d359b11905153230d5a707c787d}{i2c\+\_\+impl},\hyperlink{interpretador_8h_a3e7394eab6c6446efeaa8562837f218d}{i2s\+\_\+impl},\hyperlink{interpretador_8h_ad54c4c75df5ad40ac0d14c711a03df80}{lcmp\+\_\+impl},\hyperlink{interpretador_8h_a75f211f0c1ac8947336f5f4172b3b398}{fcmpl\+\_\+impl},\hyperlink{interpretador_8h_a897894b79f2792960a10e48209123968}{fcmpg\+\_\+impl},\hyperlink{interpretador_8h_aab8da156e51f2c3a9cb340555804a2f3}{dcmpl\+\_\+impl},\hyperlink{interpretador_8h_a4042c5d19193fd362a041bb29221e301}{dcmpg\+\_\+impl},\hyperlink{interpretador_8h_ada1340b4109ab76d1ed6447e4e5c7e23}{ifeq\+\_\+impl},\hyperlink{interpretador_8h_a9998489ee66b9d62ee35cd50cdf6da02}{ifne\+\_\+impl},\hyperlink{interpretador_8h_af8ca5bd8b11d2a4c49925c7147db7e16}{iflt\+\_\+impl},\hyperlink{interpretador_8h_a2bb56871f159ac7fa608dc5f0439b34b}{ifge\+\_\+impl},\hyperlink{interpretador_8h_a8ae29b80027d7066bd5a081762f86e5e}{ifgt\+\_\+impl},\hyperlink{interpretador_8h_aa292ed792da2c0de2496b2fb845065ba}{ifle\+\_\+impl},\hyperlink{interpretador_8h_a80de8734b16a0cdeaa88c8f39ef7f05b}{if\+\_\+icmpeq\+\_\+impl},\hyperlink{interpretador_8h_a172f845f64987a8645d0f5dff212dbfa}{if\+\_\+icmpne\+\_\+impl},\hyperlink{interpretador_8h_a0806f1823a8b8bdef3178e2ff3edc9c6}{if\+\_\+icmplt\+\_\+impl},\hyperlink{interpretador_8h_a0776aa7a045d8df3888e446225736bec}{if\+\_\+icmpge\+\_\+impl},\hyperlink{interpretador_8h_a8d0e31fe31ce2fab3822c3a487291457}{if\+\_\+icmpgt\+\_\+impl},\hyperlink{interpretador_8h_af925f59524692494cdaa27635289f902}{if\+\_\+icmple\+\_\+impl},\hyperlink{interpretador_8h_a94c6b614198b51ca7b501f1a8258de91}{acmpeq\+\_\+impl},\hyperlink{interpretador_8h_af9d7f5fa156f20cdf3af086d19280a3c}{acmpne\+\_\+impl},\hyperlink{interpretador_8h_a305b0bf7c28b62c9c6f70017022b3633}{inst\+\_\+goto\+\_\+impl},\hyperlink{interpretador_8h_a98987e332f6b30ac84ac362373867005}{jsr\+\_\+impl},\hyperlink{interpretador_8h_a2c07903f971f1e1dcd683e34b9f7a1b4}{ret\+\_\+impl},\hyperlink{interpretador_8h_a611c730b3076fa4f64b7150f478d11fa}{tableswitch\+\_\+fantasma},\hyperlink{interpretador_8h_a606daad16a33bad25801a8bfe446ee75}{lookupswitch\+\_\+fantasma},\hyperlink{interpretador_8h_ab4844be8e982644ff50e3109c64dffe5}{ireturn\+\_\+impl},\hyperlink{interpretador_8h_a13b3338c2d12b0b93c0ebe98bfe83137}{lreturn\+\_\+impl},\hyperlink{interpretador_8h_a89dd5594dc4783749c673ca58f7168f6}{freturn\+\_\+impl},\hyperlink{interpretador_8h_ae32f0aa5f2a60283cc9376463c30a663}{dreturn\+\_\+impl},\hyperlink{interpretador_8h_a3b5b4db342ffaeffd95ebca5f94a4ebd}{areturn\+\_\+impl},\hyperlink{interpretador_8h_a0a9b7c979432ec41b8a2c62389c7f90e}{inst\+\_\+return\+\_\+impl},\hyperlink{interpretador_8h_aab8bb241f38d5254b4eb6a8d098bebfb}{getstatic\+\_\+impl},\hyperlink{interpretador_8h_a81bc4af9e545ed38b0a62650bf2ead42}{putstatic\+\_\+impl},\hyperlink{interpretador_8h_a2b6a07c24ed0591525e7cc48b676b08c}{getfield\+\_\+impl},\hyperlink{interpretador_8h_abfed0b8cbb029920687b563bcdc45637}{putfield\+\_\+impl},\hyperlink{interpretador_8h_a87210c88c859a1e732355a7ead1e2638}{invokevirtual\+\_\+impl},\hyperlink{interpretador_8h_ac1f0ebb9e8dd948c2c9526f225e04f6f}{invokespecial\+\_\+impl},\hyperlink{interpretador_8h_ac62c789b89726a00edcab417648306be}{invokestatic\+\_\+impl},\hyperlink{interpretador_8h_a632fe944219d89caa74f26b2ae63cdea}{invokeinterface\+\_\+fantasma},\hyperlink{interpretador_8h_a97f52d4cd37463b92cff91f3ec0a5f0b}{invokedynamic\+\_\+fantasma},\hyperlink{interpretador_8h_af53dda1fb156ef04b805522fde9764ba}{inst\+\_\+new\+\_\+impl},\hyperlink{interpretador_8h_af89e1ba34999630cc234c3004691d6bb}{newarray\+\_\+impl},\hyperlink{interpretador_8h_ad785bc77cfa461ccadcae45434c18a6c}{anewarray\+\_\+impl},\hyperlink{interpretador_8h_a9e039ecddb87626dd1303b75f5cc0a2c}{arraylength\+\_\+impl},\hyperlink{interpretador_8h_abff62884e6fd16c56a9094c7016f56cd}{athrow\+\_\+impl},\hyperlink{interpretador_8h_a89ef7805bfe626784388a9c859208420}{checkcast\+\_\+impl},\hyperlink{interpretador_8h_a822ad98771fff6bf05700c6d65839e86}{instanceof\+\_\+impl},\hyperlink{interpretador_8h_a0fbca3c86969309fb78ce80b87e8528c}{monitorenter\+\_\+impl},\hyperlink{interpretador_8h_a8e2a21f4852259d8ea24e83601cded07}{monitorexit\+\_\+impl},\hyperlink{interpretador_8h_a6da8ed672cdb16eb3560267dacedbeb3}{wide\+\_\+impl},\hyperlink{interpretador_8h_af01a170230fbb7c76ac3f3ca2f3cb785}{multianewarray\+\_\+fantasma},\hyperlink{interpretador_8h_a372ce682f9d54faec78796a291bfdc95}{ifnull\+\_\+impl},\hyperlink{interpretador_8h_a8a01fb2800adc854f296282d0d7cf5c8}{ifnonnull\+\_\+impl},\hyperlink{interpretador_8h_a93ccb036273453537acc8dd0b9ef074c}{goto\+\_\+w\+\_\+impl},\hyperlink{interpretador_8h_afb926e678ecc929443794dd877319448}{jsr\+\_\+w\+\_\+impl}\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Arquivo cabeçalho contendo funções relacionadas à execução do arquivo. 
+
+
+
+\subsection{Funções}
+\index{jvm.\+c@{jvm.\+c}!atualizar\+P\+C\+Metodo\+Atual@{atualizar\+P\+C\+Metodo\+Atual}}
+\index{atualizar\+P\+C\+Metodo\+Atual@{atualizar\+P\+C\+Metodo\+Atual}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{atualizar\+P\+C\+Metodo\+Atual(u1 $\ast$code, u4 length)}{atualizarPCMetodoAtual(u1 *code, u4 length)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u1}$\ast$ atualizar\+P\+C\+Metodo\+Atual (
+\begin{DoxyParamCaption}
+\item[{{\bf u1} $\ast$}]{code, }
+\item[{{\bf u4}}]{length}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_aae70b67add7e68b5be88dc5ffc1128d7}{}\label{jvm_8c_aae70b67add7e68b5be88dc5ffc1128d7}
+
+
+Função para atualizar o PC, de acordo com a instrução branch previamente executada, verificando se o branch foi executado ou não. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em code} & Ponteiro para o code do método atual \\
+\hline
+{\em length} & Tamanho do código que deve ser analisado\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Retorna o valor atualizado de PC 
+\end{DoxyReturn}
+\index{jvm.\+c@{jvm.\+c}!criar\+Frame@{criar\+Frame}}
+\index{criar\+Frame@{criar\+Frame}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{criar\+Frame(char $\ast$classe\+Corrente, u2 max\+\_\+locals)}{criarFrame(char *classeCorrente, u2 max_locals)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf frame}$\ast$ criar\+Frame (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{classe\+Corrente, }
+\item[{{\bf u2}}]{max\+\_\+locals}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_aaaa91ab2001f62b4df3b5ef193e5fc51}{}\label{jvm_8c_aaaa91ab2001f62b4df3b5ef193e5fc51}
+
+
+Função para criar um frame e inicializar com os valores default. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em classe\+Corrente} & Nome da classe corrente do frame \\
+\hline
+{\em max\+\_\+locals} & Tamanho do vetor de variáveis locais do frame\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+A função retorna um ponteiro para uma estrutura frame alocada
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{Veja também}
+\hyperlink{structframe}{frame} 
+\end{DoxySeeAlso}
+\index{jvm.\+c@{jvm.\+c}!Criar\+J\+VM@{Criar\+J\+VM}}
+\index{Criar\+J\+VM@{Criar\+J\+VM}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{Criar\+J\+V\+M()}{CriarJVM()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf J\+VM}$\ast$ Criar\+J\+VM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_a8a7112ea88d395459941cbaafa51ea98}{}\label{jvm_8c_a8a7112ea88d395459941cbaafa51ea98}
+
+
+Função para inicializar a estrutura da J\+VM com nulo. 
+
+\begin{DoxyReturn}{Retorna}
+Retorna a estrutura da J\+VM setada para um ponteiro nulo 
+\end{DoxyReturn}
+\index{jvm.\+c@{jvm.\+c}!executar\+J\+VM@{executar\+J\+VM}}
+\index{executar\+J\+VM@{executar\+J\+VM}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{executar\+J\+V\+M()}{executarJVM()}}]{\setlength{\rightskip}{0pt plus 5cm}void executar\+J\+VM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_a713d35f536711d10380226694fa8721b}{}\label{jvm_8c_a713d35f536711d10380226694fa8721b}
+
+
+A função inicia a interpretação do arquivo .class, chamando outras funções da interpretação. 
+
+\index{jvm.\+c@{jvm.\+c}!executar\+Metodo@{executar\+Metodo}}
+\index{executar\+Metodo@{executar\+Metodo}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{executar\+Metodo(method\+\_\+info $\ast$m, char $\ast$classe\+Corrente, int chamador)}{executarMetodo(method_info *m, char *classeCorrente, int chamador)}}]{\setlength{\rightskip}{0pt plus 5cm}void executar\+Metodo (
+\begin{DoxyParamCaption}
+\item[{{\bf method\+\_\+info} $\ast$}]{m, }
+\item[{char $\ast$}]{classe\+Corrente, }
+\item[{int}]{chamador}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_a7597ae8a141cbaf8e5798ae021bf2d09}{}\label{jvm_8c_a7597ae8a141cbaf8e5798ae021bf2d09}
+
+
+Função que executa o código de um método. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em m} & Estrutura \hyperlink{structmethod__info}{method\+\_\+info} representando o método que deve ser executado \\
+\hline
+{\em classe\+Corrente} & Ponteiro para a classe corrente do método \\
+\hline
+{\em chamador} & Inteiro que é 1 se o chamador foi o arquivo da J\+VM, 2 se foi uma instrução do tipo invoke que vai executar um método \\
+\hline
+\end{DoxyParams}
+\index{jvm.\+c@{jvm.\+c}!free\+Vetor\+Locais@{free\+Vetor\+Locais}}
+\index{free\+Vetor\+Locais@{free\+Vetor\+Locais}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{free\+Vetor\+Locais(vetor\+\_\+locais $\ast$v, u2 vetor\+\_\+length)}{freeVetorLocais(vetor_locais *v, u2 vetor_length)}}]{\setlength{\rightskip}{0pt plus 5cm}void free\+Vetor\+Locais (
+\begin{DoxyParamCaption}
+\item[{{\bf vetor\+\_\+locais} $\ast$}]{v, }
+\item[{{\bf u2}}]{vetor\+\_\+length}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_a2ecf2c686f20ff7269d89c39263068eb}{}\label{jvm_8c_a2ecf2c686f20ff7269d89c39263068eb}
+
+
+Função para liberar o vetor de variáveis locais da memória. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em v} & Vetor do tipo {\ttfamily \hyperlink{structvetor__locais}{vetor\+\_\+locais}} que deve ser desalocado \\
+\hline
+{\em vetor\+\_\+length} & Tamanho do vetor que deve ser desalocado\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{Veja também}
+\hyperlink{structvetor__locais}{vetor\+\_\+locais} 
+\end{DoxySeeAlso}
+\index{jvm.\+c@{jvm.\+c}!Imprime\+Code@{Imprime\+Code}}
+\index{Imprime\+Code@{Imprime\+Code}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{Imprime\+Code(u1 $\ast$code, u4 length)}{ImprimeCode(u1 *code, u4 length)}}]{\setlength{\rightskip}{0pt plus 5cm}void Imprime\+Code (
+\begin{DoxyParamCaption}
+\item[{{\bf u1} $\ast$}]{code, }
+\item[{{\bf u4}}]{length}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_a5c2f00c1122f0d570ec59446d475bcc0}{}\label{jvm_8c_a5c2f00c1122f0d570ec59446d475bcc0}
+
+
+Função para imprimir um Atributo Code de um método. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em code} & Ponteiro para o código que deve ser impresso \\
+\hline
+{\em length} & Tamanho do código que deve ser percorrido\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{Veja também}
+code 
+\end{DoxySeeAlso}
+\index{jvm.\+c@{jvm.\+c}!Inicializar\+J\+VM@{Inicializar\+J\+VM}}
+\index{Inicializar\+J\+VM@{Inicializar\+J\+VM}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{Inicializar\+J\+V\+M()}{InicializarJVM()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf J\+VM}$\ast$ Inicializar\+J\+VM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_a296f9ddc212714719c49e4cfc0a3461e}{}\label{jvm_8c_a296f9ddc212714719c49e4cfc0a3461e}
+
+
+Função para inicializar a estrutura da J\+VM, alocando os campos da estrutura, e setando os valores iniciais. 
+
+\begin{DoxyReturn}{Retorna}
+A função retorna a estrutura da J\+VM alocada
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{Veja também}
+\hyperlink{jvm_8h_a36df1d3591b105d3d4e4e00e7ee9498c}{J\+VM} 
+\end{DoxySeeAlso}
+\index{jvm.\+c@{jvm.\+c}!instrucao\+Branch@{instrucao\+Branch}}
+\index{instrucao\+Branch@{instrucao\+Branch}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{instrucao\+Branch(char $\ast$nome\+Instrucao)}{instrucaoBranch(char *nomeInstrucao)}}]{\setlength{\rightskip}{0pt plus 5cm}bool instrucao\+Branch (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{nome\+Instrucao}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_a5a2fcaf7218407641523857cea5e8c05}{}\label{jvm_8c_a5a2fcaf7218407641523857cea5e8c05}
+
+
+Avalia se a instrução passada como parâmetro é uma instrução do tipo branch. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em nome\+Instrucao} & Nome da instrução sendo analisada \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+A função retorna um booleano, indicando se a instrução é uma instrução do tipo branch ou não. 
+\end{DoxyReturn}
+\index{jvm.\+c@{jvm.\+c}!interpretar\+Code@{interpretar\+Code}}
+\index{interpretar\+Code@{interpretar\+Code}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{interpretar\+Code(u1 $\ast$code, u4 length, method\+\_\+info $\ast$m)}{interpretarCode(u1 *code, u4 length, method_info *m)}}]{\setlength{\rightskip}{0pt plus 5cm}void interpretar\+Code (
+\begin{DoxyParamCaption}
+\item[{{\bf u1} $\ast$}]{code, }
+\item[{{\bf u4}}]{length, }
+\item[{{\bf method\+\_\+info} $\ast$}]{m}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_a312403d0b2928fc335e4cc57067ee029}{}\label{jvm_8c_a312403d0b2928fc335e4cc57067ee029}
+
+
+Função para interpretar as instruções do Code de um método. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em code} & Ponteiro para o código que deve ser interpretado \\
+\hline
+{\em length} & Tamanho do código que deve ser interpretado \\
+\hline
+{\em m} & Estrutura representando o método que deve ter seu code interpretado \\
+\hline
+\end{DoxyParams}
+\index{jvm.\+c@{jvm.\+c}!opcao\+Menu@{opcao\+Menu}}
+\index{opcao\+Menu@{opcao\+Menu}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{opcao\+Menu()}{opcaoMenu()}}]{\setlength{\rightskip}{0pt plus 5cm}int opcao\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_abc71d20bef45f0510b4fd6643a40ed52}{}\label{jvm_8c_abc71d20bef45f0510b4fd6643a40ed52}
+
+
+Função para apresentar o menu para o usuário. 
+
+\begin{DoxyReturn}{Retorna}
+Retorna um inteiro, representando a opção escolhida pelo usuário 
+\end{DoxyReturn}
+\index{jvm.\+c@{jvm.\+c}!verifica\+Handler\+Metodo@{verifica\+Handler\+Metodo}}
+\index{verifica\+Handler\+Metodo@{verifica\+Handler\+Metodo}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{verifica\+Handler\+Metodo(method\+\_\+info $\ast$m)}{verificaHandlerMetodo(method_info *m)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u2} verifica\+Handler\+Metodo (
+\begin{DoxyParamCaption}
+\item[{{\bf method\+\_\+info} $\ast$}]{m}
+\end{DoxyParamCaption}
+)}\hypertarget{jvm_8c_a042997c5708162db884ddcaec55d5d3e}{}\label{jvm_8c_a042997c5708162db884ddcaec55d5d3e}
+
+
+Função para encontrar em um método o PC do handler da exceção lançada na J\+VM. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em m} & A estrutura do método no qual o handler da exceção será buscado \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+A função retorna o PC do handler do método, ou o número máximo short, caso o handler não seja encontrado 
+\end{DoxyReturn}
+
+
+\subsection{Variáveis}
+\index{jvm.\+c@{jvm.\+c}!func\+\_\+ptr@{func\+\_\+ptr}}
+\index{func\+\_\+ptr@{func\+\_\+ptr}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{func\+\_\+ptr}{func_ptr}}]{\setlength{\rightskip}{0pt plus 5cm}void($\ast$ func\+\_\+ptr\mbox{[}202\mbox{]})({\bf frame} $\ast$, {\bf u1}, {\bf u1}) = \{{\bf nop\+\_\+impl},{\bf aconst\+\_\+null\+\_\+impl},{\bf iconst\+\_\+m1\+\_\+impl},{\bf iconst\+\_\+0\+\_\+impl},{\bf iconst\+\_\+1\+\_\+impl},{\bf iconst\+\_\+2\+\_\+impl},{\bf iconst\+\_\+3\+\_\+impl},{\bf iconst\+\_\+4\+\_\+impl},{\bf iconst\+\_\+5\+\_\+impl},{\bf lconst\+\_\+0\+\_\+impl},{\bf lconst\+\_\+1\+\_\+impl},{\bf fconst\+\_\+0\+\_\+impl},{\bf fconst\+\_\+1\+\_\+impl},{\bf fconst\+\_\+2\+\_\+impl},{\bf dconst\+\_\+0\+\_\+impl},{\bf dconst\+\_\+1\+\_\+impl},{\bf bipush\+\_\+impl},{\bf sipush\+\_\+impl},{\bf ldc\+\_\+impl},{\bf ldc\+\_\+w\+\_\+impl},{\bf ldc2\+\_\+w\+\_\+impl},{\bf iload\+\_\+impl},{\bf lload\+\_\+impl},{\bf fload\+\_\+impl},{\bf dload\+\_\+impl},{\bf aload\+\_\+impl},{\bf iload\+\_\+0\+\_\+impl},{\bf iload\+\_\+1\+\_\+impl},{\bf iload\+\_\+2\+\_\+impl},{\bf iload\+\_\+3\+\_\+impl},{\bf lload\+\_\+0\+\_\+impl},{\bf lload\+\_\+1\+\_\+impl},{\bf lload\+\_\+2\+\_\+impl},{\bf lload\+\_\+3\+\_\+impl},{\bf fload\+\_\+0\+\_\+impl},{\bf fload\+\_\+1\+\_\+impl},{\bf fload\+\_\+2\+\_\+impl},{\bf fload\+\_\+3\+\_\+impl},{\bf dload\+\_\+0\+\_\+impl},{\bf dload\+\_\+1\+\_\+impl},{\bf dload\+\_\+2\+\_\+impl},{\bf dload\+\_\+3\+\_\+impl},{\bf aload\+\_\+0\+\_\+impl},{\bf aload\+\_\+1\+\_\+impl},{\bf aload\+\_\+2\+\_\+impl},{\bf aload\+\_\+3\+\_\+impl},{\bf iaload\+\_\+impl},{\bf laload\+\_\+impl},{\bf faload\+\_\+impl},{\bf daload\+\_\+impl},{\bf aaload\+\_\+impl},{\bf baload\+\_\+impl},{\bf caload\+\_\+impl},{\bf saload\+\_\+impl},{\bf istore\+\_\+impl},{\bf lstore\+\_\+impl},{\bf fstore\+\_\+impl},{\bf dstore\+\_\+impl},{\bf astore\+\_\+impl},{\bf istore\+\_\+0\+\_\+impl},{\bf istore\+\_\+1\+\_\+impl},{\bf istore\+\_\+2\+\_\+impl},{\bf istore\+\_\+3\+\_\+impl},{\bf lstore\+\_\+0\+\_\+impl},{\bf lstore\+\_\+1\+\_\+impl},{\bf lstore\+\_\+2\+\_\+impl},{\bf lstore\+\_\+3\+\_\+impl},{\bf fstore\+\_\+0\+\_\+impl},{\bf fstore\+\_\+1\+\_\+impl},{\bf fstore\+\_\+2\+\_\+impl},{\bf fstore\+\_\+3\+\_\+impl},{\bf dstore\+\_\+0\+\_\+impl},{\bf dstore\+\_\+1\+\_\+impl},{\bf dstore\+\_\+2\+\_\+impl},{\bf dstore\+\_\+3\+\_\+impl},{\bf astore\+\_\+0\+\_\+impl},{\bf astore\+\_\+1\+\_\+impl},{\bf astore\+\_\+2\+\_\+impl},{\bf astore\+\_\+3\+\_\+impl},{\bf iastore\+\_\+impl},{\bf lastore\+\_\+impl},{\bf fastore\+\_\+impl},{\bf dastore\+\_\+impl},{\bf aastore\+\_\+impl},{\bf bastore\+\_\+impl},{\bf castore\+\_\+impl},{\bf sastore\+\_\+impl},{\bf pop\+\_\+fantasma},{\bf pop2\+\_\+fantasma},{\bf dup\+\_\+impl},{\bf dup\+\_\+x1\+\_\+impl},{\bf dup\+\_\+x2\+\_\+impl},{\bf dup2\+\_\+impl},{\bf dup2\+\_\+x1\+\_\+impl},{\bf dup2\+\_\+x2\+\_\+impl},{\bf swap\+\_\+impl},{\bf iadd\+\_\+impl},{\bf ladd\+\_\+impl},{\bf fadd\+\_\+impl},{\bf dadd\+\_\+impl},{\bf isub\+\_\+impl},{\bf lsub\+\_\+impl},{\bf fsub\+\_\+impl},{\bf dsub\+\_\+impl},{\bf imul\+\_\+impl},{\bf lmul\+\_\+impl},{\bf fmul\+\_\+impl},{\bf dmul\+\_\+impl},{\bf idiv\+\_\+impl},{\bf ldiv\+\_\+impl},{\bf fdiv\+\_\+impl},{\bf ddiv\+\_\+impl},{\bf irem\+\_\+impl},{\bf lrem\+\_\+impl},{\bf frem\+\_\+impl},{\bf drem\+\_\+impl},{\bf ineg\+\_\+impl},{\bf lneg\+\_\+impl},{\bf fneg\+\_\+impl},{\bf dneg\+\_\+impl},{\bf ishl\+\_\+impl},{\bf lshl\+\_\+impl},{\bf ishr\+\_\+impl},{\bf lshr\+\_\+impl},{\bf iushr\+\_\+impl},{\bf lushr\+\_\+impl},{\bf iand\+\_\+impl},{\bf land\+\_\+impl},{\bf ior\+\_\+impl},{\bf lor\+\_\+impl},{\bf ixor\+\_\+impl},{\bf lxor\+\_\+impl},{\bf iinc\+\_\+fantasma},{\bf i2l\+\_\+impl},{\bf i2f\+\_\+impl},{\bf i2d\+\_\+impl},{\bf l2i\+\_\+impl},{\bf l2f\+\_\+impl},{\bf l2d\+\_\+impl},{\bf f2i\+\_\+impl},{\bf f2l\+\_\+impl},{\bf f2d\+\_\+impl},{\bf d2i\+\_\+impl},{\bf d2l\+\_\+impl},{\bf d2f\+\_\+impl},{\bf i2b\+\_\+impl},{\bf i2c\+\_\+impl},{\bf i2s\+\_\+impl},{\bf lcmp\+\_\+impl},{\bf fcmpl\+\_\+impl},{\bf fcmpg\+\_\+impl},{\bf dcmpl\+\_\+impl},{\bf dcmpg\+\_\+impl},{\bf ifeq\+\_\+impl},{\bf ifne\+\_\+impl},{\bf iflt\+\_\+impl},{\bf ifge\+\_\+impl},{\bf ifgt\+\_\+impl},{\bf ifle\+\_\+impl},{\bf if\+\_\+icmpeq\+\_\+impl},{\bf if\+\_\+icmpne\+\_\+impl},{\bf if\+\_\+icmplt\+\_\+impl},{\bf if\+\_\+icmpge\+\_\+impl},{\bf if\+\_\+icmpgt\+\_\+impl},{\bf if\+\_\+icmple\+\_\+impl},{\bf acmpeq\+\_\+impl},{\bf acmpne\+\_\+impl},{\bf inst\+\_\+goto\+\_\+impl},{\bf jsr\+\_\+impl},{\bf ret\+\_\+impl},{\bf tableswitch\+\_\+fantasma},{\bf lookupswitch\+\_\+fantasma},{\bf ireturn\+\_\+impl},{\bf lreturn\+\_\+impl},{\bf freturn\+\_\+impl},{\bf dreturn\+\_\+impl},{\bf areturn\+\_\+impl},{\bf inst\+\_\+return\+\_\+impl},{\bf getstatic\+\_\+impl},{\bf putstatic\+\_\+impl},{\bf getfield\+\_\+impl},{\bf putfield\+\_\+impl},{\bf invokevirtual\+\_\+impl},{\bf invokespecial\+\_\+impl},{\bf invokestatic\+\_\+impl},{\bf invokeinterface\+\_\+fantasma},{\bf invokedynamic\+\_\+fantasma},{\bf inst\+\_\+new\+\_\+impl},{\bf newarray\+\_\+impl},{\bf anewarray\+\_\+impl},{\bf arraylength\+\_\+impl},{\bf athrow\+\_\+impl},{\bf checkcast\+\_\+impl},{\bf instanceof\+\_\+impl},{\bf monitorenter\+\_\+impl},{\bf monitorexit\+\_\+impl},{\bf wide\+\_\+impl},{\bf multianewarray\+\_\+fantasma},{\bf ifnull\+\_\+impl},{\bf ifnonnull\+\_\+impl},{\bf goto\+\_\+w\+\_\+impl},{\bf jsr\+\_\+w\+\_\+impl}\}}\hypertarget{jvm_8c_ae10e26f3963b2f4b36e36155c7edacbf}{}\label{jvm_8c_ae10e26f3963b2f4b36e36155c7edacbf}
+\index{jvm.\+c@{jvm.\+c}!instrucoes@{instrucoes}}
+\index{instrucoes@{instrucoes}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{instrucoes}{instrucoes}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf instrucao}$\ast$ instrucoes}\hypertarget{jvm_8c_aa7b71b2eb311631483ae2057257df739}{}\label{jvm_8c_aa7b71b2eb311631483ae2057257df739}
+\index{jvm.\+c@{jvm.\+c}!jvm@{jvm}}
+\index{jvm@{jvm}!jvm.\+c@{jvm.\+c}}
+\subsubsection[{\texorpdfstring{jvm}{jvm}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf J\+VM}$\ast$ {\bf jvm} = N\+U\+LL}\hypertarget{jvm_8c_aaadd6bd4e20642a7a34ea6db728289ae}{}\label{jvm_8c_aaadd6bd4e20642a7a34ea6db728289ae}
+Declarar as variáveis globais que serão utilizadas no processo de execução 

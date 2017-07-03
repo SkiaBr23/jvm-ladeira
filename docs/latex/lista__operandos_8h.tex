@@ -1,0 +1,397 @@
+\hypertarget{lista__operandos_8h}{}\section{Referência do Arquivo lista\+\_\+operandos.\+h}
+\label{lista__operandos_8h}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+
+
+Estrutura e cabeçalho da implementação da pilha de operandos do programa.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+\subsection*{Estruturas de Dados}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structlista__operandos}{lista\+\_\+operandos}
+\begin{DoxyCompactList}\small\item\em Estrutura de dados da lista de operandos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Definições e Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{lista__operandos_8h_a15b7b54f84c933d1dc59bc77919a3368}{T\+I\+P\+O\+S\+\_\+U}
+\item 
+\#define \hyperlink{lista__operandos_8h_ad925a154a9e05059e1d334f09e880332}{T\+I\+P\+O\+S\+\_\+I}
+\end{DoxyCompactItemize}
+\subsection*{Definições de Tipos}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint8\+\_\+t \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}
+\item 
+typedef uint16\+\_\+t \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2}
+\item 
+typedef uint32\+\_\+t \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4}
+\item 
+typedef uint64\+\_\+t \hyperlink{lista__operandos_8h_ae4d1c3d548028e31400378ec81026110}{u8}
+\item 
+typedef int8\+\_\+t \hyperlink{lista__operandos_8h_a6be0d08d5318753334c788d23128142e}{i1}
+\item 
+typedef int16\+\_\+t \hyperlink{lista__operandos_8h_a71fa27a2ba58296c5995f3f9b9af37e1}{i2}
+\item 
+typedef int32\+\_\+t \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4}
+\item 
+typedef int64\+\_\+t \hyperlink{lista__operandos_8h_abaef16ebba624387a2f4839b6ae159c5}{i8}
+\item 
+typedef struct \hyperlink{structlista__operandos}{lista\+\_\+operandos} \hyperlink{lista__operandos_8h_a94c550791dabb02566a383b410cd325a}{lista\+\_\+operandos}
+\item 
+typedef enum \hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31f}{tipos\+\_\+operandos} \hyperlink{lista__operandos_8h_a35d69375a4e0e6ad887acd3bacf494ef}{tipos\+\_\+operandos}
+\end{DoxyCompactItemize}
+\subsection*{Enumerações}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31f}{tipos\+\_\+operandos} \{ \\*
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa32ea4cf3e4933d06248caea66308f31c}{B\+O\+O\+L\+E\+A\+N\+\_\+\+OP} = 1, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa8640b25ef78414a830fed77ea87c1f32}{B\+Y\+T\+E\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa73bc4c034b269cf456bc2a901af8f099}{C\+H\+A\+R\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fafa5636644188507ef14e37e5f3302f90}{S\+H\+O\+R\+T\+\_\+\+OP}, 
+\\*
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa21e9fcac9a3a623a2da4139782e5b3eb}{I\+N\+T\+E\+G\+E\+R\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa230712e5b8cf4ca08b6d2a8aceb4f605}{F\+L\+O\+A\+T\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa272b982d18ad897b4d8d58347b48ae6f}{L\+O\+N\+G\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa9d7b0e1f016c303f827c81ab00297bdd}{D\+O\+U\+B\+L\+E\+\_\+\+OP}, 
+\\*
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fad177591f08eabd0ac4821477583a2017}{R\+E\+T\+U\+R\+N\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa7e1780a7fe80e9662c912c4dc0287c01}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31faf8e3811bfd6668cfc098279958413eb9}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fae9a2c5571ddfb44eb2567ac9963236f0}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP}, 
+\\*
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa43b9a6149589c90cf24a1fb522669636}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa650c71fd895bcba8a6d779007e5e1943}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fab1fe63c9bbc6a67bbaf7acfee4920e87}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fabb19c4623e7fc1894216dbc19f51d9dc}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+R\+T\+\_\+\+OP}, 
+\\*
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa2206d96b3a68e10ca3b87f199483a21f}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa9b7bc3d03300a17dcf0497a143643655}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP}, 
+\hyperlink{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa000e575ab2a8689d7461093a6c42b29e}{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+OP}
+ \}\begin{DoxyCompactList}\small\item\em Enumerador dos tipos de operando suportados pela lista de operandos do programa. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_a4f0e71ddfa31aa409ae0496b2cd27a5a}{Criar\+Lista\+\_\+operandos} ()
+\begin{DoxyCompactList}\small\item\em Inicializa uma lista de operandos. \end{DoxyCompactList}\item 
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_afc0999a6041d8f8dcbfa0805b3a6cc1b}{Inserir\+Inicio\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} operando, void $\ast$referencia, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
+\begin{DoxyCompactList}\small\item\em Insere um operando (valor ou referencia) no início da lista de operandos. \end{DoxyCompactList}\item 
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_a51e1cc54b0f0c6d2bbf79d3ad649210b}{Inserir\+Fim\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} operando, void $\ast$referencia, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
+\begin{DoxyCompactList}\small\item\em Insere um operando (valor ou referencia) no final da lista de operandos. \end{DoxyCompactList}\item 
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_aa9bbc289de84fb8d1b8ea40fb8ac510e}{Remover\+Inicio\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis)
+\begin{DoxyCompactList}\small\item\em Remove o operando (valor ou referencia) que está no início da lista de operandos. \end{DoxyCompactList}\item 
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_ae19c6f32bd26da6a53ec397057c18e89}{Remover\+Fim\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis)
+\begin{DoxyCompactList}\small\item\em Remove o operando (valor ou referencia) que está no final da lista de operandos. \end{DoxyCompactList}\item 
+void \hyperlink{lista__operandos_8h_ac3f471ef52b36ab62a4089ba235684dc}{Imprimir\+Lista\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis)
+\begin{DoxyCompactList}\small\item\em Imprime na tela uma representação textual da lista de operandos. \end{DoxyCompactList}\item 
+void \hyperlink{lista__operandos_8h_a9c412c67fcf57cf29f600fc6433a2dcd}{Liberar\+Lista\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis)
+\begin{DoxyCompactList}\small\item\em Libera a memória utilizada por toda a lista de operandos passada por argumento. \end{DoxyCompactList}\item 
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_a9beb167026ffb728ae33c99ef7773c4f}{Remover\+Elemento\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} operando, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
+\item 
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_a4ec017563a6ce7c74f40f9af8aab3943}{Buscar\+Elemento\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} operando, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
+\item 
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_aadadc29517d57ca747549d09fd6f3ff8}{Buscar\+Posicao\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, int posicao)
+\item 
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_aa49007dfb979ab20a47e6075c67522c7}{Inserir\+Posicao\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} operando, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando, int posicao)
+\item 
+\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$ \hyperlink{lista__operandos_8h_ae956cbc72aa01fc52533e8f6b6156691}{Remover\+Posicao\+\_\+operandos} (\hyperlink{structlista__operandos}{lista\+\_\+operandos} $\ast$lis, int posicao)
+\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Estrutura e cabeçalho da implementação da pilha de operandos do programa. 
+
+
+
+\subsection{Definições e macros}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!T\+I\+P\+O\+S\+\_\+I@{T\+I\+P\+O\+S\+\_\+I}}
+\index{T\+I\+P\+O\+S\+\_\+I@{T\+I\+P\+O\+S\+\_\+I}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{T\+I\+P\+O\+S\+\_\+I}{TIPOS_I}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+I\+P\+O\+S\+\_\+I}\hypertarget{lista__operandos_8h_ad925a154a9e05059e1d334f09e880332}{}\label{lista__operandos_8h_ad925a154a9e05059e1d334f09e880332}
+Definição dos tipos de inteiro com sinal utilizados \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!T\+I\+P\+O\+S\+\_\+U@{T\+I\+P\+O\+S\+\_\+U}}
+\index{T\+I\+P\+O\+S\+\_\+U@{T\+I\+P\+O\+S\+\_\+U}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{T\+I\+P\+O\+S\+\_\+U}{TIPOS_U}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+I\+P\+O\+S\+\_\+U}\hypertarget{lista__operandos_8h_a15b7b54f84c933d1dc59bc77919a3368}{}\label{lista__operandos_8h_a15b7b54f84c933d1dc59bc77919a3368}
+Definição dos tipos de inteiro sem sinal utilizados 
+
+\subsection{Definições dos tipos}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!i1@{i1}}
+\index{i1@{i1}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{i1}{i1}}]{\setlength{\rightskip}{0pt plus 5cm}typedef int8\+\_\+t {\bf i1}}\hypertarget{lista__operandos_8h_a6be0d08d5318753334c788d23128142e}{}\label{lista__operandos_8h_a6be0d08d5318753334c788d23128142e}
+Tipo {\ttfamily int} com sinal, de 8 bits \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!i2@{i2}}
+\index{i2@{i2}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{i2}{i2}}]{\setlength{\rightskip}{0pt plus 5cm}typedef int16\+\_\+t {\bf i2}}\hypertarget{lista__operandos_8h_a71fa27a2ba58296c5995f3f9b9af37e1}{}\label{lista__operandos_8h_a71fa27a2ba58296c5995f3f9b9af37e1}
+Tipo {\ttfamily int} com sinal, de 16 bits \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!i4@{i4}}
+\index{i4@{i4}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{i4}{i4}}]{\setlength{\rightskip}{0pt plus 5cm}typedef int32\+\_\+t {\bf i4}}\hypertarget{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{}\label{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}
+Tipo {\ttfamily int} com sinal, de 32 bits \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!i8@{i8}}
+\index{i8@{i8}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{i8}{i8}}]{\setlength{\rightskip}{0pt plus 5cm}typedef int64\+\_\+t {\bf i8}}\hypertarget{lista__operandos_8h_abaef16ebba624387a2f4839b6ae159c5}{}\label{lista__operandos_8h_abaef16ebba624387a2f4839b6ae159c5}
+Tipo {\ttfamily int} com sinal, de 64 bits \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!lista\+\_\+operandos@{lista\+\_\+operandos}}
+\index{lista\+\_\+operandos@{lista\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{lista\+\_\+operandos}{lista_operandos}}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf lista\+\_\+operandos} {\bf lista\+\_\+operandos}}\hypertarget{lista__operandos_8h_a94c550791dabb02566a383b410cd325a}{}\label{lista__operandos_8h_a94c550791dabb02566a383b410cd325a}
+Definição do tipo {\ttfamily \hyperlink{structlista__operandos}{lista\+\_\+operandos}} \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!tipos\+\_\+operandos@{tipos\+\_\+operandos}}
+\index{tipos\+\_\+operandos@{tipos\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{tipos\+\_\+operandos}{tipos_operandos}}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum {\bf tipos\+\_\+operandos} {\bf tipos\+\_\+operandos}}\hypertarget{lista__operandos_8h_a35d69375a4e0e6ad887acd3bacf494ef}{}\label{lista__operandos_8h_a35d69375a4e0e6ad887acd3bacf494ef}
+Definição do tipo tipos\+\_\+operandos \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!u1@{u1}}
+\index{u1@{u1}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{u1}{u1}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint8\+\_\+t {\bf u1}}\hypertarget{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{}\label{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}
+Tipo {\ttfamily unsigned} {\ttfamily int} de 8 bits \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!u2@{u2}}
+\index{u2@{u2}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{u2}{u2}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint16\+\_\+t {\bf u2}}\hypertarget{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{}\label{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}
+Tipo {\ttfamily unsigned} {\ttfamily int} de 16 bits \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!u4@{u4}}
+\index{u4@{u4}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{u4}{u4}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint32\+\_\+t {\bf u4}}\hypertarget{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{}\label{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}
+Tipo {\ttfamily unsigned} {\ttfamily int} de 32 bits \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!u8@{u8}}
+\index{u8@{u8}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{u8}{u8}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint64\+\_\+t {\bf u8}}\hypertarget{lista__operandos_8h_ae4d1c3d548028e31400378ec81026110}{}\label{lista__operandos_8h_ae4d1c3d548028e31400378ec81026110}
+Tipo {\ttfamily unsigned} {\ttfamily int} de 64 bits 
+
+\subsection{Enumerações}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!tipos\+\_\+operandos@{tipos\+\_\+operandos}}
+\index{tipos\+\_\+operandos@{tipos\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{tipos\+\_\+operandos}{tipos_operandos}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf tipos\+\_\+operandos}}\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31f}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31f}
+
+
+Enumerador dos tipos de operando suportados pela lista de operandos do programa. 
+
+O tipo de operando é utilizado nas operações de armazenamento e acesso na lista de operandos, no momento de alocação de memória e impressões/acessos à posições específicas. \begin{Desc}
+\item[Valores de enumerações]\par
+\begin{description}
+\index{B\+O\+O\+L\+E\+A\+N\+\_\+\+OP@{B\+O\+O\+L\+E\+A\+N\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!B\+O\+O\+L\+E\+A\+N\+\_\+\+OP@{B\+O\+O\+L\+E\+A\+N\+\_\+\+OP}}\item[{\em 
+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa32ea4cf3e4933d06248caea66308f31c}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa32ea4cf3e4933d06248caea66308f31c}
+}]\index{B\+Y\+T\+E\+\_\+\+OP@{B\+Y\+T\+E\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!B\+Y\+T\+E\+\_\+\+OP@{B\+Y\+T\+E\+\_\+\+OP}}\item[{\em 
+B\+Y\+T\+E\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa8640b25ef78414a830fed77ea87c1f32}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa8640b25ef78414a830fed77ea87c1f32}
+}]\index{C\+H\+A\+R\+\_\+\+OP@{C\+H\+A\+R\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!C\+H\+A\+R\+\_\+\+OP@{C\+H\+A\+R\+\_\+\+OP}}\item[{\em 
+C\+H\+A\+R\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa73bc4c034b269cf456bc2a901af8f099}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa73bc4c034b269cf456bc2a901af8f099}
+}]\index{S\+H\+O\+R\+T\+\_\+\+OP@{S\+H\+O\+R\+T\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!S\+H\+O\+R\+T\+\_\+\+OP@{S\+H\+O\+R\+T\+\_\+\+OP}}\item[{\em 
+S\+H\+O\+R\+T\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fafa5636644188507ef14e37e5f3302f90}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fafa5636644188507ef14e37e5f3302f90}
+}]\index{I\+N\+T\+E\+G\+E\+R\+\_\+\+OP@{I\+N\+T\+E\+G\+E\+R\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!I\+N\+T\+E\+G\+E\+R\+\_\+\+OP@{I\+N\+T\+E\+G\+E\+R\+\_\+\+OP}}\item[{\em 
+I\+N\+T\+E\+G\+E\+R\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa21e9fcac9a3a623a2da4139782e5b3eb}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa21e9fcac9a3a623a2da4139782e5b3eb}
+}]\index{F\+L\+O\+A\+T\+\_\+\+OP@{F\+L\+O\+A\+T\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!F\+L\+O\+A\+T\+\_\+\+OP@{F\+L\+O\+A\+T\+\_\+\+OP}}\item[{\em 
+F\+L\+O\+A\+T\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa230712e5b8cf4ca08b6d2a8aceb4f605}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa230712e5b8cf4ca08b6d2a8aceb4f605}
+}]\index{L\+O\+N\+G\+\_\+\+OP@{L\+O\+N\+G\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!L\+O\+N\+G\+\_\+\+OP@{L\+O\+N\+G\+\_\+\+OP}}\item[{\em 
+L\+O\+N\+G\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa272b982d18ad897b4d8d58347b48ae6f}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa272b982d18ad897b4d8d58347b48ae6f}
+}]\index{D\+O\+U\+B\+L\+E\+\_\+\+OP@{D\+O\+U\+B\+L\+E\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!D\+O\+U\+B\+L\+E\+\_\+\+OP@{D\+O\+U\+B\+L\+E\+\_\+\+OP}}\item[{\em 
+D\+O\+U\+B\+L\+E\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa9d7b0e1f016c303f827c81ab00297bdd}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa9d7b0e1f016c303f827c81ab00297bdd}
+}]\index{R\+E\+T\+U\+R\+N\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+OP@{R\+E\+T\+U\+R\+N\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+T\+U\+R\+N\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+OP@{R\+E\+T\+U\+R\+N\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+OP}}\item[{\em 
+R\+E\+T\+U\+R\+N\+\_\+\+A\+D\+D\+R\+E\+S\+S\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fad177591f08eabd0ac4821477583a2017}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fad177591f08eabd0ac4821477583a2017}
+}]\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+OP}}\item[{\em 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa7e1780a7fe80e9662c912c4dc0287c01}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa7e1780a7fe80e9662c912c4dc0287c01}
+}]\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP}}\item[{\em 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+O\+O\+L\+E\+A\+N\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31faf8e3811bfd6668cfc098279958413eb9}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31faf8e3811bfd6668cfc098279958413eb9}
+}]\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP}}\item[{\em 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+C\+H\+A\+R\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fae9a2c5571ddfb44eb2567ac9963236f0}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fae9a2c5571ddfb44eb2567ac9963236f0}
+}]\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP}}\item[{\em 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+F\+L\+O\+A\+T\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa43b9a6149589c90cf24a1fb522669636}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa43b9a6149589c90cf24a1fb522669636}
+}]\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP}}\item[{\em 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+D\+O\+U\+B\+L\+E\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa650c71fd895bcba8a6d779007e5e1943}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa650c71fd895bcba8a6d779007e5e1943}
+}]\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP}}\item[{\em 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+B\+Y\+T\+E\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fab1fe63c9bbc6a67bbaf7acfee4920e87}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fab1fe63c9bbc6a67bbaf7acfee4920e87}
+}]\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+R\+T\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+R\+T\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+R\+T\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+R\+T\+\_\+\+OP}}\item[{\em 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+S\+H\+O\+R\+T\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fabb19c4623e7fc1894216dbc19f51d9dc}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fabb19c4623e7fc1894216dbc19f51d9dc}
+}]\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP}}\item[{\em 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+I\+N\+T\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa2206d96b3a68e10ca3b87f199483a21f}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa2206d96b3a68e10ca3b87f199483a21f}
+}]\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP}}\item[{\em 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+L\+O\+N\+G\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa9b7bc3d03300a17dcf0497a143643655}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa9b7bc3d03300a17dcf0497a143643655}
+}]\index{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+OP}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+OP@{R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+OP}}\item[{\em 
+R\+E\+F\+E\+R\+E\+N\+C\+E\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+OP\hypertarget{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa000e575ab2a8689d7461093a6c42b29e}{}\label{lista__operandos_8h_a4e4626fe04fb7e693e4747300a58f31fa000e575ab2a8689d7461093a6c42b29e}
+}]\end{description}
+\end{Desc}
+
+
+\subsection{Funções}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Buscar\+Elemento\+\_\+operandos@{Buscar\+Elemento\+\_\+operandos}}
+\index{Buscar\+Elemento\+\_\+operandos@{Buscar\+Elemento\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Buscar\+Elemento\+\_\+operandos(lista\+\_\+operandos $\ast$lis, i4 operando, u1 tipo\+\_\+operando)}{BuscarElemento_operandos(lista_operandos *lis, i4 operando, u1 tipo_operando)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+operandos}$\ast$ Buscar\+Elemento\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+operandos} $\ast$}]{lis, }
+\item[{{\bf i4}}]{operando, }
+\item[{{\bf u1}}]{tipo\+\_\+operando}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_a4ec017563a6ce7c74f40f9af8aab3943}{}\label{lista__operandos_8h_a4ec017563a6ce7c74f40f9af8aab3943}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Buscar\+Posicao\+\_\+operandos@{Buscar\+Posicao\+\_\+operandos}}
+\index{Buscar\+Posicao\+\_\+operandos@{Buscar\+Posicao\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Buscar\+Posicao\+\_\+operandos(lista\+\_\+operandos $\ast$lis, int posicao)}{BuscarPosicao_operandos(lista_operandos *lis, int posicao)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+operandos}$\ast$ Buscar\+Posicao\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+operandos} $\ast$}]{lis, }
+\item[{int}]{posicao}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_aadadc29517d57ca747549d09fd6f3ff8}{}\label{lista__operandos_8h_aadadc29517d57ca747549d09fd6f3ff8}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Criar\+Lista\+\_\+operandos@{Criar\+Lista\+\_\+operandos}}
+\index{Criar\+Lista\+\_\+operandos@{Criar\+Lista\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Criar\+Lista\+\_\+operandos()}{CriarLista_operandos()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+operandos}$\ast$ Criar\+Lista\+\_\+operandos (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_a4f0e71ddfa31aa409ae0496b2cd27a5a}{}\label{lista__operandos_8h_a4f0e71ddfa31aa409ae0496b2cd27a5a}
+
+
+Inicializa uma lista de operandos. 
+
+A função cria uma lista de operandos sem valor e retorna o ponteiro para ela. \begin{DoxyReturn}{Retorna}
+Lista de operandos com valor nulo 
+\end{DoxyReturn}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Imprimir\+Lista\+\_\+operandos@{Imprimir\+Lista\+\_\+operandos}}
+\index{Imprimir\+Lista\+\_\+operandos@{Imprimir\+Lista\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Imprimir\+Lista\+\_\+operandos(lista\+\_\+operandos $\ast$lis)}{ImprimirLista_operandos(lista_operandos *lis)}}]{\setlength{\rightskip}{0pt plus 5cm}void Imprimir\+Lista\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+operandos} $\ast$}]{lis}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_ac3f471ef52b36ab62a4089ba235684dc}{}\label{lista__operandos_8h_ac3f471ef52b36ab62a4089ba235684dc}
+
+
+Imprime na tela uma representação textual da lista de operandos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro para a lista de operandos a ser impressa \\
+\hline
+\end{DoxyParams}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Inserir\+Fim\+\_\+operandos@{Inserir\+Fim\+\_\+operandos}}
+\index{Inserir\+Fim\+\_\+operandos@{Inserir\+Fim\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Inserir\+Fim\+\_\+operandos(lista\+\_\+operandos $\ast$lis, i4 operando, void $\ast$referencia, u1 tipo\+\_\+operando)}{InserirFim_operandos(lista_operandos *lis, i4 operando, void *referencia, u1 tipo_operando)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+operandos}$\ast$ Inserir\+Fim\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+operandos} $\ast$}]{lis, }
+\item[{{\bf i4}}]{operando, }
+\item[{void $\ast$}]{referencia, }
+\item[{{\bf u1}}]{tipo\+\_\+operando}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_a51e1cc54b0f0c6d2bbf79d3ad649210b}{}\label{lista__operandos_8h_a51e1cc54b0f0c6d2bbf79d3ad649210b}
+
+
+Insere um operando (valor ou referencia) no final da lista de operandos. 
+
+O tipo do operando é checado para que seja feita a inserção correta, e então é alocado um espaço na memória correspondente, atribuindo ao operando enviado. Apenas um tipo de operando deve ser enviado nesta função.
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro para a lista de operandos \\
+\hline
+{\em operando} & Operando de valor direto a ser inserido na lista \\
+\hline
+{\em referencia} & Operando de referência a ser inserido na lista \\
+\hline
+{\em tipo\+\_\+operando} & Definição do tipo de operando a ser inserido \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista de operandos após a inserção do novo operando 
+\end{DoxyReturn}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Inserir\+Inicio\+\_\+operandos@{Inserir\+Inicio\+\_\+operandos}}
+\index{Inserir\+Inicio\+\_\+operandos@{Inserir\+Inicio\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Inserir\+Inicio\+\_\+operandos(lista\+\_\+operandos $\ast$lis, i4 operando, void $\ast$referencia, u1 tipo\+\_\+operando)}{InserirInicio_operandos(lista_operandos *lis, i4 operando, void *referencia, u1 tipo_operando)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+operandos}$\ast$ Inserir\+Inicio\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+operandos} $\ast$}]{lis, }
+\item[{{\bf i4}}]{operando, }
+\item[{void $\ast$}]{referencia, }
+\item[{{\bf u1}}]{tipo\+\_\+operando}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_afc0999a6041d8f8dcbfa0805b3a6cc1b}{}\label{lista__operandos_8h_afc0999a6041d8f8dcbfa0805b3a6cc1b}
+
+
+Insere um operando (valor ou referencia) no início da lista de operandos. 
+
+O tipo do operando é checado para que seja feita a inserção correta, e então é alocado um espaço na memória correspondente, atribuindo ao operando enviado. Apenas um tipo de operando deve ser enviado nesta função.
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro para a lista de operandos \\
+\hline
+{\em operando} & Operando de valor direto a ser inserido na lista \\
+\hline
+{\em referencia} & Operando de referência a ser inserido na lista \\
+\hline
+{\em tipo\+\_\+operando} & Definição do tipo de operando a ser inserido \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a lista de operandos após a inserção do novo operando 
+\end{DoxyReturn}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Inserir\+Posicao\+\_\+operandos@{Inserir\+Posicao\+\_\+operandos}}
+\index{Inserir\+Posicao\+\_\+operandos@{Inserir\+Posicao\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Inserir\+Posicao\+\_\+operandos(lista\+\_\+operandos $\ast$lis, i4 operando, u1 tipo\+\_\+operando, int posicao)}{InserirPosicao_operandos(lista_operandos *lis, i4 operando, u1 tipo_operando, int posicao)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+operandos}$\ast$ Inserir\+Posicao\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+operandos} $\ast$}]{lis, }
+\item[{{\bf i4}}]{operando, }
+\item[{{\bf u1}}]{tipo\+\_\+operando, }
+\item[{int}]{posicao}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_aa49007dfb979ab20a47e6075c67522c7}{}\label{lista__operandos_8h_aa49007dfb979ab20a47e6075c67522c7}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Liberar\+Lista\+\_\+operandos@{Liberar\+Lista\+\_\+operandos}}
+\index{Liberar\+Lista\+\_\+operandos@{Liberar\+Lista\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Liberar\+Lista\+\_\+operandos(lista\+\_\+operandos $\ast$lis)}{LiberarLista_operandos(lista_operandos *lis)}}]{\setlength{\rightskip}{0pt plus 5cm}void Liberar\+Lista\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+operandos} $\ast$}]{lis}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_a9c412c67fcf57cf29f600fc6433a2dcd}{}\label{lista__operandos_8h_a9c412c67fcf57cf29f600fc6433a2dcd}
+
+
+Libera a memória utilizada por toda a lista de operandos passada por argumento. 
+
+A lista é iterada e cada elemento é liberado da memória com o comando {\ttfamily free(p)} 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro para a lista de operandos a ser liberada \\
+\hline
+\end{DoxyParams}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Remover\+Elemento\+\_\+operandos@{Remover\+Elemento\+\_\+operandos}}
+\index{Remover\+Elemento\+\_\+operandos@{Remover\+Elemento\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Remover\+Elemento\+\_\+operandos(lista\+\_\+operandos $\ast$lis, i4 operando, u1 tipo\+\_\+operando)}{RemoverElemento_operandos(lista_operandos *lis, i4 operando, u1 tipo_operando)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+operandos}$\ast$ Remover\+Elemento\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+operandos} $\ast$}]{lis, }
+\item[{{\bf i4}}]{operando, }
+\item[{{\bf u1}}]{tipo\+\_\+operando}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_a9beb167026ffb728ae33c99ef7773c4f}{}\label{lista__operandos_8h_a9beb167026ffb728ae33c99ef7773c4f}
+Não utilizadas \index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Remover\+Fim\+\_\+operandos@{Remover\+Fim\+\_\+operandos}}
+\index{Remover\+Fim\+\_\+operandos@{Remover\+Fim\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Remover\+Fim\+\_\+operandos(lista\+\_\+operandos $\ast$lis)}{RemoverFim_operandos(lista_operandos *lis)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+operandos}$\ast$ Remover\+Fim\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+operandos} $\ast$}]{lis}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_ae19c6f32bd26da6a53ec397057c18e89}{}\label{lista__operandos_8h_ae19c6f32bd26da6a53ec397057c18e89}
+
+
+Remove o operando (valor ou referencia) que está no final da lista de operandos. 
+
+O último operando da lista tem sua memória liberada, não fazendo a diferença nesse momento o tipo de operando armazenado pois toda a estrutura é liberada.
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro para a lista de operandos \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Lista de operandos com o último elemento removido 
+\end{DoxyReturn}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Remover\+Inicio\+\_\+operandos@{Remover\+Inicio\+\_\+operandos}}
+\index{Remover\+Inicio\+\_\+operandos@{Remover\+Inicio\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Remover\+Inicio\+\_\+operandos(lista\+\_\+operandos $\ast$lis)}{RemoverInicio_operandos(lista_operandos *lis)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+operandos}$\ast$ Remover\+Inicio\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+operandos} $\ast$}]{lis}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_aa9bbc289de84fb8d1b8ea40fb8ac510e}{}\label{lista__operandos_8h_aa9bbc289de84fb8d1b8ea40fb8ac510e}
+
+
+Remove o operando (valor ou referencia) que está no início da lista de operandos. 
+
+O primeiro operando da lista tem sua memória liberada, não fazendo a diferença nesse momento o tipo de operando armazenado pois toda a estrutura é liberada.
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro para a lista de operandos \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Lista de operandos com o primeiro elemento removido 
+\end{DoxyReturn}
+\index{lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}!Remover\+Posicao\+\_\+operandos@{Remover\+Posicao\+\_\+operandos}}
+\index{Remover\+Posicao\+\_\+operandos@{Remover\+Posicao\+\_\+operandos}!lista\+\_\+operandos.\+h@{lista\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Remover\+Posicao\+\_\+operandos(lista\+\_\+operandos $\ast$lis, int posicao)}{RemoverPosicao_operandos(lista_operandos *lis, int posicao)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lista\+\_\+operandos}$\ast$ Remover\+Posicao\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf lista\+\_\+operandos} $\ast$}]{lis, }
+\item[{int}]{posicao}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__operandos_8h_ae956cbc72aa01fc52533e8f6b6156691}{}\label{lista__operandos_8h_ae956cbc72aa01fc52533e8f6b6156691}

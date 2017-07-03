@@ -1,0 +1,48 @@
+\paragraph*{Professor Marcelo Ladeira}
+
+\paragraph*{Semestre\+: 2017/1}
+
+\paragraph*{Integrantes\+:}
+
+
+\begin{DoxyItemize}
+\item Eduardo Sousa 13/0108405
+\item Eduardo Schuabb 11/0010876
+\item Maximillian Xavier 12/0153271
+\item Murilo Medeiros 12/0130637
+\item Rafael Costa 12/0133253
+\end{DoxyItemize}
+
+\subsection*{Especificação}
+
+Esse trabalho foi realizado com base nas aulas e nos materiais do professor Marcelo Ladeira. A J\+VM (Java Virtual Machine), foi construída com base na parte anterior, que foi a construção do leitor e exibidor de um arquivo .class. A partir desse leitor, que possui as estruturas de uma classe já carregada, foi possivel montar as estruturas de run-\/time e dessa forma, a construção da J\+VM.
+
+\subsection*{Executando o programa}
+
+Para compilar os arquivos, é possivel executar o makefile com o comando
+
+\begin{quote}
+make \end{quote}
+
+
+Ou via compilação manual rodando o comando
+
+\begin{quote}
+gcc -\/std=c99 -\/\+Wall \hyperlink{structures_8h}{structures.\+h} \hyperlink{lista__operandos_8h}{lista\+\_\+operandos.\+h} \hyperlink{pilha__operandos_8h}{pilha\+\_\+operandos.\+h} \hyperlink{interpretador_8h}{interpretador.\+h} \hyperlink{lista__frames_8h}{lista\+\_\+frames.\+h} \hyperlink{pilha__frames_8h}{pilha\+\_\+frames.\+h} \hyperlink{classFileStruct_8h}{class\+File\+Struct.\+h} \hyperlink{instrucoes_8h}{instrucoes.\+h} \hyperlink{leitura_8h}{leitura.\+h} \hyperlink{lista__classes_8h}{lista\+\_\+classes.\+h} \hyperlink{jvm_8h}{jvm.\+h} \hyperlink{lista__operandos_8c}{lista\+\_\+operandos.\+c} \hyperlink{pilha__operandos_8c}{pilha\+\_\+operandos.\+c} \hyperlink{interpretador_8c}{interpretador.\+c} \hyperlink{lista__frames_8c}{lista\+\_\+frames.\+c} \hyperlink{pilha__frames_8c}{pilha\+\_\+frames.\+c} \hyperlink{instrucoes_8c}{instrucoes.\+c} \hyperlink{leitura_8c}{leitura.\+c} \hyperlink{lista__classes_8c}{lista\+\_\+classes.\+c} \hyperlink{jvm_8c}{jvm.\+c} \hyperlink{main_8c}{main.\+c} -\/lm \end{quote}
+
+
+Será gerado um arquivo executável (a.\+out em Linux, a.\+exe em Windows) que deve ser rodado passando um arquivo \char`\"{}.\+class\char`\"{} como no exemplo\+:
+
+\begin{quote}
+./a.out Main.\+class \end{quote}
+
+
+O usuario deve inserir o nome do arquivo de saida quando requisitado pelo programa. O programa imprime a saída na tela e neste arquivo.
+
+\subsection*{Projeto lógico da J\+VM}
+
+
+
+\subsection*{Diagrama de estruturas utilizadas}
+
+ 

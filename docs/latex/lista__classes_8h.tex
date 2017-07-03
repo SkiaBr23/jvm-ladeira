@@ -1,0 +1,271 @@
+\hypertarget{lista__classes_8h}{}\section{Referência do Arquivo lista\+\_\+classes.\+h}
+\label{lista__classes_8h}\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+
+
+Arquivo cabeçalho que contém a estrutura para armazenar a lista de classes carregadas.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}class\+File\+Struct.\+h\char`\"{}}\\*
+\subsection*{Estruturas de Dados}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structclassesCarregadas}{classes\+Carregadas}
+\begin{DoxyCompactList}\small\item\em Estrutura de dados da lista de classes carregadas no programa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Definições de Tipos}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structclassesCarregadas}{classes\+Carregadas} \hyperlink{lista__classes_8h_a693c247999d35728bd0c6a81350f714b}{classes\+Carregadas}
+\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$ \hyperlink{lista__classes_8h_a60b4fee666dc517813a5c7d6be2d881b}{Criar\+Lista\+\_\+classes} ()
+\begin{DoxyCompactList}\small\item\em Função para criar uma lista. \end{DoxyCompactList}\item 
+\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$ \hyperlink{lista__classes_8h_a8fa90fd36506ceaf5cde836d77eced25}{Inserir\+Fim\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, \hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File} $\ast$arquivo\+Class)
+\begin{DoxyCompactList}\small\item\em Função para inserir um elemento no fim da lista. \end{DoxyCompactList}\item 
+\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$ \hyperlink{lista__classes_8h_a02b37b59899d7aa45249864349507fb9}{Remover\+Fim\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis)
+\begin{DoxyCompactList}\small\item\em Função para remover um elemento do fim da lista. \end{DoxyCompactList}\item 
+\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$ \hyperlink{lista__classes_8h_a14122e823ae128b6bbbe04887308a0ca}{Remover\+Elemento\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, char $\ast$string)
+\begin{DoxyCompactList}\small\item\em Função para remover um elemento da lista. \end{DoxyCompactList}\item 
+\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$ \hyperlink{lista__classes_8h_aafc5fe146c0b29e710dfeae3989a9648}{Buscar\+Elemento\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, char $\ast$string)
+\begin{DoxyCompactList}\small\item\em Funçao para buscar um elemento na lista. \end{DoxyCompactList}\item 
+\hyperlink{structcp__info}{cp\+\_\+info} $\ast$ \hyperlink{lista__classes_8h_a86aba2d3490f16f5b8e982641d8005bb}{Buscar\+C\+P\+Classe\+Corrente\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, char $\ast$string)
+\begin{DoxyCompactList}\small\item\em Função que retorna a pool de constantes da classe corrente, passada como parâmetro. \end{DoxyCompactList}\item 
+\hyperlink{structmethod__info}{method\+\_\+info} $\ast$ \hyperlink{lista__classes_8h_ae87a6b48366ebffe49cb9e705f8c896d}{Buscar\+Method\+Classe\+Corrente\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, char $\ast$nome\+Classe, char $\ast$nome\+Metodo)
+\begin{DoxyCompactList}\small\item\em Função para buscar um método da classe corrente, passada como parâmetro. \end{DoxyCompactList}\item 
+void \hyperlink{lista__classes_8h_a6e1e13f14d233ba1e3398cf28f63e64f}{Imprimir\+Lista\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis)
+\begin{DoxyCompactList}\small\item\em Função para imprimir os elementos da lista de classes. \end{DoxyCompactList}\item 
+void \hyperlink{lista__classes_8h_aafe7a22cfa21c4ed801ccdc82b56b0ed}{Liberar\+Lista\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis)
+\begin{DoxyCompactList}\small\item\em Função para liberar uma lista da memória. \end{DoxyCompactList}\item 
+\hyperlink{structfield__info}{field\+\_\+info} $\ast$ \hyperlink{lista__classes_8h_aecf4550fb62164a78cf63d7311e66aff}{Buscar\+Field\+Classe\+Corrente\+\_\+classes} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$lis, char $\ast$nome\+Classe, char $\ast$nome\+Field)
+\begin{DoxyCompactList}\small\item\em Função para buscar um field da classe passada como parâmetro. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Arquivo cabeçalho que contém a estrutura para armazenar a lista de classes carregadas. 
+
+
+
+\subsection{Definições dos tipos}
+\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}!classes\+Carregadas@{classes\+Carregadas}}
+\index{classes\+Carregadas@{classes\+Carregadas}!lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+\subsubsection[{\texorpdfstring{classes\+Carregadas}{classesCarregadas}}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf classes\+Carregadas} {\bf classes\+Carregadas}}\hypertarget{lista__classes_8h_a693c247999d35728bd0c6a81350f714b}{}\label{lista__classes_8h_a693c247999d35728bd0c6a81350f714b}
+Definição do tipo {\ttfamily \hyperlink{structclassesCarregadas}{classes\+Carregadas}} 
+
+\subsection{Funções}
+\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}!Buscar\+C\+P\+Classe\+Corrente\+\_\+classes@{Buscar\+C\+P\+Classe\+Corrente\+\_\+classes}}
+\index{Buscar\+C\+P\+Classe\+Corrente\+\_\+classes@{Buscar\+C\+P\+Classe\+Corrente\+\_\+classes}!lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+\subsubsection[{\texorpdfstring{Buscar\+C\+P\+Classe\+Corrente\+\_\+classes(classes\+Carregadas $\ast$lis, char $\ast$string)}{BuscarCPClasseCorrente_classes(classesCarregadas *lis, char *string)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf cp\+\_\+info}$\ast$ Buscar\+C\+P\+Classe\+Corrente\+\_\+classes (
+\begin{DoxyParamCaption}
+\item[{{\bf classes\+Carregadas} $\ast$}]{lis, }
+\item[{char $\ast$}]{string}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__classes_8h_a86aba2d3490f16f5b8e982641d8005bb}{}\label{lista__classes_8h_a86aba2d3490f16f5b8e982641d8005bb}
+
+
+Função que retorna a pool de constantes da classe corrente, passada como parâmetro. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro apontando para o início da lista \\
+\hline
+{\em string} & Nome da classe cuja constant pool deve ser retornada\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Um ponteiro do tipo \hyperlink{structcp__info}{cp\+\_\+info} que é a constant pool da classe passada como parâmetro
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{Veja também}
+\hyperlink{structcp__info}{cp\+\_\+info} 
+\end{DoxySeeAlso}
+\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}!Buscar\+Elemento\+\_\+classes@{Buscar\+Elemento\+\_\+classes}}
+\index{Buscar\+Elemento\+\_\+classes@{Buscar\+Elemento\+\_\+classes}!lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+\subsubsection[{\texorpdfstring{Buscar\+Elemento\+\_\+classes(classes\+Carregadas $\ast$lis, char $\ast$string)}{BuscarElemento_classes(classesCarregadas *lis, char *string)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf classes\+Carregadas}$\ast$ Buscar\+Elemento\+\_\+classes (
+\begin{DoxyParamCaption}
+\item[{{\bf classes\+Carregadas} $\ast$}]{lis, }
+\item[{char $\ast$}]{string}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__classes_8h_aafc5fe146c0b29e710dfeae3989a9648}{}\label{lista__classes_8h_aafc5fe146c0b29e710dfeae3989a9648}
+
+
+Funçao para buscar um elemento na lista. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro apontando para o início da lista \\
+\hline
+{\em string} & Nome da classe que será buscada na lista\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+A função retorna o ponteiro para o elemento encontrado, ou um ponteiro nulo, caso o elemento não seja encontrado 
+\end{DoxyReturn}
+\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}!Buscar\+Field\+Classe\+Corrente\+\_\+classes@{Buscar\+Field\+Classe\+Corrente\+\_\+classes}}
+\index{Buscar\+Field\+Classe\+Corrente\+\_\+classes@{Buscar\+Field\+Classe\+Corrente\+\_\+classes}!lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+\subsubsection[{\texorpdfstring{Buscar\+Field\+Classe\+Corrente\+\_\+classes(classes\+Carregadas $\ast$lis, char $\ast$nome\+Classe, char $\ast$nome\+Field)}{BuscarFieldClasseCorrente_classes(classesCarregadas *lis, char *nomeClasse, char *nomeField)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf field\+\_\+info}$\ast$ Buscar\+Field\+Classe\+Corrente\+\_\+classes (
+\begin{DoxyParamCaption}
+\item[{{\bf classes\+Carregadas} $\ast$}]{lis, }
+\item[{char $\ast$}]{nome\+Classe, }
+\item[{char $\ast$}]{nome\+Field}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__classes_8h_aecf4550fb62164a78cf63d7311e66aff}{}\label{lista__classes_8h_aecf4550fb62164a78cf63d7311e66aff}
+
+
+Função para buscar um field da classe passada como parâmetro. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro apontando para o início da lista \\
+\hline
+{\em nome\+Classe} & Nome da classe que deve ter o field buscado \\
+\hline
+{\em nome\+Field} & Nome do field que deve ser buscado na classe \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Estrutura do field que foi buscado na classe
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{Veja também}
+\hyperlink{structfield__info}{field\+\_\+info} 
+\end{DoxySeeAlso}
+\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}!Buscar\+Method\+Classe\+Corrente\+\_\+classes@{Buscar\+Method\+Classe\+Corrente\+\_\+classes}}
+\index{Buscar\+Method\+Classe\+Corrente\+\_\+classes@{Buscar\+Method\+Classe\+Corrente\+\_\+classes}!lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+\subsubsection[{\texorpdfstring{Buscar\+Method\+Classe\+Corrente\+\_\+classes(classes\+Carregadas $\ast$lis, char $\ast$nome\+Classe, char $\ast$nome\+Metodo)}{BuscarMethodClasseCorrente_classes(classesCarregadas *lis, char *nomeClasse, char *nomeMetodo)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf method\+\_\+info}$\ast$ Buscar\+Method\+Classe\+Corrente\+\_\+classes (
+\begin{DoxyParamCaption}
+\item[{{\bf classes\+Carregadas} $\ast$}]{lis, }
+\item[{char $\ast$}]{nome\+Classe, }
+\item[{char $\ast$}]{nome\+Metodo}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__classes_8h_ae87a6b48366ebffe49cb9e705f8c896d}{}\label{lista__classes_8h_ae87a6b48366ebffe49cb9e705f8c896d}
+
+
+Função para buscar um método da classe corrente, passada como parâmetro. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro apontando para o início da lista \\
+\hline
+{\em nome\+Classe} & Nome da classe que contém o método que será buscado \\
+\hline
+{\em nome\+Metodo} & Nome do método que deve ser buscado na classe corrente \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Estrutura \hyperlink{structmethod__info}{method\+\_\+info} do método buscado
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{Veja também}
+\hyperlink{structmethod__info}{method\+\_\+info} 
+\end{DoxySeeAlso}
+\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}!Criar\+Lista\+\_\+classes@{Criar\+Lista\+\_\+classes}}
+\index{Criar\+Lista\+\_\+classes@{Criar\+Lista\+\_\+classes}!lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+\subsubsection[{\texorpdfstring{Criar\+Lista\+\_\+classes()}{CriarLista_classes()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf classes\+Carregadas}$\ast$ Criar\+Lista\+\_\+classes (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__classes_8h_a60b4fee666dc517813a5c7d6be2d881b}{}\label{lista__classes_8h_a60b4fee666dc517813a5c7d6be2d881b}
+
+
+Função para criar uma lista. 
+
+\begin{DoxyReturn}{Retorna}
+Retorna um ponteiro nulo 
+\end{DoxyReturn}
+\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}!Imprimir\+Lista\+\_\+classes@{Imprimir\+Lista\+\_\+classes}}
+\index{Imprimir\+Lista\+\_\+classes@{Imprimir\+Lista\+\_\+classes}!lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+\subsubsection[{\texorpdfstring{Imprimir\+Lista\+\_\+classes(classes\+Carregadas $\ast$lis)}{ImprimirLista_classes(classesCarregadas *lis)}}]{\setlength{\rightskip}{0pt plus 5cm}void Imprimir\+Lista\+\_\+classes (
+\begin{DoxyParamCaption}
+\item[{{\bf classes\+Carregadas} $\ast$}]{lis}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__classes_8h_a6e1e13f14d233ba1e3398cf28f63e64f}{}\label{lista__classes_8h_a6e1e13f14d233ba1e3398cf28f63e64f}
+
+
+Função para imprimir os elementos da lista de classes. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro apontando para o início da lista \\
+\hline
+\end{DoxyParams}
+\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}!Inserir\+Fim\+\_\+classes@{Inserir\+Fim\+\_\+classes}}
+\index{Inserir\+Fim\+\_\+classes@{Inserir\+Fim\+\_\+classes}!lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+\subsubsection[{\texorpdfstring{Inserir\+Fim\+\_\+classes(classes\+Carregadas $\ast$lis, Class\+File $\ast$arquivo\+Class)}{InserirFim_classes(classesCarregadas *lis, ClassFile *arquivoClass)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf classes\+Carregadas}$\ast$ Inserir\+Fim\+\_\+classes (
+\begin{DoxyParamCaption}
+\item[{{\bf classes\+Carregadas} $\ast$}]{lis, }
+\item[{{\bf Class\+File} $\ast$}]{arquivo\+Class}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__classes_8h_a8fa90fd36506ceaf5cde836d77eced25}{}\label{lista__classes_8h_a8fa90fd36506ceaf5cde836d77eced25}
+
+
+Função para inserir um elemento no fim da lista. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro apontando para o início da lista \\
+\hline
+{\em arquivo\+Class} & Ponteiro de Class\+File que deve ser inserido na lista\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+A função retorna o ponteiro para o início da lista, com a lista atualizada
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{Veja também}
+\hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File} 
+\end{DoxySeeAlso}
+\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}!Liberar\+Lista\+\_\+classes@{Liberar\+Lista\+\_\+classes}}
+\index{Liberar\+Lista\+\_\+classes@{Liberar\+Lista\+\_\+classes}!lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+\subsubsection[{\texorpdfstring{Liberar\+Lista\+\_\+classes(classes\+Carregadas $\ast$lis)}{LiberarLista_classes(classesCarregadas *lis)}}]{\setlength{\rightskip}{0pt plus 5cm}void Liberar\+Lista\+\_\+classes (
+\begin{DoxyParamCaption}
+\item[{{\bf classes\+Carregadas} $\ast$}]{lis}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__classes_8h_aafe7a22cfa21c4ed801ccdc82b56b0ed}{}\label{lista__classes_8h_aafe7a22cfa21c4ed801ccdc82b56b0ed}
+
+
+Função para liberar uma lista da memória. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro apontando para o início da lista \\
+\hline
+\end{DoxyParams}
+\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}!Remover\+Elemento\+\_\+classes@{Remover\+Elemento\+\_\+classes}}
+\index{Remover\+Elemento\+\_\+classes@{Remover\+Elemento\+\_\+classes}!lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+\subsubsection[{\texorpdfstring{Remover\+Elemento\+\_\+classes(classes\+Carregadas $\ast$lis, char $\ast$string)}{RemoverElemento_classes(classesCarregadas *lis, char *string)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf classes\+Carregadas}$\ast$ Remover\+Elemento\+\_\+classes (
+\begin{DoxyParamCaption}
+\item[{{\bf classes\+Carregadas} $\ast$}]{lis, }
+\item[{char $\ast$}]{string}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__classes_8h_a14122e823ae128b6bbbe04887308a0ca}{}\label{lista__classes_8h_a14122e823ae128b6bbbe04887308a0ca}
+
+
+Função para remover um elemento da lista. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro apontando para o início da lista \\
+\hline
+{\em string} & Nome da classe que será buscado, e então a classe será removida da lista\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+A função retorna o ponteiro para o início da lista, com a lista atualizada 
+\end{DoxyReturn}
+\index{lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}!Remover\+Fim\+\_\+classes@{Remover\+Fim\+\_\+classes}}
+\index{Remover\+Fim\+\_\+classes@{Remover\+Fim\+\_\+classes}!lista\+\_\+classes.\+h@{lista\+\_\+classes.\+h}}
+\subsubsection[{\texorpdfstring{Remover\+Fim\+\_\+classes(classes\+Carregadas $\ast$lis)}{RemoverFim_classes(classesCarregadas *lis)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf classes\+Carregadas}$\ast$ Remover\+Fim\+\_\+classes (
+\begin{DoxyParamCaption}
+\item[{{\bf classes\+Carregadas} $\ast$}]{lis}
+\end{DoxyParamCaption}
+)}\hypertarget{lista__classes_8h_a02b37b59899d7aa45249864349507fb9}{}\label{lista__classes_8h_a02b37b59899d7aa45249864349507fb9}
+
+
+Função para remover um elemento do fim da lista. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em lis} & Ponteiro apontando para o início da lista \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+A função retorna o ponteiro para o início da lista, com a lista atualizada 
+\end{DoxyReturn}

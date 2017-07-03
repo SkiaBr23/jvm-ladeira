@@ -1,0 +1,61 @@
+\hypertarget{classFileStruct_8h}{}\section{Referência do Arquivo class\+File\+Struct.\+h}
+\label{classFileStruct_8h}\index{class\+File\+Struct.\+h@{class\+File\+Struct.\+h}}
+
+
+Arquivo cabeçalho de definição da estrutura de Class\+File.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}structures.\+h\char`\"{}}\\*
+\subsection*{Estruturas de Dados}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structclassFile}{class\+File}
+\end{DoxyCompactItemize}
+\subsection*{Definições de Tipos}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structclassFile}{class\+File} \hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File}
+\begin{DoxyCompactList}\small\item\em Definição de tipo \textquotesingle{}Class\+File\textquotesingle{} para a estrutura. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Arquivo cabeçalho de definição da estrutura de Class\+File. 
+
+Definição da estrutura de Class\+File. Uma estrutura de um arquivo .class no Java possui as seguintes características\+: 
+\begin{DoxyCode}
+\hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} magic;
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} minor\_version;
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} major\_version;
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} constant\_pool\_count;
+\hyperlink{structcp__info}{cp\_info} constant\_pool[constant\_pool\_count];
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} \hyperlink{structures_8h_aaea667445c15617b5c6ad01f0e53b481}{access\_flags};
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} this\_class;
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} super\_class;
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} interfaces\_count;
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} interfaces[interfaces\_count];
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} fields\_count;
+\hyperlink{structfield__info}{field\_info} fields[fields\_count]; 
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} methods\_count;
+\hyperlink{structmethod__info}{method\_info} methods[methods\_count]; 
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} attributes\_count;
+\hyperlink{structattribute__info}{attribute\_info} attibutes[attributes\_count];
+\end{DoxyCode}
+
+
+Onde\+: 
+\begin{DoxyCode}
+\hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} = \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} -> uint8\_t
+\hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} = \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{short} -> uint16\_t
+\hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} = \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} -> uint32\_t
+\end{DoxyCode}
+ 
+
+\subsection{Definições dos tipos}
+\index{class\+File\+Struct.\+h@{class\+File\+Struct.\+h}!Class\+File@{Class\+File}}
+\index{Class\+File@{Class\+File}!class\+File\+Struct.\+h@{class\+File\+Struct.\+h}}
+\subsubsection[{\texorpdfstring{Class\+File}{ClassFile}}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf class\+File} {\bf Class\+File}}\hypertarget{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{}\label{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}
+
+
+Definição de tipo \textquotesingle{}Class\+File\textquotesingle{} para a estrutura. 
+

@@ -1,0 +1,223 @@
+\hypertarget{pilha__operandos_8h}{}\section{Referência do Arquivo pilha\+\_\+operandos.\+h}
+\label{pilha__operandos_8h}\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+
+
+Estrutura e cabeçalho da implementação da pilha de operandos.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$stdbool.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}lista\+\_\+operandos.\+h\char`\"{}}\\*
+\subsection*{Estruturas de Dados}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structpilha__operandos}{pilha\+\_\+operandos}
+\begin{DoxyCompactList}\small\item\em Estrutura de dados da pilha de operandos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Definições e Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{pilha__operandos_8h_a15b7b54f84c933d1dc59bc77919a3368}{T\+I\+P\+O\+S\+\_\+U}
+\end{DoxyCompactItemize}
+\subsection*{Definições de Tipos}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint8\+\_\+t \hyperlink{pilha__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1}
+\item 
+typedef uint16\+\_\+t \hyperlink{pilha__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2}
+\item 
+typedef uint32\+\_\+t \hyperlink{pilha__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4}
+\item 
+typedef uint64\+\_\+t \hyperlink{pilha__operandos_8h_ae4d1c3d548028e31400378ec81026110}{u8}
+\item 
+typedef struct \hyperlink{structpilha__operandos}{pilha\+\_\+operandos} \hyperlink{pilha__operandos_8h_a758e263072bb229c4f95c5996c938b00}{pilha\+\_\+operandos}
+\begin{DoxyCompactList}\small\item\em Definição de tipo \textquotesingle{}\hyperlink{structpilha__operandos}{pilha\+\_\+operandos}\textquotesingle{} para a estrutura. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$ \hyperlink{pilha__operandos_8h_aa3b2bde86d0b8c3ed4d1c4e32c047b8c}{Criar\+Pilha\+\_\+operandos} ()
+\begin{DoxyCompactList}\small\item\em Inicializa uma pilha de frames. \end{DoxyCompactList}\item 
+\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$ \hyperlink{pilha__operandos_8h_a4eda82fd56c755c0354c032a74d68a30}{Push\+\_\+operandos} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p, \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} operando, void $\ast$referencia, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} tipo\+\_\+operando)
+\begin{DoxyCompactList}\small\item\em Insere um operando no topo da pilha de operandos. \end{DoxyCompactList}\item 
+\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$ \hyperlink{pilha__operandos_8h_a1a305cf54da84e6754e19302713fa3c1}{Pop\+\_\+operandos} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
+\begin{DoxyCompactList}\small\item\em Remove o operando localizado no topo da pilha de operandos. \end{DoxyCompactList}\item 
+\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$ \hyperlink{pilha__operandos_8h_adaefdd5bf10228846ae7aa24d29d8757}{Topo\+\_\+operandos} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
+\begin{DoxyCompactList}\small\item\em Acessa o topo da pilha de operandos. \end{DoxyCompactList}\item 
+bool \hyperlink{pilha__operandos_8h_adfcc4bc1d942133ea35b7f5776f94549}{pilha\+Vazia} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
+\begin{DoxyCompactList}\small\item\em Verifica se a pilha de operandos está vazia. \end{DoxyCompactList}\item 
+void \hyperlink{pilha__operandos_8h_abaa4f790f229e0f7e6bd12cf3cd77952}{Imprimir\+Pilha\+\_\+operandos} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
+\begin{DoxyCompactList}\small\item\em Imprime na tela uma representação textual da pilha de operandos. \end{DoxyCompactList}\item 
+bool \hyperlink{pilha__operandos_8h_a3f29eb413998d19a727f107de0ce77cb}{print\+Vazio} (\hyperlink{structpilha__operandos}{pilha\+\_\+operandos} $\ast$p)
+\begin{DoxyCompactList}\small\item\em Verifica se o campo no topo da pilha de operandos é um salto de linha (na impressão) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descrição Detalhada}
+Estrutura e cabeçalho da implementação da pilha de operandos. 
+
+
+
+\subsection{Definições e macros}
+\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!T\+I\+P\+O\+S\+\_\+U@{T\+I\+P\+O\+S\+\_\+U}}
+\index{T\+I\+P\+O\+S\+\_\+U@{T\+I\+P\+O\+S\+\_\+U}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{T\+I\+P\+O\+S\+\_\+U}{TIPOS_U}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+I\+P\+O\+S\+\_\+U}\hypertarget{pilha__operandos_8h_a15b7b54f84c933d1dc59bc77919a3368}{}\label{pilha__operandos_8h_a15b7b54f84c933d1dc59bc77919a3368}
+Definição dos tipos de inteiro sem sinal utilizados 
+
+\subsection{Definições dos tipos}
+\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!pilha\+\_\+operandos@{pilha\+\_\+operandos}}
+\index{pilha\+\_\+operandos@{pilha\+\_\+operandos}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{pilha\+\_\+operandos}{pilha_operandos}}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf pilha\+\_\+operandos} {\bf pilha\+\_\+operandos}}\hypertarget{pilha__operandos_8h_a758e263072bb229c4f95c5996c938b00}{}\label{pilha__operandos_8h_a758e263072bb229c4f95c5996c938b00}
+
+
+Definição de tipo \textquotesingle{}\hyperlink{structpilha__operandos}{pilha\+\_\+operandos}\textquotesingle{} para a estrutura. 
+
+\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!u1@{u1}}
+\index{u1@{u1}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{u1}{u1}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint8\+\_\+t {\bf u1}}\hypertarget{pilha__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{}\label{pilha__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}
+Tipo {\ttfamily unsigned} {\ttfamily int} de 8 bits \index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!u2@{u2}}
+\index{u2@{u2}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{u2}{u2}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint16\+\_\+t {\bf u2}}\hypertarget{pilha__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{}\label{pilha__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}
+Tipo {\ttfamily unsigned} {\ttfamily int} de 16 bits \index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!u4@{u4}}
+\index{u4@{u4}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{u4}{u4}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint32\+\_\+t {\bf u4}}\hypertarget{pilha__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{}\label{pilha__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}
+Tipo {\ttfamily unsigned} {\ttfamily int} de 32 bits \index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!u8@{u8}}
+\index{u8@{u8}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{u8}{u8}}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint64\+\_\+t {\bf u8}}\hypertarget{pilha__operandos_8h_ae4d1c3d548028e31400378ec81026110}{}\label{pilha__operandos_8h_ae4d1c3d548028e31400378ec81026110}
+Tipo {\ttfamily unsigned} {\ttfamily int} de 64 bits 
+
+\subsection{Funções}
+\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!Criar\+Pilha\+\_\+operandos@{Criar\+Pilha\+\_\+operandos}}
+\index{Criar\+Pilha\+\_\+operandos@{Criar\+Pilha\+\_\+operandos}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Criar\+Pilha\+\_\+operandos()}{CriarPilha_operandos()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pilha\+\_\+operandos}$\ast$ Criar\+Pilha\+\_\+operandos (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{pilha__operandos_8h_aa3b2bde86d0b8c3ed4d1c4e32c047b8c}{}\label{pilha__operandos_8h_aa3b2bde86d0b8c3ed4d1c4e32c047b8c}
+
+
+Inicializa uma pilha de frames. 
+
+Esta função inicializa uma pilha de operandos vazia para utilização posterior \begin{DoxyReturn}{Retorna}
+Pilha de operandos com valor nulo 
+\end{DoxyReturn}
+\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!Imprimir\+Pilha\+\_\+operandos@{Imprimir\+Pilha\+\_\+operandos}}
+\index{Imprimir\+Pilha\+\_\+operandos@{Imprimir\+Pilha\+\_\+operandos}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Imprimir\+Pilha\+\_\+operandos(pilha\+\_\+operandos $\ast$p)}{ImprimirPilha_operandos(pilha_operandos *p)}}]{\setlength{\rightskip}{0pt plus 5cm}void Imprimir\+Pilha\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf pilha\+\_\+operandos} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{pilha__operandos_8h_abaa4f790f229e0f7e6bd12cf3cd77952}{}\label{pilha__operandos_8h_abaa4f790f229e0f7e6bd12cf3cd77952}
+
+
+Imprime na tela uma representação textual da pilha de operandos. 
+
+Esta função apenas invoca a função Imprimir\+Lista\+\_\+operandos do \hyperlink{lista__operandos_8h}{lista\+\_\+operandos.\+h}
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em p} & Ponteiro para a pilha de operandos a ser impressa \\
+\hline
+\end{DoxyParams}
+\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!pilha\+Vazia@{pilha\+Vazia}}
+\index{pilha\+Vazia@{pilha\+Vazia}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{pilha\+Vazia(pilha\+\_\+operandos $\ast$p)}{pilhaVazia(pilha_operandos *p)}}]{\setlength{\rightskip}{0pt plus 5cm}bool pilha\+Vazia (
+\begin{DoxyParamCaption}
+\item[{{\bf pilha\+\_\+operandos} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{pilha__operandos_8h_adfcc4bc1d942133ea35b7f5776f94549}{}\label{pilha__operandos_8h_adfcc4bc1d942133ea35b7f5776f94549}
+
+
+Verifica se a pilha de operandos está vazia. 
+
+A função checa se o topo da pilha contém o valor N\+U\+LO.
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em p} & Ponteiro para a pilha de operandos \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+booleano T\+R\+UE (pilha está vazia) ou F\+A\+L\+SE (pilha não está vazia) 
+\end{DoxyReturn}
+\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!Pop\+\_\+operandos@{Pop\+\_\+operandos}}
+\index{Pop\+\_\+operandos@{Pop\+\_\+operandos}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Pop\+\_\+operandos(pilha\+\_\+operandos $\ast$p)}{Pop_operandos(pilha_operandos *p)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pilha\+\_\+operandos}$\ast$ Pop\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf pilha\+\_\+operandos} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{pilha__operandos_8h_a1a305cf54da84e6754e19302713fa3c1}{}\label{pilha__operandos_8h_a1a305cf54da84e6754e19302713fa3c1}
+
+
+Remove o operando localizado no topo da pilha de operandos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em p} & Ponteiro para a pilha de operandos \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Pilha de operandos com o elemento do topo removido 
+\end{DoxyReturn}
+\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!print\+Vazio@{print\+Vazio}}
+\index{print\+Vazio@{print\+Vazio}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{print\+Vazio(pilha\+\_\+operandos $\ast$p)}{printVazio(pilha_operandos *p)}}]{\setlength{\rightskip}{0pt plus 5cm}bool print\+Vazio (
+\begin{DoxyParamCaption}
+\item[{{\bf pilha\+\_\+operandos} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{pilha__operandos_8h_a3f29eb413998d19a727f107de0ce77cb}{}\label{pilha__operandos_8h_a3f29eb413998d19a727f107de0ce77cb}
+
+
+Verifica se o campo no topo da pilha de operandos é um salto de linha (na impressão) 
+
+Algumas exceções podem imprimir um salto de linha, ou chamadas de {\ttfamily System.\+out.\+println} sem argumentos.
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em p} & Ponteiro para a pilha de operandos a ser verificada \\
+\hline
+\end{DoxyParams}
+\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!Push\+\_\+operandos@{Push\+\_\+operandos}}
+\index{Push\+\_\+operandos@{Push\+\_\+operandos}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Push\+\_\+operandos(pilha\+\_\+operandos $\ast$p, u4 operando, void $\ast$referencia, u1 tipo\+\_\+operando)}{Push_operandos(pilha_operandos *p, u4 operando, void *referencia, u1 tipo_operando)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pilha\+\_\+operandos}$\ast$ Push\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf pilha\+\_\+operandos} $\ast$}]{p, }
+\item[{{\bf u4}}]{operando, }
+\item[{void $\ast$}]{referencia, }
+\item[{{\bf u1}}]{tipo\+\_\+operando}
+\end{DoxyParamCaption}
+)}\hypertarget{pilha__operandos_8h_a4eda82fd56c755c0354c032a74d68a30}{}\label{pilha__operandos_8h_a4eda82fd56c755c0354c032a74d68a30}
+
+
+Insere um operando no topo da pilha de operandos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em p} & Ponteiro para a pilha de operandos \\
+\hline
+{\em operando} & Operando de valor direto a ser inserido na pilha \\
+\hline
+{\em referencia} & Operando de referência a ser inserido na lista \\
+\hline
+{\em tipo\+\_\+operando} & Definição do tipo de operando a ser inserido \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro para a pilha de operandos após a inserção do novo operando 
+\end{DoxyReturn}
+\index{pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}!Topo\+\_\+operandos@{Topo\+\_\+operandos}}
+\index{Topo\+\_\+operandos@{Topo\+\_\+operandos}!pilha\+\_\+operandos.\+h@{pilha\+\_\+operandos.\+h}}
+\subsubsection[{\texorpdfstring{Topo\+\_\+operandos(pilha\+\_\+operandos $\ast$p)}{Topo_operandos(pilha_operandos *p)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pilha\+\_\+operandos}$\ast$ Topo\+\_\+operandos (
+\begin{DoxyParamCaption}
+\item[{{\bf pilha\+\_\+operandos} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{pilha__operandos_8h_adaefdd5bf10228846ae7aa24d29d8757}{}\label{pilha__operandos_8h_adaefdd5bf10228846ae7aa24d29d8757}
+
+
+Acessa o topo da pilha de operandos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em p} & Ponteiro para a pilha de operandos \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Retorna}
+Ponteiro referente ao topo da pilha 
+\end{DoxyReturn}
