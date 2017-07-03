@@ -8,7 +8,7 @@ var searchData=
   ['local_5fvariables',['local_variables',['../structlocalVariableTable__attributes.html#a78911369e8a4c58d93f579613144a8c2',1,'localVariableTable_attributes::local_variables()'],['../structlocalVariableTypeTable.html#acb5bcd42df545b2aeb7517e01e1b5ed0',1,'localVariableTypeTable::local_variables()']]],
   ['locals',['locals',['../structstack__map__frame.html#a0f20c63cb736738c8cf6c7e4ba59c070',1,'stack_map_frame']]],
   ['long',['Long',['../structcp__info.html#a0275ac98f14502226fcc7be5f3b618ed',1,'cp_info']]],
-  ['long_5fvariable_5finfo',['long_variable_info',['../structverification__type__info.html#a6dddbb4250cda83faf00d2dbe869c4b6',1,'verification_type_info']]],
-  ['low',['low',['../structfield__info.html#a578a358c12b99b512974ff10295582be',1,'field_info']]],
+  ['long_5fvariable_5finfo',['long_variable_info',['../structverification__type__info.html#ae205fc70c729fd4a92d31af0becd819d',1,'verification_type_info']]],
+  ['low',['low',['../structstaticData.html#a6c801d8dfb13f581177419b886e185b7',1,'staticData']]],
   ['low_5fbytes',['low_bytes',['../structcp__info.html#aff872b9dcff18e083ca9f73ef82ab14f',1,'cp_info']]]
 ];

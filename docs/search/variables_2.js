@@ -1,7 +1,7 @@
 var searchData=
 [
   ['catch_5ftype',['catch_type',['../structexception__table.html#ade50b30a987f3d3452a6de69eee0ada5',1,'exception_table']]],
-  ['chop_5fframe',['chop_frame',['../structstack__map__frame.html#a91903af38a05776c1f3c9993b5273f83',1,'stack_map_frame']]],
+  ['chop_5fframe',['chop_frame',['../structstack__map__frame.html#a27a14f523a1397381684cbb47c8a241f',1,'stack_map_frame']]],
   ['class',['Class',['../structcp__info.html#aa2cc42e313a1550a5f5e8c0d7ffc58ee',1,'cp_info']]],
   ['class_5findex',['class_index',['../structcp__info.html#a1c7c3f3e2f9a620669b5f5cc51249ef8',1,'cp_info::class_index()'],['../structenclosingMethod__attribute.html#a3f2ebf2e90b6eb973e3fc92d88307c06',1,'enclosingMethod_attribute::class_index()']]],
   ['classecorrente',['classeCorrente',['../structframe.html#a9c7ccb24c4cc2e9c8e17f1f5e9809211',1,'frame']]],

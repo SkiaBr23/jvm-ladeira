@@ -343,14 +343,14 @@ u2 verificaHandlerMetodo(method_info *m){
 		// Se não encontrar o handler, desempilhar o frame corrente da pilha de frames e retornar -INT_MAX para indicar que o handler não foi encontrado
 		// Desalocar operandos
 		while(jvm->frames->topo->f->p->topo!=NULL){
-			pilha_operandos *removido = Pop_operandos(jvm->frames->topo->f->p);
+			Pop_operandos(jvm->frames->topo->f->p);
 		}
 
 		// Desalocar vetor
 		freeVetorLocais(jvm->frames->topo->f->v,jvm->frames->topo->f->vetor_length);
 
 		// Desempilhar o frame
-		pilha_frames *removido = Pop_frames(jvm->frames);
+		Pop_frames(jvm->frames);
 	}
 
 	// Retornar USHRT_MAX para indicar que o handler não foi encontrado

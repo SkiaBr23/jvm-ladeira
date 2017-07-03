@@ -7,7 +7,7 @@ var searchData=
   ['major_5fversion',['major_version',['../structclassFile.html#a3765d2f6ef5f54e8e2c554afadb795f6',1,'classFile']]],
   ['mantissa',['mantissa',['../structures_8h.html#accc2e5821ce816129805ed1c55102ef5',1,'structures.h']]],
   ['mantissa_5fd',['mantissa_d',['../structures_8h.html#a49bc2edc17642c90385b20da22cef65b',1,'structures.h']]],
-  ['map_5fframe_5ftype',['map_frame_type',['../structstack__map__frame.html#ae487d6986750a023b9dfef9b10b2c5c8',1,'stack_map_frame']]],
+  ['map_5fframe_5ftype',['map_frame_type',['../structstack__map__frame.html#aa924e6fab46f29a756e2649da800a419',1,'stack_map_frame']]],
   ['max_5flocals',['max_locals',['../structcode__attribute.html#ab75487f3c1d38f9fb6ad5e71ab99dea2',1,'code_attribute']]],
   ['max_5fstack',['max_stack',['../structcode__attribute.html#abd4d398c165a4e91f3ea559808931473',1,'code_attribute']]],
   ['maxu1',['MAXU1',['../structures_8h.html#a460d8c84503828433ddece54d19f3149',1,'structures.h']]],
@@ -26,5 +26,6 @@ var searchData=
   ['monitorexit',['monitorexit',['../instrucoes_8h.html#aa19b38b70e34a2bf9af3be5aba356668a0b0e8dee962d999a45485c82fdcc6266',1,'instrucoes.h']]],
   ['monitorexit_5fimpl',['monitorexit_impl',['../interpretador_8c.html#a8e2a21f4852259d8ea24e83601cded07',1,'monitorexit_impl(frame *f, u1 par1, u1 par2):&#160;interpretador.c'],['../interpretador_8h.html#a8e2a21f4852259d8ea24e83601cded07',1,'monitorexit_impl(frame *f, u1 par1, u1 par2):&#160;interpretador.c']]],
   ['multianewarray',['multianewarray',['../instrucoes_8h.html#aa19b38b70e34a2bf9af3be5aba356668a1df6aaf4e9442d8b1272e6932537327a',1,'instrucoes.h']]],
-  ['multianewarray_5fimpl',['multianewarray_impl',['../interpretador_8c.html#a0aa9c7c347ecce171ac8590b0b4b4162',1,'multianewarray_impl(frame *f, u1 par1, u1 par2):&#160;interpretador.c'],['../interpretador_8h.html#a0aa9c7c347ecce171ac8590b0b4b4162',1,'multianewarray_impl(frame *f, u1 par1, u1 par2):&#160;interpretador.c']]]
+  ['multianewarray_5ffantasma',['multianewarray_fantasma',['../interpretador_8c.html#af01a170230fbb7c76ac3f3ca2f3cb785',1,'multianewarray_fantasma(frame *f, u1 par1, u1 par2):&#160;interpretador.c'],['../interpretador_8h.html#af01a170230fbb7c76ac3f3ca2f3cb785',1,'multianewarray_fantasma(frame *f, u1 par1, u1 par2):&#160;interpretador.c']]],
+  ['multianewarray_5fimpl',['multianewarray_impl',['../interpretador_8c.html#a478cae9b4e76cac306adc32b2b129504',1,'multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions):&#160;interpretador.c'],['../interpretador_8h.html#a478cae9b4e76cac306adc32b2b129504',1,'multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions):&#160;interpretador.c']]]
 ];

@@ -354,7 +354,7 @@ method_info * lerMethod (FILE * fp, u2 methods_count, cp_info *cp) {
 }
 
 char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *instrucoes){
-	u1 *aux=NULL,*aux3=NULL;
+	u1 *aux=NULL,*aux3=NULL,*aux5=NULL,*aux7=NULL, *aux_inc1=NULL, *aux_inc2=NULL;
 	char *retorno = (char*)malloc(10000*sizeof(char));
 	char *stringaux = (char*)malloc(100*sizeof(char));
 	u2 *aux2=NULL,*aux4=NULL;
@@ -364,13 +364,17 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 	char *stringargs=NULL;
 	char *stringdecod=NULL;
 	strcpy(retorno,"");
+	int pc = 0;
 
 	for(aux=code;aux<code+length;){
 		int numarg = instrucoes[*aux].numarg;
 		int opcode = instrucoes[*aux].opcode;
 		char *nomeinst = malloc(100*sizeof(char));
+		sprintf(stringaux,"%d ",pc);
+		strcat(retorno,stringaux);
 		strcpy(nomeinst,instrucoes[*aux].inst_nome);
 		strcat(retorno,instrucoes[*aux].inst_nome);
+		pc+=instrucoes[*aux].pc_instrucao;
 		switch(numarg){
 			case 0:
 				if(opcode==wide){
@@ -407,13 +411,53 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				aux++;
 			break;
 			case 1:
-				if(opcode==bipush || opcode==istore || opcode == iload){
+				if(opcode==bipush || opcode==istore || opcode == iload || opcode == lstore || opcode == lload || opcode == fstore || opcode == fload || opcode == dstore || opcode == dload){
 					sprintf(stringaux," %d\n",*(++aux));
+					strcat(retorno,stringaux);
+				}
+				else if(opcode == newarray){
+					aux3 = (u1*) malloc(sizeof(u1));
+					*aux3 = *(++aux);
+					sprintf(stringaux," %d ",*aux3);
+					switch(*aux3){
+						case T_BOOLEAN:
+							strcat(stringaux,"(boolean)\n");
+						break;
+
+						case T_CHAR:
+							strcat(stringaux,"(char)\n");
+						break;
+
+						case T_FLOAT:
+							strcat(stringaux,"(float)\n");
+						break;
+
+						case T_DOUBLE:
+							strcat(stringaux,"(double)\n");
+						break;
+
+						case T_BYTE:
+							strcat(stringaux,"(byte)\n");
+						break;
+
+						case T_SHORT:
+							strcat(stringaux,"(short)\n");
+						break;
+
+						case T_INT:
+							strcat(stringaux,"(int)\n");
+						break;
+
+						case T_LONG:
+							strcat(stringaux,"(long)\n");
+						break;
+					}
+
 					strcat(retorno,stringaux);
 				}
 
 				else{
-					sprintf(stringaux," %d ",*(++aux));
+					sprintf(stringaux,"%d ",*(++aux));
 					strcat(retorno," #");
 					strcat(retorno,stringaux);
 					stringdecod = decodificarOperandoInstrucao(cp,*aux,sizeCP);
@@ -426,7 +470,31 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 			case 2:
 
 				if(opcode==iinc){
-					sprintf(stringaux," %d by %d\n",*(++aux),*(++aux));
+					aux_inc1 = (u1 *) malloc(sizeof(u1));
+					*aux_inc1 = *(++aux);
+					aux_inc2 = (u1 *) malloc(sizeof(u1));
+					*aux_inc2 = *(++aux);
+
+
+					sprintf(stringaux," %d by %d\n",*(aux_inc1),*(aux_inc2));
+					strcat(retorno,stringaux);
+				}
+				else if(opcode==ifeq || opcode==ifne || opcode==iflt || opcode==ifge || opcode==ifgt || opcode==ifle || opcode==if_icmpeq || opcode==if_icmpne || opcode==if_icmplt || opcode==if_icmpge || opcode==if_icmpgt || opcode==if_icmple){
+					aux3 = (u1 *) malloc(sizeof(u1));
+					aux5 = (u1 *) malloc(sizeof(u1));
+					aux7 = (u1 *) malloc(sizeof(u1));
+					*aux7 = pc-instrucoes[*aux].pc_instrucao;
+					*aux3 = (u1) *(++aux);
+					*aux5 = (u1) *(++aux);
+
+					*aux3 = (*aux5)+(*aux7);
+
+					if(*aux3<*aux7){
+						sprintf(stringaux," %d (-%d)\n",*aux3,*aux5);
+					}
+					else{
+						sprintf(stringaux," %d (+%d)\n",*aux3,*aux5);
+					}
 					strcat(retorno,stringaux);
 				}
 				else{
@@ -460,9 +528,9 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				strcat(retorno,stringaux);
 				strcat(retorno," ");
 				strcat(retorno,stringargs);
-				aux3 = (u2*) malloc(sizeof(u2));
-				*aux3 = *(++aux);
-				sprintf(stringaux,"%d",(int)*aux3);
+				aux4 = (u2*) malloc(sizeof(u2));
+				*aux4 = *(++aux);
+				sprintf(stringaux,"%d",(int)*aux4);
 				strcat(retorno," count ");
 				strcat(retorno,stringaux);
 				strcat(retorno,"\n");
@@ -477,9 +545,8 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				strcat(retorno,"undefined");
 				aux++;
 			break;
-
-
 		}
+
 	}
 
 	if(stringargs!=NULL){
@@ -913,13 +980,13 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 			break;
 
 			case CONSTANT_Float:
-      	saidaFloat = decodificaFloatInfo(cp_aux);
-        stringGeral = (char *) malloc(100*sizeof(char));
-        sprintf(stringGeral,"%f",saidaFloat);
-        strcpy(retorno,"<");
-        strcat(retorno,stringGeral);
-        strcat(retorno,">");
-        break;
+				saidaFloat = decodificaFloatInfo(cp_aux);
+				stringGeral = (char *) malloc(100*sizeof(char));
+				sprintf(stringGeral,"%f",saidaFloat);
+				strcpy(retorno,"<");
+				strcat(retorno,stringGeral);
+				strcat(retorno,">");
+			break;
 
 			default:
 				strcpy(retorno,"undefined");
@@ -1097,7 +1164,7 @@ double decodificaDoubleInfo (cp_info * cp) {
 	long long mant = (expon == 0) ? ((valor & 0xfffffffffffffL) << 1) : ((valor & 0xfffffffffffffL) | 0x10000000000000L);
 
 	printf("Valor Ajust-MANTISSA OK:\n");
- 	printf("val1 = 0x%" PRIx64 "\n", mant);
+ 	printf("val1 = 0x%llx\n", mant);
 
 	double retorno = sinal*mant*(pow(2,expon-1075));
 
@@ -1248,6 +1315,10 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				fprintf(fp, "Long High Bytes: 0x%08x\n",aux->UnionCP.Long.high_bytes);
 				fprintf(fp, "Long Low Bytes: 0x%08x\n",aux->UnionCP.Long.low_bytes);
 				fprintf(fp, "Long: %lld\n",longValue);
+				aux++;
+				fprintf(fp, "--------------Entrada [%d]--------------\n",contador);
+				printf("(large numeric continued)\n");
+				contador++;
 				break;
 			case CONSTANT_Double:
 				valor = decodificaDoubleInfo(aux);
@@ -1258,7 +1329,6 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				fprintf(fp, "--------------Entrada [%d]--------------\n",contador);
 				printf("(large numeric continued)\n");
 				contador++;
-
 				break;
 			case CONSTANT_NameAndType:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);

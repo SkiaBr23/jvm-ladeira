@@ -94,6 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="instrucoes_8h_source.html">instrucoes.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="classFileStruct_8h_source.html">classFileStruct.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="jvm_8h_source.html">jvm.h</a>&quot;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 </div>
 <p><a href="interpretador_8h_source.html">Vá para o código-fonte deste arquivo.</a></p>
@@ -123,6 +124,12 @@ Funções</h2></td></tr>
 <tr class="separator:afd8010d34f38706a0a35bee368a615be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3795a0cceadd541bc68eb650c0c7595a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a3795a0cceadd541bc68eb650c0c7595a">decodificaFloatValor</a> (<a class="el" href="lista__operandos_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> valor)</td></tr>
 <tr class="separator:a3795a0cceadd541bc68eb650c0c7595a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad71b4e1c8179f35bd7a6b2b640b6e7a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ad71b4e1c8179f35bd7a6b2b640b6e7a5">getParametrosNaoStatic</a> (<a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *classe)</td></tr>
+<tr class="separator:ad71b4e1c8179f35bd7a6b2b640b6e7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48f87cee6dd6a755b917030668385c54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="jvm_8h.html#a44d196f61b6d8bad019106cbc5da18d0">Lista_Objetos</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a48f87cee6dd6a755b917030668385c54">InsereObjeto</a> (<a class="el" href="jvm_8h.html#a44d196f61b6d8bad019106cbc5da18d0">Lista_Objetos</a> *lis, <a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *classe, int parametrosNaoStatic)</td></tr>
+<tr class="separator:a48f87cee6dd6a755b917030668385c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac35643f2a48457591ea4f409d6ecec76"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ac35643f2a48457591ea4f409d6ecec76">buscaStaticFlags</a> (char *accessFlags)</td></tr>
+<tr class="separator:ac35643f2a48457591ea4f409d6ecec76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae65dcccf3c1058ca276f014f46f03cab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ae65dcccf3c1058ca276f014f46f03cab">nop_impl</a> (<a class="el" href="structframe.html">frame</a> *par0, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
 <tr class="separator:ae65dcccf3c1058ca276f014f46f03cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adab1a7c93444468815bcbc1e5754cf4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#adab1a7c93444468815bcbc1e5754cf4f">aconst_null_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
@@ -161,10 +168,10 @@ Funções</h2></td></tr>
 <tr class="separator:a38cb2454df139c79c92d2fb982ffb1eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fa4e527838bfe11ed60319f2229c608"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a8fa4e527838bfe11ed60319f2229c608">ldc_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
 <tr class="separator:a8fa4e527838bfe11ed60319f2229c608"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b3a7baa9ebc5086522bdd166b251250"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a6b3a7baa9ebc5086522bdd166b251250">ldc_w_impl</a> (<a class="el" href="structframe.html">frame</a> *par0, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
-<tr class="separator:a6b3a7baa9ebc5086522bdd166b251250"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27c45010b02a9bbccfef32fd175fc53c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a27c45010b02a9bbccfef32fd175fc53c">ldc2_w_impl</a> (<a class="el" href="structframe.html">frame</a> *par0, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
-<tr class="separator:a27c45010b02a9bbccfef32fd175fc53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa72cd615dc4d9ba8f911ea139673659a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#aa72cd615dc4d9ba8f911ea139673659a">ldc_w_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2)</td></tr>
+<tr class="separator:aa72cd615dc4d9ba8f911ea139673659a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad283d69d6829abd469d60bff05fdb6be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ad283d69d6829abd469d60bff05fdb6be">ldc2_w_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="separator:ad283d69d6829abd469d60bff05fdb6be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f18ae9c69ebc1f3246c12ba9e09c57e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a6f18ae9c69ebc1f3246c12ba9e09c57e">iload_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> index, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1)</td></tr>
 <tr class="separator:a6f18ae9c69ebc1f3246c12ba9e09c57e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26525d3852198808f8d40cbe19cfb68a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a26525d3852198808f8d40cbe19cfb68a">lload_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> index, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1)</td></tr>
@@ -395,6 +402,10 @@ Funções</h2></td></tr>
 <tr class="separator:ad5802ef6711babf3d30bd4aa5c8f39a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f7571e76cf945ef8682ac68084e9128"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a8f7571e76cf945ef8682ac68084e9128">iinc_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> index, <a class="el" href="lista__operandos_8h.html#a6be0d08d5318753334c788d23128142e">i1</a> constante)</td></tr>
 <tr class="separator:a8f7571e76cf945ef8682ac68084e9128"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf8f1db06ae2b6aea4d594deed4da8a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#adf8f1db06ae2b6aea4d594deed4da8a4">iinc_wide_fantasma</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> constbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> constbyte2)</td></tr>
+<tr class="separator:adf8f1db06ae2b6aea4d594deed4da8a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13c65f68ac61b078ccf7d325353ea958"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a13c65f68ac61b078ccf7d325353ea958">iinc_wide</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> indexbyte, <a class="el" href="lista__operandos_8h.html#a71fa27a2ba58296c5995f3f9b9af37e1">i2</a> constbyte)</td></tr>
+<tr class="separator:a13c65f68ac61b078ccf7d325353ea958"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf6c9b6c939b98336957bc8ac9590983"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#acf6c9b6c939b98336957bc8ac9590983">i2l_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
 <tr class="separator:acf6c9b6c939b98336957bc8ac9590983"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0a572bf0fca1b29eb16bcdd6588caf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ad0a572bf0fca1b29eb16bcdd6588caf6">i2f_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
@@ -527,10 +538,12 @@ Funções</h2></td></tr>
 <tr class="separator:a0fbca3c86969309fb78ce80b87e8528c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e2a21f4852259d8ea24e83601cded07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a8e2a21f4852259d8ea24e83601cded07">monitorexit_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
 <tr class="separator:a8e2a21f4852259d8ea24e83601cded07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15713510782bed96bdbc38aab131c82c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a15713510782bed96bdbc38aab131c82c">wide_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
-<tr class="separator:a15713510782bed96bdbc38aab131c82c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0aa9c7c347ecce171ac8590b0b4b4162"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a0aa9c7c347ecce171ac8590b0b4b4162">multianewarray_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
-<tr class="separator:a0aa9c7c347ecce171ac8590b0b4b4162"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6da8ed672cdb16eb3560267dacedbeb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a6da8ed672cdb16eb3560267dacedbeb3">wide_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2)</td></tr>
+<tr class="separator:a6da8ed672cdb16eb3560267dacedbeb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a478cae9b4e76cac306adc32b2b129504"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a478cae9b4e76cac306adc32b2b129504">multianewarray_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> dimensions)</td></tr>
+<tr class="separator:a478cae9b4e76cac306adc32b2b129504"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af01a170230fbb7c76ac3f3ca2f3cb785"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#af01a170230fbb7c76ac3f3ca2f3cb785">multianewarray_fantasma</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="separator:af01a170230fbb7c76ac3f3ca2f3cb785"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a372ce682f9d54faec78796a291bfdc95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a372ce682f9d54faec78796a291bfdc95">ifnull_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
 <tr class="separator:a372ce682f9d54faec78796a291bfdc95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a01fb2800adc854f296282d0d7cf5c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a8a01fb2800adc854f296282d0d7cf5c8">ifnonnull_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
@@ -1271,6 +1284,22 @@ Variáveis</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac35643f2a48457591ea4f409d6ecec76"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool buscaStaticFlags </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>accessFlags</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -3351,6 +3380,22 @@ Variáveis</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad71b4e1c8179f35bd7a6b2b640b6e7a5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int getParametrosNaoStatic </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *&#160;</td>
+          <td class="paramname"><em>classe</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aab8bb241f38d5254b4eb6a8d098bebfb"></a>
 <div class="memitem">
 <div class="memproto">
@@ -4503,6 +4548,82 @@ Variáveis</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a13c65f68ac61b078ccf7d325353ea958"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iinc_wide </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structframe.html">frame</a> *&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a>&#160;</td>
+          <td class="paramname"><em>indexbyte</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lista__operandos_8h.html#a71fa27a2ba58296c5995f3f9b9af37e1">i2</a>&#160;</td>
+          <td class="paramname"><em>constbyte</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adf8f1db06ae2b6aea4d594deed4da8a4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void iinc_wide_fantasma </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structframe.html">frame</a> *&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
+          <td class="paramname"><em>indexbyte1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
+          <td class="paramname"><em>indexbyte2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
+          <td class="paramname"><em>constbyte1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
+          <td class="paramname"><em>constbyte2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="abad883afe8691ac323c9b4631f30e288"></a>
 <div class="memitem">
 <div class="memproto">
@@ -4716,6 +4837,38 @@ Variáveis</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
           <td class="paramname"><em>par2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a48f87cee6dd6a755b917030668385c54"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="jvm_8h.html#a44d196f61b6d8bad019106cbc5da18d0">Lista_Objetos</a>* InsereObjeto </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="jvm_8h.html#a44d196f61b6d8bad019106cbc5da18d0">Lista_Objetos</a> *&#160;</td>
+          <td class="paramname"><em>lis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *&#160;</td>
+          <td class="paramname"><em>classe</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>parametrosNaoStatic</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -4987,10 +5140,8 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>3 condições do invokespecial</p><ol type="1">
-<li></li>
-<li>Se a classe do método resolvido é superclass da classe corrente, não chama</li>
-<li></li>
+<p>3 condições do invokespecial 1.</p><ol type="1">
+<li>Se a classe do método resolvido é superclass da classe corrente, não chama 3.</li>
 </ol>
 
 </div>
@@ -5859,7 +6010,7 @@ Variáveis</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a27c45010b02a9bbccfef32fd175fc53c"></a>
+<a class="anchor" id="ad283d69d6829abd469d60bff05fdb6be"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -5867,19 +6018,19 @@ Variáveis</h2></td></tr>
           <td class="memname">void ldc2_w_impl </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structframe.html">frame</a> *&#160;</td>
-          <td class="paramname"><em>par0</em>, </td>
+          <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
-          <td class="paramname"><em>par1</em>, </td>
+          <td class="paramname"><em>branchbyte1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
-          <td class="paramname"><em>par2</em>&#160;</td>
+          <td class="paramname"><em>branchbyte2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -5923,7 +6074,7 @@ Variáveis</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6b3a7baa9ebc5086522bdd166b251250"></a>
+<a class="anchor" id="aa72cd615dc4d9ba8f911ea139673659a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -5931,19 +6082,19 @@ Variáveis</h2></td></tr>
           <td class="memname">void ldc_w_impl </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structframe.html">frame</a> *&#160;</td>
-          <td class="paramname"><em>par0</em>, </td>
+          <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
-          <td class="paramname"><em>par1</em>, </td>
+          <td class="paramname"><em>indexbyte1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
-          <td class="paramname"><em>par2</em>&#160;</td>
+          <td class="paramname"><em>indexbyte2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -6739,12 +6890,12 @@ Variáveis</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0aa9c7c347ecce171ac8590b0b4b4162"></a>
+<a class="anchor" id="af01a170230fbb7c76ac3f3ca2f3cb785"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void multianewarray_impl </td>
+          <td class="memname">void multianewarray_fantasma </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structframe.html">frame</a> *&#160;</td>
           <td class="paramname"><em>f</em>, </td>
@@ -6760,6 +6911,44 @@ Variáveis</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
           <td class="paramname"><em>par2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a478cae9b4e76cac306adc32b2b129504"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void multianewarray_impl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structframe.html">frame</a> *&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
+          <td class="paramname"><em>indexbyte1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
+          <td class="paramname"><em>indexbyte2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
+          <td class="paramname"><em>dimensions</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -7373,7 +7562,7 @@ Variáveis</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a15713510782bed96bdbc38aab131c82c"></a>
+<a class="anchor" id="a6da8ed672cdb16eb3560267dacedbeb3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -7387,13 +7576,13 @@ Variáveis</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
-          <td class="paramname"><em>par1</em>, </td>
+          <td class="paramname"><em>indexbyte1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td>
-          <td class="paramname"><em>par2</em>&#160;</td>
+          <td class="paramname"><em>indexbyte2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

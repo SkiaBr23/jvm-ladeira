@@ -84,4 +84,16 @@ bool pilhaVazia (pilha_operandos * p);
  * @param p Ponteiro para a pilha de operandos a ser impressa
  */
 void ImprimirPilha_operandos(pilha_operandos *p);
+
+/**
+ * @brief Verifica se o campo no topo da pilha de operandos é um salto de linha (na impressão) 
+ * @details Algumas exceções podem imprimir um salto de linha, ou chamadas de \c System.out.println 
+ * sem argumentos.
+ * 
+ * @param p Ponteiro para a pilha de operandos a ser verificada
+ */
+bool printVazio (pilha_operandos * p);
+
+
+
 #endif

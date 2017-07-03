@@ -9,6 +9,7 @@
 {\ttfamily \#include $<$string.\+h$>$}\\*
 {\ttfamily \#include $<$math.\+h$>$}\\*
 {\ttfamily \#include $<$inttypes.\+h$>$}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
 \subsection*{Funções}
 \begin{DoxyCompactItemize}
 \item 
@@ -68,7 +69,7 @@ void \hyperlink{interpretador_8c_a38cb2454df139c79c92d2fb982ffb1eb}{sipush\+\_\+
 \item 
 void \hyperlink{interpretador_8c_a8fa4e527838bfe11ed60319f2229c608}{ldc\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
 \item 
-void \hyperlink{interpretador_8c_a6b3a7baa9ebc5086522bdd166b251250}{ldc\+\_\+w\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$par0, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
+void \hyperlink{interpretador_8c_aa72cd615dc4d9ba8f911ea139673659a}{ldc\+\_\+w\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
 \item 
 void \hyperlink{interpretador_8c_ad283d69d6829abd469d60bff05fdb6be}{ldc2\+\_\+w\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
 \item 
@@ -302,6 +303,10 @@ void \hyperlink{interpretador_8c_a8f7571e76cf945ef8682ac68084e9128}{iinc\+\_\+im
 \item 
 void \hyperlink{interpretador_8c_ad5802ef6711babf3d30bd4aa5c8f39a6}{iinc\+\_\+fantasma} (\hyperlink{structframe}{frame} $\ast$par0, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
 \item 
+void \hyperlink{interpretador_8c_adf8f1db06ae2b6aea4d594deed4da8a4}{iinc\+\_\+wide\+\_\+fantasma} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} constbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} constbyte2)
+\item 
+void \hyperlink{interpretador_8c_a13c65f68ac61b078ccf7d325353ea958}{iinc\+\_\+wide} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_a732cde1300aafb73b0ea6c2558a7a54f}{u2} indexbyte, \hyperlink{lista__operandos_8h_a71fa27a2ba58296c5995f3f9b9af37e1}{i2} constbyte)
+\item 
 void \hyperlink{interpretador_8c_acf6c9b6c939b98336957bc8ac9590983}{i2l\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
 \item 
 void \hyperlink{interpretador_8c_ad0a572bf0fca1b29eb16bcdd6588caf6}{i2f\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
@@ -396,9 +401,13 @@ void \hyperlink{interpretador_8c_aab8bb241f38d5254b4eb6a8d098bebfb}{getstatic\+\
 \item 
 void \hyperlink{interpretador_8c_a81bc4af9e545ed38b0a62650bf2ead42}{putstatic\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
 \item 
+bool \hyperlink{interpretador_8c_ac35643f2a48457591ea4f409d6ecec76}{busca\+Static\+Flags} (char $\ast$access\+Flags)
+\item 
 void \hyperlink{interpretador_8c_a2b6a07c24ed0591525e7cc48b676b08c}{getfield\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
 \item 
 void \hyperlink{interpretador_8c_abfed0b8cbb029920687b563bcdc45637}{putfield\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
+\item 
+void \hyperlink{interpretador_8c_a4e01458c1aa0e8a5a45819cd1e6d7986}{imprimir\+Valores\+Static} (\hyperlink{structclassesCarregadas}{classes\+Carregadas} $\ast$class)
 \item 
 void \hyperlink{interpretador_8c_a87210c88c859a1e732355a7ead1e2638}{invokevirtual\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
 \item 
@@ -413,6 +422,10 @@ void \hyperlink{interpretador_8c_a632fe944219d89caa74f26b2ae63cdea}{invokeinterf
 void \hyperlink{interpretador_8c_a97f52d4cd37463b92cff91f3ec0a5f0b}{invokedynamic\+\_\+fantasma} (\hyperlink{structframe}{frame} $\ast$par0, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
 \item 
 void \hyperlink{interpretador_8c_af53dda1fb156ef04b805522fde9764ba}{inst\+\_\+new\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
+\item 
+\hyperlink{jvm_8h_a44d196f61b6d8bad019106cbc5da18d0}{Lista\+\_\+\+Objetos} $\ast$ \hyperlink{interpretador_8c_a48f87cee6dd6a755b917030668385c54}{Insere\+Objeto} (\hyperlink{jvm_8h_a44d196f61b6d8bad019106cbc5da18d0}{Lista\+\_\+\+Objetos} $\ast$lis, \hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File} $\ast$classe, int parametros\+Nao\+Static)
+\item 
+int \hyperlink{interpretador_8c_ad71b4e1c8179f35bd7a6b2b640b6e7a5}{get\+Parametros\+Nao\+Static} (\hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File} $\ast$classe)
 \item 
 void \hyperlink{interpretador_8c_af89e1ba34999630cc234c3004691d6bb}{newarray\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} atype, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1)
 \item 
@@ -430,9 +443,13 @@ void \hyperlink{interpretador_8c_a0fbca3c86969309fb78ce80b87e8528c}{monitorenter
 \item 
 void \hyperlink{interpretador_8c_a8e2a21f4852259d8ea24e83601cded07}{monitorexit\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
 \item 
-void \hyperlink{interpretador_8c_a15713510782bed96bdbc38aab131c82c}{wide\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
+void \hyperlink{interpretador_8c_a6da8ed672cdb16eb3560267dacedbeb3}{wide\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
 \item 
-void \hyperlink{interpretador_8c_a0aa9c7c347ecce171ac8590b0b4b4162}{multianewarray\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
+void \hyperlink{interpretador_8c_af01a170230fbb7c76ac3f3ca2f3cb785}{multianewarray\+\_\+fantasma} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
+\item 
+void $\ast$ \hyperlink{interpretador_8c_a721f6b561cd5024ea292109e573bb691}{inicializa\+\_\+multiarray\+\_\+recursivo} (void $\ast$endereco, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} $\ast$counts, char $\ast$tipos)
+\item 
+void \hyperlink{interpretador_8c_a478cae9b4e76cac306adc32b2b129504}{multianewarray\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} dimensions)
 \item 
 void \hyperlink{interpretador_8c_a372ce682f9d54faec78796a291bfdc95}{ifnull\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
 \item 
@@ -647,6 +664,13 @@ float \hyperlink{interpretador_8c_a3795a0cceadd541bc68eb650c0c7595a}{decodifica\
 \item[{{\bf u1}}]{par1}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_af8f40dfd4bef8eaa9ce50c11ff42a920}{}\label{interpretador_8c_af8f40dfd4bef8eaa9ce50c11ff42a920}
+\index{interpretador.\+c@{interpretador.\+c}!busca\+Static\+Flags@{busca\+Static\+Flags}}
+\index{busca\+Static\+Flags@{busca\+Static\+Flags}!interpretador.\+c@{interpretador.\+c}}
+\subsubsection[{\texorpdfstring{busca\+Static\+Flags(char $\ast$access\+Flags)}{buscaStaticFlags(char *accessFlags)}}]{\setlength{\rightskip}{0pt plus 5cm}bool busca\+Static\+Flags (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{access\+Flags}
+\end{DoxyParamCaption}
+)}\hypertarget{interpretador_8c_ac35643f2a48457591ea4f409d6ecec76}{}\label{interpretador_8c_ac35643f2a48457591ea4f409d6ecec76}
 \index{interpretador.\+c@{interpretador.\+c}!caload\+\_\+impl@{caload\+\_\+impl}}
 \index{caload\+\_\+impl@{caload\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{caload\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{caload_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void caload\+\_\+impl (
@@ -1236,6 +1260,13 @@ float \hyperlink{interpretador_8c_a3795a0cceadd541bc68eb650c0c7595a}{decodifica\
 \item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a2b6a07c24ed0591525e7cc48b676b08c}{}\label{interpretador_8c_a2b6a07c24ed0591525e7cc48b676b08c}
+\index{interpretador.\+c@{interpretador.\+c}!get\+Parametros\+Nao\+Static@{get\+Parametros\+Nao\+Static}}
+\index{get\+Parametros\+Nao\+Static@{get\+Parametros\+Nao\+Static}!interpretador.\+c@{interpretador.\+c}}
+\subsubsection[{\texorpdfstring{get\+Parametros\+Nao\+Static(\+Class\+File $\ast$classe)}{getParametrosNaoStatic(ClassFile *classe)}}]{\setlength{\rightskip}{0pt plus 5cm}int get\+Parametros\+Nao\+Static (
+\begin{DoxyParamCaption}
+\item[{{\bf Class\+File} $\ast$}]{classe}
+\end{DoxyParamCaption}
+)}\hypertarget{interpretador_8c_ad71b4e1c8179f35bd7a6b2b640b6e7a5}{}\label{interpretador_8c_ad71b4e1c8179f35bd7a6b2b640b6e7a5}
 \index{interpretador.\+c@{interpretador.\+c}!getstatic\+\_\+impl@{getstatic\+\_\+impl}}
 \index{getstatic\+\_\+impl@{getstatic\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{getstatic\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2)}{getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void getstatic\+\_\+impl (
@@ -1560,6 +1591,26 @@ float \hyperlink{interpretador_8c_a3795a0cceadd541bc68eb650c0c7595a}{decodifica\
 \item[{{\bf i1}}]{constante}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a8f7571e76cf945ef8682ac68084e9128}{}\label{interpretador_8c_a8f7571e76cf945ef8682ac68084e9128}
+\index{interpretador.\+c@{interpretador.\+c}!iinc\+\_\+wide@{iinc\+\_\+wide}}
+\index{iinc\+\_\+wide@{iinc\+\_\+wide}!interpretador.\+c@{interpretador.\+c}}
+\subsubsection[{\texorpdfstring{iinc\+\_\+wide(frame $\ast$f, u2 indexbyte, i2 constbyte)}{iinc_wide(frame *f, u2 indexbyte, i2 constbyte)}}]{\setlength{\rightskip}{0pt plus 5cm}void iinc\+\_\+wide (
+\begin{DoxyParamCaption}
+\item[{{\bf frame} $\ast$}]{f, }
+\item[{{\bf u2}}]{indexbyte, }
+\item[{{\bf i2}}]{constbyte}
+\end{DoxyParamCaption}
+)}\hypertarget{interpretador_8c_a13c65f68ac61b078ccf7d325353ea958}{}\label{interpretador_8c_a13c65f68ac61b078ccf7d325353ea958}
+\index{interpretador.\+c@{interpretador.\+c}!iinc\+\_\+wide\+\_\+fantasma@{iinc\+\_\+wide\+\_\+fantasma}}
+\index{iinc\+\_\+wide\+\_\+fantasma@{iinc\+\_\+wide\+\_\+fantasma}!interpretador.\+c@{interpretador.\+c}}
+\subsubsection[{\texorpdfstring{iinc\+\_\+wide\+\_\+fantasma(frame $\ast$f, u1 indexbyte1, u1 indexbyte2, u1 constbyte1, u1 constbyte2)}{iinc_wide_fantasma(frame *f, u1 indexbyte1, u1 indexbyte2, u1 constbyte1, u1 constbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void iinc\+\_\+wide\+\_\+fantasma (
+\begin{DoxyParamCaption}
+\item[{{\bf frame} $\ast$}]{f, }
+\item[{{\bf u1}}]{indexbyte1, }
+\item[{{\bf u1}}]{indexbyte2, }
+\item[{{\bf u1}}]{constbyte1, }
+\item[{{\bf u1}}]{constbyte2}
+\end{DoxyParamCaption}
+)}\hypertarget{interpretador_8c_adf8f1db06ae2b6aea4d594deed4da8a4}{}\label{interpretador_8c_adf8f1db06ae2b6aea4d594deed4da8a4}
 \index{interpretador.\+c@{interpretador.\+c}!iload\+\_\+0\+\_\+impl@{iload\+\_\+0\+\_\+impl}}
 \index{iload\+\_\+0\+\_\+impl@{iload\+\_\+0\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{iload\+\_\+0\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{iload_0_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void iload\+\_\+0\+\_\+impl (
@@ -1605,6 +1656,13 @@ float \hyperlink{interpretador_8c_a3795a0cceadd541bc68eb650c0c7595a}{decodifica\
 \item[{{\bf u1}}]{par1}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a6f18ae9c69ebc1f3246c12ba9e09c57e}{}\label{interpretador_8c_a6f18ae9c69ebc1f3246c12ba9e09c57e}
+\index{interpretador.\+c@{interpretador.\+c}!imprimir\+Valores\+Static@{imprimir\+Valores\+Static}}
+\index{imprimir\+Valores\+Static@{imprimir\+Valores\+Static}!interpretador.\+c@{interpretador.\+c}}
+\subsubsection[{\texorpdfstring{imprimir\+Valores\+Static(classes\+Carregadas $\ast$class)}{imprimirValoresStatic(classesCarregadas *class)}}]{\setlength{\rightskip}{0pt plus 5cm}void imprimir\+Valores\+Static (
+\begin{DoxyParamCaption}
+\item[{{\bf classes\+Carregadas} $\ast$}]{class}
+\end{DoxyParamCaption}
+)}\hypertarget{interpretador_8c_a4e01458c1aa0e8a5a45819cd1e6d7986}{}\label{interpretador_8c_a4e01458c1aa0e8a5a45819cd1e6d7986}
 \index{interpretador.\+c@{interpretador.\+c}!imul\+\_\+impl@{imul\+\_\+impl}}
 \index{imul\+\_\+impl@{imul\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{imul\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{imul_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void imul\+\_\+impl (
@@ -1623,6 +1681,24 @@ float \hyperlink{interpretador_8c_a3795a0cceadd541bc68eb650c0c7595a}{decodifica\
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ad538695dcaef32109c8f9f3160ba3311}{}\label{interpretador_8c_ad538695dcaef32109c8f9f3160ba3311}
+\index{interpretador.\+c@{interpretador.\+c}!inicializa\+\_\+multiarray\+\_\+recursivo@{inicializa\+\_\+multiarray\+\_\+recursivo}}
+\index{inicializa\+\_\+multiarray\+\_\+recursivo@{inicializa\+\_\+multiarray\+\_\+recursivo}!interpretador.\+c@{interpretador.\+c}}
+\subsubsection[{\texorpdfstring{inicializa\+\_\+multiarray\+\_\+recursivo(void $\ast$endereco, i4 $\ast$counts, char $\ast$tipos)}{inicializa_multiarray_recursivo(void *endereco, i4 *counts, char *tipos)}}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ inicializa\+\_\+multiarray\+\_\+recursivo (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{endereco, }
+\item[{{\bf i4} $\ast$}]{counts, }
+\item[{char $\ast$}]{tipos}
+\end{DoxyParamCaption}
+)}\hypertarget{interpretador_8c_a721f6b561cd5024ea292109e573bb691}{}\label{interpretador_8c_a721f6b561cd5024ea292109e573bb691}
+\index{interpretador.\+c@{interpretador.\+c}!Insere\+Objeto@{Insere\+Objeto}}
+\index{Insere\+Objeto@{Insere\+Objeto}!interpretador.\+c@{interpretador.\+c}}
+\subsubsection[{\texorpdfstring{Insere\+Objeto(\+Lista\+\_\+\+Objetos $\ast$lis, Class\+File $\ast$classe, int parametros\+Nao\+Static)}{InsereObjeto(Lista_Objetos *lis, ClassFile *classe, int parametrosNaoStatic)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Lista\+\_\+\+Objetos}$\ast$ Insere\+Objeto (
+\begin{DoxyParamCaption}
+\item[{{\bf Lista\+\_\+\+Objetos} $\ast$}]{lis, }
+\item[{{\bf Class\+File} $\ast$}]{classe, }
+\item[{int}]{parametros\+Nao\+Static}
+\end{DoxyParamCaption}
+)}\hypertarget{interpretador_8c_a48f87cee6dd6a755b917030668385c54}{}\label{interpretador_8c_a48f87cee6dd6a755b917030668385c54}
 \index{interpretador.\+c@{interpretador.\+c}!inst\+\_\+goto\+\_\+impl@{inst\+\_\+goto\+\_\+impl}}
 \index{inst\+\_\+goto\+\_\+impl@{inst\+\_\+goto\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{inst\+\_\+goto\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{inst_goto_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void inst\+\_\+goto\+\_\+impl (
@@ -1696,11 +1772,9 @@ O invokeinterface, nesse momento, está executando um método que foi declarado 
 \item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ac1f0ebb9e8dd948c2c9526f225e04f6f}{}\label{interpretador_8c_ac1f0ebb9e8dd948c2c9526f225e04f6f}
-3 condições do invokespecial
+3 condições do invokespecial 1.
 \begin{DoxyEnumerate}
-\item 
-\item Se a classe do método resolvido é superclass da classe corrente, não chama
-\item 
+\item Se a classe do método resolvido é superclass da classe corrente, não chama 3.
 \end{DoxyEnumerate}\index{interpretador.\+c@{interpretador.\+c}!invokestatic\+\_\+impl@{invokestatic\+\_\+impl}}
 \index{invokestatic\+\_\+impl@{invokestatic\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{invokestatic\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2)}{invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void invokestatic\+\_\+impl (
@@ -1971,13 +2045,13 @@ O invokeinterface, nesse momento, está executando um método que foi declarado 
 )}\hypertarget{interpretador_8c_a8fa4e527838bfe11ed60319f2229c608}{}\label{interpretador_8c_a8fa4e527838bfe11ed60319f2229c608}
 \index{interpretador.\+c@{interpretador.\+c}!ldc\+\_\+w\+\_\+impl@{ldc\+\_\+w\+\_\+impl}}
 \index{ldc\+\_\+w\+\_\+impl@{ldc\+\_\+w\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
-\subsubsection[{\texorpdfstring{ldc\+\_\+w\+\_\+impl(frame $\ast$par0, u1 par1, u1 par2)}{ldc_w_impl(frame *par0, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ldc\+\_\+w\+\_\+impl (
+\subsubsection[{\texorpdfstring{ldc\+\_\+w\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2)}{ldc_w_impl(frame *f, u1 indexbyte1, u1 indexbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ldc\+\_\+w\+\_\+impl (
 \begin{DoxyParamCaption}
-\item[{{\bf frame} $\ast$}]{par0, }
-\item[{{\bf u1}}]{par1, }
-\item[{{\bf u1}}]{par2}
+\item[{{\bf frame} $\ast$}]{f, }
+\item[{{\bf u1}}]{indexbyte1, }
+\item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
-)}\hypertarget{interpretador_8c_a6b3a7baa9ebc5086522bdd166b251250}{}\label{interpretador_8c_a6b3a7baa9ebc5086522bdd166b251250}
+)}\hypertarget{interpretador_8c_aa72cd615dc4d9ba8f911ea139673659a}{}\label{interpretador_8c_aa72cd615dc4d9ba8f911ea139673659a}
 \index{interpretador.\+c@{interpretador.\+c}!ldiv\+\_\+impl@{ldiv\+\_\+impl}}
 \index{ldiv\+\_\+impl@{ldiv\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{ldiv\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{ldiv_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ldiv\+\_\+impl (
@@ -2194,15 +2268,25 @@ O invokeinterface, nesse momento, está executando um método que foi declarado 
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a8e2a21f4852259d8ea24e83601cded07}{}\label{interpretador_8c_a8e2a21f4852259d8ea24e83601cded07}
-\index{interpretador.\+c@{interpretador.\+c}!multianewarray\+\_\+impl@{multianewarray\+\_\+impl}}
-\index{multianewarray\+\_\+impl@{multianewarray\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
-\subsubsection[{\texorpdfstring{multianewarray\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{multianewarray_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void multianewarray\+\_\+impl (
+\index{interpretador.\+c@{interpretador.\+c}!multianewarray\+\_\+fantasma@{multianewarray\+\_\+fantasma}}
+\index{multianewarray\+\_\+fantasma@{multianewarray\+\_\+fantasma}!interpretador.\+c@{interpretador.\+c}}
+\subsubsection[{\texorpdfstring{multianewarray\+\_\+fantasma(frame $\ast$f, u1 par1, u1 par2)}{multianewarray_fantasma(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void multianewarray\+\_\+fantasma (
 \begin{DoxyParamCaption}
 \item[{{\bf frame} $\ast$}]{f, }
 \item[{{\bf u1}}]{par1, }
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
-)}\hypertarget{interpretador_8c_a0aa9c7c347ecce171ac8590b0b4b4162}{}\label{interpretador_8c_a0aa9c7c347ecce171ac8590b0b4b4162}
+)}\hypertarget{interpretador_8c_af01a170230fbb7c76ac3f3ca2f3cb785}{}\label{interpretador_8c_af01a170230fbb7c76ac3f3ca2f3cb785}
+\index{interpretador.\+c@{interpretador.\+c}!multianewarray\+\_\+impl@{multianewarray\+\_\+impl}}
+\index{multianewarray\+\_\+impl@{multianewarray\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
+\subsubsection[{\texorpdfstring{multianewarray\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2, u1 dimensions)}{multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions)}}]{\setlength{\rightskip}{0pt plus 5cm}void multianewarray\+\_\+impl (
+\begin{DoxyParamCaption}
+\item[{{\bf frame} $\ast$}]{f, }
+\item[{{\bf u1}}]{indexbyte1, }
+\item[{{\bf u1}}]{indexbyte2, }
+\item[{{\bf u1}}]{dimensions}
+\end{DoxyParamCaption}
+)}\hypertarget{interpretador_8c_a478cae9b4e76cac306adc32b2b129504}{}\label{interpretador_8c_a478cae9b4e76cac306adc32b2b129504}
 \index{interpretador.\+c@{interpretador.\+c}!newarray\+\_\+impl@{newarray\+\_\+impl}}
 \index{newarray\+\_\+impl@{newarray\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{newarray\+\_\+impl(frame $\ast$f, u1 atype, u1 par1)}{newarray_impl(frame *f, u1 atype, u1 par1)}}]{\setlength{\rightskip}{0pt plus 5cm}void newarray\+\_\+impl (
@@ -2387,10 +2471,10 @@ O invokeinterface, nesse momento, está executando um método que foi declarado 
 )}\hypertarget{interpretador_8c_afbe1a74bed5d93cfa0b9919f4fd71270}{}\label{interpretador_8c_afbe1a74bed5d93cfa0b9919f4fd71270}
 \index{interpretador.\+c@{interpretador.\+c}!wide\+\_\+impl@{wide\+\_\+impl}}
 \index{wide\+\_\+impl@{wide\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
-\subsubsection[{\texorpdfstring{wide\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{wide_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void wide\+\_\+impl (
+\subsubsection[{\texorpdfstring{wide\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2)}{wide_impl(frame *f, u1 indexbyte1, u1 indexbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void wide\+\_\+impl (
 \begin{DoxyParamCaption}
 \item[{{\bf frame} $\ast$}]{f, }
-\item[{{\bf u1}}]{par1, }
-\item[{{\bf u1}}]{par2}
+\item[{{\bf u1}}]{indexbyte1, }
+\item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
-)}\hypertarget{interpretador_8c_a15713510782bed96bdbc38aab131c82c}{}\label{interpretador_8c_a15713510782bed96bdbc38aab131c82c}
+)}\hypertarget{interpretador_8c_a6da8ed672cdb16eb3560267dacedbeb3}{}\label{interpretador_8c_a6da8ed672cdb16eb3560267dacedbeb3}

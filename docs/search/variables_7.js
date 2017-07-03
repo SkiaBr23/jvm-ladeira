@@ -8,7 +8,7 @@ var searchData=
   ['inst_5fnome',['inst_nome',['../structinstrucao.html#ac2c793a7850383fa1cb4cf040d3c3cb4',1,'instrucao']]],
   ['instrucoes',['instrucoes',['../jvm_8c.html#aa7b71b2eb311631483ae2057257df739',1,'instrucoes():&#160;jvm.c'],['../jvm_8h.html#aa7b71b2eb311631483ae2057257df739',1,'instrucoes():&#160;jvm.c']]],
   ['integer',['Integer',['../structcp__info.html#a2a51febf186f789356c2ce50ed6219c3',1,'cp_info']]],
-  ['integer_5fvariable_5finfo',['integer_variable_info',['../structverification__type__info.html#a622b07bc67a176d7a3d4513dc3687d0a',1,'verification_type_info']]],
+  ['integer_5fvariable_5finfo',['integer_variable_info',['../structverification__type__info.html#a518dcb2dd60e556d8ea4059f6a6dd3b1',1,'verification_type_info']]],
   ['interfacemethodref',['InterfaceMethodref',['../structcp__info.html#a7b323182372d6d7a58f0caf6b762db98',1,'cp_info']]],
   ['interfaces',['interfaces',['../structclassFile.html#a4b17bc5bb5475d1f7db40302ba9e1df1',1,'classFile']]],
   ['interfaces_5fcount',['interfaces_count',['../structclassFile.html#ab1ef5a76288d97e248fd48a46e93a185',1,'classFile']]],
