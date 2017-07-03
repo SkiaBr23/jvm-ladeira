@@ -71,7 +71,15 @@ union \{\\
 \index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!offset\+\_\+delta@{offset\+\_\+delta}}
 \index{offset\+\_\+delta@{offset\+\_\+delta}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
 \subsubsection[{\texorpdfstring{offset\+\_\+delta}{offset_delta}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u2} stack\+\_\+map\+\_\+frame\+::offset\+\_\+delta}\hypertarget{structstack__map__frame_a6eb1565feda91c1edced70dc473c834d}{}\label{structstack__map__frame_a6eb1565feda91c1edced70dc473c834d}
-\index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!same\+\_\+frame@{same\+\_\+frame}}
+he frame type same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame\+\_\+extended indicates that the frame has exactly the same locals as the previous stack map frame and that the number of stack items is 1. The offset\+\_\+delta value for the frame is given explicitly.
+
+f the frame\+\_\+type is chop\+\_\+frame, it means that the operand stack is empty and the current locals are the same as the locals in the previous frame, except that the k last locals are absent. The value of k is given by the formula 251 -\/ frame\+\_\+type.
+
+If the frame type is same\+\_\+frame\+\_\+extended, it means the frame has exactly the same locals as the previous stack map frame and that the number of stack items is zero.
+
+If the frame\+\_\+type is append\+\_\+frame, it means that the operand stack is empty and the current locals are the same as the locals in the previous frame, except that k additional locals are defined. The value of k is given by the formula frame\+\_\+type -\/ 251
+
+The frame type full\+\_\+frame is represented by the tag value 255. \index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!same\+\_\+frame@{same\+\_\+frame}}
 \index{same\+\_\+frame@{same\+\_\+frame}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
 \subsubsection[{\texorpdfstring{same\+\_\+frame}{same_frame}}]{\setlength{\rightskip}{0pt plus 5cm}struct \{ ... \}   stack\+\_\+map\+\_\+frame\+::same\+\_\+frame}\hypertarget{structstack__map__frame_a761073b8521c7ac269b5357dfcf963b6}{}\label{structstack__map__frame_a761073b8521c7ac269b5357dfcf963b6}
 \index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!same\+\_\+frame\+\_\+extended@{same\+\_\+frame\+\_\+extended}}
@@ -86,7 +94,7 @@ union \{\\
 \index{stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}!stack@{stack}}
 \index{stack@{stack}!stack\+\_\+map\+\_\+frame@{stack\+\_\+map\+\_\+frame}}
 \subsubsection[{\texorpdfstring{stack}{stack}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf verification\+\_\+type\+\_\+info}$\ast$$\ast$ stack\+\_\+map\+\_\+frame\+::stack}\hypertarget{structstack__map__frame_acf0d1f6336e72271bc0d91186a9360d5}{}\label{structstack__map__frame_acf0d1f6336e72271bc0d91186a9360d5}
-
+If the frame\+\_\+type is same\+\_\+locals\+\_\+1\+\_\+stack\+\_\+item\+\_\+frame, it means the frame has exactly the same locals as the previous stack map frame and that the number of stack items is 1 
 
 A documentação para esta estrutura foi gerada a partir do seguinte arquivo\+:\begin{DoxyCompactItemize}
 \item 

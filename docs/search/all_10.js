@@ -27,7 +27,7 @@ var searchData=
   ['static',['STATIC',['../structures_8h.html#aaea667445c15617b5c6ad01f0e53b481ae55a36a850c67d46b3b3325de7fce0b8',1,'structures.h']]],
   ['staticclinit',['STATICCLINIT',['../jvm_8h.html#abd8d306b372813a750e84a6df504a142',1,'jvm.h']]],
   ['staticdata',['staticData',['../structstaticData.html',1,'staticData'],['../structures_8h.html#acfde97d6401e85be8e4163ddccd27092',1,'staticData():&#160;structures.h']]],
-  ['string',['string',['../structlista.html#a1ba5a9f199d6bf09cb40c905d50685f0',1,'lista::string()'],['../structstaticData.html#a62892ba25aa5ac67cb46d49e82447f86',1,'staticData::string()'],['../structcp__info.html#a0b6107f2f01ff36a3d7d05175675b043',1,'cp_info::String()']]],
+  ['string',['String',['../structcp__info.html#a0b6107f2f01ff36a3d7d05175675b043',1,'cp_info::String()'],['../structstaticData.html#a62892ba25aa5ac67cb46d49e82447f86',1,'staticData::string()']]],
   ['string_5findex',['string_index',['../structcp__info.html#ae760e12a2ee01b0ace3d35170ca07981',1,'cp_info::string_index()'],['../structures_8h.html#a81b3fab2aef84e348c02d916df7bda02',1,'STRING_INDEX():&#160;structures.h']]],
   ['structures_2eh',['structures.h',['../structures_8h.html',1,'']]],
   ['super',['SUPER',['../structures_8h.html#aaea667445c15617b5c6ad01f0e53b481af877c1dc1b78a33c3c949ed8ac6aac8f',1,'structures.h']]],

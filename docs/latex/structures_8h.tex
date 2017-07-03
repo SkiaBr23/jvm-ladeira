@@ -1,5 +1,10 @@
 \hypertarget{structures_8h}{}\section{Referência do Arquivo structures.\+h}
 \label{structures_8h}\index{structures.\+h@{structures.\+h}}
+
+
+Arquivo cabeçalho contendo as estruturas básicas utilizadas na J\+VM.  
+
+
 {\ttfamily \#include $<$stdint.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}pilha\+\_\+operandos.\+h\char`\"{}}\\*
 \subsection*{Estruturas de Dados}
@@ -259,6 +264,11 @@ enum \hyperlink{structures_8h_a10f4dfa4cc56f9dc100ed8b124308cf8}{tipos\+\_\+arra
 \end{DoxyCompactItemize}
 
 
+\subsection{Descrição Detalhada}
+Arquivo cabeçalho contendo as estruturas básicas utilizadas na J\+VM. 
+
+
+
 \subsection{Definições e macros}
 \index{structures.\+h@{structures.\+h}!C\+L\+A\+S\+S\+\_\+\+I\+N\+D\+EX@{C\+L\+A\+S\+S\+\_\+\+I\+N\+D\+EX}}
 \index{C\+L\+A\+S\+S\+\_\+\+I\+N\+D\+EX@{C\+L\+A\+S\+S\+\_\+\+I\+N\+D\+EX}!structures.\+h@{structures.\+h}}
@@ -303,7 +313,7 @@ enum \hyperlink{structures_8h_a10f4dfa4cc56f9dc100ed8b124308cf8}{tipos\+\_\+arra
 \index{structures.\+h@{structures.\+h}!M\+A\+X\+U1@{M\+A\+X\+U1}}
 \index{M\+A\+X\+U1@{M\+A\+X\+U1}!structures.\+h@{structures.\+h}}
 \subsubsection[{\texorpdfstring{M\+A\+X\+U1}{MAXU1}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+U1~255}\hypertarget{structures_8h_a460d8c84503828433ddece54d19f3149}{}\label{structures_8h_a460d8c84503828433ddece54d19f3149}
-\index{structures.\+h@{structures.\+h}!M\+A\+X\+U2@{M\+A\+X\+U2}}
+Definição de valores máximos, para debug -\/ P\+E\+N\+S\+AR O\+U\+T\+RO M\+O\+DO \index{structures.\+h@{structures.\+h}!M\+A\+X\+U2@{M\+A\+X\+U2}}
 \index{M\+A\+X\+U2@{M\+A\+X\+U2}!structures.\+h@{structures.\+h}}
 \subsubsection[{\texorpdfstring{M\+A\+X\+U2}{MAXU2}}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\+A\+X\+U2~65535}\hypertarget{structures_8h_ae0480f005dd86738db3308eaa5776b9e}{}\label{structures_8h_ae0480f005dd86738db3308eaa5776b9e}
 \index{structures.\+h@{structures.\+h}!M\+A\+X\+U4@{M\+A\+X\+U4}}
@@ -341,7 +351,14 @@ enum \hyperlink{structures_8h_a10f4dfa4cc56f9dc100ed8b124308cf8}{tipos\+\_\+arra
 \index{structures.\+h@{structures.\+h}!T\+I\+P\+O\+S\+\_\+U@{T\+I\+P\+O\+S\+\_\+U}}
 \index{T\+I\+P\+O\+S\+\_\+U@{T\+I\+P\+O\+S\+\_\+U}!structures.\+h@{structures.\+h}}
 \subsubsection[{\texorpdfstring{T\+I\+P\+O\+S\+\_\+U}{TIPOS_U}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+I\+P\+O\+S\+\_\+U}\hypertarget{structures_8h_a15b7b54f84c933d1dc59bc77919a3368}{}\label{structures_8h_a15b7b54f84c933d1dc59bc77919a3368}
+Macro para verificação de inclusão de estrutura Class\+File Nesse arquivo estão definidas as estruturas que sao utilizadas na Constant Pool
 
+
+\begin{DoxyItemize}
+\item Valores para tag\+:
+\end{DoxyItemize}
+
+C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Class -\/$>$ 7 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Fieldref -\/$>$ 9 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Methodref -\/$>$ 10 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Interface\+Methodref -\/$>$ 11 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+String -\/$>$ 8 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Integer -\/$>$ 3 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Float -\/$>$ 4 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Long -\/$>$ 5 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Double -\/$>$ 6 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Name\+And\+Type -\/$>$12 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Utf8 -\/$>$ 1 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Method\+Handle -\/$>$ 15 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Method\+Type -\/$>$ 16 C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Invoke\+Dynamic -\/$>$ 18 Inclusão de biblioteca para tratamento de tipo inteiro com representatividade alternada de acordo com a quantidade de bits Definição de rótulos para os tipos uint8\+\_\+t, uint16\+\_\+t e uint32\+\_\+t como u1, u2 e u4, respectivamente 
 
 \subsection{Definições dos tipos}
 \index{structures.\+h@{structures.\+h}!access\+\_\+flags@{access\+\_\+flags}}
@@ -508,7 +525,7 @@ E\+N\+UM\hypertarget{structures_8h_aaea667445c15617b5c6ad01f0e53b481a5bc38f5ef3a
 \index{structures.\+h@{structures.\+h}!tag\+\_\+values@{tag\+\_\+values}}
 \index{tag\+\_\+values@{tag\+\_\+values}!structures.\+h@{structures.\+h}}
 \subsubsection[{\texorpdfstring{tag\+\_\+values}{tag_values}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf tag\+\_\+values}}\hypertarget{structures_8h_a583540b6f8d0dcbe8f43f2b3f955fb30}{}\label{structures_8h_a583540b6f8d0dcbe8f43f2b3f955fb30}
-\begin{Desc}
+Definição de estrutura enum para designar o valor do byte tag de cada entrada na tabela Constant Pool \begin{Desc}
 \item[Valores de enumerações]\par
 \begin{description}
 \index{C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Class@{C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Class}!structures.\+h@{structures.\+h}}\index{structures.\+h@{structures.\+h}!C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Class@{C\+O\+N\+S\+T\+A\+N\+T\+\_\+\+Class}}\item[{\em 

@@ -128,9 +128,6 @@ lista_operandos* RemoverInicio_operandos(lista_operandos *lis);
 lista_operandos* RemoverFim_operandos(lista_operandos *lis);
 /**
  * @brief Imprime na tela uma representação textual da lista de operandos.
- * @details
- *
- * @todo Ajustar impressão para tipos específicos.
  * @param lis Ponteiro para a lista de operandos a ser impressa
  */
 void ImprimirLista_operandos(lista_operandos *lis);

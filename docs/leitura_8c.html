@@ -22,7 +22,6 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">JVM - Grupo 4
    &#160;<span id="projectnumber">0.1</span>
@@ -90,6 +89,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 <div class="title">Referência do Arquivo leitura.c</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Arquivo cabeçalho contendo funções do leitor/exibidor de .class.  
+<a href="#details">Mais...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="leitura_8h_source.html">leitura.h</a>&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
@@ -99,77 +101,114 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funções</h2></td></tr>
 <tr class="memitem:a532302b615784d3e310fe34af2a37d98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a532302b615784d3e310fe34af2a37d98">u1Read</a> (FILE *fp)</td></tr>
+<tr class="memdesc:a532302b615784d3e310fe34af2a37d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler um byte do arquivo.  <a href="#a532302b615784d3e310fe34af2a37d98">Mais...</a><br /></td></tr>
 <tr class="separator:a532302b615784d3e310fe34af2a37d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a977e3cf4c6aa6ffb6cc576edeb904f22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a977e3cf4c6aa6ffb6cc576edeb904f22">u2Read</a> (FILE *fp)</td></tr>
+<tr class="memdesc:a977e3cf4c6aa6ffb6cc576edeb904f22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler dois bytes sem sinal do arquivo.  <a href="#a977e3cf4c6aa6ffb6cc576edeb904f22">Mais...</a><br /></td></tr>
 <tr class="separator:a977e3cf4c6aa6ffb6cc576edeb904f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06f778bc03e466296f0a2f4f5e0ac879"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lista__operandos_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a06f778bc03e466296f0a2f4f5e0ac879">u4Read</a> (FILE *fp)</td></tr>
+<tr class="memdesc:a06f778bc03e466296f0a2f4f5e0ac879"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler 4 bytes sem sinal do arquivo.  <a href="#a06f778bc03e466296f0a2f4f5e0ac879">Mais...</a><br /></td></tr>
 <tr class="separator:a06f778bc03e466296f0a2f4f5e0ac879"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b0235fc0540288e0628f3eaea6f029f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a7b0235fc0540288e0628f3eaea6f029f">lerArquivo</a> (char *nomeArquivo)</td></tr>
+<tr class="memdesc:a7b0235fc0540288e0628f3eaea6f029f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler um arquivo .class.  <a href="#a7b0235fc0540288e0628f3eaea6f029f">Mais...</a><br /></td></tr>
 <tr class="separator:a7b0235fc0540288e0628f3eaea6f029f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95442c88b06feb6516d379b8952a2c82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcp__info.html">cp_info</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a95442c88b06feb6516d379b8952a2c82">lerConstantPool</a> (FILE *fp, <a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> constant_pool_count)</td></tr>
+<tr class="memdesc:a95442c88b06feb6516d379b8952a2c82"><td class="mdescLeft">&#160;</td><td class="mdescRight">A função lê uma constant pool de um arquivo .class.  <a href="#a95442c88b06feb6516d379b8952a2c82">Mais...</a><br /></td></tr>
 <tr class="separator:a95442c88b06feb6516d379b8952a2c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75b94ac184f3265902d83df25b7e7268"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a75b94ac184f3265902d83df25b7e7268">lerInterfaces</a> (FILE *fp, <a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> size)</td></tr>
+<tr class="memdesc:a75b94ac184f3265902d83df25b7e7268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler as interfaces de um arquivo .class.  <a href="#a75b94ac184f3265902d83df25b7e7268">Mais...</a><br /></td></tr>
 <tr class="separator:a75b94ac184f3265902d83df25b7e7268"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21bd4dbf4715db55b7ddb09b76ae70eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfield__info.html">field_info</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a21bd4dbf4715db55b7ddb09b76ae70eb">lerField</a> (FILE *fp, <a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> fields_count, <a class="el" href="structcp__info.html">cp_info</a> *cp)</td></tr>
+<tr class="memdesc:a21bd4dbf4715db55b7ddb09b76ae70eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler os fields do arquivo .class.  <a href="#a21bd4dbf4715db55b7ddb09b76ae70eb">Mais...</a><br /></td></tr>
 <tr class="separator:a21bd4dbf4715db55b7ddb09b76ae70eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a116051c4e47e9cc5e2a43042bb816da4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmethod__info.html">method_info</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a116051c4e47e9cc5e2a43042bb816da4">lerMethod</a> (FILE *fp, <a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> methods_count, <a class="el" href="structcp__info.html">cp_info</a> *cp)</td></tr>
+<tr class="memdesc:a116051c4e47e9cc5e2a43042bb816da4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que lê os métodos de uma classe.  <a href="#a116051c4e47e9cc5e2a43042bb816da4">Mais...</a><br /></td></tr>
 <tr class="separator:a116051c4e47e9cc5e2a43042bb816da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fad17e4731a413a3ddb388cdf31dbc3"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a5fad17e4731a413a3ddb388cdf31dbc3">decodificarCode</a> (<a class="el" href="structcp__info.html">cp_info</a> *cp, <a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> sizeCP, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> *code, <a class="el" href="lista__operandos_8h.html#ae5be1f726785414dd1b77d60df074c9d">u4</a> length, <a class="el" href="structinstrucao.html">instrucao</a> *<a class="el" href="jvm_8h.html#aa7b71b2eb311631483ae2057257df739">instrucoes</a>)</td></tr>
+<tr class="memdesc:a5fad17e4731a413a3ddb388cdf31dbc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para decodificar o atributo Code de um método.  <a href="#a5fad17e4731a413a3ddb388cdf31dbc3">Mais...</a><br /></td></tr>
 <tr class="separator:a5fad17e4731a413a3ddb388cdf31dbc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3826e4a8f6c1af1db46e90c86cf9454"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcode__attribute.html">code_attribute</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#ac3826e4a8f6c1af1db46e90c86cf9454">lerCode</a> (FILE *fp, <a class="el" href="structcp__info.html">cp_info</a> *cp)</td></tr>
+<tr class="memdesc:ac3826e4a8f6c1af1db46e90c86cf9454"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler o atributo Code de um método.  <a href="#ac3826e4a8f6c1af1db46e90c86cf9454">Mais...</a><br /></td></tr>
 <tr class="separator:ac3826e4a8f6c1af1db46e90c86cf9454"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77311e9f0c826e8e44c1aa3013fb14a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structline__number__table.html">line_number_table</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a77311e9f0c826e8e44c1aa3013fb14a7">lerLineNumberTable</a> (FILE *fp, <a class="el" href="structcp__info.html">cp_info</a> *cp)</td></tr>
+<tr class="memdesc:a77311e9f0c826e8e44c1aa3013fb14a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler o atributo Line Number Table de um atributo Code de um método.  <a href="#a77311e9f0c826e8e44c1aa3013fb14a7">Mais...</a><br /></td></tr>
 <tr class="separator:a77311e9f0c826e8e44c1aa3013fb14a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32894495a7939fc4c0eac70e56878b36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structexception__table.html">exception_table</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a32894495a7939fc4c0eac70e56878b36">lerExceptionTable</a> (FILE *fp, <a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> size)</td></tr>
+<tr class="memdesc:a32894495a7939fc4c0eac70e56878b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler a exception table de Code.  <a href="#a32894495a7939fc4c0eac70e56878b36">Mais...</a><br /></td></tr>
 <tr class="separator:a32894495a7939fc4c0eac70e56878b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a344e7559e678338d7b0205fd55ad26ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structattribute__info.html">attribute_info</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a344e7559e678338d7b0205fd55ad26ba">lerAttributes</a> (FILE *fp, <a class="el" href="structcp__info.html">cp_info</a> *cp)</td></tr>
+<tr class="memdesc:a344e7559e678338d7b0205fd55ad26ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler a estrutura attribute info de um arquivo.  <a href="#a344e7559e678338d7b0205fd55ad26ba">Mais...</a><br /></td></tr>
 <tr class="separator:a344e7559e678338d7b0205fd55ad26ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09338a6014c2893ef9ba7488356c12d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structexceptions__attribute.html">exceptions_attribute</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a09338a6014c2893ef9ba7488356c12d3">lerExceptionsAttribute</a> (FILE *fp)</td></tr>
+<tr class="memdesc:a09338a6014c2893ef9ba7488356c12d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler o exception attribute.  <a href="#a09338a6014c2893ef9ba7488356c12d3">Mais...</a><br /></td></tr>
 <tr class="separator:a09338a6014c2893ef9ba7488356c12d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5491f47f9133cfd4998b464c16ffd10"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structconstantValue__attribute.html">constantValue_attribute</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#aa5491f47f9133cfd4998b464c16ffd10">lerConstantValue</a> (FILE *fp)</td></tr>
+<tr class="memdesc:aa5491f47f9133cfd4998b464c16ffd10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler o atributo constant value de um field que apresenta modificador constante.  <a href="#aa5491f47f9133cfd4998b464c16ffd10">Mais...</a><br /></td></tr>
 <tr class="separator:aa5491f47f9133cfd4998b464c16ffd10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a222cb02b826242935cacd28690beb5b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsignature__attribute.html">signature_attribute</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a222cb02b826242935cacd28690beb5b6">lerSignature</a> (FILE *fp)</td></tr>
+<tr class="memdesc:a222cb02b826242935cacd28690beb5b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler o atributo signature do arquivo .class sendo lido.  <a href="#a222cb02b826242935cacd28690beb5b6">Mais...</a><br /></td></tr>
 <tr class="separator:a222cb02b826242935cacd28690beb5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2655407d9b829fbbde68d1c76874de2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structinnerClasses__attribute.html">innerClasses_attribute</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a2655407d9b829fbbde68d1c76874de2e">lerInnerClasses</a> (FILE *fp, <a class="el" href="structcp__info.html">cp_info</a> *cp)</td></tr>
+<tr class="memdesc:a2655407d9b829fbbde68d1c76874de2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler as inner classes de uma classe.  <a href="#a2655407d9b829fbbde68d1c76874de2e">Mais...</a><br /></td></tr>
 <tr class="separator:a2655407d9b829fbbde68d1c76874de2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ae71bffe947dcf76d2ac3afb9d2ccd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structclasses.html">classes</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a8ae71bffe947dcf76d2ac3afb9d2ccd7">lerClasses</a> (FILE *fp)</td></tr>
+<tr class="memdesc:a8ae71bffe947dcf76d2ac3afb9d2ccd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler atributos das inner classes da classe sendo lida.  <a href="#a8ae71bffe947dcf76d2ac3afb9d2ccd7">Mais...</a><br /></td></tr>
 <tr class="separator:a8ae71bffe947dcf76d2ac3afb9d2ccd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0841731a467a9c4ea01fd14d26e5e16e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structstackMapTable__attribute.html">stackMapTable_attribute</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a0841731a467a9c4ea01fd14d26e5e16e">lerStackMapTable</a> (FILE *fp)</td></tr>
+<tr class="memdesc:a0841731a467a9c4ea01fd14d26e5e16e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler o atributo stack map table dentro de Code.  <a href="#a0841731a467a9c4ea01fd14d26e5e16e">Mais...</a><br /></td></tr>
 <tr class="separator:a0841731a467a9c4ea01fd14d26e5e16e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a473a55147e656d17fa92fd0aa2de6353"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structstack__map__frame.html">stack_map_frame</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a473a55147e656d17fa92fd0aa2de6353">lerStackMapFrame</a> (FILE *fp)</td></tr>
+<tr class="memdesc:a473a55147e656d17fa92fd0aa2de6353"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler o atributo stack map frame.  <a href="#a473a55147e656d17fa92fd0aa2de6353">Mais...</a><br /></td></tr>
 <tr class="separator:a473a55147e656d17fa92fd0aa2de6353"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90fa6790693f0c42f9b9c7b51e29626d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structverification__type__info.html">verification_type_info</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a90fa6790693f0c42f9b9c7b51e29626d">lerVerificationTypeInfo</a> (FILE *fp)</td></tr>
+<tr class="memdesc:a90fa6790693f0c42f9b9c7b51e29626d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler o atributo <a class="el" href="structverification__type__info.html">verification_type_info</a>.  <a href="#a90fa6790693f0c42f9b9c7b51e29626d">Mais...</a><br /></td></tr>
 <tr class="separator:a90fa6790693f0c42f9b9c7b51e29626d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ec511f5458503a4af2a2c52e252bf19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsource__file__attribute.html">source_file_attribute</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a4ec511f5458503a4af2a2c52e252bf19">lerSourceFile</a> (FILE *fp)</td></tr>
+<tr class="memdesc:a4ec511f5458503a4af2a2c52e252bf19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ler o atributo source file.  <a href="#a4ec511f5458503a4af2a2c52e252bf19">Mais...</a><br /></td></tr>
 <tr class="separator:a4ec511f5458503a4af2a2c52e252bf19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2497de7aaaa254ef6528bfa85205686"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#ac2497de7aaaa254ef6528bfa85205686">buscaNomeTag</a> (<a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> tag)</td></tr>
+<tr class="memdesc:ac2497de7aaaa254ef6528bfa85205686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para retornar a string representando uma tag.  <a href="#ac2497de7aaaa254ef6528bfa85205686">Mais...</a><br /></td></tr>
 <tr class="separator:ac2497de7aaaa254ef6528bfa85205686"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa660949a854a21aad677f4146fad9d9"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#aaa660949a854a21aad677f4146fad9d9">decodificaStringUTF8</a> (<a class="el" href="structcp__info.html">cp_info</a> *cp)</td></tr>
+<tr class="memdesc:aaa660949a854a21aad677f4146fad9d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função que retorna a string UTF8 da entrada da constant pool recebida como parâmetro.  <a href="#aaa660949a854a21aad677f4146fad9d9">Mais...</a><br /></td></tr>
 <tr class="separator:aaa660949a854a21aad677f4146fad9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8bca39af3cce73734be57793ce3ef44"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#af8bca39af3cce73734be57793ce3ef44">decodificarOperandoInstrucao</a> (<a class="el" href="structcp__info.html">cp_info</a> *cp, <a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> index, <a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> sizeCP)</td></tr>
+<tr class="memdesc:af8bca39af3cce73734be57793ce3ef44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para decodificar os argumentos de uma instrução.  <a href="#af8bca39af3cce73734be57793ce3ef44">Mais...</a><br /></td></tr>
 <tr class="separator:af8bca39af3cce73734be57793ce3ef44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e4585c1f5bdd0cb82601abcb82fda49"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a3e4585c1f5bdd0cb82601abcb82fda49">decodificaNIeNT</a> (<a class="el" href="structcp__info.html">cp_info</a> *cp, <a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> index, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> tipo)</td></tr>
+<tr class="memdesc:a3e4585c1f5bdd0cb82601abcb82fda49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para decodificar uma entrada da Constant Pool.  <a href="#a3e4585c1f5bdd0cb82601abcb82fda49">Mais...</a><br /></td></tr>
 <tr class="separator:a3e4585c1f5bdd0cb82601abcb82fda49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14b76bbb5ed6123e3fce49ed29270ae5"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a14b76bbb5ed6123e3fce49ed29270ae5">decodificaAccessFlags</a> (<a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> flag)</td></tr>
+<tr class="memdesc:a14b76bbb5ed6123e3fce49ed29270ae5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para decodificar o access flag enviado como parâmetro.  <a href="#a14b76bbb5ed6123e3fce49ed29270ae5">Mais...</a><br /></td></tr>
 <tr class="separator:a14b76bbb5ed6123e3fce49ed29270ae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af317d89b25c5b6170994b6baf20b962f"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#af317d89b25c5b6170994b6baf20b962f">organizandoFlags</a> (char *flagsOrdemInversa)</td></tr>
+<tr class="memdesc:af317d89b25c5b6170994b6baf20b962f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para colocar as flags de acesso na ordem correta.  <a href="#af317d89b25c5b6170994b6baf20b962f">Mais...</a><br /></td></tr>
 <tr class="separator:af317d89b25c5b6170994b6baf20b962f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a404e212e067e543ef2bb41917bc88048"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a404e212e067e543ef2bb41917bc88048">decodificaDoubleInfo</a> (<a class="el" href="structcp__info.html">cp_info</a> *cp)</td></tr>
+<tr class="memdesc:a404e212e067e543ef2bb41917bc88048"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para decodificar uma entrada double na constant pool.  <a href="#a404e212e067e543ef2bb41917bc88048">Mais...</a><br /></td></tr>
 <tr class="separator:a404e212e067e543ef2bb41917bc88048"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae96720147cc7cc5143450b071d5e080e"><td class="memItemLeft" align="right" valign="top">long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#ae96720147cc7cc5143450b071d5e080e">decodificaLongInfo</a> (<a class="el" href="structcp__info.html">cp_info</a> *cp)</td></tr>
+<tr class="memdesc:ae96720147cc7cc5143450b071d5e080e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para decodificar uma entrada long na constant pool.  <a href="#ae96720147cc7cc5143450b071d5e080e">Mais...</a><br /></td></tr>
 <tr class="separator:ae96720147cc7cc5143450b071d5e080e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a193651d01919e84f6190d78268218797"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a193651d01919e84f6190d78268218797">decodificaIntegerInfo</a> (<a class="el" href="structcp__info.html">cp_info</a> *cp)</td></tr>
+<tr class="memdesc:a193651d01919e84f6190d78268218797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para decodificar uma entrada Integer na constant pool.  <a href="#a193651d01919e84f6190d78268218797">Mais...</a><br /></td></tr>
 <tr class="separator:a193651d01919e84f6190d78268218797"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45d3610b7050b8c252785827138bfac2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a45d3610b7050b8c252785827138bfac2">decodificaFloatInfo</a> (<a class="el" href="structcp__info.html">cp_info</a> *cp)</td></tr>
+<tr class="memdesc:a45d3610b7050b8c252785827138bfac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">[brief description]  <a href="#a45d3610b7050b8c252785827138bfac2">Mais...</a><br /></td></tr>
 <tr class="separator:a45d3610b7050b8c252785827138bfac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d668efa8d9f1f9b3c53f477d69fbff5"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a5d668efa8d9f1f9b3c53f477d69fbff5">decodificaMajorVersion</a> (<a class="el" href="lista__operandos_8h.html#a732cde1300aafb73b0ea6c2558a7a54f">u2</a> major)</td></tr>
+<tr class="memdesc:a5d668efa8d9f1f9b3c53f477d69fbff5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para decodificar a major version de um arquivo .class.  <a href="#a5d668efa8d9f1f9b3c53f477d69fbff5">Mais...</a><br /></td></tr>
 <tr class="separator:a5d668efa8d9f1f9b3c53f477d69fbff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08eb19cb2eaa414dc427e87098c7d84d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a08eb19cb2eaa414dc427e87098c7d84d">imprimirClassFile</a> (<a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993">ClassFile</a> *arquivoClass, FILE *fp)</td></tr>
+<tr class="memdesc:a08eb19cb2eaa414dc427e87098c7d84d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para imprimir um arquivo .class lido.  <a href="#a08eb19cb2eaa414dc427e87098c7d84d">Mais...</a><br /></td></tr>
 <tr class="separator:a08eb19cb2eaa414dc427e87098c7d84d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b22b47700c5359a81c24a70a381bc71"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="leitura_8c.html#a5b22b47700c5359a81c24a70a381bc71">setaOffsetImpressao</a> (int posicao, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> offset)</td></tr>
+<tr class="memdesc:a5b22b47700c5359a81c24a70a381bc71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para ajustar um offset do atributo interno da stack map frame.  <a href="#a5b22b47700c5359a81c24a70a381bc71">Mais...</a><br /></td></tr>
 <tr class="separator:a5b22b47700c5359a81c24a70a381bc71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Funções</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição Detalhada</h2>
+<div class="textblock"><p>Arquivo cabeçalho contendo funções do leitor/exibidor de .class. </p>
+</div><h2 class="groupheader">Funções</h2>
 <a class="anchor" id="ac2497de7aaaa254ef6528bfa85205686"></a>
 <div class="memitem">
 <div class="memproto">
@@ -183,6 +222,15 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para retornar a string representando uma tag. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>A tag que deve ser convertida para string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a string equivalente à tag enviada como parâmetro </dd></dl>
 
 </div>
 </div>
@@ -200,6 +248,15 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para decodificar o access flag enviado como parâmetro. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flag</td><td>Inteiro representando as flags que devem ser decodificadas </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a string que representa os access flags decodificados </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a404e212e067e543ef2bb41917bc88048"></a>
@@ -215,6 +272,15 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para decodificar uma entrada double na constant pool. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cp</td><td>Entrada da constant pool apontando para o double </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Número double decodificado </dd></dl>
 
 </div>
 </div>
@@ -232,6 +298,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>[brief description] </p>
+<p>[long description]</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cp</td><td>[description] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>[description] </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a193651d01919e84f6190d78268218797"></a>
@@ -247,6 +323,15 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para decodificar uma entrada Integer na constant pool. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cp</td><td>Entrada na constant pool apontando para uma entrada do tipo Integer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna o inteiro decodificado </dd></dl>
 
 </div>
 </div>
@@ -264,6 +349,15 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para decodificar uma entrada long na constant pool. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cp</td><td>Entrada da constant pool apontando para o long </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Número long decodificado </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a5d668efa8d9f1f9b3c53f477d69fbff5"></a>
@@ -279,6 +373,15 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para decodificar a major version de um arquivo .class. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">major</td><td>A major version lida do .class </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um número representando a versão </dd></dl>
 
 </div>
 </div>
@@ -311,6 +414,17 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para decodificar uma entrada da Constant Pool. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cp</td><td>Ponteiro para a constant pool de uma classe </td></tr>
+    <tr><td class="paramname">index</td><td>Índice da constant pool que deve ser decodificado </td></tr>
+    <tr><td class="paramname">tipo</td><td>Tipo da entrada que deve ser decodificada </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a string, que é a entrada decodificada </dd></dl>
 
 </div>
 </div>
@@ -356,6 +470,19 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para decodificar o atributo Code de um método. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cp</td><td>Constant pool da classe </td></tr>
+    <tr><td class="paramname">sizeCP</td><td>Tamanho da constant pool da classe </td></tr>
+    <tr><td class="paramname">code</td><td>Ponteiro apontando para o início do atributo code </td></tr>
+    <tr><td class="paramname">length</td><td>Tamanho do atributo code </td></tr>
+    <tr><td class="paramname">instrucoes</td><td>Vetor contendo todas as instruções </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna um ponteiro de char, contendo todo o Code de um método </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="af8bca39af3cce73734be57793ce3ef44"></a>
@@ -388,6 +515,17 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para decodificar os argumentos de uma instrução. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cp</td><td>Constant pool da classe </td></tr>
+    <tr><td class="paramname">index</td><td>Índice da constant pool que deve ser decodificado </td></tr>
+    <tr><td class="paramname">sizeCP</td><td>Tamanho da constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna um ponteiro de char, representando os argumentos decodificados </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="aaa660949a854a21aad677f4146fad9d9"></a>
@@ -403,6 +541,15 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função que retorna a string UTF8 da entrada da constant pool recebida como parâmetro. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cp</td><td>Entrada da constant pool que aponta para uma estrutura do tipo UTF8 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a string UTF8 decodificada </dd></dl>
 
 </div>
 </div>
@@ -430,6 +577,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para imprimir um arquivo .class lido. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arquivoClass</td><td>Estrutura de um arquivo .class que já foi lido </td></tr>
+    <tr><td class="paramname">fp</td><td>Ponteiro de arquivo em que o arquivo .class deve ser impresso</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993" title="Definição de tipo &#39;ClassFile&#39; para a estrutura. ">ClassFile</a> </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a7b0235fc0540288e0628f3eaea6f029f"></a>
@@ -445,6 +602,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para ler um arquivo .class. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nomeArquivo</td><td>Nome do arquivo que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna um ponteiro de estrutura ClassFile, representando a classe que foi lida do arquivo</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="classFileStruct_8h.html#aed419e54ca9f7e5ab3b22a3036af9993" title="Definição de tipo &#39;ClassFile&#39; para a estrutura. ">ClassFile</a> </dd></dl>
 
 </div>
 </div>
@@ -472,6 +639,17 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para ler a estrutura attribute info de um arquivo. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro de arquivo que deve ser lido </td></tr>
+    <tr><td class="paramname">cp</td><td>Ponteiro para a constant pool do arquivo lido</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a estrutura representando o attribute info lido</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structattribute__info.html">attribute_info</a> </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a8ae71bffe947dcf76d2ac3afb9d2ccd7"></a>
@@ -487,6 +665,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para ler atributos das inner classes da classe sendo lida. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Arquivo .class que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a estrutura representando os atributos lidos</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structclasses.html">classes</a> </dd></dl>
 
 </div>
 </div>
@@ -514,6 +702,17 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para ler o atributo Code de um método. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo que deve ser lido </td></tr>
+    <tr><td class="paramname">cp</td><td>Constant Pool do arquivo lido</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a estrutura representando o atributo code lido</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structcode__attribute.html">code_attribute</a> </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a95442c88b06feb6516d379b8952a2c82"></a>
@@ -540,6 +739,17 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>A função lê uma constant pool de um arquivo .class. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo que deve ser lido </td></tr>
+    <tr><td class="paramname">constant_pool_count</td><td>Variável que contém o tamanho da constant pool, para que a leitura seja delimitada</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna um ponteiro de <a class="el" href="structcp__info.html">cp_info</a>, representando a constant pool lida</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structcp__info.html">cp_info</a> </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="aa5491f47f9133cfd4998b464c16ffd10"></a>
@@ -556,6 +766,15 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para ler o atributo constant value de um field que apresenta modificador constante. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>O arquivo .class que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a estrutura que representa o atributo lido </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a09338a6014c2893ef9ba7488356c12d3"></a>
@@ -571,6 +790,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para ler o exception attribute. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a estrutura que representa as exceções</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structexceptions__attribute.html">exceptions_attribute</a> </dd></dl>
 
 </div>
 </div>
@@ -597,6 +826,17 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para ler a exception table de Code. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo que deve ser lido </td></tr>
+    <tr><td class="paramname">size</td><td>Tamanho da exception table que deve ser lida</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a estrutura representando a tabela de exceções do Code</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structexception__table.html">exception_table</a> </dd></dl>
 
 </div>
 </div>
@@ -630,6 +870,18 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para ler os fields do arquivo .class. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo que deve ser lido </td></tr>
+    <tr><td class="paramname">fields_count</td><td>Contagem de fields da classe. </td></tr>
+    <tr><td class="paramname">cp</td><td>Constant Pool da classe </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a estrutura contendo os fields lidos</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structfield__info.html">field_info</a> </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a2655407d9b829fbbde68d1c76874de2e"></a>
@@ -655,6 +907,17 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para ler as inner classes de uma classe. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo que deve ser lido </td></tr>
+    <tr><td class="paramname">cp</td><td>Ponteiro para a constant pool da classe sendo lida</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna a estrutura que representa as inner classes de uma classe</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structinnerClasses__attribute.html">innerClasses_attribute</a> </dd></dl>
 
 </div>
 </div>
@@ -682,6 +945,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para ler as interfaces de um arquivo .class. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo .class que deve ser lido </td></tr>
+    <tr><td class="paramname">size</td><td>Número de bytes que devem ser lidos</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna um ponteiro para o array de interfaces indexadas pela entrada na Constant Pool que referencia a classe da interface </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a77311e9f0c826e8e44c1aa3013fb14a7"></a>
@@ -707,6 +980,17 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para ler o atributo Line Number Table de um atributo Code de um método. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Arquivo que deve ser lido </td></tr>
+    <tr><td class="paramname">cp</td><td>Ponteiro para a constant pool do arquivo lido</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a estrutura representando o atributo Line Number Table lido</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structline__number__table.html">line_number_table</a> </dd></dl>
 
 </div>
 </div>
@@ -740,6 +1024,18 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função que lê os métodos de uma classe. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo .class que deve ser lido </td></tr>
+    <tr><td class="paramname">methods_count</td><td>Número de métodos que devem ser lidos </td></tr>
+    <tr><td class="paramname">cp</td><td>constant_pool que deve ser passada como parâmetro para decodificação dos nomes dos métodos </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a estrutura <a class="el" href="structmethod__info.html">method_info</a>, que representa a estrutura dos métodos da classe</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structmethod__info.html">method_info</a> </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a222cb02b826242935cacd28690beb5b6"></a>
@@ -755,6 +1051,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para ler o atributo signature do arquivo .class sendo lido. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro de arquivo que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a estrutura representando o atributo signature lido</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structsignature__attribute.html">signature_attribute</a> </dd></dl>
 
 </div>
 </div>
@@ -772,6 +1078,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para ler o atributo source file. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a estrutura que representa o atributo source file</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structsource__file__attribute.html">source_file_attribute</a> </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a473a55147e656d17fa92fd0aa2de6353"></a>
@@ -787,6 +1103,16 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para ler o atributo stack map frame. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro de arquivo que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna a estrutura representando o atributo stack map frame</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structstack__map__frame.html">stack_map_frame</a> </dd></dl>
 
 </div>
 </div>
@@ -804,6 +1130,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para ler o atributo stack map table dentro de Code. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Arquivo que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna a estrutura que representa o atributo stack map table</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structstackMapTable__attribute.html">stackMapTable_attribute</a> </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a90fa6790693f0c42f9b9c7b51e29626d"></a>
@@ -820,6 +1156,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para ler o atributo <a class="el" href="structverification__type__info.html">verification_type_info</a>. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Arquivo que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna a estrutura representando o atributo <a class="el" href="structverification__type__info.html">verification_type_info</a> lido</dd></dl>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="structverification__type__info.html">verification_type_info</a> </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="af317d89b25c5b6170994b6baf20b962f"></a>
@@ -835,6 +1181,15 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para colocar as flags de acesso na ordem correta. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">flagsOrdemInversa</td><td>Ponteiro de char com as flags na ordem inversa </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>Retorna um ponteiro de char com a string na ordem correta </dd></dl>
 
 </div>
 </div>
@@ -862,6 +1217,16 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para ajustar um offset do atributo interno da stack map frame. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">posicao</td><td>Posição do atributo interno ao stack frame </td></tr>
+    <tr><td class="paramname">offset</td><td>Valor de ajuste presente no atributo do stack frame a ser avaliado para correta impressao</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna a posição correta de impressão do atributo </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a532302b615784d3e310fe34af2a37d98"></a>
@@ -877,6 +1242,15 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para ler um byte do arquivo. </p>
+<p>Macro para verificação de inclusão de arquivos de estrutura, bibliotecas de leitura/escrita de dados e manipulação de arquivos Inclusão de bibliotecas para leitura/escrita de dados, manipualão de arquivos e definição de estruturas </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna o u1 lido </dd></dl>
 
 </div>
 </div>
@@ -894,6 +1268,15 @@ Funções</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Função para ler dois bytes sem sinal do arquivo. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna o u2 lido </dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a06f778bc03e466296f0a2f4f5e0ac879"></a>
@@ -909,6 +1292,15 @@ Funções</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para ler 4 bytes sem sinal do arquivo. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fp</td><td>Ponteiro do arquivo que deve ser lido </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>A função retorna o u4 lido </dd></dl>
 
 </div>
 </div>
