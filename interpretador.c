@@ -466,7 +466,7 @@ void ldc2_w_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 
 	u4 high,low;
 
-	if(f->p->topo->tipo_operando == DOUBLE_OP){
+	if(doubleValue->tag == CONSTANT_Double){
 		high = doubleValue->UnionCP.Double.high_bytes;
 		low = doubleValue->UnionCP.Double.low_bytes;
 	} else {
@@ -474,9 +474,13 @@ void ldc2_w_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 		low = doubleValue->UnionCP.Long.low_bytes;
 	}
 
-	Push_operandos(f->p,high,NULL,f->p->topo->tipo_operando);//high
-	Push_operandos(f->p,low,NULL,f->p->topo->tipo_operando);//low
-
+	if(doubleValue->tag == CONSTANT_Double){
+		Push_operandos(f->p,high,NULL,DOUBLE_OP);//high
+		Push_operandos(f->p,low,NULL,DOUBLE_OP);//low
+	} else {
+		Push_operandos(f->p,high,NULL,LONG_OP);//high
+		Push_operandos(f->p,low,NULL,LONG_OP);//low
+	}
 	printf("Valores:\n");
 	printf("-> 0x%08x\n",high);
 	printf("-> 0x%08x\n",low);
@@ -982,7 +986,7 @@ pilha_operandos* pop_impl(frame *f){
 }
 
 /** pop2_impl
-* @todo TERMINAR 
+* @todo TERMINAR
 */
 
 pilha_operandos** pop2_impl(frame *f){
@@ -2236,7 +2240,7 @@ void dreturn_impl(frame *f, u1 par1, u1 par2){
 void areturn_impl(frame *f, u1 par1, u1 par2){
 	// Analisar mesmas coisas do ireturn
 
-	// pilha_operandos *valor = 
+	// pilha_operandos *valor =
 	Pop_operandos(f->p);
 }
 
