@@ -193,7 +193,10 @@ frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 		cont++;
 	}
 
-	for(int i=0;i<cont;i++){
+	printf("-------------AQUI-----------\n");
+	printf("Cont: %d\n",cont);
+	ImprimirPilha_operandos(aux);
+	for(int i = 0; i < cont; i++) {
 		pilha_operandos *p = Pop_operandos(aux);
 		novo->v[i].variavel = malloc(sizeof(u4));
 		if(p->topo->tipo_operando<=8){
@@ -204,6 +207,7 @@ frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 		}
 		novo->v[i].tipo_variavel = (u1) p->topo->tipo_operando;
 	}
+	printf("Saiu mesmo.\n");
 
 	*parametros_cont = cont;
 
@@ -590,11 +594,14 @@ void dload_3_impl(frame *f, u1 par1, u1 par2){
 //Carrega referencia na posicao 0 para a pilha
 void aload_0_impl(frame *f, u1 par1, u1 par2){
 	printf("\n\nEXECUTANDO ALOAD_0\n\n");
+	printf("TIPO: %d\n",f->v[0].tipo_variavel);
+	printf("Valor: 0x%08x\n",*(f->v[0].variavel));
 	Push_operandos(f->p,-INT_MAX,*(f->v[0].variavel),f->v[0].tipo_variavel);
 }
 
 void aload_1_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,-INT_MAX,*(f->v[1].variavel),f->v[1].tipo_variavel);
+	ImprimirPilha_operandos(f->p);
 }
 
 void aload_2_impl(frame *f, u1 par1, u1 par2){
@@ -873,6 +880,7 @@ void astore_1_impl(frame *f, u1 par1, u1 par2){
 	ImprimirPilha_operandos(f->p);
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[1].variavel) = (i4) valor->topo->referencia;
+	printf("ASTORE1: 0x%08x\n",*(f->v[1].variavel));
 	f->v[1].tipo_variavel = valor->topo->tipo_operando;
 
 }
@@ -880,7 +888,11 @@ void astore_1_impl(frame *f, u1 par1, u1 par2){
 void astore_2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[2].variavel) = (i4) valor->topo->referencia;
+	printf("ASTORE2: 0x%08x\n",*(f->v[2].variavel));
 	f->v[2].tipo_variavel = valor->topo->tipo_operando;
+
+	printf("----------------Opa------------\n");
+	ImprimirPilha_operandos(f->p);
 }
 
 void astore_3_impl(frame *f, u1 par1, u1 par2){
@@ -2417,42 +2429,102 @@ void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
     char *classedoField = decodificaNIeNT(f->cp,aux->UnionCP.Fieldref.class_index,NAME_INDEX);
     if(strcmp(classedoField,"java/lang/System")==0){
         f->p = Push_operandos(f->p,-INT_MAX,"out",REFERENCE_OP);
-    } else{
-        classesCarregadas * nova = BuscarElemento_classes(jvm->classes,classedoField);
-        if (nova == NULL) {
-            if (resolverClasse(classedoField) == NULL) {
-                printf("Falha ao abrir classe com field estático, encerrando.\n");
-                exit(1);
-            }
-        } else {
-            cp_info * nameTypeField = f->cp-1+aux->UnionCP.Fieldref.name_and_type_index;
-            char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
-            field_info * fieldSaida = BuscarFieldClasseCorrente_classes(jvm->classes, classedoField, nomeField);
+    } else {
+			printf("Entrou no else...\n");
+			cp_info * nameTypeField = f->cp-1+aux->UnionCP.Fieldref.name_and_type_index;
+			char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
+			char * descriptorRetorno = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
+			printf("%s\n",nomeField);
+			printf("%s\n",descriptorRetorno);
+			int tipoRetorno = getTipoRetorno(descriptorRetorno);
+			if (tipoRetorno != -1) {
+				printf("Nome do fieeeeeeeeeeeeeeeeeeld: %s\n",nomeField);
+				printf("Aqui-----GETFIELD-----------------\n");
+				getchar();
+				ImprimirPilha_operandos(f->p);
+				getchar();
+				pilha_operandos * objetoRef = Pop_operandos(f->p);
+				ClassFile * buscado = (ClassFile*)objetoRef->topo->referencia;
+				Lista_Objetos * obj = buscaObjetoViaReferencia(buscado);
+				if (obj != NULL) {
+					printf("Nao é nulo...\n");
+					printf("NOme field: %s\n",nomeField);
+					printf("Eita piranha oh ein: 0x%08x\n",(i4*)obj->obj);
+					int posicaoField = getPositionField(obj->obj, nomeField);
+					printf("Ja pegou a posicao...\n");
+					if (posicaoField != -1) {
+						if (tipoRetorno == 1) {
+							printf("Passou...............\n");
+							printf("Posicao: %d\n",posicaoField);
+							printf("Quantidade de dados: %d\n",obj->sizeData);
+							u4 * valorLow = (u4*)malloc(sizeof(u4));
+							*valorLow = obj->data[posicaoField];
+							printf("eeeeeeeeeeeitaaaa\n");
+							int tipoOperandoSaida = getTipoOperandoSaida(descriptorRetorno);
+							printf("Opaaaaaaaaaaaaaaa\n");
+							f->p = Push_operandos(f->p,*valorLow,NULL,tipoOperandoSaida);
+							printf("Valor armazenado: 0x%08x\n",*valorLow);
+						} else {
+							u4 * valorHigh = (u4*)malloc(sizeof(u4));
+							*valorHigh = obj->data[posicaoField];
+							u4 * valorLow = (u4*)malloc(sizeof(u4));
+							*valorLow = obj->data[posicaoField+1];
+							int tipoOperandoSaida = getTipoOperandoSaida(descriptorRetorno);
+							f->p = Push_operandos(f->p,*valorHigh,NULL,tipoOperandoSaida);
+							f->p = Push_operandos(f->p,*valorLow,NULL,tipoOperandoSaida);
+							printf("Valor armazenado High: 0x%08x\n",*valorHigh);
+							printf("Valor armazenado Low: 0x%08x\n",*valorLow);
+						}
+					} else {
+						printf("Nao achou ein..........\n");
+					}
 
-            if (fieldSaida != NULL) {
-                if (fieldSaida->access_flags != 0x0008) {
-                    char * descriptorFieldAux = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
-                    if (descriptorFieldValidate(descriptorFieldAux) < 5) {
-                        i4 valorPushed = *fieldSaida->dadosStatics->low;
-                        f->p = Push_operandos(f->p,valorPushed,NULL,INTEGER_OP);
-                        printf("Empilhou na pilha\n");
-                    } else if (descriptorFieldValidate(descriptorFieldAux) == 5 || descriptorFieldValidate(descriptorFieldAux) == 6) {
-                        i4 valorPushedLow = *fieldSaida->dadosStatics->low;
-                        i4 valorPushedHigh = *fieldSaida->dadosStatics->high;
-                        if (descriptorFieldValidate(descriptorFieldAux) == 5) {
-                            f->p = Push_operandos(f->p,valorPushedHigh,NULL,DOUBLE_OP);
-                            f->p = Push_operandos(f->p,valorPushedLow,NULL,DOUBLE_OP);
-                        } else {
-                            f->p = Push_operandos(f->p,valorPushedHigh,NULL,LONG_OP);
-                            f->p = Push_operandos(f->p,valorPushedLow,NULL,DOUBLE_OP);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    // Resolver o field
-    // struct Fieldref campo = f->cp[indice_cp];
+				}
+			}
+		}
+		getchar();
+}
+
+int getTipoOperandoSaida(char * descriptorRetorno) {
+	switch (*descriptorRetorno) {
+			case 'I':
+				return INTEGER_OP;
+			case 'F':
+				return FLOAT_OP;
+			case 'B':
+				return BYTE_OP;
+			case 'C':
+				return CHAR_OP;
+			case 'S':
+				return SHORT_OP;
+			case 'Z':
+				return BOOLEAN_OP;
+			case 'D':
+				return DOUBLE_OP;
+			case 'J':
+				return LONG_OP;
+			default:
+				break;
+	}
+	return -1;
+}
+
+int getTipoRetorno (char * descriptor) {
+	switch (*descriptor) {
+			case 'I':
+			case 'F':
+			case 'B':
+			case 'C':
+			case 'S':
+			case 'Z':
+				return 1;
+			case 'D':
+			case 'J':
+				return 2;
+			default:
+				break;
+	}
+	return -1;
 }
 
 void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
@@ -2470,30 +2542,66 @@ void putfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
         cp_info * nameTypeField = f->cp-1+field->UnionCP.Fieldref.name_and_type_index;
         char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
         printf("Nome do fieeeeeeeeeeeeeeeeeeld: %s\n",nomeField);
-        field_info * fieldSaida = BuscarFieldClasseCorrente_classes(jvm->classes, nomeClasse, nomeField);
-        if (fieldSaida != NULL) {
-            if (fieldSaida->access_flags != 0x0008) {
-                char * descriptorFieldAux = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
-                if (descriptorFieldValidate(descriptorFieldAux) < 5) {
-                    pilha_operandos *valor = Pop_operandos(f->p);
-                    fieldSaida->dadosStatics->low = (u4*) malloc(sizeof(u4));
-                    *fieldSaida->dadosStatics->high = (u4)valor->topo->operando;
-                    printf("Empilhou float 0x%08x\n",*fieldSaida->dadosStatics->low);
-                } else if (descriptorFieldValidate(descriptorFieldAux) == 5 || descriptorFieldValidate(descriptorFieldAux) == 6) {
-                    pilha_operandos *valorLow = Pop_operandos(f->p);
-                    pilha_operandos *valorHigh = Pop_operandos(f->p);
-                    fieldSaida->dadosStatics->low = (u4*) malloc(sizeof(u4));
-                    fieldSaida->dadosStatics->high = (u4*) malloc(sizeof(u4));
-                    *fieldSaida->dadosStatics->low = (u4)valorLow->topo->operando;
-                    *fieldSaida->dadosStatics->high = (u4)valorHigh->topo->operando;
-                    printf("Empilhou double 0x%08x\n",*fieldSaida->dadosStatics->high);
-                    printf("Empilhou double 0x%08x\n",*fieldSaida->dadosStatics->low);
-                }
-            }
-        }
+				printf("Aqui----------------------\n");
+				ImprimirPilha_operandos(f->p);
+        pilha_operandos * valorPopedLow = Pop_operandos(f->p);
+				pilha_operandos * valorPopedHigh = NULL;
+				if (valorPopedLow->topo->tipo_operando == DOUBLE_OP || valorPopedLow->topo->tipo_operando == LONG_OP) {
+					valorPopedHigh = Pop_operandos(f->p);
+				}
+				pilha_operandos * objetoRef = Pop_operandos(f->p);
+				ClassFile * buscado = (ClassFile*)objetoRef->topo->referencia;
+				printf("Eita piranha: 0x%08x\n",(i4*)(jvm->objetos->obj));
+				printf("Eita piranha: 0x%08x\n",(i4*)buscado);
+				Lista_Objetos * obj = buscaObjetoViaReferencia(buscado);
+				printf("Catou objeto...\n");
+				if (obj != NULL) {
+					printf("Nao é nulo...\n");
+					printf("NOme field: %s\n",nomeField);
+					printf("Eita piranha oh ein: 0x%08x\n",(i4*)obj->obj);
+					int posicaoField = getPositionField(obj->obj, nomeField);
+					printf("Ja pegou a posicao...\n");
+					if (posicaoField != -1) {
+						if (valorPopedHigh == NULL) {
+							obj->data[posicaoField] = valorPopedLow->topo->operando;
+							printf("Valor armazenado: 0x%08x\n",obj->data[posicaoField]);
+						} else {
+							obj->data[posicaoField] = valorPopedHigh->topo->operando;
+							obj->data[posicaoField+1] = valorPopedLow->topo->operando;
+							printf("Valor armazenado High: 0x%08x\n",obj->data[posicaoField]);
+							printf("Valor armazenado Low: 0x%08x\n",obj->data[posicaoField+1]);
+						}
+					} else {
+						printf("Nao achou ein..........\n");
+					}
+
+				}
+				getchar();
     }
-    // Resolver o field
-    // struct Fieldref campo = f->cp[indice_cp];
+}
+
+int getPositionField (ClassFile * obj, char * nomeField) {
+	ClassFile * aux = obj;
+	int posicao = 0;
+	for (field_info * auxF = aux->fields; auxF < aux->fields+aux->fields_count; auxF++) {
+		char * nomeF = decodificaStringUTF8(aux->constant_pool-1+auxF->name_index);
+		if (strcmp(nomeF,nomeField) == 0) {
+			return posicao;
+		} else {
+			posicao++;
+		}
+	}
+	return -1;
+}
+
+Lista_Objetos * buscaObjetoViaReferencia (ClassFile * p) {
+	Lista_Objetos * auxiliarObjetos;
+	for (auxiliarObjetos = jvm->objetos; auxiliarObjetos != NULL; auxiliarObjetos = auxiliarObjetos->prox) {
+		if (auxiliarObjetos->obj == p) {
+			return auxiliarObjetos;
+		}
+	}
+	return NULL;
 }
 
 void imprimirValoresStatic (classesCarregadas * class) {
@@ -2517,9 +2625,13 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		u4 * end;
     u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 		i4 valorAux;
+		char *classeDoMetodo = NULL;
+		int *parametros_cont = malloc(sizeof(int));
 
     char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
     char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
+		char *descriptorcopia = malloc(strlen(descriptormetodo)*sizeof(char));
+		strcpy(descriptorcopia,descriptormetodo);
 
 
     /*method_info *metodos = f->classes->topo->arquivoClass->methods;
@@ -2640,10 +2752,61 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
         }
     }
     else{
-        if(resolverMetodo(f->cp,indice_cp,0)){
+					classeDoMetodo = obterClasseDoMetodo(f->cp,indice_cp);
 
-        }
-    }
+					method_info * methodAux = BuscarMethodClasseCorrente_classes(jvm->classes,classeDoMetodo, nomemetodo);
+					attribute_info *aux;
+					int posicao;
+					*parametros_cont = 1 + getParametrosCount (descriptormetodo);
+
+					for(posicao = 0; posicao < methodAux->attributes_count; posicao++) {
+						aux = (*(methodAux->attributes+posicao));
+						classesCarregadas *classeAtual = BuscarElemento_classes(jvm->classes,classeDoMetodo);
+						char *nameindex = decodificaStringUTF8(classeAtual->arquivoClass->constant_pool-1+aux->attribute_name_index);
+						if(strcmp(nameindex,"Code")==0){
+							code_attribute *c = (code_attribute *) aux->info;
+							frame *f_novo = criarFrame(classeDoMetodo,c->max_locals);
+							printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
+							ImprimirPilha_operandos(f->p);
+							f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
+							jvm->frames = Push_frames(jvm->frames,f_novo);
+							// printf("%lu\n",sizeof(vetor_locais));
+							for(int i=0;i<*(parametros_cont);i++){
+								printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
+							}
+
+
+							printf("Classe nova: %s\n",classeDoMetodo);
+							classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeDoMetodo);
+							if (classe != NULL) {
+								printf("Buscou a classe carregada...\n");
+							}
+
+							// Achar o método na classe que o contém
+							method_info *metodos = classe->arquivoClass->methods;
+							for(method_info *aux=metodos;aux<metodos+classe->arquivoClass->methods_count;aux++){
+								// Verificar se o nome e o descriptor do método que deve ser invocado são iguais ao que está sendo analisado no .class
+								char * nomeMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->name_index);
+								char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
+
+								if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptorcopia,descriptorMetodoAux) == 0){
+									printf("Metodo da classe: %s\n",nomeMetodoAux);
+									// Executar o code do método invocado
+									jvm->pc +=3;
+									f->end_retorno = jvm->pc;
+									printf("f->end_retorno: %d\n", f->end_retorno);
+									jvm->pc = 0;
+									printf("Executando método...\n");
+									executarMetodo(aux,classeDoMetodo,2);
+									jvm->pc = f->end_retorno;
+
+								}
+							}
+						}
+					}
+
+
+				}
 
 }
 
@@ -2662,7 +2825,10 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	if(resolverMetodo(f->cp,indice_cp,0)){
 		classeDoMetodo = obterClasseDoMetodo(f->cp,indice_cp);
+		printf("INDICE CP: %d\n",indice_cp);
 		// Corrente é a filha
+		printf("CLASSE DO METODO ------------------------> %s\n",classeDoMetodo);
+		printf("CLASSE CORRENTE ------------------------> %s\n",jvm->frames->topo->f->classeCorrente);
 		classeResolvida = BuscarElemento_classes(jvm->classes,classeDoMetodo);
 		classeCorrente = BuscarElemento_classes(jvm->classes,jvm->frames->topo->f->classeCorrente);
 
@@ -2686,8 +2852,7 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			method_info * methodAux = BuscarMethodClasseCorrente_classes(jvm->classes,classeDoMetodo, nomemetodo);
 			attribute_info *aux;
 			int posicao;
-			char *pch = strtok(descriptormetodo,"()");
-			*parametros_cont += strlen(pch);
+			*parametros_cont = 1 + getParametrosCount (descriptormetodo);
 
 			for(posicao = 0; posicao < methodAux->attributes_count; posicao++) {
 				aux = (*(methodAux->attributes+posicao));
@@ -2697,6 +2862,7 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 					code_attribute *c = (code_attribute *) aux->info;
 					frame *f_novo = criarFrame(classeDoMetodo,c->max_locals);
 					printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
+					ImprimirPilha_operandos(f->p);
 					f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 					jvm->frames = Push_frames(jvm->frames,f_novo);
 					// printf("%lu\n",sizeof(vetor_locais));
@@ -2736,6 +2902,38 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 		}
 	}
+}
+
+int getParametrosCount (char * descriptor) {
+	int sizeChar = strlen(descriptor);
+	int contador = 0;
+	char * descriptorAuxiliar = descriptor;
+	while (sizeChar > 0) {
+		switch (*descriptorAuxiliar) {
+			case '(':
+				break;
+			case ')':
+				return contador;
+				break;
+			case 'I':
+			case 'F':
+			case 'B':
+			case 'C':
+			case 'S':
+			case 'Z':
+				contador++;
+				break;
+			case 'D':
+			case 'J':
+				contador += 2;
+				break;
+			default:
+				break;
+		}
+		descriptorAuxiliar++;
+		sizeChar--;
+	}
+	return contador;
 }
 
 /*
@@ -2893,10 +3091,18 @@ void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 	char *nomeClasse = decodificaNIeNT(f->cp,indice_cp,NAME_INDEX);
 	printf("Nome da classe: %s\n",nomeClasse);
-	ClassFile *classe = resolverClasse(nomeClasse);
+	ClassFile *classe = instanciarClasse(nomeClasse);
 	int numFields = getParametrosNaoStatic(classe);
 	jvm->objetos = InsereObjeto(jvm->objetos, classe,numFields);
 	f->p = Push_operandos(f->p,-INT_MAX,classe,REFERENCE_OP);
+}
+
+ClassFile * instanciarClasse (char * nomeClasse) {
+	char * saida = (char*)malloc((strlen(nomeClasse)+8)*sizeof(char));
+	strcpy(saida,nomeClasse);
+	strcat(saida,".class");
+	ClassFile * cf = lerArquivo(saida);
+	return cf;
 }
 
 Lista_Objetos * InsereObjeto (Lista_Objetos * lis, ClassFile * classe, int parametrosNaoStatic) {

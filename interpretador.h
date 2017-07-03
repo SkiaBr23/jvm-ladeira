@@ -24,6 +24,11 @@ float decodificaFloatValor(u4 valor);
 int getParametrosNaoStatic (ClassFile * classe);
 Lista_Objetos * InsereObjeto (Lista_Objetos * lis, ClassFile * classe, int parametrosNaoStatic);
 bool buscaStaticFlags (char * accessFlags);
+int getParametrosCount (char * descriptor);
+Lista_Objetos * buscaObjetoViaReferencia (ClassFile * p);
+int getPositionField (ClassFile * obj, char * nomeField);
+ClassFile * instanciarClasse (char * nomeClasse);
+int getTipoOperandoSaida(char * descriptorRetorno);
 
 void nop_impl(frame *par0,u1 par1, u1 par2);
 void aconst_null_impl(frame *f, u1 par1, u1 par2);

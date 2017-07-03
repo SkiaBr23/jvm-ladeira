@@ -27,28 +27,28 @@ lista_operandos* InserirInicio_operandos(lista_operandos* lis, i4 operando, void
 	novo->tipo_operando = tipo_operando;
 	novo->prox = lis;
 	novo->ant = NULL;
-	
+
 	if (lis!=NULL){
 		lis->ant = novo;
 	}
-	
+
 	return novo;
 }
 
 lista_operandos* InserirFim_operandos(lista_operandos* lis, i4 operando, void *referencia, u1 tipo_operando){
 	lista_operandos *novo; lista_operandos *ant = NULL; lista_operandos *p = lis;
-	
+
 	while(p!=NULL){
 		ant = p;
 		p=p->prox;
 	}
-	
+
 	novo = malloc(sizeof(lista_operandos));
 
 	if(tipo_operando <= 8){
 	novo->operando = operando;
 	novo->referencia = NULL;
-	} 
+	}
 	else {
 		novo->operando = -INT_MAX;
 		novo->referencia = referencia;
@@ -57,32 +57,32 @@ lista_operandos* InserirFim_operandos(lista_operandos* lis, i4 operando, void *r
 	novo->prox = NULL;
 	novo->ant = ant;
 	ant->prox = novo;
-	
+
 	return (lis);
 }
 
 lista_operandos* RemoverInicio_operandos(lista_operandos* lis){
 	lista_operandos* p=lis;
-	
+
 	lis = p->prox;
 	if(lis!=NULL){
 		lis->ant = NULL;
 	}
-	
+
 	free(p);
 	return (lis);
 }
 
 lista_operandos* RemoverFim_operandos(lista_operandos* lis){
 	lista_operandos *p=lis, *ant=NULL;
-	
+
 	while (p!=NULL){
 		ant = p;
 		p=p->prox;
 	}
 
 	ant->ant->prox = NULL;
-	
+
 	free(ant);
 
 	return lis;
@@ -90,7 +90,7 @@ lista_operandos* RemoverFim_operandos(lista_operandos* lis){
 
 lista_operandos* RemoverElemento_operandos(lista_operandos* lis,i4 operando,u1 tipo_operando){
 	lista_operandos *p = BuscarElemento_operandos(lis, operando, tipo_operando);
-	
+
 	if(p==NULL){
 		return lis;
 	}
@@ -100,13 +100,13 @@ lista_operandos* RemoverElemento_operandos(lista_operandos* lis,i4 operando,u1 t
 	}else{
 		p->ant->prox = p->prox;
 	}
-	
+
 	if (p->prox!=NULL){
 		p->prox->ant = p->ant;
 	}
 
 	free(p);
-	
+
 	return lis;
 }
 
@@ -166,7 +166,7 @@ lista_operandos* InserirPosicao_operandos(lista_operandos *lis, i4 operando, u1 
 lista_operandos* RemoverPosicao_operandos(lista_operandos *lis, int posicao){
 
 	lista_operandos *p = BuscarPosicao_operandos(lis, posicao);
-	
+
 	if(p==NULL){
 		return lis;
 	}
@@ -176,23 +176,23 @@ lista_operandos* RemoverPosicao_operandos(lista_operandos *lis, int posicao){
 	}else{
 		p->ant->prox = p->prox;
 	}
-	
+
 	if (p->prox!=NULL){
 		p->prox->ant = p->ant;
 	}
 
 	free(p);
-	
+
 	return (lis);
 }
 
 void ImprimirLista_operandos(lista_operandos *lis){
 	lista_operandos *p;
-	
+
 	for(p=lis;p!=NULL;p=p->prox){
 		printf("Tipo: %d\t",p->tipo_operando);
 		if(p->tipo_operando<=8){
-			printf("Operando: %d\n\n",p->operando);
+			printf("Operando: 0x%08x\n\n",p->operando);
 		}
 		else{
 			switch(p->tipo_operando){
@@ -224,7 +224,7 @@ void ImprimirLista_operandos(lista_operandos *lis){
 					printf("[J@%p\n",(u4*) p->referencia);
 				break;
 				case REFERENCE_OP:
-					printf("Operando: %s\n\n",(char*) p->referencia);
+					printf("Operando: 0x%08x\n\n", p->referencia);
 				break;
 			}
 		}

@@ -379,20 +379,20 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 					*aux3 = *(++aux);
 
 					if(instrucoes[*aux3].opcode==iinc){
-	
+
 						indexbyte = malloc(sizeof(u2));
 						*indexbyte = *(++aux) << 8;
 						*indexbyte |= *(++aux);
-		
+
 						constbyte = malloc(sizeof(i2));
 						*constbyte = (i2) *(++aux) << 8;
 						*constbyte |= (i2) *(++aux);
-		
+
 						sprintf(stringaux,"\n%s %d by %d\n",instrucoes[*aux3].inst_nome,(int) *indexbyte,(int) *constbyte);
 						strcat(retorno,stringaux);
 					}
 					else{
-	
+
 						aux2 = (u2*) malloc(sizeof(u2));
 						*aux2 = *(++aux) << 8;
 						*aux2 |= *(++aux);
@@ -434,7 +434,7 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 					aux2 = (u2*)malloc(sizeof(u2));
 					*aux2 = *(++aux) << 8;
 					*aux2 |= *(++aux);
-	
+
 					//stringargs = (char*)malloc(100*sizeof(char));
 					stringargs = decodificarOperandoInstrucao(cp,*aux2,sizeCP);
 					strcat(retorno," #");
@@ -453,7 +453,7 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 				aux2 = (u2*) malloc(sizeof(u2));
 				*aux2 = *(++aux) << 8;
 				*aux2 |= *(++aux);
-	
+
 				stringargs = decodificarOperandoInstrucao(cp,*aux2,sizeCP);
 				strcat(retorno," #");
 				sprintf(stringaux,"%d",(int)*aux2);
@@ -472,7 +472,7 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 
 				aux++;
 			break;
-			
+
 			default:
 				strcat(retorno,"undefined");
 				aux++;
@@ -819,6 +819,7 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 	cp_info *cp_aux = cp+index-1;
 	long long saidaLong;
 	double valorSaida;
+	float saidaFloat;
 
 
 	if (index < sizeCP) {
@@ -911,6 +912,15 @@ char* decodificarOperandoInstrucao(cp_info *cp,u2 index, u2 sizeCP){
 				strcat(retorno,">");
 			break;
 
+			case CONSTANT_Float:
+      	saidaFloat = decodificaFloatInfo(cp_aux);
+        stringGeral = (char *) malloc(100*sizeof(char));
+        sprintf(stringGeral,"%f",saidaFloat);
+        strcpy(retorno,"<");
+        strcat(retorno,stringGeral);
+        strcat(retorno,">");
+        break;
+
 			default:
 				strcpy(retorno,"undefined");
 			break;
@@ -998,7 +1008,7 @@ char* decodificaAccessFlags(u2 flag){
 			flag-=TRANSIENT;
 			strcat(retorno,"TRANSIENT;");
 		}
-		
+
 		if(flag>=VOLATILE){
 			flag-=VOLATILE;
 			strcat(retorno,"VOLATILE;");
@@ -1244,6 +1254,11 @@ void imprimirClassFile (ClassFile * arquivoClass, FILE* fp) {
 				fprintf(fp, "Double High Bytes: 0x%08x\n",aux->UnionCP.Double.high_bytes);
 				fprintf(fp, "Double Low Bytes: 0x%08x\n",aux->UnionCP.Double.low_bytes);
 				fprintf(fp, "Double: %lf\n",valor);
+				aux++;
+				fprintf(fp, "--------------Entrada [%d]--------------\n",contador);
+				printf("(large numeric continued)\n");
+				contador++;
+
 				break;
 			case CONSTANT_NameAndType:
 				ponteiroprint = decodificaNIeNT(arquivoClass->constant_pool,aux->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
