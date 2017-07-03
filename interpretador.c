@@ -875,10 +875,6 @@ pilha_operandos* pop_impl(frame *f){
 	return(valor);
 }
 
-/** pop2_impl
-* @todo TERMINAR
-*/
-
 pilha_operandos** pop2_impl(frame *f){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
@@ -3032,10 +3028,6 @@ void multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions){
 
 }
 
-
-/** ifnull_impl
-* @todo IMPLEMENTAR
-*/
 void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
@@ -3049,10 +3041,6 @@ void ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-
-/** ifnonnull_impl
-* @todo IMPLEMENTAR
-*/
 void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 
@@ -3065,16 +3053,11 @@ void ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 		jvm->pc += offset;
 	}
 }
-/** Goto_w_impl
-* @todo IMPLEMENTAR
-*/
+
 void goto_w_impl(frame *f, u1 par1, u1 par2){
+
 }
 
-
-/**jsr_w_impl
-* @todo IMPLEMENTAR
-*/
 void jsr_w_impl(frame *f, u1 par1, u1 par2){
 
 }
