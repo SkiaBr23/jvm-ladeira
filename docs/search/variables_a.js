@@ -2,7 +2,7 @@ var searchData=
 [
   ['magic',['magic',['../structclassFile.html#a3fec808625410854af3cb80b7faeca10',1,'classFile']]],
   ['major_5fversion',['major_version',['../structclassFile.html#a3765d2f6ef5f54e8e2c554afadb795f6',1,'classFile']]],
-  ['map_5fframe_5ftype',['map_frame_type',['../structstack__map__frame.html#ae487d6986750a023b9dfef9b10b2c5c8',1,'stack_map_frame']]],
+  ['map_5fframe_5ftype',['map_frame_type',['../structstack__map__frame.html#aa924e6fab46f29a756e2649da800a419',1,'stack_map_frame']]],
   ['max_5flocals',['max_locals',['../structcode__attribute.html#ab75487f3c1d38f9fb6ad5e71ab99dea2',1,'code_attribute']]],
   ['max_5fstack',['max_stack',['../structcode__attribute.html#abd4d398c165a4e91f3ea559808931473',1,'code_attribute']]],
   ['method_5findex',['method_index',['../structenclosingMethod__attribute.html#a86276273eb87b21a7d0bb23daddb0bca',1,'enclosingMethod_attribute']]],

@@ -26,7 +26,7 @@ var searchData=
   ['printvazio',['printVazio',['../pilha__operandos_8c.html#a3f29eb413998d19a727f107de0ce77cb',1,'pilha_operandos.c']]],
   ['private',['PRIVATE',['../structures_8h.html#aaea667445c15617b5c6ad01f0e53b481a0f0fd409954c4ec858e4cd7594059792',1,'structures.h']]],
   ['protected',['PROTECTED',['../structures_8h.html#aaea667445c15617b5c6ad01f0e53b481a4eca054070419f48846f93d1e09f2ac6',1,'structures.h']]],
-  ['prox',['prox',['../structclassesCarregadas.html#a9be874f129111fad8157f3e4205e9e98',1,'classesCarregadas::prox()'],['../structlista__frames.html#ac33c75b9e66a517b493e6d35a3c1efb3',1,'lista_frames::prox()'],['../structlista.html#a3b0e375147c1163d74544fd206a1f1de',1,'lista::prox()'],['../structlista__operandos.html#a90699e5c7f710177b37754cd5231c9f5',1,'lista_operandos::prox()']]],
+  ['prox',['prox',['../structlista__objetos.html#ace56ba58679d56ce8efbf2e144892d83',1,'lista_objetos::prox()'],['../structclassesCarregadas.html#a9be874f129111fad8157f3e4205e9e98',1,'classesCarregadas::prox()'],['../structlista__frames.html#ac33c75b9e66a517b493e6d35a3c1efb3',1,'lista_frames::prox()'],['../structlista.html#a3b0e375147c1163d74544fd206a1f1de',1,'lista::prox()'],['../structlista__operandos.html#a90699e5c7f710177b37754cd5231c9f5',1,'lista_operandos::prox()']]],
   ['public',['PUBLIC',['../structures_8h.html#aaea667445c15617b5c6ad01f0e53b481ae81e3f79af4b80e22c6b86d63ea397bf',1,'structures.h']]],
   ['public_5fstatic',['PUBLIC_STATIC',['../jvm_8h.html#a27a522139757c63670201a0b9e3edf8f',1,'jvm.h']]],
   ['push',['Push',['../pilha__modelo_8c.html#a5e8693132d45e54134605ba3795251e8',1,'Push(Pilha *p, char *string):&#160;pilha_modelo.c'],['../pilha__modelo_8h.html#a5e8693132d45e54134605ba3795251e8',1,'Push(Pilha *p, char *string):&#160;pilha_modelo.c']]],

@@ -5,13 +5,22 @@
 #include "classFileStruct.h"
 
 
+
+/**
+ * @struct classesCarregadas
+ *
+ * @brief Estrutura de dados da lista de classes carregadas no programa.
+ * @see classFileStruct.h
+ *
+ */
 struct classesCarregadas {
 
-	ClassFile * arquivoClass;
-	struct classesCarregadas * prox;
-	struct classesCarregadas * ant;
+	ClassFile * arquivoClass; 			/**< Ponteiro para uma estrutura de ClassFile */
+	struct classesCarregadas * prox;	/**< Ponteiro de acesso ao próximo nó da lista*/
+	struct classesCarregadas * ant;		/**< Ponteiro de acesso ao nó anterior da lista*/
 
 };
+/** Definição do tipo \c classesCarregadas*/
 typedef struct classesCarregadas classesCarregadas;
 
 classesCarregadas* CriarLista_classes();

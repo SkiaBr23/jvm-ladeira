@@ -200,7 +200,7 @@ frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 			*(novo->v[i].variavel) = (u4) p->topo->operando;
 		}
 		else{
-			*(novo->v[i].variavel) = (u4 *) p->topo->referencia;
+			*(novo->v[i].variavel) = (intptr_t) p->topo->referencia;
 		}
 		novo->v[i].tipo_variavel = (u1) p->topo->tipo_operando;
 	}
@@ -229,7 +229,7 @@ frame *transferePilhaVetorCount(frame *f, frame *novo,int quantidade){
 			*(novo->v[i].variavel) = (u4) p->topo->operando;
 		}
 		else{
-			*(novo->v[i].variavel) = (u4 *) p->topo->referencia;
+			*(novo->v[i].variavel) = (intptr_t) p->topo->referencia;
 		}
 		novo->v[i].tipo_variavel = (u1) p->topo->tipo_operando;
 	}
@@ -345,10 +345,6 @@ void dconst_1_impl(frame *f, u1 par1, u1 par2){
 	//TOPO DA PILHA FICA O LOW
 	i4 low_bytes = (i4) 0;
 	Push_operandos(f->p,low_bytes,NULL,DOUBLE_OP);
-
-	u8 longv = ((u8)high_bytes << 32) | low_bytes;
-	u8 sum = (u8)(*(u8*)&longv);
-
 }
 
 //Push sexted byte para a pilha de operandos
@@ -399,9 +395,7 @@ void ldc_impl(frame *f, u1 indexbyte1, u1 par2){
 			printf("\nName index: %d\n",item->UnionCP.Methodref.class_index);
 			printf("\nName and type index: %d\n",item->UnionCP.Methodref.name_and_type_index);
 			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.class_index,NAME_INDEX);
-			printf("\nPORCARIA: %s\n",valor);
 			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
-			printf("\nPORCARIA: %s\n",valor);
 
 		break;
 
@@ -449,9 +443,7 @@ void ldc_w_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			printf("\nName index: %d\n",item->UnionCP.Methodref.class_index);
 			printf("\nName and type index: %d\n",item->UnionCP.Methodref.name_and_type_index);
 			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.class_index,NAME_INDEX);
-			printf("\nPORCARIA: %s\n",valor);
 			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
-			printf("\nPORCARIA: %s\n",valor);
 
 		break;
 
@@ -589,7 +581,6 @@ void dload_3_impl(frame *f, u1 par1, u1 par2){
 
 //Carrega referencia na posicao 0 para a pilha
 void aload_0_impl(frame *f, u1 par1, u1 par2){
-	printf("\n\nEXECUTANDO ALOAD_0\n\n");
 	Push_operandos(f->p,-INT_MAX,*(f->v[0].variavel),f->v[0].tipo_variavel);
 }
 
@@ -861,7 +852,7 @@ void dstore_3_impl(frame *f, u1 par1, u1 par2){
 
 void astore_0_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[0].variavel) = (i4) valor->topo->referencia;
+	*(f->v[0].variavel) = (intptr_t) valor->topo->referencia;
 	f->v[0].tipo_variavel = valor->topo->tipo_operando;
 }
 
@@ -869,14 +860,15 @@ void astore_0_impl(frame *f, u1 par1, u1 par2){
 void astore_1_impl(frame *f, u1 par1, u1 par2){
 	ImprimirPilha_operandos(f->p);
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[1].variavel) = (i4) valor->topo->referencia;
+
+	*(f->v[1].variavel) = (intptr_t) valor->topo->referencia;
 	f->v[1].tipo_variavel = valor->topo->tipo_operando;
 
 }
 
 void astore_2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
-	*(f->v[2].variavel) = (i4) valor->topo->referencia;
+	*(f->v[2].variavel) = (intptr_t) valor->topo->referencia;
 	f->v[2].tipo_variavel = valor->topo->tipo_operando;
 }
 
@@ -884,7 +876,7 @@ void astore_3_impl(frame *f, u1 par1, u1 par2){
 
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	*(f->v[3].variavel) = (i4) valor->topo->referencia;
+	*(f->v[3].variavel) = (intptr_t) valor->topo->referencia;
 	f->v[3].tipo_variavel = valor->topo->tipo_operando;
 }
 
@@ -990,6 +982,12 @@ void sastore_impl(frame *f, u1 par1, u1 par2){
 }
 
 void aastore_impl(frame *f, u1 par1, u1 par2){
+	pilha_operandos *valor = Pop_operandos(f->p);
+	pilha_operandos *indice = Pop_operandos(f->p);
+	pilha_operandos *array = Pop_operandos(f->p);
+
+	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(u2)));
+	*endereco_array = valor->topo->operando;
 
 }
 
