@@ -451,13 +451,77 @@ void d2f_impl(frame *f, u1 par1, u1 par2);
 void i2b_impl(frame *f, u1 par1, u1 par2);
 void i2c_impl(frame *f, u1 par1, u1 par2);
 void i2s_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução que compara valores long oriundos da pilha de operandos
+ * 
+ * @param f Frame do método corrente que está executando a instrução atual
+ * @param par1 Parâmetro não utilizado
+ * @param par2 Parâmetro não utilizado
+ */
 void lcmp_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução que compara valores float oriundos da pilha de operandos
+ * 
+ * @param f Frame do método corrente que está executando a instrução atual
+ * @param par1 Parâmetro não utilizado
+ * @param par2 Parâmetro não utilizado
+ */
 void fcmpl_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução que compara valores float oriundos da pilha de operandos
+ * 
+ * @param f Frame do método corrente que está executando a instrução atual
+ * @param par1 Parâmetro não utilizado
+ * @param par2 Parâmetro não utilizado
+ */
 void fcmpg_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução que compara valores double oriundos da pilha de operandos
+ * 
+ * @param f Frame do método corrente que está executando a instrução atual
+ * @param par1 Parâmetro não utilizado
+ * @param par2 Parâmetro não utilizado
+ */
 void dcmpl_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução que compara valores double oriundos da pilha de operandos
+ * 
+ * @param f Frame do método corrente que está executando a instrução atual
+ * @param par1 Parâmetro não utilizado
+ * @param par2 Parâmetro não utilizado
+ */
 void dcmpg_impl(frame *f, u1 par1, u1 par2);
+
+/**
+ * @brief Instrução que compara valor da pilha de operandos com zero, verificando se são iguais
+ * 
+ * @param f Frame do método corrente que está executando a instrução atual
+ * @param branchbyte1 Byte high para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero
+ * @param branchbyte2 Byte low para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero
+ */
 void ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Instrução que compara valor da pilha de operandos com zero, verificando se são diferentes
+ * 
+ * @param f Frame do método corrente que está executando a instrução atual
+ * @param branchbyte1 Byte high para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero
+ * @param branchbyte2 Byte low para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero
+ */
 void ifne_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
+
+/**
+ * @brief Instrução que compara valor da pilha de operandos com zero, verificando se o valor da pilha de operandos é menor que zero
+ * 
+ * @param f Frame do método corrente que está executando a instrução atual
+ * @param branchbyte1 Byte high para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero
+ * @param branchbyte2 Byte low para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero
+ */
 void iflt_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void ifge_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
 void ifgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2);
