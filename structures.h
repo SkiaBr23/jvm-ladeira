@@ -1,21 +1,13 @@
-/*
-Universidade de Brasília - 01/2017
-Software Básico - Turma A
-Projeto Leitor/Exibidor de arquivo .class
+/**
+ * @file structures.h
+ * @brief Arquivo cabeçalho contendo as estruturas básicas utilizadas na JVM
+ */
 
-Alunos: Maximillian Fan Xavier - 12/0153271
-				Rafael Dias da Costa - 12/0133253
-				Murilo Cerqueira Medeiros - 12/0130637
-				Eduardo Sousa da Silva - 13/0108405
-				Eduardo Schuabb Duarte - 11/0010876
-
-*/
-
-/*Macro para verificação de inclusão de estrutura ClassFile */
+/** Macro para verificação de inclusão de estrutura ClassFile */
 #ifndef	STRUCTURES_H
 #define STRUCTURES_H
 
-/*
+/**
 Nesse arquivo estão definidas as estruturas que sao utilizadas na Constant Pool
 
 - Valores para tag:
@@ -36,11 +28,11 @@ CONSTANT_MethodType -> 16
 CONSTANT_InvokeDynamic -> 18
 */
 
-/*Inclusão de biblioteca para tratamento de tipo inteiro com representatividade
+/** Inclusão de biblioteca para tratamento de tipo inteiro com representatividade
 alternada de acordo com a quantidade de bits*/
 #include <stdint.h>
 
-/*Definição de rótulos para os tipos uint8_t, uint16_t e uint32_t como
+/** Definição de rótulos para os tipos uint8_t, uint16_t e uint32_t como
 u1, u2 e u4, respectivamente*/
 #ifndef TIPOS_U
 #define TIPOS_U
@@ -70,7 +62,7 @@ typedef uint64_t u8;
 
 #include "pilha_operandos.h"
 
-/*Definição de valores máximos, para debug - PENSAR OUTRO MODO*/
+/** Definição de valores máximos, para debug - PENSAR OUTRO MODO */
 #define MAXU1 255
 #define MAXU2 65535
 #define MAXU4 2147483647
@@ -83,134 +75,134 @@ typedef uint64_t u8;
 #define FIELD_INDEX 7
 
 
-/*Definição da estrutura de Constant Pool*/
+/** Definição da estrutura de Constant Pool*/
 struct cp_info{
-	/*Byte tag para designar o tipo de entrada na Constant Pool*/
+	/**Byte tag para designar o tipo de entrada na Constant Pool*/
 	u1 tag;
-	/*Estrutura union para conter os tipos de entrada na Constant Pool.
+	/**Estrutura union para conter os tipos de entrada na Constant Pool.
 	Cada entrada assume a forma de estrutura, com seus respectivos atributos
 	de informação*/
 	union{
-		/*Estrutura representando uma classe ou interface*/
+		/**Estrutura representando uma classe ou interface*/
 		struct{
-			/*Índice válido em Constant Pool, indicando
+			/**Índice válido em Constant Pool, indicando
 			o nome completo qualificado da classe ou
 			interface*/
 			u2 name_index;
 		} Class;
-		/*Estrutura representando um field*/
+		/**Estrutura representando um field*/
 		struct{
-			/*Índice válido em Constant Pool, indicando
+			/**Índice válido em Constant Pool, indicando
 			o nome completo da classe ou interface que
 			contém a declaração desse field*/
 			u2 class_index;
-			/*Índice válido em Constant Pool, indicando
+			/**Índice válido em Constant Pool, indicando
 			o nome e o descritor do field*/
 			u2 name_and_type_index;
 		} Fieldref;
-		/*Estrutura representando um método*/
+		/**Estrutura representando um método*/
 		struct{
-			/*Índice válido em Constant Pool, indicando
+			/**Índice válido em Constant Pool, indicando
 			o nome completo da classe que contém a
 			declaração desse método*/
 			u2 class_index;
-			/*Índice válido em Constant Pool, indicando
+			/**Índice válido em Constant Pool, indicando
 			o nome e o descritor do método*/
 			u2 name_and_type_index;
 		} Methodref;
-		/*Estrutura representando interfaceamento
+		/**Estrutura representando interfaceamento
 		de métodos*/
 		struct{
-			/*Índice válido em Constant Pool, indicando
+			/**Índice válido em Constant Pool, indicando
 			o nome completo da interface que contém a
 			declaração desse método*/
 			u2 class_index;
-			/*Índice válido em Constant Pool, indicando
+			/**Índice válido em Constant Pool, indicando
 			o nome e o descritor do método*/
 			u2 name_and_type_index;
 		} InterfaceMethodref;
-		/*Estrutura representando objetos
+		/**Estrutura representando objetos
 		constantes do tipo String*/
 		struct{
-			/*Índice válido em Constant Pool, indicando
+			/**Índice válido em Constant Pool, indicando
 			a sequência de caracteres com a qual o
 			objeto String será iniciado*/
 			u2 string_index;
 		} String;
-		/*Estrutura representando uma
+		/**Estrutura representando uma
 		constante inteira de 4 bytes*/
 		struct{
-			/*Representa o valor da constante
+			/**Representa o valor da constante
 			int, em big-endian*/
 			u4 bytes;
 		} Integer;
-		/*Estrutura representando uma
+		/**Estrutura representando uma
 		constante de ponto flutuante de
 		4 bytes*/
 		struct{
-			/*Representa o valor da constante
+			/**Representa o valor da constante
 			float, em big-endian, no formato de
 			precisão simples de ponto flutuante
 			padrão IEEE 754*/
 			u4 bytes;
 		} Float;
-		/*Estrutura representando uma
+		/**Estrutura representando uma
 		constante inteira de 8 bytes*/
 		struct{
-			/*Representa a parte alta do valor, 4 bytes*/
+			/**Representa a parte alta do valor, 4 bytes*/
 			u4 high_bytes;
-			/*Representa a parte baixa do valor, 4 bytes*/
+			/**Representa a parte baixa do valor, 4 bytes*/
 			u4 low_bytes;
 		} Long;
-		/*Estrutura representando uma
+		/**Estrutura representando uma
 		constante de ponto flutuante de
 		8 bytes, big-endian, no formato precisão
 		dupla IEEE 754*/
 		struct{
-			/*Representa a parte alta do valor, 4 bytes*/
+			/**Representa a parte alta do valor, 4 bytes*/
 			u4 high_bytes;
-			/*Representa a parte baixa do valor, 4 bytes*/
+			/**Representa a parte baixa do valor, 4 bytes*/
 			u4 low_bytes;
 		} Double;
-		/*Estrutura representando um field ou
+		/**Estrutura representando um field ou
 		método sem indicar classe ou interface
 		a que pertence*/
 		struct{
-			/*Índice válido em Constant Pool, indicando
+			/**Índice válido em Constant Pool, indicando
 			o nome simples do field ou método ou ainda
 			o nome do método especial <init>*/
 			u2 name_index;
-			/*Índice válido em Constant Pool, indicando
+			/**Índice válido em Constant Pool, indicando
 			o descritor válido do field ou de método*/
 			u2 descriptor_index;
 		} NameAndType;
-		/*Estrutura representando valores strings
+		/**Estrutura representando valores strings
 		constantes, inclusive Unicode*/
 		struct{
-			/*Representa o número de bytes no array
+			/**Representa o número de bytes no array
 			bytes*/
 			u2 length;
-			/*Contém os bytes da string*/
+			/**Contém os bytes da string*/
 			u1 *bytes;
 		} UTF8;
-		/*Estrutura representando um método handle*/
+		/**Estrutura representando um método handle*/
 		struct{
-			/*Valor denotando o tipo deste método handle
+			/**Valor denotando o tipo deste método handle
 			, que caracteriza o comportamento do bytecode*/
 			u1 reference_kind;
-			/*Índice válido em Constant Pool, indicando uma
+			/**Índice válido em Constant Pool, indicando uma
 			estrutura de Method, Field ou InterfaceMethod*/
 			u2 reference_index;
 		} MethodHandle;
-		/*Estrutura representando um tipo de método*/
+		/**Estrutura representando um tipo de método*/
 		struct{
-			/*Índice válido em Constant Pool, indicando
+			/**Índice válido em Constant Pool, indicando
 			o descritor do método*/
 			u2 descriptor_index;
 		} MethodType;
-		/*Estrutura utilizada pela instrução invokecdynamic*/
+		/**Estrutura utilizada pela instrução invokecdynamic*/
 		struct{
-			/*Índice válido em Bootstrap Methods*/
+			/**Índice válido em Bootstrap Methods*/
 			u2 bootstrap_method_attr_index;
 			/**Índice válido em Constant Pool, indicando
 			o nome e o descritor do método*/
@@ -221,7 +213,7 @@ struct cp_info{
 };
 typedef struct cp_info cp_info;
 
-/*Definição de estrutura enum para designar o valor do byte
+/**Definição de estrutura enum para designar o valor do byte
 tag de cada entrada na tabela Constant Pool*/
 enum tag_values {
 
@@ -271,15 +263,15 @@ enum tipos_array{
 
 typedef enum tipos_array tipos_array;
 
-/*Definição da estrutura de Attributes*/
+/**Definição da estrutura de Attributes*/
 struct attribute_info {
-	/*Índice válido em Constant Pool, indicando
+	/**Índice válido em Constant Pool, indicando
 	o nome do atributo*/
 	u2 attribute_name_index;
-	/*Indica o tamanho, em bytes, do restante
+	/**Indica o tamanho, em bytes, do restante
 	do atributo*/
 	u4 attribute_length;
-	/*Array contendo a informação no formato
+	/**Array contendo a informação no formato
 	String - ANALISAR*/
 	void *info;
 };
@@ -292,21 +284,21 @@ struct staticData {
 };
 typedef struct staticData staticData;
 
-/*Definição de estrutura de Field*/
+/**Definição de estrutura de Field*/
 struct field_info{
-	/*Denota a permissão de acesso ao field e suas
+	/**Denota a permissão de acesso ao field e suas
 	propriedades*/
 	u2 access_flags;
-	/*Índice válido em Constant Pool, indicando
+	/**Índice válido em Constant Pool, indicando
 	o nome simples do field*/
 	u2 name_index;
-	/*Índice válido em Constant Pool, indicando
+	/**Índice válido em Constant Pool, indicando
 	o descritor do field*/
 	u2 descriptor_index;
-	/*Indica o número de atributos adicionais
+	/**Indica o número de atributos adicionais
 	deste campo*/
 	u2 attributes_count;
-	/*Array de estruturas Attribute Info*/
+	/**Array de estruturas Attribute Info*/
 	attribute_info ** attributes;
 
 	staticData * dadosStatics;
@@ -334,49 +326,49 @@ struct line_number_table {
 };
 typedef struct line_number_table line_number_table;
 
-/*Definição de estrutura Code - ANALISAR!*/
+/**Definição de estrutura Code - ANALISAR!*/
 struct code_attribute {
-	/*Determina a profundidade máxima do operando
+	/**Determina a profundidade máxima do operando
 	na pilha deste método, em qualquer ponto
 	durante a execução deste método*/
   u2 max_stack;
-	/*Número de variáveis locais no array de
+	/**Número de variáveis locais no array de
 	variáveis locais alocado na chamada deste
 	método, incluindo as variáveis locais utilizadas
 	para passar parâmetros para o método*/
   u2 max_locals;
-	/*Determina o número de bytes no array do código
+	/**Determina o número de bytes no array do código
 	para este método*/
   u4 code_length;
-	/*Arrat de bytes designando o código que implementa
+	/**Arrat de bytes designando o código que implementa
 	o método*/
   u1 * code;
-	/*Número de entrada na tabela de exceções*/
+	/**Número de entrada na tabela de exceções*/
   u2 exception_table_length;
   exception_table * table; // Alocar com exception_table_length
-	/*Número de atributos do Code Attribute*/
+	/**Número de atributos do Code Attribute*/
   u2 attributes_count;
-	/*Array de atributos para este Code*/
+	/**Array de atributos para este Code*/
 	attribute_info ** attributes;
 };
 typedef struct code_attribute code_attribute;
 
-/*Definição de estrutura Method*/
+/**Definição de estrutura Method*/
 struct method_info{
-	/*Denota a permissão de acesso ao método
+	/**Denota a permissão de acesso ao método
 	e suas propriedades*/
 	u2 access_flags;
-	/*Índice válido em Constant Pool, indicando
+	/**Índice válido em Constant Pool, indicando
 	o nome simples do método ou ainda
 	o nome do método especial <init> ou <clinit>*/
 	u2 name_index;
-	/*Índice válido em Constant Pool, indicando
+	/**Índice válido em Constant Pool, indicando
 	o descritor do método*/
 	u2 descriptor_index;
-	/*Indica o número de atributos adicionais
+	/**Indica o número de atributos adicionais
 	deste método*/
 	u2 attributes_count;
-	/*Array de estruturas Attrite Info*/
+	/**Array de estruturas Attrite Info*/
 	attribute_info ** attributes;
 };
 typedef struct method_info method_info;
@@ -422,7 +414,7 @@ struct classes {
 };
 typedef struct classes classes;
 
-	/* Sobre: inner_class_access_flags
+	/** Sobre: inner_class_access_flags
 
 		Flag Name     	Value(Decimal)
 
@@ -466,7 +458,7 @@ struct enclosingMethod_attribute {
 typedef struct enclosingMethod_attribute enclosingMethod_attribute;
 
 
-/*struct synthetic_attribute {		// COMO FAZ COM ESSA?
+/**struct synthetic_attribute {		// COMO FAZ COM ESSA?
 
 	u2 attribute_name_index;
 	u4 attribute_length;		// The value of the attribute_length item is zero.
@@ -521,7 +513,7 @@ struct localVariableTypeTable {
 typedef struct localVariableTypeTable localVariableTypeTable;
 
 
-/*struct deprecated_attribute{	// O que fazer com essa estrutura?
+/**struct deprecated_attribute{	// O que fazer com essa estrutura?
 
 	u2 attribute_name_index;
 	u4 attribute_length;
@@ -682,7 +674,7 @@ struct verification_type_info{
 
 		} float_variable_info;
 
-		/*	 ATENCAo - Tanto para Long como Double (64bits ambas).
+		/**	 ATENCAo - Tanto para Long como Double (64bits ambas).
 		This structure gives the contents of two locations
 		in the operand stack or in the local variable array.
 		If the location is a local variable, then:
@@ -717,7 +709,7 @@ struct verification_type_info{
 
 		} uninitializedThis_variable_info;
 
-		/*The Object_variable_info type indicates that the location
+		/**The Object_variable_info type indicates that the location
 		contains an instance of the class represented by the CONSTANT_Class_info*/
 
 		struct {
@@ -730,7 +722,7 @@ struct verification_type_info{
 		struct {
 
 			//u1 tag; // possuira valor 8
-			u2 offset; /* The offset item indicates the offset, in the code array
+			u2 offset; /** The offset item indicates the offset, in the code array
 						of the Code attribute that contains this StackMapTable
 						attribute, of the new instruction (§new) that created the
 						object being stored in the location.*/
@@ -749,7 +741,7 @@ struct stack_map_frame {
 	union{
 		struct{
 
-			/* frame_type eh representado por uma tag com valores entre 0 e 63
+			/** frame_type eh representado por uma tag com valores entre 0 e 63
 			If the frame type is same_frame, it means the frame has exactly the same
 			locals as the previous stack map frame and that the number of stack items is zero.*/
 			//u1 frame_type; // == 0 a 63
@@ -757,7 +749,7 @@ struct stack_map_frame {
 		} same_frame;
 
 		struct{
-			/*If the frame_type is same_locals_1_stack_item_frame,
+			/**If the frame_type is same_locals_1_stack_item_frame,
 			it means the frame has exactly the same
 			locals as the previous stack map frame and that the number
 			of stack items is 1*/
@@ -769,7 +761,7 @@ struct stack_map_frame {
 
 		struct{
 
-			/*he frame type same_locals_1_stack_item_frame_extended indicates
+			/**he frame type same_locals_1_stack_item_frame_extended indicates
 			that the frame has exactly the same locals as the previous stack map
 			frame and that the number of stack items is 1. The offset_delta value
 			for the frame is given explicitly.*/
@@ -783,7 +775,7 @@ struct stack_map_frame {
 
 		struct{
 
-			/*f the frame_type is chop_frame, it means that the operand stack
+			/**f the frame_type is chop_frame, it means that the operand stack
 			is empty and the current locals are the same as the locals in the
 			previous frame, except that the k last locals are absent.
 			The value of k is given by the formula 251 - frame_type.*/
@@ -795,7 +787,7 @@ struct stack_map_frame {
 
 		struct{
 
-			/*If the frame type is same_frame_extended,
+			/**If the frame type is same_frame_extended,
 			it means the frame has exactly the same locals as
 			the previous stack map frame and that the number of stack items is zero.*/
 
@@ -806,7 +798,7 @@ struct stack_map_frame {
 
 		struct{
 
-			/*If the frame_type is append_frame, it means that the
+			/**If the frame_type is append_frame, it means that the
 			operand stack is empty and the current locals are the same
 			as the locals in the previous frame, except that k
 			additional locals are defined. The value of k is given by
@@ -820,7 +812,7 @@ struct stack_map_frame {
 		} append_frame;
 
 		struct{
-			/*The frame type full_frame is represented by the tag value 255.*/
+			/**The frame type full_frame is represented by the tag value 255.*/
 
 			//frame_type == 255
     	u2 offset_delta;
