@@ -2419,7 +2419,6 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	char *descriptorcopia = malloc(strlen(descriptormetodo)*sizeof(char));
 	strcpy(descriptorcopia,descriptormetodo);
 	char *classeDoMetodo = NULL;
-	classesCarregadas *classeDoMetodoRef = NULL;
 	char *classePaiDaCorrente = NULL;
 	classesCarregadas *classeCorrente = NULL;
 	int *parametros_cont = malloc(sizeof(int));
@@ -2427,28 +2426,7 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	if(resolverMetodo(f->cp,indice_cp,0)){
 
 		classeDoMetodo = obterClasseDoMetodo(f->cp,indice_cp);
-		classeDoMetodoRef = BuscarElemento_classes(jvm->classes,classeDoMetodo);
 
-		if(strcmp(nomemetodo,"<init>")==0){
-			method_info *metodos = classeDoMetodoRef->arquivoClass->methods;
-			char * classeExecutavel = decodificaNIeNT(classeDoMetodoRef->arquivoClass->constant_pool,classeDoMetodoRef->arquivoClass->this_class,NAME_INDEX);
-		
-			for (method_info * methodAux = metodos; methodAux < metodos+classeDoMetodoRef->arquivoClass->methods_count; methodAux++) {
-    		    char *stringmetodo = decodificaStringUTF8(classeDoMetodoRef->arquivoClass->constant_pool-1+methodAux->name_index);
-    		    char *stringdescriptor = decodificaStringUTF8(classeDoMetodoRef->arquivoClass->constant_pool-1+methodAux->descriptor_index);
-		
-    		    // Se for o método main
-    		    if(strcmp(stringmetodo,CLINIT_NOME)==0 && strcmp(stringdescriptor,DESCRIPTOR_CLINIT)==0 && methodAux->access_flags==STATICCLINIT){
-    		    	printf("%s\n",stringmetodo);
-    		        executarMetodo(methodAux,classeExecutavel,1);
-    		    }
-    		}
-		}
-
-		printf("INDICE CP: %d\n",indice_cp);
-		// Corrente é a filha
-		printf("CLASSE DO METODO ------------------------> %s\n",classeDoMetodo);
-		printf("CLASSE CORRENTE ------------------------> %s\n",jvm->frames->topo->f->classeCorrente);
 		classeCorrente = BuscarElemento_classes(jvm->classes,jvm->frames->topo->f->classeCorrente);
 
 		classePaiDaCorrente = decodificaNIeNT(classeCorrente->arquivoClass->constant_pool,classeCorrente->arquivoClass->super_class,NAME_INDEX);
