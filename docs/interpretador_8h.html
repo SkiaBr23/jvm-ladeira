@@ -40,7 +40,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Página&#160;Principal</span></a></li>
-      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
       <li><a href="annotated.html"><span>Estruturas&#160;de&#160;Dados</span></a></li>
       <li class="current"><a href="files.html"><span>Arquivos</span></a></li>
       <li>
@@ -91,6 +90,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Busca');
 <div class="title">Referência do Arquivo interpretador.h</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Arquivo cabeçalho da implementação das instruções e funções auxiliares.  
+<a href="#details">Mais...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="instrucoes_8h_source.html">instrucoes.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="classFileStruct_8h_source.html">classFileStruct.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="jvm_8h_source.html">jvm.h</a>&quot;</code><br />
@@ -603,120 +605,178 @@ Funções</h2></td></tr>
 <tr class="memitem:a3e7394eab6c6446efeaa8562837f218d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a3e7394eab6c6446efeaa8562837f218d">i2s_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
 <tr class="separator:a3e7394eab6c6446efeaa8562837f218d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad54c4c75df5ad40ac0d14c711a03df80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ad54c4c75df5ad40ac0d14c711a03df80">lcmp_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:ad54c4c75df5ad40ac0d14c711a03df80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que compara valores long oriundos da pilha de operandos.  <a href="#ad54c4c75df5ad40ac0d14c711a03df80">Mais...</a><br /></td></tr>
 <tr class="separator:ad54c4c75df5ad40ac0d14c711a03df80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75f211f0c1ac8947336f5f4172b3b398"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a75f211f0c1ac8947336f5f4172b3b398">fcmpl_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a75f211f0c1ac8947336f5f4172b3b398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que compara valores float oriundos da pilha de operandos.  <a href="#a75f211f0c1ac8947336f5f4172b3b398">Mais...</a><br /></td></tr>
 <tr class="separator:a75f211f0c1ac8947336f5f4172b3b398"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a897894b79f2792960a10e48209123968"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a897894b79f2792960a10e48209123968">fcmpg_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a897894b79f2792960a10e48209123968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que compara valores float oriundos da pilha de operandos.  <a href="#a897894b79f2792960a10e48209123968">Mais...</a><br /></td></tr>
 <tr class="separator:a897894b79f2792960a10e48209123968"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab8da156e51f2c3a9cb340555804a2f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#aab8da156e51f2c3a9cb340555804a2f3">dcmpl_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:aab8da156e51f2c3a9cb340555804a2f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que compara valores double oriundos da pilha de operandos.  <a href="#aab8da156e51f2c3a9cb340555804a2f3">Mais...</a><br /></td></tr>
 <tr class="separator:aab8da156e51f2c3a9cb340555804a2f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4042c5d19193fd362a041bb29221e301"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a4042c5d19193fd362a041bb29221e301">dcmpg_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a4042c5d19193fd362a041bb29221e301"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que compara valores double oriundos da pilha de operandos.  <a href="#a4042c5d19193fd362a041bb29221e301">Mais...</a><br /></td></tr>
 <tr class="separator:a4042c5d19193fd362a041bb29221e301"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada1340b4109ab76d1ed6447e4e5c7e23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ada1340b4109ab76d1ed6447e4e5c7e23">ifeq_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:ada1340b4109ab76d1ed6447e4e5c7e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que compara valor da pilha de operandos com zero, verificando se são iguais.  <a href="#ada1340b4109ab76d1ed6447e4e5c7e23">Mais...</a><br /></td></tr>
 <tr class="separator:ada1340b4109ab76d1ed6447e4e5c7e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9998489ee66b9d62ee35cd50cdf6da02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a9998489ee66b9d62ee35cd50cdf6da02">ifne_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a9998489ee66b9d62ee35cd50cdf6da02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que compara valor da pilha de operandos com zero, verificando se são diferentes.  <a href="#a9998489ee66b9d62ee35cd50cdf6da02">Mais...</a><br /></td></tr>
 <tr class="separator:a9998489ee66b9d62ee35cd50cdf6da02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8ca5bd8b11d2a4c49925c7147db7e16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#af8ca5bd8b11d2a4c49925c7147db7e16">iflt_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:af8ca5bd8b11d2a4c49925c7147db7e16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que compara valor da pilha de operandos com zero, verificando se o valor da pilha de operandos é menor que zero.  <a href="#af8ca5bd8b11d2a4c49925c7147db7e16">Mais...</a><br /></td></tr>
 <tr class="separator:af8ca5bd8b11d2a4c49925c7147db7e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bb56871f159ac7fa608dc5f0439b34b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a2bb56871f159ac7fa608dc5f0439b34b">ifge_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a2bb56871f159ac7fa608dc5f0439b34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch será efetuado se o inteiro no topo da pilha for maior ou igual ao valor zero.  <a href="#a2bb56871f159ac7fa608dc5f0439b34b">Mais...</a><br /></td></tr>
 <tr class="separator:a2bb56871f159ac7fa608dc5f0439b34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ae29b80027d7066bd5a081762f86e5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a8ae29b80027d7066bd5a081762f86e5e">ifgt_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a8ae29b80027d7066bd5a081762f86e5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch será efetuado se o inteiro no topo da pilha for maior do que o valor zero.  <a href="#a8ae29b80027d7066bd5a081762f86e5e">Mais...</a><br /></td></tr>
 <tr class="separator:a8ae29b80027d7066bd5a081762f86e5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa292ed792da2c0de2496b2fb845065ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#aa292ed792da2c0de2496b2fb845065ba">ifle_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:aa292ed792da2c0de2496b2fb845065ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch será efetuado se o inteiro no topo da pilha for menor do que o valor zero.  <a href="#aa292ed792da2c0de2496b2fb845065ba">Mais...</a><br /></td></tr>
 <tr class="separator:aa292ed792da2c0de2496b2fb845065ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80de8734b16a0cdeaa88c8f39ef7f05b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a80de8734b16a0cdeaa88c8f39ef7f05b">if_icmpeq_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a80de8734b16a0cdeaa88c8f39ef7f05b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch será efetuado se o inteiro no topo da pilha for igual ao próximo inteiro na pilha.  <a href="#a80de8734b16a0cdeaa88c8f39ef7f05b">Mais...</a><br /></td></tr>
 <tr class="separator:a80de8734b16a0cdeaa88c8f39ef7f05b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a172f845f64987a8645d0f5dff212dbfa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a172f845f64987a8645d0f5dff212dbfa">if_icmpne_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a172f845f64987a8645d0f5dff212dbfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch será efetuado se o inteiro no topo da pilha for diferente do próximo inteiro na pilha.  <a href="#a172f845f64987a8645d0f5dff212dbfa">Mais...</a><br /></td></tr>
 <tr class="separator:a172f845f64987a8645d0f5dff212dbfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0806f1823a8b8bdef3178e2ff3edc9c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a0806f1823a8b8bdef3178e2ff3edc9c6">if_icmplt_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a0806f1823a8b8bdef3178e2ff3edc9c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch será efetuado se o inteiro no topo da pilha for maior do que o próximo inteiro na pilha.  <a href="#a0806f1823a8b8bdef3178e2ff3edc9c6">Mais...</a><br /></td></tr>
 <tr class="separator:a0806f1823a8b8bdef3178e2ff3edc9c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0776aa7a045d8df3888e446225736bec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a0776aa7a045d8df3888e446225736bec">if_icmpge_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a0776aa7a045d8df3888e446225736bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch será efetuado se o inteiro no topo da pilha for menor do que o próximo inteiro na pilha.  <a href="#a0776aa7a045d8df3888e446225736bec">Mais...</a><br /></td></tr>
 <tr class="separator:a0776aa7a045d8df3888e446225736bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d0e31fe31ce2fab3822c3a487291457"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a8d0e31fe31ce2fab3822c3a487291457">if_icmpgt_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a8d0e31fe31ce2fab3822c3a487291457"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch será efetuado se o inteiro no topo da pilha for menor do que o próximo inteiro na pilha.  <a href="#a8d0e31fe31ce2fab3822c3a487291457">Mais...</a><br /></td></tr>
 <tr class="separator:a8d0e31fe31ce2fab3822c3a487291457"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af925f59524692494cdaa27635289f902"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#af925f59524692494cdaa27635289f902">if_icmple_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:af925f59524692494cdaa27635289f902"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch será efetuado se o inteiro no topo da pilha for maior do que o próximo inteiro na pilha.  <a href="#af925f59524692494cdaa27635289f902">Mais...</a><br /></td></tr>
 <tr class="separator:af925f59524692494cdaa27635289f902"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94c6b614198b51ca7b501f1a8258de91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a94c6b614198b51ca7b501f1a8258de91">acmpeq_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a94c6b614198b51ca7b501f1a8258de91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch será efetuado se as referências na pilha forem iguais.  <a href="#a94c6b614198b51ca7b501f1a8258de91">Mais...</a><br /></td></tr>
 <tr class="separator:a94c6b614198b51ca7b501f1a8258de91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9d7f5fa156f20cdf3af086d19280a3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#af9d7f5fa156f20cdf3af086d19280a3c">acmpne_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:af9d7f5fa156f20cdf3af086d19280a3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branch será efetuado se as referências na pilha não forem iguais.  <a href="#af9d7f5fa156f20cdf3af086d19280a3c">Mais...</a><br /></td></tr>
 <tr class="separator:af9d7f5fa156f20cdf3af086d19280a3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a305b0bf7c28b62c9c6f70017022b3633"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a305b0bf7c28b62c9c6f70017022b3633">inst_goto_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a305b0bf7c28b62c9c6f70017022b3633"><td class="mdescLeft">&#160;</td><td class="mdescRight">A instrução sempre efetuará um branch.  <a href="#a305b0bf7c28b62c9c6f70017022b3633">Mais...</a><br /></td></tr>
 <tr class="separator:a305b0bf7c28b62c9c6f70017022b3633"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98987e332f6b30ac84ac362373867005"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a98987e332f6b30ac84ac362373867005">jsr_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a98987e332f6b30ac84ac362373867005"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para efetuar um branch para um offset, dentro do código do mesmo método sendo executado.  <a href="#a98987e332f6b30ac84ac362373867005">Mais...</a><br /></td></tr>
 <tr class="separator:a98987e332f6b30ac84ac362373867005"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c07903f971f1e1dcd683e34b9f7a1b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a2c07903f971f1e1dcd683e34b9f7a1b4">ret_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> index, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1)</td></tr>
+<tr class="memdesc:a2c07903f971f1e1dcd683e34b9f7a1b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para retornar de uma subrotina.  <a href="#a2c07903f971f1e1dcd683e34b9f7a1b4">Mais...</a><br /></td></tr>
 <tr class="separator:a2c07903f971f1e1dcd683e34b9f7a1b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a611c730b3076fa4f64b7150f478d11fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a611c730b3076fa4f64b7150f478d11fa">tableswitch_fantasma</a> (<a class="el" href="structframe.html">frame</a> *par0, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a611c730b3076fa4f64b7150f478d11fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto.  <a href="#a611c730b3076fa4f64b7150f478d11fa">Mais...</a><br /></td></tr>
 <tr class="separator:a611c730b3076fa4f64b7150f478d11fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a606daad16a33bad25801a8bfe446ee75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a606daad16a33bad25801a8bfe446ee75">lookupswitch_fantasma</a> (<a class="el" href="structframe.html">frame</a> *par0, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a606daad16a33bad25801a8bfe446ee75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto.  <a href="#a606daad16a33bad25801a8bfe446ee75">Mais...</a><br /></td></tr>
 <tr class="separator:a606daad16a33bad25801a8bfe446ee75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a779c3dfcf58e63584dfcbcaf2661f9e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a779c3dfcf58e63584dfcbcaf2661f9e8">tableswitch_impl</a> (<a class="el" href="structframe.html">frame</a> *f)</td></tr>
+<tr class="memdesc:a779c3dfcf58e63584dfcbcaf2661f9e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para acessar uma jump table por index e efetuar um jump.  <a href="#a779c3dfcf58e63584dfcbcaf2661f9e8">Mais...</a><br /></td></tr>
 <tr class="separator:a779c3dfcf58e63584dfcbcaf2661f9e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b5c7c14e3b2181811153909518c5832"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a1b5c7c14e3b2181811153909518c5832">lookupswitch_impl</a> (<a class="el" href="structframe.html">frame</a> *f)</td></tr>
+<tr class="memdesc:a1b5c7c14e3b2181811153909518c5832"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para acessar uma chave em um jump table e efetuar um jump.  <a href="#a1b5c7c14e3b2181811153909518c5832">Mais...</a><br /></td></tr>
 <tr class="separator:a1b5c7c14e3b2181811153909518c5832"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4844be8e982644ff50e3109c64dffe5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ab4844be8e982644ff50e3109c64dffe5">ireturn_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:ab4844be8e982644ff50e3109c64dffe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para retornar um inteiro de um método.  <a href="#ab4844be8e982644ff50e3109c64dffe5">Mais...</a><br /></td></tr>
 <tr class="separator:ab4844be8e982644ff50e3109c64dffe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13b3338c2d12b0b93c0ebe98bfe83137"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a13b3338c2d12b0b93c0ebe98bfe83137">lreturn_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a13b3338c2d12b0b93c0ebe98bfe83137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para retornar um long de um método.  <a href="#a13b3338c2d12b0b93c0ebe98bfe83137">Mais...</a><br /></td></tr>
 <tr class="separator:a13b3338c2d12b0b93c0ebe98bfe83137"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89dd5594dc4783749c673ca58f7168f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a89dd5594dc4783749c673ca58f7168f6">freturn_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a89dd5594dc4783749c673ca58f7168f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para retornar um float de um método.  <a href="#a89dd5594dc4783749c673ca58f7168f6">Mais...</a><br /></td></tr>
 <tr class="separator:a89dd5594dc4783749c673ca58f7168f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae32f0aa5f2a60283cc9376463c30a663"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ae32f0aa5f2a60283cc9376463c30a663">dreturn_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:ae32f0aa5f2a60283cc9376463c30a663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para retornar um double de um método.  <a href="#ae32f0aa5f2a60283cc9376463c30a663">Mais...</a><br /></td></tr>
 <tr class="separator:ae32f0aa5f2a60283cc9376463c30a663"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b5b4db342ffaeffd95ebca5f94a4ebd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a3b5b4db342ffaeffd95ebca5f94a4ebd">areturn_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a3b5b4db342ffaeffd95ebca5f94a4ebd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para retornar uma referência de um método.  <a href="#a3b5b4db342ffaeffd95ebca5f94a4ebd">Mais...</a><br /></td></tr>
 <tr class="separator:a3b5b4db342ffaeffd95ebca5f94a4ebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a9b7c979432ec41b8a2c62389c7f90e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a0a9b7c979432ec41b8a2c62389c7f90e">inst_return_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a0a9b7c979432ec41b8a2c62389c7f90e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para retornar void de um método.  <a href="#a0a9b7c979432ec41b8a2c62389c7f90e">Mais...</a><br /></td></tr>
 <tr class="separator:a0a9b7c979432ec41b8a2c62389c7f90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab8bb241f38d5254b4eb6a8d098bebfb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#aab8bb241f38d5254b4eb6a8d098bebfb">getstatic_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2)</td></tr>
+<tr class="memdesc:aab8bb241f38d5254b4eb6a8d098bebfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para obter um field estático de uma classe.  <a href="#aab8bb241f38d5254b4eb6a8d098bebfb">Mais...</a><br /></td></tr>
 <tr class="separator:aab8bb241f38d5254b4eb6a8d098bebfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81bc4af9e545ed38b0a62650bf2ead42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a81bc4af9e545ed38b0a62650bf2ead42">putstatic_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2)</td></tr>
+<tr class="memdesc:a81bc4af9e545ed38b0a62650bf2ead42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para setar um field estático em uma classe.  <a href="#a81bc4af9e545ed38b0a62650bf2ead42">Mais...</a><br /></td></tr>
 <tr class="separator:a81bc4af9e545ed38b0a62650bf2ead42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b6a07c24ed0591525e7cc48b676b08c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a2b6a07c24ed0591525e7cc48b676b08c">getfield_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2)</td></tr>
+<tr class="memdesc:a2b6a07c24ed0591525e7cc48b676b08c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para obter o field de um objeto.  <a href="#a2b6a07c24ed0591525e7cc48b676b08c">Mais...</a><br /></td></tr>
 <tr class="separator:a2b6a07c24ed0591525e7cc48b676b08c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfed0b8cbb029920687b563bcdc45637"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#abfed0b8cbb029920687b563bcdc45637">putfield_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2)</td></tr>
+<tr class="memdesc:abfed0b8cbb029920687b563bcdc45637"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para setar um field em um objeto.  <a href="#abfed0b8cbb029920687b563bcdc45637">Mais...</a><br /></td></tr>
 <tr class="separator:abfed0b8cbb029920687b563bcdc45637"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87210c88c859a1e732355a7ead1e2638"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a87210c88c859a1e732355a7ead1e2638">invokevirtual_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2)</td></tr>
+<tr class="memdesc:a87210c88c859a1e732355a7ead1e2638"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para invocar um método de instância, geralmente utilizada para impressão em tela.  <a href="#a87210c88c859a1e732355a7ead1e2638">Mais...</a><br /></td></tr>
 <tr class="separator:a87210c88c859a1e732355a7ead1e2638"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1f0ebb9e8dd948c2c9526f225e04f6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ac1f0ebb9e8dd948c2c9526f225e04f6f">invokespecial_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2)</td></tr>
+<tr class="memdesc:ac1f0ebb9e8dd948c2c9526f225e04f6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para invocar um método de instância.  <a href="#ac1f0ebb9e8dd948c2c9526f225e04f6f">Mais...</a><br /></td></tr>
 <tr class="separator:ac1f0ebb9e8dd948c2c9526f225e04f6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac62c789b89726a00edcab417648306be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ac62c789b89726a00edcab417648306be">invokestatic_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2)</td></tr>
+<tr class="memdesc:ac62c789b89726a00edcab417648306be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para invocar um método estático (método de classe)  <a href="#ac62c789b89726a00edcab417648306be">Mais...</a><br /></td></tr>
 <tr class="separator:ac62c789b89726a00edcab417648306be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a632fe944219d89caa74f26b2ae63cdea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a632fe944219d89caa74f26b2ae63cdea">invokeinterface_fantasma</a> (<a class="el" href="structframe.html">frame</a> *par0, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a632fe944219d89caa74f26b2ae63cdea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto.  <a href="#a632fe944219d89caa74f26b2ae63cdea">Mais...</a><br /></td></tr>
 <tr class="separator:a632fe944219d89caa74f26b2ae63cdea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35957a03e4492547d2e84aba71d83613"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a35957a03e4492547d2e84aba71d83613">invokeinterface_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> count)</td></tr>
+<tr class="memdesc:a35957a03e4492547d2e84aba71d83613"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para invocar um método de interface.  <a href="#a35957a03e4492547d2e84aba71d83613">Mais...</a><br /></td></tr>
 <tr class="separator:a35957a03e4492547d2e84aba71d83613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97f52d4cd37463b92cff91f3ec0a5f0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a97f52d4cd37463b92cff91f3ec0a5f0b">invokedynamic_fantasma</a> (<a class="el" href="structframe.html">frame</a> *par0, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a97f52d4cd37463b92cff91f3ec0a5f0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para invocar um método dinâmico. Essa instrução só existe para criar uma posição "falsa" no vetor de ponteiros de função.  <a href="#a97f52d4cd37463b92cff91f3ec0a5f0b">Mais...</a><br /></td></tr>
 <tr class="separator:a97f52d4cd37463b92cff91f3ec0a5f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af53dda1fb156ef04b805522fde9764ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#af53dda1fb156ef04b805522fde9764ba">inst_new_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2)</td></tr>
+<tr class="memdesc:af53dda1fb156ef04b805522fde9764ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para criar um novo objeto.  <a href="#af53dda1fb156ef04b805522fde9764ba">Mais...</a><br /></td></tr>
 <tr class="separator:af53dda1fb156ef04b805522fde9764ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af89e1ba34999630cc234c3004691d6bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#af89e1ba34999630cc234c3004691d6bb">newarray_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> atype, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1)</td></tr>
+<tr class="memdesc:af89e1ba34999630cc234c3004691d6bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função para criar um novo array de um dado tipo.  <a href="#af89e1ba34999630cc234c3004691d6bb">Mais...</a><br /></td></tr>
 <tr class="separator:af89e1ba34999630cc234c3004691d6bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad785bc77cfa461ccadcae45434c18a6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ad785bc77cfa461ccadcae45434c18a6c">anewarray_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:ad785bc77cfa461ccadcae45434c18a6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Criar um novo array do tipo referência.  <a href="#ad785bc77cfa461ccadcae45434c18a6c">Mais...</a><br /></td></tr>
 <tr class="separator:ad785bc77cfa461ccadcae45434c18a6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e039ecddb87626dd1303b75f5cc0a2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a9e039ecddb87626dd1303b75f5cc0a2c">arraylength_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a9e039ecddb87626dd1303b75f5cc0a2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para obter o tamanho de um array.  <a href="#a9e039ecddb87626dd1303b75f5cc0a2c">Mais...</a><br /></td></tr>
 <tr class="separator:a9e039ecddb87626dd1303b75f5cc0a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abff62884e6fd16c56a9094c7016f56cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#abff62884e6fd16c56a9094c7016f56cd">athrow_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:abff62884e6fd16c56a9094c7016f56cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para lançar uma exceção ou erro.  <a href="#abff62884e6fd16c56a9094c7016f56cd">Mais...</a><br /></td></tr>
 <tr class="separator:abff62884e6fd16c56a9094c7016f56cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89ef7805bfe626784388a9c859208420"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a89ef7805bfe626784388a9c859208420">checkcast_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a89ef7805bfe626784388a9c859208420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para verificar se um objeto é de um determinado tipo.  <a href="#a89ef7805bfe626784388a9c859208420">Mais...</a><br /></td></tr>
 <tr class="separator:a89ef7805bfe626784388a9c859208420"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a822ad98771fff6bf05700c6d65839e86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a822ad98771fff6bf05700c6d65839e86">instanceof_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a822ad98771fff6bf05700c6d65839e86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para determinar se um objeto é de um eterminado tipo.  <a href="#a822ad98771fff6bf05700c6d65839e86">Mais...</a><br /></td></tr>
 <tr class="separator:a822ad98771fff6bf05700c6d65839e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fbca3c86969309fb78ce80b87e8528c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a0fbca3c86969309fb78ce80b87e8528c">monitorenter_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a0fbca3c86969309fb78ce80b87e8528c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para entrar no monitor de um objeto.  <a href="#a0fbca3c86969309fb78ce80b87e8528c">Mais...</a><br /></td></tr>
 <tr class="separator:a0fbca3c86969309fb78ce80b87e8528c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e2a21f4852259d8ea24e83601cded07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a8e2a21f4852259d8ea24e83601cded07">monitorexit_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a8e2a21f4852259d8ea24e83601cded07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para sair de um monitor de um objeto.  <a href="#a8e2a21f4852259d8ea24e83601cded07">Mais...</a><br /></td></tr>
 <tr class="separator:a8e2a21f4852259d8ea24e83601cded07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6da8ed672cdb16eb3560267dacedbeb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a6da8ed672cdb16eb3560267dacedbeb3">wide_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2)</td></tr>
+<tr class="memdesc:a6da8ed672cdb16eb3560267dacedbeb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para estender a próxima instrução para ter o dobro de bytes de índice.  <a href="#a6da8ed672cdb16eb3560267dacedbeb3">Mais...</a><br /></td></tr>
 <tr class="separator:a6da8ed672cdb16eb3560267dacedbeb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a478cae9b4e76cac306adc32b2b129504"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a478cae9b4e76cac306adc32b2b129504">multianewarray_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> indexbyte2, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> dimensions)</td></tr>
+<tr class="memdesc:a478cae9b4e76cac306adc32b2b129504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que irá criar um array multidimensional.  <a href="#a478cae9b4e76cac306adc32b2b129504">Mais...</a><br /></td></tr>
 <tr class="separator:a478cae9b4e76cac306adc32b2b129504"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af01a170230fbb7c76ac3f3ca2f3cb785"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#af01a170230fbb7c76ac3f3ca2f3cb785">multianewarray_fantasma</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:af01a170230fbb7c76ac3f3ca2f3cb785"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto.  <a href="#af01a170230fbb7c76ac3f3ca2f3cb785">Mais...</a><br /></td></tr>
 <tr class="separator:af01a170230fbb7c76ac3f3ca2f3cb785"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a372ce682f9d54faec78796a291bfdc95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a372ce682f9d54faec78796a291bfdc95">ifnull_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a372ce682f9d54faec78796a291bfdc95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que irá efetuar um branch caso a referência no topo da pilha seja nula.  <a href="#a372ce682f9d54faec78796a291bfdc95">Mais...</a><br /></td></tr>
 <tr class="separator:a372ce682f9d54faec78796a291bfdc95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a01fb2800adc854f296282d0d7cf5c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a8a01fb2800adc854f296282d0d7cf5c8">ifnonnull_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> branchbyte2)</td></tr>
+<tr class="memdesc:a8a01fb2800adc854f296282d0d7cf5c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução que irá efetuar um branch caso a referência no topo da pilha não seja nula.  <a href="#a8a01fb2800adc854f296282d0d7cf5c8">Mais...</a><br /></td></tr>
 <tr class="separator:a8a01fb2800adc854f296282d0d7cf5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93ccb036273453537acc8dd0b9ef074c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#a93ccb036273453537acc8dd0b9ef074c">goto_w_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:a93ccb036273453537acc8dd0b9ef074c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A instrução sempre efetuará um branch, para um offset wide.  <a href="#a93ccb036273453537acc8dd0b9ef074c">Mais...</a><br /></td></tr>
 <tr class="separator:a93ccb036273453537acc8dd0b9ef074c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb926e678ecc929443794dd877319448"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#afb926e678ecc929443794dd877319448">jsr_w_impl</a> (<a class="el" href="structframe.html">frame</a> *f, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par1, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a> par2)</td></tr>
+<tr class="memdesc:afb926e678ecc929443794dd877319448"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instrução para efetuar um branch para um offset wide, de 32 bits, dentro do código do mesmo método sendo executado.  <a href="#afb926e678ecc929443794dd877319448">Mais...</a><br /></td></tr>
 <tr class="separator:afb926e678ecc929443794dd877319448"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -724,7 +784,9 @@ Variáveis</h2></td></tr>
 <tr class="memitem:ae10e26f3963b2f4b36e36155c7edacbf"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interpretador_8h.html#ae10e26f3963b2f4b36e36155c7edacbf">func_ptr</a> [202])(<a class="el" href="structframe.html">frame</a> *, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>, <a class="el" href="lista__operandos_8h.html#ad9f4cdb6757615aae2fad89dab3c5470">u1</a>)</td></tr>
 <tr class="separator:ae10e26f3963b2f4b36e36155c7edacbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Definições e macros</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição Detalhada</h2>
+<div class="textblock"><p>Arquivo cabeçalho da implementação das instruções e funções auxiliares. </p>
+</div><h2 class="groupheader">Definições e macros</h2>
 <a class="anchor" id="abe86e9e7585bca39496d13a45741f748"></a>
 <div class="memitem">
 <div class="memproto">
@@ -867,6 +929,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Branch será efetuado se as referências na pilha forem iguais. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="af9d7f5fa156f20cdf3af086d19280a3c"></a>
@@ -898,6 +970,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Branch será efetuado se as referências na pilha não forem iguais. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1183,6 +1265,17 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Criar um novo array do tipo referência. </p>
+<p>[long description]</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">par1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">par2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a3b5b4db342ffaeffd95ebca5f94a4ebd"></a>
@@ -1215,6 +1308,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para retornar uma referência de um método. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a9e039ecddb87626dd1303b75f5cc0a2c"></a>
@@ -1246,6 +1349,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para obter o tamanho de um array. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1488,6 +1601,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para lançar uma exceção ou erro. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1781,6 +1904,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para verificar se um objeto é de um determinado tipo. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">par1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">par2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a52a92bfa0456ea29c98c5bcf2bf77815"></a>
@@ -2035,6 +2168,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução que compara valores double oriundos da pilha de operandos. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="aab8da156e51f2c3a9cb340555804a2f3"></a>
@@ -2066,6 +2209,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução que compara valores double oriundos da pilha de operandos. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2682,6 +2835,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para retornar um double de um método. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -3447,6 +3610,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução que compara valores float oriundos da pilha de operandos. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a75f211f0c1ac8947336f5f4172b3b398"></a>
@@ -3478,6 +3651,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução que compara valores float oriundos da pilha de operandos. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -4015,6 +4198,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para retornar um float de um método. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a7c206c36ac21b4aab390d0916a106c5a"></a>
@@ -4299,6 +4492,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para obter o field de um objeto. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a9ea344b9fcd1ad04bfb5b1fe679729e5"></a>
@@ -4417,6 +4620,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para obter um field estático de uma classe. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a98f75106054d7c758c07584b0345123a"></a>
@@ -4498,6 +4711,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>A instrução sempre efetuará um branch, para um offset wide. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -5228,6 +5451,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Branch será efetuado se o inteiro no topo da pilha for igual ao próximo inteiro na pilha. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a0776aa7a045d8df3888e446225736bec"></a>
@@ -5259,6 +5492,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Branch será efetuado se o inteiro no topo da pilha for menor do que o próximo inteiro na pilha. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -5292,6 +5535,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Branch será efetuado se o inteiro no topo da pilha for menor do que o próximo inteiro na pilha. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="af925f59524692494cdaa27635289f902"></a>
@@ -5323,6 +5576,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Branch será efetuado se o inteiro no topo da pilha for maior do que o próximo inteiro na pilha. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -5356,6 +5619,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Branch será efetuado se o inteiro no topo da pilha for maior do que o próximo inteiro na pilha. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a172f845f64987a8645d0f5dff212dbfa"></a>
@@ -5387,6 +5660,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Branch será efetuado se o inteiro no topo da pilha for diferente do próximo inteiro na pilha. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -5420,6 +5703,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução que compara valor da pilha de operandos com zero, verificando se são iguais. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte high para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte low para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a2bb56871f159ac7fa608dc5f0439b34b"></a>
@@ -5451,6 +5744,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Branch será efetuado se o inteiro no topo da pilha for maior ou igual ao valor zero. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -5484,6 +5787,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Branch será efetuado se o inteiro no topo da pilha for maior do que o valor zero. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="aa292ed792da2c0de2496b2fb845065ba"></a>
@@ -5515,6 +5828,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Branch será efetuado se o inteiro no topo da pilha for menor do que o valor zero. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -5548,6 +5871,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução que compara valor da pilha de operandos com zero, verificando se o valor da pilha de operandos é menor que zero. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte high para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte low para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a9998489ee66b9d62ee35cd50cdf6da02"></a>
@@ -5579,6 +5912,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução que compara valor da pilha de operandos com zero, verificando se são diferentes. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte high para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte low para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -5612,6 +5955,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução que irá efetuar um branch caso a referência no topo da pilha não seja nula. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o offset do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o offset do branch </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a372ce682f9d54faec78796a291bfdc95"></a>
@@ -5643,6 +5996,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução que irá efetuar um branch caso a referência no topo da pilha seja nula. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Byte que será concatenado para montar o offset do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Byte que será concatenado para montar o offset do branch </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -6153,6 +6516,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>A instrução sempre efetuará um branch. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Parâmetro que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Parâmetro que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="af53dda1fb156ef04b805522fde9764ba"></a>
@@ -6184,6 +6557,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para criar um novo objeto. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -6217,6 +6600,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para retornar void de um método. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a822ad98771fff6bf05700c6d65839e86"></a>
@@ -6248,6 +6641,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para determinar se um objeto é de um eterminado tipo. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">par1</td><td>Byte que será concatenado para acessar uma entrada na constant pool</td></tr>
+    <tr><td class="paramname">par2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -6306,6 +6709,17 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para invocar um método dinâmico. Essa instrução só existe para criar uma posição "falsa" no vetor de ponteiros de função. </p>
+<p>[long description]</p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">par0</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a632fe944219d89caa74f26b2ae63cdea"></a>
@@ -6337,6 +6751,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+    <tr><td class="paramname">par1</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+    <tr><td class="paramname">par2</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -6376,6 +6800,17 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para invocar um método de interface. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">count</td><td>Um byte que não pode ser zero </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="ac1f0ebb9e8dd948c2c9526f225e04f6f"></a>
@@ -6407,6 +6842,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para invocar um método de instância. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -6440,6 +6885,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para invocar um método estático (método de classe) </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a87210c88c859a1e732355a7ead1e2638"></a>
@@ -6471,6 +6926,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para invocar um método de instância, geralmente utilizada para impressão em tela. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -6587,6 +7052,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para retornar um inteiro de um método. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -7040,6 +7515,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para efetuar um branch para um offset, dentro do código do mesmo método sendo executado. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">branchbyte1</td><td>Parâmetro que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">branchbyte2</td><td>Parâmetro que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="afb926e678ecc929443794dd877319448"></a>
@@ -7071,6 +7556,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para efetuar um branch para um offset wide, de 32 bits, dentro do código do mesmo método sendo executado. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro que será concatenado para montar o índice do branch </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro que será concatenado para montar o índice do branch </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -7367,6 +7862,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução que compara valores long oriundos da pilha de operandos. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame do método corrente que está executando a instrução atual </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -7946,6 +8451,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">par0</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+    <tr><td class="paramname">par1</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+    <tr><td class="paramname">par2</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a1b5c7c14e3b2181811153909518c5832"></a>
@@ -7961,6 +8476,14 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para acessar uma chave em um jump table e efetuar um jump. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -8077,6 +8600,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para retornar um long de um método. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -8530,6 +9063,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para entrar no monitor de um objeto. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a8e2a21f4852259d8ea24e83601cded07"></a>
@@ -8562,6 +9105,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para sair de um monitor de um objeto. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">par2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="af01a170230fbb7c76ac3f3ca2f3cb785"></a>
@@ -8593,6 +9146,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+    <tr><td class="paramname">par1</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+    <tr><td class="paramname">par2</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -8632,6 +9195,17 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução que irá criar um array multidimensional. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para montar um índice para a constant pool da classe corrente </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para montar um índice para a constant pool da classe corrente </td></tr>
+    <tr><td class="paramname">dimensions</td><td>Número de dimensões do array </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="af89e1ba34999630cc234c3004691d6bb"></a>
@@ -8663,6 +9237,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Função para criar um novo array de um dado tipo. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">atype</td><td>Tipo do array que deve ser criado </td></tr>
+    <tr><td class="paramname">par1</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -8994,6 +9578,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução para setar um field em um objeto. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a81bc4af9e545ed38b0a62650bf2ead42"></a>
@@ -9025,6 +9619,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para setar um field estático em uma classe. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Byte que será concatenado para acessar uma entrada na constant pool </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -9125,6 +9729,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para retornar de uma subrotina. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+    <tr><td class="paramname">index</td><td>Índice no vetor de variáveis locais do frame corrente </td></tr>
+    <tr><td class="paramname">par1</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -9326,6 +9940,16 @@ Variáveis</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">par0</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+    <tr><td class="paramname">par1</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+    <tr><td class="paramname">par2</td><td>Esse parâmetro não será utilizado na prática </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a class="anchor" id="a779c3dfcf58e63584dfcbcaf2661f9e8"></a>
@@ -9341,6 +9965,14 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para acessar uma jump table por index e efetuar um jump. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Frame corrente </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -9416,6 +10048,16 @@ Variáveis</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Instrução para estender a próxima instrução para ter o dobro de bytes de índice. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">indexbyte1</td><td>Parâmetro não utilizado </td></tr>
+    <tr><td class="paramname">indexbyte2</td><td>Parâmetro não utilizado </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

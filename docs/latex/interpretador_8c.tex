@@ -1,10 +1,5 @@
 \hypertarget{interpretador_8c}{}\section{Referência do Arquivo interpretador.\+c}
 \label{interpretador_8c}\index{interpretador.\+c@{interpretador.\+c}}
-
-
-Arquivo fonte que contém a implementação das instruções e funções auxiliares.  
-
-
 {\ttfamily \#include \char`\"{}interpretador.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}jvm.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}leitura.\+h\char`\"{}}\\*
@@ -343,99 +338,99 @@ void \hyperlink{interpretador_8c_a4bd96d359b11905153230d5a707c787d}{i2c\+\_\+imp
 void \hyperlink{interpretador_8c_a3e7394eab6c6446efeaa8562837f218d}{i2s\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
 \item 
 void \hyperlink{interpretador_8c_ad54c4c75df5ad40ac0d14c711a03df80}{lcmp\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução que compara valores long oriundos da pilha de operandos. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a75f211f0c1ac8947336f5f4172b3b398}{fcmpl\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução que compara valores float oriundos da pilha de operandos. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a897894b79f2792960a10e48209123968}{fcmpg\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução que compara valores float oriundos da pilha de operandos. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_aab8da156e51f2c3a9cb340555804a2f3}{dcmpl\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução que compara valores double oriundos da pilha de operandos. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a4042c5d19193fd362a041bb29221e301}{dcmpg\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução que compara valores double oriundos da pilha de operandos. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_ada1340b4109ab76d1ed6447e4e5c7e23}{ifeq\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução que compara valor da pilha de operandos com zero, verificando se são iguais. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a9998489ee66b9d62ee35cd50cdf6da02}{ifne\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução que compara valor da pilha de operandos com zero, verificando se são diferentes. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_af8ca5bd8b11d2a4c49925c7147db7e16}{iflt\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução que compara valor da pilha de operandos com zero, verificando se o valor da pilha de operandos é menor que zero. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a2bb56871f159ac7fa608dc5f0439b34b}{ifge\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Branch será efetuado se o inteiro no topo da pilha for maior ou igual ao valor zero. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a8ae29b80027d7066bd5a081762f86e5e}{ifgt\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Branch será efetuado se o inteiro no topo da pilha for maior do que o valor zero. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_aa292ed792da2c0de2496b2fb845065ba}{ifle\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Branch será efetuado se o inteiro no topo da pilha for menor do que o valor zero. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a80de8734b16a0cdeaa88c8f39ef7f05b}{if\+\_\+icmpeq\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Branch será efetuado se o inteiro no topo da pilha for igual ao próximo inteiro na pilha. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a172f845f64987a8645d0f5dff212dbfa}{if\+\_\+icmpne\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Branch será efetuado se o inteiro no topo da pilha for diferente do próximo inteiro na pilha. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a0806f1823a8b8bdef3178e2ff3edc9c6}{if\+\_\+icmplt\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Branch será efetuado se o inteiro no topo da pilha for maior do que o próximo inteiro na pilha. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a0776aa7a045d8df3888e446225736bec}{if\+\_\+icmpge\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Branch será efetuado se o inteiro no topo da pilha for menor do que o próximo inteiro na pilha. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a8d0e31fe31ce2fab3822c3a487291457}{if\+\_\+icmpgt\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Branch será efetuado se o inteiro no topo da pilha for menor do que o próximo inteiro na pilha. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_af925f59524692494cdaa27635289f902}{if\+\_\+icmple\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Branch será efetuado se o inteiro no topo da pilha for maior do que o próximo inteiro na pilha. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a94c6b614198b51ca7b501f1a8258de91}{acmpeq\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Branch será efetuado se as referências na pilha forem iguais. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_af9d7f5fa156f20cdf3af086d19280a3c}{acmpne\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Branch será efetuado se as referências na pilha não forem iguais. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a305b0bf7c28b62c9c6f70017022b3633}{inst\+\_\+goto\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em A instrução sempre efetuará um branch. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a98987e332f6b30ac84ac362373867005}{jsr\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para efetuar um branch para um offset, dentro do código do mesmo método sendo executado. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a63583879aed3ccd23ab8f15b62baec2c}{ret\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} index, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para retornar de uma subrotina. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a611c730b3076fa4f64b7150f478d11fa}{tableswitch\+\_\+fantasma} (\hyperlink{structframe}{frame} $\ast$par0, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a606daad16a33bad25801a8bfe446ee75}{lookupswitch\+\_\+fantasma} (\hyperlink{structframe}{frame} $\ast$par0, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_ab4844be8e982644ff50e3109c64dffe5}{ireturn\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para retornar um inteiro de um método. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a13b3338c2d12b0b93c0ebe98bfe83137}{lreturn\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para retornar um long de um método. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a89dd5594dc4783749c673ca58f7168f6}{freturn\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para retornar um float de um método. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_ae32f0aa5f2a60283cc9376463c30a663}{dreturn\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para retornar um double de um método. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a3b5b4db342ffaeffd95ebca5f94a4ebd}{areturn\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para retornar uma referência de um método. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a0a9b7c979432ec41b8a2c62389c7f90e}{inst\+\_\+return\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para retornar void de um método. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_aab8bb241f38d5254b4eb6a8d098bebfb}{getstatic\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para obter um field estático de uma classe. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a81bc4af9e545ed38b0a62650bf2ead42}{putstatic\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para setar um field estático em uma classe. \end{DoxyCompactList}\item 
 bool \hyperlink{interpretador_8c_ac35643f2a48457591ea4f409d6ecec76}{busca\+Static\+Flags} (char $\ast$access\+Flags)
 \begin{DoxyCompactList}\small\item\em Função para verificar se um método ou field é do tipo static. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a2b6a07c24ed0591525e7cc48b676b08c}{getfield\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para obter o field de um objeto. \end{DoxyCompactList}\item 
 int \hyperlink{interpretador_8c_a98f75106054d7c758c07584b0345123a}{get\+Tipo\+Operando\+Saida} (char $\ast$descriptor\+Retorno)
 \begin{DoxyCompactList}\small\item\em Função para obter o tipo do operando a ser alocado na pilha de operandos. \end{DoxyCompactList}\item 
 int \hyperlink{interpretador_8c_a8c94309854df69624823725b29db9318}{get\+Tipo\+Retorno} (char $\ast$descriptor)
 \begin{DoxyCompactList}\small\item\em Função para obter o modo de empilhamento do valor de retorno de um método. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_abfed0b8cbb029920687b563bcdc45637}{putfield\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para setar um field em um objeto. \end{DoxyCompactList}\item 
 int \hyperlink{interpretador_8c_a5a4ffd2dc3291b09f0eba004b3989726}{get\+Position\+Field} (\hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File} $\ast$obj, char $\ast$nome\+Field)
 \begin{DoxyCompactList}\small\item\em Função para obter a posição do field no array de dados de instância (dados não estáticos) \end{DoxyCompactList}\item 
 \hyperlink{jvm_8h_a44d196f61b6d8bad019106cbc5da18d0}{Lista\+\_\+\+Objetos} $\ast$ \hyperlink{interpretador_8c_a763acf7d4814679feadd889e4f756cac}{busca\+Objeto\+Via\+Referencia} (\hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File} $\ast$p)
 \begin{DoxyCompactList}\small\item\em Função para buscar um objeto na lista de objetos. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a87210c88c859a1e732355a7ead1e2638}{invokevirtual\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Função para invocar um método de instância, geralmente utilizada para impressão em tela. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_ac1f0ebb9e8dd948c2c9526f225e04f6f}{invokespecial\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para invocar um método de instância. \end{DoxyCompactList}\item 
 int \hyperlink{interpretador_8c_a9ea344b9fcd1ad04bfb5b1fe679729e5}{get\+Parametros\+Count} (char $\ast$descriptor)
 \begin{DoxyCompactList}\small\item\em Função para obter a quantidade de parâmetros a serem passados para um método. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_ac62c789b89726a00edcab417648306be}{invokestatic\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para invocar um método estático (método de classe) \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a35957a03e4492547d2e84aba71d83613}{invokeinterface\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} count)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para invocar um método de interface. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a632fe944219d89caa74f26b2ae63cdea}{invokeinterface\+\_\+fantasma} (\hyperlink{structframe}{frame} $\ast$par0, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a97f52d4cd37463b92cff91f3ec0a5f0b}{invokedynamic\+\_\+fantasma} (\hyperlink{structframe}{frame} $\ast$par0, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para invocar um método dinâmico. Essa instrução só existe para criar uma posição \char`\"{}falsa\char`\"{} no vetor de ponteiros de função. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_af53dda1fb156ef04b805522fde9764ba}{inst\+\_\+new\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para criar um novo objeto. \end{DoxyCompactList}\item 
 \hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File} $\ast$ \hyperlink{interpretador_8c_a6961f0abc35f19bb8eb2a90abfd90312}{instanciar\+Classe} (char $\ast$nome\+Classe)
 \begin{DoxyCompactList}\small\item\em Função para instanciar um objeto novo. \end{DoxyCompactList}\item 
 \hyperlink{jvm_8h_a44d196f61b6d8bad019106cbc5da18d0}{Lista\+\_\+\+Objetos} $\ast$ \hyperlink{interpretador_8c_a48f87cee6dd6a755b917030668385c54}{Insere\+Objeto} (\hyperlink{jvm_8h_a44d196f61b6d8bad019106cbc5da18d0}{Lista\+\_\+\+Objetos} $\ast$lis, \hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File} $\ast$classe, int parametros\+Nao\+Static)
@@ -443,48 +438,43 @@ void \hyperlink{interpretador_8c_af53dda1fb156ef04b805522fde9764ba}{inst\+\_\+ne
 int \hyperlink{interpretador_8c_ad71b4e1c8179f35bd7a6b2b640b6e7a5}{get\+Parametros\+Nao\+Static} (\hyperlink{classFileStruct_8h_aed419e54ca9f7e5ab3b22a3036af9993}{Class\+File} $\ast$classe)
 \begin{DoxyCompactList}\small\item\em Função para obter a quantidade de campos da classe que não são estáticos (atributos de classe) \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_af89e1ba34999630cc234c3004691d6bb}{newarray\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} atype, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1)
-\item 
+\begin{DoxyCompactList}\small\item\em Função para criar um novo array de um dado tipo. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_ad785bc77cfa461ccadcae45434c18a6c}{anewarray\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Criar um novo array do tipo referência. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a9e039ecddb87626dd1303b75f5cc0a2c}{arraylength\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para obter o tamanho de um array. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_abff62884e6fd16c56a9094c7016f56cd}{athrow\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para lançar uma exceção ou erro. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a89ef7805bfe626784388a9c859208420}{checkcast\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para verificar se um objeto é de um determinado tipo. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a822ad98771fff6bf05700c6d65839e86}{instanceof\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para determinar se um objeto é de um eterminado tipo. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a0fbca3c86969309fb78ce80b87e8528c}{monitorenter\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para entrar no monitor de um objeto. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a8e2a21f4852259d8ea24e83601cded07}{monitorexit\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para sair de um monitor de um objeto. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a6da8ed672cdb16eb3560267dacedbeb3}{wide\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para estender a próxima instrução para ter o dobro de bytes de índice. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_af01a170230fbb7c76ac3f3ca2f3cb785}{multianewarray\+\_\+fantasma} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. \end{DoxyCompactList}\item 
 void $\ast$ \hyperlink{interpretador_8c_a721f6b561cd5024ea292109e573bb691}{inicializa\+\_\+multiarray\+\_\+recursivo} (void $\ast$endereco, \hyperlink{lista__operandos_8h_a7bc084923d20fddbe46335d882c6fda2}{i4} $\ast$counts, char $\ast$tipos)
 \item 
 void \hyperlink{interpretador_8c_a478cae9b4e76cac306adc32b2b129504}{multianewarray\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} indexbyte2, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} dimensions)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução que irá criar um array multidimensional. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a372ce682f9d54faec78796a291bfdc95}{ifnull\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução que irá efetuar um branch caso a referência no topo da pilha seja nula. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a8a01fb2800adc854f296282d0d7cf5c8}{ifnonnull\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} branchbyte2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução que irá efetuar um branch caso a referência no topo da pilha não seja nula. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_a93ccb036273453537acc8dd0b9ef074c}{goto\+\_\+w\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em A instrução sempre efetuará um branch, para um offset wide. \end{DoxyCompactList}\item 
 void \hyperlink{interpretador_8c_afb926e678ecc929443794dd877319448}{jsr\+\_\+w\+\_\+impl} (\hyperlink{structframe}{frame} $\ast$f, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par1, \hyperlink{lista__operandos_8h_ad9f4cdb6757615aae2fad89dab3c5470}{u1} par2)
-\item 
+\begin{DoxyCompactList}\small\item\em Instrução para efetuar um branch para um offset wide, de 32 bits, dentro do código do mesmo método sendo executado. \end{DoxyCompactList}\item 
 double \hyperlink{interpretador_8c_afd8010d34f38706a0a35bee368a615be}{decodifica\+Double\+Valor} (\hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} high, \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} low)
 \begin{DoxyCompactList}\small\item\em Função para decodificar operandos em um valor double (64 bits) \end{DoxyCompactList}\item 
 long \hyperlink{interpretador_8c_a9ec4a01aa2750993523bbe98cc84c644}{decodifica\+Long\+Valor} (\hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} high, \hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} low)
 \begin{DoxyCompactList}\small\item\em Função para decodificar operandos em um valor long (64 bits) \end{DoxyCompactList}\item 
 float \hyperlink{interpretador_8c_a3795a0cceadd541bc68eb650c0c7595a}{decodifica\+Float\+Valor} (\hyperlink{lista__operandos_8h_ae5be1f726785414dd1b77d60df074c9d}{u4} valor)
 \begin{DoxyCompactList}\small\item\em Função para decodificar operando em um valor float (32 bits) \end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsection{Descrição Detalhada}
-Arquivo fonte que contém a implementação das instruções e funções auxiliares. 
-
 
 
 \subsection{Funções}
@@ -541,6 +531,19 @@ Armazena uma referência em um array.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a94c6b614198b51ca7b501f1a8258de91}{}\label{interpretador_8c_a94c6b614198b51ca7b501f1a8258de91}
+
+
+Branch será efetuado se as referências na pilha forem iguais. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!acmpne\+\_\+impl@{acmpne\+\_\+impl}}
 \index{acmpne\+\_\+impl@{acmpne\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{acmpne\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{acmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void acmpne\+\_\+impl (
@@ -550,6 +553,19 @@ Armazena uma referência em um array.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_af9d7f5fa156f20cdf3af086d19280a3c}{}\label{interpretador_8c_af9d7f5fa156f20cdf3af086d19280a3c}
+
+
+Branch será efetuado se as referências na pilha não forem iguais. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!aconst\+\_\+null\+\_\+impl@{aconst\+\_\+null\+\_\+impl}}
 \index{aconst\+\_\+null\+\_\+impl@{aconst\+\_\+null\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{aconst\+\_\+null\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{aconst_null_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void aconst\+\_\+null\+\_\+impl (
@@ -691,6 +707,21 @@ Carrega uma referência do vetor de variáveis locais.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ad785bc77cfa461ccadcae45434c18a6c}{}\label{interpretador_8c_ad785bc77cfa461ccadcae45434c18a6c}
+
+
+Criar um novo array do tipo referência. 
+
+\mbox{[}long description\mbox{]}
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em par1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em par2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!areturn\+\_\+impl@{areturn\+\_\+impl}}
 \index{areturn\+\_\+impl@{areturn\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{areturn\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{areturn_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void areturn\+\_\+impl (
@@ -700,6 +731,19 @@ Carrega uma referência do vetor de variáveis locais.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a3b5b4db342ffaeffd95ebca5f94a4ebd}{}\label{interpretador_8c_a3b5b4db342ffaeffd95ebca5f94a4ebd}
+
+
+Instrução para retornar uma referência de um método. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!arraylength\+\_\+impl@{arraylength\+\_\+impl}}
 \index{arraylength\+\_\+impl@{arraylength\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{arraylength\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{arraylength_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void arraylength\+\_\+impl (
@@ -709,6 +753,19 @@ Carrega uma referência do vetor de variáveis locais.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a9e039ecddb87626dd1303b75f5cc0a2c}{}\label{interpretador_8c_a9e039ecddb87626dd1303b75f5cc0a2c}
+
+
+Instrução para obter o tamanho de um array. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!astore\+\_\+0\+\_\+impl@{astore\+\_\+0\+\_\+impl}}
 \index{astore\+\_\+0\+\_\+impl@{astore\+\_\+0\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{astore\+\_\+0\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{astore_0_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void astore\+\_\+0\+\_\+impl (
@@ -828,6 +885,19 @@ Armazena uma referência no vetor de variáveis locais.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_abff62884e6fd16c56a9094c7016f56cd}{}\label{interpretador_8c_abff62884e6fd16c56a9094c7016f56cd}
+
+
+Instrução para lançar uma exceção ou erro. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!baload\+\_\+impl@{baload\+\_\+impl}}
 \index{baload\+\_\+impl@{baload\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{baload\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{baload_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void baload\+\_\+impl (
@@ -985,6 +1055,19 @@ Armazena um valor {\ttfamily char} em um array.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a89ef7805bfe626784388a9c859208420}{}\label{interpretador_8c_a89ef7805bfe626784388a9c859208420}
+
+
+Instrução para verificar se um objeto é de um determinado tipo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em par1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em par2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!d2f\+\_\+impl@{d2f\+\_\+impl}}
 \index{d2f\+\_\+impl@{d2f\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{d2f\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{d2f_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void d2f\+\_\+impl (
@@ -1087,6 +1170,19 @@ Armazena um valor {\ttfamily double} em um array.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a4042c5d19193fd362a041bb29221e301}{}\label{interpretador_8c_a4042c5d19193fd362a041bb29221e301}
+
+
+Instrução que compara valores double oriundos da pilha de operandos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dcmpl\+\_\+impl@{dcmpl\+\_\+impl}}
 \index{dcmpl\+\_\+impl@{dcmpl\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{dcmpl\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{dcmpl_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void dcmpl\+\_\+impl (
@@ -1096,6 +1192,19 @@ Armazena um valor {\ttfamily double} em um array.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_aab8da156e51f2c3a9cb340555804a2f3}{}\label{interpretador_8c_aab8da156e51f2c3a9cb340555804a2f3}
+
+
+Instrução que compara valores double oriundos da pilha de operandos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dconst\+\_\+0\+\_\+impl@{dconst\+\_\+0\+\_\+impl}}
 \index{dconst\+\_\+0\+\_\+impl@{dconst\+\_\+0\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{dconst\+\_\+0\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{dconst_0_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void dconst\+\_\+0\+\_\+impl (
@@ -1429,6 +1538,19 @@ Calcula o resto {\ttfamily double} da divisão entre dois operandos.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ae32f0aa5f2a60283cc9376463c30a663}{}\label{interpretador_8c_ae32f0aa5f2a60283cc9376463c30a663}
+
+
+Instrução para retornar um double de um método. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!dstore\+\_\+0\+\_\+impl@{dstore\+\_\+0\+\_\+impl}}
 \index{dstore\+\_\+0\+\_\+impl@{dstore\+\_\+0\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{dstore\+\_\+0\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{dstore_0_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void dstore\+\_\+0\+\_\+impl (
@@ -1807,6 +1929,19 @@ Armazena um valor {\ttfamily float} em um array.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a897894b79f2792960a10e48209123968}{}\label{interpretador_8c_a897894b79f2792960a10e48209123968}
+
+
+Instrução que compara valores float oriundos da pilha de operandos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fcmpl\+\_\+impl@{fcmpl\+\_\+impl}}
 \index{fcmpl\+\_\+impl@{fcmpl\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{fcmpl\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{fcmpl_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void fcmpl\+\_\+impl (
@@ -1816,6 +1951,19 @@ Armazena um valor {\ttfamily float} em um array.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a75f211f0c1ac8947336f5f4172b3b398}{}\label{interpretador_8c_a75f211f0c1ac8947336f5f4172b3b398}
+
+
+Instrução que compara valores float oriundos da pilha de operandos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fconst\+\_\+0\+\_\+impl@{fconst\+\_\+0\+\_\+impl}}
 \index{fconst\+\_\+0\+\_\+impl@{fconst\+\_\+0\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{fconst\+\_\+0\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{fconst_0_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void fconst\+\_\+0\+\_\+impl (
@@ -2089,6 +2237,19 @@ Calcula o resto {\ttfamily float} da divisão entre dois operandos.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a89dd5594dc4783749c673ca58f7168f6}{}\label{interpretador_8c_a89dd5594dc4783749c673ca58f7168f6}
+
+
+Instrução para retornar um float de um método. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!fstore\+\_\+0\+\_\+impl@{fstore\+\_\+0\+\_\+impl}}
 \index{fstore\+\_\+0\+\_\+impl@{fstore\+\_\+0\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{fstore\+\_\+0\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{fstore_0_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void fstore\+\_\+0\+\_\+impl (
@@ -2230,6 +2391,19 @@ Executa uma subtração de {\ttfamily float}.
 \item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a2b6a07c24ed0591525e7cc48b676b08c}{}\label{interpretador_8c_a2b6a07c24ed0591525e7cc48b676b08c}
+
+
+Instrução para obter o field de um objeto. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!get\+Parametros\+Count@{get\+Parametros\+Count}}
 \index{get\+Parametros\+Count@{get\+Parametros\+Count}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{get\+Parametros\+Count(char $\ast$descriptor)}{getParametrosCount(char *descriptor)}}]{\setlength{\rightskip}{0pt plus 5cm}int get\+Parametros\+Count (
@@ -2299,6 +2473,19 @@ Posição do field no array de dados não estáticos
 \item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_aab8bb241f38d5254b4eb6a8d098bebfb}{}\label{interpretador_8c_aab8bb241f38d5254b4eb6a8d098bebfb}
+
+
+Instrução para obter um field estático de uma classe. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!get\+Tipo\+Operando\+Saida@{get\+Tipo\+Operando\+Saida}}
 \index{get\+Tipo\+Operando\+Saida@{get\+Tipo\+Operando\+Saida}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{get\+Tipo\+Operando\+Saida(char $\ast$descriptor\+Retorno)}{getTipoOperandoSaida(char *descriptorRetorno)}}]{\setlength{\rightskip}{0pt plus 5cm}int get\+Tipo\+Operando\+Saida (
@@ -2346,6 +2533,19 @@ Valor inteiro representando o modo de empilhamento do valor de retorno de um mé
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a93ccb036273453537acc8dd0b9ef074c}{}\label{interpretador_8c_a93ccb036273453537acc8dd0b9ef074c}
+
+
+A instrução sempre efetuará um branch, para um offset wide. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em par1} & Parâmetro que será concatenado para montar o índice do branch \\
+\hline
+{\em par2} & Parâmetro que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!i2b\+\_\+impl@{i2b\+\_\+impl}}
 \index{i2b\+\_\+impl@{i2b\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{i2b\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{i2b_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void i2b\+\_\+impl (
@@ -2675,6 +2875,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a80de8734b16a0cdeaa88c8f39ef7f05b}{}\label{interpretador_8c_a80de8734b16a0cdeaa88c8f39ef7f05b}
+
+
+Branch será efetuado se o inteiro no topo da pilha for igual ao próximo inteiro na pilha. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!if\+\_\+icmpge\+\_\+impl@{if\+\_\+icmpge\+\_\+impl}}
 \index{if\+\_\+icmpge\+\_\+impl@{if\+\_\+icmpge\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{if\+\_\+icmpge\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{if_icmpge_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void if\+\_\+icmpge\+\_\+impl (
@@ -2684,6 +2897,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a0776aa7a045d8df3888e446225736bec}{}\label{interpretador_8c_a0776aa7a045d8df3888e446225736bec}
+
+
+Branch será efetuado se o inteiro no topo da pilha for menor do que o próximo inteiro na pilha. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!if\+\_\+icmpgt\+\_\+impl@{if\+\_\+icmpgt\+\_\+impl}}
 \index{if\+\_\+icmpgt\+\_\+impl@{if\+\_\+icmpgt\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{if\+\_\+icmpgt\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{if_icmpgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void if\+\_\+icmpgt\+\_\+impl (
@@ -2693,6 +2919,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a8d0e31fe31ce2fab3822c3a487291457}{}\label{interpretador_8c_a8d0e31fe31ce2fab3822c3a487291457}
+
+
+Branch será efetuado se o inteiro no topo da pilha for menor do que o próximo inteiro na pilha. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!if\+\_\+icmple\+\_\+impl@{if\+\_\+icmple\+\_\+impl}}
 \index{if\+\_\+icmple\+\_\+impl@{if\+\_\+icmple\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{if\+\_\+icmple\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{if_icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void if\+\_\+icmple\+\_\+impl (
@@ -2702,6 +2941,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_af925f59524692494cdaa27635289f902}{}\label{interpretador_8c_af925f59524692494cdaa27635289f902}
+
+
+Branch será efetuado se o inteiro no topo da pilha for maior do que o próximo inteiro na pilha. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!if\+\_\+icmplt\+\_\+impl@{if\+\_\+icmplt\+\_\+impl}}
 \index{if\+\_\+icmplt\+\_\+impl@{if\+\_\+icmplt\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{if\+\_\+icmplt\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{if_icmplt_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void if\+\_\+icmplt\+\_\+impl (
@@ -2711,6 +2963,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a0806f1823a8b8bdef3178e2ff3edc9c6}{}\label{interpretador_8c_a0806f1823a8b8bdef3178e2ff3edc9c6}
+
+
+Branch será efetuado se o inteiro no topo da pilha for maior do que o próximo inteiro na pilha. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!if\+\_\+icmpne\+\_\+impl@{if\+\_\+icmpne\+\_\+impl}}
 \index{if\+\_\+icmpne\+\_\+impl@{if\+\_\+icmpne\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{if\+\_\+icmpne\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{if_icmpne_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void if\+\_\+icmpne\+\_\+impl (
@@ -2720,6 +2985,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a172f845f64987a8645d0f5dff212dbfa}{}\label{interpretador_8c_a172f845f64987a8645d0f5dff212dbfa}
+
+
+Branch será efetuado se o inteiro no topo da pilha for diferente do próximo inteiro na pilha. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ifeq\+\_\+impl@{ifeq\+\_\+impl}}
 \index{ifeq\+\_\+impl@{ifeq\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{ifeq\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{ifeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ifeq\+\_\+impl (
@@ -2729,6 +3007,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ada1340b4109ab76d1ed6447e4e5c7e23}{}\label{interpretador_8c_ada1340b4109ab76d1ed6447e4e5c7e23}
+
+
+Instrução que compara valor da pilha de operandos com zero, verificando se são iguais. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em branchbyte1} & Byte high para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero \\
+\hline
+{\em branchbyte2} & Byte low para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ifge\+\_\+impl@{ifge\+\_\+impl}}
 \index{ifge\+\_\+impl@{ifge\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{ifge\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{ifge_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ifge\+\_\+impl (
@@ -2738,6 +3029,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a2bb56871f159ac7fa608dc5f0439b34b}{}\label{interpretador_8c_a2bb56871f159ac7fa608dc5f0439b34b}
+
+
+Branch será efetuado se o inteiro no topo da pilha for maior ou igual ao valor zero. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ifgt\+\_\+impl@{ifgt\+\_\+impl}}
 \index{ifgt\+\_\+impl@{ifgt\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{ifgt\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{ifgt_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ifgt\+\_\+impl (
@@ -2747,6 +3051,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a8ae29b80027d7066bd5a081762f86e5e}{}\label{interpretador_8c_a8ae29b80027d7066bd5a081762f86e5e}
+
+
+Branch será efetuado se o inteiro no topo da pilha for maior do que o valor zero. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ifle\+\_\+impl@{ifle\+\_\+impl}}
 \index{ifle\+\_\+impl@{ifle\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{ifle\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{ifle_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ifle\+\_\+impl (
@@ -2756,6 +3073,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_aa292ed792da2c0de2496b2fb845065ba}{}\label{interpretador_8c_aa292ed792da2c0de2496b2fb845065ba}
+
+
+Branch será efetuado se o inteiro no topo da pilha for menor do que o valor zero. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iflt\+\_\+impl@{iflt\+\_\+impl}}
 \index{iflt\+\_\+impl@{iflt\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{iflt\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{iflt_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void iflt\+\_\+impl (
@@ -2765,6 +3095,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_af8ca5bd8b11d2a4c49925c7147db7e16}{}\label{interpretador_8c_af8ca5bd8b11d2a4c49925c7147db7e16}
+
+
+Instrução que compara valor da pilha de operandos com zero, verificando se o valor da pilha de operandos é menor que zero. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em branchbyte1} & Byte high para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero \\
+\hline
+{\em branchbyte2} & Byte low para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ifne\+\_\+impl@{ifne\+\_\+impl}}
 \index{ifne\+\_\+impl@{ifne\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{ifne\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{ifne_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ifne\+\_\+impl (
@@ -2774,6 +3117,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a9998489ee66b9d62ee35cd50cdf6da02}{}\label{interpretador_8c_a9998489ee66b9d62ee35cd50cdf6da02}
+
+
+Instrução que compara valor da pilha de operandos com zero, verificando se são diferentes. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em branchbyte1} & Byte high para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero \\
+\hline
+{\em branchbyte2} & Byte low para formar o branch em caso de sucesso na comparação do valor da pilha de operandos com zero \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ifnonnull\+\_\+impl@{ifnonnull\+\_\+impl}}
 \index{ifnonnull\+\_\+impl@{ifnonnull\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{ifnonnull\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{ifnonnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ifnonnull\+\_\+impl (
@@ -2783,6 +3139,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a8a01fb2800adc854f296282d0d7cf5c8}{}\label{interpretador_8c_a8a01fb2800adc854f296282d0d7cf5c8}
+
+
+Instrução que irá efetuar um branch caso a referência no topo da pilha não seja nula. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o offset do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o offset do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ifnull\+\_\+impl@{ifnull\+\_\+impl}}
 \index{ifnull\+\_\+impl@{ifnull\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{ifnull\+\_\+impl(frame $\ast$f, u1 branchbyte1, u1 branchbyte2)}{ifnull_impl(frame *f, u1 branchbyte1, u1 branchbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ifnull\+\_\+impl (
@@ -2792,6 +3161,19 @@ Executa uma divisão de {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a372ce682f9d54faec78796a291bfdc95}{}\label{interpretador_8c_a372ce682f9d54faec78796a291bfdc95}
+
+
+Instrução que irá efetuar um branch caso a referência no topo da pilha seja nula. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Byte que será concatenado para montar o offset do branch \\
+\hline
+{\em branchbyte2} & Byte que será concatenado para montar o offset do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!iinc\+\_\+fantasma@{iinc\+\_\+fantasma}}
 \index{iinc\+\_\+fantasma@{iinc\+\_\+fantasma}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{iinc\+\_\+fantasma(frame $\ast$par0, u1 par1, u1 par2)}{iinc_fantasma(frame *par0, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void iinc\+\_\+fantasma (
@@ -3027,6 +3409,19 @@ Ponteiro para a lista de objetos atualizado com a inserção do novo objeto
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a305b0bf7c28b62c9c6f70017022b3633}{}\label{interpretador_8c_a305b0bf7c28b62c9c6f70017022b3633}
+
+
+A instrução sempre efetuará um branch. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Parâmetro que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Parâmetro que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!inst\+\_\+new\+\_\+impl@{inst\+\_\+new\+\_\+impl}}
 \index{inst\+\_\+new\+\_\+impl@{inst\+\_\+new\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{inst\+\_\+new\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2)}{inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void inst\+\_\+new\+\_\+impl (
@@ -3036,6 +3431,19 @@ Ponteiro para a lista de objetos atualizado com a inserção do novo objeto
 \item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_af53dda1fb156ef04b805522fde9764ba}{}\label{interpretador_8c_af53dda1fb156ef04b805522fde9764ba}
+
+
+Instrução para criar um novo objeto. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!inst\+\_\+return\+\_\+impl@{inst\+\_\+return\+\_\+impl}}
 \index{inst\+\_\+return\+\_\+impl@{inst\+\_\+return\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{inst\+\_\+return\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{inst_return_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void inst\+\_\+return\+\_\+impl (
@@ -3045,6 +3453,19 @@ Ponteiro para a lista de objetos atualizado com a inserção do novo objeto
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a0a9b7c979432ec41b8a2c62389c7f90e}{}\label{interpretador_8c_a0a9b7c979432ec41b8a2c62389c7f90e}
+
+
+Instrução para retornar void de um método. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!instanceof\+\_\+impl@{instanceof\+\_\+impl}}
 \index{instanceof\+\_\+impl@{instanceof\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{instanceof\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{instanceof_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void instanceof\+\_\+impl (
@@ -3054,6 +3475,19 @@ Ponteiro para a lista de objetos atualizado com a inserção do novo objeto
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a822ad98771fff6bf05700c6d65839e86}{}\label{interpretador_8c_a822ad98771fff6bf05700c6d65839e86}
+
+
+Instrução para determinar se um objeto é de um eterminado tipo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em par1} & Byte que será concatenado para acessar uma entrada na constant pool\\
+\hline
+{\em par2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!instanciar\+Classe@{instanciar\+Classe}}
 \index{instanciar\+Classe@{instanciar\+Classe}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{instanciar\+Classe(char $\ast$nome\+Classe)}{instanciarClasse(char *nomeClasse)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Class\+File}$\ast$ instanciar\+Classe (
@@ -3082,6 +3516,21 @@ Ponteiro para o objeto alocado
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a97f52d4cd37463b92cff91f3ec0a5f0b}{}\label{interpretador_8c_a97f52d4cd37463b92cff91f3ec0a5f0b}
+
+
+Instrução para invocar um método dinâmico. Essa instrução só existe para criar uma posição \char`\"{}falsa\char`\"{} no vetor de ponteiros de função. 
+
+\mbox{[}long description\mbox{]}
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em par0} & Parâmetro não utilizado \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!invokeinterface\+\_\+fantasma@{invokeinterface\+\_\+fantasma}}
 \index{invokeinterface\+\_\+fantasma@{invokeinterface\+\_\+fantasma}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{invokeinterface\+\_\+fantasma(frame $\ast$par0, u1 par1, u1 par2)}{invokeinterface_fantasma(frame *par0, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void invokeinterface\+\_\+fantasma (
@@ -3091,6 +3540,19 @@ Ponteiro para o objeto alocado
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a632fe944219d89caa74f26b2ae63cdea}{}\label{interpretador_8c_a632fe944219d89caa74f26b2ae63cdea}
+
+
+Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Esse parâmetro não será utilizado na prática \\
+\hline
+{\em par1} & Esse parâmetro não será utilizado na prática \\
+\hline
+{\em par2} & Esse parâmetro não será utilizado na prática \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!invokeinterface\+\_\+impl@{invokeinterface\+\_\+impl}}
 \index{invokeinterface\+\_\+impl@{invokeinterface\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{invokeinterface\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2, u1 count)}{invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count)}}]{\setlength{\rightskip}{0pt plus 5cm}void invokeinterface\+\_\+impl (
@@ -3101,6 +3563,21 @@ Ponteiro para o objeto alocado
 \item[{{\bf u1}}]{count}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a35957a03e4492547d2e84aba71d83613}{}\label{interpretador_8c_a35957a03e4492547d2e84aba71d83613}
+
+
+Instrução para invocar um método de interface. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em count} & Um byte que não pode ser zero \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!invokespecial\+\_\+impl@{invokespecial\+\_\+impl}}
 \index{invokespecial\+\_\+impl@{invokespecial\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{invokespecial\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2)}{invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void invokespecial\+\_\+impl (
@@ -3110,6 +3587,19 @@ Ponteiro para o objeto alocado
 \item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ac1f0ebb9e8dd948c2c9526f225e04f6f}{}\label{interpretador_8c_ac1f0ebb9e8dd948c2c9526f225e04f6f}
+
+
+Instrução para invocar um método de instância. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!invokestatic\+\_\+impl@{invokestatic\+\_\+impl}}
 \index{invokestatic\+\_\+impl@{invokestatic\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{invokestatic\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2)}{invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void invokestatic\+\_\+impl (
@@ -3119,6 +3609,19 @@ Ponteiro para o objeto alocado
 \item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ac62c789b89726a00edcab417648306be}{}\label{interpretador_8c_ac62c789b89726a00edcab417648306be}
+
+
+Instrução para invocar um método estático (método de classe) 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!invokevirtual\+\_\+impl@{invokevirtual\+\_\+impl}}
 \index{invokevirtual\+\_\+impl@{invokevirtual\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{invokevirtual\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2)}{invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void invokevirtual\+\_\+impl (
@@ -3128,6 +3631,19 @@ Ponteiro para o objeto alocado
 \item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a87210c88c859a1e732355a7ead1e2638}{}\label{interpretador_8c_a87210c88c859a1e732355a7ead1e2638}
+
+
+Função para invocar um método de instância, geralmente utilizada para impressão em tela. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ior\+\_\+impl@{ior\+\_\+impl}}
 \index{ior\+\_\+impl@{ior\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{ior\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{ior_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ior\+\_\+impl (
@@ -3181,6 +3697,19 @@ Calcula o resto {\ttfamily int} da divisão entre dois operandos.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ab4844be8e982644ff50e3109c64dffe5}{}\label{interpretador_8c_ab4844be8e982644ff50e3109c64dffe5}
+
+
+Instrução para retornar um inteiro de um método. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!ishl\+\_\+impl@{ishl\+\_\+impl}}
 \index{ishl\+\_\+impl@{ishl\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{ishl\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{ishl_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void ishl\+\_\+impl (
@@ -3417,6 +3946,19 @@ Executa a operação \char`\"{}\+X\+O\+R\char`\"{} de dois {\ttfamily int}.
 \item[{{\bf u1}}]{branchbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a98987e332f6b30ac84ac362373867005}{}\label{interpretador_8c_a98987e332f6b30ac84ac362373867005}
+
+
+Instrução para efetuar um branch para um offset, dentro do código do mesmo método sendo executado. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em branchbyte1} & Parâmetro que será concatenado para montar o índice do branch \\
+\hline
+{\em branchbyte2} & Parâmetro que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!jsr\+\_\+w\+\_\+impl@{jsr\+\_\+w\+\_\+impl}}
 \index{jsr\+\_\+w\+\_\+impl@{jsr\+\_\+w\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{jsr\+\_\+w\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{jsr_w_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void jsr\+\_\+w\+\_\+impl (
@@ -3426,6 +3968,19 @@ Executa a operação \char`\"{}\+X\+O\+R\char`\"{} de dois {\ttfamily int}.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_afb926e678ecc929443794dd877319448}{}\label{interpretador_8c_afb926e678ecc929443794dd877319448}
+
+
+Instrução para efetuar um branch para um offset wide, de 32 bits, dentro do código do mesmo método sendo executado. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em par1} & Parâmetro que será concatenado para montar o índice do branch \\
+\hline
+{\em par2} & Parâmetro que será concatenado para montar o índice do branch \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!l2d\+\_\+impl@{l2d\+\_\+impl}}
 \index{l2d\+\_\+impl@{l2d\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{l2d\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{l2d_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void l2d\+\_\+impl (
@@ -3550,6 +4105,19 @@ Armazena um valor {\ttfamily long} em um array.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_ad54c4c75df5ad40ac0d14c711a03df80}{}\label{interpretador_8c_ad54c4c75df5ad40ac0d14c711a03df80}
+
+
+Instrução que compara valores long oriundos da pilha de operandos. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame do método corrente que está executando a instrução atual \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lconst\+\_\+0\+\_\+impl@{lconst\+\_\+0\+\_\+impl}}
 \index{lconst\+\_\+0\+\_\+impl@{lconst\+\_\+0\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{lconst\+\_\+0\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{lconst_0_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void lconst\+\_\+0\+\_\+impl (
@@ -3845,6 +4413,19 @@ Inverte o sinal de um {\ttfamily long}.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a606daad16a33bad25801a8bfe446ee75}{}\label{interpretador_8c_a606daad16a33bad25801a8bfe446ee75}
+
+
+Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em par0} & Esse parâmetro não será utilizado na prática \\
+\hline
+{\em par1} & Esse parâmetro não será utilizado na prática \\
+\hline
+{\em par2} & Esse parâmetro não será utilizado na prática \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lor\+\_\+impl@{lor\+\_\+impl}}
 \index{lor\+\_\+impl@{lor\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{lor\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{lor_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void lor\+\_\+impl (
@@ -3898,6 +4479,19 @@ Calcula o resto {\ttfamily long} da divisão entre dois operandos.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a13b3338c2d12b0b93c0ebe98bfe83137}{}\label{interpretador_8c_a13b3338c2d12b0b93c0ebe98bfe83137}
+
+
+Instrução para retornar um long de um método. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!lshl\+\_\+impl@{lshl\+\_\+impl}}
 \index{lshl\+\_\+impl@{lshl\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{lshl\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{lshl_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void lshl\+\_\+impl (
@@ -4127,6 +4721,19 @@ Executa a operação \char`\"{}\+X\+O\+R\char`\"{} de dois {\ttfamily long}.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a0fbca3c86969309fb78ce80b87e8528c}{}\label{interpretador_8c_a0fbca3c86969309fb78ce80b87e8528c}
+
+
+Instrução para entrar no monitor de um objeto. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!monitorexit\+\_\+impl@{monitorexit\+\_\+impl}}
 \index{monitorexit\+\_\+impl@{monitorexit\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{monitorexit\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{monitorexit_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void monitorexit\+\_\+impl (
@@ -4136,6 +4743,19 @@ Executa a operação \char`\"{}\+X\+O\+R\char`\"{} de dois {\ttfamily long}.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a8e2a21f4852259d8ea24e83601cded07}{}\label{interpretador_8c_a8e2a21f4852259d8ea24e83601cded07}
+
+
+Instrução para sair de um monitor de um objeto. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+{\em par2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!multianewarray\+\_\+fantasma@{multianewarray\+\_\+fantasma}}
 \index{multianewarray\+\_\+fantasma@{multianewarray\+\_\+fantasma}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{multianewarray\+\_\+fantasma(frame $\ast$f, u1 par1, u1 par2)}{multianewarray_fantasma(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void multianewarray\+\_\+fantasma (
@@ -4145,6 +4765,19 @@ Executa a operação \char`\"{}\+X\+O\+R\char`\"{} de dois {\ttfamily long}.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_af01a170230fbb7c76ac3f3ca2f3cb785}{}\label{interpretador_8c_af01a170230fbb7c76ac3f3ca2f3cb785}
+
+
+Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Esse parâmetro não será utilizado na prática \\
+\hline
+{\em par1} & Esse parâmetro não será utilizado na prática \\
+\hline
+{\em par2} & Esse parâmetro não será utilizado na prática \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!multianewarray\+\_\+impl@{multianewarray\+\_\+impl}}
 \index{multianewarray\+\_\+impl@{multianewarray\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{multianewarray\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2, u1 dimensions)}{multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions)}}]{\setlength{\rightskip}{0pt plus 5cm}void multianewarray\+\_\+impl (
@@ -4155,6 +4788,21 @@ Executa a operação \char`\"{}\+X\+O\+R\char`\"{} de dois {\ttfamily long}.
 \item[{{\bf u1}}]{dimensions}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a478cae9b4e76cac306adc32b2b129504}{}\label{interpretador_8c_a478cae9b4e76cac306adc32b2b129504}
+
+
+Instrução que irá criar um array multidimensional. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para montar um índice para a constant pool da classe corrente \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para montar um índice para a constant pool da classe corrente \\
+\hline
+{\em dimensions} & Número de dimensões do array \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!newarray\+\_\+impl@{newarray\+\_\+impl}}
 \index{newarray\+\_\+impl@{newarray\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{newarray\+\_\+impl(frame $\ast$f, u1 atype, u1 par1)}{newarray_impl(frame *f, u1 atype, u1 par1)}}]{\setlength{\rightskip}{0pt plus 5cm}void newarray\+\_\+impl (
@@ -4164,6 +4812,19 @@ Executa a operação \char`\"{}\+X\+O\+R\char`\"{} de dois {\ttfamily long}.
 \item[{{\bf u1}}]{par1}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_af89e1ba34999630cc234c3004691d6bb}{}\label{interpretador_8c_af89e1ba34999630cc234c3004691d6bb}
+
+
+Função para criar um novo array de um dado tipo. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em atype} & Tipo do array que deve ser criado \\
+\hline
+{\em par1} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!nop\+\_\+impl@{nop\+\_\+impl}}
 \index{nop\+\_\+impl@{nop\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{nop\+\_\+impl(frame $\ast$par0, u1 par1, u1 par2)}{nop_impl(frame *par0, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void nop\+\_\+impl (
@@ -4347,6 +5008,19 @@ Remove o valor de topo da pilha de operandos.
 \item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_abfed0b8cbb029920687b563bcdc45637}{}\label{interpretador_8c_abfed0b8cbb029920687b563bcdc45637}
+
+
+Instrução para setar um field em um objeto. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!putstatic\+\_\+impl@{putstatic\+\_\+impl}}
 \index{putstatic\+\_\+impl@{putstatic\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{putstatic\+\_\+impl(frame $\ast$f, u1 indexbyte1, u1 indexbyte2)}{putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2)}}]{\setlength{\rightskip}{0pt plus 5cm}void putstatic\+\_\+impl (
@@ -4356,6 +5030,19 @@ Remove o valor de topo da pilha de operandos.
 \item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a81bc4af9e545ed38b0a62650bf2ead42}{}\label{interpretador_8c_a81bc4af9e545ed38b0a62650bf2ead42}
+
+
+Instrução para setar um field estático em uma classe. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em indexbyte1} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+{\em indexbyte2} & Byte que será concatenado para acessar uma entrada na constant pool \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!resolver\+Classe@{resolver\+Classe}}
 \index{resolver\+Classe@{resolver\+Classe}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{resolver\+Classe(char $\ast$nome\+\_\+classe)}{resolverClasse(char *nome_classe)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Class\+File}$\ast$ resolver\+Classe (
@@ -4406,9 +5093,22 @@ Valor booleano representando o sucesso da execucção da resolução
 \begin{DoxyParamCaption}
 \item[{{\bf frame} $\ast$}]{f, }
 \item[{{\bf u1}}]{index, }
-\item[{{\bf u1}}]{par}
+\item[{{\bf u1}}]{par1}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a63583879aed3ccd23ab8f15b62baec2c}{}\label{interpretador_8c_a63583879aed3ccd23ab8f15b62baec2c}
+
+
+Instrução para retornar de uma subrotina. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Frame corrente \\
+\hline
+{\em index} & Índice no vetor de variáveis locais do frame corrente \\
+\hline
+{\em par1} & Esse parâmetro não será utilizado na prática \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!saload\+\_\+impl@{saload\+\_\+impl}}
 \index{saload\+\_\+impl@{saload\+\_\+impl}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{saload\+\_\+impl(frame $\ast$f, u1 par1, u1 par2)}{saload_impl(frame *f, u1 par1, u1 par2)}}]{\setlength{\rightskip}{0pt plus 5cm}void saload\+\_\+impl (
@@ -4506,6 +5206,19 @@ Inverte os dois operandos do topo da pilha.
 \item[{{\bf u1}}]{par2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a611c730b3076fa4f64b7150f478d11fa}{}\label{interpretador_8c_a611c730b3076fa4f64b7150f478d11fa}
+
+
+Instrução utilizada como placeholder, para ocupar a posição no array de instruções, para não prejudicar o mapeamento direto. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em par0} & Esse parâmetro não será utilizado na prática \\
+\hline
+{\em par1} & Esse parâmetro não será utilizado na prática \\
+\hline
+{\em par2} & Esse parâmetro não será utilizado na prática \\
+\hline
+\end{DoxyParams}
 \index{interpretador.\+c@{interpretador.\+c}!transfere\+Pilha\+Vetor@{transfere\+Pilha\+Vetor}}
 \index{transfere\+Pilha\+Vetor@{transfere\+Pilha\+Vetor}!interpretador.\+c@{interpretador.\+c}}
 \subsubsection[{\texorpdfstring{transfere\+Pilha\+Vetor(frame $\ast$anterior, frame $\ast$novo, int $\ast$parametros\+\_\+cont)}{transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf frame}$\ast$ transfere\+Pilha\+Vetor (
@@ -4549,3 +5262,16 @@ Retorna um ponteiro para frame, com o array de variáveis locais atualizado
 \item[{{\bf u1}}]{indexbyte2}
 \end{DoxyParamCaption}
 )}\hypertarget{interpretador_8c_a6da8ed672cdb16eb3560267dacedbeb3}{}\label{interpretador_8c_a6da8ed672cdb16eb3560267dacedbeb3}
+
+
+Instrução para estender a próxima instrução para ter o dobro de bytes de índice. 
+
+
+\begin{DoxyParams}{Parâmetros}
+{\em f} & Parâmetro não utilizado \\
+\hline
+{\em indexbyte1} & Parâmetro não utilizado \\
+\hline
+{\em indexbyte2} & Parâmetro não utilizado \\
+\hline
+\end{DoxyParams}

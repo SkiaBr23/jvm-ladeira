@@ -119,6 +119,5 @@ var searchData=
   ['lushr',['lushr',['../instrucoes_8h.html#aa19b38b70e34a2bf9af3be5aba356668a075ff63a4dfc3fb449591546c445ee22',1,'instrucoes.h']]],
   ['lushr_5fimpl',['lushr_impl',['../interpretador_8c.html#aeec3ed72bc674702df23ebff4f583aaf',1,'lushr_impl(frame *f, u1 par1, u1 par2):&#160;interpretador.c'],['../interpretador_8h.html#aeec3ed72bc674702df23ebff4f583aaf',1,'lushr_impl(frame *f, u1 par1, u1 par2):&#160;interpretador.c']]],
   ['lxor',['lxor',['../instrucoes_8h.html#aa19b38b70e34a2bf9af3be5aba356668acb1dfc68b68e6e5abb6d476abbf53757',1,'instrucoes.h']]],
-  ['lxor_5fimpl',['lxor_impl',['../interpretador_8c.html#af270b0c9d76038c4f93b6a3563bbb033',1,'lxor_impl(frame *f, u1 par1, u1 par2):&#160;interpretador.c'],['../interpretador_8h.html#af270b0c9d76038c4f93b6a3563bbb033',1,'lxor_impl(frame *f, u1 par1, u1 par2):&#160;interpretador.c']]],
-  ['lista_20de_20futuras_20atividades',['Lista de Futuras Atividades',['../todo.html',1,'']]]
+  ['lxor_5fimpl',['lxor_impl',['../interpretador_8c.html#af270b0c9d76038c4f93b6a3563bbb033',1,'lxor_impl(frame *f, u1 par1, u1 par2):&#160;interpretador.c'],['../interpretador_8h.html#af270b0c9d76038c4f93b6a3563bbb033',1,'lxor_impl(frame *f, u1 par1, u1 par2):&#160;interpretador.c']]]
 ];
