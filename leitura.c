@@ -497,6 +497,19 @@ char* decodificarCode(cp_info *cp, u2 sizeCP, u1 *code, u4 length,instrucao *ins
 					}
 					strcat(retorno,stringaux);
 				}
+				else if(opcode==sipush){
+					aux2 = (u2 *) malloc(sizeof(u2));
+					aux3 = (u1 *) malloc(sizeof(u1));
+					aux5 = (u1 *) malloc(sizeof(u1));
+
+					*aux3 = *(++aux);
+					*aux5 = *(++aux);
+
+					*aux2 = ((*aux3) << 8) | *aux5;
+
+					sprintf(stringaux," %d\n",*aux2);
+					strcat(retorno,stringaux);
+				}
 				else{
 
 					aux2 = (u2*)malloc(sizeof(u2));
