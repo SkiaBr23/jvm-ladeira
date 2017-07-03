@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['readme_2emd',['README.md',['../README_8md.html',1,'']]],
   ['reference_5farray_5fboolean_5fop',['REFERENCE_ARRAY_BOOLEAN_OP',['../lista__operandos_8h.html#a4e4626fe04fb7e693e4747300a58f31faf8e3811bfd6668cfc098279958413eb9',1,'lista_operandos.h']]],
   ['reference_5farray_5fbyte_5fop',['REFERENCE_ARRAY_BYTE_OP',['../lista__operandos_8h.html#a4e4626fe04fb7e693e4747300a58f31fab1fe63c9bbc6a67bbaf7acfee4920e87',1,'lista_operandos.h']]],
   ['reference_5farray_5fchar_5fop',['REFERENCE_ARRAY_CHAR_OP',['../lista__operandos_8h.html#a4e4626fe04fb7e693e4747300a58f31fae9a2c5571ddfb44eb2567ac9963236f0',1,'lista_operandos.h']]],

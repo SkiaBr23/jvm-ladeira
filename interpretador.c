@@ -357,7 +357,7 @@ void bipush_impl(frame *f, u1 byte, u1 par1){
 
 //Push sexted short para a pilha de operandos
 void sipush_impl(frame *f, u1 byte1, u1 byte2){
-	u2 byte_short = (byte1 << 8) | byte2;
+	i2 byte_short = (i2)(byte1<<8) | (i2)byte2;
 	i4 byte_int = (i4) byte_short;
 	Push_operandos(f->p,byte_int,NULL,SHORT_OP);
 }
@@ -644,10 +644,9 @@ void aaload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
-	u4 endereco;
-	endereco = ((u4) referencia->topo->referencia) + (indice->topo->operando * sizeof(u4));
+	u4* endereco = (referencia->topo->referencia) + (indice->topo->operando * sizeof(i4));
 
-	Push_operandos(f->p,-INT_MAX,endereco,REFERENCE_OP);
+	Push_operandos(f->p,-INT_MAX,*endereco,referencia->topo->tipo_operando);
 }
 
 void baload_impl(frame *f, u1 par1, u1 par2){
@@ -966,12 +965,15 @@ void sastore_impl(frame *f, u1 par1, u1 par2){
 }
 
 void aastore_impl(frame *f, u1 par1, u1 par2){
-/*	pilha_operandos *valor = Pop_operandos(f->p);
+	pilha_operandos *valor = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
 
-	i4 *endereco_array =  (((i4) array->topo->referencia) + (indice->topo->operando * sizeof(u2)));
-	*endereco_array = valor->topo->operando;*/
+	printf("VALOR A SER GUARDADO: %s\n",valor->topo->operando);
+	i4 *endereco_array =  ((array->topo->referencia) + (indice->topo->operando * sizeof(u4)));
+	*endereco_array = valor->topo->operando;
+
+	printf("VALOR GUARDADO NO ENDERECO: %04x\n",*endereco_array);
 
 }
 
@@ -3175,7 +3177,95 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 }
 
 void anewarray_impl(frame *f, u1 par1, u1 par2){
+/*	pilha_operandos *count = Pop_operandos(f->p);
+	i4 countnum = count->topo->operando;
 
+
+	u2 indice_cp = normaliza_indice(par1,par2);
+	cp_info *item = f->cp-1 + indice_cp;
+	char* tipo = decodificaStringUTF8(f->cp-1+item->UnionCP.Class.name_index);
+	void *endereco = NULL;
+	printf("%s\n", tipo);
+	getchar();
+*/
+
+	/*switch(tipo){
+		case '[':{
+			endereco = (void**)malloc(counts[0]*sizeof(void*));
+			void ** endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux = inicializa_multiarray_recursivo(endereco_aux, &counts[1], &tipos[1]);
+				endereco_aux++;
+			}
+			break;
+		}
+		case 'I':{
+			endereco = (i4*)malloc(counts[0]*sizeof(i4));
+			i4* endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux=0;
+				endereco_aux++;
+			}
+			break;
+		}
+		case 'B':{
+			endereco = (i1*)malloc(counts[0]*sizeof(i1));
+			i1* endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux=0;
+				endereco_aux++;
+			}
+			break;
+		}
+		case 'S':{
+			endereco = (i2*)malloc(counts[0]*sizeof(i2));
+			i2* endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux=0;
+				endereco_aux++;
+			}
+			break;
+		}
+		case 'J':{//LONG
+			endereco = (i8*)malloc(counts[0]*sizeof(i8));
+			i8* endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux=0;
+				endereco_aux++;
+			}
+			break;
+		}
+		case 'F':{
+			endereco = (float*)malloc(counts[0]*sizeof(float));
+			float* endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux=0;
+				endereco_aux++;
+			}
+			break;
+		}
+		case 'D':{
+			endereco = (double*)malloc(counts[0]*sizeof(double));
+			double* endereco_aux = endereco;
+			for(u4 i = 0; i < counts[0]; i++){
+				*endereco_aux=0;
+				endereco_aux++;
+			}
+			break;
+		}
+		default:
+		break;
+	}
+*/
+
+	//f->p = Push_operandos(f->p,-INT_MAX,endereco,REFERENCE_OP);
+
+/*	int ref_size = 0;
+	void *endereco = NULL;
+	int i = 0;
+	if(count<0){
+		// Lançar exceção
+	}*/
 }
 
 void arraylength_impl(frame *f, u1 par1, u1 par2){

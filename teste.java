@@ -4,10 +4,10 @@
 public class teste{
 	public static void main(String args[]){
 
-		String piroquinha = "piroquinha";
+		Jogador array[] = {new Jogador("Silver"),new Jogador("Xuaby"),new Jogador("Max")};
 
 
-		System.out.println(piroquinha);
+		System.out.println(array[1]);
 
 	}
 }
