@@ -29,7 +29,6 @@ ClassFile* resolverClasse(char* nome_classe){
 		char *nomearquivo = malloc((strlen(nome_classe)+7)*sizeof(char));
 		strcpy(nomearquivo,nome_classe);
 		strcat(nomearquivo,".class");
-		printf("Nome Arquivo: %s\n",nomearquivo);
 		classe = lerArquivo(nomearquivo);
 		jvm->classes = InserirFim_classes(jvm->classes,classe);
 	}
@@ -190,9 +189,6 @@ frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 		cont++;
 	}
 
-	printf("-------------AQUI-----------\n");
-	printf("Cont: %d\n",cont);
-	ImprimirPilha_operandos(aux);
 	for(int i = 0; i < cont; i++) {
 		pilha_operandos *p = Pop_operandos(aux);
 		novo->v[i].variavel = malloc(sizeof(u4));
@@ -204,7 +200,6 @@ frame* transferePilhaVetor(frame *anterior, frame *novo, int *parametros_cont){
 		}
 		novo->v[i].tipo_variavel = (u1) p->topo->tipo_operando;
 	}
-	printf("Saiu mesmo.\n");
 
 	*parametros_cont = cont;
 
@@ -281,29 +276,24 @@ void iconst_5_impl(frame *f, u1 par1, u1 par2){
 	Push_operandos(f->p,(u4)inteiro_sinal,NULL,INTEGER_OP);
 }
 
-//Insere 0L na pilha de operandos TOPO|lb|hb|...|base
 void lconst_0_impl(frame *f, u1 par1, u1 par2){
 
-	//Push 0L to stack
 	i4 high_bytes = (i4) 0;
 	Push_operandos(f->p,high_bytes,NULL,LONG_OP);
 
-	//TOPO DA PILHA FICA O LOW
 	i4 low_bytes = (i4) 0;
 	Push_operandos(f->p,low_bytes,NULL,LONG_OP);
 }
 
 void lconst_1_impl(frame *f, u1 par1, u1 par2){
 
-	//Push 1L to stack
 	i4 high_bytes = (i4) 0;
 	Push_operandos(f->p,high_bytes,NULL,LONG_OP);
 
-	//TOPO DA PILHA FICA O LOW
 	i4 low_bytes = (i4) 1;
 	Push_operandos(f->p,low_bytes,NULL,LONG_OP);
 }
-//Insere 0.0 na pilha de operandos
+
 void fconst_0_impl(frame *f, u1 par1, u1 par2){
 
 	i4 float_bytes = (i4) 0;
@@ -325,37 +315,30 @@ void fconst_2_impl(frame *f, u1 par1, u1 par2){
 
 }
 
-//Insere 0.0d na pilha de operandos
 void dconst_0_impl(frame *f, u1 par1, u1 par2){
 
-	//Push 0.0 double to stack
 	i4 high_bytes = (i4) 0;
 	Push_operandos(f->p,high_bytes,NULL,DOUBLE_OP);
 
-	//TOPO DA PILHA FICA O LOW
 	i4 low_bytes = (i4) 0;
 	Push_operandos(f->p,low_bytes,NULL,DOUBLE_OP);
 }
 
 void dconst_1_impl(frame *f, u1 par1, u1 par2){
 
-	//Push 1.0 double to stack
 	i4 high_bytes = 0x3FF00000;
 	Push_operandos(f->p,high_bytes,NULL,DOUBLE_OP);
 
-	//TOPO DA PILHA FICA O LOW
 	i4 low_bytes = (i4) 0;
 	Push_operandos(f->p,low_bytes,NULL,DOUBLE_OP);
 }
 
-//Push sexted byte para a pilha de operandos
 void bipush_impl(frame *f, u1 byte, u1 par1){
 	i1 aux = (i1)byte;
 	i4 byte_int = (i4) aux;
 	Push_operandos(f->p,byte_int,NULL,BYTE_OP);
 }
 
-//Push sexted short para a pilha de operandos
 void sipush_impl(frame *f, u1 byte1, u1 byte2){
 	i2 byte_short = (i2)(byte1<<8) | (i2)byte2;
 	i4 byte_int = (i4) byte_short;
@@ -368,16 +351,11 @@ void ldc_impl(frame *f, u1 indexbyte1, u1 par2){
 	u4 num=0;
 	void *classe=NULL;
 
-	printf("\n\nEXECUTANDO LDC\n\n");
-	printf("\nitem->tag: %d\n",item->tag);
-
 	switch(item->tag){
 		case CONSTANT_String:
 			valor = (char*) decodificaStringUTF8(f->cp-1+item->UnionCP.String.string_index);
 			f->p = Push_operandos(f->p,-INT_MAX,valor,REFERENCE_OP);
 			u4 *endereco = (u4*) f->p->topo->referencia;
-
-			printf("STRING EMPILHADA: %s\n",(char*) endereco);
 		break;
 		case CONSTANT_Float:
 			num = item->UnionCP.Float.bytes;
@@ -393,18 +371,10 @@ void ldc_impl(frame *f, u1 indexbyte1, u1 par2){
 			f->p = Push_operandos(f->p,-INT_MAX,classe,REFERENCE_OP);
 		break;
 		default:
-			printf("\nName index: %d\n",item->UnionCP.Methodref.class_index);
-			printf("\nName and type index: %d\n",item->UnionCP.Methodref.name_and_type_index);
 			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.class_index,NAME_INDEX);
 			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
 
 		break;
-
-		/* Implementar depois, pois não temos no arquivo */
-		/*case CONSTANT_MethodHandle:
-		break;
-		case CONSTANT_MethodType:
-		break;*/
 	}
 
 }
@@ -416,16 +386,11 @@ void ldc_w_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u4 num=0;
 	void *classe=NULL;
 
-	printf("\n\nEXECUTANDO LDC_w\n\n");
-	printf("\nitem->tag: %d\n",item->tag);
-
 	switch(item->tag){
 		case CONSTANT_String:
 			valor = (char*) decodificaStringUTF8(f->cp-1+item->UnionCP.String.string_index);
 			f->p = Push_operandos(f->p,-INT_MAX,valor,REFERENCE_OP);
 			u4 *endereco = (u4*) f->p->topo->referencia;
-
-			printf("STRING EMPILHADA: %s\n",(char*) endereco);
 		break;
 		case CONSTANT_Float:
 			num = item->UnionCP.Float.bytes;
@@ -441,24 +406,15 @@ void ldc_w_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			f->p = Push_operandos(f->p,-INT_MAX,classe,REFERENCE_OP);
 		break;
 		default:
-			printf("\nName index: %d\n",item->UnionCP.Methodref.class_index);
-			printf("\nName and type index: %d\n",item->UnionCP.Methodref.name_and_type_index);
 			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.class_index,NAME_INDEX);
 			valor = (char *) decodificaNIeNT(f->cp,item->UnionCP.Methodref.name_and_type_index,NAME_AND_TYPE);
 
 		break;
-
-		/* Implementar depois, pois não temos no arquivo */
-		/*case CONSTANT_MethodHandle:
-		break;
-		case CONSTANT_MethodType:
-		break;*/
 	}
 
 }
 
 void ldc2_w_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
-	printf("Entrou aqui\n");
 	int8_t v1 = (int8_t)branchbyte1;
 	int8_t v2 = (int8_t)branchbyte2;
 	int16_t branchoffset = (v1 << 8) | v2;
@@ -481,10 +437,6 @@ void ldc2_w_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 		Push_operandos(f->p,high,NULL,LONG_OP);//high
 		Push_operandos(f->p,low,NULL,LONG_OP);//low
 	}
-	printf("Valores:\n");
-	printf("-> 0x%08x\n",high);
-	printf("-> 0x%08x\n",low);
-
 }
 //Carrega inteiro do frame para a pilha de operandos
 void iload_impl(frame *f, u1 index, u1 par1){
@@ -645,12 +597,6 @@ void daload_impl(frame *f, u1 par1, u1 par2){
 }
 
 void aaload_impl(frame *f, u1 par1, u1 par2){
-	pilha_operandos *indice = Pop_operandos(f->p);
-	pilha_operandos *referencia = Pop_operandos(f->p);
-
-	u4* endereco = (referencia->topo->referencia) + (indice->topo->operando * sizeof(i4));
-
-	Push_operandos(f->p,-INT_MAX,*endereco,referencia->topo->tipo_operando);
 }
 
 void baload_impl(frame *f, u1 par1, u1 par2){
@@ -659,7 +605,6 @@ void baload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
 	i1* endereco = (referencia->topo->referencia) + (indice->topo->operando * sizeof(i1));
-	//O Sign Extend foi feito?
 	Push_operandos(f->p,*endereco,NULL,BYTE_OP);
 }
 
@@ -668,8 +613,6 @@ void caload_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *referencia = Pop_operandos(f->p);
 
 	u2* endereco = (referencia->topo->referencia) + (indice->topo->operando * sizeof(u2));
-
-	//O Zero Extend foi feito?
 	Push_operandos(f->p,*endereco,NULL,CHAR_OP);
 }
 
@@ -679,15 +622,11 @@ void saload_impl(frame *f, u1 par1, u1 par2){
 
 	i2* endereco = (referencia->topo->referencia) + (indice->topo->operando * sizeof(i2));
 
-	//O Sign Extend foi feito?
 	Push_operandos(f->p,*endereco,NULL,SHORT_OP);
 }
 
 void istore_impl(frame *f, u1 index,u1 par1){
-	printf("Executando istore\n");
-	printf("Opcode: %d\n",istore);
 	pilha_operandos *valor = Pop_operandos(f->p);
-
 	*(f->v[index].variavel) = (i4) valor->topo->operando;
 }
 
@@ -713,7 +652,6 @@ void dstore_impl(frame *f, u1 index, u1 par1){
 }
 
 void astore_impl(frame *f, u1 index,u1 par1){
-	printf("Executando astore\n\n");
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[index].variavel) = (intptr_t) valor->topo->referencia;
 	f->v[index].tipo_variavel = valor->topo->tipo_operando;
@@ -725,9 +663,6 @@ void istore_0_impl(frame *f, u1 par1, u1 par2){
 }
 
 void istore_1_impl(frame *f, u1 par1, u1 par2){
-
-	printf("EXECUÇÃO ISTORE_1\n\n");
-
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[1].variavel) = (u4) valor->topo->operando;
 }
@@ -808,11 +743,6 @@ void dstore_1_impl(frame *f, u1 par1, u1 par2){
 
 	*(f->v[1].variavel) = (u4) high_bytes->topo->operando;
 	*(f->v[2].variavel) = (u4) low_bytes->topo->operando;
-
-	printf("Valores depois do pop:\n");
-	printf("-> 0x%08x\n",*(f->v[1].variavel));
-	printf("-> 0x%08x\n",*(f->v[2].variavel));
-
 }
 
 void dstore_2_impl(frame *f, u1 par1, u1 par2){
@@ -829,9 +759,6 @@ void dstore_3_impl(frame *f, u1 par1, u1 par2){
 
 	*(f->v[3].variavel) = (u4) high_bytes->topo->operando;
 	*(f->v[4].variavel) = (u4) low_bytes->topo->operando;
-	printf("Valores depois do pop:\n");
-	printf("-> 0x%08x\n",*(f->v[3].variavel));
-	printf("-> 0x%08x\n",*(f->v[4].variavel));
 }
 
 void astore_0_impl(frame *f, u1 par1, u1 par2){
@@ -840,7 +767,6 @@ void astore_0_impl(frame *f, u1 par1, u1 par2){
 	f->v[0].tipo_variavel = valor->topo->tipo_operando;
 }
 
-// TODO: verificar
 void astore_1_impl(frame *f, u1 par1, u1 par2){
 	ImprimirPilha_operandos(f->p);
 	pilha_operandos *valor = Pop_operandos(f->p);
@@ -854,32 +780,15 @@ void astore_2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor = Pop_operandos(f->p);
 	*(f->v[2].variavel) = (intptr_t) valor->topo->referencia;
 	f->v[2].tipo_variavel = valor->topo->tipo_operando;
-
-	printf("----------------Opa------------\n");
-	ImprimirPilha_operandos(f->p);
 }
 
 void astore_3_impl(frame *f, u1 par1, u1 par2){
-
 	pilha_operandos *valor = Pop_operandos(f->p);
-
 	*(f->v[3].variavel) = (intptr_t) valor->topo->referencia;
 	f->v[3].tipo_variavel = valor->topo->tipo_operando;
 }
 
-/*
-	Objetivo da instrução: atribuir um valor a uma posição de um array de inteiros
-	Exemplo: v[2] = 3.
-	Pegar o endereço de v, somar com 2 "endereços de v" e o valor dessa posição de memória será igual a 3.
-
-	Não sabemos se isso está logicamente/semanticamente correto.
-
-	FORCA: Mudei enderecos para i4 em vez de i4*, acho que ta errado, mas vcs fizeram assim entao convem ver nos testes
-
-	RAFAEL: Mudei de volta pro jeito que funciona. Agora com o valor referencia na estrutura fica mais facil.
-*/
 void iastore_impl(frame *f, u1 par1, u1 par2){
-	// Convém criar função pra desempilhar 3 valores, sei lá. Pra generalizar isso. Vamos analisar.
 	pilha_operandos *valor = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
@@ -902,10 +811,6 @@ void lastore_impl(frame *f, u1 par1, u1 par2){
 	endereco_array++;
 
 	*endereco_array = low_bytes->topo->operando;
-/*
-	endereco = high_bytes->topo->operando;
-	endereco = endereco + sizeof(i4);
-	endereco = low_bytes->topo->operando;*/
 }
 
 void fastore_impl(frame *f, u1 par1, u1 par2){
@@ -924,13 +829,6 @@ void dastore_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *high_bytes = Pop_operandos(f->p);
 	pilha_operandos *indice = Pop_operandos(f->p);
 	pilha_operandos *array = Pop_operandos(f->p);
-
-/*	i4 endereco;
-	endereco = ((i4) array->topo->operando) + (indice->topo->operando * sizeof(i4));
-
-	endereco = high_bytes->topo->operando;
-	endereco = endereco + sizeof(i4);
-	endereco = low_bytes->topo->operando;*/
 
 	u4 *endereco_array =  ((array->topo->referencia) + (indice->topo->operando * 2 * sizeof(u4)));
 
@@ -969,16 +867,6 @@ void sastore_impl(frame *f, u1 par1, u1 par2){
 }
 
 void aastore_impl(frame *f, u1 par1, u1 par2){
-	pilha_operandos *valor = Pop_operandos(f->p);
-	pilha_operandos *indice = Pop_operandos(f->p);
-	pilha_operandos *array = Pop_operandos(f->p);
-
-	printf("VALOR A SER GUARDADO: %s\n",valor->topo->operando);
-	i4 *endereco_array =  ((array->topo->referencia) + (indice->topo->operando * sizeof(u4)));
-	*endereco_array = valor->topo->operando;
-
-	printf("VALOR GUARDADO NO ENDERECO: %04x\n",*endereco_array);
-
 }
 
 pilha_operandos* pop_impl(frame *f){
@@ -1040,20 +928,7 @@ void dup_x2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 	pilha_operandos *valor3 = Pop_operandos(f->p);
 
-	// Se for categoria 2
-	// Teoricamente não precisa desse if
-	// Se valor2 for categoria 2, tem que desempilhar o próximo
-	// Se não for, também tem que desempilhar o próximo
-	/*if(valor2->topo->tipo_operando == LONG_OP || valor2->topo->tipo_operando == DOUBLE_OP){
-
-	}
-	else{
-
-	}*/
-
-	// Valor 1,3,2,1 ou 1,2,1
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->referencia,valor1->topo->tipo_operando);
-	// Se valor2 for categoria 2, valor3 e valor2 se referem ao mesmo número
 	f->p = Push_operandos(f->p,valor3->topo->operando,valor3->topo->referencia,valor3->topo->tipo_operando);
 	f->p = Push_operandos(f->p,valor2->topo->operando,valor2->topo->referencia,valor2->topo->tipo_operando);
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->referencia,valor1->topo->tipo_operando);
@@ -1063,8 +938,6 @@ void dup2_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	// Se for 32 ou 64 bits, não faz diferença, como na instrução anterior.
-	// Porém, verificar se isso é valido.
 	f->p = Push_operandos(f->p,valor2->topo->operando,valor2->topo->referencia,valor2->topo->tipo_operando);
 	f->p = Push_operandos(f->p,valor1->topo->operando,valor1->topo->referencia,valor1->topo->tipo_operando);
 	f->p = Push_operandos(f->p,valor2->topo->operando,valor2->topo->referencia,valor2->topo->tipo_operando);
@@ -1106,7 +979,6 @@ void iadd_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
 	pilha_operandos *valor3 = CriarPilha_operandos();
-	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
 	valor3 = Push_operandos(valor3,valor1->topo->operando+valor2->topo->operando,NULL,valor1->topo->tipo_operando);
 	valor3->topo->tipo_operando = valor1->topo->tipo_operando;
 	f->p = Push_operandos(f->p,valor3->topo->operando,NULL,valor3->topo->tipo_operando);
@@ -1162,12 +1034,11 @@ void dadd_impl(frame *f, u1 par1, u1 par2){
 	f->p = Push_operandos(f->p, (u4)result,NULL, DOUBLE_OP);
 
 }
-// Overflow pode ocorrer, mas mesmo assim, exceção não é lançada. Ou seja, é só subtrair
+
 void isub_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
 	i4 result = valor2->topo->operando-valor1->topo->operando;
 	f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
 }
@@ -1227,7 +1098,6 @@ void imul_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	// Se os tipos dos valores forem iguais, e se esse tipo for inteiro
 	i4 result = valor1->topo->operando*valor2->topo->operando;
 	f->p = Push_operandos(f->p,result,NULL,INTEGER_OP);
 }
@@ -1281,61 +1151,10 @@ void dmul_impl(frame *f, u1 par1, u1 par2){
 
 }
 
-// void fmul_impl(frame *f, u1 par1, u1 par2){
-// 	pilha_operandos *valor1 = Pop_operandos(f->p);
-// 	pilha_operandos *valor2 = Pop_operandos(f->p);
-
-// 	u4 op1 = valor1->topo->operando;
-// 	u4 op2 = valor2->topo->operando;
-
-// 	i4 result_exp = expoente(op1) + expoente(op2);
-// 	u4 result_mant = mantissa(op1) * mantissa(op2);
-// 	u4 result_sin = sinal(op1) ^ sinal(op2);
-
-// 	//Normaliza float
-// 	while((result_mant>>23) != 0){
-// 		result_mant = result_mant>>1;
-// 		result_exp++;
-// 	}
-
-// 	//Constroi float
-// 	u4 result = (result_sin<<31) | (result_exp<<23) | result_mant;
-
-// 	f->p = Push_operandos(f->p,result,NULL,FLOAT_OP);
-// }
-
-// void dmul_impl(frame *f, u1 par1, u1 par2){
-// 	pilha_operandos *valor1_low = Pop_operandos(f->p);
-// 	pilha_operandos *valor1_high = Pop_operandos(f->p);
-// 	pilha_operandos *valor2_low = Pop_operandos(f->p);
-// 	pilha_operandos *valor2_high = Pop_operandos(f->p);
-
-// 	u8 op1 = ((u8)valor1_high->topo->operando << 32) | valor1_low->topo->operando;
-// 	u8 op2 = ((u8)valor2_high->topo->operando << 32) | valor2_low->topo->operando;
-
-// 	i8 result_exp = expoente_d(op1) + expoente_d(op2);
-// 	u8 result_mant = mantissa_d(op1) * mantissa_d(op2);
-// 	u8 result_sin = sinal_d(op1) ^ sinal_d(op2);
-
-// 	//Normaliza double
-// 	while((result_mant>>52) != 0){
-// 		result_mant = result_mant>>1;
-// 		result_exp++;
-// 	}
-
-// 	//Constroi float
-// 	u8 result = (result_sin<<63) | (result_exp<<52) | result_mant;
-
-// 	f->p = Push_operandos(f->p, (u4)(result>>32), NULL,DOUBLE_OP);
-// 	f->p = Push_operandos(f->p, (u4)result, NULL,DOUBLE_OP);
-// }
-
 void idiv_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
-	printf("VALOR 1: %d\n",valor1->topo->operando);
-	printf("VALOR 2: %d\n",valor2->topo->operando);
 	i4 result;
 	void *messageErrorDiv = NULL;
 	char *messageError = "java.lang.ArithmeticException: / by zero";
@@ -1350,15 +1169,11 @@ void idiv_impl(frame *f, u1 par1, u1 par2){
 		jvm->excecao = 1;
 		//Caso ocorra uma excecao, temos que result deve ser 1.
 		result = valor2->topo->operando/valor2->topo->operando;
-		printf("OOOOOOOOHHHHHHHH REEEEESULT: %d\n", result);
 		strcpy(jvm->excecao_nome,"java/lang/ArithmeticException");
 
 		messageErrorDiv = messageError;
 		f->p = Push_operandos(f->p,result,messageErrorDiv,REFERENCE_OP);
 	}
-
-
-	ImprimirPilha_operandos(f->p);
 }
 
 void ldiv_impl(frame *f, u1 par1, u1 par2){
@@ -1412,7 +1227,6 @@ void ddiv_impl(frame *f, u1 par1, u1 par2){
 
 
 void irem_impl(frame *f, u1 par1, u1 par2){
-	printf("IREM------------------------------------------\n");
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -1446,7 +1260,6 @@ void lrem_impl(frame *f, u1 par1, u1 par2){
 }
 
 void frem_impl(frame *f, u1 par1, u1 par2){
-	//Tratar casos de NaN e demais insucessos
 	pilha_operandos * valor1 = Pop_operandos(f->p);
 	pilha_operandos * valor2 = Pop_operandos(f->p);
 
@@ -1461,7 +1274,6 @@ void frem_impl(frame *f, u1 par1, u1 par2){
 }
 
 void drem_impl(frame *f, u1 par1, u1 par2){
-	//Tratar casos de NaN e demais insucessos
 	pilha_operandos *valor1_low = Pop_operandos(f->p);
 	pilha_operandos *valor1_high = Pop_operandos(f->p);
 	pilha_operandos *valor2_low = Pop_operandos(f->p);
@@ -1472,7 +1284,6 @@ void drem_impl(frame *f, u1 par1, u1 par2){
 
 	double resultAux = fmod(v2,v1);
 
-	printf("%lf\n",resultAux);
 	u8 result = (u8)(*(u8*)&resultAux);
 
 	f->p = Push_operandos(f->p,(u4)(result>>32),NULL,DOUBLE_OP);
@@ -1505,8 +1316,7 @@ void fneg_impl(frame *f, u1 par1, u1 par2){
 
 	u4 op1 = valor1->topo->operando;
 
-	//Constroi float
-	u4 result = op1 ^ 0X80000000; //Invert signal
+	u4 result = op1 ^ 0X80000000;
 
 	f->p = Push_operandos(f->p,result,NULL,FLOAT_OP);
 }
@@ -1518,7 +1328,7 @@ void dneg_impl(frame *f, u1 par1, u1 par2){
 	u4 high_bytes = valor1_high->topo->operando;
 	u4 low_bytes = valor1_low->topo->operando;
 
-	u4 result = high_bytes ^ 0X80000000; //Invert signal on high_bytes
+	u4 result = high_bytes ^ 0X80000000;
 
 	f->p = Push_operandos(f->p, result,NULL, DOUBLE_OP);
 	f->p = Push_operandos(f->p, low_bytes,NULL, DOUBLE_OP);
@@ -1526,7 +1336,6 @@ void dneg_impl(frame *f, u1 par1, u1 par2){
 
 
 void ishl_impl(frame *f, u1 par1, u1 par2){
-	printf("Entrou no shl---------------------------------------------\n");
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -1588,7 +1397,6 @@ void lshr_impl(frame *f, u1 par1, u1 par2){
 
 }
 
-// Verificar se a implementação é essa mesmo, para fazer a extensão do sinal
 void iushr_impl(frame *f, u1 par1, u1 par2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
@@ -1706,7 +1514,6 @@ void lxor_impl(frame *f, u1 par1, u1 par2){
 }
 
 void iinc_impl(frame *f,u1 index, i1 constante){
-	// Estender o sinal para 32 bits
 	i4 inteiro_constante = (i4) constante;
 	*(f->v[index].variavel) += inteiro_constante;
 }
@@ -1724,10 +1531,7 @@ void iinc_wide_fantasma(frame *f, u1 indexbyte1, u1 indexbyte2, u1 constbyte1, u
 }
 
 void iinc_wide(frame *f, u2 indexbyte, i2 constbyte){
-	printf("Executando iinc_wide\n");
-	printf("Opcode: %d\n",iinc);
 	i4 inteiro_constante = (i4) constbyte;
-
 	f->v[indexbyte].variavel += inteiro_constante;
 }
 
@@ -1912,7 +1716,6 @@ void lcmp_impl(frame *f, u1 par1, u1 par2){
 }
 
 void fcmpl_impl(frame *f, u1 par1, u1 par2){
-	//TODO Tratar NaN
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -1931,7 +1734,6 @@ void fcmpl_impl(frame *f, u1 par1, u1 par2){
 }
 
 void fcmpg_impl(frame *f, u1 par1, u1 par2){
-	//TODO Tratar NaN
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
 
@@ -1952,7 +1754,6 @@ void fcmpg_impl(frame *f, u1 par1, u1 par2){
 
 void dcmpl_impl(frame *f, u1 par1, u1 par2){
 
-	//TODO Tratar NaN
 	pilha_operandos *valor1_low = Pop_operandos(f->p);
 	pilha_operandos *valor1_high = Pop_operandos(f->p);
 	pilha_operandos *valor2_low = Pop_operandos(f->p);
@@ -1974,7 +1775,7 @@ void dcmpl_impl(frame *f, u1 par1, u1 par2){
 }
 
 void dcmpg_impl(frame *f, u1 par1, u1 par2){
-	//TODO Tratar NaN
+
 	pilha_operandos *valor1_low = Pop_operandos(f->p);
 	pilha_operandos *valor1_high = Pop_operandos(f->p);
 	pilha_operandos *valor2_low = Pop_operandos(f->p);
@@ -2135,7 +1936,6 @@ void if_icmple_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	}
 }
 
-// Operando ou referencia nesses compares do a?
 void acmpeq_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 	pilha_operandos *valor1 = Pop_operandos(f->p);
 	pilha_operandos *valor2 = Pop_operandos(f->p);
@@ -2176,39 +1976,29 @@ void jsr_impl(frame *f, u1 branchbyte1, u1 branchbyte2){
 }
 
 void ret_impl(frame *f,u1 index, u1 par){
-	// u1 endereco_retorno = f->v[index]->variavel;
-
-	// Escrever no registrador PC
 }
 
 void tableswitch_fantasma(frame *par0, u1 par1, u1 par2){
-
 }
 
 void lookupswitch_fantasma(frame *par0, u1 par1, u1 par2){
-
 }
 
 void ireturn_impl(frame *f, u1 par1, u1 par2){
-	// Analisar as condições do método que deve ser retornado
+
 	pilha_operandos *valor = Pop_operandos(f->p);
 
-	// Empilhar na pilha de operandos do frame do chamador
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(i4)valor->topo->operando,NULL,valor->topo->tipo_operando);
 	Pop_frames(jvm->frames);
-	ImprimirPilha_frames(jvm->frames);
 }
 
 void lreturn_impl(frame *f, u1 par1, u1 par2){
-	// Analisar as condições do método que deve ser retornado
 	pilha_operandos *low_bytes = Pop_operandos(f->p);
 	pilha_operandos *high_bytes = Pop_operandos(f->p);
 
-	// Empilhar na pilha de operandos do frame do chamador
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)high_bytes->topo->operando,NULL,LONG_OP);
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)low_bytes->topo->operando,NULL,LONG_OP);
 	Pop_frames(jvm->frames);
-	ImprimirPilha_frames(jvm->frames);
 
 }
 
@@ -2219,8 +2009,6 @@ void freturn_impl(frame *f, u1 par1, u1 par2){
 	// Empilhar na pilha de operandos do frame do chamador
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)valor->topo->operando,NULL,FLOAT_OP);
 	Pop_frames(jvm->frames);
-	ImprimirPilha_frames(jvm->frames);
-
 }
 
 void dreturn_impl(frame *f, u1 par1, u1 par2){
@@ -2232,31 +2020,13 @@ void dreturn_impl(frame *f, u1 par1, u1 par2){
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)high_bytes->topo->operando,NULL,DOUBLE_OP);
 	jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,(u4)low_bytes->topo->operando,NULL,DOUBLE_OP);
 	Pop_frames(jvm->frames);
-	ImprimirPilha_frames(jvm->frames);
-
 }
 
-/** areturn_impl
-* @todo TERMINAR
-*/
 void areturn_impl(frame *f, u1 par1, u1 par2){
-	// Analisar mesmas coisas do ireturn
-
-	// pilha_operandos *valor =
 	Pop_operandos(f->p);
 }
 
-/** inst_return_impl
-* @todo TERMINAR
-*/
 void inst_return_impl(frame *f, u1 par1, u1 par2){
-
-	printf("EXECUÇÃO RETURN\n\n");
-
-	ImprimirPilha_operandos(f->p);
-
-	// Empilhar NULL na pilha de operandos do frame chamador, ou seja, o próximo frame na pilha
-	//jvm->frames->topo->prox->f->p = Push_operandos(jvm->frames->topo->prox->f->p,-INT_MAX,NULL,-1);
 	Pop_frames(jvm->frames);
 }
 
@@ -2296,13 +2066,11 @@ void getstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 							f->p = Push_operandos(f->p,valorPushed,NULL,FLOAT_OP);
 						} else if (descriptorFieldValidate(descriptorFieldAux) == 5) {
 							u4 * valorPushed = fieldSaida->dadosStatics->low;
-							printf("ENDERECO PAU NU CU FDP ARROMBADO: %s\n",(char*)valorPushed);
 							f->p = Push_operandos(f->p,-INT_MAX,(void*)valorPushed,REFERENCE_STRING_OP);
 						} else {
 							i4 valorPushed = *fieldSaida->dadosStatics->low;
 							f->p = Push_operandos(f->p,valorPushed,NULL,INTEGER_OP);
 						}
-						printf("Empilhou na pilha\n");
 					} else if (descriptorFieldValidate(descriptorFieldAux) == 7 || descriptorFieldValidate(descriptorFieldAux) == 8) {
 						i4 valorPushedLow = *fieldSaida->dadosStatics->low;
 						i4 valorPushedHigh = *fieldSaida->dadosStatics->high;
@@ -2368,14 +2136,6 @@ void putstatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			}
 		}
 	}
-
-	//Obter classe que contém o field
-	//Inicializar a classe que contém o field, caso
-	//a classe nao tenha sido inicializada
-	//Obter field dessa classe, buscas na classe que contem
-	//esse field e retornar ele
-	//Obter tipo pelo name and type index
-	// Fieldref campo = f->cp[indice_cp];
 }
 
 bool buscaStaticFlags (char * accessFlags) {
@@ -2403,8 +2163,6 @@ void getfield_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			cp_info * nameTypeField = f->cp-1+aux->UnionCP.Fieldref.name_and_type_index;
 			char * nomeField = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.name_index,NAME_AND_TYPE_INFO_NAME_INDEX);
 			char * descriptorRetorno = decodificaNIeNT(f->cp,nameTypeField->UnionCP.NameAndType.descriptor_index,NAME_AND_TYPE_INFO_DESCRIPTOR_INDEX);
-			printf("%s\n",nomeField);
-			printf("%s\n",descriptorRetorno);
 			int tipoRetorno = getTipoRetorno(descriptorRetorno);
 			if (tipoRetorno != -1) {
 				pilha_operandos * objetoRef = Pop_operandos(f->p);
@@ -2572,10 +2330,6 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
         double valorSaida_double;
         float valorSaida_float;
 
-        printf("Entrou no println\n");
-        // Imprimir com o printf do c
-        // Esvaziar a pilha de operandos
-        // ImprimirPilha_operandos(f->p);
         if (!pilhaVazia(f->p)) {
             if (!printVazio(f->p)) {
                 pilha_operandos *string = Pop_operandos(f->p);
@@ -2672,17 +2426,8 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 							frame *f_novo = criarFrame(classeDoMetodo,c->max_locals);
 							f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 							jvm->frames = Push_frames(jvm->frames,f_novo);
-							// printf("%lu\n",sizeof(vetor_locais));
-							for(int i=0;i<*(parametros_cont);i++){
-								printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
-							}
 
-
-							printf("Classe nova: %s\n",classeDoMetodo);
 							classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeDoMetodo);
-							if (classe != NULL) {
-								printf("Buscou a classe carregada...\n");
-							}
 
 							// Achar o método na classe que o contém
 							method_info *metodos = classe->arquivoClass->methods;
@@ -2692,13 +2437,10 @@ void invokevirtual_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 								char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
 
 								if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptorcopia,descriptorMetodoAux) == 0){
-									printf("Metodo da classe: %s\n",nomeMetodoAux);
 									// Executar o code do método invocado
 									jvm->pc +=3;
-									f->end_retorno = jvm->pc;
-									printf("f->end_retorno: %d\n", f->end_retorno);
+									f->end_retorno = jvm->pc;					
 									jvm->pc = 0;
-									printf("Executando método...\n");
 									executarMetodo(aux,classeDoMetodo,2);
 									jvm->pc = f->end_retorno;
 
@@ -2726,21 +2468,10 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	if(resolverMetodo(f->cp,indice_cp,0)){
 		classeDoMetodo = obterClasseDoMetodo(f->cp,indice_cp);
-		printf("INDICE CP: %d\n",indice_cp);
-		// Corrente é a filha
-		printf("CLASSE DO METODO ------------------------> %s\n",classeDoMetodo);
-		printf("CLASSE CORRENTE ------------------------> %s\n",jvm->frames->topo->f->classeCorrente);
+	
 		classeCorrente = BuscarElemento_classes(jvm->classes,jvm->frames->topo->f->classeCorrente);
 
 		classePaiDaCorrente = decodificaNIeNT(classeCorrente->arquivoClass->constant_pool,classeCorrente->arquivoClass->super_class,NAME_INDEX);
-		printf("CLASSE PAI DA CORRENTE: %s\n",classePaiDaCorrente);
-
-		/**
-			3 condições do invokespecial
-			1.
-			2. Se a classe do método resolvido é superclass da classe corrente, não chama
-			3.
-		**/
 
 		// If não executa, else executa
 		if(isSuper(classeCorrente->arquivoClass->access_flags) && strcmp(classeDoMetodo,classePaiDaCorrente)==0 && (strcmp(nomemetodo,"init")!=0 || strcmp(nomemetodo,"clinit")!=0)){
@@ -2748,7 +2479,6 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 		}
 		else{
 			// Vai invocar o método
-
 			method_info * methodAux = BuscarMethodClasseCorrente_classes(jvm->classes,classeDoMetodo, nomemetodo);
 			attribute_info *aux;
 			int posicao;
@@ -2761,21 +2491,10 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 				if(strcmp(nameindex,"Code")==0){
 					code_attribute *c = (code_attribute *) aux->info;
 					frame *f_novo = criarFrame(classeDoMetodo,c->max_locals);
-					printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
-					ImprimirPilha_operandos(f->p);
 					f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 					jvm->frames = Push_frames(jvm->frames,f_novo);
-					// printf("%lu\n",sizeof(vetor_locais));
-					for(int i=0;i<*(parametros_cont);i++){
-						printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
-					}
 
-
-					printf("Classe nova: %s\n",classeDoMetodo);
 					classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeDoMetodo);
-					if (classe != NULL) {
-						printf("Buscou a classe carregada...\n");
-					}
 
 					// Achar o método na classe que o contém
 					method_info *metodos = classe->arquivoClass->methods;
@@ -2785,13 +2504,10 @@ void invokespecial_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 						char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
 
 						if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptorcopia,descriptorMetodoAux) == 0){
-							printf("Metodo da classe: %s\n",nomeMetodoAux);
 							// Executar o code do método invocado
 							jvm->pc +=3;
 							f->end_retorno = jvm->pc;
-							printf("f->end_retorno: %d\n", f->end_retorno);
 							jvm->pc = 0;
-							printf("Executando método...\n");
 							executarMetodo(aux,classeDoMetodo,2);
 							jvm->pc = f->end_retorno;
 
@@ -2836,18 +2552,10 @@ int getParametrosCount (char * descriptor) {
 	return contador;
 }
 
-/*
-	Falta implementar o PC.
-
-	Antes de colocar as variáveis no vetor de variáveis locais do frame do método que será invocado,
-	elas devem ser convertidas para o tipo indicado no descriptor do método que será invocado
-
-*/
 void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 	char *nomemetodo = obterNomeMetodo(f->cp,indice_cp,0);
-	printf("Nome metodo AAAAHHHHHHHHH: %s\n", nomemetodo);
 	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,0);
 	char *descriptorcopia = malloc(strlen(descriptormetodo)*sizeof(char));
 	strcpy(descriptorcopia,descriptormetodo);
@@ -2860,7 +2568,6 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	char *pch = strtok(descriptormetodo,"()");
 	*parametros_cont += strlen(pch);
 
-	printf("Vai rodar invoke static...\n");
 	if(resolverMetodo(f->cp,indice_cp,0)){
 		char *classeNova = obterClasseDoMetodo(f->cp,indice_cp);
 		method_info * methodAux = BuscarMethodClasseCorrente_classes(jvm->classes, classeNova, nomemetodo);
@@ -2873,24 +2580,11 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 			if(strcmp(nameindex,"Code")==0){
 				code_attribute *c = (code_attribute *) aux->info;
 				frame *f_novo = criarFrame(classeNova,c->max_locals);
-				//printf("CONT ANTES DA CHAMADA: %d\n",*parametros_cont);
-				//printf("IMPRESSÃO DE VETOR DE VARIÁVEIS LOCAIS DO FRAME ANTES DA TRANSFERÊNCIA\n");
-				//for (int i = 0;i<f->vetor_length;i++){
-				//	printf("VARIAVEL: %d\n",f->v[i].variavel);
-				//}
+
 				f_novo = transferePilhaVetor(f,f_novo,parametros_cont);
 				jvm->frames = Push_frames(jvm->frames,f_novo);
-				// printf("%lu\n",sizeof(vetor_locais));
-				//for(int i=0;i<*(parametros_cont);i++){
-				//	printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
-				//}
 
-
-				printf("Classe nova: %s\n",classeNova);
 				classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
-				if (classe != NULL) {
-					printf("Buscou a classe carregada...\n");
-				}
 
 				// Achar o método na classe que o contém
 				method_info *metodos = classe->arquivoClass->methods;
@@ -2900,13 +2594,10 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 					char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
 
 					if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptorcopia,descriptorMetodoAux) == 0){
-						printf("Metodo da classe: %s\n",nomeMetodoAux);
 						// Executar o code do método invocado
 						jvm->pc +=3;
 						f->end_retorno = jvm->pc;
-						printf("f->end_retorno: %d\n", f->end_retorno);
 						jvm->pc = 0;
-						printf("Executando método...\n");
 						executarMetodo(aux,classeNova,2);
 						jvm->pc = f->end_retorno;
 
@@ -2917,11 +2608,6 @@ void invokestatic_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	}
 }
 
-/**
-	O invokeinterface, nesse momento, está executando um método que foi declarado em uma interface, se esse método está implementado na classe atual.
-	Ou seja, falta analisar heranças. Se o método não existe na classe atual, mas existe em uma classe pai, o método da classe pai deve ser executado. Isso não está implementado.
-
-**/
 void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
 	u2 indice_cp = normaliza_indice(indexbyte1,indexbyte2);
 
@@ -2929,11 +2615,6 @@ void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
 	char *descriptormetodo = obterDescriptorMetodo(f->cp,indice_cp,1);
 
 	if(resolverMetodo(f->cp,indice_cp,1)){
-		// Assumindo que está na corrente, não há verificação
-		// Descobrir o nome da classe para fazer as coisas.
-		// Como descobrir o nome da classe, sendo que tem que pesquisar pela classe na lista de classes primeiro, para ter o nome dela?
-		// Deadlock da pesquisa
-
 		char *classeNova = malloc(100*sizeof(char));
 		strcpy(classeNova,jvm->frames->topo->f->classeCorrente);
 		method_info *methodAux = BuscarMethodClasseCorrente_classes(jvm->classes, classeNova, nomemetodo);
@@ -2948,17 +2629,8 @@ void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
 				frame *f_novo = criarFrame(classeNova,c->max_locals);
 				f_novo = transferePilhaVetorCount(f,f_novo,count);
 				jvm->frames = Push_frames(jvm->frames,f_novo);
-				// printf("%lu\n",sizeof(vetor_locais));
-				for(int i=0;i<count;i++){
-					printf("VARIÁVEL LOCAL: %04x\n",*(jvm->frames->topo->f->v[i].variavel));
-				}
 
-
-				printf("Classe nova: %s\n",classeNova);
 				classesCarregadas *classe = BuscarElemento_classes(jvm->classes,classeNova);
-				if (classe != NULL) {
-					printf("Buscou a classe carregada...\n");
-				}
 
 				// Achar o método na classe que o contém
 				method_info *metodos = classe->arquivoClass->methods;
@@ -2968,9 +2640,6 @@ void invokeinterface_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 count){
 					char * descriptorMetodoAux = decodificaStringUTF8(classe->arquivoClass->constant_pool-1+aux->descriptor_index);
 
 					if(strcmp(nomemetodo,nomeMetodoAux) == 0 && strcmp(descriptormetodo,descriptorMetodoAux) == 0){
-						printf("Metodo da classe: %s\n",nomeMetodoAux);
-						// Executar o code do método invocado
-						printf("Executando método...\n");
 						executarMetodo(aux,classeNova,2);
 					}
 				}
@@ -2990,7 +2659,6 @@ void invokedynamic_fantasma(frame *par0, u1 par1, u1 par2){
 void inst_new_impl(frame *f, u1 indexbyte1, u1 indexbyte2){
 	u2 indice_cp = (indexbyte1 << 8) | indexbyte2;
 	char *nomeClasse = decodificaNIeNT(f->cp,indice_cp,NAME_INDEX);
-	printf("Nome da classe: %s\n",nomeClasse);
 	ClassFile *classe = instanciarClasse(nomeClasse);
 	int numFields = getParametrosNaoStatic(classe);
 	jvm->objetos = InsereObjeto(jvm->objetos, classe,numFields);
@@ -3116,7 +2784,7 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 			case T_BYTE:
 				endereco = (i1*) malloc((countnum+1)*sizeof(i1));
 				ref_size = sizeof(i1);
-				/*// Inicializar com os valores default */
+				/* Inicializar com os valores default */
 				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
 					// Alocar com -INT_MAX para marcar o fim do array
 					if(i==countnum){
@@ -3131,7 +2799,7 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 			case T_SHORT:
 				endereco = (i2*) malloc((countnum+1)*sizeof(i2));
 				ref_size = sizeof(i2);
-				/*// Inicializar com os valores default */
+				/* Inicializar com os valores default */
 				for(void *p=endereco;i<=countnum;i++,p+=ref_size){
 					// Alocar com -INT_MAX para marcar o fim do array
 					if(i==countnum){
@@ -3170,7 +2838,6 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 					else{
 						*(i4 *)p=0;
 					}
-					printf("NEWARRAY LOOP  %d ============== %d\n",i, *(i4 *)p);
 				}
 			break;
 		}
@@ -3181,95 +2848,6 @@ void newarray_impl(frame *f, u1 atype, u1 par1){
 }
 
 void anewarray_impl(frame *f, u1 par1, u1 par2){
-/*	pilha_operandos *count = Pop_operandos(f->p);
-	i4 countnum = count->topo->operando;
-
-
-	u2 indice_cp = normaliza_indice(par1,par2);
-	cp_info *item = f->cp-1 + indice_cp;
-	char* tipo = decodificaStringUTF8(f->cp-1+item->UnionCP.Class.name_index);
-	void *endereco = NULL;
-	printf("%s\n", tipo);
-	getchar();
-*/
-
-	/*switch(tipo){
-		case '[':{
-			endereco = (void**)malloc(counts[0]*sizeof(void*));
-			void ** endereco_aux = endereco;
-			for(u4 i = 0; i < counts[0]; i++){
-				*endereco_aux = inicializa_multiarray_recursivo(endereco_aux, &counts[1], &tipos[1]);
-				endereco_aux++;
-			}
-			break;
-		}
-		case 'I':{
-			endereco = (i4*)malloc(counts[0]*sizeof(i4));
-			i4* endereco_aux = endereco;
-			for(u4 i = 0; i < counts[0]; i++){
-				*endereco_aux=0;
-				endereco_aux++;
-			}
-			break;
-		}
-		case 'B':{
-			endereco = (i1*)malloc(counts[0]*sizeof(i1));
-			i1* endereco_aux = endereco;
-			for(u4 i = 0; i < counts[0]; i++){
-				*endereco_aux=0;
-				endereco_aux++;
-			}
-			break;
-		}
-		case 'S':{
-			endereco = (i2*)malloc(counts[0]*sizeof(i2));
-			i2* endereco_aux = endereco;
-			for(u4 i = 0; i < counts[0]; i++){
-				*endereco_aux=0;
-				endereco_aux++;
-			}
-			break;
-		}
-		case 'J':{//LONG
-			endereco = (i8*)malloc(counts[0]*sizeof(i8));
-			i8* endereco_aux = endereco;
-			for(u4 i = 0; i < counts[0]; i++){
-				*endereco_aux=0;
-				endereco_aux++;
-			}
-			break;
-		}
-		case 'F':{
-			endereco = (float*)malloc(counts[0]*sizeof(float));
-			float* endereco_aux = endereco;
-			for(u4 i = 0; i < counts[0]; i++){
-				*endereco_aux=0;
-				endereco_aux++;
-			}
-			break;
-		}
-		case 'D':{
-			endereco = (double*)malloc(counts[0]*sizeof(double));
-			double* endereco_aux = endereco;
-			for(u4 i = 0; i < counts[0]; i++){
-				*endereco_aux=0;
-				endereco_aux++;
-			}
-			break;
-		}
-		default:
-		break;
-	}
-*/
-
-	//f->p = Push_operandos(f->p,-INT_MAX,endereco,REFERENCE_OP);
-
-/*	int ref_size = 0;
-	void *endereco = NULL;
-	int i = 0;
-	if(count<0){
-		// Lançar exceção
-	}*/
 }
 
 void arraylength_impl(frame *f, u1 par1, u1 par2){
@@ -3279,11 +2857,6 @@ void arraylength_impl(frame *f, u1 par1, u1 par2){
 
 	int tamanho = 0;
 	int ref_size = 0;
-	/* Observação
-	// Não tem como descobrir o tipo do elemento, a princípio.
-	// Como fazer esse incremento? Foi alocado como void, mas com sizeofs diferentes (observar instrução newarray)
-	// O void vai garantir que o incremento é o mesmo?
-	*/
 	switch(tipo_referencia){
 		case REFERENCE_ARRAY_BOOLEAN_OP:
 			ref_size = sizeof(u1);
@@ -3460,9 +3033,7 @@ void multianewarray_impl(frame *f, u1 indexbyte1, u1 indexbyte2, u1 dimensions){
 	char* tipos_aux = (char*)malloc(sizeof(char));
 	i4* counts = (i4*)malloc(dimensions*sizeof(i4));
 	void *endereco = NULL;
-	printf("%s\n", tipos);
-	getchar();
-	for(u1 i = dimensions; i > 0; i--){ //Eh ao contrario, dimensao-n no indice 0, dimensao-0 no indice n
+	for(u1 i = dimensions; i > 0; i--){
 		pilha_operandos *valor = Pop_operandos(f->p);
 		counts[i-1] = valor->topo->operando;
 		if(counts[i] < 0){
